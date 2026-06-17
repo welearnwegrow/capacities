@@ -44,6 +44,14 @@
     </div>
   </div>
 
+  <!-- intro / context -->
+  <div style="width:1040px;max-width:100%;margin:0 auto 34px;text-align:center">
+    <div style="max-width:64ch;margin:0 auto;display:flex;flex-direction:column;gap:15px">
+      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0">We are living in an age where movements for justice and regeneration are colliding with ecological upheaval, widening inequality, technological disruption, and political fragmentation. These conditions demand that people develop the orientations, capacities, and meta-process to navigate complexity and act with integrity in shaping better futures.</p>
+      <p data-edit="intro-2" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0">This work asks one simple question: <em style="color:#1f3a36">What do we need to learn to intervene in complex systems.</em> It is designed to serve educators, program designers, school leaders, policy advocates, community organizers, and funders working with youth. Rather than a fixed context, it offers a flexible backbone that supports coherence and can be applied in multiple contexts: formal, non-formal, and informal learning programs.</p>
+    </div>
+  </div>
+
   <!-- caption / legend (moved above map) -->
   <div style="width:1040px;max-width:100%;margin-bottom:20px;display:flex;flex-direction:column;gap:11px;font-size:13px;color:#6f685d">
 
@@ -147,40 +155,40 @@
 class Component extends DCLogic {
   state = {
     wp: [
-      {n:1,label:'Probe',x:130,y:150},
-      {n:2,label:'Sense',x:435,y:495},
-      {n:3,label:'Design',x:952,y:660},
-      {n:4,label:'Adapt',x:785,y:1015},
-      {n:5,label:'Integrate ↺',x:78,y:650}
+      {n:1,label:'Probe',x:260,y:90},
+      {n:2,label:'Sense',x:708,y:624},
+      {n:3,label:'Design',x:841,y:1088},
+      {n:4,label:'Adapt',x:150,y:1135},
+      {n:5,label:'Integrate ↺',x:118,y:669}
     ],
     isl: [
       // WITHIN — individual agency (teal)
-      {label:'Somatic Eco-Regulation',x:180,y:190,r:46,w:104,group:'teal',seed:100},
-      {label:'Observing & Listening',x:370,y:160,r:42,w:96,group:'teal',seed:107},
-      {label:'Critical Thinking & Reflexivity',x:530,y:230,r:46,w:104,group:'teal',seed:114},
-      {label:'Spiritual & Moral Inquiry',x:270,y:300,r:52,w:112,group:'teal',seed:121},
-      {label:'Socioeconomic & Political Literacy',x:480,y:350,r:46,w:104,group:'teal',seed:128},
+      {label:'Somatic Eco-Regulation',x:378,y:136,r:46,w:104,group:'teal',seed:100},
+      {label:'Observing & Listening',x:188,y:199,r:42,w:96,group:'teal',seed:107},
+      {label:'Critical Thinking & Reflexivity',x:530,y:242,r:46,w:104,group:'teal',seed:114},
+      {label:'Spiritual & Moral Inquiry',x:280,y:327,r:52,w:112,group:'teal',seed:121},
+      {label:'Socioeconomic & Political Literacy',x:450,y:337,r:46,w:104,group:'teal',seed:128},
       {label:'Learning Agency',x:150,y:370,r:42,w:96,group:'teal',seed:135},
-      {label:'Ecological & Planetary Literacy',x:340,y:430,r:48,w:108,group:'teal',seed:142},
-      {label:'Cultural & Ancestral Literacy',x:515,y:460,r:44,w:100,group:'teal',seed:149},
+      {label:'Ecological & Planetary Literacy',x:343,y:434,r:48,w:108,group:'teal',seed:142},
+      {label:'Cultural & Ancestral Literacy',x:569,y:425,r:44,w:100,group:'teal',seed:149},
       // COLLECTIVE — collective agency (green)
-      {label:'Systems Thinking & Modeling',x:490,y:530,r:46,w:104,group:'green',seed:300},
-      {label:'Complex Problem Solving',x:680,y:500,r:44,w:100,group:'green',seed:307},
-      {label:'Futures Thinking & Foresight',x:860,y:565,r:46,w:104,group:'green',seed:314},
+      {label:'Systems Thinking & Modeling',x:460,y:543,r:46,w:104,group:'green',seed:300},
+      {label:'Complex Problem Solving',x:668,y:512,r:44,w:100,group:'green',seed:307},
+      {label:'Futures Thinking & Foresight',x:822,y:559,r:46,w:104,group:'green',seed:314},
       {label:'Positionality & Power Analysis',x:600,y:640,r:52,w:112,group:'green',seed:321},
-      {label:'Regenerative Systems Design',x:810,y:690,r:46,w:106,group:'green',seed:328},
+      {label:'Regenerative Systems Design',x:803,y:678,r:46,w:106,group:'green',seed:328},
       {label:'Narrative & Media Analysis',x:475,y:730,r:42,w:98,group:'green',seed:335},
       {label:'Participatory Research & Design',x:670,y:790,r:48,w:108,group:'green',seed:342},
-      {label:'Data Analysis & Evaluation',x:480,y:865,r:42,w:96,group:'coral',seed:349},
+      {label:'Data Analysis & Evaluation',x:482,y:878,r:42,w:96,group:'coral',seed:349},
       // ACTION — structural agency (coral)
-      {label:'Experimenting & Building',x:290,y:890,r:46,w:104,group:'coral',seed:500},
-      {label:'Convening & Facilitating Collaborations',x:845,y:800,r:44,w:104,group:'green',seed:507},
-      {label:'Conflict Transformation',x:640,y:940,r:46,w:104,group:'coral',seed:514},
-      {label:'Planning & Resource Mobilization',x:385,y:1010,r:52,w:112,group:'coral',seed:521},
-      {label:'Leading in Complexity',x:595,y:1060,r:46,w:104,group:'coral',seed:528},
-      {label:'Ecosystem Engagement',x:260,y:1090,r:42,w:96,group:'coral',seed:535},
+      {label:'Experimenting & Building',x:311,y:843,r:46,w:104,group:'coral',seed:500},
+      {label:'Convening & Facilitating Collaborations',x:823,y:795,r:44,w:104,group:'green',seed:507},
+      {label:'Conflict Transformation',x:642,y:1154,r:46,w:104,group:'coral',seed:514},
+      {label:'Planning & Resource Mobilization',x:407,y:1008,r:52,w:112,group:'coral',seed:521},
+      {label:'Leading in Complexity',x:555,y:1049,r:46,w:104,group:'coral',seed:528},
+      {label:'Ecosystem Engagement',x:258,y:1062,r:42,w:96,group:'coral',seed:535},
       {label:'Political Participation',x:455,y:1150,r:48,w:106,group:'coral',seed:542},
-      {label:'Networking & Engaging Capital',x:625,y:1175,r:44,w:102,group:'coral',seed:549}
+      {label:'Networking & Engaging Capital',x:588,y:935,r:44,w:102,group:'coral',seed:549}
     ]
   };
 

@@ -16,10 +16,10 @@
 <div style="{{ rootStyle }}">
   <dc-import name="SiteNav" active="about" hint-size="100%,58px"></dc-import>
 
-  <div style="{{ heroWrapStyle }}">
-    <div style="{{ heroInnerStyle }}">
-      <h1 style="{{ h1Style }}">Co-Editors &amp; Contributors</h1>
-      <p style="{{ ledeStyle }}">The creation of this resource is a collective effort — a living framework shaped by Jaya &amp; Raisa and a growing practice of facilitators, educators, and researchers working toward just and regenerative futures.</p>
+  <div style="background:#ebeedd;border-top:4px solid #76834a;padding:42px 26px 40px">
+    <div style="max-width:920px;margin:0 auto">
+      <h1 style="font-family:'PT Serif',serif;font-weight:700;font-size:40px;line-height:1.08;margin:0 0 16px;color:#46512a">Co-Editors &amp; Contributors</h1>
+      <p style="font-size:16.5px;line-height:1.65;color:#41514a;margin:0;max-width:72ch">The creation of this resource is a collective effort — a living framework shaped by Jaya &amp; Raisa and a growing practice of facilitators, educators, and researchers working toward just and regenerative futures.</p>
     </div>
   </div>
 
@@ -60,12 +60,13 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:900},&quot;mood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;estuary&quot;,&quot;ember&quot;,&quot;meadow&quot;,&quot;twilight&quot;],&quot;default&quot;:&quot;estuary&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cozy&quot;,&quot;open&quot;,&quot;grand&quot;],&quot;default&quot;:&quot;open&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;immersive&quot;,&quot;editorial&quot;,&quot;centered&quot;],&quot;default&quot;:&quot;immersive&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   renderVals(){
-    const mood = this.props.mood ?? 'estuary';
+    const mood = this.props.mood ?? 'meadow';
     const density = this.props.density ?? 'open';
     const hero = this.props.heroStyle ?? 'immersive';
 
     const MOODS = {
       estuary:  { g1:'#5f8a82', g2:'#46716f', accent:'#46716f', bg:'#D9D3C7' },
+      gold:     { g1:'#c39a5a', g2:'#8a6a45', accent:'#8a6a45', bg:'#D9D3C7' },
       ember:    { g1:'#d99e7f', g2:'#bd6a47', accent:'#a8542d', bg:'#e6dacb' },
       meadow:   { g1:'#aeb878', g2:'#76834a', accent:'#5b6733', bg:'#dcd8c4' },
       twilight: { g1:'#4a5a6b', g2:'#2b323d', accent:'#6b788a', bg:'#cdcbc6' }
@@ -108,7 +109,7 @@ class Component extends DCLogic {
       color: onColor ? 'rgba(255,255,255,.9)' : '#544E45'
     };
 
-    const rootStyle = { minHeight:'100vh', background:m.bg, fontFamily:"'PT Sans',system-ui,sans-serif", color:'#39342b' };
+    const rootStyle = { minHeight:'100vh', background:'#ebeede', fontFamily:"'PT Sans',system-ui,sans-serif", color:'#39342b' };
     const mainStyle = { maxWidth:'920px', margin:'0 auto', padding:d.mainPad };
 
     const h2Base = { fontFamily:serif, fontWeight:700, fontSize:d.h2 };

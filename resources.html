@@ -22,7 +22,8 @@
   .ioc-scroll::-webkit-scrollbar{width:9px}
   .ioc-scroll::-webkit-scrollbar-thumb{background:rgba(120,105,75,.32);border-radius:6px}
 </style>
-<script src="edit-mode.js"></script>
+<script src="forms-config.js"></script>
+<script src="capacity-detail.js"></script>
 </helmet>
 
 <div style="min-height:100vh;background:#D9D3C7;font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
@@ -32,9 +33,8 @@
   <!-- ===== HERO BAND ===== -->
   <div style="background:linear-gradient(180deg,#76834a,#5b6733);padding:46px 26px 40px">
     <div style="max-width:1180px;margin:0 auto;color:#fff">
-      <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8);font-weight:700;margin-bottom:10px">A living, curated resource library</div>
       <h1 style="font-family:'PT Serif',serif;font-weight:700;font-size:38px;line-height:1.08;margin:0 0 8px;color:#FDFBF7">The Resource Library</h1>
-      <p style="font-size:16px;line-height:1.55;color:rgba(255,255,255,.88);margin:0;max-width:70ch">The resources that have informed these capacities. Explore by capacity, or browse the whole library. Curated by Jaya &amp; Raisa and a growing practice of facilitators.</p>
+      <p style="font-size:16px;line-height:1.55;color:rgba(255,255,255,.88);margin:0;max-width:70ch">The resources that have informed these capacities. Explore by capacity, or browse the whole library. All resources are curated by the co-editors and a growing base of system change practitioners.</p>
     </div>
   </div>
 
@@ -57,7 +57,6 @@
             <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:14px">
               <span style="width:12px;height:12px;border-radius:50%;flex:none;background:{{ sec.dot }}"></span>
               <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:22px;margin:0;color:{{ sec.color }}">{{ sec.name }}</h2>
-              <span style="font-style:italic;font-size:14px;color:#977c45">{{ sec.sub }}</span>
             </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:11px">
               <sc-for list="{{ sec.caps }}" as="cap" hint-placeholder-count="8">
@@ -221,23 +220,41 @@
           <button onClick="{{ openSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:8px;border:1px solid rgba(120,105,75,.4);background:#FCFBF7;color:#8a6a45;cursor:pointer">+ Suggest a resource</button>
         </div>
       </div>
+      <div style="padding:20px 26px 0">
+        <sc-if value="{{ deep.desc }}" hint-placeholder-val="">
+          <p style="font-size:14px;line-height:1.62;color:#4a4438;margin:0 0 20px">{{ deep.desc }}</p>
+        </sc-if>
+        <sc-if value="{{ deep.hasLevels }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Indicators of learning</span>
+            <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ deep.levels }}" as="lv" hint-placeholder-count="4">
+              <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.18);border-left:3px solid {{ deep.color }};border-radius:10px;padding:11px 14px">
+                <div style="{{ lv.badgeStyle }}">{{ lv.label }}</div>
+                <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:6px 0 0">{{ lv.text }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
       <div style="padding:18px 26px 40px">
         <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
-          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Most upvoted</span>
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Resources</span>
           <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
         </div>
         <div style="display:flex;flex-direction:column;gap:10px">
           <sc-for list="{{ deep.items }}" as="res" hint-placeholder-count="5">
-            <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:12px;padding:13px 15px;display:flex;gap:13px;align-items:flex-start">
-              <button onClick="{{ res.onUpvote }}" title="Upvote to move this higher" style="{{ res.upvoteStyle }}">
-                <span style="font-size:12px">▲</span>
-                <span style="font-size:13px;font-weight:700">{{ res.voteCount }}</span>
-              </button>
-              <div style="flex:1;min-width:0">
-                <div style="margin-bottom:7px"><span style="{{ res.typeStyle }}">{{ res.typeText }}</span></div>
-                <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }} <span style="font-weight:400;color:{{ deep.color }};font-size:13px">↗</span></a>
-                <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:7px 0 0">{{ res.desc }}</p>
+            <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:12px;padding:13px 15px">
+              <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:7px">
+                <sc-if value="{{ res.featured }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ res.pickStyle }}">★ Editor's pick</span>
+                </sc-if>
+                <span style="{{ res.typeStyle }}">{{ res.typeText }}</span>
               </div>
+              <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }} <span style="font-weight:400;color:{{ deep.color }};font-size:13px">↗</span></a>
+              <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:7px 0 0">{{ res.desc }}</p>
             </div>
           </sc-for>
         </div>
@@ -263,14 +280,13 @@
               <button onClick="{{ doSubmit }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Submit for curation</button>
               <button onClick="{{ closeSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px 15px;border-radius:9px;border:1px solid rgba(120,105,75,.4);background:transparent;color:#8a6a45;cursor:pointer">Cancel</button>
             </div>
-            <p style="font-size:11px;color:#9a8d76;margin:14px 0 0;line-height:1.5">Submitting opens your email app with a message addressed to the editors (Jaya &amp; Raisa) for curation.</p>
           </div>
         </sc-if>
         <sc-if value="{{ submitDone }}" hint-placeholder-val="{{ false }}">
           <div style="text-align:center;padding:14px 6px">
             <div style="font-size:40px;margin-bottom:10px">🌱</div>
             <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 6px">Thank you</h3>
-            <p style="font-size:13.5px;line-height:1.55;color:#544E45;margin:0 0 20px">Your email app should have opened with the suggestion ready to send to the editors. Once curated, it will join the growing library.</p>
+            <p style="font-size:13.5px;line-height:1.55;color:#544E45;margin:0 0 20px">Your suggestion has been sent to the editors. Once curated, it will join the growing library.</p>
             <button onClick="{{ closeSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:10px 22px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Close</button>
           </div>
         </sc-if>
@@ -289,8 +305,7 @@ class Component extends DCLogic {
       deep: null,
       libGroups: {}, libMediums: {}, libSearch: '',
       methods: {}, conditions: {}, contextCap: null,
-      submitOpen: false, submitDone: false, copied: false,
-      voted: {}
+      submitOpen: false, submitDone: false, submitting: false, submitError: null, copied: false
     };
   }
   componentDidMount(){
@@ -302,24 +317,12 @@ class Component extends DCLogic {
       }, 40);
     }
     try {
-      const v = JSON.parse(localStorage.getItem('ioc-votes-v1') || '{}');
-      if (v && typeof v === 'object') this.setState({ voted: v });
-    } catch(e){}
-    try {
       const p = new URLSearchParams(window.location.search).get('capacity');
       if (p) {
         const match = this._data().capacities.find(c => c.label === p);
         if (match) this.setState({ tab:'capacities', deep: match.label });
       }
     } catch(e){}
-  }
-  _baseVotes(name){ let h=0; for(let i=0;i<name.length;i++){ h=(h*31 + name.charCodeAt(i))>>>0; } return 5 + (h % 44); }
-  _voteCount(name){ return this._baseVotes(name) + ((this.state.voted||{})[name] ? 1 : 0); }
-  upvote(name){
-    const voted = Object.assign({}, this.state.voted);
-    if (voted[name]) delete voted[name]; else voted[name] = 1;
-    this.setState({ voted });
-    try { localStorage.setItem('ioc-votes-v1', JSON.stringify(voted)); } catch(e){}
   }
   _data(){ return window.__RESEARCH || {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}}; }
   _cols(){ return {
@@ -337,30 +340,35 @@ class Component extends DCLogic {
   doSubmit(){
     var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
     var title=g('ioc-sr-title'), link=g('ioc-sr-link'), from=g('ioc-sr-from'), why=g('ioc-sr-why');
-    var to='jayajohnyramchandani@gmail.com,raisamirza@gmail.com';
+    var key=(typeof window!=='undefined' && window.WEB3FORMS_ACCESS_KEY) ? window.WEB3FORMS_ACCESS_KEY : '';
     var subject='Resource suggestion: '+(title||'(untitled)');
-    var body='A resource has been suggested for the library.\n\n'
-      +'Title: '+title+'\n'
-      +'Link: '+link+'\n'
-      +'Suggested by: '+(from||'(not given)')+'\n\n'
-      +'Why it matters / how it informs a capacity:\n'+why+'\n';
-    try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
-    this.setState({submitDone:true});
+    if (key) {
+      this.setState({submitting:true, submitError:null});
+      fetch('https://api.web3forms.com/submit', {
+        method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'},
+        body: JSON.stringify({ access_key:key, subject:subject, from_name:'Resource Library suggestion',
+          'Resource title':title, 'Link':link, 'Suggested by':from||'(not given)', 'Why it matters':why })
+      }).then(r=>r.json()).then(j=>{
+        this.setState({submitting:false, submitDone:true, submitError: j && j.success ? null : 'send'});
+      }).catch(()=>{ this.setState({submitting:false, submitDone:true, submitError:'network'}); });
+    } else {
+      var to='jayajohnyramchandani@gmail.com,raisamirza@gmail.com';
+      var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
+        +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs a capacity:\n'+why+'\n';
+      try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
+      this.setState({submitDone:true});
+    }
   }
   toggleObj(bag, key){ const b=Object.assign({}, this.state[bag]); if(b[key]) delete b[key]; else b[key]=true; const s={}; s[bag]=b; this.setState(s); }
 
   _mkRes(r){
     const cols=this._cols();
-    const voted=!!(this.state.voted||{})[r.name];
-    const vc=this._voteCount(r.name);
     return {
       name:r.name, desc:r.desc, url:r.url||'#',
+      featured:!!r.featured,
       typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
       typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'rgba(138,106,69,.12)', color:'#8a6a45', whiteSpace:'nowrap' },
-      voteCount:vc, voted,
-      onUpvote:(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.upvote(r.name); },
-      upvoteStyle:{ flex:'none', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'1px', width:'46px', padding:'8px 0', borderRadius:'10px', cursor:'pointer', lineHeight:1,
-        border:'1px solid '+(voted?'#8a6a45':'rgba(120,105,75,.35)'), background:voted?'#8a6a45':'#FFFDF8', color:voted?'#fff':'#8a6a45' },
+      pickStyle:{ display:'inline-flex', alignItems:'center', gap:'4px', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'#8a6a45', color:'#fff', whiteSpace:'nowrap' },
       capTags:r.caps.map(c=>{
         const col=cols[this._groupOf(c)];
         return { label:c, onOpen:(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.openDeep(c); },
@@ -408,13 +416,18 @@ class Component extends DCLogic {
     if(this.state.deep){
       const label=this.state.deep, g=this._groupOf(label), col=cols[g];
       const list=this._resFor(label);
-      const items=list.map((r,i)=>({r,i})).sort((a,b)=>{ const d=this._voteCount(b.r.name)-this._voteCount(a.r.name); return d!==0?d:a.i-b.i; }).map(x=>this._mkRes(x.r));
+      const items=list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:a.i-b.i; }).map(x=>this._mkRes(x.r));
       const order=['Books','Methods & Toolkits','Digital Publications / Reports','Data Tools','Case Studies','Networks','Podcast','Video','Articly / Blogposts','Articles / Blogposts','Other'];
       const byMed={};
       list.forEach(r=>{ const ts=(r.types&&r.types.length)?r.types:['Other']; ts.forEach(t=>{ (byMed[t]=byMed[t]||[]).push(r); }); });
       const keys=Object.keys(byMed).sort((a,b)=>{ const ia=order.indexOf(a), ib=order.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });
       const mediums=keys.map(m=>({ medium:m, count:byMed[m].length, items:byMed[m].map(r=>this._mkRes(r)) }));
+      const det=(typeof window!=='undefined'&&window.__CAPDETAIL)?(window.__CAPDETAIL[label]||{}):{};
+      const levOrder=['Emerging','Developing','Effective','Influential'];
+      const badge={display:'inline-block',fontFamily:"'PT Sans',sans-serif",fontSize:'10.5px',fontWeight:700,letterSpacing:'.07em',textTransform:'uppercase',color:col.c};
+      const levels=det.levels?levOrder.filter(k=>det.levels[k]).map(k=>({label:k,text:det.levels[k],badgeStyle:badge})):[];
       deep={ label, color:col.c, headerBg:col.head, groupName:(meta[g]||{}).name||g,
+        desc:det.desc||'', levels, hasLevels:levels.length>0,
         countText:list.length+(list.length===1?' resource informs this capacity':' resources inform this capacity'),
         items, onDesign:()=>{ window.location.href='design.html'; } };
     }
@@ -476,7 +489,7 @@ class Component extends DCLogic {
       // capacities
       groupSections,
       // deep dive
-      deepOpen:!!deep, deep:deep||{label:'',color:'#46716f',headerBg:'#e9efe8',groupName:'',countText:'',items:[],onDesign:()=>{}},
+      deepOpen:!!deep, deep:deep||{label:'',color:'#46716f',headerBg:'#e9efe8',groupName:'',desc:'',levels:[],hasLevels:false,countText:'',items:[],onDesign:()=>{}},
       closeDeep:()=>this.closeDeep(),
       openSubmit:()=>this.openSubmit(),
       // library

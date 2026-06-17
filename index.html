@@ -11,9 +11,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Caveat:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#D9D3C7;font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased}
+  body{margin:0;background:#d3dad2;font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased}
   .ioc-root{padding:46px 24px 70px}
   .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden}
   .ioc-stage{position:absolute;top:0;left:0;width:1040px;height:1320px;transform-origin:top left}
@@ -29,31 +30,32 @@
 </style>
 </helmet>
 
-<div class="ioc-root" style="position:relative;min-height:100vh;background:#D9D3C7;display:flex;flex-direction:column;align-items:center">
-
-  {{ editToggle }}
+<div class="ioc-root" style="position:relative;min-height:100vh;background:#d3dad2;display:flex;flex-direction:column;align-items:center">
 
   <dc-import name="SiteNav" active="home" hint-size="100%,58px" style="width:100%"></dc-import>
 
   <!-- title block -->
-  <div style="width:1040px;max-width:100%;margin-bottom:22px;padding-top:34px">
-    
-    <h1 class="ioc-title" data-edit="title" style="font-family:'PT Serif',serif;font-weight:700;font-size:40px;line-height:1.08;margin:0 0 10px">Learning to intervene in complex systems</h1>
-    <p class="ioc-lede" data-edit="lede" style="font-size:16px;line-height:1.6;color:#544E45;margin:0;max-width:74ch">This framework maps the orientations, capacities, and meta-proccess young people need to intervene in complex systems.&nbsp;&nbsp;Each island is a capacity to grow; the dotted route is the meta-process you cycle through; the compass bearings are the orientations that hold the whole field.</p>
+  <div style="width:1040px;max-width:100%;margin-bottom:24px;padding-top:40px;text-align:center">
+    <h1 class="ioc-title" data-edit="title" style="font-family:'Fraunces',serif;font-weight:500;font-size:52px;line-height:1.04;letter-spacing:-.01em;margin:0 auto 18px;max-width:17ch;color:#1f3a36">Learning to intervene in complex systems</h1>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+      <span style="width:54px;height:1px;background:rgba(70,113,111,.5)"></span>
+      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:15.5px;color:#4c6b64;margin:0">A capacity framework for just &amp; regenerative futures</p>
+      <span style="width:54px;height:1px;background:rgba(70,113,111,.5)"></span>
+    </div>
   </div>
 
   <!-- caption / legend (moved above map) -->
   <div style="width:1040px;max-width:100%;margin-bottom:20px;display:flex;flex-direction:column;gap:11px;font-size:13px;color:#6f685d">
 
     <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
-      <span data-edit="leg-orient-label" style="flex:none;min-width:104px;font-weight:700;color:#8a6a45;letter-spacing:.02em">The orientations</span>
+      <span data-edit="leg-orient-label" style="flex:none;min-width:104px;font-weight:700;color:#46716f;letter-spacing:.02em">The orientations</span>
       <span style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
         <span style="display:flex;align-items:center;gap:7px"><span style="width: 13px; height: 13px; border-radius: 3px; background: rgb(244, 239, 230); border: 1px solid rgb(217, 187, 120); display: inline-block;"></span><span data-edit="leg-orient">Just and Regenerative Futures · Reciprocity · Pluriversality · Shared Agency</span></span>
       </span>
     </div>
 
     <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
-      <span data-edit="leg-cap-label" style="flex:none;min-width:104px;font-weight:700;color:#8a6a45;letter-spacing:.02em">The capacities</span>
+      <span data-edit="leg-cap-label" style="flex:none;min-width:104px;font-weight:700;color:#46716f;letter-spacing:.02em">The capacities</span>
       <span style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
         <span style="display:flex;align-items:center;gap:7px"><span style="width:13px;height:13px;border-radius:50%;background:#7E9E9E;display:inline-block"></span><span data-edit="leg-cap-1">Individual grounding</span></span>
         <span style="display:flex;align-items:center;gap:7px"><span style="width:13px;height:13px;border-radius:50%;background:#A2AD68;display:inline-block"></span><span data-edit="leg-cap-2">Collective strategy</span></span>
@@ -62,15 +64,20 @@
     </div>
 
     <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
-      <span data-edit="leg-meta-label" style="flex:none;min-width:104px;font-weight:700;color:#8a6a45;letter-spacing:.02em">The meta-process</span>
+      <span data-edit="leg-meta-label" style="flex:none;min-width:104px;font-weight:700;color:#46716f;letter-spacing:.02em">The meta-process</span>
       <span style="display:flex;align-items:center;gap:7px"><span style="width:20px;border-top:2px dashed #6f685d;display:inline-block"></span><span data-edit="leg-meta">Probe · Sense · Design · Adapt · Integrate ↺</span></span>
     </div>
 
   </div>
 
-  <!-- ===== MAP (scale-to-fit stage) ===== -->
-  <div class="ioc-mapframe" style="border-radius:20px;box-shadow:0 14px 40px rgba(70,55,35,0.16),inset 0 0 0 1px rgba(120,105,75,0.16)">
-  <div class="ioc-stage" style="border-radius:20px;overflow:hidden;background:#EADFC9">
+  <!-- ===== MAP — framed plate ===== -->
+  <div style="width:1040px;max-width:100%">
+    <div style="display:flex;justify-content:flex-end;padding:0 2px 10px">
+      <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a9b94;font-weight:700">Drag · hover · explore</span>
+    </div>
+    <div style="border:1px solid rgba(47,58,54,.5);padding:9px;background:#e3e7df">
+  <div class="ioc-mapframe" style="border:1px solid rgba(47,58,54,.32);box-shadow:none">
+  <div class="ioc-stage" style="overflow:hidden;background:#EADFC9">
 
     <!-- generated watercolour sea, islands, route, compass -->
     {{ seaArt }}
@@ -126,6 +133,8 @@
 
   </div>
   </div>
+    </div>
+  </div>
 
   <!-- attribution -->
   <div data-edit="attrib" style="width:1040px;max-width:100%;margin-top:14px;font-size:12px;color:#8a8377;letter-spacing:.02em"><br></div>
@@ -137,7 +146,6 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1090,&quot;height&quot;:1560}}">
 class Component extends DCLogic {
   state = {
-    editMode: false,
     wp: [
       {n:1,label:'Probe',x:130,y:150},
       {n:2,label:'Sense',x:435,y:495},
@@ -163,10 +171,10 @@ class Component extends DCLogic {
       {label:'Regenerative Systems Design',x:810,y:690,r:46,w:106,group:'green',seed:328},
       {label:'Narrative & Media Analysis',x:475,y:730,r:42,w:98,group:'green',seed:335},
       {label:'Participatory Research & Design',x:670,y:790,r:48,w:108,group:'green',seed:342},
-      {label:'Data Analysis & Impact Evaluation',x:845,y:800,r:44,w:104,group:'green',seed:349},
+      {label:'Data Analysis & Evaluation',x:480,y:865,r:42,w:96,group:'coral',seed:349},
       // ACTION — structural agency (coral)
       {label:'Experimenting & Building',x:290,y:890,r:46,w:104,group:'coral',seed:500},
-      {label:'Convening & Facilitating',x:480,y:865,r:42,w:96,group:'coral',seed:507},
+      {label:'Convening & Facilitating Collaborations',x:845,y:800,r:44,w:104,group:'green',seed:507},
       {label:'Conflict Transformation',x:640,y:940,r:46,w:104,group:'coral',seed:514},
       {label:'Planning & Resource Mobilization',x:385,y:1010,r:52,w:112,group:'coral',seed:521},
       {label:'Leading in Complexity',x:595,y:1060,r:46,w:104,group:'coral',seed:528},
@@ -254,46 +262,6 @@ class Component extends DCLogic {
     window.addEventListener('resize', this._fit);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this._fit());
     this._initTips();
-    this._initEditable();
-  }
-  _initEditable() {
-    const KEY = 'ioc-txt-v1';
-    let saved = {}; try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
-    this._txt = saved;
-    const root = document.querySelector('.ioc-root');
-    if (!root) return;
-    root.querySelectorAll('[data-edit]').forEach((el) => {
-      const id = el.getAttribute('data-edit');
-      if (saved[id] != null) el.textContent = saved[id];
-      el.setAttribute('spellcheck', 'false');
-      if (!el._wired) {
-        el._wired = true;
-        el.addEventListener('focus', () => { el.style.boxShadow = '0 0 0 2px rgba(154,106,74,.55)'; });
-        el.addEventListener('blur', () => {
-          el.style.boxShadow = 'none';
-          this._txt[id] = el.textContent;
-          try { localStorage.setItem(KEY, JSON.stringify(this._txt)); } catch(e){}
-        });
-        el.addEventListener('keydown', (ev) => {
-          if (ev.key === 'Enter' && !ev.shiftKey && el.tagName !== 'P') { ev.preventDefault(); el.blur(); }
-          if (ev.key === 'Escape') { ev.preventDefault(); el.blur(); }
-        });
-      }
-    });
-    this._applyEditMode();
-  }
-  _applyEditMode() {
-    const on = this.state.editMode;
-    const root = document.querySelector('.ioc-root');
-    if (!root) return;
-    root.querySelectorAll('[data-edit]').forEach((el) => {
-      el.setAttribute('contenteditable', on ? 'true' : 'false');
-      el.style.cursor = on ? 'text' : '';
-      el.style.outline = on ? '1px dashed rgba(138,106,69,.6)' : 'none';
-      el.style.outlineOffset = on ? '2px' : '';
-      el.style.borderRadius = '3px';
-    });
-    if (!on && document.activeElement && document.activeElement.getAttribute && document.activeElement.getAttribute('data-edit') != null) { try { document.activeElement.blur(); } catch(e){} }
   }
   _tipData() {
     if (this.__tips) return this.__tips;
@@ -328,10 +296,10 @@ class Component extends DCLogic {
       'Regenerative Systems Design': { g:'green', t:'Regenerative Systems Design', s:'Collective strategy', b:'Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.' },
       'Narrative & Media Analysis': { g:'green', t:'Narrative & Media Analysis', s:'Collective strategy', b:'Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.' },
       'Participatory Research & Design': { g:'green', t:'Participatory Research & Design', s:'Collective strategy', b:'Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.' },
-      'Data Analysis & Impact Evaluation': { g:'green', t:'Data Analysis & Impact Evaluation', s:'Collective strategy', b:'Utilizing empirical data tracking, quantitative metrics, and positive-deviance mapping to identify hidden localized solutions and track system-wide trends.' },
+      'Data Analysis & Evaluation': { g:'coral', t:'Data Analysis & Evaluation', s:'Systemic intervention', b:'Utilizing empirical data tracking, quantitative metrics, and positive-deviance mapping to identify hidden localized solutions and track system-wide trends.' },
       // ===== systemic capacities (coral) =====
       'Experimenting & Building': { g:'coral', t:'Experimenting & Building', s:'Systemic intervention', b:"Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback." },
-      'Convening & Facilitating': { g:'coral', t:'Convening & Facilitating', s:'Systemic intervention', b:'Designing and stewarding non-hierarchical, highly democratic spaces that cultivate distributed intelligence, deep dialogue, and shared consensus.' },
+      'Convening & Facilitating Collaborations': { g:'green', t:'Convening & Facilitating Collaborations', s:'Collective strategy', b:'Designing and stewarding non-hierarchical, highly democratic spaces that cultivate distributed intelligence, deep dialogue, and shared consensus.' },
       'Conflict Transformation': { g:'coral', t:'Conflict Transformation', s:'Systemic intervention', b:'Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.' },
       'Planning & Resource Mobilization': { g:'coral', t:'Planning & Resource Mobilization', s:'Systemic intervention', b:'Organizing adaptive logistics, elastic operational budgets, and highly flexible, non-linear timelines that accommodate unpredictable systemic feedback loops.' },
       'Leading in Complexity': { g:'coral', t:'Leading in Complexity', s:'Systemic intervention', b:'Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.' },
@@ -476,9 +444,6 @@ class Component extends DCLogic {
     if (this._ro) this._ro.disconnect();
     if (this._fit) window.removeEventListener('resize', this._fit);
   }
-  componentDidUpdate(pp, ps) {
-    if (!ps || ps.editMode !== this.state.editMode) this._applyEditMode();
-  }
   renderVals() {
     const h = React.createElement;
     const C = { teal:'#7E9E9E', tealDeep:'#46716f', green:'#A2AD68', greenDeep:'#76834a', coral:'#D08B6C', coralDeep:'#bd6a47', ink:'#39342b', cream:'#F4EFE6' };
@@ -551,14 +516,7 @@ class Component extends DCLogic {
       ))
     );
 
-    const editToggle = h('button', { key:'editbtn', className:'ioc-noexport',
-      onClick:()=>this.setState(s=>({ editMode:!s.editMode }), ()=>this._applyEditMode()),
-      style:{ position:'fixed', bottom:'22px', right:'22px', zIndex:60, display:'flex', alignItems:'center', gap:'7px', whiteSpace:'nowrap', fontFamily:"'PT Sans',system-ui,sans-serif", fontSize:'14px', fontWeight:700, letterSpacing:'.01em', padding:'12px 20px', borderRadius:'999px', cursor:'pointer', border: this.state.editMode?'1px solid #8a6a45':'1px solid rgba(120,105,75,0.5)', background: this.state.editMode?'#8a6a45':'rgba(252,251,247,0.97)', color: this.state.editMode?'#fff':'#8a6a45', boxShadow:'0 6px 20px rgba(70,55,35,0.28)' } },
-      h('span',{key:'i',style:{fontSize:'14px',lineHeight:1}}, '\u270E'),
-      h('span',{key:'t'}, this.state.editMode ? 'Done editing' : 'Edit text')
-    );
-
-    return { seaArt, islands, waypoints, editToggle };
+    return { seaArt, islands, waypoints };
   }
 }
 </script>

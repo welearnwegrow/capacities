@@ -10,20 +10,23 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 </helmet>
-<nav style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:flex-end;gap:22px;flex-wrap:wrap;padding:13px 30px;background:rgba(233,227,215,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(120,105,75,.22);font-family:'PT Sans',system-ui,sans-serif">
-  <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="4">
-    <a href="{{ it.href }}" style="{{ it.style }}">{{ it.label }}</a>
-  </sc-for>
+<nav style="position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:18px 26px;flex-wrap:wrap;padding:17px 30px;background:rgba(211,218,210,0.9);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border-bottom:1px solid rgba(70,113,111,.2);font-family:'PT Sans',system-ui,sans-serif">
+  <a href="index.html" style="margin-right:auto;text-decoration:none;font-family:'Fraunces',serif;font-weight:600;font-size:16px;line-height:1.1;letter-spacing:.005em;color:#1f3a36">Systems Change Learning Design Studio</a>
+  <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+    <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="4">
+      <a href="{{ it.href }}" style="{{ it.style }}">{{ it.label }}</a>
+    </sc-for>
+  </div>
 </nav>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;resources&quot;,&quot;design&quot;,&quot;about&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;resources&quot;,&quot;about&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   renderVals(){
     const active = this.props.active || '';
-    const base = { fontFamily:"'PT Sans',sans-serif", fontSize:'13.5px', fontWeight:700, letterSpacing:'.01em', textDecoration:'none', color:'#7a6f5c', padding:'6px 2px', borderBottom:'2px solid transparent', whiteSpace:'nowrap' };
-    const on = Object.assign({}, base, { color:'#39342b', borderBottom:'2px solid #8a6a45' });
+    const base = { fontFamily:"'PT Sans',sans-serif", fontSize:'13px', fontWeight:700, letterSpacing:'.02em', textDecoration:'none', color:'#5f7a73', padding:'5px 0', borderBottom:'2px solid transparent', whiteSpace:'nowrap' };
+    const on = Object.assign({}, base, { color:'#1f3a36', borderBottom:'2px solid #46716f' });
     const items = [
       { key:'home', label:'Home', href:'index.html' },
       { key:'resources', label:'Explore Resource Library', href:'resources.html' },

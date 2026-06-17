@@ -12,52 +12,129 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <style>*{box-sizing:border-box}html,body{margin:0;padding:0}</style>
-<script src="edit-mode.js"></script>
 </helmet>
-<div style="min-height:100vh;background:#D9D3C7;font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
+<div style="{{ rootStyle }}">
   <dc-import name="SiteNav" active="about" hint-size="100%,58px"></dc-import>
 
-  <div style="background:linear-gradient(180deg,#5f8a82,#46716f);padding:48px 26px 44px">
-    <div style="max-width:920px;margin:0 auto;color:#fff">
-      <p style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.78);font-weight:700;margin:0 0 12px">About this project</p>
-      <h1 style="font-family:'PT Serif',serif;font-weight:700;font-size:40px;line-height:1.08;margin:0 0 16px;color:#FDFBF7">Co-Editors &amp; Contributors</h1>
-      <p style="font-size:16.5px;line-height:1.65;color:rgba(255,255,255,.88);margin:0;max-width:72ch">Islands of Coherence is a collective effort — a living framework shaped by editors and a growing practice of facilitators, educators, and researchers working toward just and regenerative futures.</p>
+  <div style="{{ heroWrapStyle }}">
+    <div style="{{ heroInnerStyle }}">
+      <h1 style="{{ h1Style }}">Co-Editors &amp; Contributors</h1>
+      <p style="{{ ledeStyle }}">The creation of this resource is a collective effort — a living framework shaped by Jaya &amp; Raisa and a growing practice of facilitators, educators, and researchers working toward just and regenerative futures.</p>
     </div>
   </div>
 
-  <main style="max-width:920px;margin:0 auto;padding:42px 26px 80px">
+  <main style="{{ mainStyle }}">
 
     <!-- Co-editors -->
-    <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:23px;margin:8px 0 18px">Co-Editors</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px">
-      <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-radius:16px;padding:24px;display:flex;gap:18px;align-items:flex-start">
-        <div style="width:64px;height:64px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 35%, #A2AD68, #46716f 78%);display:flex;align-items:center;justify-content:center;font-family:'PT Serif',serif;font-weight:700;font-size:22px;color:#fff">JR</div>
+    <h2 style="{{ coH2Style }}">Co-Editors</h2>
+    <div style="{{ gridStyle }}">
+      <div style="{{ cardStyle }}">
+        <div style="{{ avatar1Style }}">JR</div>
         <div>
-          <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0">Jaya Ramchandani</h3>
-          <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8a6a45;margin:3px 0 9px">Co-Editor</p>
-          <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Short bio coming soon — a few sentences on Jaya's background, practice, and what she brings to this framework.</p>
+          <h3 style="{{ nameStyle }}">Jaya Ramchandani</h3>
+          <p style="{{ roleStyle }}">Co-Editor</p>
+          <p style="{{ bioStyle }}">Short bio coming soon — a few sentences on Jaya's background, practice, and what she brings to this framework.</p>
         </div>
       </div>
-      <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-radius:16px;padding:24px;display:flex;gap:18px;align-items:flex-start">
-        <div style="width:64px;height:64px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 35%, #D08B6C, #a8542d 78%);display:flex;align-items:center;justify-content:center;font-family:'PT Serif',serif;font-weight:700;font-size:22px;color:#fff">RM</div>
+      <div style="{{ cardStyle }}">
+        <div style="{{ avatar2Style }}">RM</div>
         <div>
-          <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0">Raisa Mirza</h3>
-          <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#8a6a45;margin:3px 0 9px">Co-Editor</p>
-          <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Short bio coming soon — a few sentences on Raisa's background, practice, and what she brings to this framework.</p>
+          <h3 style="{{ nameStyle }}">Raisa Mirza</h3>
+          <p style="{{ roleStyle }}">Co-Editor</p>
+          <p style="{{ bioStyle }}">Short bio coming soon — a few sentences on Raisa's background, practice, and what she brings to this framework.</p>
         </div>
       </div>
     </div>
 
     <!-- Contributors -->
-    <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:23px;margin:46px 0 18px">Contributors</h2>
-    <div style="background:#FCFBF7;border:1px dashed rgba(120,105,75,.4);border-radius:16px;padding:30px;text-align:center">
-      <p style="font-size:15px;line-height:1.6;color:#5a5347;margin:0 auto;max-width:60ch">This is a growing practice. Contributors who have shaped the capacities, curated resources, and tested the framework in the field will be recognized here.</p>
-      <p style="font-size:12.5px;color:#9a8d76;margin:14px 0 0;font-style:italic">Send me the contributor names, roles, and any bios/photos you'd like included.</p>
+    <h2 style="{{ contribH2Style }}">Contributors</h2>
+    <div style="{{ contribBoxStyle }}">
+      <p style="{{ contribLeadStyle }}">This is a growing practice. Contributors who have shaped the capacities, curated resources, and tested the framework in the field will be recognized here.</p>
+      <p style="{{ contribNoteStyle }}">Send me the contributor names, roles, and any bios/photos you'd like included.</p>
     </div>
   </main>
 
   <dc-import name="SiteFooter" hint-size="100%,260px" style="width:100%"></dc-import>
 </div>
 </x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:900},&quot;mood&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;estuary&quot;,&quot;ember&quot;,&quot;meadow&quot;,&quot;twilight&quot;],&quot;default&quot;:&quot;estuary&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;cozy&quot;,&quot;open&quot;,&quot;grand&quot;],&quot;default&quot;:&quot;open&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;immersive&quot;,&quot;editorial&quot;,&quot;centered&quot;],&quot;default&quot;:&quot;immersive&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals(){
+    const mood = this.props.mood ?? 'estuary';
+    const density = this.props.density ?? 'open';
+    const hero = this.props.heroStyle ?? 'immersive';
+
+    const MOODS = {
+      estuary:  { g1:'#5f8a82', g2:'#46716f', accent:'#46716f', bg:'#D9D3C7' },
+      ember:    { g1:'#d99e7f', g2:'#bd6a47', accent:'#a8542d', bg:'#e6dacb' },
+      meadow:   { g1:'#aeb878', g2:'#76834a', accent:'#5b6733', bg:'#dcd8c4' },
+      twilight: { g1:'#4a5a6b', g2:'#2b323d', accent:'#6b788a', bg:'#cdcbc6' }
+    };
+    const m = MOODS[mood] || MOODS.estuary;
+
+    const D = {
+      cozy:  { heroPad:'32px 26px 30px', mainPad:'30px 26px 64px', h1:'32px', lede:'15.5px', h2:'20px', gap:'14px', card:'18px', sgap:'34px', name:'17px' },
+      open:  { heroPad:'48px 26px 44px', mainPad:'42px 26px 80px', h1:'40px', lede:'16.5px', h2:'23px', gap:'18px', card:'24px', sgap:'46px', name:'18px' },
+      grand: { heroPad:'74px 26px 66px', mainPad:'64px 26px 100px', h1:'52px', lede:'19px', h2:'28px', gap:'22px', card:'30px', sgap:'66px', name:'21px' }
+    };
+    const d = D[density] || D.open;
+
+    const editorial = hero === 'editorial';
+    const centered = hero === 'centered';
+    const onColor = !editorial;          // hero text sits on a colored band
+    const serif = "'PT Serif',serif";
+
+    const heroWrapStyle = editorial
+      ? { background:'transparent', padding:d.heroPad, borderBottom:'2px solid '+m.accent }
+      : { background:'linear-gradient(180deg, '+m.g1+', '+m.g2+')', padding:d.heroPad };
+
+    const heroInnerStyle = {
+      maxWidth: centered ? '740px' : '920px',
+      margin:'0 auto',
+      textAlign: centered ? 'center' : 'left',
+      color: onColor ? '#fff' : '#39342b'
+    };
+
+    const eyebrowStyle = {
+      fontSize:'12px', letterSpacing:'.24em', textTransform:'uppercase', fontWeight:700,
+      margin:'0 0 12px', color: onColor ? 'rgba(255,255,255,.8)' : m.accent
+    };
+    const h1Style = {
+      fontFamily:serif, fontWeight:700, fontSize:d.h1, lineHeight:1.08, margin:'0 0 16px',
+      color: onColor ? '#FDFBF7' : '#2c261d'
+    };
+    const ledeStyle = {
+      fontSize:d.lede, lineHeight:1.65, margin: centered ? '0 auto' : '0', maxWidth:'72ch',
+      color: onColor ? 'rgba(255,255,255,.9)' : '#544E45'
+    };
+
+    const rootStyle = { minHeight:'100vh', background:m.bg, fontFamily:"'PT Sans',system-ui,sans-serif", color:'#39342b' };
+    const mainStyle = { maxWidth:'920px', margin:'0 auto', padding:d.mainPad };
+
+    const h2Base = { fontFamily:serif, fontWeight:700, fontSize:d.h2 };
+    const coH2Style = Object.assign({}, h2Base, { margin:'8px 0 18px' });
+    const contribH2Style = Object.assign({}, h2Base, { margin:d.sgap+' 0 18px' });
+
+    const gridStyle = { display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:d.gap };
+    const cardStyle = { background:'#FCFBF7', border:'1px solid rgba(120,105,75,.22)', borderRadius:'16px', padding:d.card, display:'flex', gap:'18px', alignItems:'flex-start' };
+
+    const avatarBase = { width:'64px', height:'64px', flex:'none', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', fontFamily:serif, fontWeight:700, fontSize:'22px', color:'#fff' };
+    const avatar1Style = Object.assign({}, avatarBase, { background:'radial-gradient(circle at 35% 35%, '+m.g1+', '+m.g2+' 80%)' });
+    const avatar2Style = Object.assign({}, avatarBase, { background:'radial-gradient(circle at 35% 35%, #D08B6C, #a8542d 80%)' });
+
+    const nameStyle = { fontFamily:serif, fontWeight:700, fontSize:d.name, margin:0 };
+    const roleStyle = { fontSize:'12.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', color:m.accent, margin:'3px 0 9px' };
+    const bioStyle = { fontSize:'13.5px', lineHeight:1.6, color:'#5a5347', margin:0 };
+
+    const contribBoxStyle = { background:'#FCFBF7', border:'1px dashed '+m.accent+'66', borderRadius:'16px', padding:'30px', textAlign:'center' };
+    const contribLeadStyle = { fontSize:'15px', lineHeight:1.6, color:'#5a5347', margin:'0 auto', maxWidth:'60ch' };
+    const contribNoteStyle = { fontSize:'12.5px', color:'#9a8d76', margin:'14px 0 0', fontStyle:'italic' };
+
+    return { rootStyle, heroWrapStyle, heroInnerStyle, eyebrowStyle, h1Style, ledeStyle,
+      mainStyle, coH2Style, contribH2Style, gridStyle, cardStyle, avatar1Style, avatar2Style,
+      nameStyle, roleStyle, bioStyle, contribBoxStyle, contribLeadStyle, contribNoteStyle };
+  }
+}
+</script>
 </body>
 </html>

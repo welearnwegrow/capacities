@@ -62,16 +62,16 @@ window.__RESEARCH = {
    "group": "green"
   },
   {
-   "label": "Data Analysis & Impact Evaluation",
-   "group": "green"
+   "label": "Data Analysis & Evaluation",
+   "group": "coral"
   },
   {
    "label": "Experimenting & Building",
    "group": "coral"
   },
   {
-   "label": "Convening & Facilitating",
-   "group": "coral"
+   "label": "Convening & Facilitating Collaborations",
+   "group": "green"
   },
   {
    "label": "Conflict Transformation",
@@ -114,7 +114,7 @@ window.__RESEARCH = {
   {
    "name": "Audrey Tang: The Power of Collective Intelligence",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Narrative & Media Analysis",
     "Participatory Research & Design"
    ],
@@ -164,7 +164,7 @@ window.__RESEARCH = {
   {
    "name": "Living Planet Report",
    "caps": [
-    "Data Analysis & Impact Evaluation",
+    "Data Analysis & Evaluation",
     "Ecological & Planetary Literacy"
    ],
    "desc": "Global wildlife populations have dropped about 73% since 1970, with freshwater and Latin American species hit hardest. The report warns that habitat loss, overexploitation, and other pressures could trigger environmental tipping points without urgent action on food, energy, finance, and conservation.",
@@ -275,7 +275,7 @@ window.__RESEARCH = {
    "name": "Facilitator's Guide to Participatory Decision-Making",
    "caps": [
     "Conflict Transformation",
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Participatory Research & Design"
    ],
    "desc": "Sam Kaner and colleagues lay out a comprehensive sourcebook packed with visual tools and strategies designed to maximize collaboration, foster mutual understanding, and lead groups through complex choices to sustainable agreements.",
@@ -371,7 +371,7 @@ window.__RESEARCH = {
   {
    "name": "The Circle Way: A Leader in Every Chair",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Leading in Complexity"
    ],
    "desc": "Christina Baldwin and Ann Linnea outline a foundational methodology for group facilitation, detailing how to use structured circle dynamics to foster deep listening, collaborative leadership, and shared decision-making.",
@@ -395,7 +395,7 @@ window.__RESEARCH = {
   {
    "name": "Reinventing Organizations: An Illustrated Invitation to Join the Conversation on Next-Stage Organizations",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Leading in Complexity",
     "Planning & Resource Mobilization"
    ],
@@ -420,7 +420,7 @@ window.__RESEARCH = {
   {
    "name": "Theory U: Leading from the Future as It Emerges",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Leading in Complexity",
     "Observing & Listening"
    ],
@@ -568,7 +568,7 @@ window.__RESEARCH = {
   {
    "name": "The Systems Thinking Playbook",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Systems Thinking & Modeling"
    ],
    "desc": "Linda Booth Sweeney and Dennis Meadows compile thirty short experiential gaming exercises designed to help educators and corporate consultants introduce and build mental capacity for systems thinking.",
@@ -580,7 +580,7 @@ window.__RESEARCH = {
   {
    "name": "Working Together: Collective Action, the Commons, and Multiple Methods in Practice",
    "caps": [
-    "Convening & Facilitating"
+    "Convening & Facilitating Collaborations"
    ],
    "desc": "Amy R. Poteete, Marco A. Janssen, and Elinor Ostrom evaluate how combining diverse research methodologies (experiments, field observations, and models) deepens scientific understanding of collective action and institutional structures.",
    "types": [
@@ -603,7 +603,7 @@ window.__RESEARCH = {
   {
    "name": "Social Change Now",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Learning Agency",
     "Political Participation"
    ],
@@ -678,7 +678,7 @@ window.__RESEARCH = {
   {
    "name": "Community Weaving",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Ecosystem Engagement",
     "Networking & Engaging Capital"
    ],
@@ -741,7 +741,7 @@ window.__RESEARCH = {
    "name": "Radical Collaboration",
    "caps": [
     "Conflict Transformation",
-    "Convening & Facilitating"
+    "Convening & Facilitating Collaborations"
    ],
    "desc": "A tactical guidebook for those tackling the climate crisis. It focuses on the mechanics of building \"impact networks\"—collaborations that bridge sectors and scales—by emphasizing speed, justice, and the alignment of diverse stakeholders around shared systemic goals.",
    "types": [
@@ -776,7 +776,7 @@ window.__RESEARCH = {
   {
    "name": "Collective Intelligence Design Playbook",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Participatory Research & Design",
     "Systems Thinking & Modeling"
    ],
@@ -814,7 +814,7 @@ window.__RESEARCH = {
   {
    "name": "Data-Powered Positive Deviance",
    "caps": [
-    "Data Analysis & Impact Evaluation",
+    "Data Analysis & Evaluation",
     "Experimenting & Building"
    ],
    "desc": "This handbook details the Data-Powered Positive Deviance (DPPD) method, which uses big data to identify outliers who are succeeding despite systemic constraints. It provides a rigorous step-by-step process for extracting these \"uncommon practices\" and scaling them to create effective, community-led interventions.",
@@ -887,7 +887,7 @@ window.__RESEARCH = {
   {
    "name": "Our World in Data",
    "caps": [
-    "Data Analysis & Impact Evaluation",
+    "Data Analysis & Evaluation",
     "Socioeconomic & Political Literacy"
    ],
    "desc": "A comprehensive online publication that presents empirical research and data on global development challenges, helping users visualize long-term trends in health, poverty, and environmental sustainability.",
@@ -899,7 +899,7 @@ window.__RESEARCH = {
   {
    "name": "SDG Tracker",
    "caps": [
-    "Data Analysis & Impact Evaluation",
+    "Data Analysis & Evaluation",
     "Ecological & Planetary Literacy"
    ],
    "desc": "An interactive tool that monitors global progress toward the United Nations Sustainable Development Goals, providing data-driven insights into how countries are performing against specific targets.",
@@ -912,7 +912,7 @@ window.__RESEARCH = {
    "name": "Gapminder",
    "caps": [
     "Critical Thinking & Reflexivity",
-    "Data Analysis & Impact Evaluation"
+    "Data Analysis & Evaluation"
    ],
    "desc": "An independent educational foundation that provides tools to visualize global development data, aimed at dismantling misconceptions about how the world is changing.",
    "types": [
@@ -923,7 +923,7 @@ window.__RESEARCH = {
   {
    "name": "Map of Life",
    "caps": [
-    "Data Analysis & Impact Evaluation",
+    "Data Analysis & Evaluation",
     "Ecological & Planetary Literacy"
    ],
    "desc": "A scientific platform that integrates global biodiversity data to map species distributions and habitat health, providing essential insights for ecological systems management.",
@@ -1123,7 +1123,7 @@ window.__RESEARCH = {
   {
    "name": "Thinking Collaborative",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Networking & Engaging Capital",
     "Participatory Research & Design"
    ],
@@ -1163,7 +1163,7 @@ window.__RESEARCH = {
    "name": "Successful Collaboration Starts With Eight Simple Rules",
    "caps": [
     "Conflict Transformation",
-    "Convening & Facilitating"
+    "Convening & Facilitating Collaborations"
    ],
    "desc": "This article outlines eight foundational principles for effective collaborative work. It provides actionable strategies for fostering mutual understanding, maintaining clear communication, and creating the psychological safety necessary for teams to thrive in complex environments.",
    "types": [
@@ -1174,7 +1174,7 @@ window.__RESEARCH = {
   {
    "name": "Sociocracy 3.0",
    "caps": [
-    "Convening & Facilitating",
+    "Convening & Facilitating Collaborations",
     "Leading in Complexity"
    ],
    "desc": "A comprehensive framework for evolutionary, self-organizing systems. It provides modular, practical patterns for decentralized decision-making, effective meeting facilitation, and organizational governance, helping groups increase transparency and collective agency.",

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}html,body{margin:0;padding:0}</style>
+<script src="edit-mode.js"></script>
+<script>
+(function(){
+  var TO='jayajohnyramchandani@gmail.com,raisamirza@gmail.com';
+  function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+  function send(){
+    var name=val('ioc-eg-name'), email=val('ioc-eg-email'), org=val('ioc-eg-org'), msg=val('ioc-eg-msg');
+    var subject='Engage Us enquiry'+(name?(' from '+name):'');
+    var body='Name: '+name+'\nEmail: '+email+'\nOrganization / context: '+org+'\n\nMessage:\n'+msg+'\n';
+    try { window.location.href='mailto:'+TO+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
+    var done=document.getElementById('ioc-eg-done'); if(done) done.style.display='block';
+  }
+  function init(t){
+    var btn=document.getElementById('ioc-eg-send');
+    if(!btn){ if(t<40) return requestAnimationFrame(function(){init(t+1);}); return; }
+    if(btn._wired) return; btn._wired=true;
+    btn.addEventListener('click', function(e){ e.preventDefault(); send(); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){init(0);}); else init(0);
+})();
+</script>
+</helmet>
+<div style="min-height:100vh;background:#D9D3C7;font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
+  <dc-import name="SiteNav" active="engage" hint-size="100%,58px"></dc-import>
+
+  <div style="background:linear-gradient(180deg,#d99e7f,#bd6a47);padding:48px 26px 44px">
+    <div style="max-width:1000px;margin:0 auto;color:#fff">
+      <div style="font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.8);font-weight:700;margin-bottom:12px">Work with us</div>
+      <h1 style="font-family:'PT Serif',serif;font-weight:700;font-size:40px;line-height:1.08;margin:0 0 16px;color:#FFF7F2">Engage Us</h1>
+      <p style="font-size:16.5px;line-height:1.65;color:rgba(255,255,255,.9);margin:0;max-width:74ch">This framework adapts to many kinds of learning contexts. However you work with young people and systems change, we can help you put it into practice. Here's how different partners engage with us.</p>
+    </div>
+  </div>
+
+  <main style="max-width:1000px;margin:0 auto;padding:40px 26px 80px">
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:6px">
+
+      <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-left:4px solid #46716f;border-radius:14px;padding:24px 24px 26px">
+        <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin:0 0 10px;color:#335a58">Formal Education Institutions</h2>
+        <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0">Schools and universities with progressive, interdisciplinary, or mission-driven curricula can use this framework to embed systems change competencies. It can shape capstone projects, transdisciplinary modules, teacher development, and student portfolios — offering a consistent reference point across academic and co-curricular learning.</p>
+      </div>
+
+      <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-left:4px solid #76834a;border-radius:14px;padding:24px 24px 26px">
+        <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin:0 0 10px;color:#5b6733">Non-Formal Learning Spaces</h2>
+        <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0">Organizations running youth fellowships, innovation hubs, seasonal schools, or intergenerational learning programs can use the framework to scaffold experiential learning and systems thinking. Whether through residencies focused on community-based interventions or mentorship programs exploring climate justice, it helps clarify learning goals, design reflective activities, and articulate progression.</p>
+      </div>
+
+      <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-left:4px solid #bd6a47;border-radius:14px;padding:24px 24px 26px">
+        <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin:0 0 10px;color:#a8542d">Civic &amp; Governance Meta-Actors</h2>
+        <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0">Curriculum boards, philanthropic foundations, and policy think tanks can use this framework to guide educational funding strategies, influence policy priorities, or develop holistic assessment tools.</p>
+      </div>
+
+      <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-left:4px solid #8a6a45;border-radius:14px;padding:24px 24px 26px">
+        <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin:0 0 10px;color:#8a6a45">Social Enterprises &amp; Capacity-Building Programs</h2>
+        <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0">Organizations offering internships, trainee programs, or early-career pathways — especially those focused on social innovation, design, or sustainability — can integrate the framework into onboarding, mentorship, and progression planning. It can inform personal development goals and support reflective practice across diverse roles.</p>
+      </div>
+
+    </div>
+
+    <!-- contact form -->
+    <div style="margin-top:36px;background:#FCFBF7;border:1px solid rgba(120,105,75,.25);border-radius:18px;padding:36px 34px">
+      <div style="text-align:center;max-width:54ch;margin:0 auto 22px">
+        <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:25px;margin:0 0 10px;color:#2c261d">Let's start a conversation</h2>
+        <p style="font-size:15px;line-height:1.6;color:#544E45;margin:0">Tell us about your context and the learners you serve, and we'll explore how the framework can support your work.</p>
+      </div>
+      <div style="max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <input id="ioc-eg-name" placeholder="Your name" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none"/>
+          <input id="ioc-eg-email" type="email" placeholder="Your email" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none"/>
+        </div>
+        <input id="ioc-eg-org" placeholder="Organization / context (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none"/>
+        <textarea id="ioc-eg-msg" rows="4" placeholder="How would you like to work together?" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none;resize:vertical"></textarea>
+        <button id="ioc-eg-send" type="button" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:14.5px;font-weight:700;color:#fff;background:#bd6a47;padding:13px 26px;border:none;border-radius:26px;cursor:pointer">Send message →</button>
+        <p id="ioc-eg-done" style="display:none;font-size:13px;color:#5b6733;font-weight:700;margin:2px 0 0">Your email app should have opened, addressed to Jaya &amp; Raisa. If it didn't, write to jayajohnyramchandani@gmail.com and raisamirza@gmail.com.</p>
+        <p style="font-size:12px;color:#9a8d76;margin:2px 0 0;font-style:italic">This opens your email app with a message ready to send to the editors.</p>
+      </div>
+    </div>
+  </main>
+
+  <dc-import name="SiteFooter" hint-size="100%,260px" style="width:100%"></dc-import>
+</div>
+</x-dc>
+</body>
+</html>

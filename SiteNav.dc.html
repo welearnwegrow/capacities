@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+</helmet>
+<nav style="position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:flex-end;gap:22px;flex-wrap:wrap;padding:13px 30px;background:rgba(233,227,215,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(120,105,75,.22);font-family:'PT Sans',system-ui,sans-serif">
+  <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="4">
+    <a href="{{ it.href }}" style="{{ it.style }}">{{ it.label }}</a>
+  </sc-for>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;resources&quot;,&quot;design&quot;,&quot;about&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals(){
+    const active = this.props.active || '';
+    const base = { fontFamily:"'PT Sans',sans-serif", fontSize:'13.5px', fontWeight:700, letterSpacing:'.01em', textDecoration:'none', color:'#7a6f5c', padding:'6px 2px', borderBottom:'2px solid transparent', whiteSpace:'nowrap' };
+    const on = Object.assign({}, base, { color:'#39342b', borderBottom:'2px solid #8a6a45' });
+    const items = [
+      { key:'home', label:'Home', href:'index.html' },
+      { key:'resources', label:'Explore Resource Library', href:'resources.html' },
+      { key:'about', label:'About the Work', href:'about.html' },
+      { key:'engage', label:'Work with Us', href:'engage.html' }
+    ];
+    return { navItems: items.map(it => ({ label:it.label, href:it.href, style: active===it.key ? on : base })) };
+  }
+}
+</script>
+</body>
+</html>

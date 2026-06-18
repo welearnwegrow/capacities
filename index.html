@@ -12,12 +12,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Caveat:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;display=swap" rel="stylesheet">
+<script src="research-data.js"></script>
+<script src="capacity-detail.js"></script>
 <style>
   *{box-sizing:border-box}
   body{margin:0;background:#d3dad2;font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased}
   .ioc-root{padding:46px 24px 70px}
   .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden}
   .ioc-stage{position:absolute;top:0;left:0;width:1040px;height:1320px;transform-origin:top left}
+  @keyframes iocFade{from{opacity:0}to{opacity:1}}
+  @keyframes iocDrawerR{from{transform:translateX(100%)}to{transform:translateX(0)}}
   @media (max-width:760px){
     .ioc-root{padding:26px 14px 48px}
     .ioc-title{font-size:30px !important}
@@ -47,7 +51,7 @@
   <!-- intro / context -->
   <div style="width:1040px;max-width:100%;margin:0 auto 18px;text-align:center">
     <div style="max-width:64ch;margin:0 auto;display:flex;flex-direction:column;gap:15px">
-      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0">We are living in an age where movements for justice and regeneration are colliding with ecological upheaval, widening inequality, technological disruption, and political fragmentation. This work asks one simple question: <em style="color:#1f3a36">What do we need to learn to intervene in complex systems.</em> It outlines the orientations, capacities, and meta-process to navigate complexity and act with integrity in shaping better futures.</p>
+      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0">We are living in an age where movements for justice and regeneration are colliding with ecological upheaval, widening inequality, technological disruption, and political fragmentation. This work asks one simple question: <em data-om-id="8d732bd2:23" style="color: rgb(31, 58, 54);">What do we need to learn to intervene in complex systems.</em>&nbsp; It outlines the orientations, capacities, and meta-process to navigate complexity and act with integrity in shaping better futures.&nbsp;</p>
     </div>
   </div>
 
@@ -129,7 +133,8 @@
 
     <!-- orientation descriptor tooltip (hover / tap) -->
     <div class="ioc-tip" style="position:absolute;left:0;top:0;width:268px;transform:translate(-50%,-50%);background:rgba(252,251,247,0.98);border:1px solid rgba(217,187,120,0.7);border-radius:13px;padding:14px 16px;box-shadow:0 10px 30px rgba(70,55,35,0.26);opacity:0;visibility:hidden;transition:opacity .14s ease;pointer-events:none;z-index:60">
-      <div class="ioc-tip-title" style="font-family:'PT Serif',serif;font-weight:700;font-size:15px;line-height:1.16;color:#6B5527"></div>
+      <button class="ioc-tip-close" type="button" aria-label="Close" style="display:none;position:absolute;top:7px;right:8px;width:22px;height:22px;align-items:center;justify-content:center;border:none;border-radius:50%;background:rgba(57,52,43,0.08);color:#6b5d45;font-size:15px;line-height:1;cursor:pointer;padding:0">×</button>
+      <div class="ioc-tip-title" style="font-family:'PT Serif',serif;font-weight:700;font-size:15px;line-height:1.16;color:#6B5527;padding-right:18px"></div>
       <div class="ioc-tip-sub" style="font-style:italic;font-size:11px;color:#977c45;margin-top:2px;margin-bottom:7px"></div>
       <div class="ioc-tip-body" style="font-size:11.5px;line-height:1.5;color:#544E45"></div>
       <a class="ioc-tip-link" target="_blank" rel="noopener" style="display:none;align-items:center;gap:5px;margin-top:9px;font-size:11.5px;font-weight:700;text-decoration:none"></a>
@@ -148,11 +153,68 @@
 
   <dc-import name="SiteFooter" hint-size="100%,260px" style="width:100%;margin-top:30px"></dc-import>
 
+  <!-- ============ CAPACITY DRAWER ============ -->
+  <sc-if value="{{ capDrawer.open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCap }}" style="position:fixed;inset:0;background:rgba(40,32,22,.42);z-index:80;animation:iocFade .2s ease"></div>
+    <aside style="position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:#EFE9DC;z-index:81;overflow-y:auto;box-shadow:-14px 0 40px rgba(40,30,20,.22);animation:iocDrawerR .28s cubic-bezier(.2,.7,.3,1)">
+      <div style="position:sticky;top:0;background:{{ capDrawer.headerBg }};padding:22px 26px 18px;border-bottom:1px solid rgba(120,105,75,.2)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px">
+          <div>
+            <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:{{ capDrawer.color }};margin-bottom:7px">{{ capDrawer.groupName }}</div>
+            <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:25px;line-height:1.1;margin:0;color:#332d24">{{ capDrawer.label }}</h2>
+            <div style="font-size:13px;color:#7a6f5c;margin-top:6px">{{ capDrawer.countText }}</div>
+          </div>
+          <button onClick="{{ closeCap }}" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(120,105,75,.3);background:#FCFBF7;color:#6b5527;font-size:17px;cursor:pointer;line-height:1">✕</button>
+        </div>
+      </div>
+      <div style="padding:20px 26px 0">
+        <sc-if value="{{ capDrawer.desc }}" hint-placeholder-val="">
+          <p style="font-size:14px;line-height:1.62;color:#4a4438;margin:0 0 20px">{{ capDrawer.desc }}</p>
+        </sc-if>
+        <sc-if value="{{ capDrawer.hasLevels }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px">
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Indicators of learning</span>
+            <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
+          </div>
+          <div>
+            <sc-for list="{{ capDrawer.levels }}" as="lv" hint-placeholder-count="4">
+              <div style="padding:9px 0;border-top:1px solid rgba(120,105,75,.14)">
+                <p style="font-size:13px;line-height:1.55;color:#5a5347;margin:0"><span style="{{ lv.tierStyle }}">{{ lv.label }}:</span> {{ lv.text }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <div style="padding:18px 26px 40px">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Resources</span>
+          <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ capDrawer.items }}" as="res" hint-placeholder-count="4">
+            <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:12px;padding:13px 15px">
+              <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:7px">
+                <sc-if value="{{ res.featured }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ res.pickStyle }}">★ Editor's pick</span>
+                </sc-if>
+                <span style="{{ res.typeStyle }}">{{ res.typeText }}</span>
+              </div>
+              <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }} <span style="font-weight:400;color:{{ capDrawer.color }};font-size:13px">↗</span></a>
+              <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:7px 0 0">{{ res.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <a href="{{ capDrawer.libHref }}" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:{{ capDrawer.color }};text-decoration:none">Open in Resource Library →</a>
+      </div>
+    </aside>
+  </sc-if>
+
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1090,&quot;height&quot;:1560}}">
 class Component extends DCLogic {
   state = {
+    openCap: null,
     wp: [
       {n:1,label:'Probe',x:260,y:90},
       {n:2,label:'Sense',x:708,y:624},
@@ -342,12 +404,15 @@ class Component extends DCLogic {
     const stage = document.querySelector('.ioc-stage');
     const tip = stage && stage.querySelector('.ioc-tip');
     if (!tip) return;
+    const closeEl = tip.querySelector('.ioc-tip-close');
+    if (closeEl) closeEl.style.display = (this._pinned === key) ? 'flex' : 'none';
     const th2 = this._tipTheme(key);
     const titleEl = tip.querySelector('.ioc-tip-title');
     const subEl = tip.querySelector('.ioc-tip-sub');
     const bodyEl = tip.querySelector('.ioc-tip-body');
     const isCap = d.g === 'teal' || d.g === 'green' || d.g === 'coral';
     const isIsland = isCap && key.indexOf('grp-') !== 0;
+    this._tipKey = isIsland ? key : null;
     titleEl.textContent = d.t; bodyEl.textContent = d.b;
     subEl.textContent = isCap ? '' : d.s;
     subEl.style.display = (isCap || !d.s) ? 'none' : '';
@@ -394,8 +459,37 @@ class Component extends DCLogic {
     e.stopPropagation();
     if (this._islDragged) { this._islDragged = false; return; }
     const p = this.state.isl[i]; const key = p.label;
-    if (this._pinned === key) { this._pinned = null; this._hideTip(); }
-    else { this._pinned = key; this._showTip(key, p.x, p.y, p.r*2); }
+    this._pinned = null; this._hideTip();
+    this.setState({ openCap: key });
+  }
+  closeCap(){ this.setState({ openCap: null }); }
+  _capDrawer(){
+    const key = this.state.openCap;
+    if (!key) return { open:false, label:'', groupName:'', color:'#46716f', headerBg:'#e3ecea', desc:'', levels:[], hasLevels:false, countText:'', items:[] };
+    const R = (typeof window!=='undefined' && window.__RESEARCH) ? window.__RESEARCH : {capacities:[],resources:[]};
+    const CD = (typeof window!=='undefined' && window.__CAPDETAIL) ? window.__CAPDETAIL : {};
+    const capRec = (R.capacities||[]).find(c=>c.label===key) || {group:'teal'};
+    const g = capRec.group || 'teal';
+    const GRP = { teal:{c:'#46716f',name:'Individual Grounding',head:'#e3ecea',rgb:[46,113,111]}, green:{c:'#5b6733',name:'Collective Strategy',head:'#ebeedd',rgb:[118,131,74]}, coral:{c:'#a8542d',name:'Systemic Intervention',head:'#f4e3d9',rgb:[189,106,71]} };
+    const gd = GRP[g] || GRP.teal;
+    const det = CD[key] || {};
+    const tcMap = { 'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733','Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8','Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45' };
+    const tcol = (t)=> tcMap[t] || '#6b5d45';
+    const list = (R.resources||[]).filter(r=>r.caps && r.caps.indexOf(key)>=0);
+    const items = list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:a.i-b.i; }).map(x=>{
+      const r=x.r; const t0=(r.types&&r.types.length)?r.types[0]:'Resource'; const tc=tcol(t0);
+      return { name:r.name, desc:r.desc, url:r.url||'#', featured:!!r.featured,
+        typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
+        typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },
+        pickStyle:{ display:'inline-flex', alignItems:'center', gap:'4px', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'#8a6a45', color:'#fff', whiteSpace:'nowrap' } };
+    });
+    const levOrder=['Emerging','Developing','Effective','Influential']; const alpha=[0.40,0.60,0.80,1];
+    const levels = det.levels ? levOrder.filter(k=>det.levels[k]).map((k,idx)=>({ label:k, text:det.levels[k], tierStyle:{ fontFamily:"'PT Serif',serif", fontWeight:700, color:'rgba('+gd.rgb[0]+','+gd.rgb[1]+','+gd.rgb[2]+','+alpha[idx]+')' } })) : [];
+    const n=list.length;
+    return { open:true, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,
+      desc:det.desc||'', levels, hasLevels:levels.length>0,
+      countText: n+(n===1?' resource informs this capacity':' resources inform this capacity'),
+      libHref: 'resources.html?capacity='+encodeURIComponent(key), items };
   }
   _onWpEnter(i) { if (this._pinned == null) { const p = this.state.wp[i]; this._showTip(p.key || ['probe','sense','design','adapt','integrate'][i], p.x, p.y, 30); } }
   _onWpLeave() { this._scheduleHide(); }
@@ -413,8 +507,12 @@ class Component extends DCLogic {
     const tipEl = stage.querySelector('.ioc-tip');
     if (tipEl && !tipEl._bridgeWired) {
       tipEl._bridgeWired = true;
+      tipEl.style.cursor = 'pointer';
+      tipEl.addEventListener('click', (e) => { if (e.target.closest && e.target.closest('.ioc-tip-close')) return; if (this._tipKey) { e.preventDefault(); const k = this._tipKey; this._pinned = null; this._hideTip(); this.setState({ openCap: k }); } });
       tipEl.addEventListener('mouseenter', () => { if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; } });
       tipEl.addEventListener('mouseleave', () => { this._scheduleHide(); });
+      const closeEl = tipEl.querySelector('.ioc-tip-close');
+      if (closeEl) closeEl.addEventListener('click', (e) => { e.stopPropagation(); this._pinned = null; this._hideTip(); });
     }
     stage.querySelectorAll('[data-orient]').forEach((card) => {
       const key = card.getAttribute('data-orient');
@@ -509,7 +607,7 @@ class Component extends DCLogic {
     const waypoints = h('div', { key:'wps', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
       WP.map((p, i) => h('div', { key:'wp'+i, style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', pointerEvents:'none' } },
         h('div', { style:{ position:'absolute', left:'0px', top:'-38px', transform:'translateX(-50%)', whiteSpace:'nowrap', fontSize:'12px', fontWeight:700, letterSpacing:'.02em', color:'#F4EFE6', background:'rgba(57,52,43,0.92)', padding:'3px 10px', borderRadius:'9px', pointerEvents:'none' } }, p.label),
-        h('div', { title:'Drag to move · click for details', onPointerDown:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to top, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
+        h('div', { title:'', onPointerDown:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to top, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
       ))
     );
 
@@ -517,13 +615,13 @@ class Component extends DCLogic {
 
     // draggable island labels + drag surfaces (whole island moves)
     const islands = h('div', { key:'isls', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
-      ISL.map((p, i) => h('div', { key:'isl'+i, title:'Drag to move · click for details', onPointerDown:(e)=>this._startDragIsland(i,e), onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
+      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onPointerDown:(e)=>this._startDragIsland(i,e), onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
           style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', width:(p.r*2)+'px', height:(p.r*2)+'px', borderRadius:'50%', cursor:'pointer', pointerEvents:'auto', touchAction:'none' } },
         h('div', { style:{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', width:p.w+'px', textAlign:'center', fontSize:'12px', fontWeight:600, lineHeight:1.16, color:'#fff', textShadow:'0 1px 3px rgba(35,28,18,.6)', pointerEvents:'none', userSelect:'none' } }, p.label)
       ))
     );
 
-    return { seaArt, islands, waypoints };
+    return { seaArt, islands, waypoints, capDrawer: this._capDrawer(), closeCap: () => this.closeCap() };
   }
 }
 </script>

@@ -1,220 +1,222 @@
-// Per-capacity detail for the "Learn more" drawer: description (mirrors the map tooltips)
-// plus a 4-level progression scaffolding (Emerging / Developing / Effective / Influential).
+// Per-capacity detail for the "Learn more" drawer and the Capacity Database table.
+// desc = short definition (mirrors the map tooltips).
+// levels = a 4-tier progression (Emerging / Developing / Effective / Influential),
+//   written for people new to the field, age-agnostic (16+), grounded in the framework sources.
 window.__CAPDETAIL = {
  "Observing & Listening": {
-  "desc": "Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.",
+  "desc": "Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before acting.",
   "levels": {
-   "Emerging": "Recognizes personal cognitive filters; can identify single-sided media biases and deliberately listens to marginalized viewpoints without immediate defensiveness.",
-   "Developing": "Tracks and documents subtle cultural, historical, and unspoken dynamics within a community space during participatory research setups.",
-   "Effective": "Decodes institutional hidden agendas and structural power balances in professional environments, utilizing deep listening to identify underlying shared motivations.",
-   "Influential": "Senses shifting geopolitical and ecological signals across macro landscapes; models spaces that allow competing, multi-stakeholder groups to deeply hear one another."
+   "Emerging": "Notices your own assumptions and filters, and chooses to listen to people whose views differ from yours — including those usually overlooked — without rushing to judge. Practices active, empathic listening: summarising what you heard before responding.",
+   "Developing": "Pays close attention inside a group or community, picking up the unspoken feelings, histories, and tensions that shape how people show up. Uses tools like empathy maps and listening interviews to surface what isn't being said directly.",
+   "Effective": "Reads the deeper dynamics inside organisations — who really holds influence, what goes unsaid, and what people care about beneath their stated positions — and adapts how you engage accordingly. Distinguishes genuine empathy from projection or assumption.",
+   "Influential": "Senses wider shifts across regions, cultures, and ecosystems, and designs settings where groups who usually talk past each other can genuinely hear one another. Models the kind of attentive presence that helps whole fields listen better."
   }
  },
  "Somatic Eco-Regulation": {
-  "desc": "The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.",
+  "desc": "Monitoring and steadying your own nervous-system responses through deliberate, relational grounding — often within ecological and land-based settings.",
   "levels": {
-   "Emerging": "Identifies personal nervous system triggers (anxiety, defensiveness) caused by eco-grief or systemic overwhelm; utilizes basic land-based grounding routines.",
-   "Developing": "Co-cultivates emotional regulation and psychological safety within activist or collaborative peer cohorts during high-stress project delivery.",
-   "Effective": "Maintains professional stability and leadership clarity while navigating acute institutional crises, workplace transitions, or localized structural turbulence.",
-   "Influential": "Holds space for collective healing and somatic recalibration within highly conflicted macro-systems, preventing ecosystem-wide burnout."
+   "Emerging": "Notices how stress, grief, or overwhelm show up in your body, and learns simple ways to steady yourself, such as breathwork, body scans, or time in nature. Begins to name emotions without being swept away by them.",
+   "Developing": "Helps a team or group stay grounded and feel safe with one another through demanding, high-pressure work. Builds shared practices of rest, care, and reflection that sustain people over a long project.",
+   "Effective": "Stays steady and clear-headed while guiding others through crises, transitions, or turbulent periods, drawing on an understanding of how the nervous system responds to stress. Treats setbacks as material for learning rather than threats.",
+   "Influential": "Holds space for collective healing and recovery across large, conflict-heavy efforts, helping whole communities avoid burnout. Builds cultures and structures where wellbeing and long-term purpose are protected, not sacrificed."
   }
  },
  "Learning Agency": {
-  "desc": "Taking proactive, self-directed ownership of personal knowledge-acquisition loops, tracking individual capacity gaps, and designing customized learning pathways.",
+  "desc": "Taking proactive, self-directed ownership of your own learning — noticing gaps, setting goals, and designing pathways to grow across contexts.",
   "levels": {
-   "Emerging": "Reclaims autonomy from conventional, rigid testing models; actively tracks personal capacity gaps and builds self-directed learning paths.",
-   "Developing": "Seeks out mentorship, alternative non-formal fellowships, and diverse knowledge traditions to build a transcontextual skillset.",
-   "Effective": "Designs ongoing upskilling pipelines and reflective professional development practices for teams inside social enterprises or organizations.",
-   "Influential": "Deconstructs legacy, Eurocentric training paradigms across international networks; establishes alternative, lifelong learning ecosystems."
+   "Emerging": "Takes charge of your own learning — noticing what you don't yet know, setting goals, and finding your own ways to grow beyond tests and grades. Uses feedback as fuel for growth rather than as judgement.",
+   "Developing": "Seeks out mentors, hands-on programs, and different knowledge traditions to build skills that travel across settings. Reflects on how you learn best and adjusts your strategies when something isn't working.",
+   "Effective": "Designs ongoing learning and reflection for whole teams, so growth is built into how an organisation works rather than left to chance. Makes your own learning visible to others through documentation, teaching, or portfolios.",
+   "Influential": "Rethinks how learning happens across whole networks, building lasting, lifelong learning systems beyond any single dominant model. Helps shift cultures from one-off training toward continuous, self-directed growth."
   }
  },
  "Critical Thinking & Reflexivity": {
-  "desc": "The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective.",
+  "desc": "Continuously examining your own assumptions, position, and inherited biases to understand the limits of your own perspective and act with accountability.",
   "levels": {
-   "Emerging": "Questions normalized, everyday behaviors; maps personal privileges and unmasks how dominant social structures shape their worldview.",
-   "Developing": "Identifies and actively challenges colonial biases embedded within conventional university or non-profit research methodologies.",
-   "Effective": "Audits internal organizational architectures to locate hidden practices that reproduce inequality, exclusion, or structural extraction.",
-   "Influential": "Challenges foundational philosophical and economic paradigms at the legislative or global funding level, shifting systems toward pluriversality."
+   "Emerging": "Questions things usually taken for granted, and begins to see how your own background, identity, and advantages shape the way you see the world. Practices surfacing hidden assumptions before acting on them.",
+   "Developing": "Spots biases built into common ways of researching or running projects, and is willing to name and challenge them. Maps how identity, worldview, and power intersect in a given situation.",
+   "Effective": "Examines how an organisation's own habits and structures can quietly reproduce inequality or exclusion — and works to change them. Turns reflexive insight into concrete shifts in language, strategy, and behaviour.",
+   "Influential": "Challenges deep-rooted economic and cultural assumptions at the level of policy and funding, opening space for many ways of knowing. Models the humility and accountability that lets whole fields question their own foundations."
   }
  },
  "Spiritual & Moral Inquiry": {
-  "desc": "Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.",
+  "desc": "Grounding choices, designs, and relationships in a non-extractive ethic that honours interconnection, repair, and long-term moral integrity.",
   "levels": {
-   "Emerging": "Formulates a personal ethical compass rooted in care, mutual respect, and a rejection of transactional, extractive relationships.",
-   "Developing": "Aligns local activist or project goals with a clear commitment to structural repair and intergenerational ethics.",
-   "Effective": "Resolves complex moral dilemmas within organizational value chains, explicitly prioritizing community well-being over raw compliance or short-term gains.",
-   "Influential": "Anchors macro-funding strategies or sovereign conservation protocols in deep ethics, ensuring long-term reciprocity with the living world."
+   "Emerging": "Develops a personal sense of right relationship, grounded in care and respect rather than what's merely useful or transactional. Begins to clarify the values that guide your decisions.",
+   "Developing": "Connects the goals of a project to a clear commitment to repair, fairness, and responsibility to future generations. Recognises that ethics is rarely a simple right-or-wrong, and works with that complexity.",
+   "Effective": "Works through hard ethical trade-offs in real decisions, weighing who is affected and how, and putting people's wellbeing ahead of convenience or short-term gain. Takes responsibility for both the intended and unintended effects of action.",
+   "Influential": "Anchors large funding and stewardship decisions in deep ethics, ensuring long-term care for people and the living world. Helps institutions hold themselves accountable to justice and repair, not just compliance."
   }
  },
  "Socioeconomic & Political Literacy": {
-  "desc": "Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.",
+  "desc": "Understanding how political and economic systems are built, how they got that way, and how they shape the conditions a community lives within.",
   "levels": {
-   "Emerging": "Understands basic global economic patterns and can trace how macro-politics impact everyday life in their community.",
-   "Developing": "Analyzes the intersectional impacts of structural racism, class privileges, and historical trade imbalances within regional social challenges.",
-   "Effective": "Navigates regional legislative frameworks, corporate tax models, and public sector budgeting to identify systemic leverage points.",
-   "Influential": "Restructures international financing flows, multi-million dollar grants, or trade agreements to counter systemic economic extraction."
+   "Emerging": "Understands the basics of how economies and politics work, and can trace how large forces — markets, policy, institutions — shape everyday life. Reads beyond the headlines to the structures underneath.",
+   "Developing": "Sees how race, class, and history layer together to create the social and economic challenges a place faces. Connects local struggles to the wider systems that produce them.",
+   "Effective": "Navigates laws, budgets, and economic rules well enough to spot where real change can be made, and designs strategies around those leverage points. Reads how money and policy actually move through a system.",
+   "Influential": "Reshapes how money and policy flow at large scales to counter extraction and keep power from concentrating in few hands. Influences the rules and financing structures that govern whole sectors or regions."
   }
  },
  "Ecological & Planetary Literacy": {
-  "desc": "Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.",
+  "desc": "Understanding earth systems, biodiversity, resource limits, and ecological feedback well enough to make decisions that work with nature rather than against it.",
   "levels": {
-   "Emerging": "Explains basic earth system interactions, localized climate risks, and the concept of global planetary boundaries.",
-   "Developing": "Connects macro ecological statistics (e.g., biodiversity loss) with on-the-ground impacts on local agricultural or urban communities.",
-   "Effective": "Integrates complex ecological science metrics directly into corporate resource planning or municipal urban adaptation toolkits.",
-   "Influential": "Directs large-scale bio-regional conservation policies that restore natural boundaries and promote multi-species coexistence across borders."
+   "Emerging": "Explains how natural systems work, the climate and ecological risks nearby, and the idea that the planet has real limits. Connects personal choices to their ecological footprint and begins to act on that awareness.",
+   "Developing": "Connects big-picture ecological trends — biodiversity loss, climate disruption, resource depletion — to what's actually happening in local communities and landscapes. Reads ecological feedback loops, not just isolated facts.",
+   "Effective": "Brings sound ecological science into real planning decisions for organisations or cities, helping choices reduce harm and support ecosystem health. Translates complex science into usable guidance for non-specialists.",
+   "Influential": "Guides large-scale conservation and land policy that restores ecosystems and makes room for many species to thrive across borders. Shapes how institutions understand and respect planetary boundaries."
   }
  },
  "Cultural & Ancestral Literacy": {
-  "desc": "Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.",
+  "desc": "Engaging with and protecting cultural knowledge, Indigenous lifeways, land-based histories, and intergenerational traditions with care and proper attribution.",
   "levels": {
-   "Emerging": "Values local, land-based histories, oral histories, and family lineages; respects cultural traditions outside their own.",
-   "Developing": "Integrates traditional ecological knowledge and indigenous design principles into local youth program formats.",
-   "Effective": "Bridges Western technical frameworks with local ancestral practices within organizational project designs, maintaining deep ethical attribution.",
-   "Influential": "Normalizes pluriversal ways of knowing across global institutional platforms, ensuring indigenous and land-based sovereignty are structurally respected."
+   "Emerging": "Values local histories, oral traditions, and lineages, and respects cultural ways of knowing different from your own. Listens to ancestral and land-based knowledge with humility rather than extraction.",
+   "Developing": "Brings traditional and Indigenous knowledge into the design of programs, with care, consent, and respect. Recognises whose knowledge is present and whose has been erased.",
+   "Effective": "Bridges technical methods with ancestral practices in real projects, always crediting their source and honouring their integrity. Holds the tension between different worldviews without flattening them.",
+   "Influential": "Helps many ways of knowing gain genuine standing within large institutions, protecting Indigenous and land-based sovereignty. Normalises pluriversal knowledge in spaces that have long excluded it."
   }
  },
  "Systems Thinking & Modeling": {
-  "desc": "Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.",
+  "desc": "Mapping how complex systems behave — their feedback loops, delays, stocks, and flows — to find the points where change can take hold.",
   "levels": {
-   "Emerging": "Traces simple causal relationships and feedback loops within a local neighborhood issue or a personal organization chart.",
-   "Developing": "Constructs thorough system maps (e.g., causal loop diagrams) identifying systemic delays and unintended consequences in community initiatives.",
-   "Effective": "Models complex corporate value chains or municipal workflows to identify high-leverage points for structural optimization.",
-   "Influential": "Generates and updates macroscopic dynamic simulations for multi-million dollar international adaptation or development networks."
+   "Emerging": "Traces simple cause-and-effect and feedback loops in a situation close to you, seeing how one thing influences another over time. Begins to look for patterns rather than blaming single events or people.",
+   "Developing": "Maps how a system works — its loops, delays, and unintended effects — to make sense of a community challenge. Builds visual representations like causal-loop diagrams to share that understanding with others.",
+   "Effective": "Models complex organisational or city systems to find leverage points where a small, well-placed shift produces outsized change. Distinguishes symptoms from the deeper structures that generate them.",
+   "Influential": "Builds and maintains large-scale system models that guide major, multi-partner efforts over time. Helps whole networks reason about feedback, delay, and consequence before they act."
   }
  },
  "Complex Problem Solving": {
-  "desc": "Categorizing problem fields across ordered, complex, or chaotic domains to determine whether an environment requires linear management or emergent experimentation.",
+  "desc": "Telling apart ordered, complex, and chaotic situations so you know when to manage with a plan and when to experiment your way forward.",
   "levels": {
-   "Emerging": "Distinguishes between simple, linear tasks and messy, unpredictable problems in school or community team environments.",
-   "Developing": "Uses frameworks (like Cynefin) to design iterative experiments suited to complex, uncertain neighborhood challenges.",
-   "Effective": "Manages cross-functional corporate or social enterprise teams through systemic crises, adapting project scope based on real-time feedback.",
-   "Influential": "Coordinates international, multi-stakeholder strategic strategies within highly volatile, fast-changing geopolitical environments."
+   "Emerging": "Tells the difference between 'complicated' problems — solvable by experts and analysis — and 'complex' challenges that need emergence and experimentation. Resists the urge to apply tidy, one-size-fits-all fixes to messy situations.",
+   "Developing": "Identifies and maps the non-linear feedback loops and time delays inside a system, recognising that simple 'root cause' analysis is often not enough. Designs small experiments suited to genuine uncertainty.",
+   "Effective": "Uses probe–sense–respond approaches to navigate uncertainty, favouring rapid learning and safe-to-fail experiments over rigid long-term prediction. Guides teams to adjust the plan as new information emerges.",
+   "Influential": "Fosters 'adaptive space' that lets groups self-organise, shaping the underlying constraints and relationships of a system rather than trying to control its outputs. Coordinates large, many-sided efforts in fast-changing, high-stakes environments."
   }
  },
  "Positionality & Power Analysis": {
-  "desc": "Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.",
+  "desc": "Mapping both formal hierarchies and informal power — visible, hidden, and invisible — to see how resources, decisions, and risks are distributed.",
   "levels": {
-   "Emerging": "Maps who holds formal and informal decision-making influence inside their school, club, or direct youth peer space.",
-   "Developing": "Identifies how invisible power, historical marginalization, and donor dynamics operate within local community change projects.",
-   "Effective": "Analyzes corporate board dynamics, regulatory incentives, and value-chain power to design realistic negotiation strategies.",
-   "Influential": "Restructures deeply entrenched power imbalances across international funding portfolios, shifting agency back to the Global South."
+   "Emerging": "Maps who holds influence — both official and unofficial — in a space you're part of, and who benefits or loses from how things are arranged. Begins to notice the hidden and invisible forms of power, not just the obvious ones.",
+   "Developing": "Sees how power intersects with race, gender, class, and history to shape what's possible in a community effort. Uses tools like stakeholder maps or Gaventa's Power Cube to analyse a real situation.",
+   "Effective": "Analyses how power works inside institutions, funding, and value chains, and designs realistic strategies that account for it. Identifies where power can be challenged, shared, or redistributed.",
+   "Influential": "Shifts deeply entrenched power imbalances across large funding systems and institutions toward those most affected. Helps return agency and decision-making to communities long kept on the margins."
   }
  },
  "Narrative & Media Analysis": {
-  "desc": "Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.",
+  "desc": "Seeing how stories, media, and cultural narratives shape what people believe is normal and possible — and crafting narratives that open new possibilities.",
   "levels": {
-   "Emerging": "Identifies underlying bias, propaganda, and stereotypical framing within media reporting and trending digital spaces.",
-   "Developing": "Maps how dominant cultural myths create systemic barriers for local environmental or social justice campaigns.",
-   "Effective": "Designs comprehensive narrative strategies and counter-cultural communication campaigns that alter consumer or institutional behaviors.",
-   "Influential": "Shifts macro cultural narratives across global networks, redefining public definitions of success, wealth, and community resilience."
+   "Emerging": "Spots bias, spin, framing, and stereotypes in news and online spaces, and asks whose voice is centred and whose is missing. Begins to see stories as something designed, not just given.",
+   "Developing": "Sees how widely-held cultural myths and dominant narratives quietly block social and environmental change. Crafts stories that surface shared values and invite people in.",
+   "Effective": "Designs communication strategies and counter-narratives that shift how people and institutions actually behave, aligning diverse stakeholders behind a shared message. Builds trust and mobilises support through story.",
+   "Influential": "Shifts large-scale cultural narratives across networks and media, reshaping what societies treat as success, wealth, and resilience. Changes the stories a whole field tells about what's possible."
   }
  },
  "Futures Thinking & Foresight": {
-  "desc": "Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.",
+  "desc": "Using horizon-scanning, scenarios, and imagination to explore possible futures and plan with long time-horizons in mind.",
   "levels": {
-   "Emerging": "Imagines alternative futures for their local neighborhood, moving past passive acceptance of current socio-ecological trends.",
-   "Developing": "Facilitates creative scenario-planning sessions and horizon-scanning exercises with youth cohorts to expand collective imagination.",
-   "Effective": "Embeds long-term risk and foresight modeling directly into corporate strategy, organizational designs, or urban planning models.",
-   "Influential": "Steers global institutional futures agendas, designing structural systems that remain resilient across multi-generational timelines."
+   "Emerging": "Imagines different possible futures instead of assuming things must stay as they are, distinguishing probable, plausible, possible, and preferred futures. Notices early signals and emerging trends.",
+   "Developing": "Leads others through scenario and 'what if' exercises — like Three Horizons or scenario planning — that stretch collective imagination. Reflects on how cultural narratives shape what futures people can even picture.",
+   "Effective": "Builds long-term thinking and risk foresight into how organisations and cities plan and decide. Examines systems across multiple timescales rather than only the next budget cycle.",
+   "Influential": "Shapes long-horizon agendas at large scale, designing systems meant to hold up and stay just across generations. Helps institutions take intergenerational responsibility seriously."
   }
  },
  "Regenerative Systems Design": {
-  "desc": "Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.",
+  "desc": "Designing organisations, infrastructure, and interventions that renew rather than deplete — mirroring the cyclical, self-sustaining patterns of living systems.",
   "levels": {
-   "Emerging": "Appreciates circular design logic; maps basic waste streams or resource consumption patterns in their personal or school environment.",
-   "Developing": "Co-designs community-scale circular projects (e.g., local composting networks, shared tools) that mirror ecological cycles.",
-   "Effective": "Restructures corporate supply networks or social business models to transition them from extractive habits to regenerative practices.",
-   "Influential": "Designs large-scale economic and resource commons that revitalize entire ecosystems and restore ancestral land relationships."
+   "Emerging": "Grasps the idea of circular, waste-free design and starts noticing resource use and waste streams around you. Sees the difference between extracting from a system and renewing it.",
+   "Developing": "Co-designs community-scale projects — shared tools, composting, repair networks — that follow nature's cycles. Applies regenerative and circular principles to real, local efforts.",
+   "Effective": "Redesigns supply chains, business models, or services to move from extracting toward renewing, building regeneration into how they operate. Structures work to restore rather than deplete its surroundings.",
+   "Influential": "Designs large shared-resource systems and commons that revitalise whole ecosystems and restore relationships with land. Helps shift entire sectors from extractive habits to regenerative ones."
   }
  },
  "Participatory Research & Design": {
-  "desc": "Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.",
+  "desc": "Running research and design where the people most affected by a problem are equal partners in framing questions and making sense of findings.",
   "levels": {
-   "Emerging": "Gathers local community input through respectful, simple interviews and peer-to-peer discussions rather than imposing personal assumptions.",
-   "Developing": "Implements non-extractive, participatory action research modules that treat local youth as equal co-creators of data.",
-   "Effective": "Integrates participatory design protocols into formal corporate product development cycles or municipal public spaces.",
-   "Influential": "Establishes national or global research policies that mandate community-led design and recognize pluriversal knowledge standards."
+   "Emerging": "Gathers people's input through respectful conversation and inquiry rather than assuming you already know best. Frames questions that centre relevance, justice, and mutual learning.",
+   "Developing": "Runs research and design where the affected community are genuine co-creators, not just subjects or data points. Reflects with the group on how power shapes the inquiry itself.",
+   "Effective": "Builds community-led design into how organisations and public services actually work, sharing decision-making power throughout. Holds accountability to participants and context, not just to funders.",
+   "Influential": "Shapes research norms and policy so that community-led design and many knowledge traditions become the standard. Helps redefine whose knowledge counts across a whole field."
   }
  },
  "Data Analysis & Evaluation": {
-  "desc": "Utilizing empirical data tracking, quantitative metrics, and positive-deviance mapping to identify hidden localized solutions and track system-wide trends.",
+  "desc": "Using data, metrics, and positive-deviance to find what's quietly working, track system-wide trends, and judge real impact.",
   "levels": {
-   "Emerging": "Reads basic public datasets (e.g., Our World in Data) to build clear, evidence-based arguments for local changes.",
-   "Developing": "Combines quantitative statistics with community stories to track positive deviance and evaluate local project trends.",
-   "Effective": "Builds data tracking systems for corporate ESG compliance or non-linear social impact metrics for mid-sized foundations.",
-   "Influential": "Overhauls macro-evaluation systems for international development grants, shifting reporting from rigid KPIs to complex system change dynamics."
+   "Emerging": "Reads public data and basic statistics to build clear, evidence-based arguments for change. Asks what the numbers do — and don't — actually show.",
+   "Developing": "Combines numbers with people's stories to track progress and spot 'positive deviance' — the places quietly succeeding against the odds. Pairs quantitative and qualitative evidence honestly.",
+   "Effective": "Builds measurement and evaluation systems that capture real social and environmental impact, not just whatever is easiest to count. Designs metrics that hold up to scrutiny and inform decisions.",
+   "Influential": "Overhauls how large funders and institutions judge success, shifting from rigid targets toward measures of genuine systems change. Reshapes what a whole field treats as evidence of impact."
   }
  },
  "Experimenting & Building": {
-  "desc": "Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback.",
+  "desc": "Launching small, low-stakes prototypes to test how a system responds and to learn quickly from real-world feedback.",
   "levels": {
-   "Emerging": "Launches safe-to-fail, low-fidelity community prototypes (e.g., pop-up libraries, seed swaps) to gather immediate feedback.",
-   "Developing": "Manages a rolling series of neighborhood experiments, iteratively refining project design based on community response data.",
-   "Effective": "Secures corporate innovation budgets to pilot new regenerative business units or modular operational practices.",
-   "Influential": "Establishes agile funding pools and experimental policy zones that allow networks to systematically prototype alternatives."
+   "Emerging": "Tries small, safe-to-fail prototypes — a pop-up, a pilot, a quick test — to learn fast from real feedback rather than over-planning. Treats each attempt as a probe, not a final answer.",
+   "Developing": "Runs a steady series of experiments, refining each one based on how people actually respond. Builds the discipline of iterating in public and adjusting course.",
+   "Effective": "Secures the backing and resources to pilot new ventures or ways of working inside organisations. Designs portfolios of experiments so the system can learn while staying safe.",
+   "Influential": "Creates the funding and policy conditions that let whole networks prototype alternatives. Builds the experimental spaces and permissions that allow a field to try, learn, and adapt at scale."
   }
  },
  "Convening & Facilitating Collaborations": {
-  "desc": "Designing and stewarding non-hierarchical, highly democratic spaces that cultivate distributed intelligence, deep dialogue, and shared consensus.",
+  "desc": "Designing and holding democratic, non-hierarchical spaces where distributed intelligence, deep dialogue, and shared decisions can emerge.",
   "levels": {
-   "Emerging": "Hosts structured, balanced group discussions among peers, ensuring quiet voices are heard and tasks are shared.",
-   "Developing": "Uses circle processes and participatory tools to facilitate multi-stakeholder consensus workshops for local community networks.",
-   "Effective": "Facilitates high-stakes strategic alignment meetings between conflicting corporate divisions, civil actors, or municipal teams.",
-   "Influential": "Directs international multi-stakeholder forums, holding generative spaces where competing nation-states or corporate blocks can co-design."
+   "Emerging": "Hosts balanced group conversations where quieter voices are heard and the work is genuinely shared. Co-creates norms and agreements that reflect the group's needs.",
+   "Developing": "Facilitates workshops that help diverse community groups reach real agreement, using participatory methods that make power and decision-making visible. Adapts the process to meet the group where it is.",
+   "Effective": "Guides high-stakes meetings between groups that don't easily see eye to eye, holding tension long enough for shared direction to form. Designs collaborative processes, not just runs meetings.",
+   "Influential": "Leads large multi-party gatherings where even rivals or competing interests can design solutions together. Stewards the kind of collective spaces that move whole systems forward."
   }
  },
  "Conflict Transformation": {
-  "desc": "Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.",
+  "desc": "Turning friction — between people, ideologies, or institutions — into trust and shared growth rather than avoidance or escalation.",
   "levels": {
-   "Emerging": "Navigates peer arguments constructively, de-escalating tension through active listening and interest-based compromise.",
-   "Developing": "De-escalates ideological or tactical divides within local activist networks, transforming internal friction into strategic clarity.",
-   "Effective": "Moderates entrenched labor-management disputes or community-corporate value-chain standoffs, securing win-win structural outcomes.",
-   "Influential": "Directs regional reconciliation or resource-dispute negotiations across highly polarized geopolitical landscapes, restoring shared trust."
+   "Emerging": "Handles disagreements constructively, easing tension through listening and finding common ground. Engages with conflict without avoidance, aggression, or collapse.",
+   "Developing": "Works through divides inside a group, recognising both the surface dispute and the deeper structural drivers beneath it. Notices early signs of tension and acts to de-escalate before things harden.",
+   "Effective": "Mediates entrenched disputes between organisations or interests toward outcomes that genuinely work for everyone. Maps the actors and dynamics in a conflict and designs a path to repair.",
+   "Influential": "Guides reconciliation across deeply divided regions, sectors, or interests, helping rebuild trust where it has broken down. Transforms long-standing conflict into shared, generative direction."
   }
  },
  "Planning & Resource Mobilization": {
-  "desc": "Organizing adaptive logistics, elastic operational budgets, and highly flexible, non-linear timelines that accommodate unpredictable systemic feedback loops.",
+  "desc": "Guiding an initiative with care and adaptability — managing budgets, timelines, relationships, and ethics through uncertainty.",
   "levels": {
-   "Emerging": "Manages a project timeline and basic budget for a school event or a youth club, tracking simple resource flows.",
-   "Developing": "Coordinates flexible budgets and elastic timelines for community initiatives, adapting plans as local needs change.",
-   "Effective": "Secures and manages complex operational budgets ($100k+) for social enterprises, blending public grants with corporate earned income.",
-   "Influential": "Structures large-scale financial mechanisms and asset allocations ($1M+) for global climate adaptation networks or bioregional trusts."
+   "Emerging": "Manages a timeline and a simple budget, keeping clear track of what's needed and when. Balances getting things done with caring for the people doing them.",
+   "Developing": "Coordinates flexible budgets and adaptive plans for community efforts, adjusting as needs and conditions change. Keeps a project focused while staying responsive to feedback.",
+   "Effective": "Secures and manages substantial budgets, blending different kinds of funding, and steers complex initiatives over time. Balances task, relationship, and ethical dimensions of the work.",
+   "Influential": "Designs large-scale funding and resource structures for major, long-term efforts and networks. Builds the financial and organisational backbone that lets ambitious change endure."
   }
  },
  "Ecosystem Engagement": {
-  "desc": "Interweaving separate grassroots initiatives, formal institutions, and civil actors into mutually supportive networks that share resources and strategic focus.",
+  "desc": "Weaving separate initiatives, institutions, and civic actors into mutually supportive networks that share resources and direction.",
   "levels": {
-   "Emerging": "Connects disparate student clubs or neighborhood youth groups to organize shared events or cross-promote campaigns.",
-   "Developing": "Weaves localized grassroots organizations and regional hubs into cohesive, resource-sharing community alliances.",
-   "Effective": "Manages corporate-NGO partnerships or public-private coalitions, aligning diverse organizational cultures around systemic goals.",
-   "Influential": "Architects global platform cooperatives and multi-continent ecosystems that coordinate resources and advocacy across borders."
+   "Emerging": "Connects nearby groups to organise shared events or support each other's work. Begins to see the wider ecosystem of actors around an issue.",
+   "Developing": "Weaves grassroots groups and local hubs into alliances that share resources and strategy. Builds the relationships and trust that hold a network together.",
+   "Effective": "Manages partnerships across sectors — public, private, civic — aligning very different organisations and cultures around shared goals. Navigates the tensions that come with collaboration at scale.",
+   "Influential": "Builds large cooperative networks and platforms that coordinate resources and advocacy across regions and borders. Helps a whole field act with more coherence than its parts could alone."
   }
  },
  "Political Participation": {
-  "desc": "Actively engaging, challenging, or restructuring local legislative, policy, and civic institutional channels to secure structural and legal permanence for interventions.",
+  "desc": "Engaging, challenging, and reshaping policy and civic institutions to make change durable and protected in law.",
   "levels": {
-   "Emerging": "Participates in local civil actions, signature drives, or youth councils; understands municipal voting and advocacy paths.",
-   "Developing": "Drafts clear policy recommendations and runs public advocacy campaigns targeting municipal or school board changes.",
-   "Effective": "Partners with public servants and lawmakers to embed regenerative standards or decolonial equity metrics into official city bylaws.",
-   "Influential": "Shifts legislative priorities and drafts national or international legal protections to defend the commons and secure rights for future generations."
+   "Emerging": "Takes part in civic life — petitions, local actions, voting, councils — and learns how decisions actually get made. Understands the paths through which ordinary people can shape policy.",
+   "Developing": "Writes clear policy proposals and runs advocacy campaigns aimed at concrete local change. Builds the case and the coalition needed to move a decision.",
+   "Effective": "Works with officials and lawmakers to write better standards and fairer rules into law and institutional practice. Translates community needs into durable policy.",
+   "Influential": "Shifts policy priorities and secures lasting legal protections for the common good and future generations. Helps reshape the rules that govern whole systems."
   }
  },
  "Leading in Complexity": {
-  "desc": "Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.",
+  "desc": "Facilitating collective learning and adaptive action in uncertain conditions — leading with humility rather than top-down control.",
   "levels": {
-   "Emerging": "Exercises inclusive peer leadership; steps up to organize group work while distributing tasks fairly and celebrating collective effort.",
-   "Developing": "Practices emergent leadership within youth fellowships, letting go of personal control to let community strategies evolve naturally.",
-   "Effective": "Leads agile corporate teams or social start-ups by setting clear values boundaries while encouraging open operational experimentation.",
-   "Influential": "Guides large international networks through deep paradigm shifts, modeling adaptive, trust-based leadership during systemic change."
+   "Emerging": "Leads among peers, organising shared work fairly and celebrating the whole group's effort. Recognises the difference between complicated and complex challenges and adjusts accordingly.",
+   "Developing": "Practices letting go of control so a group's own strategies can emerge, helping others stay engaged in uncertainty without rushing to premature answers. Uses reflection and feedback to guide action.",
+   "Effective": "Leads teams by setting clear values and direction while leaving real room for experimentation and self-organisation. Balances clarity with flexibility as conditions change.",
+   "Influential": "Guides large networks through deep, paradigm-level change, modelling steady, trust-based, learning-in-action leadership. Holds shared purpose across many actors without dominating it."
   }
  },
  "Networking & Engaging Capital": {
-  "desc": "Directing financial, social, and structural capital to local projects while maintaining complete autonomy and protecting against extractive or conditional funding strings.",
+  "desc": "Directing financial, social, and structural capital toward local efforts while protecting their autonomy from extractive or conditional strings.",
   "levels": {
-   "Emerging": "Runs simple local crowdsourcing, crowdfunding, or mutual aid efforts to resource immediate neighborhood needs.",
-   "Developing": "Secures micro-grants and non-extractive seed funds for youth projects, managing donor relationships with integrity.",
-   "Effective": "Pitches and manages social impact investments, green bonds, or corporate venture funding lines for sustainability initiatives.",
-   "Influential": "Designs and deploys alternative, community-owned financial funds and decentralized banking infrastructure across the Global South."
+   "Emerging": "Runs simple crowdfunding or mutual-aid efforts to meet immediate, concrete needs. Learns how resources flow and how to ask for support with integrity.",
+   "Developing": "Secures small grants and seed funding, handling relationships with funders honestly and guarding against strings that distort the work. Builds the trust that early resourcing depends on.",
+   "Effective": "Raises and manages larger impact investment and funding for sustainability work, keeping the mission in control of the money rather than the reverse. Structures deals that protect autonomy.",
+   "Influential": "Builds community-owned funds and financial infrastructure that keep wealth and decision-making local, especially in the Global South. Designs alternatives to extractive finance at scale."
   }
  }
 };

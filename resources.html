@@ -40,17 +40,16 @@
 
   <!-- ===== TABS ===== -->
   <header style="max-width:1180px;margin:0 auto;padding:20px 26px 0">
-    <div role="tablist" style="display:flex;gap:8px;border-bottom:1px solid rgba(120,105,75,.28);flex-wrap:wrap">
-      <button role="tab" onClick="{{ setCapacities }}" style="{{ tabCapStyle }}">Capacities</button>
-      <button role="tab" onClick="{{ setLibrary }}" style="{{ tabLibStyle }}">Library <span style="{{ tabCountStyle }}">{{ totalText }}</span></button>
-      <button onClick="{{ openSubmit }}" style="margin-left:auto;align-self:center;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:8px 15px;margin-bottom:8px;border-radius:20px;border:1px solid #8a6a45;background:#8a6a45;color:#fff;cursor:pointer">+ Suggest a resource</button>
+    <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(120,105,75,.28);padding-bottom:10px;flex-wrap:wrap">
+      <span style="font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;color:#39342b">All resources <span style="{{ tabCountStyle }}">{{ totalText }}</span></span>
+      <button onClick="{{ openSubmit }}" style="margin-left:auto;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:8px 15px;border-radius:20px;border:1px solid #8a6a45;background:#8a6a45;color:#fff;cursor:pointer">+ Suggest a resource</button>
     </div>
   </header>
 
   <main style="max-width:1180px;margin:0 auto;padding:28px 26px 80px">
 
     <!-- ============ CAPACITIES TAB ============ -->
-    <sc-if value="{{ isCapacities }}" hint-placeholder-val="{{ true }}">
+    <sc-if value="{{ isCapacities }}" hint-placeholder-val="{{ false }}">
       <div style="animation:iocFade .3s ease">
         <sc-for list="{{ groupSections }}" as="sec" hint-placeholder-count="3">
           <section style="margin-bottom:34px">
@@ -75,13 +74,18 @@
     </sc-if>
 
     <!-- ============ LIBRARY TAB ============ -->
-    <sc-if value="{{ isLibrary }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ isLibrary }}" hint-placeholder-val="{{ true }}">
       <div style="animation:iocFade .3s ease">
         <!-- search -->
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
           <input value="{{ libSearch }}" onInput="{{ onSearch }}" placeholder="Search titles &amp; descriptions…" style="flex:1;min-width:220px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 14px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;outline:none"/>
           <button onClick="{{ clearFilters }}" style="{{ clearStyle }}">Clear filters</button>
         </div>
+        <sc-if value="{{ capFilterActive }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;gap:9px;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;padding:7px 8px 7px 14px;border-radius:20px;background:{{ capFilterColor }};color:#fff">Capacity: {{ capFilterLabel }} <span onClick="{{ clearCapFilter }}" title="Remove filter" style="cursor:pointer;display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.25);font-size:13px">×</span></span>
+          </div>
+        </sc-if>
         <!-- group chips -->
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:9px">
           <sc-for list="{{ groupChips }}" as="g" hint-placeholder-count="3">
@@ -98,7 +102,7 @@
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px">
           <sc-for list="{{ libList }}" as="res" hint-placeholder-count="9">
             <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-radius:13px;padding:15px 16px;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(70,55,35,.06)">
-              <span style="font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#9A6A4A;margin-bottom:6px">{{ res.typeText }}</span>
+              <span style="{{ res.typeTagStyle }}">{{ res.typeText }}</span>
               <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }}</a>
               <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:8px 0 11px">{{ res.desc }}</p>
               <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:auto">
@@ -229,11 +233,10 @@
             <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Indicators of learning</span>
             <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:9px">
+          <div>
             <sc-for list="{{ deep.levels }}" as="lv" hint-placeholder-count="4">
-              <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.18);border-left:3px solid {{ deep.color }};border-radius:10px;padding:11px 14px">
-                <div style="{{ lv.badgeStyle }}">{{ lv.label }}</div>
-                <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:6px 0 0">{{ lv.text }}</p>
+              <div style="padding:9px 0;border-top:1px solid rgba(120,105,75,.14)">
+                <p style="font-size:13px;line-height:1.55;color:#5a5347;margin:0"><span style="{{ lv.tierStyle }}">{{ lv.label }}:</span> {{ lv.text }}</p>
               </div>
             </sc-for>
           </div>
@@ -301,8 +304,8 @@ class Component extends DCLogic {
   constructor(props){
     super(props);
     this.state = {
-      tab: (props && props.defaultTab) || 'capacities',
-      deep: null,
+      tab: (props && props.defaultTab) || 'library',
+      deep: null, capFilter: null,
       libGroups: {}, libMediums: {}, libSearch: '',
       methods: {}, conditions: {}, contextCap: null,
       submitOpen: false, submitDone: false, submitting: false, submitError: null, copied: false
@@ -320,7 +323,7 @@ class Component extends DCLogic {
       const p = new URLSearchParams(window.location.search).get('capacity');
       if (p) {
         const match = this._data().capacities.find(c => c.label === p);
-        if (match) this.setState({ tab:'capacities', deep: match.label });
+        if (match) this.setState({ tab:'library', capFilter: match.label });
       }
     } catch(e){}
   }
@@ -361,13 +364,25 @@ class Component extends DCLogic {
   }
   toggleObj(bag, key){ const b=Object.assign({}, this.state[bag]); if(b[key]) delete b[key]; else b[key]=true; const s={}; s[bag]=b; this.setState(s); }
 
+  _typeColor(t){
+    const M={
+      'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733',
+      'Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8',
+      'Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45'
+    };
+    return M[t] || '#6b5d45';
+  }
   _mkRes(r){
     const cols=this._cols();
+    const t0=(r.types&&r.types.length)?r.types[0]:'Resource';
+    const tc=this._typeColor(t0);
     return {
       name:r.name, desc:r.desc, url:r.url||'#',
       featured:!!r.featured,
       typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
-      typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'rgba(138,106,69,.12)', color:'#8a6a45', whiteSpace:'nowrap' },
+      typeColor:tc,
+      typeTagStyle:{ display:'inline-block', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.06em', textTransform:'uppercase', color:tc, marginBottom:'6px' },
+      typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },
       pickStyle:{ display:'inline-flex', alignItems:'center', gap:'4px', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'#8a6a45', color:'#fff', whiteSpace:'nowrap' },
       capTags:r.caps.map(c=>{
         const col=cols[this._groupOf(c)];
@@ -424,8 +439,12 @@ class Component extends DCLogic {
       const mediums=keys.map(m=>({ medium:m, count:byMed[m].length, items:byMed[m].map(r=>this._mkRes(r)) }));
       const det=(typeof window!=='undefined'&&window.__CAPDETAIL)?(window.__CAPDETAIL[label]||{}):{};
       const levOrder=['Emerging','Developing','Effective','Influential'];
-      const badge={display:'inline-block',fontFamily:"'PT Sans',sans-serif",fontSize:'10.5px',fontWeight:700,letterSpacing:'.07em',textTransform:'uppercase',color:col.c};
-      const levels=det.levels?levOrder.filter(k=>det.levels[k]).map(k=>({label:k,text:det.levels[k],badgeStyle:badge})):[];
+      const _hx=(col.c||'#46716f').replace('#',''); const _r=parseInt(_hx.substr(0,2),16),_g2=parseInt(_hx.substr(2,2),16),_b=parseInt(_hx.substr(4,2),16);
+      const _alpha=[0.38,0.58,0.79,1];
+      const levels=det.levels?levOrder.filter(k=>det.levels[k]).map((k,idx)=>({
+        label:k, text:det.levels[k],
+        tierStyle:{ fontFamily:"'PT Serif',serif", fontWeight:700, color:'rgba('+_r+','+_g2+','+_b+','+_alpha[idx]+')' }
+      })):[];
       deep={ label, color:col.c, headerBg:col.head, groupName:(meta[g]||{}).name||g,
         desc:det.desc||'', levels, hasLevels:levels.length>0,
         countText:list.length+(list.length===1?' resource informs this capacity':' resources inform this capacity'),
@@ -438,6 +457,7 @@ class Component extends DCLogic {
     const gActive=this.state.libGroups, mActive=this.state.libMediums, q=this.state.libSearch.trim().toLowerCase();
     const anyG=Object.keys(gActive).length>0, anyM=Object.keys(mActive).length>0;
     const filtered=d.resources.filter(r=>{
+      if(this.state.capFilter && r.caps.indexOf(this.state.capFilter)<0) return false;
       if(anyG && !r.caps.some(c=>gActive[this._groupOf(c)])) return false;
       if(anyM && !r.types.some(t=>mActive[t])) return false;
       if(q){ const hay=(r.name+' '+r.desc).toLowerCase(); if(hay.indexOf(q)<0) return false; }
@@ -495,7 +515,8 @@ class Component extends DCLogic {
       // library
       libSearch:this.state.libSearch,
       onSearch:(e)=>this.setState({libSearch:e.target.value}),
-      clearFilters:()=>this.setState({libGroups:{},libMediums:{},libSearch:''}),
+      clearFilters:()=>this.setState({libGroups:{},libMediums:{},libSearch:'',capFilter:null}),
+      capFilterActive:!!this.state.capFilter, capFilterLabel:this.state.capFilter||'', capFilterColor:this.state.capFilter?cols[this._groupOf(this.state.capFilter)].accent:'#8a6a45', clearCapFilter:()=>this.setState({capFilter:null}),
       clearStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12.5px', fontWeight:700, padding:'9px 14px', borderRadius:'9px', border:'1px solid rgba(120,105,75,.32)', background:'transparent', color:'#8a6a45', cursor:'pointer' },
       groupChips, mediumChips, libList,
       libCountText:filtered.length+' of '+d.resources.length+' resources',

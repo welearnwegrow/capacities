@@ -21,7 +21,7 @@
   </div>
 </nav>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;resources&quot;,&quot;about&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;resources&quot;,&quot;descriptors&quot;,&quot;about&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   renderVals(){
     const active = this.props.active || '';
@@ -30,6 +30,7 @@ class Component extends DCLogic {
     const items = [
       { key:'home', label:'Home', href:'index.html' },
       { key:'resources', label:'Resource Library', href:'resources.html' },
+      { key:'descriptors', label:'Capacity Descriptors', href:'descriptors.html' },
       { key:'about', label:'About the Framework', href:'about.html' },
       { key:'engage', label:'Work with Us', href:'engage.html' }
     ];

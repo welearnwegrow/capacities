@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./analytics.js"></script>
 </head>
 <body>
 <x-dc>
@@ -12,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <script src="./research-data.js"></script>
+<script src="notion-config.js"></script>
+<script src="data-loader.js"></script>
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -312,6 +315,9 @@ class Component extends DCLogic {
     };
   }
   componentDidMount(){
+    // Live Notion data may arrive after first paint — re-render when it does.
+    window.addEventListener('research-data-updated', () => this.forceUpdate());
+    if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
     // In standalone bundles, data scripts may load async — re-render once data is ready.
     if (!this._data().resources.length) {
       let tries = 0;
@@ -345,6 +351,15 @@ class Component extends DCLogic {
     var title=g('ioc-sr-title'), link=g('ioc-sr-link'), from=g('ioc-sr-from'), why=g('ioc-sr-why');
     var key=(typeof window!=='undefined' && window.WEB3FORMS_ACCESS_KEY) ? window.WEB3FORMS_ACCESS_KEY : '';
     var subject='Resource suggestion: '+(title||'(untitled)');
+    var nurl=(typeof window!=='undefined' && window.NOTION_CONNECTOR_URL) ? window.NOTION_CONNECTOR_URL : '';
+    if (nurl) {
+      this.setState({submitting:true, submitError:null});
+      if (key) { try { fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'}, body: JSON.stringify({ access_key:key, subject:subject, from_name:'Resource Library suggestion', 'Resource title':title, 'Link':link, 'Suggested by':from||'(not given)', 'Why it matters':why }) }); } catch(e){} }
+      fetch(nurl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name:title, url:link, why:why, suggestedBy:from }) })
+        .then(r=>r.json()).then(j=>{ this.setState({submitting:false, submitDone:true, submitError: j && j.ok ? null : 'send'}); })
+        .catch(()=>{ this.setState({submitting:false, submitDone:true, submitError:'network'}); });
+      return;
+    }
     if (key) {
       this.setState({submitting:true, submitError:null});
       fetch('https://api.web3forms.com/submit', {
@@ -370,7 +385,10 @@ class Component extends DCLogic {
       'Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8',
       'Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45'
     };
-    return M[t] || '#6b5d45';
+    if (M[t]) return M[t];
+    // any new/unknown type gets a stable, distinct colour derived from its name
+    let h=0; for(let i=0;i<t.length;i++){ h=(h*31 + t.charCodeAt(i))>>>0; }
+    return 'hsl('+(h%360)+' 42% 42%)';
   }
   _mkRes(r){
     const cols=this._cols();

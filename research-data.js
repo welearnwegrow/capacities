@@ -710,7 +710,7 @@ window.__RESEARCH = {
    "types": [
     "Digital Publications / Reports"
    ],
-   "url": "https://regenerative-economics.org"
+   "url": "https://www.regenerativeeconomics.earth/"
   },
   {
    "name": "Transformative Pathways",

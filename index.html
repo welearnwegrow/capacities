@@ -102,11 +102,11 @@
     <div style="position: absolute; left: 892px; top: 469px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #69763f; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-green" data-edit="ban-collective">Collective strategy</div><div style="position: absolute; left: 203px; top: 981px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #a85c38; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-coral" data-edit="ban-action">Systemic intervention</div><div style="position: absolute; left: 371px; top: 227px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #3c5f5d; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-teal" data-edit="ban-within">Individual grounding</div><div style="position: absolute; left: 685px; top: 183px; transform: translate(-50%,-50%); width: 123px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 37px" data-orient="recip">
       <div data-edit="card-recip-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Reciprocity</div>
       <div data-edit="card-recip-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we act</div>
-    </div><div style="position: absolute; left: 816px; top: 259px; transform: translate(-50%,-50%); width: 152px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 8px; height: 34px" data-orient="shared">
+    </div><div style="position: absolute; left: 936px; top: 181px; transform: translate(-50%,-50%); width: 152px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 8px; height: 34px" data-orient="shared">
       <div data-edit="card-shared-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Shared Agency</div><div data-edit="card-shared-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we make decisions</div>
       
-    </div><div style="position: absolute; left: 936px; top: 181px; transform: translate(-50%,-50%); width: 121px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 40px" data-orient="pluri">
-      <div data-edit="card-pluri-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Pluriversality</div>
+    </div><div style="position: absolute; left: 816px; top: 259px; transform: translate(-50%,-50%); width: 121px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 40px" data-orient="pluri">
+      <div data-edit="card-pluri-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Plurality</div>
       <div data-edit="card-pluri-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we know</div>
     </div><div style="position: absolute; left: 806px; top: 100px; transform: translate(-50%,-50%); width: 202px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 39px" data-orient="jrf">
       
@@ -200,7 +200,9 @@
                 <sc-if value="{{ res.featured }}" hint-placeholder-val="{{ false }}">
                   <span style="{{ res.pickStyle }}">★ Featured</span>
                 </sc-if>
-                <span style="{{ res.typeStyle }}">{{ res.typeText }}</span>
+                <sc-for list="{{ res.typeTags }}" as="t" hint-placeholder-count="1">
+                  <span style="{{ t.style }}">{{ t.label }}</span>
+                </sc-for>
               </div>
               <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }} <span style="font-weight:400;color:{{ capDrawer.color }};font-size:13px">↗</span></a>
               <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:7px 0 0">{{ res.desc }}</p>
@@ -341,7 +343,7 @@ class Component extends DCLogic {
     if (this.__tips) return this.__tips;
     this.__tips = {
       jrf: { t:'Just & Regenerative Futures', s:'Where we are going — what we value', b:'Just and regenerative futures braid together justice, peace, and renewal — confronting the structural causes of harm, redistributing power, and restoring the living systems we depend on, so every community and ecosystem can thrive with dignity, security, and voice. Drawing on Indigenous sovereignty, climate justice, and intergenerational ethics, this orientation serves as both compass and collective practice.' },
-      pluri: { t:'Pluriversality', s:'How we know', b:'The recognition that many worlds and ways of knowing coexist, and that no single worldview can claim universality. It foregrounds Indigenous, local, land-based, and spiritual knowledge alongside scientific and technical expertise. Informed by decolonial thought and community-led innovation, it expands whose worlds are made visible.' },
+      pluri: { t:'Plurality', s:'How we know', b:'The recognition that many worlds and ways of knowing coexist, and that no single worldview can claim universality. It foregrounds Indigenous, local, land-based, and spiritual knowledge alongside scientific and technical expertise. Informed by decolonial thought and community-led innovation, it expands whose worlds are made visible.' },
       recip: { t:'Reciprocity', s:'How we act', b:'Reciprocity calls us to act with care, responsibility, and mutual exchange, so that interventions restore balance rather than reproduce harm. It is paired with reflexivity — an ongoing awareness of how our identities, assumptions, and choices shape the systems we seek to change — which keeps that action humble and accountable. Rooted in Indigenous relational ethics and feminist standpoint theory.' },
       shared: { t:'Shared Agency', s:'How we make decisions', b:'The capacity to act together — distributing power, voice, and responsibility so decisions are made with, rather than for, communities. Grounded in interdependence, it holds that our lives and futures are woven into a shared web of care, and that collaboration is the foundation for thriving in an interconnected world.' },
       probe: { t:'Probe', s:'Probe the context & frame the problem field', b:'Probing begins with intellectual humility and deep listening. Rather than entering with a pre-defined solution, the practitioner scans the landscape to frame the problem field — gathering multi-dimensional evidence that moves beyond data to engage the lived realities, values, and cultural norms of those most affected. By surfacing pockets of hope and existing initiatives, they build on current momentum rather than acting in isolation.' },
@@ -479,12 +481,13 @@ class Component extends DCLogic {
     const gd = GRP[g] || GRP.teal;
     const det = CD[key] || {};
     const tcMap = { 'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733','Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8','Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45' };
-    const tcol = (t)=> tcMap[t] || '#6b5d45';
+    const tcol = (t)=>{ if(tcMap[t]) return tcMap[t]; let h=0; for(let i=0;i<t.length;i++){ h=(h*31+t.charCodeAt(i))>>>0; } return 'hsl('+(h%360)+' 42% 42%)'; };
     const list = (R.resources||[]).filter(r=>r.caps && r.caps.indexOf(key)>=0);
     const items = list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:a.i-b.i; }).map(x=>{
       const r=x.r; const t0=(r.types&&r.types.length)?r.types[0]:'Resource'; const tc=tcol(t0);
       return { name:r.name, desc:r.desc, url:r.url||'#', featured:!!r.featured,
         typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
+        typeTags:(r.types&&r.types.length?r.types:['Resource']).map(t=>{ const c=tcol(t); return { label:t, style:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:c+'1f', color:c, whiteSpace:'nowrap' } }; }),
         typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },
         pickStyle:{ display:'inline-flex', alignItems:'center', gap:'4px', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'#8a6a45', color:'#fff', whiteSpace:'nowrap' } };
     });

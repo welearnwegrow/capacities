@@ -14,6 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Caveat:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;display=swap" rel="stylesheet">
 <script src="research-data.js"></script>
+<script src="notion-config.js"></script>
+<script src="data-loader.js"></script>
 <script src="capacity-detail.js"></script>
 <style>
   *{box-sizing:border-box}
@@ -196,7 +198,7 @@
             <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:12px;padding:13px 15px">
               <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:7px">
                 <sc-if value="{{ res.featured }}" hint-placeholder-val="{{ false }}">
-                  <span style="{{ res.pickStyle }}">★ Editor's pick</span>
+                  <span style="{{ res.pickStyle }}">★ Featured</span>
                 </sc-if>
                 <span style="{{ res.typeStyle }}">{{ res.typeText }}</span>
               </div>
@@ -304,6 +306,8 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    window.addEventListener('research-data-updated', () => this.forceUpdate());
+    if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
     try { const s = localStorage.getItem('ioc-wp-v1'); if (s) { const wp = JSON.parse(s); if (Array.isArray(wp) && wp.length === 5) this.setState({ wp }); } } catch(e){}
     try { const s = localStorage.getItem('ioc-isl-v2'); if (s) { const saved = JSON.parse(s); if (Array.isArray(saved) && saved.length === this.state.isl.length) {
       // keep persisted positions, but always reconcile labels/meta from canonical defs (by seed, else index)

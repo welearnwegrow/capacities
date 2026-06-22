@@ -13,20 +13,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Caveat:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
 <script src="research-data.js"></script>
 <script src="notion-config.js"></script>
 <script src="data-loader.js"></script>
 <script src="capacity-detail.js"></script>
 <style>
   *{box-sizing:border-box}
-  body{margin:0;background:#d3dad2;font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased}
-  .ioc-root{padding:46px 24px 70px}
-  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden}
+  body{margin:0;background:radial-gradient(680px 460px at 14% 6%, rgba(120,160,195,.20), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(150,185,180,.16), transparent 72%), linear-gradient(180deg,#dce7ed 0%,#eef2ef 620px);font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .ioc-root{padding:0 24px 70px}
+  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 70px, #000 calc(100% - 130px), transparent 100%);mask-image:linear-gradient(to bottom, transparent 0, #000 70px, #000 calc(100% - 130px), transparent 100%)}
   .ioc-stage{position:absolute;top:0;left:0;width:1040px;height:1320px;transform-origin:top left}
   @keyframes iocFade{from{opacity:0}to{opacity:1}}
   @keyframes iocDrawerR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+  @keyframes iocFloat{0%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% + 4px),calc(-50% - 5px))}50%{transform:translate(calc(-50% - 3px),calc(-50% - 8px))}75%{transform:translate(calc(-50% - 5px),calc(-50% - 2px))}100%{transform:translate(-50%,-50%)}}
+  @keyframes iocMarch{to{stroke-dashoffset:-11}}
+  .ioc-march{animation:iocMarch 1s linear infinite}
+  @keyframes iocMarchRev{to{stroke-dashoffset:11}}
+  .ioc-march-rev{animation:iocMarchRev 1s linear infinite}
+  @keyframes iocIsleFloat{0%{transform:translate(0px,0px)}25%{transform:translate(5px,-7px)}50%{transform:translate(-4px,-11px)}75%{transform:translate(-6px,-3px)}100%{transform:translate(0px,0px)}}
+  .ioc-isle{animation-name:iocIsleFloat;animation-timing-function:ease-in-out;animation-iteration-count:infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes iocWash{0%{transform:translate(0px,0px) scale(1)}50%{transform:translate(20px,-15px) scale(1.08)}100%{transform:translate(0px,0px) scale(1)}}
+  @keyframes iocBuoy{0%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 3px),calc(-50% - 5px))}100%{transform:translate(-50%,-50%)}}
+  .ioc-wash{transform-box:fill-box;transform-origin:center;animation-name:iocWash;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+  @keyframes iocSpin{to{transform:rotate(360deg)}}
+  .ioc-compass-star{transform-box:fill-box;transform-origin:center;animation:iocSpin 90s linear infinite}
+  @keyframes iocBob{0%{transform:translateY(0px)}50%{transform:translateY(-4px)}100%{transform:translateY(0px)}}
+  .ioc-compass{transform-box:fill-box;transform-origin:center;animation:iocBob 6s ease-in-out infinite}
   @media (max-width:760px){
-    .ioc-root{padding:26px 14px 48px}
+    .ioc-root{padding:0 14px 48px}
     .ioc-title{font-size:30px !important}
     .ioc-lede{font-size:15px !important}
     .ioc-kicker{font-size:11px !important;letter-spacing:.18em !important}
@@ -37,61 +52,30 @@
 </style>
 </helmet>
 
-<div class="ioc-root" style="position:relative;min-height:100vh;background:#d3dad2;display:flex;flex-direction:column;align-items:center">
+<div class="ioc-root" style="position:relative;min-height:100vh;background:transparent;display:flex;flex-direction:column;align-items:center">
 
-  <dc-import name="SiteNav" active="home" hint-size="100%,58px" style="width:100%"></dc-import>
+  <dc-import name="SiteNav" active="home" hint-size="100%,58px" style="display:block;width:100vw;margin-bottom:22px"></dc-import>
 
   <!-- title block -->
-  <div style="width:1040px;max-width:100%;margin-bottom:24px;padding-top:40px;text-align:center">
-    <h1 class="ioc-title" data-edit="title" style="font-family:'Fraunces',serif;font-weight:500;font-size:52px;line-height:1.04;letter-spacing:-.01em;margin:0 auto 18px;max-width:17ch;color:#1f3a36">Learning to intervene in complex systems</h1>
-    <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
-      <span style="width:54px;height:1px;background:rgba(70,113,111,.5)"></span>
-      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:15.5px;color:#4c6b64;margin:0">A capacity framework for just &amp; regenerative futures</p>
-      <span style="width:54px;height:1px;background:rgba(70,113,111,.5)"></span>
+  <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
+    <div style="position:relative">
+      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;max-width:20ch;color:#1f3a36">Learning to intervene in complex systems</h1>
+      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:16px;color:#4c6b64;margin:0;max-width:70ch">A guided learning map for just &amp; regenerative futures</p>
     </div>
   </div>
 
   <!-- intro / context -->
-  <div style="width:1040px;max-width:100%;margin:0 auto 18px;text-align:center">
-    <div style="max-width:64ch;margin:0 auto;display:flex;flex-direction:column;gap:15px">
+  <div style="width:1040px;max-width:100%;margin:0 auto 26px;text-align:left">
+    <div style="max-width:78ch;margin:0;display:flex;flex-direction:column;gap:15px">
       <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><span style="font-size: 15.5px;"><span style="font-size: 15.5px;">As movements for justice and regeneration collide with systemic crises, navigating complexity requires a lifelong learning journey. Grounded in the question, <i>What do we need to learn to intervene in complex systems,</i> this open-source framework provides the capacities and meta-processes needed to act with integrity. It is designed for changemakers, educators, and leaders seeking an accessible, localized pathway into systems work with a decolonial lens. Rather than a fixed curriculum, it offers a flexible, peer-validated backbone structured around a distinct moral and practical orientation: Just, Regenerative, and Plural.</span></span></p>
     </div>
   </div>
 
-  <!-- caption / legend (moved above map) -->
-  <div style="width:1040px;max-width:100%;margin-bottom:20px;display:flex;flex-direction:column;gap:11px;font-size:13px;color:#6f685d">
-
-    <div style="display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap">
-      <span data-edit="leg-orient-label" style="flex:none;min-width:104px;font-weight:700;color:#46716f;letter-spacing:.02em">The orientations</span>
-      <span style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-        <span style="display:flex;align-items:center;gap:7px"><span style="width: 13px; height: 13px; border-radius: 3px; background: rgb(244, 239, 230); border: 1px solid rgb(217, 187, 120); display: inline-block;"></span><span data-edit="leg-orient">Just and Regenerative Futures · Reciprocity · Pluriversality · Shared Agency</span></span>
-      </span>
-    </div>
-
-    <div style="display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap">
-      <span data-edit="leg-cap-label" style="flex:none;min-width:104px;font-weight:700;color:#46716f;letter-spacing:.02em">The capacities</span>
-      <span style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-        <span style="display:flex;align-items:center;gap:7px"><span style="width:13px;height:13px;border-radius:50%;background:#7E9E9E;display:inline-block"></span><span data-edit="leg-cap-1">Individual grounding</span></span>
-        <span style="display:flex;align-items:center;gap:7px"><span style="width:13px;height:13px;border-radius:50%;background:#A2AD68;display:inline-block"></span><span data-edit="leg-cap-2">Collective strategy</span></span>
-        <span style="display:flex;align-items:center;gap:7px"><span style="width: 13px; height: 13px; border-radius: 50%; background: rgb(208, 139, 108); display: inline-block;"></span><span data-edit="leg-cap-3">Systemic intervention</span></span>
-      </span>
-    </div>
-
-    <div style="display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap">
-      <span data-edit="leg-meta-label" style="flex:none;min-width:104px;font-weight:700;color:#46716f;letter-spacing:.02em">The meta-process</span>
-      <span style="display:flex;align-items:center;gap:7px"><span style="width:20px;border-top:2px dashed #6f685d;display:inline-block"></span><span data-edit="leg-meta">Probe · Sense · Design · Adapt · Integrate ↺</span></span>
-    </div>
-
-  </div>
-
-  <!-- ===== MAP — framed plate ===== -->
+  <!-- ===== MAP ===== -->
   <div style="width:1040px;max-width:100%">
-    <div style="display:flex;justify-content:flex-end;padding:0 2px 10px">
-      <span style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a9b94;font-weight:700">Drag · hover · explore</span>
-    </div>
-    <div style="border:1px solid rgba(47,58,54,.5);padding:9px;background:#e3e7df">
-  <div class="ioc-mapframe" style="border:1px solid rgba(47,58,54,.32);box-shadow:none">
-  <div class="ioc-stage" style="overflow:hidden;background:#EADFC9">
+    <div style="position:relative;left:50%;margin-left:-50vw;width:100vw;overflow:hidden">
+  <div class="ioc-mapframe" style="box-shadow:none;max-width:1500px;margin:0 auto">
+  <div class="ioc-stage" style="overflow:hidden;background:transparent">
 
     <!-- generated watercolour sea, islands, route, compass -->
     {{ seaArt }}
@@ -99,7 +83,7 @@
     <!-- grain -->
     <div style="position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply; background-image: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'&gt;&lt;filter id='n'&gt;&lt;feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/&gt;&lt;feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/&gt;&lt;/filter&gt;&lt;rect width='160' height='160' filter='url(%23n)'/&gt;&lt;/svg&gt;&quot;); left: 95px; top: 76px"></div>
     <!-- domain banners + orientation cards (lifted out of grain layer for clean white fill) -->
-    <div style="position: absolute; left: 892px; top: 469px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #69763f; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-green" data-edit="ban-collective">Collective strategy</div><div style="position: absolute; left: 203px; top: 981px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #a85c38; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-coral" data-edit="ban-action">Systemic intervention</div><div style="position: absolute; left: 371px; top: 227px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #3c5f5d; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-teal" data-edit="ban-within">Individual grounding</div><div style="position: absolute; left: 685px; top: 183px; transform: translate(-50%,-50%); width: 123px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 37px" data-orient="recip">
+    <div style="position: absolute; left: 892px; top: 469px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #69763f; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-green" data-edit="ban-collective">Collective strategy</div><div style="position: absolute; left: 203px; top: 981px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #a85c38; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-coral" data-edit="ban-action">Systemic intervention</div><div style="position: absolute; left: 371px; top: 227px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #3c5f5d; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-teal" data-edit="ban-within">Inner inquiry</div><div style="position: absolute; left: 685px; top: 183px; transform: translate(-50%,-50%); width: 123px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 37px" data-orient="recip">
       <div data-edit="card-recip-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Reciprocity</div>
       <div data-edit="card-recip-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we act</div>
     </div><div style="position: absolute; left: 936px; top: 181px; transform: translate(-50%,-50%); width: 152px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 8px; height: 34px" data-orient="shared">
@@ -166,6 +150,7 @@
             <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:{{ capDrawer.color }};margin-bottom:7px">{{ capDrawer.groupName }}</div>
             <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:25px;line-height:1.1;margin:0;color:#332d24">{{ capDrawer.label }}</h2>
             <div style="font-size:13px;color:#7a6f5c;margin-top:6px">{{ capDrawer.countText }}</div>
+            <a href="{{ capDrawer.suggestHref }}" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:20px;border:1px solid #8a6a45;background:#FCFBF7;color:#8a6a45;text-decoration:none">+ Suggest a resource</a>
           </div>
           <button onClick="{{ closeCap }}" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(120,105,75,.3);background:#FCFBF7;color:#6b5527;font-size:17px;cursor:pointer;line-height:1">✕</button>
         </div>
@@ -176,7 +161,7 @@
         </sc-if>
         <sc-if value="{{ capDrawer.hasLevels }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Indicators of learning</span>
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Learning Goals</span>
             <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
           </div>
           <div>
@@ -209,7 +194,9 @@
             </div>
           </sc-for>
         </div>
-        <a href="{{ capDrawer.libHref }}" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:{{ capDrawer.color }};text-decoration:none">Open in Resource Library →</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px">
+          <a href="{{ capDrawer.libHref }}" style="display:inline-flex;align-items:center;gap:6px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:{{ capDrawer.color }};text-decoration:none">Open in Resource Library →</a>
+        </div>
       </div>
     </aside>
   </sc-if>
@@ -225,7 +212,7 @@ class Component extends DCLogic {
       {n:2,label:'Sense',x:708,y:624},
       {n:3,label:'Design',x:841,y:1088},
       {n:4,label:'Adapt',x:150,y:1135},
-      {n:5,label:'Integrate ↺',x:118,y:669}
+      {n:5,label:'Integrate',x:118,y:669}
     ],
     isl: [
       // WITHIN — individual agency (teal)
@@ -310,7 +297,7 @@ class Component extends DCLogic {
   componentDidMount() {
     window.addEventListener('research-data-updated', () => this.forceUpdate());
     if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
-    try { const s = localStorage.getItem('ioc-wp-v1'); if (s) { const wp = JSON.parse(s); if (Array.isArray(wp) && wp.length === 5) this.setState({ wp }); } } catch(e){}
+    try { const s = localStorage.getItem('ioc-wp-v1'); if (s) { const wp = JSON.parse(s); if (Array.isArray(wp) && wp.length === 5) { const dwp = this.state.wp; this.setState({ wp: wp.map((p,i)=>({ ...p, label: dwp[i].label })) }); } } } catch(e){}
     try { const s = localStorage.getItem('ioc-isl-v2'); if (s) { const saved = JSON.parse(s); if (Array.isArray(saved) && saved.length === this.state.isl.length) {
       // keep persisted positions, but always reconcile labels/meta from canonical defs (by seed, else index)
       const def = this.state.isl;
@@ -350,20 +337,20 @@ class Component extends DCLogic {
       sense: { t:'Sense', s:'Sense the field & imagineer possibilities', b:'Sensing renders the invisible visible. The practitioner maps the forces, mental models, and feedback loops that hold systemic inertia in place, moving from observing isolated events to understanding the patterns that drive them. It concludes by locating high-leverage intervention points — shifting focus from symptoms to the root structural dynamics that, if nudged, can orient the system toward greater health.' },
       design: { t:'Design', s:'Design the roadmap & mobilize resources', b:'Design builds a bridge between current reality and a regenerative future. Because complex adaptive systems cannot be strictly controlled, the practitioner nudges the system by cultivating the right conditions and constraints. This stage is collaborative and radically inclusive, prioritizing relational infrastructure — bridging, belonging, and trust — so the roadmap is not just a plan, but a shared commitment.' },
       adapt: { t:'Adapt', s:'Adapt to context & solve emergent problems', b:'Adapting begins the moment an intervention meets the system and the system reveals new information. Every action is treated as an experiment — a probe — and the practitioner stays agile enough to pivot on real-time feedback. This calls for a leadership style that holds space for emergence, navigating uncertainty with equanimity and reshaping the roadmap around what the system is actively teaching.' },
-      integrate: { t:'Integrate ↺', s:'Integrate feedback & learnings', b:'Integrating weaves the learning back into the fabric of the community — the cycle closes not when action stops, but when knowledge is absorbed. It documents the trajectory of change, honoring successes and failures alike, to build the social capital that feeds the next iteration. An act of closure and gratitude, it recognizes that sustainability depends on the density of relationships and the depth of shared knowledge created along the way.' },
+      integrate: { t:'Integrate', s:'Integrate feedback & learnings', b:'Integrating weaves the learning back into the fabric of the community — the cycle closes not when action stops, but when knowledge is absorbed. It documents the trajectory of change, honoring successes and failures alike, to build the social capital that feeds the next iteration. An act of closure and gratitude, it recognizes that sustainability depends on the density of relationships and the depth of shared knowledge created along the way.' },
       // ===== group intros (banners) =====
-      'grp-teal':  { g:'teal',  t:'Individual Grounding', s:'The personal foundation', b:'These capacities ground the individual in the deep work of self-awareness and world-view diversification. Without the ability to interrogate our own positionality, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the personal foundation required to remain centered while navigating the volatility of systems change.' },
-      'grp-green': { g:'green', t:'Collective Strategy', s:'Reading the field', b:'Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These capacities equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.' },
-      'grp-coral': { g:'coral', t:'Systemic Intervention', s:'Acting & sustaining', b:'The operational and tactical capacity domain centered on non-linear execution, asset mobilization, and relational stewardship. It governs the practical application of power and the architecture of long-term regenerative structures, ensuring that systemic shifts are sustainably maintained across generations.' },
+      'grp-teal':  { g:'teal',  t:'Inner Inquiry', s:'The personal foundation', b:'These islands ground the individual in the deep work of self-awareness and world-view diversification. Without the ability to interrogate our own positionality, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the personal foundation required to remain centered while navigating the volatility of systems change.' },
+      'grp-green': { g:'green', t:'Collective Strategy', s:'Reading the field', b:'Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These islands equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.' },
+      'grp-coral': { g:'coral', t:'Systemic Intervention', s:'Acting & sustaining', b:'The operational and tactical domain centered on non-linear execution, asset mobilization, and relational stewardship. It governs the practical application of power and the architecture of long-term regenerative structures, ensuring that systemic shifts are sustainably maintained across generations.' },
       // ===== individual capacities (teal) =====
-      'Somatic Eco-Regulation': { g:'teal', t:'Somatic Eco-Regulation', s:'Individual grounding', b:'The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.' },
-      'Observing & Listening': { g:'teal', t:'Observing & Listening', s:'Individual grounding', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
-      'Critical Thinking & Reflexivity': { g:'teal', t:'Critical Thinking & Reflexivity', s:'Individual grounding', b:"The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective." },
-      'Spiritual & Moral Inquiry': { g:'teal', t:'Spiritual & Moral Inquiry', s:'Individual grounding', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
-      'Socioeconomic & Political Literacy': { g:'teal', t:'Socioeconomic & Political Literacy', s:'Individual grounding', b:'Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.' },
-      'Learning Agency': { g:'teal', t:'Learning Agency', s:'Individual grounding', b:'Taking proactive, self-directed ownership of personal knowledge-acquisition loops, tracking individual capacity gaps, and designing customized learning pathways.' },
-      'Ecological & Planetary Literacy': { g:'teal', t:'Ecological & Planetary Literacy', s:'Individual grounding', b:'Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.' },
-      'Cultural & Ancestral Literacy': { g:'teal', t:'Cultural & Ancestral Literacy', s:'Individual grounding', b:'Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
+      'Somatic Eco-Regulation': { g:'teal', t:'Somatic Eco-Regulation', s:'Inner inquiry', b:'The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.' },
+      'Observing & Listening': { g:'teal', t:'Observing & Listening', s:'Inner inquiry', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
+      'Critical Thinking & Reflexivity': { g:'teal', t:'Critical Thinking & Reflexivity', s:'Inner inquiry', b:"The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective." },
+      'Spiritual & Moral Inquiry': { g:'teal', t:'Spiritual & Moral Inquiry', s:'Inner inquiry', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
+      'Socioeconomic & Political Literacy': { g:'teal', t:'Socioeconomic & Political Literacy', s:'Inner inquiry', b:'Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.' },
+      'Learning Agency': { g:'teal', t:'Learning Agency', s:'Inner inquiry', b:'Taking proactive, self-directed ownership of personal knowledge-acquisition loops, tracking individual capacity gaps, and designing customized learning pathways.' },
+      'Ecological & Planetary Literacy': { g:'teal', t:'Ecological & Planetary Literacy', s:'Inner inquiry', b:'Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.' },
+      'Cultural & Ancestral Literacy': { g:'teal', t:'Cultural & Ancestral Literacy', s:'Inner inquiry', b:'Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
       // ===== collective capacities (green) =====
       'Systems Thinking & Modeling': { g:'green', t:'Systems Thinking & Modeling', s:'Collective strategy', b:'Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.' },
       'Complex Problem Solving': { g:'green', t:'Complex Problem Solving', s:'Collective strategy', b:'Categorizing problem fields across ordered, complex, or chaotic domains to determine whether an environment requires linear management or emergent experimentation.' },
@@ -372,7 +359,7 @@ class Component extends DCLogic {
       'Regenerative Systems Design': { g:'green', t:'Regenerative Systems Design', s:'Collective strategy', b:'Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.' },
       'Narrative & Media Analysis': { g:'green', t:'Narrative & Media Analysis', s:'Collective strategy', b:'Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.' },
       'Participatory Research & Design': { g:'green', t:'Participatory Research & Design', s:'Collective strategy', b:'Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.' },
-      'Data Analysis & Evaluation': { g:'coral', t:'Data Analysis & Evaluation', s:'Systemic intervention', b:'Utilizing empirical data tracking, quantitative metrics, and positive-deviance mapping to identify hidden localized solutions and track system-wide trends.' },
+      'Data Analysis & Evaluation': { g:'coral', t:'Data Analysis & Evaluation', s:'Systemic intervention', b:'Utilizing empirical data tracking, quantitative and qualitative metrics, and positive deviance mapping to identify hidden localized solutions and track system-wide trends.' },
       // ===== systemic capacities (coral) =====
       'Experimenting & Building': { g:'coral', t:'Experimenting & Building', s:'Systemic intervention', b:"Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback." },
       'Convening & Facilitating Collaborations': { g:'green', t:'Convening & Facilitating Collaborations', s:'Collective strategy', b:'Designing and stewarding non-hierarchical, highly democratic spaces that cultivate distributed intelligence, deep dialogue, and shared consensus.' },
@@ -477,13 +464,13 @@ class Component extends DCLogic {
     const CD = (typeof window!=='undefined' && window.__CAPDETAIL) ? window.__CAPDETAIL : {};
     const capRec = (R.capacities||[]).find(c=>c.label===key) || {group:'teal'};
     const g = capRec.group || 'teal';
-    const GRP = { teal:{c:'#46716f',name:'Individual Grounding',head:'#e3ecea',rgb:[46,113,111]}, green:{c:'#5b6733',name:'Collective Strategy',head:'#ebeedd',rgb:[118,131,74]}, coral:{c:'#a8542d',name:'Systemic Intervention',head:'#f4e3d9',rgb:[189,106,71]} };
+    const GRP = { teal:{c:'#46716f',name:'Inner Inquiry',head:'#e3ecea',rgb:[46,113,111]}, green:{c:'#5b6733',name:'Collective Strategy',head:'#ebeedd',rgb:[118,131,74]}, coral:{c:'#a8542d',name:'Systemic Intervention',head:'#f4e3d9',rgb:[189,106,71]} };
     const gd = GRP[g] || GRP.teal;
     const det = CD[key] || {};
     const tcMap = { 'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733','Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8','Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45' };
     const tcol = (t)=>{ if(tcMap[t]) return tcMap[t]; let h=0; for(let i=0;i<t.length;i++){ h=(h*31+t.charCodeAt(i))>>>0; } return 'hsl('+(h%360)+' 42% 42%)'; };
     const list = (R.resources||[]).filter(r=>r.caps && r.caps.indexOf(key)>=0);
-    const items = list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:a.i-b.i; }).map(x=>{
+    const items = list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:(a.r.name||'').localeCompare(b.r.name||''); }).map(x=>{
       const r=x.r; const t0=(r.types&&r.types.length)?r.types[0]:'Resource'; const tc=tcol(t0);
       return { name:r.name, desc:r.desc, url:r.url||'#', featured:!!r.featured,
         typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
@@ -496,8 +483,9 @@ class Component extends DCLogic {
     const n=list.length;
     return { open:true, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,
       desc:det.desc||'', levels, hasLevels:levels.length>0,
-      countText: n+(n===1?' resource informs this capacity':' resources inform this capacity'),
-      libHref: 'resources.html?capacity='+encodeURIComponent(key), items };
+      countText: n+(n===1?' resource to learn about this island':' resources to learn about this island'),
+      libHref: 'resources.html?capacity='+encodeURIComponent(key),
+      suggestHref: 'resources.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
   }
   _onWpEnter(i) { if (this._pinned == null) { const p = this.state.wp[i]; this._showTip(p.key || ['probe','sense','design','adapt','integrate'][i], p.x, p.y, 30); } }
   _onWpLeave() { this._scheduleHide(); }
@@ -568,9 +556,11 @@ class Component extends DCLogic {
 
     const island = (cx,cy,r,fill,deep,seed) => {
       const els=[];
+      els.push(h('ellipse',{key:'sh',cx:cx,cy:cy+r*0.62,rx:r*0.94,ry:r*0.34,fill:'#241f17',opacity:.18,filter:'url(#soft)'}));
       els.push(h('path',{key:'u',d:blob(cx,cy,r*1.16,0.3,12,seed+1,0.94),fill:fill,opacity:.26,filter:'url(#soft)'}));
       els.push(h('path',{key:'b',d:blob(cx,cy,r,0.26,13,seed,0.94),fill:fill,opacity:.92,filter:'url(#rough)'}));
       els.push(h('path',{key:'c',d:blob(cx,cy,r*0.62,0.3,12,seed+3,0.94),fill:deep,opacity:.36,filter:'url(#rough)'}));
+      els.push(h('path',{key:'hl',d:blob(cx-r*0.22,cy-r*0.24,r*0.46,0.32,12,seed+5,0.94),fill:'#ffffff',opacity:.16,filter:'url(#soft)'}));
       if(r>=48){ for(let k=1;k<=2;k++) els.push(h('path',{key:'ct'+k,d:blob(cx,cy,r*(0.8-k*0.18),0.26,12,seed+10+k,0.94),fill:'none',stroke:C.ink,strokeOpacity:.4,strokeWidth:1})); }
       return h('g',{key:'i'+seed},els);
     };
@@ -588,34 +578,59 @@ class Component extends DCLogic {
       h('filter',{id:'rough',x:'-30%',y:'-30%',width:'160%',height:'160%'},
         h('feTurbulence',{type:'fractalNoise',baseFrequency:'0.013 0.017',numOctaves:3,seed:7,result:'n'}),
         h('feDisplacementMap',{in:'SourceGraphic',in2:'n',scale:13,xChannelSelector:'R',yChannelSelector:'G'})),
-      h('filter',{id:'soft',x:'-40%',y:'-40%',width:'180%',height:'180%'}, h('feGaussianBlur',{stdDeviation:5}))
+      h('filter',{id:'soft',x:'-40%',y:'-40%',width:'180%',height:'180%'}, h('feGaussianBlur',{stdDeviation:7})),
+      h('radialGradient',{id:'compDome',cx:'38%',cy:'30%',r:'74%'},
+        h('stop',{offset:'0%',stopColor:'#FBF6EA'}),
+        h('stop',{offset:'60%',stopColor:'#EADFC6'}),
+        h('stop',{offset:'100%',stopColor:'#C9B68F'})),
+      h('linearGradient',{id:'compLight',x1:'0',y1:'0',x2:'1',y2:'1'},
+        h('stop',{offset:'0%',stopColor:'#FFFDF8'}),
+        h('stop',{offset:'100%',stopColor:'#D6C5A1'})),
+      h('linearGradient',{id:'compDark',x1:'0',y1:'0',x2:'1',y2:'1'},
+        h('stop',{offset:'0%',stopColor:'#C0703F'}),
+        h('stop',{offset:'100%',stopColor:'#8A3F1F'}))
     ));
     // sea depth washes
-    kids.push(h('path',{key:'w1',d:blob(300,300,360,0.4,12,21),fill:C.teal,opacity:.13,filter:'url(#soft)'}));
-    kids.push(h('path',{key:'w2',d:blob(660,650,380,0.4,12,22),fill:C.green,opacity:.12,filter:'url(#soft)'}));
-    kids.push(h('path',{key:'w3',d:blob(440,1020,390,0.4,12,23),fill:C.coral,opacity:.16,filter:'url(#soft)'}));
-    kids.push(h('path',{key:'w4',d:blob(880,420,300,0.4,12,24),fill:'#E7Cf9f',opacity:.3,filter:'url(#soft)'}));
+    kids.push(h('path',{key:'w1',className:'ioc-wash',style:{animationDuration:'15s'},d:blob(300,300,430,0.46,12,21),fill:C.teal,opacity:.12,filter:'url(#soft)'}));
+    kids.push(h('path',{key:'w2',className:'ioc-wash',style:{animationDuration:'19s',animationDelay:'-4s'},d:blob(660,650,380,0.4,12,22),fill:C.green,opacity:.12,filter:'url(#soft)'}));
+    kids.push(h('path',{key:'w3',className:'ioc-wash',style:{animationDuration:'23s',animationDelay:'-8s'},d:blob(440,1020,390,0.4,12,23),fill:C.coral,opacity:.16,filter:'url(#soft)'}));
+    kids.push(h('path',{key:'w4',className:'ioc-wash',style:{animationDuration:'17s',animationDelay:'-2s'},d:blob(880,420,300,0.4,12,24),fill:'#E7Cf9f',opacity:.3,filter:'url(#soft)'}));
     // faint depth contour rings around bays
-    [[300,300,300],[660,650,310],[440,1020,320]].forEach((b,i)=>{ for(let k=0;k<3;k++) kids.push(h('path',{key:'ring'+i+k,d:blob(b[0],b[1],b[2]-k*46,0.16,16,90+i*5+k,0.96),fill:'none',stroke:C.ink,strokeOpacity:.05,strokeWidth:1})); });
+    [[300,300,300],[660,650,310],[440,1020,320]].forEach((b,i)=>{ for(let k=0;k<3;k++) kids.push(h('path',{key:'ring'+i+k,d:blob(b[0],b[1],b[2]-k*46,0.16,16,90+i*5+k,0.96),fill:'none',stroke:C.ink,strokeOpacity:.13,strokeWidth:1.1})); });
 
     // wayfinding route (under islands? draw under labels but over sea). Put before islands so islands sit on top.
     // wayfinding route — one continuous, smooth CLOSED loop through all steps (no seam, no kink)
-    kids.push(h('path',{key:'route',d:smooth(route),fill:'none',stroke:C.ink,strokeOpacity:.5,strokeWidth:2.5,strokeDasharray:'2 9',strokeLinecap:'round'}));
+    const routeD = smooth(route);
+    kids.push(h('path',{key:'route',className:'ioc-march',d:routeD,fill:'none',stroke:C.ink,strokeOpacity:.72,strokeWidth:3.4,strokeDasharray:'2 9',strokeLinecap:'round'}));
+    // feedback-loop chords
+    { const cen=[480,700];
+      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const cxp=mx+dx/L*off, cyp=my+dy/L*off; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${cxp},${cyp} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); };
+      arc(0,1,95,'ioc-march-rev','fb-ps',.62);
+      arc(1,2,95,'ioc-march-rev','fb-sd',.62);
+      arc(4,2,64,'ioc-march','fb-id',.3);
+      arc(2,3,82,'ioc-march-rev','fb-da',.62);
+    }
 
     // islands (positions from state — draggable)
     ISL.forEach((p,i)=>kids.push(island(p.x,p.y,p.r,COL[p.group].fill,COL[p.group].deep,p.seed)));
 
-    // compass rose (decorative) mid-right
-    const ccx=808, ccy=182, cr=50;
-    const comp=[h('circle',{key:'c0',cx:ccx,cy:ccy,r:cr,fill:'none',stroke:C.ink,strokeOpacity:.3,strokeWidth:1.4}),
-      h('circle',{key:'c1',cx:ccx,cy:ccy,r:cr*0.6,fill:'none',stroke:C.ink,strokeOpacity:.2,strokeWidth:1})];
-    [[0,-1],[1,0],[0,1],[-1,0]].forEach((d,i)=>comp.push(h('path',{key:'p'+i,d:`M${ccx},${ccy} L${ccx+d[0]*cr*0.5-d[1]*6},${ccy+d[1]*cr*0.5+d[0]*6} L${ccx+d[0]*cr},${ccy+d[1]*cr} L${ccx+d[0]*cr*0.5+d[1]*6},${ccy+d[1]*cr*0.5-d[0]*6} Z`,fill:i%2?C.cream:C.coralDeep,stroke:C.ink,strokeOpacity:.35,strokeWidth:.7})));
-    kids.push(h('g',{key:'comp',opacity:.85},comp));
+    // compass rose (decorative, 3D + animated) mid-right
+    const ccx=808, ccy=182, cr=52;
+    const compEls=[];
+    compEls.push(h('ellipse',{key:'cs',cx:ccx,cy:ccy+cr*0.9,rx:cr*0.82,ry:cr*0.2,fill:'#241f17',opacity:.16,filter:'url(#soft)'}));
+    compEls.push(h('circle',{key:'cd',cx:ccx,cy:ccy,r:cr,fill:'url(#compDome)',stroke:C.ink,strokeOpacity:.28,strokeWidth:1.4}));
+    compEls.push(h('circle',{key:'cd2',cx:ccx,cy:ccy,r:cr*0.74,fill:'none',stroke:C.ink,strokeOpacity:.16,strokeWidth:1}));
+    const star=[];
+    [[0.707,-0.707],[0.707,0.707],[-0.707,0.707],[-0.707,-0.707]].forEach((d,i)=>{ const len=cr*0.5, half=4, px=-d[1], py=d[0]; const T=[ccx+d[0]*len,ccy+d[1]*len], b1=[ccx+px*half,ccy+py*half], b2=[ccx-px*half,ccy-py*half]; star.push(h('path',{key:'dg'+i,d:`M${ccx},${ccy} L${b1[0]},${b1[1]} L${T[0]},${T[1]} L${b2[0]},${b2[1]} Z`,fill:'url(#compLight)',opacity:.55,stroke:C.ink,strokeOpacity:.2,strokeWidth:.5})); });
+    [[0,-1],[1,0],[0,1],[-1,0]].forEach((d,i)=>{ const len=cr*0.92, half=8, px=-d[1], py=d[0]; const T=[ccx+d[0]*len,ccy+d[1]*len], b1=[ccx+px*half,ccy+py*half], b2=[ccx-px*half,ccy-py*half]; star.push(h('path',{key:'cl'+i,d:`M${ccx},${ccy} L${b1[0]},${b1[1]} L${T[0]},${T[1]} Z`,fill:'url(#compLight)',stroke:C.ink,strokeOpacity:.25,strokeWidth:.5})); star.push(h('path',{key:'cr'+i,d:`M${ccx},${ccy} L${T[0]},${T[1]} L${b2[0]},${b2[1]} Z`,fill:'url(#compDark)',stroke:C.ink,strokeOpacity:.25,strokeWidth:.5})); });
+    star.push(h('circle',{key:'hub',cx:ccx,cy:ccy,r:4,fill:'#FBF6EA',stroke:C.ink,strokeOpacity:.4,strokeWidth:.8}));
+    compEls.push(h('g',{key:'star',className:'ioc-compass-star'},star));
+    kids.push(h('g',{key:'comp',className:'ioc-compass',opacity:.92},compEls));
 
     const waypoints = h('div', { key:'wps', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
-      WP.map((p, i) => h('div', { key:'wp'+i, style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', pointerEvents:'none' } },
+      WP.map((p, i) => h('div', { key:'wp'+i, style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', animation:'iocBuoy '+(6+(i%4))+'s ease-in-out infinite', animationDelay:(-i*1.3)+'s', pointerEvents:'none' } },
         h('div', { style:{ position:'absolute', left:'0px', top:'-38px', transform:'translateX(-50%)', whiteSpace:'nowrap', fontSize:'12px', fontWeight:700, letterSpacing:'.02em', color:'#F4EFE6', background:'rgba(57,52,43,0.92)', padding:'3px 10px', borderRadius:'9px', pointerEvents:'none' } }, p.label),
-        h('div', { title:'', onPointerDown:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to top, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
+        h('div', { title:'', onPointerDown:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to right, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
       ))
     );
 

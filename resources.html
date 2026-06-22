@@ -11,7 +11,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <script src="./research-data.js"></script>
 <script src="notion-config.js"></script>
 <script src="data-loader.js"></script>
@@ -29,21 +29,40 @@
 <script src="capacity-detail.js"></script>
 </helmet>
 
-<div style="min-height:100vh;background:#e3ecea;font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
+<div style="min-height:100vh;background:radial-gradient(680px 460px at 14% 6%, rgba(150,178,108,.21), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(120,165,150,.12), transparent 72%), linear-gradient(180deg,#e2ebd4 0%,#eef1e3 540px);font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
 
   <dc-import name="SiteNav" active="resources" hint-size="100%,58px" style="width:100%"></dc-import>
 
   <!-- ===== HERO BAND ===== -->
-  <div style="background:#e3ecea;border-top:4px solid #46716f;padding:42px 26px 40px">
-    <div style="max-width:1180px;margin:0 auto;color:#274a47">
-      <h1 style="font-family:'PT Serif',serif;font-weight:700;font-size:38px;line-height:1.08;margin:0 0 8px;color:#274a47">Resource Library</h1>
-      <p style="font-size:16px;line-height:1.55;color:#41514a;margin:0;max-width:70ch">The resources that have informed these capacities. Explore by capacity, or browse the whole library. All resources are curated by the co-editors and a growing base of system change practitioners.</p>
+  <div style="position:relative;overflow:hidden;padding:54px 26px 42px">
+    <div style="position:absolute;right:40px;bottom:-6px;width:150px;opacity:.5;pointer-events:none" aria-hidden="true">
+      <svg viewBox="0 0 200 290" width="100%" style="display:block">
+        <g opacity="0.5" fill="#d9a441">
+          <path d="M90,64 L6,26 L6,42 Z"></path>
+          <path d="M110,64 L194,26 L194,42 Z"></path>
+          <path d="M88,72 L4,70 L6,86 Z"></path>
+          <path d="M112,72 L196,70 L194,86 Z"></path>
+        </g>
+        <path d="M34,256 Q100,236 166,256 L172,278 L28,278 Z" fill="#7E9E9E" opacity="0.55"></path>
+        <path d="M86,84 L114,84 L128,256 L72,256 Z" fill="#f6f3ec" stroke="#46716f" stroke-width="2.4"></path>
+        <path d="M84,108 L116,108 L120,134 L80,134 Z" fill="#46716f"></path>
+        <path d="M78,180 L122,180 L126,206 L74,206 Z" fill="#46716f"></path>
+        <rect x="80" y="72" width="40" height="12" rx="1.5" fill="#46716f"></rect>
+        <rect x="87" y="50" width="26" height="22" fill="#d9a441" stroke="#46716f" stroke-width="2.4"></rect>
+        <line x1="100" y1="50" x2="100" y2="72" stroke="#46716f" stroke-width="1.6"></line>
+        <path d="M82,50 L100,30 L118,50 Z" fill="#46716f"></path>
+        <circle cx="100" cy="26" r="3.4" fill="#46716f"></circle>
+      </svg>
+    </div>
+    <div style="position:relative;max-width:1180px;margin:0 auto">
+      <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#1f3a36">Resources for systems change</h1>
+      <p style="font-size:16px;line-height:1.6;color:#3e544f;margin:0;max-width:70ch">The texts, tools, and practices that inform each island. Explore by island, or browse the whole library — all curated by the co-editors and a growing base of systems-change practitioners.</p>
     </div>
   </div>
 
   <!-- ===== TABS ===== -->
   <header style="max-width:1180px;margin:0 auto;padding:20px 26px 0">
-    <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(120,105,75,.28);padding-bottom:10px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(70,90,85,.13);padding-bottom:10px;flex-wrap:wrap">
       <span style="font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;color:#39342b">All resources <span style="{{ tabCountStyle }}">{{ totalText }}</span></span>
       <button onClick="{{ openSubmit }}" style="margin-left:auto;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:8px 15px;border-radius:20px;border:1px solid #8a6a45;background:#8a6a45;color:#fff;cursor:pointer">+ Suggest a resource</button>
     </div>
@@ -83,7 +102,7 @@
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
           <input value="{{ libSearch }}" onInput="{{ onSearch }}" placeholder="Search titles &amp; descriptions…" style="flex:1;min-width:220px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 14px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;outline:none"/>
           <select value="{{ capFilterVal }}" onChange="{{ onCapSelect }}" style="font-family:'PT Sans',sans-serif;font-size:13px;padding:11px 12px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;cursor:pointer;max-width:240px">
-            <option value="">Jump to capacity…</option>
+            <option value="">Jump to island…</option>
             <sc-for list="{{ capGroups }}" as="g" hint-placeholder-count="3">
               <optgroup label="{{ g.label }}">
                 <sc-for list="{{ g.caps }}" as="c" hint-placeholder-count="6">
@@ -108,7 +127,7 @@
         <div style="font-size:13px;color:#8a7a5f;margin-bottom:16px">{{ libCountText }}</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px">
           <sc-for list="{{ libList }}" as="res" hint-placeholder-count="9">
-            <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-radius:13px;padding:15px 16px;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(70,55,35,.06)">
+            <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:16px;padding:15px 16px;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(40,70,65,.08)">
               <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">
                 <sc-for list="{{ res.typeTags }}" as="t" hint-placeholder-count="1">
                   <span style="{{ t.style }}">{{ t.label }}</span>
@@ -137,7 +156,7 @@
           <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 6px">Design a Learning Experience</h2>
           <p style="font-size:14px;line-height:1.55;color:#544E45;margin:0;max-width:74ch">Assemble a learning experience: choose the <strong>methods</strong> for how learning happens, and the <strong>conditions</strong> that need to be in place for it to land. Your design builds in the panel on the right.</p>
           <sc-if value="{{ hasContext }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:12px;font-size:13px;color:#8a6a45">Designing for capacity: <strong style="color:{{ contextColor }}">{{ contextLabel }}</strong> <button onClick="{{ clearContext }}" style="background:none;border:none;color:#a07a4f;cursor:pointer;text-decoration:underline;font-size:12px">clear</button></div>
+            <div style="margin-top:12px;font-size:13px;color:#8a6a45">Designing for island: <strong style="color:{{ contextColor }}">{{ contextLabel }}</strong> <button onClick="{{ clearContext }}" style="background:none;border:none;color:#a07a4f;cursor:pointer;text-decoration:underline;font-size:12px">clear</button></div>
           </sc-if>
         </div>
 
@@ -241,7 +260,7 @@
         </sc-if>
         <sc-if value="{{ deep.hasLevels }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Indicators of learning</span>
+            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Learning Goals</span>
             <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
           </div>
           <div>
@@ -290,7 +309,7 @@
               <input id="ioc-sr-title" placeholder="Title" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none"/>
               <input id="ioc-sr-link" placeholder="Link (URL)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none"/>
               <input id="ioc-sr-from" placeholder="Your name &amp; email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none"/>
-              <textarea id="ioc-sr-why" placeholder="Why it matters / how it informs a capacity" rows="3" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none;resize:vertical"></textarea>
+              <textarea id="ioc-sr-why" placeholder="Why it matters / how it informs an island" rows="3" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none;resize:vertical"></textarea>
             </div>
             <div style="display:flex;gap:9px;margin-top:18px">
               <button onClick="{{ doSubmit }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Submit for curation</button>
@@ -341,6 +360,9 @@ class Component extends DCLogic {
         const match = this._data().capacities.find(c => c.label === p);
         if (match) this.setState({ tab:'library', capFilter: match.label });
       }
+      if (new URLSearchParams(window.location.search).get('suggest')) {
+        this.setState({ submitOpen:true, submitDone:false });
+      }
     } catch(e){}
   }
   _data(){ return window.__RESEARCH || {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}}; }
@@ -382,7 +404,7 @@ class Component extends DCLogic {
     } else {
       var to='jayajohnyramchandani@gmail.com,raisamirza@gmail.com';
       var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
-        +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs a capacity:\n'+why+'\n';
+        +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs an island:\n'+why+'\n';
       try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
       this.setState({submitDone:true});
     }
@@ -426,7 +448,7 @@ class Component extends DCLogic {
     const ms=d.methods.filter(m=>this.state.methods[m.name]);
     const cs=d.conditions.filter(c=>this.state.conditions[c.name]);
     let t='LEARNING DESIGN';
-    if(this.state.contextCap) t+='\nCapacity: '+this.state.contextCap;
+    if(this.state.contextCap) t+='\nIsland: '+this.state.contextCap;
     t+='\n\nMethods:\n'+(ms.length?ms.map((m,i)=>'  '+(i+1)+'. '+m.name).join('\n'):'  —');
     t+='\n\nEnabling conditions:\n'+(cs.length?cs.map(c=>'  • '+c.name).join('\n'):'  —');
     try{ navigator.clipboard.writeText(t); }catch(e){}
@@ -460,12 +482,12 @@ class Component extends DCLogic {
     if(this.state.deep){
       const label=this.state.deep, g=this._groupOf(label), col=cols[g];
       const list=this._resFor(label);
-      const items=list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:a.i-b.i; }).map(x=>this._mkRes(x.r));
+      const items=list.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
       const order=['Books','Methods & Toolkits','Digital Publications / Reports','Data Tools','Case Studies','Networks','Podcast','Video','Articly / Blogposts','Articles / Blogposts','Other'];
       const byMed={};
       list.forEach(r=>{ const ts=(r.types&&r.types.length)?r.types:['Other']; ts.forEach(t=>{ (byMed[t]=byMed[t]||[]).push(r); }); });
       const keys=Object.keys(byMed).sort((a,b)=>{ const ia=order.indexOf(a), ib=order.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });
-      const mediums=keys.map(m=>({ medium:m, count:byMed[m].length, items:byMed[m].map(r=>this._mkRes(r)) }));
+      const mediums=keys.map(m=>({ medium:m, count:byMed[m].length, items:byMed[m].slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r)) }));
       const det=(typeof window!=='undefined'&&window.__CAPDETAIL)?(window.__CAPDETAIL[label]||{}):{};
       const levOrder=['Emerging','Developing','Effective','Influential'];
       const _hx=(col.c||'#46716f').replace('#',''); const _r=parseInt(_hx.substr(0,2),16),_g2=parseInt(_hx.substr(2,2),16),_b=parseInt(_hx.substr(4,2),16);
@@ -476,7 +498,7 @@ class Component extends DCLogic {
       })):[];
       deep={ label, color:col.c, headerBg:col.head, groupName:(meta[g]||{}).name||g,
         desc:det.desc||'', levels, hasLevels:levels.length>0,
-        countText:list.length+(list.length===1?' resource informs this capacity':' resources inform this capacity'),
+        countText:list.length+(list.length===1?' resource to learn about this island':' resources to learn about this island'),
         items, onDesign:()=>{ window.location.href='design.html'; } };
     }
 
@@ -502,7 +524,7 @@ class Component extends DCLogic {
       return { label:m, onToggle:()=>this.toggleObj('libMediums',m),
         style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12px', fontWeight:600, padding:'6px 11px', borderRadius:'18px', cursor:'pointer', border:'1px solid rgba(120,105,75,.35)', background:on?'#8a6a45':'#FCFBF7', color:on?'#fff':'#6b5d45' } };
     });
-    const libList=filtered.map(r=>this._mkRes(r));
+    const libList=filtered.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
     const capGroups=['teal','green','coral'].map(g=>({ label:(meta[g]||{}).name||g, caps:d.capacities.filter(c=>c.group===g).map(c=>({label:c.label})) }));
 
     // ---- studio ----

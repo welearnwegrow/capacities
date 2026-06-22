@@ -1,4 +1,4 @@
-# Systems Change Learning Lab
+# Institute of Fog and Tide
 
 A static website for the *Islands of Coherence* capacity framework — an interactive map, a curated resource library, and supporting pages.
 

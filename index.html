@@ -22,7 +22,7 @@
   *{box-sizing:border-box}
   body{margin:0;background:radial-gradient(680px 460px at 14% 6%, rgba(120,160,195,.20), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(150,185,180,.16), transparent 72%), linear-gradient(180deg,#dce7ed 0%,#eef2ef 620px);font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .ioc-root{padding:0 24px 70px}
-  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 70px, #000 calc(100% - 130px), transparent 100%);mask-image:linear-gradient(to bottom, transparent 0, #000 70px, #000 calc(100% - 130px), transparent 100%)}
+  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 130px), transparent 100%), linear-gradient(to right, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 130px), transparent 100%), linear-gradient(to right, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);mask-composite:intersect}
   .ioc-stage{position:absolute;top:0;left:0;width:1040px;height:1320px;transform-origin:top left}
   @keyframes iocFade{from{opacity:0}to{opacity:1}}
   @keyframes iocDrawerR{from{transform:translateX(100%)}to{transform:translateX(0)}}
@@ -59,7 +59,7 @@
   <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
     <div style="position:relative">
       <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;max-width:20ch;color:#1f3a36">Learning to intervene in complex systems</h1>
-      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:16px;color:#4c6b64;margin:0;max-width:70ch">A guided learning map for just &amp; regenerative futures</p>
+      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:16px;color:#4c6b64;margin:0;max-width:70ch">lifelong learning x systems practice for just &amp; regenerative futures</p>
     </div>
   </div>
 
@@ -71,6 +71,9 @@
   </div>
 
   <!-- ===== MAP ===== -->
+  <div style="width:1040px;max-width:100%;display:flex;justify-content:flex-end;margin-bottom:4px">
+    <button onClick="{{ resetMap }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#6b7d6a;background:rgba(255,255,255,.6);border:1px solid rgba(70,90,85,.25);border-radius:18px;padding:6px 14px;cursor:pointer">↺ Reset map</button>
+  </div>
   <div style="width:1040px;max-width:100%">
     <div style="position:relative;left:50%;margin-left:-50vw;width:100vw;overflow:hidden">
   <div class="ioc-mapframe" style="box-shadow:none;max-width:1200px;margin:0 auto">
@@ -209,7 +212,7 @@ class Component extends DCLogic {
     bend: [[589,240],null,[538,1198]],
     bendChord: {"fb-da":[512,1057],"fb-ps":[465,306],"fb-sd":[770,850]},
     wp: [
-      {n:1,label:'Probe',x:242,y:58},
+      {n:1,label:'Probe',x:241,y:104},
       {n:2,label:'Sense',x:736,y:520},
       {n:3,label:'Design',x:931,y:1059},
       {n:4,label:'Adapt',x:126,y:1121},
@@ -358,6 +361,7 @@ class Component extends DCLogic {
     try { const s = localStorage.getItem('ioc-bend-v1'); if (s) { const b = JSON.parse(s); if (Array.isArray(b)) this.setState({ bend: b }); } } catch(e){}
     try { const s = localStorage.getItem('ioc-bendc-v1'); if (s) { const b = JSON.parse(s); if (b && typeof b==='object') this.setState({ bendChord: b }); } } catch(e){}
     this._initBanDrag(); setTimeout(()=>this._initBanDrag(),150); setTimeout(()=>this._initBanDrag(),500);
+    this._resetMap = () => { ['ioc-wp-v1','ioc-isl-v2','ioc-bend-v1','ioc-bendc-v1','ioc-ban-v1'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); location.reload(); };
     try { const s = localStorage.getItem('ioc-isl-v2'); if (s) { const saved = JSON.parse(s); if (Array.isArray(saved) && saved.length === this.state.isl.length) {
       // keep persisted positions, but always reconcile labels/meta from canonical defs (by seed, else index)
       const def = this.state.isl;
@@ -711,7 +715,7 @@ class Component extends DCLogic {
       ))
     );
 
-    return { seaArt, islands, waypoints, capDrawer: this._capDrawer(), closeCap: () => this.closeCap() };
+    return { seaArt, islands, waypoints, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap() };
   }
 }
 </script>

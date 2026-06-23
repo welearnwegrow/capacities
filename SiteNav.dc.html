@@ -31,7 +31,7 @@ class Component extends DCLogic {
       { key:'home', label:'Home', href:'index.html' },
       { key:'resources', label:'Resource Library', href:'resources.html' },
       { key:'descriptors', label:'Learning Goals', href:'descriptors.html' },
-      { key:'about', label:'About the Framework', href:'about.html' },
+      { key:'about', label:'Methods & Approach', href:'about.html' },
       { key:'engage', label:'Partner with Us', href:'engage.html' }
     ];
     return { navItems: items.map(it => ({ label:it.label, href:it.href, style: active===it.key ? on : base })) };

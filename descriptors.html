@@ -14,51 +14,30 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
 <style>*{box-sizing:border-box}html,body{margin:0;padding:0}</style>
 
+<script src="assess.js"></script>
 </helmet>
 <div style="min-height:100vh;background:radial-gradient(680px 460px at 14% 6%, rgba(214,176,96,.20), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(120,165,160,.12), transparent 72%), linear-gradient(180deg,#f1e5cb 0%,#f6efdd 540px);font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
   <dc-import name="SiteNav" active="descriptors" hint-size="100%,58px"></dc-import>
 
   <div style="position:relative;overflow:hidden;padding:54px 26px 42px">
-    <div style="position:absolute;right:24px;top:18px;width:380px;max-width:46%;opacity:.6;pointer-events:none" aria-hidden="true">
-      <svg viewBox="0 0 380 210" width="100%" style="display:block">
-        <g stroke="#b98a3a" stroke-width="1" opacity="0.45" fill="none">
-          <path d="M44,46 L96,74 L158,58 L212,96 L274,64"></path>
-          <path d="M158,58 L168,126 L230,148"></path>
-          <path d="M274,64 L326,104 L314,158"></path>
-        </g>
-        <g fill="#a06e1f">
-          <circle cx="44" cy="46" r="2.6"></circle>
-          <circle cx="96" cy="74" r="2"></circle>
-          <circle cx="158" cy="58" r="3"></circle>
-          <circle cx="212" cy="96" r="2"></circle>
-          <circle cx="274" cy="64" r="2.6"></circle>
-          <circle cx="168" cy="126" r="2.2"></circle>
-          <circle cx="230" cy="148" r="2.6"></circle>
-          <circle cx="326" cy="104" r="2"></circle>
-          <circle cx="314" cy="158" r="2.4"></circle>
-        </g>
-        <g fill="#c9a55a">
-          <circle cx="74" cy="138" r="1.2"></circle>
-          <circle cx="128" cy="168" r="1"></circle>
-          <circle cx="258" cy="120" r="1.3"></circle>
-          <circle cx="348" cy="54" r="1.1"></circle>
-          <circle cx="196" cy="32" r="1.2"></circle>
-          <circle cx="22" cy="96" r="1"></circle>
-        </g>
-        <path d="M158,44 L160,55 L171,57 L160,59 L158,70 L156,59 L145,57 L156,55 Z" fill="#d9a441"></path>
-        <path d="M274,52 L275.6,61 L284,63 L275.6,65 L274,74 L272.4,65 L264,63 L272.4,61 Z" fill="#d9a441"></path>
-      </svg>
-    </div>
     <div style="position:relative;max-width:1380px;margin:0 auto">
       <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#6e4f1e">Learning Goals</h1>
       <p style="font-size:16px;line-height:1.6;color:#6e5a36;margin:0;max-width:80ch">All 24 islands and their four-tier progression of learning indicators — Emerging, Developing, Effective, and Influential. Written for people new to the field, age-agnostic (16+), spanning first steps through roughly fifteen years of systems-change practice. No island is sufficient on its own. They are meant to develop in dialogue, as part of an integrated learning process.</p>
     </div>
   </div>
 
+  <div style="max-width:1380px;margin:0 auto 0;padding:0 26px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+    <button id="ioc-assess-btn" type="button" style="font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;color:#fff;background:#6e4f1e;border:none;border-radius:24px;padding:11px 22px;cursor:pointer">Take a self-assessment</button>
+    <span id="ioc-assess-hint" style="display:none;font-size:13px;color:#6e5a36;font-style:italic">Click a cell in each row — Emerging → Influential — to mark where you are. Click again to clear.</span>
+    <button id="ioc-assess-gen" type="button" style="display:none;font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;color:#6e4f1e;background:#fff;border:1px solid #6e4f1e;border-radius:24px;padding:10px 20px;cursor:pointer">Generate my radar →</button>
+    <button id="ioc-assess-reset" type="button" style="display:none;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#9a8d76;background:none;border:none;cursor:pointer;text-decoration:underline">Reset</button>
+  </div>
+  <div id="ioc-assess-results" style="display:none;max-width:1380px;margin:18px auto 0;padding:0 26px"></div>
+
   <main style="max-width:1380px;margin:0 auto;padding:30px 26px 80px">
     <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin:34px 0 10px;padding-bottom:7px;border-bottom:2px solid #46716f;color:#46716f">Inner Inquiry</div>
     <p style="font-size:13.5px;line-height:1.62;color:#5a5347;max-width:94ch;margin:0 0 14px">These islands ground the individual in the deep work of self-awareness and world-view diversification. Without the ability to interrogate our own positionality, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the personal foundation required to remain centered while navigating the volatility of systems change.</p>
-    <div style="display:grid;grid-template-columns:150px 200px repeat(4,1fr);background:rgba(255,255,255,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.7);border-radius:14px;overflow:hidden;font-size:12px;box-shadow:0 8px 26px rgba(60,70,50,.09)">
+    <div data-assess-grid="1" style="display:grid;grid-template-columns:118px 150px repeat(4,1.25fr);background:rgba(255,255,255,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.7);border-radius:14px;overflow:hidden;font-size:12px;box-shadow:0 8px 26px rgba(60,70,50,.09)">
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25)">Island</div>
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25)">Description</div>
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25);display:flex;align-items:center;gap:7px"><span style="width:10px;height:10px;border-radius:50%;background:rgba(46,113,111,0.4);flex:none"></span>Emerging</div>
@@ -116,7 +95,7 @@
     </div>
     <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin:34px 0 10px;padding-bottom:7px;border-bottom:2px solid #5b6733;color:#5b6733">Collective Strategy</div>
     <p style="font-size:13.5px;line-height:1.62;color:#5a5347;max-width:94ch;margin:0 0 14px">Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These islands equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.</p>
-    <div style="display:grid;grid-template-columns:150px 200px repeat(4,1fr);background:rgba(255,255,255,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.7);border-radius:14px;overflow:hidden;font-size:12px;box-shadow:0 8px 26px rgba(60,70,50,.09)">
+    <div data-assess-grid="1" style="display:grid;grid-template-columns:118px 150px repeat(4,1.25fr);background:rgba(255,255,255,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.7);border-radius:14px;overflow:hidden;font-size:12px;box-shadow:0 8px 26px rgba(60,70,50,.09)">
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25)">Island</div>
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25)">Description</div>
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25);display:flex;align-items:center;gap:7px"><span style="width:10px;height:10px;border-radius:50%;background:rgba(118,131,74,0.4);flex:none"></span>Emerging</div>
@@ -174,7 +153,7 @@
     </div>
     <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin:34px 0 10px;padding-bottom:7px;border-bottom:2px solid #a8542d;color:#a8542d">Systemic Intervention</div>
     <p style="font-size:13.5px;line-height:1.62;color:#5a5347;max-width:94ch;margin:0 0 14px">The operational and tactical domain centered on non-linear execution, asset mobilization, and relational stewardship. It governs the practical application of power and the architecture of long-term regenerative structures, ensuring that systemic shifts are sustainably maintained across generations.</p>
-    <div style="display:grid;grid-template-columns:150px 200px repeat(4,1fr);background:rgba(255,255,255,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.7);border-radius:14px;overflow:hidden;font-size:12px;box-shadow:0 8px 26px rgba(60,70,50,.09)">
+    <div data-assess-grid="1" style="display:grid;grid-template-columns:118px 150px repeat(4,1.25fr);background:rgba(255,255,255,.6);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);border:1px solid rgba(255,255,255,.7);border-radius:14px;overflow:hidden;font-size:12px;box-shadow:0 8px 26px rgba(60,70,50,.09)">
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25)">Island</div>
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25)">Description</div>
       <div style="font-family:'PT Sans',sans-serif;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;font-weight:700;padding:10px 12px;background:rgba(244,238,225,.82);color:#6b5d45;border-bottom:1px solid rgba(120,105,75,.25);display:flex;align-items:center;gap:7px"><span style="width:10px;height:10px;border-radius:50%;background:rgba(189,106,71,0.4);flex:none"></span>Emerging</div>

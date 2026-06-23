@@ -36,10 +36,9 @@
   @keyframes iocWash{0%{transform:translate(0px,0px) scale(1)}50%{transform:translate(20px,-15px) scale(1.08)}100%{transform:translate(0px,0px) scale(1)}}
   @keyframes iocBuoy{0%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 3px),calc(-50% - 5px))}100%{transform:translate(-50%,-50%)}}
   .ioc-wash{transform-box:fill-box;transform-origin:center;animation-name:iocWash;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
-  @keyframes iocSpin{to{transform:rotate(360deg)}}
-  .ioc-compass-star{transform-box:fill-box;transform-origin:center;animation:iocSpin 90s linear infinite}
-  @keyframes iocBob{0%{transform:translateY(0px)}50%{transform:translateY(-4px)}100%{transform:translateY(0px)}}
-  .ioc-compass{transform-box:fill-box;transform-origin:center;animation:iocBob 6s ease-in-out infinite}
+  @keyframes iocNeedle{0%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}100%{transform:rotate(-7deg)}}
+  .ioc-compass-star{transform-box:fill-box;transform-origin:center;animation:iocNeedle 5.5s ease-in-out infinite}
+  .ioc-compass{transform-box:fill-box;transform-origin:center}
   @media (max-width:760px){
     .ioc-root{padding:0 14px 48px}
     .ioc-title{font-size:30px !important}
@@ -67,14 +66,14 @@
   <!-- intro / context -->
   <div style="width:1040px;max-width:100%;margin:0 auto 26px;text-align:left">
     <div style="max-width:78ch;margin:0;display:flex;flex-direction:column;gap:15px">
-      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><span style="font-size: 15.5px;"><span style="font-size: 15.5px;">As movements for justice and regeneration collide with systemic crises, navigating complexity requires a lifelong learning journey. Grounded in the question, <i>What do we need to learn to intervene in complex systems,</i> this open-source framework provides the capacities and meta-processes needed to act with integrity. It is designed for changemakers, educators, and leaders seeking an accessible, localized pathway into systems work with a decolonial lens. Rather than a fixed curriculum, it offers a flexible, peer-validated backbone structured around a distinct moral and practical orientation: Just, Regenerative, and Plural.</span></span></p>
+      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><span style="font-size: 15.5px;">As movements for justice and regeneration collide with systemic crises, navigating complexity requires a lifelong learning journey. Grounded in the question, What do we need to learn to intervene in complex systems, this open-source framework provides learning goals across 24 islands of coherence, a meta-process, and a resource library that can be applied in multiple contexts. It is designed for changemakers, educators, and leaders seeking an accessible, localized pathway into systemic intervention as a lifelong practice.</span></p>
     </div>
   </div>
 
   <!-- ===== MAP ===== -->
   <div style="width:1040px;max-width:100%">
     <div style="position:relative;left:50%;margin-left:-50vw;width:100vw;overflow:hidden">
-  <div class="ioc-mapframe" style="box-shadow:none;max-width:1500px;margin:0 auto">
+  <div class="ioc-mapframe" style="box-shadow:none;max-width:1200px;margin:0 auto">
   <div class="ioc-stage" style="overflow:hidden;background:transparent">
 
     <!-- generated watercolour sea, islands, route, compass -->
@@ -138,7 +137,7 @@
   <!-- attribution -->
   <div data-edit="attrib" style="width:1040px;max-width:100%;margin-top:14px;font-size:12px;color:#8a8377;letter-spacing:.02em"><br></div>
 
-  <dc-import name="SiteFooter" hint-size="100%,260px" style="width:100%;margin-top:30px"></dc-import>
+  <dc-import name="SiteFooter" hint-size="100%,260px" style="display:block;width:100vw;margin-top:30px"></dc-import>
 
   <!-- ============ CAPACITY DRAWER ============ -->
   <sc-if value="{{ capDrawer.open }}" hint-placeholder-val="{{ false }}">
@@ -207,41 +206,40 @@
 class Component extends DCLogic {
   state = {
     openCap: null,
+    bend: [[589,240],null,[538,1198]],
+    bendChord: {"fb-da":[512,1057],"fb-ps":[465,306],"fb-sd":[770,850]},
     wp: [
-      {n:1,label:'Probe',x:260,y:90},
-      {n:2,label:'Sense',x:708,y:624},
-      {n:3,label:'Design',x:841,y:1088},
-      {n:4,label:'Adapt',x:150,y:1135},
-      {n:5,label:'Integrate',x:118,y:669}
+      {n:1,label:'Probe',x:242,y:58},
+      {n:2,label:'Sense',x:736,y:520},
+      {n:3,label:'Design',x:931,y:1059},
+      {n:4,label:'Adapt',x:126,y:1121},
+      {n:5,label:'Integrate',x:129,y:669}
     ],
     isl: [
-      // WITHIN — individual agency (teal)
-      {label:'Somatic Eco-Regulation',x:378,y:136,r:46,w:104,group:'teal',seed:100},
-      {label:'Observing & Listening',x:188,y:199,r:42,w:96,group:'teal',seed:107},
-      {label:'Critical Thinking & Reflexivity',x:530,y:242,r:46,w:104,group:'teal',seed:114},
-      {label:'Spiritual & Moral Inquiry',x:280,y:327,r:52,w:112,group:'teal',seed:121},
+      {label:'Somatic Eco-Regulation',x:388,y:219,r:46,w:104,group:'teal',seed:100},
+      {label:'Observing & Listening',x:229,y:204,r:42,w:96,group:'teal',seed:107},
+      {label:'Critical Consciousness',x:590,y:302,r:46,w:104,group:'teal',seed:114},
+      {label:'Spiritual & Moral Inquiry',x:296,y:327,r:52,w:112,group:'teal',seed:121},
       {label:'Socioeconomic & Political Literacy',x:450,y:337,r:46,w:104,group:'teal',seed:128},
-      {label:'Learning Agency',x:150,y:370,r:42,w:96,group:'teal',seed:135},
-      {label:'Ecological & Planetary Literacy',x:343,y:434,r:48,w:108,group:'teal',seed:142},
-      {label:'Cultural & Ancestral Literacy',x:569,y:425,r:44,w:100,group:'teal',seed:149},
-      // COLLECTIVE — collective agency (green)
-      {label:'Systems Thinking & Modeling',x:460,y:543,r:46,w:104,group:'green',seed:300},
+      {label:'Learning Agency',x:189,y:381,r:42,w:96,group:'teal',seed:135},
+      {label:'Ecological & Planetary Literacy',x:342,y:457,r:48,w:108,group:'teal',seed:142},
+      {label:'Cultural & Ancestral Literacy',x:527,y:438,r:44,w:100,group:'teal',seed:149},
+      {label:'Systems Thinking & Modeling',x:488,y:667,r:46,w:104,group:'green',seed:300},
       {label:'Complex Problem Solving',x:668,y:512,r:44,w:100,group:'green',seed:307},
-      {label:'Futures Thinking & Foresight',x:822,y:559,r:46,w:104,group:'green',seed:314},
-      {label:'Positionality & Power Analysis',x:600,y:640,r:52,w:112,group:'green',seed:321},
-      {label:'Regenerative Systems Design',x:803,y:678,r:46,w:106,group:'green',seed:328},
-      {label:'Narrative & Media Analysis',x:475,y:730,r:42,w:98,group:'green',seed:335},
-      {label:'Participatory Research & Design',x:670,y:790,r:48,w:108,group:'green',seed:342},
-      {label:'Data Analysis & Evaluation',x:482,y:878,r:42,w:96,group:'coral',seed:349},
-      // ACTION — structural agency (coral)
-      {label:'Experimenting & Building',x:311,y:843,r:46,w:104,group:'coral',seed:500},
+      {label:'Futures Thinking & Foresight',x:831,y:541,r:46,w:104,group:'green',seed:314},
+      {label:'Positionality & Power Analysis',x:642,y:634,r:52,w:112,group:'green',seed:321},
+      {label:'Regenerative Systems Design',x:782,y:668,r:46,w:106,group:'green',seed:328},
+      {label:'Narrative & Media Analysis',x:479,y:559,r:42,w:98,group:'green',seed:335},
+      {label:'Participatory Research & Design',x:644,y:770,r:48,w:108,group:'green',seed:342},
+      {label:'Data Analysis & Evaluation',x:464,y:878,r:42,w:96,group:'coral',seed:349},
+      {label:'Experimenting & Building',x:289,y:829,r:46,w:104,group:'coral',seed:500},
       {label:'Convening & Facilitating Collaborations',x:823,y:795,r:44,w:104,group:'green',seed:507},
-      {label:'Conflict Transformation',x:642,y:1154,r:46,w:104,group:'coral',seed:514},
-      {label:'Planning & Resource Mobilization',x:407,y:1008,r:52,w:112,group:'coral',seed:521},
-      {label:'Leading in Complexity',x:555,y:1049,r:46,w:104,group:'coral',seed:528},
-      {label:'Ecosystem Engagement',x:258,y:1062,r:42,w:96,group:'coral',seed:535},
-      {label:'Political Participation',x:455,y:1150,r:48,w:106,group:'coral',seed:542},
-      {label:'Networking & Engaging Capital',x:588,y:935,r:44,w:102,group:'coral',seed:549}
+      {label:'Conflict Transformation',x:728,y:1051,r:46,w:104,group:'coral',seed:514},
+      {label:'Planning & Resource Mobilization',x:351,y:978,r:52,w:112,group:'coral',seed:521},
+      {label:'Leading in Complexity',x:588,y:970,r:46,w:104,group:'coral',seed:528},
+      {label:'Ecosystem Engagement',x:252,y:1077,r:42,w:96,group:'coral',seed:535},
+      {label:'Political Participation',x:466,y:1095,r:48,w:106,group:'coral',seed:542},
+      {label:'Networking & Engaging Capital',x:764,y:932,r:44,w:102,group:'coral',seed:549}
     ]
   };
 
@@ -263,6 +261,65 @@ class Component extends DCLogic {
       this.setState({ wp });
     };
     const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (this._wpDragged) this._persist(this.state.wp); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+  _persistBend(){ try { localStorage.setItem('ioc-bend-v1', JSON.stringify(this.state.bend || [])); } catch(e){} }
+  _persistBendChord(){ try { localStorage.setItem('ioc-bendc-v1', JSON.stringify(this.state.bendChord || {})); } catch(e){} }
+  _initBanDrag(){
+    const stage = document.querySelector('.ioc-stage');
+    if(!stage) return;
+    const keys = ['ban-within','ban-collective','ban-action'];
+    const BANDEF = {'ban-within':{dx:138,dy:9},'ban-action':{dx:23,dy:-75}};
+    let saved = {}; try { saved = JSON.parse(localStorage.getItem('ioc-ban-v1')||'{}'); } catch(e){}
+    keys.forEach(k=>{
+      const el = stage.querySelector('[data-edit="'+k+'"]');
+      if(!el || el._banBound) return;
+      el._banBound = true;
+      let off = saved[k] || BANDEF[k] || {dx:0,dy:0};
+      const apply = (dx,dy)=>{ el.style.transform = 'translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))'; };
+      if(off.dx||off.dy) apply(off.dx,off.dy);
+      el.style.cursor='grab'; el.style.pointerEvents='auto'; el.style.touchAction='none';
+      el.addEventListener('pointerdown',(e)=>{
+        e.preventDefault(); e.stopPropagation();
+        const r = stage.getBoundingClientRect();
+        const sc = r.width/1040 || 1;
+        const sx = e.clientX, sy = e.clientY, start = {dx:off.dx, dy:off.dy};
+        const move = (ev)=>{ off = {dx: start.dx+(ev.clientX-sx)/sc, dy: start.dy+(ev.clientY-sy)/sc}; apply(off.dx, off.dy); };
+        const up = ()=>{ document.removeEventListener('pointermove',move); document.removeEventListener('pointerup',up); let s={}; try { s=JSON.parse(localStorage.getItem('ioc-ban-v1')||'{}'); } catch(e2){} s[k]=off; try { localStorage.setItem('ioc-ban-v1', JSON.stringify(s)); } catch(e2){} };
+        document.addEventListener('pointermove',move); document.addEventListener('pointerup',up);
+      });
+    });
+  }
+  _startDragBendChord(key, e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const stage = document.querySelector('.ioc-stage');
+    const move = (ev) => {
+      const r = stage.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
+      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
+      const bendChord = Object.assign({}, this.state.bendChord || {});
+      bendChord[key] = [Math.round(x), Math.round(y)];
+      this.setState({ bendChord });
+    };
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); this._persistBendChord(); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+  _startDragBend(i, e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const stage = document.querySelector('.ioc-stage');
+    const move = (ev) => {
+      const r = stage.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
+      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
+      const bend = (this.state.bend || []).slice();
+      bend[i] = [Math.round(x), Math.round(y)];
+      this.setState({ bend });
+    };
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); this._persistBend(); };
     window.addEventListener('pointermove', move);
     window.addEventListener('pointerup', up);
   }
@@ -298,6 +355,9 @@ class Component extends DCLogic {
     window.addEventListener('research-data-updated', () => this.forceUpdate());
     if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
     try { const s = localStorage.getItem('ioc-wp-v1'); if (s) { const wp = JSON.parse(s); if (Array.isArray(wp) && wp.length === 5) { const dwp = this.state.wp; this.setState({ wp: wp.map((p,i)=>({ ...p, label: dwp[i].label })) }); } } } catch(e){}
+    try { const s = localStorage.getItem('ioc-bend-v1'); if (s) { const b = JSON.parse(s); if (Array.isArray(b)) this.setState({ bend: b }); } } catch(e){}
+    try { const s = localStorage.getItem('ioc-bendc-v1'); if (s) { const b = JSON.parse(s); if (b && typeof b==='object') this.setState({ bendChord: b }); } } catch(e){}
+    this._initBanDrag(); setTimeout(()=>this._initBanDrag(),150); setTimeout(()=>this._initBanDrag(),500);
     try { const s = localStorage.getItem('ioc-isl-v2'); if (s) { const saved = JSON.parse(s); if (Array.isArray(saved) && saved.length === this.state.isl.length) {
       // keep persisted positions, but always reconcile labels/meta from canonical defs (by seed, else index)
       const def = this.state.isl;
@@ -345,7 +405,7 @@ class Component extends DCLogic {
       // ===== individual capacities (teal) =====
       'Somatic Eco-Regulation': { g:'teal', t:'Somatic Eco-Regulation', s:'Inner inquiry', b:'The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.' },
       'Observing & Listening': { g:'teal', t:'Observing & Listening', s:'Inner inquiry', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
-      'Critical Thinking & Reflexivity': { g:'teal', t:'Critical Thinking & Reflexivity', s:'Inner inquiry', b:"The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective." },
+      'Critical Consciousness': { g:'teal', t:'Critical Consciousness', s:'Inner inquiry', b:"The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective." },
       'Spiritual & Moral Inquiry': { g:'teal', t:'Spiritual & Moral Inquiry', s:'Inner inquiry', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
       'Socioeconomic & Political Literacy': { g:'teal', t:'Socioeconomic & Political Literacy', s:'Inner inquiry', b:'Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.' },
       'Learning Agency': { g:'teal', t:'Learning Agency', s:'Inner inquiry', b:'Taking proactive, self-directed ownership of personal knowledge-acquisition loops, tracking individual capacity gaps, and designing customized learning pathways.' },
@@ -600,11 +660,18 @@ class Component extends DCLogic {
 
     // wayfinding route (under islands? draw under labels but over sea). Put before islands so islands sit on top.
     // wayfinding route — one continuous, smooth CLOSED loop through all steps (no seam, no kink)
-    const routeD = smooth(route);
+    const rn = route.length;
+    const bends = this.state.bend || [];
+    const segMid = (i) => { const p0=route[(i-1+rn)%rn],p1=route[i],p2=route[(i+1)%rn],p3=route[(i+2)%rn]; const c1x=p1[0]+(p2[0]-p0[0])/6,c1y=p1[1]+(p2[1]-p0[1])/6,c2x=p2[0]-(p3[0]-p1[0])/6,c2y=p2[1]-(p3[1]-p1[1])/6; return [(p1[0]+3*c1x+3*c2x+p2[0])/8,(p1[1]+3*c1y+3*c2y+p2[1])/8]; };
+    const handlePts = route.map((_,i)=> (bends[i] && bends[i].length===2) ? bends[i] : segMid(i));
+    let routeD = `M${route[0][0]},${route[0][1]}`;
+    for(let i=0;i<rn;i++){ const A=route[i],B=route[(i+1)%rn],P=handlePts[i]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; routeD+=` Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0].toFixed(1)},${B[1].toFixed(1)}`; }
+    routeD+='Z';
     kids.push(h('path',{key:'route',className:'ioc-march',d:routeD,fill:'none',stroke:C.ink,strokeOpacity:.72,strokeWidth:3.4,strokeDasharray:'2 9',strokeLinecap:'round'}));
+    handlePts.forEach((P,i)=>{ kids.push(h('circle',{key:'bh'+i,cx:P[0],cy:P[1],r:15,fill:'transparent',onPointerDown:(e)=>this._startDragBend(i,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:'bd'+i,cx:P[0],cy:P[1],r:4.5,fill:'#39342b',fillOpacity:.22,stroke:'#39342b',strokeOpacity:.45,strokeWidth:1,style:{pointerEvents:'none'}})); });
     // feedback-loop chords
     { const cen=[480,700];
-      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const cxp=mx+dx/L*off, cyp=my+dy/L*off; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${cxp},${cyp} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); };
+      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=this.state.bendChord||{}; const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); kids.push(h('circle',{key:key+'-h',cx:P[0],cy:P[1],r:14,fill:'transparent',onPointerDown:(e)=>this._startDragBendChord(key,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:key+'-d',cx:P[0],cy:P[1],r:4,fill:'#39342b',fillOpacity:.2,stroke:'#39342b',strokeOpacity:.4,strokeWidth:1,style:{pointerEvents:'none'}})); };
       arc(0,1,95,'ioc-march-rev','fb-ps',.62);
       arc(1,2,95,'ioc-march-rev','fb-sd',.62);
       arc(4,2,64,'ioc-march','fb-id',.3);

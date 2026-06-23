@@ -10,7 +10,7 @@ window.__RESEARCH = {
    "group": "teal"
   },
   {
-   "label": "Critical Thinking & Reflexivity",
+   "label": "Critical Consciousness",
    "group": "teal"
   },
   {
@@ -249,7 +249,7 @@ window.__RESEARCH = {
   {
    "name": "Hospicing Modernity: Facing Humanity's Wrongs and the Implications for Social Activism",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Ecological & Planetary Literacy",
     "Socioeconomic & Political Literacy"
    ],
@@ -287,7 +287,7 @@ window.__RESEARCH = {
   {
    "name": "Systems Thinking Made Simple: New Hope for Solving Wicked Problems",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Systems Thinking & Modeling"
    ],
    "desc": "Derek Cabrera and Laura Cabrera provide an accessible introduction to systems thinking by introducing the DSRP method (Distinctions, Systems, Relationships, Perspectives) as a universal framework to analyze and solve complex problems.",
@@ -334,7 +334,7 @@ window.__RESEARCH = {
   {
    "name": "Decolonizing Methodologies: Research and Indigenous Peoples",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Cultural & Ancestral Literacy",
     "Participatory Research & Design"
    ],
@@ -359,7 +359,7 @@ window.__RESEARCH = {
   {
    "name": "Combining",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Observing & Listening"
    ],
    "desc": "Nora Bateson explores the interconnectedness of ecology, biology, and human behavior, offering deep reflections on how living systems communicate, learn, and evolve together.",
@@ -383,7 +383,7 @@ window.__RESEARCH = {
   {
    "name": "Pedagogy of the Oppressed",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Positionality & Power Analysis"
    ],
    "desc": "Paulo Freire's seminal text introduces a liberating education framework, championing critical pedagogy and dialogic practices to empower communities to overcome systemic oppression.",
@@ -752,7 +752,7 @@ window.__RESEARCH = {
   {
    "name": "Self-Study Guide: Regenerative Leadership",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Learning Agency"
    ],
    "desc": "Designed for changemakers, this guide offers a developmental pathway toward regenerative leadership. It focuses on internal alignment, systems awareness, and the capacity to lead from a place of \"evolutionary purpose\" rather than top-down control.",
@@ -764,7 +764,7 @@ window.__RESEARCH = {
   {
    "name": "Transformative Research Toolkit",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Participatory Research & Design"
    ],
    "desc": "A resource that democratizes the research process, providing tools for communities to conduct their own inquiry and data collection. It shifts the power of \"knowledge production\" from academic institutions to the people most impacted by the systems being studied.",
@@ -789,7 +789,7 @@ window.__RESEARCH = {
   {
    "name": "Dismantling the Master's Tools",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Positionality & Power Analysis"
    ],
    "desc": "This project offers a deep dive into the somatic and systemic practice of interrogating white supremacy in social R&D. It provides reflective tools for practitioners to recognize how their own bodies and habits are conditioned by colonial structures, offering paths toward radical transformation.",
@@ -911,7 +911,7 @@ window.__RESEARCH = {
   {
    "name": "Gapminder",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Data Analysis & Evaluation"
    ],
    "desc": "An independent educational foundation that provides tools to visualize global development data, aimed at dismantling misconceptions about how the world is changing.",
@@ -960,7 +960,7 @@ window.__RESEARCH = {
   {
    "name": "Deschooling Dialogues",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Learning Agency"
    ],
    "desc": "A podcast series exploring the boundaries of traditional education, questioning systemic norms, and interviewing practitioners who are building alternative learning spaces.",
@@ -997,7 +997,7 @@ window.__RESEARCH = {
   {
    "name": "Green Dreamer",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Socioeconomic & Political Literacy"
    ],
    "desc": "A podcast and community platform hosted by Kamea Chayne, focusing on radical solutions for climate justice and collective healing through systemic re-alignment.",
@@ -1149,7 +1149,7 @@ window.__RESEARCH = {
   {
    "name": "Design Your Own Learning: A Guided Workbook for Learning How to Learn",
    "caps": [
-    "Critical Thinking & Reflexivity",
+    "Critical Consciousness",
     "Learning Agency"
    ],
    "desc": "A guided workbook designed to help individuals transition from passive learners to active drivers of their own educational journey, providing frameworks for meta-cognition and self-directed growth.",

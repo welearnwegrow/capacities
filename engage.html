@@ -10,12 +10,15 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:wght@400;600;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   @media (max-width:880px){ .eg-cols{flex-direction:column} .eg-frame{width:100% !important} }
+  @keyframes egBand{0%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-9px)}100%{transform:translateX(-50%) translateY(0)}}
+  @keyframes egFloat{0%{transform:translate(-50%,0)}50%{transform:translate(-50%,-5px)}100%{transform:translate(-50%,0)}}
+  .eg-lab:hover div:first-child{text-decoration:underline}
 </style>
 <script src="forms-config.js"></script>
 <script>
@@ -60,52 +63,62 @@
   <div style="position:relative;overflow:hidden;padding:54px 26px 42px">
     <div style="position:relative;max-width:1180px;margin:0 auto;color:#5a443a">
       <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#8a3f1f">Partner with Us</h1>
-      <p style="font-size:16.5px;line-height:1.65;color:#5a443a;margin:0;max-width:76ch">This framework adapts to many learning contexts. The groups we work with are arranged below by how directly they engage with learners — from formal institutions and alternative learning spaces, through enterprises, to the civic and governance actors that shape the wider system. Select any group to see who it includes and how we can help.</p>
+      <p style="font-size:16.5px;line-height:1.65;color:#5a443a;margin:0;max-width:76ch">How learning happens matters as important to design as what is learned. To cultivate the capacities needed to intervene in complex systems, we must begin by shaping the right conditions for learning. We can help with that process through curriculum development, professional development, and strategic design. The groups we work in our lifelong learning ecosystem are arranged by how directly they engage with learners — from formal institutions and alternative learning spaces, through enterprises, to the civic and governance actors that shape the wider system.</p>
     </div>
   </div>
 
   <main style="max-width:1180px;margin:0 auto;padding:38px 26px 80px">
 
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
-      <span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:#3f7d78">The learning ecosystem</span>
       <span style="flex:1;height:1px;background:rgba(120,105,75,.2)"></span>
-      <span style="font-size:12px;color:#9a8d76;font-style:italic">Click a group to see how we help</span>
+      <span style="font-size:12px;color:#9a8d76;font-style:italic">A multi-level view of who we work with — click any group to see how we help</span>
     </div>
 
-    <div style="display:flex;flex-direction:column;border-radius:18px;overflow:hidden;box-shadow:0 6px 26px rgba(40,70,65,.14)">
-      <sc-for list="{{ bands }}" as="z" hint-placeholder-count="5">
-        <div style="background:{{ z.base }}">
-          <button onClick="{{ z.onToggle }}" style="width:100%;display:flex;align-items:center;gap:14px;padding:22px 26px;background:transparent;border:none;cursor:pointer;text-align:left">
-            <span style="flex:1;font-family:'PT Serif',serif;font-weight:700;font-size:21px;line-height:1.16;color:{{ z.text }}">{{ z.name }}</span>
-            <span style="font-size:27px;font-weight:300;color:{{ z.text }};line-height:1;width:22px;text-align:center">{{ z.chevron }}</span>
+    <div style="display:flex;flex-direction:column;border-radius:16px;overflow:hidden;box-shadow:0 6px 26px rgba(120,70,50,.12)">
+      <sc-for list="{{ strata }}" as="l" hint-placeholder-count="3">
+        <div style="background:{{ l.bg }}">
+          <button onClick="{{ l.onClick }}" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px 26px;display:block">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+              <span style="font-family:'Newsreader',serif;font-weight:600;font-size:18px;color:{{ l.color }}">{{ l.tag }}</span>
+              <span style="font-family:'PT Serif',serif;font-style:italic;font-size:14px;color:{{ l.color }}">{{ l.name }}</span>
+              <span style="flex:1"></span>
+              <span style="font-size:22px;font-weight:300;color:{{ l.color }};line-height:1">{{ l.chevron }}</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:7px">
+              <sc-for list="{{ l.actors }}" as="a" hint-placeholder-count="3">
+                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:16px;background:rgba(255,255,255,.7);color:{{ l.color }}">{{ a.t }}</span>
+              </sc-for>
+            </div>
           </button>
-          <sc-if value="{{ z.isOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:0 22px 22px">
-              <div style="background:rgba(255,255,255,.94);border-radius:14px;padding:22px 24px">
-                <div style="display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px">
-                  <sc-for list="{{ z.actors }}" as="ac" hint-placeholder-count="3">
-                    <span style="display:inline-flex;align-items:center;font-size:13px;font-weight:600;padding:5px 12px;border-radius:18px;background:{{ z.soft }};color:{{ z.color }}">{{ ac.label }}</span>
+          <sc-if value="{{ l.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:2px 26px 24px">
+              <div style="background:rgba(255,255,255,.85);border-radius:13px;padding:20px 22px">
+                <p style="font-size:13.5px;line-height:1.55;color:#5a5347;margin:0 0 16px">{{ l.desc }}</p>
+                <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:{{ l.color }};margin:0 0 10px">How we help</div>
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <sc-for list="{{ l.services }}" as="sv" hint-placeholder-count="3">
+                    <div>
+                      <div style="font-family:'PT Serif',serif;font-weight:700;font-size:14px;color:#3f3a31;margin:0 0 2px">{{ sv.t }}</div>
+                      <div style="font-size:13px;line-height:1.5;color:#5a5347">{{ sv.d }}</div>
+                    </div>
                   </sc-for>
                 </div>
-                <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:{{ z.color }};margin:0 0 6px">How we help</div>
-                <p style="font-size:14.5px;line-height:1.66;color:#5a5347;margin:0">{{ z.help }}</p>
               </div>
             </div>
           </sc-if>
         </div>
       </sc-for>
     </div>
-
     <!-- co-editors & contributors -->
     <div style="margin-top:46px">
-      <h2 style="font-family:'Newsreader',serif;font-weight:600;font-size:26px;line-height:1.18;color:#8a3f1f;margin:0 0 6px">Co-Editors &amp; Contributors</h2>
+      <h2 style="font-family:'Newsreader',serif;font-weight:600;font-size:26px;line-height:1.18;color:#8a3f1f;margin:0 0 6px">Co-Creators &amp; Contributors</h2>
       <p style="font-size:15px;line-height:1.62;color:#5a443a;margin:0 0 22px;max-width:72ch">A living framework shaped by Jaya &amp; Raisa and a growing practice of facilitators, educators, and researchers working toward just and regenerative futures.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:22px">
         <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:18px;padding:24px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 8px 24px rgba(120,70,50,.08)">
           <div style="width:64px;height:64px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'PT Serif',serif;font-weight:700;font-size:22px;color:#fff;background:radial-gradient(circle at 35% 35%, #5f8a82, #46716f 80%)">JR</div>
           <div>
             <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0;color:#3f3a31">Jaya Ramchandani</h3>
-            <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a8542d;margin:3px 0 9px">Co-Editor</p>
+            <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a8542d;margin:3px 0 9px">Co-Creator</p>
             <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Short bio coming soon — a few sentences on Jaya's background, practice, and what she brings to this framework.</p>
           </div>
         </div>
@@ -113,7 +126,7 @@
           <div style="width:64px;height:64px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'PT Serif',serif;font-weight:700;font-size:22px;color:#fff;background:radial-gradient(circle at 35% 35%, #D08B6C, #a8542d 80%)">RM</div>
           <div>
             <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0;color:#3f3a31">Raisa Mirza</h3>
-            <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a8542d;margin:3px 0 9px">Co-Editor</p>
+            <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a8542d;margin:3px 0 9px">Co-Creator</p>
             <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Short bio coming soon — a few sentences on Raisa's background, practice, and what she brings to this framework.</p>
           </div>
         </div>
@@ -124,6 +137,13 @@
       </div>
     </div>
 
+    <!-- sponsor / partner call-out -->
+    <div style="margin-top:40px;background:rgba(168,84,45,.07);border:1px dashed rgba(168,84,45,.4);border-radius:20px;padding:32px 34px;text-align:center">
+      <h2 style="font-family:'Newsreader',serif;font-weight:600;font-size:25px;margin:0 0 10px;color:#8a3f1f">Help us build the open commons</h2>
+      <p style="font-size:15px;line-height:1.6;color:#5a443a;margin:0 auto 6px;max-width:62ch">We're looking for partners and sponsors to co-develop the next layer of this work — an <strong>open-source facilitation handbook</strong> and a <strong>guided learning workbook</strong>, freely available to every educator and learner.</p>
+      <p style="font-size:13.5px;line-height:1.55;color:#7a6f5c;margin:0 auto;max-width:56ch;font-style:italic">If you'd like to fund or shape these projects, we'd love to talk.</p>
+    </div>
+
     <!-- contact form -->
     <div style="margin-top:40px;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:20px;padding:36px 34px;box-shadow:0 8px 26px rgba(120,70,50,.08)">
       <div style="text-align:center;max-width:54ch;margin:0 auto 22px">
@@ -132,10 +152,10 @@
       </div>
       <div style="max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
         <div style="display:flex;gap:12px;flex-wrap:wrap">
-          <input id="ioc-eg-name" placeholder="Your name" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none"/>
-          <input id="ioc-eg-email" type="email" placeholder="Your email" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none"/>
+          <input id="ioc-eg-name" placeholder="Your name" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none">
+          <input id="ioc-eg-email" type="email" placeholder="Your email" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none">
         </div>
-        <input id="ioc-eg-org" placeholder="Organization / context (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none"/>
+        <input id="ioc-eg-org" placeholder="Organization / context (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none">
         <textarea id="ioc-eg-msg" rows="4" placeholder="How would you like to work together?" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none;resize:vertical"></textarea>
         <button id="ioc-eg-send" type="button" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:14.5px;font-weight:700;color:#fff;background:#bd6a47;padding:13px 26px;border:none;border-radius:26px;cursor:pointer">Send message →</button>
         <p id="ioc-eg-done" style="display:none;font-size:13px;color:#5b6733;font-weight:700;margin:2px 0 0">Thank you — your message has been sent to the editors. We'll be in touch.</p>
@@ -148,51 +168,49 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { open:{} };
+  state = { open:'micro' };
 
-  _zones(){
+  _data(){
     return [
-      { key:'civic', caption:'The wider system', color:'#c75b73',
-        base:'#2f615d', sel:'#3c726d', soft:'#fae8ed',
-        name:'Civic & Governance Meta-Actors',
-        actors:['Curriculum boards','Philanthropic foundations','Policy think tanks'],
-        body:'These actors can use the framework to guide educational funding strategies, influence policy priorities, or develop holistic assessment tools.' },
-      { key:'social', caption:'Enabling enterprises', color:'#c98a3a',
-        base:'#437f7a', sel:'#54938d', soft:'#f8efe1',
-        name:'Social Enterprises & Capacity-Building Programs',
-        actors:['Internship & trainee programs','Early-career pathways','Social innovation, design & sustainability organizations'],
-        body:'Organizations offering internships, trainee programs, or early-career pathways — especially those focused on social innovation, design, or sustainability — can integrate the framework into onboarding, mentorship, and progression planning. It can inform personal development goals and support reflective practice across diverse roles.' },
-      { key:'nonformal', caption:'Alternative learning', color:'#3f8f88',
-        base:'#6aa39d', sel:'#7fb6b0', soft:'#e6f1ef',
-        name:'Non-Formal Learning Spaces',
-        actors:['Youth fellowships','Innovation hubs','Seasonal schools','Intergenerational & mentorship programs','Residencies'],
-        body:'Organizations running these programs can use the framework to scaffold experiential learning and systems thinking. Whether through residencies focused on community-based interventions or mentorship programs exploring climate justice, it helps clarify learning goals, design reflective activities, and articulate progression.' },
-      { key:'formal', caption:'Formal learning', color:'#2f6f8f',
-        base:'#9ec9c2', sel:'#b6dad3', soft:'#e7eff2',
-        name:'Formal Education Institutions',
-        actors:['Schools','Universities','Progressive & interdisciplinary curricula'],
-        body:'Schools and universities with progressive, interdisciplinary, or mission-driven curricula can use the framework to embed systems-change islands. It can shape capstone projects, transdisciplinary modules, teacher development, and student portfolios — a consistent reference point across academic and co-curricular learning.' },
-      { key:'learner', caption:'The learner', color:'#4f9a45',
-        base:'#ecd9b8', sel:'#f3e3c6', soft:'#eef3e6',
-        name:'The Learner',
-        actors:['Youth learners','Adult learners','Communities of practice'],
-        body:'Every group in this ecosystem exists to support the learner — building the islands and meta-processes to act with integrity in complex systems.' }
+      { key:'micro', level:'Micro', name:'(Individuals / Collectives)', color:'#8a4a22', bg:'#f3e7da',
+        desc:'Ground-up, localized learning environments where individuals and communities reclaim autonomy from rigid testing models — to navigate systemic crises and build community resilience.',
+        actors:['Individual changemakers','Youth collectives','Grassroots peer networks','Community-led mutual aid alliances'],
+        services:[
+          { t:'Self-Directed Learning Architecture', d:'Custom toolkits that help grassroots actors identify entry points, map learning paths across formal and informal spaces, and track capacity gaps.' },
+          { t:'Peer-Led Experience Co-Creation', d:'Structuring community-scale initiatives — storytelling projects, localized interventions — using peer- and place-based methods to build narrative analysis and regenerative leadership.' },
+          { t:'Alternative Competency Assessment', d:'Non-extractive self-assessment and reflection frameworks that track progression across mindsets and somatic practices, without top-down credentials.' }
+        ] },
+      { key:'meso', level:'Meso', name:'(Capacity-Building Organizations)', color:'#b9683a', bg:'#f0dcc8',
+        desc:'The formal and non-formal organizational infrastructure responsible for designing, managing, and operationalizing capability pipelines, student portfolios, and professional pathways.',
+        actors:['Progressive schools & universities','Alternative institutions','Youth fellowships','Innovation hubs','Social enterprises','Capacity-building facilitators'],
+        services:[
+          { t:'Curriculum Overhaul & Transdisciplinary Integration', d:'Embed systems-change capacities into modular programs, core pedagogies, and capstone frameworks aligned with regenerative-futures goals.' },
+          { t:'Multimodal Program & Pathway Design', d:'Flexible models — residencies, fellowships, seasonal schools, apprenticeships — tailored to diverse entry points using design conditions like freedom within structure.' },
+          { t:'Systems Coaching & Facilitator Upskilling', d:'Professional development for educators and facilitators to hold space, navigate ideological friction, and manage complexity with equanimity.' },
+          { t:'Workforce Capability & Onboarding', d:'Embedding competencies into value chains, trainee programs, mentorship structures, and personal development goals.' }
+        ] },
+      { key:'macro', level:'Macro', name:'(Meta Actors)', color:'#a8542d', bg:'#e8caaf',
+        desc:'Market-shaping and governance bodies that control capital flows, establish legal and regional frameworks, conduct systemic research, and mandate macro-level educational priorities.',
+        actors:['Philanthropic foundations','Curriculum boards','Policy think tanks','Municipal governments','Research institutes','Civic & cultural institutions'],
+        services:[
+          { t:'Strategic Philanthropy & Non-Extractive Capital', d:'Help funders design portfolios that target high-impact leverage points and support hybrid, informal learning models over traditional credentialing.' },
+          { t:'Complexity-Responsive MEL', d:'Tracking systems that move past linear KPIs into narrative, ecological, and justice-oriented metrics for non-linear interventions.' },
+          { t:'Policy & Regional Framework Translation', d:'Translate action research into policy recommendations, conservation protocols, or municipal bylaws — e.g. UNESCO Learning Cities.' },
+          { t:'Civic Curation & Intergenerational Design', d:'Public workshops, storytelling circles, and urban commons within cultural institutions to foster mutual, intergenerational learning.' }
+        ] }
     ];
   }
-  _Z(k){ return this._zones().find(z=>z.key===k); }
-
-  _toggle(k){ const o=Object.assign({},this.state.open); o[k]=!o[k]; this.setState({open:o}); }
 
   renderVals(){
-    const txt = { civic:'#ffffff', social:'#ffffff', nonformal:'#ffffff', formal:'#1f4a52', learner:'#7a5827' };
-    const bands = this._zones().map(x=>({
-      key:x.key, name:x.name, base:x.base, text:txt[x.key]||'#ffffff',
-      color:x.color, soft:x.soft,
-      actors:(x.actors||[]).map(l=>({label:l})), help:x.body,
-      isOpen:!!this.state.open[x.key], chevron: this.state.open[x.key]?'–':'+',
-      onToggle:()=>this._toggle(x.key)
-    }));
-    return { bands };
+    const open=this.state.open;
+    const strata=this._data().map(c=>{
+      const on=open===c.key;
+      return { tag:c.level, name:c.name, color:c.color, bg:c.bg, desc:c.desc,
+        chevron: on?'\u2013':'+', open:on,
+        actors:c.actors.map(t=>({t:t})), services:c.services.map(o=>({t:o.t,d:o.d})),
+        onClick:()=>this.setState({open: on?null:c.key}) };
+    });
+    return { strata };
   }
 }
 </script>

@@ -30,7 +30,7 @@ window.__CAPDETAIL = {
    "Influential": "Rethinks how learning happens across whole networks, building lasting, lifelong learning systems beyond any single dominant model. Helps shift cultures from one-off training toward continuous, self-directed growth."
   }
  },
- "Critical Thinking & Reflexivity": {
+ "Critical Consciousness": {
   "desc": "Continuously examining your own assumptions, position, and inherited biases to understand the limits of your own perspective and act with accountability.",
   "levels": {
    "Emerging": "Questions things usually taken for granted, and begins to see how your own background, identity, and advantages shape the way you see the world. Practices surfacing hidden assumptions before acting on them.",

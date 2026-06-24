@@ -5,7 +5,7 @@ A static website for the *Islands of Coherence* capacity framework — an intera
 ## Pages
 - `index.html` — the interactive map (home / entry point)
 - `resources.html` — the Resource Library (resources across 24 capacities, type tags, Editor's Picks, suggest-a-resource)
-- `about.html` — Co-Editors & Contributors
+- `metaprocess.html` — the Meta-process (five stages with downloadable reflection canvases)
 - `engage.html` — Work with Us (contact form)
 - `design.html` — Design a Learning Experience (coming soon)
 

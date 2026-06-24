@@ -16,6 +16,7 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   @media (max-width:880px){ .eg-cols{flex-direction:column} .eg-frame{width:100% !important} }
+  @media (max-width:860px){ .eg-hero{ padding:34px 18px 26px !important; } .eg-hero h1{ font-size:34px !important; } .eg-hero p{ font-size:15px !important; } }
   @keyframes egBand{0%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-9px)}100%{transform:translateX(-50%) translateY(0)}}
   @keyframes egFloat{0%{transform:translate(-50%,0)}50%{transform:translate(-50%,-5px)}100%{transform:translate(-50%,0)}}
   .eg-lab:hover div:first-child{text-decoration:underline}
@@ -60,7 +61,7 @@
 <div style="min-height:100vh;background:radial-gradient(680px 460px at 14% 6%, rgba(214,140,108,.18), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(120,165,160,.12), transparent 72%), linear-gradient(180deg,#f3e0d1 0%,#f7ebe0 540px);font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
   <dc-import name="SiteNav" active="engage" hint-size="100%,58px"></dc-import>
 
-  <div style="position:relative;overflow:hidden;padding:54px 26px 42px">
+  <div class="eg-hero" style="position:relative;overflow:hidden;padding:54px 26px 42px">
     <div style="position:relative;max-width:1180px;margin:0 auto;color:#5a443a">
       <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#8a3f1f">Partner with Us</h1>
       <p style="font-size:16.5px;line-height:1.65;color:#5a443a;margin:0;max-width:76ch">To cultivate the capacities needed to intervene in complex systems, we must begin by shaping the right conditions for learning. We can help with that process through curriculum development, professional development, or strategic design. The groups we work in our lifelong learning ecosystem are arranged by how directly they engage with learners.&nbsp;</p>
@@ -178,20 +179,20 @@ class Component extends DCLogic {
         services:[
           { t:'Self-Directed Learning Architecture', d:'Custom toolkits that help grassroots actors identify entry points, map learning paths across formal and informal spaces, and track capacity gaps.' },
           { t:'Peer-Led Experience Co-Creation', d:'Structuring community-scale initiatives — storytelling projects, localized interventions — using peer- and place-based methods to build narrative analysis and regenerative leadership.' },
-          { t:'Alternative Competency Assessment', d:'Non-extractive self-assessment and reflection frameworks that track progression across mindsets and somatic practices, without top-down credentials.' }
+          { t:'Alternative Competency Assessment', d:'Self-assessment and reflection frameworks that track progression across islands of coherence, without top-down credentials.' }
         ] },
       { key:'meso', level:'Meso', name:'(Capacity-Building Organizations)', color:'#b9683a', bg:'#f0dcc8',
         desc:'The formal and non-formal organizational infrastructure responsible for designing, managing, and operationalizing capability pipelines, student portfolios, and professional pathways.',
-        actors:['Progressive schools & universities','Alternative institutions','Youth fellowships','Innovation hubs','Social enterprises','Capacity-building facilitators'],
+        actors:['Progressive schools & universities','Alternative institutions','Youth fellowships','Innovation hubs','Social enterprises'],
         services:[
-          { t:'Curriculum Overhaul & Transdisciplinary Integration', d:'Embed systems-change capacities into modular programs, core pedagogies, and capstone frameworks aligned with regenerative-futures goals.' },
-          { t:'Multimodal Program & Pathway Design', d:'Flexible models — residencies, fellowships, seasonal schools, apprenticeships — tailored to diverse entry points using design conditions like freedom within structure.' },
+          { t:'Curriculum Development & Transdisciplinary Integration', d:'Embed systems-change capacities into modular programs, core pedagogies, and capstone frameworks aligned with regenerative-futures goals.' },
+          { t:'Program & Pathways Design', d:'Flexible models — residencies, fellowships, seasonal schools, apprenticeships — tailored to diverse entry points using design conditions like freedom within structure.' },
           { t:'Systems Coaching & Facilitator Upskilling', d:'Professional development for educators and facilitators to hold space, navigate ideological friction, and manage complexity with equanimity.' },
           { t:'Workforce Capability & Onboarding', d:'Embedding competencies into value chains, trainee programs, mentorship structures, and personal development goals.' }
         ] },
       { key:'macro', level:'Macro', name:'(Meta Actors)', color:'#a8542d', bg:'#e8caaf',
         desc:'Market-shaping and governance bodies that control capital flows, establish legal and regional frameworks, conduct systemic research, and mandate macro-level educational priorities.',
-        actors:['Philanthropic foundations','Curriculum boards','Policy think tanks','Municipal governments','Research institutes','Civic & cultural institutions'],
+        actors:['Philanthropic foundations','Curriculum boards','Policy think tanks','Municipal governments','Research institutes'],
         services:[
           { t:'Strategic Philanthropy & Non-Extractive Capital', d:'Help funders design portfolios that target high-impact leverage points and support hybrid, informal learning models over traditional credentialing.' },
           { t:'Complexity-Responsive MEL', d:'Tracking systems that move past linear KPIs into narrative, ecological, and justice-oriented metrics for non-linear interventions.' },

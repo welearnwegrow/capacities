@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Caveat:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <script src="research-data.js"></script>
 <script src="notion-config.js"></script>
 <script src="data-loader.js"></script>
@@ -39,6 +39,11 @@
   @keyframes iocNeedle{0%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}100%{transform:rotate(-7deg)}}
   .ioc-compass-star{transform-box:fill-box;transform-origin:center;animation:iocNeedle 5.5s ease-in-out infinite}
   .ioc-compass{transform-box:fill-box;transform-origin:center}
+  .ioc-zoom{display:none}
+  @media (max-width:860px){
+    .ioc-zoom{display:flex}
+    .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:pan-x pan-y}
+  }
   @media (max-width:760px){
     .ioc-root{padding:0 14px 48px}
     .ioc-title{font-size:30px !important}
@@ -71,8 +76,15 @@
   </div>
 
   <!-- ===== MAP ===== -->
-  <div style="width:1040px;max-width:100%;display:flex;justify-content:flex-end;margin-bottom:4px">
-    <button onClick="{{ resetMap }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#6b7d6a;background:rgba(255,255,255,.6);border:1px solid rgba(70,90,85,.25);border-radius:18px;padding:6px 14px;cursor:pointer">↺ Reset map</button>
+  <div style="width:1040px;max-width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em">Tap to explore · drag to rearrange · pinch or +/− to zoom</span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="ioc-zoom" style="align-items:center;gap:8px">
+        <button onClick="{{ zoomOut }}" aria-label="Zoom out" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">−</button>
+        <button onClick="{{ zoomIn }}" aria-label="Zoom in" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">+</button>
+      </div>
+      <button onClick="{{ resetMap }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#6b7d6a;background:rgba(255,255,255,.6);border:1px solid rgba(70,90,85,.25);border-radius:18px;padding:6px 14px;cursor:pointer;white-space:nowrap">↺ Reset map</button>
+    </div>
   </div>
   <div style="width:1040px;max-width:100%">
     <div style="position:relative;left:50%;margin-left:-50vw;width:100vw;overflow:hidden">
@@ -371,17 +383,23 @@ class Component extends DCLogic {
       });
       this.setState({ isl: merged });
     } } } catch(e){}
+    this._mzoom = 1.7;
     this._fit = () => {
       const frame = document.querySelector('.ioc-mapframe');
       const stage = document.querySelector('.ioc-stage');
       if (!frame || !stage) return;
       const w = frame.clientWidth;
-      if (w === this._lastW) return;   // guard against ResizeObserver feedback loop
-      this._lastW = w;
-      const scale = w / 1040;
+      const mobile = window.innerWidth <= 860;
+      if (!mobile && w === this._lastW) return;   // guard against ResizeObserver feedback loop
+      this._lastW = mobile ? null : w;
+      const scale = mobile ? (w / 1040) * this._mzoom : w / 1040;
       stage.style.transform = 'scale(' + scale + ')';
       frame.style.height = (1320 * scale) + 'px';
+      frame.style.overflowX = mobile ? 'auto' : 'hidden';
+      frame.style.overflowY = mobile ? 'hidden' : 'hidden';
+      frame.style.webkitOverflowScrolling = 'touch';
     };
+    this._zoomMap = (dir) => { this._mzoom = Math.max(1.0, Math.min(3.4, +(this._mzoom + dir).toFixed(2))); this._lastW = null; this._fit(); };
     this._fit();
     this._ro = new ResizeObserver(this._fit);
     const frame = document.querySelector('.ioc-mapframe');
@@ -397,11 +415,11 @@ class Component extends DCLogic {
       pluri: { t:'Plurality', s:'How we know', b:'The recognition that many worlds and ways of knowing coexist, and that no single worldview can claim universality. It foregrounds Indigenous, local, land-based, and spiritual knowledge alongside scientific and technical expertise. Informed by decolonial thought and community-led innovation, it expands whose worlds are made visible.' },
       recip: { t:'Reciprocity', s:'How we act', b:'Reciprocity calls us to act with care, responsibility, and mutual exchange, so that interventions restore balance rather than reproduce harm. It is paired with reflexivity — an ongoing awareness of how our identities, assumptions, and choices shape the systems we seek to change — which keeps that action humble and accountable. Rooted in Indigenous relational ethics and feminist standpoint theory.' },
       shared: { t:'Shared Agency', s:'How we make decisions', b:'The capacity to act together — distributing power, voice, and responsibility so decisions are made with, rather than for, communities. Grounded in interdependence, it holds that our lives and futures are woven into a shared web of care, and that collaboration is the foundation for thriving in an interconnected world.' },
-      probe: { t:'Probe', s:'Probe the context & frame the problem field', b:'Probing begins with intellectual humility and deep listening. Rather than entering with a pre-defined solution, the practitioner scans the landscape to frame the problem field — gathering multi-dimensional evidence that moves beyond data to engage the lived realities, values, and cultural norms of those most affected. By surfacing pockets of hope and existing initiatives, they build on current momentum rather than acting in isolation.' },
-      sense: { t:'Sense', s:'Sense the field & imagineer possibilities', b:'Sensing renders the invisible visible. The practitioner maps the forces, mental models, and feedback loops that hold systemic inertia in place, moving from observing isolated events to understanding the patterns that drive them. It concludes by locating high-leverage intervention points — shifting focus from symptoms to the root structural dynamics that, if nudged, can orient the system toward greater health.' },
-      design: { t:'Design', s:'Design the roadmap & mobilize resources', b:'Design builds a bridge between current reality and a regenerative future. Because complex adaptive systems cannot be strictly controlled, the practitioner nudges the system by cultivating the right conditions and constraints. This stage is collaborative and radically inclusive, prioritizing relational infrastructure — bridging, belonging, and trust — so the roadmap is not just a plan, but a shared commitment.' },
-      adapt: { t:'Adapt', s:'Adapt to context & solve emergent problems', b:'Adapting begins the moment an intervention meets the system and the system reveals new information. Every action is treated as an experiment — a probe — and the practitioner stays agile enough to pivot on real-time feedback. This calls for a leadership style that holds space for emergence, navigating uncertainty with equanimity and reshaping the roadmap around what the system is actively teaching.' },
-      integrate: { t:'Integrate', s:'Integrate feedback & learnings', b:'Integrating weaves the learning back into the fabric of the community — the cycle closes not when action stops, but when knowledge is absorbed. It documents the trajectory of change, honoring successes and failures alike, to build the social capital that feeds the next iteration. An act of closure and gratitude, it recognizes that sustainability depends on the density of relationships and the depth of shared knowledge created along the way.' },
+      probe: { t:'Probe', s:'Probe the context and frame the problem field', b:'The process begins with intellectual humility and deep listening. Rather than entering a system with a pre-defined solution, you scan the environment to balance macro trends with local, lived human experiences. This phase forces you to explicitly define your boundary, search out local assets that are already working, evaluate your personal alignment with the context, and aggressively check your own blind spots.' },
+      sense: { t:'Sense', s:'Sense the field and imagineer possibilities', b:'Sense-making means rendering invisible structural blocks and cultural dynamics visible. You trace the underlying rules, behaviors, and hidden loops that protect the status quo. By mapping where power rests and analyzing the real friction points within the field, you work alongside the community to co-author an alignment strategy that points directly toward a radically transformed, preferable future.' },
+      design: { t:'Design', s:'Design the roadmap and mobilize resources', b:'Design is the process of building conditions that nudge the system toward greater health. Because complex networks cannot be strictly managed by rigid checklists, you focus on changing core conditions and constraints rather than imposing fixed blueprints. This stage maps clear points of leverage, navigates institutional barriers, mobilizes diverse capital, and designs the relational trust and baseline metrics needed to hold a shared commitment together.' },
+      adapt: { t:'Adapt', s:'Adapt to context and solve emergent problems', b:'Action is an ongoing live diagnostic test. When your intervention meets the real world, the system will actively show its true nature through defensive pushback or unexpected positive ripples. Survival here relies on staying highly agile — setting up short real-time feedback loops, positioning the action for organic community adoption, distributing the power to pivot fast, and keeping internal team trust solid when chaos hits.' },
+      integrate: { t:'Integrate', s:'Integrate feedback and weave in learnings', b:'The work concludes when learning is actively metabolized back into the community ecosystem. This phase translates ground-level outcomes into institutional data — honoring failures openly rather than sanitizing them. You evaluate whether behavioral baselines moved and whether local connections grew denser, transforming the entire messy trajectory into clear, powerful change stories that build social capital for the next cycle.' },
       // ===== group intros (banners) =====
       'grp-teal':  { g:'teal',  t:'Inner Inquiry', s:'The personal foundation', b:'These islands ground the individual in the deep work of self-awareness and world-view diversification. Without the ability to interrogate our own positionality, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the personal foundation required to remain centered while navigating the volatility of systems change.' },
       'grp-green': { g:'green', t:'Collective Strategy', s:'Reading the field', b:'Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These islands equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.' },
@@ -715,7 +733,7 @@ class Component extends DCLogic {
       ))
     );
 
-    return { seaArt, islands, waypoints, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap() };
+    return { seaArt, islands, waypoints, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
   }
 }
 </script>

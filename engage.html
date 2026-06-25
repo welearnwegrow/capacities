@@ -39,6 +39,7 @@
           'Name':name, 'Email':email, 'Organization / context':org, 'Message':msg, replyto:email })
       }).then(function(r){return r.json();}).then(function(j){
         if(btn){ btn.disabled=false; btn.textContent='Send message →'; }
+        if(j && j.success && window.track){ window.track('partner_form_submit'); }
         done(j && j.success ? 'Thank you — your message has been sent to Jaya & Raisa. We\u2019ll be in touch.' : 'Something went wrong sending. Please email jayajohnyramchandani@gmail.com and raisamirza@gmail.com directly.');
       }).catch(function(){
         if(btn){ btn.disabled=false; btn.textContent='Send message →'; }
@@ -64,7 +65,7 @@
   <div class="eg-hero" style="position:relative;overflow:hidden;padding:54px 26px 42px">
     <div style="position:relative;max-width:1180px;margin:0 auto;color:#5a443a">
       <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#8a3f1f">Partner with Us</h1>
-      <p style="font-size:16.5px;line-height:1.65;color:#5a443a;margin:0;max-width:76ch">To cultivate the capacities needed to intervene in complex systems, we must begin by shaping the right conditions for learning. We can help with that process through curriculum development, professional development, or strategic design. The groups we work in our lifelong learning ecosystem are arranged by how directly they engage with learners.&nbsp;</p>
+      <p style="font-size:16.5px;line-height:1.65;color:#5a443a;margin:0;max-width:76ch">Transforming how we learn and adapt cannot happen in isolation. True systemic shift requires a nested approach: anchoring ground-up community autonomy while simultaneously rebuilding organizational infrastructure and macro-level policy. We collaborate with changemakers, institutions, and governance bodies at every level to embed complexity-responsive design into everyday practice.</p>
     </div>
   </div>
 
@@ -174,30 +175,30 @@ class Component extends DCLogic {
   _data(){
     return [
       { key:'micro', level:'Micro', name:'(Individuals / Collectives)', color:'#8a4a22', bg:'#f3e7da',
-        desc:'Ground-up, localized learning environments where individuals and communities reclaim autonomy from rigid testing models — to navigate systemic crises and build community resilience.',
+        desc:'The ground level of systems practice — individuals and collectives building the self-direction and systems awareness to act on the crises closest to them.',
         actors:['Individual changemakers','Youth collectives','Grassroots peer networks','Community-led mutual aid alliances'],
         services:[
-          { t:'Self-Directed Learning Architecture', d:'Custom toolkits that help grassroots actors identify entry points, map learning paths across formal and informal spaces, and track capacity gaps.' },
-          { t:'Peer-Led Experience Co-Creation', d:'Structuring community-scale initiatives — storytelling projects, localized interventions — using peer- and place-based methods to build narrative analysis and regenerative leadership.' },
-          { t:'Alternative Competency Assessment', d:'Self-assessment and reflection frameworks that track progression across islands of coherence, without top-down credentials.' }
+          { t:'Self-Directed Learning Resources', d:'Custom toolkits and coaching to help grassroots actors identify entry points, map learning paths across formal and informal spaces, and track capacity gaps.' },
+          { t:'Cohort-Based Learning Experiences', d:'Online workshops, in-person retreats, and peer learning circles where changemakers learn through shared experience. Storytelling and narrative projects anchor each cohort, building lasting peer bonds and collective momentum.' },
+          { t:'Alternative Competency Assessment', d:'Self-assessment and reflection frameworks that track progression across islands of coherence.' }
         ] },
       { key:'meso', level:'Meso', name:'(Capacity-Building Organizations)', color:'#b9683a', bg:'#f0dcc8',
-        desc:'The formal and non-formal organizational infrastructure responsible for designing, managing, and operationalizing capability pipelines, student portfolios, and professional pathways.',
-        actors:['Progressive schools & universities','Alternative institutions','Youth fellowships','Innovation hubs','Social enterprises'],
+        desc:'The connective layer between individuals and systems — schools, programs, and enterprises that design, run, and sustain the spaces where changemakers grow their capacities.',
+        actors:['Progressive schools & universities','Capacity-building programs','Fellowships','Social enterprises'],
         services:[
           { t:'Curriculum Development & Transdisciplinary Integration', d:'Embed systems-change capacities into modular programs, core pedagogies, and capstone frameworks aligned with regenerative-futures goals.' },
           { t:'Program & Pathways Design', d:'Flexible models — residencies, fellowships, seasonal schools, apprenticeships — tailored to diverse entry points using design conditions like freedom within structure.' },
           { t:'Systems Coaching & Facilitator Upskilling', d:'Professional development for educators and facilitators to hold space, navigate ideological friction, and manage complexity with equanimity.' },
-          { t:'Workforce Capability & Onboarding', d:'Embedding competencies into value chains, trainee programs, mentorship structures, and personal development goals.' }
+          { t:'Workforce Capability & Onboarding', d:'Embedding competencies into value chains, trainee programs, mentorship structures, and personal development goals.' },
+          { t:'Civic Curation & Intergenerational Design', d:'Public workshops, storytelling circles, and urban commons within cultural institutions to foster mutual, intergenerational learning.' }
         ] },
       { key:'macro', level:'Macro', name:'(Meta Actors)', color:'#a8542d', bg:'#e8caaf',
-        desc:'Market-shaping and governance bodies that control capital flows, establish legal and regional frameworks, conduct systemic research, and mandate macro-level educational priorities.',
+        desc:'Governance and market-shaping bodies that steer capital, policy, and research — shaping the funding strategies, priorities, and frameworks everyone else works within.',
         actors:['Philanthropic foundations','Curriculum boards','Policy think tanks','Municipal governments','Research institutes'],
         services:[
           { t:'Strategic Philanthropy & Non-Extractive Capital', d:'Help funders design portfolios that target high-impact leverage points and support hybrid, informal learning models over traditional credentialing.' },
           { t:'Complexity-Responsive MEL', d:'Tracking systems that move past linear KPIs into narrative, ecological, and justice-oriented metrics for non-linear interventions.' },
-          { t:'Policy & Regional Framework Translation', d:'Translate action research into policy recommendations, conservation protocols, or municipal bylaws — e.g. UNESCO Learning Cities.' },
-          { t:'Civic Curation & Intergenerational Design', d:'Public workshops, storytelling circles, and urban commons within cultural institutions to foster mutual, intergenerational learning.' }
+          { t:'Policy & Regional Framework Translation', d:'Translate action research into policy recommendations, conservation protocols, or municipal bylaws — e.g. UNESCO Learning Cities.' }
         ] }
     ];
   }

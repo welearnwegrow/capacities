@@ -477,6 +477,7 @@ class Component extends DCLogic {
         const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [outW / S, outH / S] });
         pdf.addImage(img, 'PNG', 0, 0, outW / S, outH / S);
         pdf.save('Islands-of-Coherence-Map.pdf');
+        if (window.track) window.track('download_map', { label: 'Islands of Coherence map PDF' });
       } catch (e) { console.warn('map pdf failed', e); }
       // restore
       frame.style.webkitMaskImage = f0.mask; frame.style.maskImage = f0.mask2;

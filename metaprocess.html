@@ -21,6 +21,7 @@
   @keyframes iocMarchRev{to{stroke-dashoffset:11}}
   @keyframes mpFade{from{opacity:0}to{opacity:1}}
   @keyframes mpPop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+  @keyframes spHalo{0%{transform:translate(-50%,-50%) scale(.85);opacity:.55}70%{opacity:0}100%{transform:translate(-50%,-50%) scale(2.2);opacity:0}}
   .ioc-march{animation:iocMarch 1s linear infinite}
   .ioc-march-rev{animation:iocMarchRev 1s linear infinite}
 </style>
@@ -141,7 +142,7 @@ class Component extends DCLogic {
       focus:'Establishing the You\u2013System fit, mapping the immediate landscape, and challenging initial biases.',
       readiness:'Ready to move on when you have drawn an actionable problem boundary backed by direct community perspectives and external context, rather than relying on unverified assumptions.',
       qs:[
-        {q:'What is your boundary within this complex system?', h:'Framing a problem small enough to be actionable without losing sight of the wider interconnected web.'},
+        {q:'What is your issue, and what is its boundary within this complex system?', h:'Naming your core issue, identifying the intersecting systems it touches, and framing a scope small enough to be actionable.'},
         {q:'Whose lived reality matters most here?', h:'Moving past institutional data to ground your framework in actual human experiences.'},
         {q:'What macro trends are shaping this issue from the outside?', h:'Mapping external political, economic, social, or environmental forces to see what limits local choice.'},
         {q:'What is already working?', h:'Identifying existing pockets of hope and community assets to build upon rather than reinventing the wheel.'},
@@ -203,14 +204,14 @@ class Component extends DCLogic {
   ];
 
   _defaultWp(){ return [
-    { key:'probe', x:164, y:225 },
-    { key:'sense', x:515, y:120 },
-    { key:'design', x:875, y:205 },
-    { key:'adapt', x:720, y:520 },
-    { key:'integrate', x:273, y:500 }
+    { key:'probe', x:111, y:167 },
+    { key:'sense', x:514, y:35 },
+    { key:'design', x:855, y:274 },
+    { key:'adapt', x:615, y:598 },
+    { key:'integrate', x:145, y:502 }
   ]; }
-  _defaultBend(){ return [[333,67],[720,193],[773,364],[485,583]]; }
-  _defaultBendChord(){ return {"fb-ps":[377,203],"fb-sd":[750,75],"fb-da":[891,381],"fb-id":[611,315]}; }
+  _defaultBend(){ return [[294,51],[703,112],[645,410],[372,614],[87,342]]; }
+  _defaultBendChord(){ return {"fb-ps":[346,189],"fb-sd":[598,219],"fb-da":[784,478],"fb-id":[475,350]}; }
 
   // ---------- lifecycle ----------
   componentDidMount(){
@@ -287,7 +288,7 @@ class Component extends DCLogic {
   _resetMap(){ ['mp-wp','mp-bend','mp-bendc'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); this.setState({ wp:this._defaultWp(), bend:this._defaultBend(), bendChord:this._defaultBendChord() }); }
 
   // ---------- nav ----------
-  _open(i){ if(this._wpDragged){ this._wpDragged=false; return; } this.setState({active:i}, ()=>this._fitOverlay()); }
+  _open(i){ if(this._wpDragged){ this._wpDragged=false; return; } if(window.track) window.track('open_stage', {stage: this.STAGES[i] && this.STAGES[i].name}); this.setState({active:i}, ()=>this._fitOverlay()); }
   closeStage(){ this.setState({active:null}); }
   prevStage(){ this.setState(s=>({active:(s.active+this.STAGES.length-1)%this.STAGES.length}), ()=>this._fitOverlay()); }
   nextStage(){ this.setState(s=>({active:(s.active+1)%this.STAGES.length}), ()=>this._fitOverlay()); }
@@ -295,7 +296,7 @@ class Component extends DCLogic {
   // ---------- pdf ----------
   _delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
   async _capture(){ const el=document.getElementById('mp-canvas'); if(!el||!window.html2canvas) return null; const c=await window.html2canvas(el,{scale:2,backgroundColor:'#f6f3e9',useCORS:true}); return { img:c.toDataURL('image/png'), w:el.offsetWidth, h:el.offsetHeight }; }
-  async downloadOne(){ if(this.state.active==null||!window.jspdf) return; const cap=await this._capture(); if(!cap) return; const {jsPDF}=window.jspdf; const pdf=new jsPDF({orientation:'landscape',unit:'px',format:[cap.w,cap.h]}); pdf.addImage(cap.img,'PNG',0,0,cap.w,cap.h); pdf.save('Meta-Process-'+this.STAGES[this.state.active].name+'.pdf'); }
+  async downloadOne(){ if(this.state.active==null||!window.jspdf) return; const cap=await this._capture(); if(!cap) return; const {jsPDF}=window.jspdf; const pdf=new jsPDF({orientation:'landscape',unit:'px',format:[cap.w,cap.h]}); pdf.addImage(cap.img,'PNG',0,0,cap.w,cap.h); pdf.save('Meta-Process-'+this.STAGES[this.state.active].name+'.pdf'); if(window.track) window.track('download_canvas', {stage: this.STAGES[this.state.active].name}); }
   async downloadAll(){ if(!window.jspdf) return; const prev=this.state.active; const {jsPDF}=window.jspdf; let pdf=null;
     for(let i=0;i<this.STAGES.length;i++){
       this.setState({active:i,generating:true,genLabel:(i+1)+' / '+this.STAGES.length}); this._fitOverlay();
@@ -304,6 +305,7 @@ class Component extends DCLogic {
       pdf.addImage(cap.img,'PNG',0,0,cap.w,cap.h);
     }
     if(pdf) pdf.save('Meta-Process-Workbook.pdf');
+    if(window.track) window.track('download_workbook', {label: 'Full meta-process workbook'});
     this.setState({active:prev,generating:false,genLabel:''});
   }
 
@@ -335,7 +337,11 @@ class Component extends DCLogic {
       wp.map((p,i)=>{ const st=this.STAGES[i]; return h('div',{key:'wp'+i,style:{position:'absolute',left:p.x+'px',top:p.y+'px',transform:'translate(-50%,-50%)',animation:'iocBuoy '+(6+(i%4))+'s ease-in-out infinite',animationDelay:(-i*1.3)+'s',pointerEvents:'none'}},
         h('div',{style:{position:'absolute',left:'0',top:'-44px',transform:'translateX(-50%)',whiteSpace:'nowrap',fontFamily:"'PT Serif',serif",fontWeight:700,fontSize:'15px',color:'#F4EFE6',background:'rgba(57,52,43,0.92)',padding:'4px 13px',borderRadius:'10px',boxShadow:'0 3px 9px rgba(40,30,20,.28)',pointerEvents:'none'}}, st.name),
         h('div',{onPointerDown:(e)=>this._startDragWp(i,e),onClick:()=>this._open(i),title:st.name,style:{position:'absolute',left:'-15px',top:'-15px',width:'30px',height:'30px',borderRadius:'50%',background:'linear-gradient(to right, #39342b '+Math.round(i/(wp.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(wp.length-1)*100)+'%)',border:'2px solid #39342b',cursor:'pointer',pointerEvents:'auto',touchAction:'none',userSelect:'none',boxShadow:'0 2px 6px rgba(40,30,20,.30)'}}),
-        h('div',{style:{position:'absolute',left:'0',top:'26px',transform:'translateX(-50%)',width:'200px',textAlign:'center',fontFamily:"'PT Sans',sans-serif",fontSize:'11.5px',fontWeight:700,color:'#39342b',lineHeight:1.25,pointerEvents:'none'}}, st.phrase)
+        i===0 ? h('div',{key:'start',style:{position:'absolute',left:'0',top:'0',pointerEvents:'none'}},
+          h('div',{style:{position:'absolute',left:'0',top:'0',width:'30px',height:'30px',borderRadius:'50%',border:'2px solid rgba(178,90,43,.7)',transform:'translate(-50%,-50%)',animation:'spHalo 2.4s ease-out infinite'}}),
+          h('div',{style:{position:'absolute',left:'0',top:'0',width:'30px',height:'30px',borderRadius:'50%',border:'2px solid rgba(178,90,43,.7)',transform:'translate(-50%,-50%)',animation:'spHalo 2.4s ease-out infinite',animationDelay:'1.2s'}}),
+          h('div',{style:{position:'absolute',left:'0',top:'24px',transform:'translateX(-50%)',whiteSpace:'nowrap',fontFamily:"'PT Sans',sans-serif",fontSize:'11px',fontWeight:700,letterSpacing:'.18em',textTransform:'uppercase',color:'#b25a2b'}}, 'Start here')
+        ) : null
       ); })
     );
     return { mapSvg, mapWaypoints:waypoints };
@@ -349,7 +355,7 @@ class Component extends DCLogic {
     const cardW=364, gapX=20, marginX=24, cardH=250, gapY=26, contentTop=210;
     const centers=[];
     const cards=st.qs.map((qq,qi)=>{
-      const row=Math.floor(qi/3); const inRow=qi%3; const col=(row%2===0)?inRow:(2-inRow);
+      const row=Math.floor(qi/3); const col=qi%3;
       const x=marginX+col*(cardW+gapX); const y=contentTop+row*(cardH+gapY);
       centers.push([x+cardW/2,y+cardH/2]);
       return {

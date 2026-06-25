@@ -369,6 +369,7 @@ class Component extends DCLogic {
   doSubmit(){
     var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
     var title=g('ioc-sr-title'), link=g('ioc-sr-link'), from=g('ioc-sr-from'), why=g('ioc-sr-why');
+    if (window.track) window.track('suggest_resource', { title: title || '(untitled)' });
     var key=(typeof window!=='undefined' && window.WEB3FORMS_ACCESS_KEY) ? window.WEB3FORMS_ACCESS_KEY : '';
     var subject='Resource suggestion: '+(title||'(untitled)');
     var nurl=(typeof window!=='undefined' && window.NOTION_CONNECTOR_URL) ? window.NOTION_CONNECTOR_URL : '';

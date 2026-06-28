@@ -10,8 +10,8 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:ital,wght@0,400;0,700;1,400&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Caveat:wght@600&amp;display=swap" rel="stylesheet">
 <script src="./research-data.js"></script>
 <script src="notion-config.js"></script>
 <script src="data-loader.js"></script>
@@ -44,7 +44,7 @@
   <div class="rl-hero" style="position:relative;overflow:hidden;padding:54px 26px 42px">
     <div style="position:relative;max-width:1180px;margin:0 auto">
       <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#1f3a36">Resource Library</h1>
-      <p style="font-size:16px;line-height:1.6;color:#3e544f;margin:0;max-width:70ch">The texts, tools, and practices that inform each island. Explore by island, or browse the whole library — all curated by the co-editors and a growing base of systems-change practitioners.</p>
+      <p style="font-size:16px;line-height:1.6;color:#3e544f;margin:0;max-width:70ch">This resource library has been curated by the co-authors of this work and a growing base of systems-change practitioners. You are invited to suggest resources that have helped you in your practice of systems work. You can also contact us to propose a new learning area or resource type.&nbsp;</p>
     </div>
   </div>
 
@@ -88,9 +88,9 @@
       <div style="animation:iocFade .3s ease">
         <!-- search -->
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
-          <input value="{{ libSearch }}" onInput="{{ onSearch }}" placeholder="Search titles &amp; descriptions…" style="flex:1;min-width:220px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 14px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;outline:none"/>
+          <input value="{{ libSearch }}" onInput="{{ onSearch }}" placeholder="Search titles &amp; descriptions…" style="flex:1;min-width:220px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 14px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;outline:none">
           <select value="{{ capFilterVal }}" onChange="{{ onCapSelect }}" style="font-family:'PT Sans',sans-serif;font-size:13px;padding:11px 12px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;cursor:pointer;max-width:240px">
-            <option value="">Jump to island…</option>
+            <option value="">Jump to learning area…</option>
             <sc-for list="{{ capGroups }}" as="g" hint-placeholder-count="3">
               <optgroup label="{{ g.label }}">
                 <sc-for list="{{ g.caps }}" as="c" hint-placeholder-count="6">
@@ -144,7 +144,7 @@
           <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 6px">Design a Learning Experience</h2>
           <p style="font-size:14px;line-height:1.55;color:#544E45;margin:0;max-width:74ch">Assemble a learning experience: choose the <strong>methods</strong> for how learning happens, and the <strong>conditions</strong> that need to be in place for it to land. Your design builds in the panel on the right.</p>
           <sc-if value="{{ hasContext }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:12px;font-size:13px;color:#8a6a45">Designing for island: <strong style="color:{{ contextColor }}">{{ contextLabel }}</strong> <button onClick="{{ clearContext }}" style="background:none;border:none;color:#a07a4f;cursor:pointer;text-decoration:underline;font-size:12px">clear</button></div>
+            <div style="margin-top:12px;font-size:13px;color:#8a6a45">Designing for learning area: <strong style="color:{{ contextColor }}">{{ contextLabel }}</strong> <button onClick="{{ clearContext }}" style="background:none;border:none;color:#a07a4f;cursor:pointer;text-decoration:underline;font-size:12px">clear</button></div>
           </sc-if>
         </div>
 
@@ -294,10 +294,10 @@
             <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 5px">Suggest a resource</h3>
             <p style="font-size:13px;line-height:1.5;color:#544E45;margin:0 0 18px">Share something that has informed your practice. It goes to the editors for curation before joining the library.</p>
             <div style="display:flex;flex-direction:column;gap:11px">
-              <input id="ioc-sr-title" placeholder="Title" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none"/>
-              <input id="ioc-sr-link" placeholder="Link (URL)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none"/>
-              <input id="ioc-sr-from" placeholder="Your name &amp; email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none"/>
-              <textarea id="ioc-sr-why" placeholder="Why it matters / how it informs an island" rows="3" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none;resize:vertical"></textarea>
+              <input id="ioc-sr-title" placeholder="Title" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <input id="ioc-sr-link" placeholder="Link (URL)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <input id="ioc-sr-from" placeholder="Your name &amp; email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <textarea id="ioc-sr-why" placeholder="Why it matters / how it informs a learning area" rows="3" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none;resize:vertical"></textarea>
             </div>
             <div style="display:flex;gap:9px;margin-top:18px">
               <button onClick="{{ doSubmit }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Submit for curation</button>
@@ -319,7 +319,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:820},&quot;defaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;capacities&quot;,&quot;library&quot;,&quot;studio&quot;],&quot;default&quot;:&quot;capacities&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:820},&quot;defaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;capacities&quot;,&quot;library&quot;,&quot;studio&quot;],&quot;default&quot;:&quot;library&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   constructor(props){
     super(props);
@@ -393,7 +393,7 @@ class Component extends DCLogic {
     } else {
       var to='jayajohnyramchandani@gmail.com,raisamirza@gmail.com';
       var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
-        +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs an island:\n'+why+'\n';
+        +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs a learning area:\n'+why+'\n';
       try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
       this.setState({submitDone:true});
     }
@@ -437,7 +437,7 @@ class Component extends DCLogic {
     const ms=d.methods.filter(m=>this.state.methods[m.name]);
     const cs=d.conditions.filter(c=>this.state.conditions[c.name]);
     let t='LEARNING DESIGN';
-    if(this.state.contextCap) t+='\nIsland: '+this.state.contextCap;
+    if(this.state.contextCap) t+='\nLearning area: '+this.state.contextCap;
     t+='\n\nMethods:\n'+(ms.length?ms.map((m,i)=>'  '+(i+1)+'. '+m.name).join('\n'):'  —');
     t+='\n\nEnabling conditions:\n'+(cs.length?cs.map(c=>'  • '+c.name).join('\n'):'  —');
     try{ navigator.clipboard.writeText(t); }catch(e){}
@@ -487,7 +487,7 @@ class Component extends DCLogic {
       })):[];
       deep={ label, color:col.c, headerBg:col.head, groupName:(meta[g]||{}).name||g,
         desc:det.desc||'', levels, hasLevels:levels.length>0,
-        countText:list.length+(list.length===1?' resource to learn about this island':' resources to learn about this island'),
+        countText:list.length+(list.length===1?' resource to learn about this area':' resources to learn about this area'),
         items, onDesign:()=>{ window.location.href='design.html'; } };
     }
 

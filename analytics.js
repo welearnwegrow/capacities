@@ -10,4 +10,10 @@
   window.gtag = gtag;
   gtag("js", new Date());
   gtag("config", ID);
+
+  /* Lightweight custom-event tracker. Safe to call before GA finishes loading
+     (gtag queues into dataLayer). Usage: track('download_map', {label:'…'}) */
+  window.track = function (name, params) {
+    try { window.gtag("event", name, params || {}); } catch (e) {}
+  };
 })();

@@ -66,14 +66,14 @@
   <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
     <div style="position:relative">
       <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;max-width:20ch;color:#1f3a36">Learning to intervene in complex systems</h1>
-      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:16px;color:#4c6b64;margin:0;max-width:70ch">lifelong learning x systems practice for just &amp; regenerative futures</p>
+      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:16px;color:#4c6b64;margin:0;max-width:70ch">systems practice x lifelong learning for just &amp; regenerative futures</p>
     </div>
   </div>
 
   <!-- intro / context -->
   <div style="width:1040px;max-width:100%;margin:0 auto 26px;text-align:left">
     <div style="max-width:78ch;margin:0;display:flex;flex-direction:column;gap:15px">
-      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><span style="font-size: 15.5px;">As movements for justice and regeneration collide with systemic crises, navigating complexity requires a lifelong learning journey. Grounded in the question, <em>What do we need to learn to intervene in complex systems</em>, this open-source framework provides learning goals across 24 islands of coherence, a meta-process, and a resource library that can be applied in multiple contexts. It is designed for changemakers, educators, and leaders seeking an accessible, localized pathway into systemic intervention as a lifelong practice with an orientation towards just and regenerative futures.</span></p>
+      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><font color="#000000" face="PT Sans, sans-serif"><span style="font-size: 16px; white-space-collapse: preserve;">Everyday, we adapt to the systems around us, trying hard to change them towards more preferred futures. We believe that systems change work is a lifelong endeavor, with each season of our lives presenting new challenges that require different skills and capacities. This open-source framework starts with a single inquiry: <i>What do we need to learn to intervene in complex systems?</i> We landed at this map to guide <b>changemakers</b>, <b>educators</b>, and <b>leaders</b> ready for systems work. It provides orientations to ground the work in shared values, 24 learning areas with goals across four levels of practice, a process for intervening in complex systems, and a resource library from a community of system change practitioners and educators. <br></span></font></p>
     </div>
   </div>
 
@@ -98,7 +98,7 @@
     </div>
     <div style="display:flex;align-items:center;gap:9px">
       <svg width="30" height="26" viewBox="0 0 30 26" style="flex:none"><path d="M5 17 C3 13 6 9 11 8.5 C13 5 19 5 21 9 C26 9 28 14 25 17 C26 20 22 22 18 21 C15 23 9 22 8 19 C4 19 4 18 5 17 Z" fill="#6f8a80" fill-opacity=".85"></path></svg>
-      <span><strong style="color:#4f6a60;font-weight:700">Islands of coherence</strong> that guide our progress</span>
+      <span><strong style="color:#4f6a60;font-weight:700">Learning areas</strong> that guide our progress</span>
     </div>
     <div style="display:flex;align-items:center;gap:9px">
       <svg width="32" height="26" viewBox="0 0 32 26" style="flex:none"><line x1="2" y1="13" x2="30" y2="13" stroke="#5b6b62" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.5 6"></line></svg>
@@ -429,7 +429,7 @@ class Component extends DCLogic {
         ctx.font = legFont;
         const items = [
           { type: 'compass', text: 'Orientations that guide our intentions' },
-          { type: 'island', text: 'Islands of coherence that guide our progress' },
+          { type: 'island', text: 'Learning areas that guide our progress' },
           { type: 'dash', text: 'The meta-process that guides our actions' }
         ];
         const glyphW = 30 * S, glyphGap = 9 * S, itemGap = 30 * S;
@@ -476,7 +476,7 @@ class Component extends DCLogic {
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [outW / S, outH / S] });
         pdf.addImage(img, 'PNG', 0, 0, outW / S, outH / S);
-        pdf.save('Islands-of-Coherence-Map.pdf');
+        pdf.save('Learning-Areas-Map.pdf');
         if (window.track) window.track('download_map', { label: 'Islands of Coherence map PDF' });
       } catch (e) { console.warn('map pdf failed', e); }
       // restore
@@ -532,8 +532,8 @@ class Component extends DCLogic {
       adapt: { t:'Adapt', s:'Adapt to context and solve emergent problems', b:'Action is an ongoing live diagnostic test. When your intervention meets the real world, the system will actively show its true nature through defensive pushback or unexpected positive ripples. Survival here relies on staying highly agile — setting up short real-time feedback loops, positioning the action for organic community adoption, distributing the power to pivot fast, and keeping internal team trust solid when chaos hits.' },
       integrate: { t:'Integrate', s:'Integrate feedback and weave in learnings', b:'The work concludes when learning is actively metabolized back into the community ecosystem. This phase translates ground-level outcomes into institutional data — honoring failures openly rather than sanitizing them. You evaluate whether behavioral baselines moved and whether local connections grew denser, transforming the entire messy trajectory into clear, powerful change stories that build social capital for the next cycle.' },
       // ===== group intros (banners) =====
-      'grp-teal':  { g:'teal',  t:'Inner Inquiry', s:'The personal foundation', b:'These islands ground the individual in the deep work of self-awareness and world-view diversification. Without the ability to interrogate our own positionality, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the personal foundation required to remain centered while navigating the volatility of systems change.' },
-      'grp-green': { g:'green', t:'Collective Strategy', s:'Reading the field', b:'Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These islands equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.' },
+      'grp-teal':  { g:'teal',  t:'Inner Inquiry', s:'The personal foundation', b:'These learning areas ground the individual in the deep work of self-awareness and world-view diversification. Without the ability to interrogate our own positionality, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the personal foundation required to remain centered while navigating the volatility of systems change.' },
+      'grp-green': { g:'green', t:'Collective Strategy', s:'Reading the field', b:'Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These learning areas equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.' },
       'grp-coral': { g:'coral', t:'Systemic Intervention', s:'Acting & sustaining', b:'The operational and tactical domain centered on non-linear execution, asset mobilization, and relational stewardship. It governs the practical application of power and the architecture of long-term regenerative structures, ensuring that systemic shifts are sustainably maintained across generations.' },
       // ===== individual capacities (teal) =====
       'Somatic Eco-Regulation': { g:'teal', t:'Somatic Eco-Regulation', s:'Inner inquiry', b:'The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.' },
@@ -676,7 +676,7 @@ class Component extends DCLogic {
     const n=list.length;
     return { open:true, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,
       desc:det.desc||'', levels, hasLevels:levels.length>0,
-      countText: n+(n===1?' resource to learn about this island':' resources to learn about this island'),
+      countText: n+(n===1?' resource to learn about this area':' resources to learn about this area'),
       libHref: 'resources.html?capacity='+encodeURIComponent(key),
       suggestHref: 'resources.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
   }

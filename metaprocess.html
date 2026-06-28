@@ -10,8 +10,8 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:wght@400;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
@@ -32,7 +32,7 @@
   <!-- HEADER -->
   <div style="max-width:1180px;margin:0 auto;padding:clamp(30px,6vw,54px) clamp(18px,5vw,26px) 6px">
     <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(34px,7vw,54px);line-height:1.03;letter-spacing:-.01em;margin:0 0 16px;color:#46512a">Meta-process</h1>
-    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.65;color:#41514a;margin:0;max-width:74ch">Systems change is rarely a linear trajectory. It is an emergent, iterative dance between deep reflection and decisive action. The following stages serve as a navigation tool, not a checklist — practitioners often find themselves moving fluidly between these phases as the system responds to their interventions and new insights reshape the problem field. <span style="{{ dragHintStyle }}">Drag the waypoints, route, and feedback loops to make the map your own, then</span> <span style="{{ tapHintStyle }}">Pinch or use the + / − buttons to zoom, swipe to pan, and</span> tap a stage to open its reflection canvas.</p>
+    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.65;color:#41514a;margin:0;max-width:74ch">Systems change is rarely a linear trajectory. It is an emergent, iterative dance between deep reflection and decisive action. The following stages serve as a navigation tool, not a checklist — practitioners often find themselves moving fluidly between these phases as the system responds to their interventions and new insights reshape the problem field. <span style="display: inline;">Drag the waypoints, route, and feedback loops to make the map your own, then</span> <span style="display: none;">Pinch or use the + / − buttons to zoom, swipe to pan, and</span> tap a stage to open its starter reflection canvas.</p>
     <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px">
       <button onClick="{{ downloadAll }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.01em;color:#fff;background:#46716f;border:none;border-radius:22px;padding:11px 22px;cursor:pointer;box-shadow:0 6px 16px rgba(70,113,111,.28)">↓ Download the full workbook (PDF)</button>
       <span style="font-family:'PT Sans',sans-serif;font-size:13px;color:#7a8270">or open a single stage below</span>
@@ -53,6 +53,12 @@
         {{ mapSvg }}
         {{ mapWaypoints }}
       </div>
+    </div>
+  </div>
+
+  <div style="max-width:1180px;margin:0 auto 64px;padding:0 clamp(18px,5vw,26px)">
+    <div style="max-width:760px;border-top:1px solid rgba(70,90,85,.18);padding-top:26px">
+      <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.7;color:#41514a;margin:0">While non-linear, this process requires a disciplined relationship with time. Systems change is characterized by long periods of gradual accumulation punctuated by moments of rapid transformation. Practitioners must balance the urgency of the issue with the patience required for systemic shifts, often employing elastic deadlines and creating internal buffers to accommodate the unpredictable feedback loops and stakeholder dynamics inherent to this work.</p>
     </div>
   </div>
 
@@ -139,7 +145,7 @@ class Component extends DCLogic {
     { key:'probe', name:'Probe', color:'#46716f',
       phrase:'Probe the context and frame the problem field',
       sub:'Frame the problem field',
-      focus:'Establishing the You\u2013System fit, mapping the immediate landscape, and challenging initial biases.',
+      focus:'The process begins with intellectual humility and deep listening. Rather than entering a system with a pre-defined solution, you scan the environment to balance macro trends with local, lived human experiences. This phase forces you to explicitly define your boundary, search out local assets that are already working, evaluate your personal alignment with the context, and aggressively check your own blind spots.',
       readiness:'Ready to move on when you have drawn an actionable problem boundary backed by direct community perspectives and external context, rather than relying on unverified assumptions.',
       qs:[
         {q:'What is your issue, and what is its boundary within this complex system?', h:'Naming your core issue, identifying the intersecting systems it touches, and framing a scope small enough to be actionable.'},
@@ -152,7 +158,7 @@ class Component extends DCLogic {
     { key:'sense', name:'Sense', color:'#5f7a3a',
       phrase:'Sense the field and imagineer possibilities',
       sub:'Imagineer possibilities',
-      focus:'Uncovering systemic loops, identifying deep structural barriers, and locating leverage points.',
+      focus:'Sense-making means rendering invisible structural blocks and cultural dynamics visible. You trace the underlying rules, behaviors, and hidden loops that protect the status quo. By mapping where power rests and analyzing the real friction points within the field, you work alongside the community to co-author an alignment strategy that points directly toward a radically transformed, preferable future.',
       readiness:'Ready to move on when you have mapped the structural barriers and stakeholder power dynamics keeping the system stuck, and have established a co-authored vision of your destination.',
       qs:[
         {q:'What is your preferable future?', h:'Using futures thinking to envision a completely transformed system rather than just patching the current one.'},
@@ -165,7 +171,7 @@ class Component extends DCLogic {
     { key:'design', name:'Design', color:'#b07a3c',
       phrase:'Design the roadmap and mobilize resources',
       sub:'Build the roadmap',
-      focus:'Building relational infrastructure, establishing strategic constraints, and designing for elasticity.',
+      focus:'Design is the process of building conditions that nudge the system toward greater health. Because complex networks cannot be strictly managed by rigid checklists, you focus on changing core conditions and constraints rather than imposing fixed blueprints. This stage maps clear points of leverage, navigates institutional barriers, mobilizes diverse capital, and designs the relational trust and baseline metrics needed to hold a shared commitment together.',
       readiness:'Ready to move on when your roadmap has moved from an abstract theory into a resource-mobilized action plan equipped with clear baseline metrics and local trust infrastructure.',
       qs:[
         {q:'Where are your points of leverage?', h:'Formulating your core leverage hypothesis — the small shifts that can cause systemic ripples.'},
@@ -178,7 +184,7 @@ class Component extends DCLogic {
     { key:'adapt', name:'Adapt', color:'#a8542d',
       phrase:'Adapt to context and solve emergent problems',
       sub:'Solve emergent problems',
-      focus:'Treating action as an experiment, managing systemic pushback, and maintaining agility.',
+      focus:'Action is an ongoing live diagnostic test. When your intervention meets the real world, the system will actively show its true nature through defensive pushback or unexpected positive ripples. Survival here relies on staying highly agile — setting up short real-time feedback loops, positioning the action for organic community adoption, distributing the power to pivot fast, and keeping internal team trust solid when chaos hits.',
       readiness:'This phase is ending when your experimental action probe has finished its cycle, leaving you with raw, real-world data on how the ecosystem reacts to your presence.',
       qs:[
         {q:'Is your first action designed as a probe?', h:'Treating your initial intervention as a live test to gather data rather than a final solution.'},
@@ -191,7 +197,7 @@ class Component extends DCLogic {
     { key:'integrate', name:'Integrate', color:'#3f6e74',
       phrase:'Integrate feedback and weave in learnings',
       sub:'Weave in learnings',
-      focus:'Embedding institutional memory, evaluating relational density, and preparing for the next cycle.',
+      focus:'The work concludes when learning is actively metabolized back into the community ecosystem. This phase translates ground-level outcomes into institutional data — honoring failures openly rather than sanitizing them. You evaluate whether behavioral baselines moved and whether local connections grew denser, transforming the entire messy trajectory into clear, powerful change stories that build social capital for the next cycle.',
       readiness:'This phase is ending when your field insights are structurally archived, the surrounding network is demonstrably more self-reliant, and your story of change is ready for external synthesis.',
       qs:[
         {q:'What did you learn about the system that you couldn\u2019t see before you acted?', h:'Capturing the new insights revealed by the system\u2019s reaction — how real-world feedback disproved your initial logic.'},
@@ -247,7 +253,7 @@ class Component extends DCLogic {
   }
   zoomIn(){ this.setState(s=>({mzoom:Math.min(3.4, +(s.mzoom+0.4).toFixed(2))}), ()=>this._fitMap()); }
   zoomOut(){ this.setState(s=>({mzoom:Math.max(1.0, +(s.mzoom-0.4).toFixed(2))}), ()=>this._fitMap()); }
-  _canvasHeight(n){ const rows=Math.ceil(n/3); return 210 + rows*276 + 78; }
+  _canvasHeight(n){ const rows=Math.ceil(n/3); return 270 + rows*276 + 78; }
   _fitOverlay(){
     const i=this.state.active; if(i==null) return;
     const H=this._canvasHeight(this.STAGES[i].qs.length);
@@ -352,7 +358,7 @@ class Component extends DCLogic {
     if(i==null) return { cards:[], headerStyle:{}, readyStyle:{}, readyBadgeStyle:{}, readyTextStyle:{}, mHeaderStyle:{}, mReadyStyle:{}, connector:'', viewBox:'0 0 1180 998', color:'#46716f', name:'', phrase:'', focus:'', readiness:'' };
     const st=this.STAGES[i];
     const n=st.qs.length, H=this._canvasHeight(n);
-    const cardW=364, gapX=20, marginX=24, cardH=250, gapY=26, contentTop=210;
+    const cardW=364, gapX=20, marginX=24, cardH=250, gapY=26, contentTop=270;
     const centers=[];
     const cards=st.qs.map((qq,qi)=>{
       const row=Math.floor(qi/3); const col=qi%3;
@@ -369,10 +375,10 @@ class Component extends DCLogic {
     // connector following snake order
     let connector='';
     centers.forEach((c,idx)=>{ connector += (idx===0?'M ':'L ')+c[0].toFixed(1)+' '+c[1].toFixed(1)+' '; });
-    const rows=Math.ceil(n/3); const readyTop=210+rows*276+2;
+    const rows=Math.ceil(n/3); const readyTop=270+rows*276+2;
     return {
       cards, connector, viewBox:'0 0 1180 '+H, color:st.color, name:st.name, phrase:st.phrase, focus:st.focus, readiness:st.readiness, H,
-      headerStyle:{ position:'absolute', left:0, right:0, top:0, height:'190px', padding:'30px 38px', display:'flex', alignItems:'center', justifyContent:'space-between', background:'linear-gradient(120deg, '+st.color+' 0%, '+this._darken(st.color)+' 100%)' },
+      headerStyle:{ position:'absolute', left:0, right:0, top:0, height:'250px', padding:'30px 38px', display:'flex', alignItems:'center', justifyContent:'space-between', background:'linear-gradient(120deg, '+st.color+' 0%, '+this._darken(st.color)+' 100%)' },
       readyStyle:{ position:'absolute', left:'24px', right:'24px', top:readyTop+'px', display:'flex', alignItems:'center', gap:'12px', background:this._hex2rgba(st.color,.1), border:'1px solid '+this._hex2rgba(st.color,.3), borderRadius:'12px', padding:'14px 20px' },
       readyBadgeStyle:{ flex:'none', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.12em', textTransform:'uppercase', color:'#fff', background:st.color, borderRadius:'20px', padding:'5px 12px' },
       readyTextStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'13px', lineHeight:1.45, color:this._darken(st.color) },

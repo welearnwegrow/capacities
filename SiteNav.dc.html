@@ -29,9 +29,9 @@ class Component extends DCLogic {
     const on = Object.assign({}, base, { color:'#1f3a36', borderBottom:'2px solid #46716f' });
     const items = [
       { key:'home', label:'Home', href:'index.html' },
-      { key:'resources', label:'Resource Library', href:'resources.html' },
       { key:'descriptors', label:'Learning Goals', href:'descriptors.html' },
       { key:'about', label:'Meta-process', href:'metaprocess.html' },
+      { key:'resources', label:'Resource Library', href:'resources.html' },
       { key:'engage', label:'Partner with Us', href:'engage.html' }
     ];
     return { navItems: items.map(it => ({ label:it.label, href:it.href, style: active===it.key ? on : base })) };

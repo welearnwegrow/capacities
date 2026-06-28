@@ -16,6 +16,13 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   @media (max-width:880px){ .eg-cols{flex-direction:column} .eg-frame{width:100% !important} }
+  @media (max-width:760px){ .eg-grid{grid-template-columns:1fr !important} }
+  .eg-card{transition:transform .18s ease, box-shadow .18s ease}
+  .eg-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(120,70,50,.18)}
+  .eg-cta{transition:filter .15s ease, transform .15s ease}
+  .eg-cta:hover{filter:brightness(1.07);transform:translateX(3px)}
+  .eg-advisor{transition:transform .14s ease, box-shadow .14s ease, border-color .14s ease}
+  .eg-advisor:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(120,70,50,.16);border-color:rgba(168,84,45,.45) !important}
   @media (max-width:860px){ .eg-hero{ padding:34px 18px 26px !important; } .eg-hero h1{ font-size:34px !important; } .eg-hero p{ font-size:15px !important; } }
   @keyframes egBand{0%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-9px)}100%{transform:translateX(-50%) translateY(0)}}
   @keyframes egFloat{0%{transform:translate(-50%,0)}50%{transform:translate(-50%,-5px)}100%{transform:translate(-50%,0)}}
@@ -64,93 +71,153 @@
 
   <div class="eg-hero" style="position:relative;overflow:hidden;padding:54px 26px 42px">
     <div style="position:relative;max-width:1180px;margin:0 auto;color:#5a443a">
-      <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#8a3f1f">Partner with Us</h1>
-      <p style="font-size:16.5px;line-height:1.65;color:#5a443a;margin:0;max-width:76ch">Transforming how we learn and adapt cannot happen in isolation. True systemic shift requires a nested approach: anchoring ground-up community autonomy while simultaneously rebuilding organizational infrastructure and macro-level policy. We collaborate with changemakers, institutions, and governance bodies at every level to embed complexity-responsive design into everyday practice.</p>
+      <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#8a3f1f">Navigate Systems with Us</h1>
+      <p style="font-size:16.5px;line-height:1.65;color:#5a443a;margin:0;max-width:76ch">Many organisations treat systems change as something you can learn within a time period. We believe that learning to intervene in complex systems is a lifelong endeavour.&nbsp; We are building the infrastructure for on-going personal and collective learning to take action in systems around us (health, education, energy, food, water, livelihoods...). <i>What makes us different? </i>We provide changemakers, educators, and leaders practical ways to help you take the next step.</p>
     </div>
   </div>
 
   <main style="max-width:1180px;margin:0 auto;padding:38px 26px 80px">
 
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
-      <span style="flex:1;height:1px;background:rgba(120,105,75,.2)"></span>
-      <span style="font-size:12px;color:#9a8d76;font-style:italic">A multi-level view of who we work with — click any group to see how we help</span>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+      <span style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8542d">Four ways to partner</span>
+      <span style="flex:1;height:1px;background:rgba(120,105,75,.22)"></span>
     </div>
 
-    <div style="display:flex;flex-direction:column;border-radius:16px;overflow:hidden;box-shadow:0 6px 26px rgba(120,70,50,.12)">
-      <sc-for list="{{ strata }}" as="l" hint-placeholder-count="3">
-        <div style="background:{{ l.bg }}">
-          <button onClick="{{ l.onClick }}" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px 26px;display:block">
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
-              <span style="font-family:'Newsreader',serif;font-weight:600;font-size:18px;color:{{ l.color }}">{{ l.tag }}</span>
-              <span style="font-family:'PT Serif',serif;font-style:italic;font-size:14px;color:{{ l.color }}">{{ l.name }}</span>
-              <span style="flex:1"></span>
-              <span style="font-size:22px;font-weight:300;color:{{ l.color }};line-height:1">{{ l.chevron }}</span>
+    <div class="eg-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:22px">
+
+      <!-- 01 Become a Member -->
+      <div class="eg-card" style="background:#fff;border:1px solid rgba(120,70,50,.1);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 26px rgba(120,70,50,.1)">
+        <div style="position:relative;padding:22px 24px 20px;background:linear-gradient(135deg,#df9266,#b35427);overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 84% 16%, rgba(255,255,255,.3), transparent 56%), radial-gradient(circle at 6% 96%, rgba(0,0,0,.14), transparent 52%)"></div>
+          <div style="position:absolute;right:16px;top:2px;font-family:'Newsreader',serif;font-size:68px;font-weight:500;color:rgba(255,255,255,.2);line-height:1">01</div>
+          <div style="position:relative;display:flex;align-items:center;gap:13px">
+            <div style="width:46px;height:46px;flex:none;border-radius:13px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
             </div>
-            <div style="display:flex;flex-wrap:wrap;gap:7px">
-              <sc-for list="{{ l.actors }}" as="a" hint-placeholder-count="3">
-                <span style="font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:16px;background:rgba(255,255,255,.7);color:{{ l.color }}">{{ a.t }}</span>
-              </sc-for>
-            </div>
-          </button>
-          <sc-if value="{{ l.open }}" hint-placeholder-val="{{ false }}">
-            <div style="padding:2px 26px 24px">
-              <div style="background:rgba(255,255,255,.85);border-radius:13px;padding:20px 22px">
-                <p style="font-size:13.5px;line-height:1.55;color:#5a5347;margin:0 0 16px">{{ l.desc }}</p>
-                <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:{{ l.color }};margin:0 0 10px">How we help</div>
-                <div style="display:flex;flex-direction:column;gap:12px">
-                  <sc-for list="{{ l.services }}" as="sv" hint-placeholder-count="3">
-                    <div>
-                      <div style="font-family:'PT Serif',serif;font-weight:700;font-size:14px;color:#3f3a31;margin:0 0 2px">{{ sv.t }}</div>
-                      <div style="font-size:13px;line-height:1.5;color:#5a5347">{{ sv.d }}</div>
-                    </div>
-                  </sc-for>
-                </div>
-              </div>
-            </div>
-          </sc-if>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92)">EDUCATORS AND EDUCATIONAL INSTITUTIONS</span>
+          </div>
         </div>
-      </sc-for>
+        <div style="padding:22px 24px 24px;display:flex;flex-direction:column;flex:1">
+          <h3 style="font-family:'Newsreader',serif;font-weight:600;font-size:23px;line-height:1.12;color:#3f2a1c;margin:0 0 11px">Become a Member</h3>
+          <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0 0 20px;flex:1">Twice every month, you will receive a newsletter with field-tested learning activities that are easy to adapt to your educational setting. These will range from templates and tools to case studies to help young people understand themselves and navigate systems to make change.</p>
+          <a href="#eg-contact" class="eg-cta" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:#b35427;padding:11px 21px;border-radius:24px;text-decoration:none">Subscribe →</a>
+        </div>
+      </div>
+
+      <!-- 02 Guided Learning Journeys -->
+      <div class="eg-card" style="background:#fff;border:1px solid rgba(120,70,50,.1);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 26px rgba(120,70,50,.1)">
+        <div style="position:relative;padding:22px 24px 20px;background:linear-gradient(135deg,#6fa39a,#3f6f6a);overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 84% 16%, rgba(255,255,255,.3), transparent 56%), radial-gradient(circle at 6% 96%, rgba(0,0,0,.14), transparent 52%)"></div>
+          <div style="position:absolute;right:16px;top:2px;font-family:'Newsreader',serif;font-size:68px;font-weight:500;color:rgba(255,255,255,.2);line-height:1">02</div>
+          <div style="position:relative;display:flex;align-items:center;gap:13px">
+            <div style="width:46px;height:46px;flex:none;border-radius:13px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="19" r="2.3"></circle><circle cx="19" cy="5" r="2.3"></circle><path d="M7.2 18.2c4 0 5.3-2.6 5.3-6.2s2.3-5.2 4.3-5.4"></path></svg>
+            </div>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92)">CHANGEMAKERS AND SYSTEMS CHANGE PRACTITIONERS</span>
+          </div>
+        </div>
+        <div style="padding:22px 24px 24px;display:flex;flex-direction:column;flex:1">
+          <h3 style="font-family:'Newsreader',serif;font-weight:600;font-size:23px;line-height:1.12;color:#234542;margin:0 0 11px">Take a Guided Learning Journey</h3>
+          <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0 0 20px;flex:1">You know the tools, you've done the research but you're still not sure how to move into action. Guided learning journeys help you engage, prototype, and ideate on how to make change in your own community or organisation.</p>
+          <a href="#eg-contact" class="eg-cta" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:#3f6f6a;padding:11px 21px;border-radius:24px;text-decoration:none">Start a Journey →</a>
+        </div>
+      </div>
+
+      <!-- 03 Intensives -->
+      <div class="eg-card" style="background:#fff;border:1px solid rgba(120,70,50,.1);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 26px rgba(120,70,50,.1)">
+        <div style="position:relative;padding:22px 24px 20px;background:linear-gradient(135deg,#cd6440,#8f2f1c);overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 84% 16%, rgba(255,255,255,.28), transparent 56%), radial-gradient(circle at 6% 96%, rgba(0,0,0,.16), transparent 52%)"></div>
+          <div style="position:absolute;right:16px;top:2px;font-family:'Newsreader',serif;font-size:68px;font-weight:500;color:rgba(255,255,255,.2);line-height:1">03</div>
+          <div style="position:relative;display:flex;align-items:center;gap:13px">
+            <div style="width:46px;height:46px;flex:none;border-radius:13px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4.5 13.5H11l-1 8.5L19.5 10H13z"></path></svg>
+            </div>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92)">SOCIAL CHANGE ORGANIZATIONS</span>
+          </div>
+        </div>
+        <div style="padding:22px 24px 24px;display:flex;flex-direction:column;flex:1">
+          <h3 style="font-family:'Newsreader',serif;font-weight:600;font-size:23px;line-height:1.12;color:#46180f;margin:0 0 11px">Book an Intensive</h3>
+          <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0 0 20px;flex:1">Your organisation needs to upskill staff to navigate complexity quickly, with strong values and practical tools. Our 2–3 day intensives work with teams of up to 50 people to deliver real behavioural outcomes, drawing on 30+ years of designing complexity interventions across education, healthcare, government, and everything in between.</p>
+          <a href="#eg-contact" class="eg-cta" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:#8f2f1c;padding:11px 21px;border-radius:24px;text-decoration:none">Book Now →</a>
+        </div>
+      </div>
+
+      <!-- 04 Retreats -->
+      <div class="eg-card" style="background:#fff;border:1px solid rgba(120,70,50,.1);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 8px 26px rgba(120,70,50,.1)">
+        <div style="position:relative;padding:22px 24px 20px;background:linear-gradient(135deg,#dcab53,#b07a26);overflow:hidden">
+          <div style="position:absolute;inset:0;background:radial-gradient(circle at 84% 16%, rgba(255,255,255,.32), transparent 56%), radial-gradient(circle at 6% 96%, rgba(0,0,0,.14), transparent 52%)"></div>
+          <div style="position:absolute;right:16px;top:2px;font-family:'Newsreader',serif;font-size:68px;font-weight:500;color:rgba(255,255,255,.22);line-height:1">04</div>
+          <div style="position:relative;display:flex;align-items:center;gap:13px">
+            <div style="width:46px;height:46px;flex:none;border-radius:13px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.42);display:flex;align-items:center;justify-content:center">
+              <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="6.5" r="2.4"></circle><path d="M3 20l5.5-7.5 3.5 4.5 3.2-4.2L21 20z"></path></svg>
+            </div>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.92)">ANYONE WHO NEEDS A GATHERING</span>
+          </div>
+        </div>
+        <div style="padding:22px 24px 24px;display:flex;flex-direction:column;flex:1">
+          <h3 style="font-family:'Newsreader',serif;font-weight:600;font-size:23px;line-height:1.12;color:#4a3611;margin:0 0 11px">Co-Design a Retreat</h3>
+          <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0 0 20px;flex:1">We are practiced space-holders and can work with you to design a transformational retreat or gathering, one that shifts people's perspectives and moves them into bold action. We also bring systems practitioners together once a year to co-design an annual retreat.</p>
+          <a href="#eg-contact" class="eg-cta" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:#b07a26;padding:11px 21px;border-radius:24px;text-decoration:none">Express Interest →</a>
+        </div>
+      </div>
+
     </div>
     <!-- co-editors & contributors -->
     <div style="margin-top:46px">
-      <h2 style="font-family:'Newsreader',serif;font-weight:600;font-size:26px;line-height:1.18;color:#8a3f1f;margin:0 0 6px">Co-Creators &amp; Contributors</h2>
-      <p style="font-size:15px;line-height:1.62;color:#5a443a;margin:0 0 22px;max-width:72ch">A living framework shaped by Jaya &amp; Raisa and a growing practice of facilitators, educators, and researchers working toward just and regenerative futures.</p>
+      <h2 style="font-family:'Newsreader',serif;font-weight:600;font-size:26px;line-height:1.18;color:#8a3f1f;margin:0 0 6px">About Us</h2>
+      <p style="font-size:15px;line-height:1.62;color:#5a443a;margin:0 0 22px;max-width:72ch"><i>Learning to Intervene in Complex Systems </i>is&nbsp;a living framework shaped by Raïsa &amp; Jaya and an adivsory of facilitators, educators, and researchers working toward just and regenerative futures.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:22px">
         <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:18px;padding:24px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 8px 24px rgba(120,70,50,.08)">
-          <div style="width:64px;height:64px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'PT Serif',serif;font-weight:700;font-size:22px;color:#fff;background:radial-gradient(circle at 35% 35%, #5f8a82, #46716f 80%)">JR</div>
+          <img src="uploads/pasted-1782659235815-0.png" alt="Raïsa Mirza" style="width:64px;height:64px;flex:none;border-radius:50%;object-fit:cover;object-position:50% 25%">
           <div>
-            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0;color:#3f3a31">Jaya Ramchandani</h3>
-            <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a8542d;margin:3px 0 9px">Co-Creator</p>
-            <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Short bio coming soon — a few sentences on Jaya's background, practice, and what she brings to this framework.</p>
+            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0;color:#3f3a31">Raïsa Mirza</h3>
+            
+            <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Raïsa Mirza is a systems practitioner and designer with 25 years of experience across more than 25 countries. Currently Senior Director of Global Programs at Legado, she oversees a portfolio of community-centered holistic systems change initiatives worldwide. She co-developed the IB's new educational pathway in systems transformation, now scaling to dozens of schools globally in her previous role as Head of Social Impact Initiatives at UWC Atlantic College. Founder of the Rural Design Network, she has held senior roles at the Tamarack Institute, One Acre Fund, and One Drop Foundation. In 2021 she was named one of 20 Positive Deviants in Canada by the Wolf Willow Institute for Systems Change.</p>
+            <a href="https://www.linkedin.com/in/raisamirza/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.03em;text-decoration:none;color:#a8542d"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex:none"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>LinkedIn</a>
           </div>
         </div>
         <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:18px;padding:24px;display:flex;gap:18px;align-items:flex-start;box-shadow:0 8px 24px rgba(120,70,50,.08)">
-          <div style="width:64px;height:64px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'PT Serif',serif;font-weight:700;font-size:22px;color:#fff;background:radial-gradient(circle at 35% 35%, #D08B6C, #a8542d 80%)">RM</div>
+          <img src="uploads/Profile12.jpeg" alt="Jaya Ramchandani" style="width:64px;height:64px;flex:none;border-radius:50%;object-fit:cover;object-position:50% 30%">
           <div>
-            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0;color:#3f3a31">Raisa Mirza</h3>
-            <p style="font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#a8542d;margin:3px 0 9px">Co-Creator</p>
-            <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Short bio coming soon — a few sentences on Raisa's background, practice, and what she brings to this framework.</p>
+            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0;color:#3f3a31">Jaya Ramchandani</h3>
+            
+            <p style="font-size:13.5px;line-height:1.6;color:#5a5347;margin:0">Jaya Ramchandani designs lifelong learning experiences that enable individual and social change.&nbsp; Her work spans shifting narratives about education through writing and public storytelling; creating competency frameworks, books, and short courses; prototyping new models of community learning (e.g., The Story Of, WLWG Short Courses); designing and teaching courses with transformative education programs (e.g., Systems Transformation Pathway at UWC Atlantic), and creating training programs and resources for educators. Her aim is to make personal, social, and systems change more accessible, achievable, and rooted in regenerative values.</p>
+            <a href="https://www.linkedin.com/in/jayar/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.03em;text-decoration:none;color:#a8542d"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex:none"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>LinkedIn</a>
           </div>
         </div>
       </div>
-      <div style="background:rgba(255,255,255,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px dashed rgba(168,84,45,.4);border-radius:18px;padding:30px;text-align:center">
-        <p style="font-size:15px;line-height:1.6;color:#5a5347;margin:0 auto;max-width:60ch">This is a growing practice. Contributors who have shaped the islands, curated resources, and tested the framework in the field will be recognized here.</p>
-        <p style="font-size:12.5px;color:#9a8d76;margin:14px 0 0;font-style:italic">Send the contributor names, roles, and any bios/photos you'd like included.</p>
+      <h2 style="font-family:'Newsreader',serif;font-weight:600;font-size:26px;line-height:1.18;color:#8a3f1f;margin:34px 0 6px">Advisory</h2>
+      <p style="font-size:15px;line-height:1.62;color:#5a443a;margin:0 0 22px;max-width:74ch">This framework is the result of many conversations, shared reflections, and collaborations. It was first put out into the world for peer validation in January 2026, which helped shape the current version.</p>
+      <div style="background:rgba(255,255,255,.65);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:18px;padding:30px 32px;box-shadow:0 8px 24px rgba(120,70,50,.08)">
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#a8542d;margin:0 0 15px">PEER VALIDATION &amp; CONTRIBUTIONS</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a href="https://www.linkedin.com/in/danyap/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#df9266,#b35427);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">DP</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Danya Pastuszek</span></a>
+          <a href="https://www.linkedin.com/in/gareth-manning-a404b387/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#6fa39a,#3f6f6a);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">GM</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Gareth Manning</span></a>
+          <a href="https://www.linkedin.com/in/akshatsinghal/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#dcab53,#b07a26);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">AS</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Akshat Singhal</span></a>
+          <a href="https://www.linkedin.com/in/caryreid/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#cd6440,#8f2f1c);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">CR</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Cary Reid</span></a>
+          <a href="https://www.linkedin.com/in/gitanjali-paul/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#df9266,#b35427);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">GP</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Gitanjali Paul</span></a>
+          <a href="https://www.linkedin.com/in/veljko-armano-linta/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#6fa39a,#3f6f6a);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">VL</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Veljko Armano Linta</span></a>
+          <a href="https://www.linkedin.com/search/results/people/?keywords=Rebecca%20Warren" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#dcab53,#b07a26);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">RW</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Rebecca Warren</span></a>
+          <a href="https://www.linkedin.com/in/hgross7/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#cd6440,#8f2f1c);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">HG</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Heather Gross</span></a>
+          <a href="https://www.linkedin.com/in/hiresd/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#df9266,#b35427);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">DH</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Daniel Hires</span></a>
+          <a href="https://www.linkedin.com/in/sfqua/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#6fa39a,#3f6f6a);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">SQ</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">S Fisher Qua</span></a>
+          <a href="https://www.linkedin.com/in/danielapapi/" target="_blank" rel="noopener" class="eg-advisor" style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.72);border:1px solid rgba(120,70,50,.1);border-radius:30px;padding:6px 15px 6px 6px;text-decoration:none;cursor:pointer"><span style="width:32px;height:32px;flex:none;border-radius:50%;background:linear-gradient(135deg,#dcab53,#b07a26);color:#fff;font-family:'PT Serif',serif;font-weight:700;font-size:11.5px;display:flex;align-items:center;justify-content:center">DP</span><span style="font-size:13.5px;font-weight:600;color:#3f3a31">Daniela Papi-Thornton</span></a>
+        </div>
+        <p style="font-size:13.5px;line-height:1.6;color:#7a6f5c;font-style:italic;margin:24px 0 0;max-width:72ch">As an open-source framework, we invite those who see themselves in this work to join us. If you'd like to contribute to future iterations, we welcome your voice.</p>
       </div>
     </div>
 
     <!-- sponsor / partner call-out -->
     <div style="margin-top:40px;background:rgba(168,84,45,.07);border:1px dashed rgba(168,84,45,.4);border-radius:20px;padding:32px 34px;text-align:center">
       <h2 style="font-family:'Newsreader',serif;font-weight:600;font-size:25px;margin:0 0 10px;color:#8a3f1f">Help us build the open commons</h2>
-      <p style="font-size:15px;line-height:1.6;color:#5a443a;margin:0 auto 6px;max-width:62ch">We're looking for partners and sponsors to co-develop the next layer of this work — an <strong>open-source facilitation handbook</strong> and a <strong>guided learning workbook</strong>, freely available to every educator and learner.</p>
-      <p style="font-size:13.5px;line-height:1.55;color:#7a6f5c;margin:0 auto;max-width:56ch;font-style:italic">If you'd like to fund or shape these projects, we'd love to talk.</p>
+      <p style="font-size:15px;line-height:1.6;color:#5a443a;margin:0 auto 6px;max-width:62ch"></p><div>We need support to actively push the framework toward true pluriversality. If you'd like to fund or shape project ideas that can be freely available to every educator and learner working in systems change, let's talk.</div><p></p>
+      <p style="font-size:13.5px;line-height:1.55;color:#7a6f5c;margin:0 auto;max-width:56ch;font-style:italic"><br></p>
     </div>
 
     <!-- contact form -->
-    <div style="margin-top:40px;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:20px;padding:36px 34px;box-shadow:0 8px 26px rgba(120,70,50,.08)">
+    <div id="eg-contact" style="margin-top:40px;background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:20px;padding:36px 34px;box-shadow:0 8px 26px rgba(120,70,50,.08)">
       <div style="text-align:center;max-width:54ch;margin:0 auto 22px">
         <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:25px;margin:0 0 10px;color:#2c261d">Let's start a conversation</h2>
-        <p style="font-size:15px;line-height:1.6;color:#544E45;margin:0">Tell us about your context and the learners you serve, and we'll explore how the framework can support your work.</p>
       </div>
       <div style="max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:12px">
         <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -170,49 +237,8 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { open:'micro' };
-
-  _data(){
-    return [
-      { key:'micro', level:'Micro', name:'(Individuals / Collectives)', color:'#8a4a22', bg:'#f3e7da',
-        desc:'The ground level of systems practice — individuals and collectives building the self-direction and systems awareness to act on the crises closest to them.',
-        actors:['Individual changemakers','Youth collectives','Grassroots peer networks','Community-led mutual aid alliances'],
-        services:[
-          { t:'Self-Directed Learning Resources', d:'Custom toolkits and coaching to help grassroots actors identify entry points, map learning paths across formal and informal spaces, and track capacity gaps.' },
-          { t:'Cohort-Based Learning Experiences', d:'Online workshops, in-person retreats, and peer learning circles where changemakers learn through shared experience. Storytelling and narrative projects anchor each cohort, building lasting peer bonds and collective momentum.' },
-          { t:'Alternative Competency Assessment', d:'Self-assessment and reflection frameworks that track progression across islands of coherence.' }
-        ] },
-      { key:'meso', level:'Meso', name:'(Capacity-Building Organizations)', color:'#b9683a', bg:'#f0dcc8',
-        desc:'The connective layer between individuals and systems — schools, programs, and enterprises that design, run, and sustain the spaces where changemakers grow their capacities.',
-        actors:['Progressive schools & universities','Capacity-building programs','Fellowships','Social enterprises'],
-        services:[
-          { t:'Curriculum Development & Transdisciplinary Integration', d:'Embed systems-change capacities into modular programs, core pedagogies, and capstone frameworks aligned with regenerative-futures goals.' },
-          { t:'Program & Pathways Design', d:'Flexible models — residencies, fellowships, seasonal schools, apprenticeships — tailored to diverse entry points using design conditions like freedom within structure.' },
-          { t:'Systems Coaching & Facilitator Upskilling', d:'Professional development for educators and facilitators to hold space, navigate ideological friction, and manage complexity with equanimity.' },
-          { t:'Workforce Capability & Onboarding', d:'Embedding competencies into value chains, trainee programs, mentorship structures, and personal development goals.' },
-          { t:'Civic Curation & Intergenerational Design', d:'Public workshops, storytelling circles, and urban commons within cultural institutions to foster mutual, intergenerational learning.' }
-        ] },
-      { key:'macro', level:'Macro', name:'(Meta Actors)', color:'#a8542d', bg:'#e8caaf',
-        desc:'Governance and market-shaping bodies that steer capital, policy, and research — shaping the funding strategies, priorities, and frameworks everyone else works within.',
-        actors:['Philanthropic foundations','Curriculum boards','Policy think tanks','Municipal governments','Research institutes'],
-        services:[
-          { t:'Strategic Philanthropy & Non-Extractive Capital', d:'Help funders design portfolios that target high-impact leverage points and support hybrid, informal learning models over traditional credentialing.' },
-          { t:'Complexity-Responsive MEL', d:'Tracking systems that move past linear KPIs into narrative, ecological, and justice-oriented metrics for non-linear interventions.' },
-          { t:'Policy & Regional Framework Translation', d:'Translate action research into policy recommendations, conservation protocols, or municipal bylaws — e.g. UNESCO Learning Cities.' }
-        ] }
-    ];
-  }
-
   renderVals(){
-    const open=this.state.open;
-    const strata=this._data().map(c=>{
-      const on=open===c.key;
-      return { tag:c.level, name:c.name, color:c.color, bg:c.bg, desc:c.desc,
-        chevron: on?'\u2013':'+', open:on,
-        actors:c.actors.map(t=>({t:t})), services:c.services.map(o=>({t:o.t,d:o.d})),
-        onClick:()=>this.setState({open: on?null:c.key}) };
-    });
-    return { strata };
+    return {};
   }
 }
 </script>

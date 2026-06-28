@@ -30,7 +30,7 @@
     var html='<div style="background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.72);border-radius:16px;padding:24px;box-shadow:0 8px 26px rgba(60,70,50,.09)">';
     html+='<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:6px"><h2 style="font-family:Newsreader,serif;font-weight:600;font-size:24px;color:#6e4f1e;margin:0">Your self-assessment</h2><button id="ioc-assess-print" type="button" style="font-family:PT Sans,sans-serif;font-size:13px;font-weight:700;color:#6e4f1e;background:#fff;border:1px solid #6e4f1e;border-radius:20px;padding:8px 16px;cursor:pointer">Download / Print PDF</button></div>';
     var rated=Object.keys(levels).length;
-    html+='<p style="font-size:13px;color:#8a7a5f;margin:0 0 18px">'+rated+' of 24 islands rated.</p>';
+    html+='<p style="font-size:13px;color:#8a7a5f;margin:0 0 18px">'+rated+' of 24 learning areas rated.</p>';
     html+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-bottom:24px">';
     BANDS.forEach(function(b,bi){ var names=bandIslands[bi].map(function(o){return o.name;}); html+='<div style="text-align:center"><div style="font-family:PT Serif,serif;font-weight:700;font-size:15px;color:'+b.color+';margin-bottom:6px">'+b.name+'</div>'+radarSVG(names,b.color)+'</div>'; });
     html+='</div>';
@@ -39,6 +39,7 @@
     for(lv=1;lv<=4;lv++){ var list=Object.keys(levels).filter(function(n){return levels[n]===lv;}).sort(); html+='<div style="background:rgba(244,238,225,.5);border-radius:12px;padding:14px"><div style="font-family:PT Sans,sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:#6b5d45;margin-bottom:8px">'+LV[lv]+' ('+list.length+')</div>'; if(list.length){ html+='<div style="display:flex;flex-direction:column;gap:5px">'; list.forEach(function(n){ html+='<div style="font-size:12.5px;color:#3f3a31;display:flex;gap:7px;align-items:baseline"><span style="width:6px;height:6px;border-radius:50%;flex:none;background:'+BANDS[meta[n].band].color+'"></span>'+n+'</div>'; }); html+='</div>'; } else { html+='<div style="font-size:12px;color:#9a8d76;font-style:italic">None yet</div>'; } html+='</div>'; }
     html+='</div></div>';
     var box=document.getElementById('ioc-assess-results'); box.innerHTML=html; box.style.display='block';
+    if(window.track){ window.track('assessment_complete', {rated: rated}); }
     document.getElementById('ioc-assess-print').addEventListener('click',function(){ window.print(); });
     box.scrollIntoView({behavior:'smooth',block:'start'});
   }
@@ -53,6 +54,7 @@
     });
     var btn=document.getElementById('ioc-assess-btn');
     btn.addEventListener('click',function(){ assessOn=!assessOn;
+      if(assessOn && window.track){ window.track('assessment_start'); }
       if(assessOn){ repaint(); } else { Object.keys(cellMap).forEach(function(n){ cellMap[n].forEach(function(c){ paint(c,false); }); }); }
       document.getElementById('ioc-assess-hint').style.display=assessOn?'inline':'none';
       document.getElementById('ioc-assess-gen').style.display=assessOn?'inline-block':'none';

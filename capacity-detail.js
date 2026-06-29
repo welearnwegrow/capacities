@@ -21,13 +21,13 @@ window.__CAPDETAIL = {
    "Influential": "Holds space for collective healing and recovery across large, conflict-heavy efforts, helping whole communities avoid burnout. Builds cultures and structures where wellbeing and long-term purpose are protected, not sacrificed."
   }
  },
- "Learning Agency": {
-  "desc": "Taking proactive, self-directed ownership of your own learning — noticing gaps, setting goals, and designing pathways to grow across contexts.",
+ "Creative Expression & Storytelling": {
+  "desc": "Synthesizing complex systemic insights into compelling narratives and creative outputs that challenge the status quo, build relational density, and model preferable futures.",
   "levels": {
-   "Emerging": "Takes charge of your own learning — noticing what you don't yet know, setting goals, and finding your own ways to grow beyond tests and grades. Uses feedback as fuel for growth rather than as judgement.",
-   "Developing": "Seeks out mentors, hands-on programs, and different knowledge traditions to build skills that travel across settings. Reflects on how you learn best and adjusts your strategies when something isn't working.",
-   "Effective": "Designs ongoing learning and reflection for whole teams, so growth is built into how an organisation works rather than left to chance. Makes your own learning visible to others through documentation, teaching, or portfolios.",
-   "Influential": "Rethinks how learning happens across whole networks, building lasting, lifelong learning systems beyond any single dominant model. Helps shift cultures from one-off training toward continuous, self-directed growth."
+   "Emerging": "Shifts from passive consumption to active production by using media, art, or storytelling to articulate personal viewpoints beyond standard assessments.",
+   "Developing": "Translates complex research or lived experience into creative outputs—such as workshops, digital narratives, or visual formats—to actively engage others in collective sense-making.",
+   "Effective": "Synthesizes intricate data and systemic patterns into accessible, creative interventions that shift institutional behaviors, communication norms, or public perception.",
+   "Influential": "Deconstructs dominant communication paradigms across global networks. Establishes alternative, creative-led ecosystems where storytelling is utilized as a vehicle for systemic reform and cultural transformation."
   }
  },
  "Critical Consciousness": {

@@ -11,10 +11,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  @media (max-width:920px){ .sf-grid{ grid-template-columns:1fr 1fr !important; } }
+  @media (max-width:560px){ .sf-grid{ grid-template-columns:1fr !important; gap:18px !important; } .sf-foot{ padding:36px 22px 26px !important; } .sf-meta{ justify-content:flex-start !important; } }
+</style>
 </helmet>
-<footer style="background:#3e645f;padding:46px 40px 32px;color:#F4EFE6;font-family:'PT Sans',system-ui,sans-serif">
+<footer class="sf-foot" style="background:#3e645f;padding:46px 40px 32px;color:#F4EFE6;font-family:'PT Sans',system-ui,sans-serif">
   <div style="max-width:1120px;margin:0 auto">
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px">
+    <div class="sf-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:22px">
 
       <a href="descriptors.html" style="display:block;text-decoration:none;border-top:2px solid #d9bb78;padding-top:15px">
         <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Learning Goals</div>
@@ -34,6 +38,12 @@
         <span style="font-size:13px;font-weight:700;color:#f0e3c2">Open the library →</span>
       </a>
 
+      <a href="orientations.html" style="display:block;text-decoration:none;border-top:2px solid #d8be7e;padding-top:15px">
+        <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Orientations</div>
+        <div style="font-size:13px;line-height:1.55;color:rgba(244,239,230,.72);margin-bottom:12px">Four values — a compass for working honestly inside complex systems.</div>
+        <span style="font-size:13px;font-weight:700;color:#f0e3c2">Find your bearings →</span>
+      </a>
+
       <a href="engage.html" style="display:block;text-decoration:none;border-top:2px solid #e8a583;padding-top:15px">
         <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Partner with Us</div>
         <div style="font-size:13px;line-height:1.55;color:rgba(244,239,230,.72);margin-bottom:12px">Four ways to work with us — membership, guided journeys, intensives, and retreats.</div>
@@ -41,7 +51,7 @@
       </a>
 
     </div>
-    <div style="border-top:1px solid rgba(244,239,230,.16);margin-top:30px;padding-top:18px;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(244,239,230,.55)">
+    <div class="sf-meta" style="border-top:1px solid rgba(244,239,230,.16);margin-top:30px;padding-top:18px;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(244,239,230,.55)">
       <span>CC BY-NC-ND 4.0 · Jaya Ramchandani &amp; Raisa Mirza</span>
     </div>
   </div>

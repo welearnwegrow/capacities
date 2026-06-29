@@ -11,30 +11,61 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  .sn-burger{ display:none; }
+  .sn-panel{ display:none; }
+  @media (max-width:760px){
+    .sn-links{ display:none !important; }
+    .sn-burger{ display:flex !important; }
+    .sn-nav.sn-open .sn-panel{ display:flex !important; }
+  }
+  .sn-burger span{ display:block; width:21px; height:2px; background:#1f3a36; border-radius:2px; transition:transform .22s ease, opacity .18s ease; }
+  .sn-burger span + span{ margin-top:5px; }
+  .sn-nav.sn-open .sn-burger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .sn-nav.sn-open .sn-burger span:nth-child(2){ opacity:0; }
+  .sn-nav.sn-open .sn-burger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+</style>
 </helmet>
-<nav style="position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:18px 26px;flex-wrap:wrap;padding:16px 30px;background:rgba(247,248,243,0.62);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.55);box-shadow:0 1px 0 rgba(70,90,85,.06),0 6px 22px rgba(60,90,85,.05);font-family:'PT Sans',system-ui,sans-serif">
+<nav class="sn-nav {{ openClass }}" style="position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:18px 26px;flex-wrap:wrap;padding:16px 30px;background:rgba(247,248,243,0.62);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.55);box-shadow:0 1px 0 rgba(70,90,85,.06),0 6px 22px rgba(60,90,85,.05);font-family:'PT Sans',system-ui,sans-serif">
   <span style="margin-right:auto"></span>
-  <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
-    <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="4">
+  <div class="sn-links" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+    <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="5">
       <a href="{{ it.href }}" style="{{ it.style }}">{{ it.label }}</a>
+    </sc-for>
+  </div>
+  <button class="sn-burger" onClick="{{ toggle }}" aria-label="Menu" aria-expanded="{{ open }}" style="align-items:center;justify-content:center;width:44px;height:44px;flex-direction:column;background:rgba(255,255,255,.55);border:1px solid rgba(70,90,85,.18);border-radius:11px;cursor:pointer;padding:0">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="sn-panel" style="flex-direction:column;flex-basis:100%;gap:0;margin-top:6px">
+    <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="5">
+      <a href="{{ it.href }}" style="{{ it.panelStyle }}">{{ it.label }}</a>
     </sc-for>
   </div>
 </nav>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;resources&quot;,&quot;descriptors&quot;,&quot;about&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;descriptors&quot;,&quot;orientations&quot;,&quot;about&quot;,&quot;resources&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
+  state = { open:false };
   renderVals(){
     const active = this.props.active || '';
     const base = { fontFamily:"'PT Sans',sans-serif", fontSize:'13px', fontWeight:700, letterSpacing:'.02em', textDecoration:'none', color:'#5f7a73', padding:'5px 0', borderBottom:'2px solid transparent', whiteSpace:'nowrap' };
     const on = Object.assign({}, base, { color:'#1f3a36', borderBottom:'2px solid #46716f' });
+    const pBase = { fontFamily:"'PT Sans',sans-serif", fontSize:'16px', fontWeight:700, letterSpacing:'.01em', textDecoration:'none', color:'#3a544e', padding:'15px 4px', borderTop:'1px solid rgba(70,90,85,.14)' };
+    const pOn = Object.assign({}, pBase, { color:'#1f3a36' });
     const items = [
       { key:'home', label:'Home', href:'index.html' },
       { key:'descriptors', label:'Learning Goals', href:'descriptors.html' },
       { key:'about', label:'Meta-process', href:'metaprocess.html' },
       { key:'resources', label:'Resource Library', href:'resources.html' },
+      { key:'orientations', label:'Orientations', href:'orientations.html' },
       { key:'engage', label:'Partner with Us', href:'engage.html' }
     ];
-    return { navItems: items.map(it => ({ label:it.label, href:it.href, style: active===it.key ? on : base })) };
+    return {
+      open: this.state.open,
+      openClass: this.state.open ? 'sn-open' : '',
+      toggle: () => this.setState(s => ({ open: !s.open })),
+      navItems: items.map(it => ({ label:it.label, href:it.href, style: active===it.key ? on : base, panelStyle: active===it.key ? pOn : pBase }))
+    };
   }
 }
 </script>

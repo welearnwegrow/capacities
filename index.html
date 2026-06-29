@@ -42,11 +42,13 @@
   .ioc-compass-star{transform-box:fill-box;transform-origin:center;animation:iocNeedle 5.5s ease-in-out infinite}
   .ioc-compass{transform-box:fill-box;transform-origin:center}
   .ioc-zoom{display:none}
+  .ioc-browse{display:none}
   @media (max-width:860px){
     .ioc-zoom{display:flex}
     .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:pan-x pan-y}
   }
   @media (max-width:760px){
+    .ioc-browse{display:block}
     .ioc-root{padding:0 14px 48px}
     .ioc-title{font-size:30px !important}
     .ioc-lede{font-size:15px !important}
@@ -169,6 +171,68 @@
     </div>
   </div>
 
+  <!-- ===== MOBILE BROWSE LIST (phones only) ===== -->
+  <div class="ioc-browse" style="width:1040px;max-width:100%;margin:36px auto 0;text-align:left">
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#8a6a2f">Orientations</h2>
+    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our intentions</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px">
+      <sc-for list="{{ browseOrients }}" as="o" hint-placeholder-count="4">
+        <div onClick="{{ o.onToggle }}" style="background:#fff;border:1px solid rgba(217,187,120,.55);border-radius:13px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <div>
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#6B5527">{{ o.title }}</div>
+              <div style="font-style:italic;font-size:12px;color:#977c45;margin-top:1px">{{ o.sub }}</div>
+            </div>
+            <span style="color:#b0822f;font-size:19px;font-weight:700;flex:none;line-height:1">{{ o.chev }}</span>
+          </div>
+          <sc-if value="{{ o.open }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:13px;line-height:1.62;color:#544E45;margin:11px 0 0">{{ o.body }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#4f6a60">Learning areas</h2>
+    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our progress</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
+      <sc-for list="{{ browseDomains }}" as="d" hint-placeholder-count="3">
+        <div style="border-radius:14px;overflow:hidden;border:1px solid {{ d.border }}">
+          <div onClick="{{ d.onToggle }}" style="{{ d.headStyle }}">
+            <div>
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:17px;color:#fff">{{ d.name }}</div>
+              <div style="font-family:'PT Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.82)">{{ d.sub }}</div>
+            </div>
+            <span style="color:#fff;font-size:22px;font-weight:700;flex:none;line-height:1">{{ d.chev }}</span>
+          </div>
+          <sc-if value="{{ d.open }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#fff">
+              <sc-for list="{{ d.areas }}" as="a" hint-placeholder-count="8">
+                <div onClick="{{ a.onOpen }}" style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-top:1px solid rgba(70,90,85,.09);cursor:pointer">
+                  <span style="width:9px;height:9px;border-radius:50%;flex:none;background:{{ d.dot }}"></span>
+                  <span style="font-family:'PT Sans',sans-serif;font-size:14px;color:#33403c;flex:1">{{ a.label }}</span>
+                  <span style="color:#b9b0a0;font-size:17px">›</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#46514a">Meta-process</h2>
+    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our actions</p>
+    <a href="metaprocess.html" style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1px solid rgba(70,90,85,.18);border-radius:14px;padding:16px;text-decoration:none">
+      <div style="display:flex;align-items:center;gap:7px">
+        <span style="width:15px;height:15px;border-radius:50%;background:#46716f"></span>
+        <span style="width:15px;height:15px;border-radius:50%;background:#5f7a3a"></span>
+        <span style="width:15px;height:15px;border-radius:50%;background:#b07a3c"></span>
+        <span style="width:15px;height:15px;border-radius:50%;background:#a8542d"></span>
+        <span style="width:15px;height:15px;border-radius:50%;background:#3f6e74"></span>
+      </div>
+      <span style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#46716f;white-space:nowrap">Walk the five stages ›</span>
+    </a>
+  </div>
+
   <!-- attribution -->
   <div data-edit="attrib" style="width:1040px;max-width:100%;margin-top:14px;font-size:12px;color:#8a8377;letter-spacing:.02em"><br></div>
 
@@ -241,6 +305,8 @@
 class Component extends DCLogic {
   state = {
     openCap: null,
+    mGroup: 'teal',
+    mOrient: null,
     bend: [[589,240],null,[538,1198]],
     bendChord: {"fb-da":[512,1057],"fb-ps":[465,306],"fb-sd":[770,850]},
     wp: [
@@ -844,7 +910,12 @@ class Component extends DCLogic {
       ))
     );
 
-    return { seaArt, islands, waypoints, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap(), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
+    const TIP = this._tipData();
+    const browseOrients = ['recip','shared','pluri','jrf'].map(k => { const d = TIP[k] || {}; const open = this.state.mOrient === k; return { title:d.t, sub:d.s, body:d.b, open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mOrient: s.mOrient===k ? null : k })) }; });
+    const GMETA = { teal:{name:'Inner Inquiry',sub:'The personal foundation',head:'#46716f',border:'rgba(70,113,111,.3)',dot:'#46716f'}, green:{name:'Collective Strategy',sub:'Reading the field',head:'#5f7a3a',border:'rgba(95,122,58,.3)',dot:'#5f7a3a'}, coral:{name:'Systemic Intervention',sub:'Acting & sustaining',head:'#a8542d',border:'rgba(168,84,45,.3)',dot:'#a8542d'} };
+    const browseDomains = ['teal','green','coral'].map(g => { const m = GMETA[g]; const open = this.state.mGroup === g; const areas = (this.state.isl||[]).filter(p=>p.group===g).map(p=>({ label:p.label, onOpen: () => this.setState({ openCap: p.label }) })); return { key:g, name:m.name, sub: m.sub+' · '+areas.length+' areas', dot:m.dot, border:m.border, open, chev: open?'–':'+', headStyle:{ background:m.head, padding:'15px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }, areas, onToggle: () => this.setState(s => ({ mGroup: s.mGroup===g ? null : g })) }; });
+
+    return { seaArt, islands, waypoints, browseOrients, browseDomains, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap(), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
   }
 }
 </script>

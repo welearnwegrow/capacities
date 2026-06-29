@@ -136,9 +136,10 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { active:null, generating:false, genLabel:'', scale:1, wp:null, bend:[], bendChord:{}, mobile:false, mzoom:1.85 };
+  state = { active:null, generating:false, genLabel:'', scale:1, wp:null, bend:[], bendChord:{}, mwp:null, mbend:[], mbendChord:{}, mobile:false, mzoom:1.85 };
 
   STAGE_W = 1040; STAGE_H = 660;
+  MSTAGE_W = 600; MSTAGE_H = 980;
   INK = '#39342b';
 
   STAGES = [
@@ -216,6 +217,15 @@ class Component extends DCLogic {
     { key:'adapt', x:615, y:598 },
     { key:'integrate', x:145, y:502 }
   ]; }
+  _mobileWp(){ return [
+    { key:'probe', x:241, y:56 },
+    { key:'sense', x:526, y:194 },
+    { key:'design', x:540, y:546 },
+    { key:'adapt', x:145, y:669 },
+    { key:'integrate', x:51, y:317 }
+  ]; }
+  _mobileBend(){ return [null,null,[392,695],[63,536],[106,158]]; }
+  _mobileBendChord(){ return {"fb-ps":[353,216],"fb-sd":[444,382],"fb-da":[281,569],"fb-id":[277,392]}; }
   _defaultBend(){ return [[294,51],[703,112],[645,410],[372,614],[87,342]]; }
   _defaultBendChord(){ return {"fb-ps":[346,189],"fb-sd":[598,219],"fb-da":[784,478],"fb-id":[475,350]}; }
 
@@ -225,7 +235,11 @@ class Component extends DCLogic {
     try{ const s=localStorage.getItem('mp-wp'); if(s){ const a=JSON.parse(s); if(Array.isArray(a)&&a.length===5) wp=a; } }catch(e){}
     try{ const s=localStorage.getItem('mp-bend'); if(s){ const a=JSON.parse(s); if(Array.isArray(a)) bend=a; } }catch(e){}
     try{ const s=localStorage.getItem('mp-bendc'); if(s){ const o=JSON.parse(s); if(o&&typeof o==='object') bendChord=o; } }catch(e){}
-    this.setState({ wp, bend, bendChord, mobile: window.innerWidth<=860 });
+    let mwp=this._mobileWp(), mbend=this._mobileBend(), mbendChord=this._mobileBendChord();
+    try{ const s=localStorage.getItem('mp-wp-m'); if(s){ const a=JSON.parse(s); if(Array.isArray(a)&&a.length===5) mwp=a; } }catch(e){}
+    try{ const s=localStorage.getItem('mp-bend-m'); if(s){ const a=JSON.parse(s); if(Array.isArray(a)) mbend=a; } }catch(e){}
+    try{ const s=localStorage.getItem('mp-bendc-m'); if(s){ const o=JSON.parse(s); if(o&&typeof o==='object') mbendChord=o; } }catch(e){}
+    this.setState({ wp, bend, bendChord, mwp, mbend, mbendChord, mobile: window.innerWidth<=860 });
     this._onResize = () => { this._checkMobile(); this._fitMap(); this._fitOverlay(); };
     window.addEventListener('resize', this._onResize);
     this._fitMap(); setTimeout(()=>this._fitMap(),60); setTimeout(()=>this._fitMap(),300);
@@ -240,12 +254,15 @@ class Component extends DCLogic {
     if(!frame||!stage) return;
     const w=frame.clientWidth;
     if(this.state.mobile){
-      const s=(w/this.STAGE_W)*this.state.mzoom;
+      const SW=this.MSTAGE_W, SH=this.MSTAGE_H;
+      const s=w/SW;
+      stage.style.width=SW+'px'; stage.style.height=SH+'px';
       stage.style.transform='scale('+s+')';
-      frame.style.height=(this.STAGE_H*s)+'px';
-      frame.style.overflowX='auto'; frame.style.overflowY='hidden'; frame.style.webkitOverflowScrolling='touch';
+      frame.style.height=(SH*s)+'px';
+      frame.style.overflowX='hidden'; frame.style.overflowY='hidden';
     } else {
       const s=w/this.STAGE_W;
+      stage.style.width=this.STAGE_W+'px'; stage.style.height=this.STAGE_H+'px';
       stage.style.transform='scale('+s+')';
       frame.style.height=(this.STAGE_H*s)+'px';
       frame.style.overflowX='visible'; frame.style.overflowY='visible';
@@ -267,31 +284,34 @@ class Component extends DCLogic {
   _darken(hex){ const n=parseInt(hex.replace('#',''),16); let r=(n>>16)&255,g=(n>>8)&255,b=n&255; r=Math.round(r*.66); g=Math.round(g*.66); b=Math.round(b*.66); return 'rgb('+r+','+g+','+b+')'; }
 
   // ---------- drag ----------
-  _toStage(ev){ const st=document.querySelector('.mp-stage'); const r=st.getBoundingClientRect(); return [ Math.max(0,Math.min(this.STAGE_W,(ev.clientX-r.left)*this.STAGE_W/r.width)), Math.max(0,Math.min(this.STAGE_H,(ev.clientY-r.top)*this.STAGE_H/r.height)) ]; }
-  _persistWp(){ try{ localStorage.setItem('mp-wp', JSON.stringify(this.state.wp)); }catch(e){} }
-  _persistBend(){ try{ localStorage.setItem('mp-bend', JSON.stringify(this.state.bend||[])); }catch(e){} }
-  _persistBendChord(){ try{ localStorage.setItem('mp-bendc', JSON.stringify(this.state.bendChord||{})); }catch(e){} }
+  _toStage(ev){ const st=document.querySelector('.mp-stage'); const r=st.getBoundingClientRect(); const SW=this.state.mobile?this.MSTAGE_W:this.STAGE_W, SH=this.state.mobile?this.MSTAGE_H:this.STAGE_H; return [ Math.max(0,Math.min(SW,(ev.clientX-r.left)*SW/r.width)), Math.max(0,Math.min(SH,(ev.clientY-r.top)*SH/r.height)) ]; }
+  _persistWp(){ try{ if(this.state.mobile) localStorage.setItem('mp-wp-m', JSON.stringify(this.state.mwp)); else localStorage.setItem('mp-wp', JSON.stringify(this.state.wp)); }catch(e){} }
+  _persistBend(){ try{ if(this.state.mobile) localStorage.setItem('mp-bend-m', JSON.stringify(this.state.mbend||[])); else localStorage.setItem('mp-bend', JSON.stringify(this.state.bend||[])); }catch(e){} }
+  _persistBendChord(){ try{ if(this.state.mobile) localStorage.setItem('mp-bendc-m', JSON.stringify(this.state.mbendChord||{})); else localStorage.setItem('mp-bendc', JSON.stringify(this.state.bendChord||{})); }catch(e){} }
 
   _startDragWp(i,e){
     e.preventDefault();
+    const mob=this.state.mobile;
     const sx=e.clientX, sy=e.clientY; this._wpDragged=false;
-    const move=(ev)=>{ if(!this._wpDragged && Math.abs(ev.clientX-sx)<4 && Math.abs(ev.clientY-sy)<4) return; this._wpDragged=true; const [x,y]=this._toStage(ev); const wp=this.state.wp.slice(); wp[i]=Object.assign({},wp[i],{x:Math.round(x),y:Math.round(y)}); this.setState({wp}); };
+    const move=(ev)=>{ if(!this._wpDragged && Math.abs(ev.clientX-sx)<4 && Math.abs(ev.clientY-sy)<4) return; this._wpDragged=true; const [x,y]=this._toStage(ev); const arr=(mob?(this.state.mwp||this._mobileWp()):this.state.wp).slice(); arr[i]=Object.assign({},arr[i],{x:Math.round(x),y:Math.round(y)}); this.setState(mob?{mwp:arr}:{wp:arr}); };
     const up=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); if(this._wpDragged) this._persistWp(); };
     window.addEventListener('pointermove',move); window.addEventListener('pointerup',up);
   }
   _startDragBend(i,e){
     e.preventDefault(); e.stopPropagation();
-    const move=(ev)=>{ const [x,y]=this._toStage(ev); const bend=(this.state.bend||[]).slice(); bend[i]=[Math.round(x),Math.round(y)]; this.setState({bend}); };
+    const mob=this.state.mobile;
+    const move=(ev)=>{ const [x,y]=this._toStage(ev); const arr=(mob?(this.state.mbend||[]):(this.state.bend||[])).slice(); arr[i]=[Math.round(x),Math.round(y)]; this.setState(mob?{mbend:arr}:{bend:arr}); };
     const up=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); this._persistBend(); };
     window.addEventListener('pointermove',move); window.addEventListener('pointerup',up);
   }
   _startDragBendChord(key,e){
     e.preventDefault(); e.stopPropagation();
-    const move=(ev)=>{ const [x,y]=this._toStage(ev); const bendChord=Object.assign({},this.state.bendChord||{}); bendChord[key]=[Math.round(x),Math.round(y)]; this.setState({bendChord}); };
+    const mob=this.state.mobile;
+    const move=(ev)=>{ const [x,y]=this._toStage(ev); const obj=Object.assign({},mob?(this.state.mbendChord||{}):(this.state.bendChord||{})); obj[key]=[Math.round(x),Math.round(y)]; this.setState(mob?{mbendChord:obj}:{bendChord:obj}); };
     const up=()=>{ window.removeEventListener('pointermove',move); window.removeEventListener('pointerup',up); this._persistBendChord(); };
     window.addEventListener('pointermove',move); window.addEventListener('pointerup',up);
   }
-  _resetMap(){ ['mp-wp','mp-bend','mp-bendc'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); this.setState({ wp:this._defaultWp(), bend:this._defaultBend(), bendChord:this._defaultBendChord() }); }
+  _resetMap(){ const mob=this.state.mobile; (mob?['mp-wp-m','mp-bend-m','mp-bendc-m']:['mp-wp','mp-bend','mp-bendc']).forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); this.setState(mob?{ mwp:this._mobileWp(), mbend:this._mobileBend(), mbendChord:this._mobileBendChord() }:{ wp:this._defaultWp(), bend:this._defaultBend(), bendChord:this._defaultBendChord() }); }
 
   // ---------- nav ----------
   _open(i){ if(this._wpDragged){ this._wpDragged=false; return; } if(window.track) window.track('open_stage', {stage: this.STAGES[i] && this.STAGES[i].name}); this.setState({active:i}, ()=>this._fitOverlay()); }
@@ -318,10 +338,12 @@ class Component extends DCLogic {
   // ---------- diagram ----------
   _buildMap(){
     const h=React.createElement;
-    const wp=this.state.wp||this._defaultWp();
+    const mob=this.state.mobile;
+    const SW=mob?this.MSTAGE_W:this.STAGE_W, SH=mob?this.MSTAGE_H:this.STAGE_H;
+    const wp=mob?(this.state.mwp||this._mobileWp()):(this.state.wp||this._defaultWp());
     const route=wp.map(p=>[p.x,p.y]);
     const rn=route.length;
-    const bends=this.state.bend||[];
+    const bends=mob?(this.state.mbend||[]):(this.state.bend||[]);
     const segMid=(i)=>{ const p0=route[(i-1+rn)%rn],p1=route[i],p2=route[(i+1)%rn],p3=route[(i+2)%rn]; const c1x=p1[0]+(p2[0]-p0[0])/6,c1y=p1[1]+(p2[1]-p0[1])/6,c2x=p2[0]-(p3[0]-p1[0])/6,c2y=p2[1]-(p3[1]-p1[1])/6; return [(p1[0]+3*c1x+3*c2x+p2[0])/8,(p1[1]+3*c1y+3*c2y+p2[1])/8]; };
     const handlePts=route.map((_,i)=> (bends[i]&&bends[i].length===2)?bends[i]:segMid(i));
     let routeD=`M${route[0][0]},${route[0][1]}`;
@@ -330,14 +352,14 @@ class Component extends DCLogic {
     const kids=[];
     kids.push(h('path',{key:'route',className:'ioc-march',d:routeD,fill:'none',stroke:this.INK,strokeOpacity:.72,strokeWidth:3.4,strokeDasharray:'2 9',strokeLinecap:'round'}));
     handlePts.forEach((P,i)=>{ kids.push(h('circle',{key:'bh'+i,cx:P[0],cy:P[1],r:15,fill:'transparent',onPointerDown:(e)=>this._startDragBend(i,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:'bd'+i,cx:P[0],cy:P[1],r:4.5,fill:'#39342b',fillOpacity:.22,stroke:'#39342b',strokeOpacity:.45,strokeWidth:1,style:{pointerEvents:'none'}})); });
-    { const cen=[510,330];
-      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=this.state.bendChord||{}; const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:this.INK,strokeOpacity:op,strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); kids.push(h('circle',{key:key+'-h',cx:P[0],cy:P[1],r:14,fill:'transparent',onPointerDown:(e)=>this._startDragBendChord(key,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:key+'-d',cx:P[0],cy:P[1],r:4,fill:'#39342b',fillOpacity:.2,stroke:'#39342b',strokeOpacity:.4,strokeWidth:1,style:{pointerEvents:'none'}})); };
-      arc(0,1,150,'ioc-march-rev','fb-ps',.5);
-      arc(1,2,150,'ioc-march-rev','fb-sd',.5);
-      arc(4,2,150,'ioc-march','fb-id',.28);
-      arc(2,3,150,'ioc-march-rev','fb-da',.5);
+    { const cen=mob?[SW/2,SH*0.46]:[510,330]; const AO=mob?90:150;
+      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=mob?(this.state.mbendChord||{}):(this.state.bendChord||{}); const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:this.INK,strokeOpacity:op,strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); kids.push(h('circle',{key:key+'-h',cx:P[0],cy:P[1],r:14,fill:'transparent',onPointerDown:(e)=>this._startDragBendChord(key,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:key+'-d',cx:P[0],cy:P[1],r:4,fill:'#39342b',fillOpacity:.2,stroke:'#39342b',strokeOpacity:.4,strokeWidth:1,style:{pointerEvents:'none'}})); };
+      arc(0,1,AO,'ioc-march-rev','fb-ps',.5);
+      arc(1,2,AO,'ioc-march-rev','fb-sd',.5);
+      arc(4,2,AO,'ioc-march','fb-id',.28);
+      arc(2,3,AO,'ioc-march-rev','fb-da',.5);
     }
-    const mapSvg=h('svg',{width:this.STAGE_W,height:this.STAGE_H,viewBox:'0 0 '+this.STAGE_W+' '+this.STAGE_H,style:{position:'absolute',inset:0,width:'100%',height:'100%',display:'block'}},kids);
+    const mapSvg=h('svg',{width:SW,height:SH,viewBox:'0 0 '+SW+' '+SH,style:{position:'absolute',inset:0,width:'100%',height:'100%',display:'block'}},kids);
 
     const waypoints=h('div',{key:'wps',style:{position:'absolute',inset:0,pointerEvents:'none'}},
       wp.map((p,i)=>{ const st=this.STAGES[i]; return h('div',{key:'wp'+i,style:{position:'absolute',left:p.x+'px',top:p.y+'px',transform:'translate(-50%,-50%)',animation:'iocBuoy '+(6+(i%4))+'s ease-in-out infinite',animationDelay:(-i*1.3)+'s',pointerEvents:'none'}},
@@ -401,7 +423,7 @@ class Component extends DCLogic {
       ac,
       dragHintStyle:{ display: mob ? 'none' : 'inline' },
       tapHintStyle:{ display: mob ? 'inline' : 'none' },
-      zoomCtrlStyle:{ display: mob ? 'flex' : 'none', alignItems:'center', gap:'8px', marginRight:'auto' },
+      zoomCtrlStyle:{ display:'none', alignItems:'center', gap:'8px', marginRight:'auto' },
       canvasScaleStyle: mob
         ? { position:'absolute', left:'-99999px', top:'0', transform:'scale(1)', flex:'none' }
         : { transform:'scale('+this.state.scale+')', transformOrigin:'center top', animation:'mpPop .22s ease', flex:'none' },

@@ -18,8 +18,9 @@
   .o-bearing{transition:transform .14s ease, box-shadow .14s ease}
   .o-bearing:hover{transform:translate(-50%,-50%) scale(1.04)}
   @media (max-width:860px){
-    .o-grid{grid-template-columns:1fr !important;gap:36px !important}
-    .o-compass-wrap{max-width:300px !important}
+    .o-grid{grid-template-columns:1fr !important;gap:28px !important}
+    .o-compass-panel{padding:30px 44px !important}
+    .o-compass-wrap{max-width:280px !important}
   }
 </style>
 </helmet>
@@ -31,12 +32,12 @@
     <p style="font-size:clamp(14.5px,3.6vw,16px);line-height:1.72;color:#4a4435;margin:0;max-width:80ch">The orientations below are not neutral. They come from global south and north social, cultural, and ecological movements, from people who taught us and communities we hold ourselves accountable to. We are both third-space changemakers, who met through the United World Colleges (UWC) Movement where this work began. We work inside structures of power, money, and authority keeping our cultural inheritance while working with institutions built on very different assumptions. We offer these four orientations as a compass, and we hope you engage with them from where you stand.</p>
   </div>
 
-  <div class="o-grid" style="max-width:1100px;margin:0 auto;padding:18px clamp(18px,5vw,30px) 12px;display:grid;grid-template-columns:1.05fr 0.82fr;gap:40px;align-items:center">
+  <div class="o-grid" style="max-width:1100px;margin:0 auto;padding:18px clamp(18px,5vw,30px) 12px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:stretch">
 
     <!-- LEFT: compass -->
-    <div>
-      <div style="font-family:'PT Sans',sans-serif;font-size:12.5px;color:#977c45;margin:0 0 14px">Tap a bearing to read its value.</div>
-      <div class="o-compass-wrap" style="position:relative;width:100%;max-width:340px;aspect-ratio:1/1;margin:0 auto">
+    <div class="o-compass-panel" style="background:radial-gradient(circle at 50% 40%, #fffefa 0%, #f6efe0 100%);border:1px solid rgba(176,130,47,.45);border-radius:16px;padding:34px 60px;box-shadow:0 10px 30px rgba(120,95,40,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+      <div style="font-family:'PT Sans',sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:#977c45;text-align:center">Tap a bearing to read its value</div>
+      <div class="o-compass-wrap" style="position:relative;width:100%;max-width:300px;aspect-ratio:1/1;margin:0 auto">
         {{ compassSvg }}
         <sc-for list="{{ orients }}" as="o" hint-placeholder-count="4">
           <button onClick="{{ o.onSelect }}" class="o-bearing" style="{{ o.btnStyle }}">{{ o.name }}</button>
@@ -45,12 +46,10 @@
     </div>
 
     <!-- RIGHT: selected value -->
-    <div>
-      <div style="background:#fffdf8;border:1px solid rgba(176,130,47,.45);border-radius:16px;padding:24px 26px;box-shadow:0 10px 30px rgba(120,95,40,.1)">
-        <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:22px;line-height:1.14;margin:0;color:#6B5527">{{ sel.name }}</h2>
-        <div style="font-style:italic;font-size:13px;color:#977c45;margin:5px 0 14px">{{ sel.paren }}</div>
-        <p style="font-size:14px;line-height:1.66;color:#4a4435;margin:0">{{ sel.body }}</p>
-      </div>
+    <div style="background:#fffdf8;border:1px solid rgba(176,130,47,.45);border-radius:16px;padding:32px 34px;box-shadow:0 10px 30px rgba(120,95,40,.1);display:flex;flex-direction:column;justify-content:center">
+      <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:23px;line-height:1.14;margin:0;color:#6B5527">{{ sel.name }}</h2>
+      <div style="font-style:italic;font-size:13px;color:#977c45;margin:6px 0 16px">{{ sel.paren }}</div>
+      <p style="font-size:14.5px;line-height:1.7;color:#4a4435;margin:0">{{ sel.body }}</p>
     </div>
   </div>
 
@@ -60,11 +59,11 @@
       <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(26px,5vw,32px);line-height:1.08;margin:0 0 12px;color:#46514a">Working with the orientations</h2>
       <p style="font-size:15px;line-height:1.68;color:#4a4435;margin:0 0 24px;max-width:80ch">These four values are a compass, not a checklist. A compass won't walk the path for you or name your destination; it tells you which way you're facing when the terrain gets confusing. Use the orientations the same way:</p>
       <div style="display:flex;flex-direction:column;gap:18px;max-width:860px">
-        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">01</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Return to them at the forks.</strong> When a decision is genuinely hard — who to involve, what to fund, when to push and when to wait — bring it back and ask which way each value points.</p></div>
-        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">02</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Read them as questions you keep asking.</strong> Resist treating them as badges to claim (we're just, we're plural). Instead ask: where is power concentrating here? Whose knowledge are we leaving out? Who actually decides? What are we taking, and what are we giving back?</p></div>
-        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">03</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Expect them to generate friction.</strong> The orientations will conflict with the demands of funders, deadlines, and institutions. They're here to help you notice and name those tensions, not to resolve them cleanly. Staying honest inside the contradiction is the work.</p></div>
-        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">04</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Mind the how as much as the what.</strong> A just outcome reached through an extractive process isn't aligned. These apply to how you meet, decide, and relate, not only to what you achieve.</p></div>
-        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">05</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Make them yours, and keep arguing.</strong> Translate them into your own context, language, and accountabilities. A living compass gets recalibrated; a doctrine just gets obeyed.</p></div>
+        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">01</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Consult them at junctions.</strong> When a decision is genuinely hard — who to involve, what to fund, when to push and when to wait — bring it back and ask which way each value points.</p></div>
+        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">02</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Apply them as ongoing inquiries.</strong> Resist treating them as badges to claim (we're just, we're plural). Instead ask, where is power concentrating here? Whose knowledge are we leaving out? Who actually decides? What are we taking, and what are we giving back?</p></div>
+        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">03</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Anticipate friction.</strong> The orientations will conflict with the demands of funders, deadlines, and institutions. They're here to help you notice and name those tensions, not to resolve them cleanly. Staying honest inside the contradiction is the work.</p></div>
+        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">04</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Prioritize the how alongside the what.</strong> A just outcome reached through an extractive process isn't aligned. These apply to how you meet, decide, and relate, not only to what you achieve.</p></div>
+        <div style="display:flex;gap:15px;align-items:baseline"><span style="font-family:'PT Serif',serif;font-weight:700;color:#c9a44f;font-size:18px;flex:none;min-width:26px">05</span><p style="font-size:15px;line-height:1.64;color:#4a4435;margin:0"><strong style="color:#6B5527">Make them yours.</strong> Translate these values into your specific context, language, and systems of accountability. A living compass requires periodic recalibration.</p></div>
       </div>
     </div>
   </div>
@@ -78,11 +77,11 @@ class Component extends DCLogic {
   ORIENTS = [
     { key:'jrf', dir:'N', name:'Just & Regenerative Futures', paren:'Where we are going', pos:{ left:'50%', top:'9%' },
       body:'Just and regenerative futures are the horizons toward which we orient our collective efforts. This involves the intertwined practices of repair, balance, and right relationship. While justice seeks to confront and transform the structural causes of harm and redistribute power, regeneration focuses on the capacity of social and ecological systems to heal, renew, and evolve. Drawing on Indigenous sovereignty, climate justice, and intergenerational ethics, this value serves as a compass for cultivating the conditions where both human and non-human communities can live with dignity and flourish over the long term.' },
-    { key:'plurality', dir:'E', name:'Plurality', paren:'How we know', pos:{ left:'97%', top:'50%' },
+    { key:'plurality', dir:'S', name:'Plurality', paren:'How we know', pos:{ left:'50%', top:'91%' },
       body:'Plurality is the recognition that many worlds and ways of knowing coexist, and that no single worldview can claim universality. It foregrounds Indigenous, local, land-based, and spiritual knowledge as vital alongside scientific and technical expertise. Informed by decolonial thought, participatory design, and community-led innovation, pluriversality expands whose worlds are made visible and strengthens our collective capacity to navigate complexity.' },
-    { key:'reciprocity', dir:'S', name:'Reciprocity', paren:'How we act', pos:{ left:'50%', top:'91%' },
+    { key:'reciprocity', dir:'W', name:'Reciprocity', paren:'How we act', pos:{ left:'3%', top:'50%' },
       body:'Reciprocity is the practice of mutual exchange and ethical relationship with the living world. It moves beyond extractive logic, calling us to act with care and responsibility so that our interventions restore balance rather than reproduce harm. By acknowledging that human thriving is dependent on the health of the systems we inhabit, reciprocity anchors systems change in humility and the pursuit of the right relationship. Rooted in Indigenous relational ethics, feminist standpoint theory, and reflective practice traditions, it ensures that every action contributes to the vitality of the whole.' },
-    { key:'shared', dir:'W', name:'Shared Agency', paren:'How we make decisions', pos:{ left:'3%', top:'50%' },
+    { key:'shared', dir:'E', name:'Shared Agency', paren:'How we make decisions', pos:{ left:'97%', top:'50%' },
       body:'Shared agency is the practice of distributing power and decision-making responsibility across a collective to ensure that action is inclusive, adaptive, and rooted in distributed intelligence. It moves away from centralized, top-down control, favoring processes that empower those closest to the work to shape its trajectory. By anchoring decision-making in collaborative governance, consensus-building, and transparency, shared agency ensures that the group remains responsive to changing circumstances and maintains accountability to its members.' }
   ];
   _compass(angle){
@@ -114,7 +113,7 @@ class Component extends DCLogic {
   }
   renderVals(){
     const sel = this.ORIENTS.find(o=>o.key===this.state.sel) || this.ORIENTS[0];
-    const DEG = { jrf:0, plurality:90, reciprocity:180, shared:270 };
+    const DEG = { jrf:0, shared:90, plurality:180, reciprocity:270 };
     const angle = DEG[this.state.sel] != null ? DEG[this.state.sel] : 0;
     const orients = this.ORIENTS.map(o=>{
       const active = o.key===this.state.sel;

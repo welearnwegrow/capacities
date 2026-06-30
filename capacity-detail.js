@@ -192,7 +192,7 @@ window.__CAPDETAIL = {
    "Influential": "Builds large cooperative networks and platforms that coordinate resources and advocacy across regions and borders. Helps a whole field act with more coherence than its parts could alone."
   }
  },
- "Political Participation": {
+ "Advocacy & Political Participation": {
   "desc": "Engaging, challenging, and reshaping policy and civic institutions to make change durable and protected in law.",
   "levels": {
    "Emerging": "Takes part in civic life — petitions, local actions, voting, councils — and learns how decisions actually get made. Understands the paths through which ordinary people can shape policy.",

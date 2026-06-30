@@ -90,7 +90,7 @@ window.__RESEARCH = {
    "group": "coral"
   },
   {
-   "label": "Political Participation",
+   "label": "Advocacy & Political Participation",
    "group": "coral"
   },
   {
@@ -605,7 +605,7 @@ window.__RESEARCH = {
    "caps": [
     "Convening & Facilitating Collaborations",
     "Creative Expression & Storytelling",
-    "Political Participation"
+    "Advocacy & Political Participation"
    ],
    "desc": "A guidebook by Deepa Iyer that offers a comprehensive set of frameworks and reflective practices for those working in social change. It helps practitioners identify their roles within an ecosystem, navigate the challenges of movement-building, and foster deep connection across diverse communities.",
    "types": [

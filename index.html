@@ -666,7 +666,9 @@ class Component extends DCLogic {
     const isCap = d.g === 'teal' || d.g === 'green' || d.g === 'coral';
     const isIsland = isCap && key.indexOf('grp-') !== 0;
     this._tipKey = isIsland ? key : null;
-    titleEl.textContent = d.t; bodyEl.textContent = d.b;
+    const CD = (typeof window!=='undefined' && window.__CAPDETAIL) ? window.__CAPDETAIL : {};
+    const capBody = (isIsland && CD[key] && CD[key].desc) ? CD[key].desc : d.b;
+    titleEl.textContent = d.t; bodyEl.textContent = capBody;
     subEl.textContent = isCap ? '' : d.s;
     subEl.style.display = (isCap || !d.s) ? 'none' : '';
     const linkEl = tip.querySelector('.ioc-tip-link');

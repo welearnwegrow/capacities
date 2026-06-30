@@ -4,7 +4,7 @@
 //   written for people new to the field, age-agnostic (16+), grounded in the framework sources.
 window.__CAPDETAIL = {
  "Observing & Listening": {
-  "desc": "Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before acting.",
+  "desc": "Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.",
   "levels": {
    "Emerging": "Notices your own assumptions and filters, and chooses to listen to people whose views differ from yours — including those usually overlooked — without rushing to judge. Practices active, empathic listening: summarising what you heard before responding.",
    "Developing": "Pays close attention inside a group or community, picking up the unspoken feelings, histories, and tensions that shape how people show up. Uses tools like empathy maps and listening interviews to surface what isn't being said directly.",
@@ -13,7 +13,7 @@ window.__CAPDETAIL = {
   }
  },
  "Somatic Eco-Regulation": {
-  "desc": "Monitoring and steadying your own nervous-system responses through deliberate, relational grounding — often within ecological and land-based settings.",
+  "desc": "The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.",
   "levels": {
    "Emerging": "Notices how stress, grief, or overwhelm show up in your body, and learns simple ways to steady yourself, such as breathwork, body scans, or time in nature. Begins to name emotions without being swept away by them.",
    "Developing": "Helps a team or group stay grounded and feel safe with one another through demanding, high-pressure work. Builds shared practices of rest, care, and reflection that sustain people over a long project.",
@@ -31,7 +31,7 @@ window.__CAPDETAIL = {
   }
  },
  "Critical Consciousness": {
-  "desc": "Continuously examining your own assumptions, position, and inherited biases to understand the limits of your own perspective and act with accountability.",
+  "desc": "The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective.",
   "levels": {
    "Emerging": "Questions things usually taken for granted, and begins to see how your own background, identity, and advantages shape the way you see the world. Practices surfacing hidden assumptions before acting on them.",
    "Developing": "Spots biases built into common ways of researching or running projects, and is willing to name and challenge them. Maps how identity, worldview, and power intersect in a given situation.",
@@ -40,7 +40,7 @@ window.__CAPDETAIL = {
   }
  },
  "Spiritual & Moral Inquiry": {
-  "desc": "Grounding choices, designs, and relationships in a non-extractive ethic that honours interconnection, repair, and long-term moral integrity.",
+  "desc": "Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.",
   "levels": {
    "Emerging": "Develops a personal sense of right relationship, grounded in care and respect rather than what's merely useful or transactional. Begins to clarify the values that guide your decisions.",
    "Developing": "Connects the goals of a project to a clear commitment to repair, fairness, and responsibility to future generations. Recognises that ethics is rarely a simple right-or-wrong, and works with that complexity.",
@@ -49,7 +49,7 @@ window.__CAPDETAIL = {
   }
  },
  "Socioeconomic & Political Literacy": {
-  "desc": "Understanding how political and economic systems are built, how they got that way, and how they shape the conditions a community lives within.",
+  "desc": "Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.",
   "levels": {
    "Emerging": "Understands the basics of how economies and politics work, and can trace how large forces — markets, policy, institutions — shape everyday life. Reads beyond the headlines to the structures underneath.",
    "Developing": "Sees how race, class, and history layer together to create the social and economic challenges a place faces. Connects local struggles to the wider systems that produce them.",
@@ -58,7 +58,7 @@ window.__CAPDETAIL = {
   }
  },
  "Ecological & Planetary Literacy": {
-  "desc": "Understanding earth systems, biodiversity, resource limits, and ecological feedback well enough to make decisions that work with nature rather than against it.",
+  "desc": "Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.",
   "levels": {
    "Emerging": "Explains how natural systems work, the climate and ecological risks nearby, and the idea that the planet has real limits. Connects personal choices to their ecological footprint and begins to act on that awareness.",
    "Developing": "Connects big-picture ecological trends — biodiversity loss, climate disruption, resource depletion — to what's actually happening in local communities and landscapes. Reads ecological feedback loops, not just isolated facts.",
@@ -67,7 +67,7 @@ window.__CAPDETAIL = {
   }
  },
  "Cultural & Ancestral Literacy": {
-  "desc": "Engaging with and protecting cultural knowledge, Indigenous lifeways, land-based histories, and intergenerational traditions with care and proper attribution.",
+  "desc": "Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.",
   "levels": {
    "Emerging": "Values local histories, oral traditions, and lineages, and respects cultural ways of knowing different from your own. Listens to ancestral and land-based knowledge with humility rather than extraction.",
    "Developing": "Brings traditional and Indigenous knowledge into the design of programs, with care, consent, and respect. Recognises whose knowledge is present and whose has been erased.",
@@ -76,7 +76,7 @@ window.__CAPDETAIL = {
   }
  },
  "Systems Thinking & Modeling": {
-  "desc": "Mapping how complex systems behave — their feedback loops, delays, stocks, and flows — to find the points where change can take hold.",
+  "desc": "Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.",
   "levels": {
    "Emerging": "Traces simple cause-and-effect and feedback loops in a situation close to you, seeing how one thing influences another over time. Begins to look for patterns rather than blaming single events or people.",
    "Developing": "Maps how a system works — its loops, delays, and unintended effects — to make sense of a community challenge. Builds visual representations like causal-loop diagrams to share that understanding with others.",
@@ -85,7 +85,7 @@ window.__CAPDETAIL = {
   }
  },
  "Complex Problem Solving": {
-  "desc": "Telling apart ordered, complex, and chaotic situations so you know when to manage with a plan and when to experiment your way forward.",
+  "desc": "Categorizing problem fields across ordered, complex, or chaotic domains to determine whether an environment requires linear management or emergent experimentation.",
   "levels": {
    "Emerging": "Tells the difference between 'complicated' problems — solvable by experts and analysis — and 'complex' challenges that need emergence and experimentation. Resists the urge to apply tidy, one-size-fits-all fixes to messy situations.",
    "Developing": "Identifies and maps the non-linear feedback loops and time delays inside a system, recognising that simple 'root cause' analysis is often not enough. Designs small experiments suited to genuine uncertainty.",
@@ -94,7 +94,7 @@ window.__CAPDETAIL = {
   }
  },
  "Positionality & Power Analysis": {
-  "desc": "Mapping both formal hierarchies and informal power — visible, hidden, and invisible — to see how resources, decisions, and risks are distributed.",
+  "desc": "Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.",
   "levels": {
    "Emerging": "Maps who holds influence — both official and unofficial — in a space you're part of, and who benefits or loses from how things are arranged. Begins to notice the hidden and invisible forms of power, not just the obvious ones.",
    "Developing": "Sees how power intersects with race, gender, class, and history to shape what's possible in a community effort. Uses tools like stakeholder maps or Gaventa's Power Cube to analyse a real situation.",
@@ -103,7 +103,7 @@ window.__CAPDETAIL = {
   }
  },
  "Narrative & Media Analysis": {
-  "desc": "Seeing how stories, media, and cultural narratives shape what people believe is normal and possible — and crafting narratives that open new possibilities.",
+  "desc": "Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.",
   "levels": {
    "Emerging": "Spots bias, spin, framing, and stereotypes in news and online spaces, and asks whose voice is centred and whose is missing. Begins to see stories as something designed, not just given.",
    "Developing": "Sees how widely-held cultural myths and dominant narratives quietly block social and environmental change. Crafts stories that surface shared values and invite people in.",
@@ -112,7 +112,7 @@ window.__CAPDETAIL = {
   }
  },
  "Futures Thinking & Foresight": {
-  "desc": "Using horizon-scanning, scenarios, and imagination to explore possible futures and plan with long time-horizons in mind.",
+  "desc": "Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.",
   "levels": {
    "Emerging": "Imagines different possible futures instead of assuming things must stay as they are, distinguishing probable, plausible, possible, and preferred futures. Notices early signals and emerging trends.",
    "Developing": "Leads others through scenario and 'what if' exercises — like Three Horizons or scenario planning — that stretch collective imagination. Reflects on how cultural narratives shape what futures people can even picture.",
@@ -121,7 +121,7 @@ window.__CAPDETAIL = {
   }
  },
  "Regenerative Systems Design": {
-  "desc": "Designing organisations, infrastructure, and interventions that renew rather than deplete — mirroring the cyclical, self-sustaining patterns of living systems.",
+  "desc": "Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.",
   "levels": {
    "Emerging": "Grasps the idea of circular, waste-free design and starts noticing resource use and waste streams around you. Sees the difference between extracting from a system and renewing it.",
    "Developing": "Co-designs community-scale projects — shared tools, composting, repair networks — that follow nature's cycles. Applies regenerative and circular principles to real, local efforts.",
@@ -130,7 +130,7 @@ window.__CAPDETAIL = {
   }
  },
  "Participatory Research & Design": {
-  "desc": "Running research and design where the people most affected by a problem are equal partners in framing questions and making sense of findings.",
+  "desc": "Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.",
   "levels": {
    "Emerging": "Gathers people's input through respectful conversation and inquiry rather than assuming you already know best. Frames questions that centre relevance, justice, and mutual learning.",
    "Developing": "Runs research and design where the affected community are genuine co-creators, not just subjects or data points. Reflects with the group on how power shapes the inquiry itself.",
@@ -139,7 +139,7 @@ window.__CAPDETAIL = {
   }
  },
  "Data Analysis & Evaluation": {
-  "desc": "Using data, metrics, and positive-deviance to find what's quietly working, track system-wide trends, and judge real impact.",
+  "desc": "Utilizing empirical data tracking, quantitative and qualitative metrics, and positive deviance mapping to identify hidden localized solutions and track system-wide trends.",
   "levels": {
    "Emerging": "Reads public data and basic statistics to build clear, evidence-based arguments for change. Asks what the numbers do — and don't — actually show.",
    "Developing": "Combines numbers with people's stories to track progress and spot 'positive deviance' — the places quietly succeeding against the odds. Pairs quantitative and qualitative evidence honestly.",
@@ -148,7 +148,7 @@ window.__CAPDETAIL = {
   }
  },
  "Experimenting & Building": {
-  "desc": "Launching small, low-stakes prototypes to test how a system responds and to learn quickly from real-world feedback.",
+  "desc": "Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback.",
   "levels": {
    "Emerging": "Tries small, safe-to-fail prototypes — a pop-up, a pilot, a quick test — to learn fast from real feedback rather than over-planning. Treats each attempt as a probe, not a final answer.",
    "Developing": "Runs a steady series of experiments, refining each one based on how people actually respond. Builds the discipline of iterating in public and adjusting course.",
@@ -157,7 +157,7 @@ window.__CAPDETAIL = {
   }
  },
  "Convening & Facilitating Collaborations": {
-  "desc": "Designing and holding democratic, non-hierarchical spaces where distributed intelligence, deep dialogue, and shared decisions can emerge.",
+  "desc": "Designing and stewarding non-hierarchical, highly democratic spaces that cultivate distributed intelligence, deep dialogue, and shared consensus.",
   "levels": {
    "Emerging": "Hosts balanced group conversations where quieter voices are heard and the work is genuinely shared. Co-creates norms and agreements that reflect the group's needs.",
    "Developing": "Facilitates workshops that help diverse community groups reach real agreement, using participatory methods that make power and decision-making visible. Adapts the process to meet the group where it is.",
@@ -166,7 +166,7 @@ window.__CAPDETAIL = {
   }
  },
  "Conflict Transformation": {
-  "desc": "Turning friction — between people, ideologies, or institutions — into trust and shared growth rather than avoidance or escalation.",
+  "desc": "Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.",
   "levels": {
    "Emerging": "Handles disagreements constructively, easing tension through listening and finding common ground. Engages with conflict without avoidance, aggression, or collapse.",
    "Developing": "Works through divides inside a group, recognising both the surface dispute and the deeper structural drivers beneath it. Notices early signs of tension and acts to de-escalate before things harden.",
@@ -175,7 +175,7 @@ window.__CAPDETAIL = {
   }
  },
  "Planning & Resource Mobilization": {
-  "desc": "Guiding an initiative with care and adaptability — managing budgets, timelines, relationships, and ethics through uncertainty.",
+  "desc": "Organizing adaptive logistics, elastic operational budgets, and highly flexible, non-linear timelines that accommodate unpredictable systemic feedback loops.",
   "levels": {
    "Emerging": "Manages a timeline and a simple budget, keeping clear track of what's needed and when. Balances getting things done with caring for the people doing them.",
    "Developing": "Coordinates flexible budgets and adaptive plans for community efforts, adjusting as needs and conditions change. Keeps a project focused while staying responsive to feedback.",
@@ -184,7 +184,7 @@ window.__CAPDETAIL = {
   }
  },
  "Ecosystem Engagement": {
-  "desc": "Weaving separate initiatives, institutions, and civic actors into mutually supportive networks that share resources and direction.",
+  "desc": "Interweaving separate grassroots initiatives, formal institutions, and civil actors into mutually supportive networks that share resources and strategic focus.",
   "levels": {
    "Emerging": "Connects nearby groups to organise shared events or support each other's work. Begins to see the wider ecosystem of actors around an issue.",
    "Developing": "Weaves grassroots groups and local hubs into alliances that share resources and strategy. Builds the relationships and trust that hold a network together.",
@@ -193,7 +193,7 @@ window.__CAPDETAIL = {
   }
  },
  "Advocacy & Political Participation": {
-  "desc": "Engaging, challenging, and reshaping policy and civic institutions to make change durable and protected in law.",
+  "desc": "Actively engaging, challenging, or restructuring local legislative, policy, and civic institutional channels to secure structural and legal permanence for interventions.",
   "levels": {
    "Emerging": "Takes part in civic life — petitions, local actions, voting, councils — and learns how decisions actually get made. Understands the paths through which ordinary people can shape policy.",
    "Developing": "Writes clear policy proposals and runs advocacy campaigns aimed at concrete local change. Builds the case and the coalition needed to move a decision.",
@@ -202,7 +202,7 @@ window.__CAPDETAIL = {
   }
  },
  "Leading in Complexity": {
-  "desc": "Facilitating collective learning and adaptive action in uncertain conditions — leading with humility rather than top-down control.",
+  "desc": "Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.",
   "levels": {
    "Emerging": "Leads among peers, organising shared work fairly and celebrating the whole group's effort. Recognises the difference between complicated and complex challenges and adjusts accordingly.",
    "Developing": "Practices letting go of control so a group's own strategies can emerge, helping others stay engaged in uncertainty without rushing to premature answers. Uses reflection and feedback to guide action.",
@@ -211,7 +211,7 @@ window.__CAPDETAIL = {
   }
  },
  "Networking & Engaging Capital": {
-  "desc": "Directing financial, social, and structural capital toward local efforts while protecting their autonomy from extractive or conditional strings.",
+  "desc": "Directing financial, social, and structural capital to local projects while maintaining complete autonomy and protecting against extractive or conditional funding strings.",
   "levels": {
    "Emerging": "Runs simple crowdfunding or mutual-aid efforts to meet immediate, concrete needs. Learns how resources flow and how to ask for support with integrity.",
    "Developing": "Secures small grants and seed funding, handling relationships with funders honestly and guarding against strings that distort the work. Builds the trust that early resourcing depends on.",
@@ -220,3 +220,7 @@ window.__CAPDETAIL = {
   }
  }
 };
+// Defensive aliases: resolve renamed/legacy capacity labels to the same detail.
+if (window.__CAPDETAIL["Advocacy & Political Participation"]) {
+  window.__CAPDETAIL["Political Participation"] = window.__CAPDETAIL["Advocacy & Political Participation"];
+}

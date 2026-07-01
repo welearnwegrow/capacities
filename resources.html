@@ -374,37 +374,20 @@ class Component extends DCLogic {
     var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
     var title=g('ioc-sr-title'), link=g('ioc-sr-link'), from=g('ioc-sr-from'), why=g('ioc-sr-why');
     if (window.track) window.track('suggest_resource', { title: title || '(untitled)' });
-    var keys=[ (typeof window!=='undefined' && window.WEB3FORMS_ACCESS_KEY) || '' ].filter(function(k){return k;});
-    var key=keys.length ? keys[0] : '';
     var subject='Resource suggestion: '+(title||'(untitled)');
     var nurl=(typeof window!=='undefined' && window.NOTION_CONNECTOR_URL) ? window.NOTION_CONNECTOR_URL : '';
     if (nurl) {
       this.setState({submitting:true, submitError:null});
-      keys.forEach(function(k){ try { fetch('https://api.web3forms.com/submit', { method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'}, body: JSON.stringify({ access_key:k, subject:subject, from_name:'Resource Library suggestion', 'Resource title':title, 'Link':link, 'Suggested by':from||'(not given)', 'Why it matters':why, ccemail:(window.WEB3FORMS_CC||'') }) }); } catch(e){} });
       fetch(nurl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name:title, url:link, why:why, suggestedBy:from }) })
         .then(r=>r.json()).then(j=>{ this.setState({submitting:false, submitDone:true, submitError: j && j.ok ? null : 'send'}); })
         .catch(()=>{ this.setState({submitting:false, submitDone:true, submitError:'network'}); });
       return;
     }
-    if (keys.length) {
-      this.setState({submitting:true, submitError:null});
-      Promise.all(keys.map(function(k){
-        return fetch('https://api.web3forms.com/submit', {
-          method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'},
-          body: JSON.stringify({ access_key:k, subject:subject, from_name:'Resource Library suggestion',
-            'Resource title':title, 'Link':link, 'Suggested by':from||'(not given)', 'Why it matters':why, ccemail:(window.WEB3FORMS_CC||'') })
-        }).then(r=>r.json()).catch(function(){return {success:false};});
-      })).then(results=>{
-        var ok=results.some(function(j){return j && j.success;});
-        this.setState({submitting:false, submitDone:true, submitError: ok ? null : 'send'});
-      }).catch(()=>{ this.setState({submitting:false, submitDone:true, submitError:'network'}); });
-    } else {
-      var to='jayajohnyramchandani@gmail.com';
-      var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
-        +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs a learning area:\n'+why+'\n';
-      try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
-      this.setState({submitDone:true});
-    }
+    var to='jayajohnyramchandani@gmail.com';
+    var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
+      +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs a learning area:\n'+why+'\n';
+    try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
+    this.setState({submitDone:true});
   }
   toggleObj(bag, key){ const b=Object.assign({}, this.state[bag]); if(b[key]) delete b[key]; else b[key]=true; const s={}; s[bag]=b; this.setState(s); }
 

@@ -40,7 +40,6 @@ Both the **Suggest a resource** form and the **Work with Us** contact form send 
 **One-time setup:**
 1. Go to web3forms.com, enter the email that should receive submissions, and copy the **Access Key**.
 2. Open `forms-config.js` and paste it: `window.WEB3FORMS_ACCESS_KEY = "your-key-here";`
-3. To deliver to **both** editors **for free** (no Pro plan): create a **second** access key registered to the other editor's email (just enter their email at web3forms.com and copy the key), then paste it into `forms-config.js` as `window.WEB3FORMS_ACCESS_KEY_2`. Every submission is posted to **both** keys, so both inboxes receive it. Leave it blank to send to the first key only.
 
 Until a key is set, the forms fall back to opening the visitor's email app (`mailto:`) so nothing is broken.
 

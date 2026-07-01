@@ -35,26 +35,26 @@
 <script src="forms-config.js"></script>
 <script>
 (function(){
-  var TO='jayajohnyramchandani@gmail.com,raisamirza@gmail.com';
+  var TO='jayajohnyramchandani@gmail.com';
   function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
   function done(extra){ var d=document.getElementById('ioc-eg-done'); if(d){ if(extra) d.textContent=extra; d.style.display='block'; } }
   function send(){
     var name=val('ioc-eg-name'), email=val('ioc-eg-email'), org=val('ioc-eg-org'), msg=val('ioc-eg-msg');
     var subject='Partner with Us enquiry'+(name?(' from '+name):'');
-    var keys=[window.WEB3FORMS_ACCESS_KEY, window.WEB3FORMS_ACCESS_KEY_2].filter(function(k){return k;});
+    var keys=[window.WEB3FORMS_ACCESS_KEY].filter(function(k){return k;});
     if (keys.length) {
       var btn=document.getElementById('ioc-eg-send'); if(btn){ btn.disabled=true; btn.textContent='Sending…'; }
       Promise.all(keys.map(function(k){
         return fetch('https://api.web3forms.com/submit', {
           method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'},
           body: JSON.stringify({ access_key:k, subject:subject, from_name:'Partner with Us form',
-            'Name':name, 'Email':email, 'Organization / context':org, 'Message':msg, replyto:email, ccemail:(window.WEB3FORMS_CC||'') })
+            'Full name':name, 'Contact email':email, 'Organization or context':org, 'Their message':msg, replyto:email, botcheck:'' })
         }).then(function(r){return r.json();}).catch(function(){return {success:false};});
       })).then(function(results){
         if(btn){ btn.disabled=false; btn.textContent='Send message →'; }
         var ok = results.some(function(j){ return j && j.success; });
         if(ok && window.track){ window.track('partner_form_submit'); }
-        done(ok ? 'Thank you — your message has been sent to Jaya & Raisa. We\u2019ll be in touch.' : 'Something went wrong sending. Please email jayajohnyramchandani@gmail.com and raisamirza@gmail.com directly.');
+        done(ok ? 'Thank you — your message has been sent. We\u2019ll be in touch.' : 'Something went wrong sending. Please email jayajohnyramchandani@gmail.com directly.');
       });
     } else {
       var body='Name: '+name+'\nEmail: '+email+'\nOrganization / context: '+org+'\n\nMessage:\n'+msg+'\n';
@@ -62,11 +62,12 @@
       done();
     }
   }
-  function init(){
-    var btn=document.getElementById('ioc-eg-send');
-    if(btn && !btn._wired){ btn._wired=true; btn.addEventListener('click', function(e){ e.preventDefault(); send(); }); }
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
+  // The DC template may render after this script runs, so a one-shot
+  // init can miss the button. A delegated listener always catches the click.
+  document.addEventListener('click', function(e){
+    var t = e.target && e.target.closest ? e.target.closest('#ioc-eg-send') : null;
+    if(t){ e.preventDefault(); send(); }
+  });
 })();
 </script>
 </helmet>
@@ -104,7 +105,7 @@
         <div style="padding:22px 24px 24px;display:flex;flex-direction:column;flex:1">
           <h3 style="font-family:'Newsreader',serif;font-weight:600;font-size:23px;line-height:1.12;color:#3f2a1c;margin:0 0 11px">Become a Member</h3>
           <p style="font-size:14px;line-height:1.62;color:#5a5347;margin:0 0 20px;flex:1">Twice every month starting August 2026, you will receive a newsletter with field-tested learning activities that are easy to adapt to your educational setting. These will range from templates and tools to case studies to help young people understand themselves and navigate systems to make change.</p>
-          <a href="#newsletter" class="eg-cta" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:#b35427;padding:11px 21px;border-radius:24px;text-decoration:none">Subscribe →</a>
+          <a href="https://systemschangelearning.substack.com/subscribe" target="_blank" rel="noopener" class="eg-cta" style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:#b35427;padding:11px 21px;border-radius:24px;text-decoration:none">Subscribe →</a>
         </div>
       </div>
 

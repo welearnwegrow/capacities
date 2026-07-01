@@ -10,52 +10,103 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  @media (max-width:920px){ .sf-grid{ grid-template-columns:1fr 1fr !important; } }
-  @media (max-width:560px){ .sf-grid{ grid-template-columns:1fr !important; gap:18px !important; } .sf-foot{ padding:36px 22px 26px !important; } .sf-meta{ justify-content:flex-start !important; } }
+  .sf-sub-input::placeholder{ color:#8a8377; }
+  @media (max-width:560px){
+    .sf-foot{ padding:40px 22px 28px !important; }
+    .sf-head{ font-size:26px !important; }
+    .sf-legal{ flex-direction:column !important; align-items:flex-start !important; gap:16px !important; }
+    .sf-form{ flex-direction:column !important; align-items:stretch !important; }
+    .sf-form button{ width:100% !important; }
+  }
 </style>
 </helmet>
-<footer class="sf-foot" style="background:#3e645f;padding:46px 40px 32px;color:#F4EFE6;font-family:'PT Sans',system-ui,sans-serif">
+<footer class="sf-foot" id="newsletter" style="background:#3e645f;padding:58px 40px 34px;color:#F4EFE6;font-family:'PT Sans',system-ui,sans-serif">
   <div style="max-width:1120px;margin:0 auto">
-    <div class="sf-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:22px">
 
-      <a href="descriptors.html" style="display:block;text-decoration:none;border-top:2px solid #d9bb78;padding-top:15px">
-        <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Learning Goals</div>
-        <div style="font-size:13px;line-height:1.55;color:rgba(244,239,230,.72);margin-bottom:12px">Each learning area defined across four levels of growth.</div>
-        <span style="font-size:13px;font-weight:700;color:#f0e3c2">See the descriptors →</span>
-      </a>
+    <h2 class="sf-head" style="font-family:'PT Serif',serif;font-weight:700;font-size:31px;line-height:1.08;margin:0;color:#FDFBF7;letter-spacing:-0.01em">Sign up to our newsletter</h2>
+    <p style="font-size:15px;line-height:1.5;margin:8px 0 0;color:rgba(244,239,230,.82);max-width:52ch">to find out about new free resources and access paid activities and guided learning experiences.</p>
 
-      <a href="metaprocess.html" style="display:block;text-decoration:none;border-top:2px solid #cfe0db;padding-top:15px">
-        <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Meta-process</div>
-        <div style="font-size:13px;line-height:1.55;color:rgba(244,239,230,.72);margin-bottom:12px">Five stages of intervention, with downloadable reflection canvases.</div>
-        <span style="font-size:13px;font-weight:700;color:#f0e3c2">Walk the process →</span>
-      </a>
+    <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:28px;display:inline-flex;align-items:center;gap:10px;background:rgba(240,227,194,.16);border:1px solid rgba(240,227,194,.4);border-radius:14px;padding:15px 20px;font-size:15.5px;font-weight:700;color:#f0e3c2;max-width:560px">{{ msg }}</div>
+    </sc-if>
 
-      <a href="resources.html" style="display:block;text-decoration:none;border-top:2px solid #c4d08a;padding-top:15px">
-        <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Resource Library</div>
-        <div style="font-size:13px;line-height:1.55;color:rgba(244,239,230,.72);margin-bottom:12px">Curated resources mapped to every learning area.</div>
-        <span style="font-size:13px;font-weight:700;color:#f0e3c2">Open the library →</span>
-      </a>
+    <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+      <form class="sf-form" onSubmit="{{ submit }}" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;max-width:560px">
+        <input class="sf-sub-input" type="email" required value="{{ email }}" onInput="{{ onInput }}" placeholder="Email" aria-label="Email address" style="flex:1;min-width:230px;background:#FDFBF7;border:none;border-radius:28px;padding:16px 22px;font-size:15px;color:#2c2c2c;font-family:'PT Sans',system-ui,sans-serif" />
+        <button type="submit" disabled="{{ loading }}" style="background:#f0e3c2;color:#2c4844;font-family:'PT Sans',system-ui,sans-serif;font-weight:700;font-size:15px;border:none;border-radius:28px;padding:16px 32px;cursor:pointer;white-space:nowrap" style-hover="background:#f6ecd2">{{ btnLabel }}</button>
+      </form>
+      <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:12px;font-size:13.5px;color:#f7cdb2;max-width:560px">{{ msg }}</div>
+      </sc-if>
+    </sc-if>
 
-      <a href="orientations.html" style="display:block;text-decoration:none;border-top:2px solid #d8be7e;padding-top:15px">
-        <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Orientations</div>
-        <div style="font-size:13px;line-height:1.55;color:rgba(244,239,230,.72);margin-bottom:12px">Four values — a compass for working honestly inside complex systems.</div>
-        <span style="font-size:13px;font-weight:700;color:#f0e3c2">Find your bearings →</span>
-      </a>
-
-      <a href="engage.html" style="display:block;text-decoration:none;border-top:2px solid #e8a583;padding-top:15px">
-        <div style="font-family:'PT Serif',serif;font-weight:700;font-size:20px;margin-bottom:7px;color:#FDFBF7">Partner with Us</div>
-        <div style="font-size:13px;line-height:1.55;color:rgba(244,239,230,.72);margin-bottom:12px">Four ways to work with us — membership, guided journeys, intensives, and retreats.</div>
-        <span style="font-size:13px;font-weight:700;color:#f0e3c2">Start a conversation →</span>
-      </a>
-
+    <div class="sf-legal" style="border-top:1px solid rgba(244,239,230,.16);margin-top:46px;padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px">
+      <div style="display:flex;gap:26px;flex-wrap:wrap">
+        <a href="privacy.html" style="color:rgba(244,239,230,.85);text-decoration:underline;text-underline-offset:3px">Privacy Policy</a>
+      </div>
+      <span style="color:rgba(244,239,230,.55)">CC BY-NC-ND 4.0 · Jaya Ramchandani &amp; Raisa Mirza</span>
     </div>
-    <div class="sf-meta" style="border-top:1px solid rgba(244,239,230,.16);margin-top:30px;padding-top:18px;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:10px;font-size:12px;color:rgba(244,239,230,.55)">
-      <span>CC BY-NC-ND 4.0 · Jaya Ramchandani &amp; Raisa Mirza</span>
-    </div>
+
   </div>
 </footer>
 </x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { email: '', status: 'idle', msg: '' };
+
+  onInput = (e) => { this.setState({ email: e.target.value }); };
+
+  submit = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const email = (this.state.email || '').trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      this.setState({ status: 'error', msg: 'Please enter a valid email address.' });
+      return;
+    }
+    const base = (typeof window !== 'undefined' && window.NOTION_CONNECTOR_URL)
+      ? window.NOTION_CONNECTOR_URL.replace(/\/+$/, '') : '';
+    if (!base) {
+      // No connector configured — fall back to Substack's own subscribe page.
+      if (typeof window !== 'undefined') window.open('https://systemschangelearning.substack.com/subscribe', '_blank', 'noopener');
+      this.setState({ status: 'done', msg: 'Opening Substack so you can confirm your subscription…' });
+      return;
+    }
+    this.setState({ status: 'loading', msg: '' });
+    fetch(base + '/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    })
+      .then((r) => r.json().catch(() => ({})))
+      .then((j) => {
+        if (j && j.ok) {
+          this.setState({ status: 'done', msg: 'Thanks for subscribing! Check your inbox to confirm.' });
+        } else {
+          this.setState({ status: 'error', msg: 'Something went wrong. Please try again, or subscribe on Substack directly.' });
+        }
+      })
+      .catch(() => {
+        this.setState({ status: 'error', msg: 'Couldn’t reach the server. Please subscribe on Substack directly.' });
+      });
+  };
+
+  renderVals() {
+    const status = this.state.status;
+    return {
+      email: this.state.email,
+      onInput: this.onInput,
+      submit: this.submit,
+      loading: status === 'loading',
+      done: status === 'done',
+      isError: status === 'error',
+      showForm: status !== 'done',
+      msg: this.state.msg,
+      btnLabel: status === 'loading' ? 'Signing up…' : 'Sign Up',
+    };
+  }
+}
+</script>
 </body>
 </html>

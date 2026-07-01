@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  .sf-sub-input::placeholder{ color:#8a8377; }
+  .sf-sub-input::placeholder{ color:#8a8377; opacity:1; }
   @media (max-width:560px){
     .sf-foot{ padding:40px 22px 28px !important; }
     .sf-head{ font-size:26px !important; }
@@ -26,26 +26,24 @@
   <div style="max-width:1120px;margin:0 auto">
 
     <h2 class="sf-head" style="font-family:'PT Serif',serif;font-weight:700;font-size:31px;line-height:1.08;margin:0;color:#FDFBF7;letter-spacing:-0.01em">Sign up to our newsletter</h2>
-    <p style="font-size:15px;line-height:1.5;margin:8px 0 0;color:rgba(244,239,230,.82);max-width:52ch">to find out about new free resources and access paid activities and guided learning experiences.</p>
+    <p style="font-size:15px;line-height:1.5;margin:8px 0 0 0;color:rgba(244,239,230,.82);max-width:52ch">to find out about new free resources and access paid activities and guided learning experiences.</p>
 
     <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
-      <div style="margin-top:28px;display:inline-flex;align-items:center;gap:10px;background:rgba(240,227,194,.16);border:1px solid rgba(240,227,194,.4);border-radius:14px;padding:15px 20px;font-size:15.5px;font-weight:700;color:#f0e3c2;max-width:560px">{{ msg }}</div>
+      <div style="margin-top:34px;display:inline-flex;align-items:center;gap:10px;background:rgba(240,227,194,.16);border:1px solid rgba(240,227,194,.4);border-radius:16px;padding:17px 22px;font-size:16px;font-weight:700;color:#f0e3c2;max-width:640px">{{ msg }}</div>
     </sc-if>
 
     <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
-      <form class="sf-form" onSubmit="{{ submit }}" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;max-width:560px">
-        <input class="sf-sub-input" type="email" required value="{{ email }}" onInput="{{ onInput }}" placeholder="Email" aria-label="Email address" style="flex:1;min-width:230px;background:#FDFBF7;border:none;border-radius:28px;padding:16px 22px;font-size:15px;color:#2c2c2c;font-family:'PT Sans',system-ui,sans-serif" />
-        <button type="submit" disabled="{{ loading }}" style="background:#f0e3c2;color:#2c4844;font-family:'PT Sans',system-ui,sans-serif;font-weight:700;font-size:15px;border:none;border-radius:28px;padding:16px 32px;cursor:pointer;white-space:nowrap" style-hover="background:#f6ecd2">{{ btnLabel }}</button>
+      <form class="sf-form" onSubmit="{{ submit }}" style="margin-top:26px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;max-width:560px">
+        <input class="sf-sub-input" type="email" required value="{{ email }}" onInput="{{ onInput }}" placeholder="Email" aria-label="Email address" style="flex:1;min-width:230px;background:#FDFBF7;border:none;border-radius:28px;padding:16px 22px;font-size:15px;color:#2c2c2c;font-family:'PT Sans',system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.10)" />
+        <button type="submit" disabled="{{ loading }}" style="background:#f0e3c2;color:#2c4844;font-family:'PT Sans',system-ui,sans-serif;font-weight:700;font-size:15px;border:none;border-radius:28px;padding:16px 32px;cursor:pointer;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.10)" style-hover="background:#f6ecd2">{{ btnLabel }}</button>
       </form>
       <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
-        <div style="margin-top:12px;font-size:13.5px;color:#f7cdb2;max-width:560px">{{ msg }}</div>
+        <div style="margin-top:14px;font-size:14px;color:#f7cdb2;max-width:640px">{{ msg }}</div>
       </sc-if>
     </sc-if>
 
-    <div class="sf-legal" style="border-top:1px solid rgba(244,239,230,.16);margin-top:46px;padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px">
-      <div style="display:flex;gap:26px;flex-wrap:wrap">
-        <a href="privacy.html" style="color:rgba(244,239,230,.85);text-decoration:underline;text-underline-offset:3px">Privacy Policy</a>
-      </div>
+    <div class="sf-legal" style="border-top:1px solid rgba(244,239,230,.22);margin-top:46px;padding-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px">
+      <a href="privacy.html" style="color:rgba(244,239,230,.85);text-decoration:underline;text-underline-offset:3px">Privacy Policy</a>
       <span style="color:rgba(244,239,230,.55)">CC BY-NC-ND 4.0 · Jaya Ramchandani &amp; Raisa Mirza</span>
     </div>
 
@@ -65,31 +63,40 @@ class Component extends DCLogic {
       this.setState({ status: 'error', msg: 'Please enter a valid email address.' });
       return;
     }
-    const base = (typeof window !== 'undefined' && window.NOTION_CONNECTOR_URL)
-      ? window.NOTION_CONNECTOR_URL.replace(/\/+$/, '') : '';
-    if (!base) {
-      // No connector configured — fall back to Substack's own subscribe page.
+    const keys = [
+      (typeof window !== 'undefined' && window.WEB3FORMS_ACCESS_KEY) || '',
+      (typeof window !== 'undefined' && window.WEB3FORMS_ACCESS_KEY_2) || '',
+    ].filter((k) => k);
+
+    if (!keys.length) {
+      // No key configured (e.g. standalone preview) — fall back to Substack's page.
       if (typeof window !== 'undefined') window.open('https://systemschangelearning.substack.com/subscribe', '_blank', 'noopener');
       this.setState({ status: 'done', msg: 'Opening Substack so you can confirm your subscription…' });
       return;
     }
+
     this.setState({ status: 'loading', msg: '' });
-    fetch(base + '/subscribe', {
+    Promise.all(keys.map((k) => fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    })
-      .then((r) => r.json().catch(() => ({})))
-      .then((j) => {
-        if (j && j.ok) {
-          this.setState({ status: 'done', msg: 'Thanks for subscribing! Check your inbox to confirm.' });
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: k,
+        subject: 'Newsletter sign-up — add to Substack',
+        from_name: 'Newsletter sign-up',
+        'Email to add to Substack': email,
+        replyto: email,
+        ccemail: (window.WEB3FORMS_CC || ''),
+      }),
+    }).then((r) => r.json()).catch(() => ({ success: false }))))
+      .then((results) => {
+        const ok = results.some((j) => j && j.success);
+        if (ok) {
+          this.setState({ status: 'done', msg: 'Thanks for signing up! We’ll add you to the newsletter shortly.' });
         } else {
           this.setState({ status: 'error', msg: 'Something went wrong. Please try again, or subscribe on Substack directly.' });
         }
       })
-      .catch(() => {
-        this.setState({ status: 'error', msg: 'Couldn’t reach the server. Please subscribe on Substack directly.' });
-      });
+      .catch(() => { this.setState({ status: 'error', msg: 'Couldn’t reach the server. Please try again in a moment.' }); });
   };
 
   renderVals() {

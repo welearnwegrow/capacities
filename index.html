@@ -47,12 +47,14 @@
   .ioc-compass{transform-box:fill-box;transform-origin:center}
   .ioc-zoom{display:none}
   .ioc-browse{display:none}
-  @media (max-width:860px){
-    .ioc-zoom{display:flex}
-    .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:pan-x pan-y}
-  }
+  .ioc-hint-desktop{display:inline}
+  .ioc-hint-mobile{display:none}
   @media (max-width:760px){
     .ioc-browse{display:block}
+    .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:auto}
+    .ioc-stage, .ioc-stage *{pointer-events:none!important}
+    .ioc-hint-desktop{display:none}
+    .ioc-hint-mobile{display:inline}
     .ioc-root{padding:0 14px 48px}
     .ioc-title{font-size:30px !important}
     .ioc-lede{font-size:15px !important}
@@ -85,7 +87,7 @@
 
   <!-- ===== MAP ===== -->
   <div style="width:1040px;max-width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em">Tap to explore · drag to rearrange · pinch or +/− to zoom</span>
+    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em"><span class="ioc-hint-desktop">Tap to explore · drag to rearrange · pinch or +/− to zoom</span><span class="ioc-hint-mobile">A map of the whole framework — browse each part below</span></span>
     <div style="display:flex;align-items:center;gap:8px">
       <div class="ioc-zoom" style="align-items:center;gap:8px">
         <button onClick="{{ zoomOut }}" aria-label="Zoom out" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">−</button>
@@ -225,16 +227,23 @@
 
     <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#46514a">Meta-process</h2>
     <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our actions</p>
-    <a href="metaprocess.html" style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1px solid rgba(70,90,85,.18);border-radius:14px;padding:16px;text-decoration:none">
-      <div style="display:flex;align-items:center;gap:7px">
-        <span style="width:15px;height:15px;border-radius:50%;background:#46716f"></span>
-        <span style="width:15px;height:15px;border-radius:50%;background:#5f7a3a"></span>
-        <span style="width:15px;height:15px;border-radius:50%;background:#b07a3c"></span>
-        <span style="width:15px;height:15px;border-radius:50%;background:#a8542d"></span>
-        <span style="width:15px;height:15px;border-radius:50%;background:#3f6e74"></span>
-      </div>
-      <span style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#46716f;white-space:nowrap">Walk the five stages ›</span>
-    </a>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ browseMeta }}" as="m" hint-placeholder-count="5">
+        <div onClick="{{ m.onToggle }}" style="background:#fff;border:1px solid rgba(70,90,85,.18);border-radius:13px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:11px">
+            <span style="width:11px;height:11px;border-radius:50%;flex:none;background:{{ m.dot }}"></span>
+            <div style="flex:1">
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#46514a">{{ m.title }}</div>
+              <div style="font-style:italic;font-size:12px;color:#7a8a80;margin-top:1px">{{ m.sub }}</div>
+            </div>
+            <span style="color:#6b7d6a;font-size:19px;font-weight:700;flex:none;line-height:1">{{ m.chev }}</span>
+          </div>
+          <sc-if value="{{ m.open }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:13px;line-height:1.62;color:#544E45;margin:11px 0 0">{{ m.body }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
   </div>
 
   <!-- attribution -->
@@ -570,14 +579,13 @@ class Component extends DCLogic {
       const stage = document.querySelector('.ioc-stage');
       if (!frame || !stage) return;
       const w = frame.clientWidth;
-      const mobile = window.innerWidth <= 860;
-      if (!mobile && w === this._lastW) return;   // guard against ResizeObserver feedback loop
-      this._lastW = mobile ? null : w;
-      const scale = mobile ? (w / 1040) * this._mzoom : w / 1040;
+      if (w === this._lastW) return;   // guard against ResizeObserver feedback loop
+      this._lastW = w;
+      const scale = w / 1040;          // always fit full map to width (static on mobile)
       stage.style.transform = 'scale(' + scale + ')';
       frame.style.height = (1320 * scale) + 'px';
-      frame.style.overflowX = mobile ? 'auto' : 'hidden';
-      frame.style.overflowY = mobile ? 'hidden' : 'hidden';
+      frame.style.overflowX = 'hidden';
+      frame.style.overflowY = 'hidden';
       frame.style.webkitOverflowScrolling = 'touch';
     };
     this._zoomMap = (dir) => { this._mzoom = Math.max(1.0, Math.min(3.4, +(this._mzoom + dir).toFixed(2))); this._lastW = null; this._fit(); };
@@ -921,7 +929,10 @@ class Component extends DCLogic {
     const GMETA = { teal:{name:'Inner Inquiry',sub:'The personal foundation',head:'#46716f',border:'rgba(70,113,111,.3)',dot:'#46716f'}, green:{name:'Collective Strategy',sub:'Reading the field',head:'#5f7a3a',border:'rgba(95,122,58,.3)',dot:'#5f7a3a'}, coral:{name:'Systemic Intervention',sub:'Acting & sustaining',head:'#a8542d',border:'rgba(168,84,45,.3)',dot:'#a8542d'} };
     const browseDomains = ['teal','green','coral'].map(g => { const m = GMETA[g]; const open = this.state.mGroup === g; const areas = (this.state.isl||[]).filter(p=>p.group===g).map(p=>({ label:p.label, onOpen: () => this.setState({ openCap: p.label }) })); return { key:g, name:m.name, sub: m.sub+' · '+areas.length+' areas', dot:m.dot, border:m.border, open, chev: open?'–':'+', headStyle:{ background:m.head, padding:'15px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }, areas, onToggle: () => this.setState(s => ({ mGroup: s.mGroup===g ? null : g })) }; });
 
-    return { seaArt, islands, waypoints, browseOrients, browseDomains, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap(), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
+    const MSTAGE = { probe:'#46716f', sense:'#5f7a3a', design:'#b07a3c', adapt:'#a8542d', integrate:'#3f6e74' };
+    const browseMeta = ['probe','sense','design','adapt','integrate'].map(k => { const d = TIP[k] || {}; const open = this.state.mMeta === k; return { title:d.t, sub:d.s, body:d.b, dot:MSTAGE[k], open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mMeta: s.mMeta===k ? null : k })) }; });
+
+    return { seaArt, islands, waypoints, browseOrients, browseDomains, browseMeta, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap(), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
   }
 }
 </script>

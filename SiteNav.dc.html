@@ -46,7 +46,7 @@
   </div>
 </nav>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;descriptors&quot;,&quot;orientations&quot;,&quot;about&quot;,&quot;resources&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;orientations&quot;,&quot;about&quot;,&quot;resources&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { open:false };
   renderVals(){
@@ -57,7 +57,6 @@ class Component extends DCLogic {
     const pOn = Object.assign({}, pBase, { color:'#1f3a36' });
     const items = [
       { key:'home', label:'Home', href:'index.html' },
-      { key:'descriptors', label:'Learning Goals', href:'descriptors.html' },
       { key:'about', label:'Meta-process', href:'metaprocess.html' },
       { key:'resources', label:'Resource Library', href:'resources.html' },
       { key:'orientations', label:'Orientations', href:'orientations.html' },

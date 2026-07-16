@@ -4,7 +4,6 @@ A static website for a capacity framework on systems practice and lifelong learn
 
 ## Pages
 - `index.html` — interactive capacity map (home)
-- `descriptors.html` — Learning Goals
 - `metaprocess.html` — Meta-process (five stages with downloadable reflection canvases)
 - `orientations.html` — Orientations
 - `resources.html` — Resource Library

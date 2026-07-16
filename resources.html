@@ -250,19 +250,6 @@
         <sc-if value="{{ deep.desc }}" hint-placeholder-val="">
           <p style="font-size:14px;line-height:1.62;color:#4a4438;margin:0 0 20px">{{ deep.desc }}</p>
         </sc-if>
-        <sc-if value="{{ deep.hasLevels }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Learning Goals</span>
-            <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
-          </div>
-          <div>
-            <sc-for list="{{ deep.levels }}" as="lv" hint-placeholder-count="4">
-              <div style="padding:9px 0;border-top:1px solid rgba(120,105,75,.14)">
-                <p style="font-size:13px;line-height:1.55;color:#5a5347;margin:0"><span style="{{ lv.tierStyle }}">{{ lv.label }}:</span> {{ lv.text }}</p>
-              </div>
-            </sc-for>
-          </div>
-        </sc-if>
       </div>
       <div style="padding:18px 26px 40px">
         <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
@@ -469,7 +456,7 @@ class Component extends DCLogic {
       const keys=Object.keys(byMed).sort((a,b)=>{ const ia=order.indexOf(a), ib=order.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });
       const mediums=keys.map(m=>({ medium:m, count:byMed[m].length, items:byMed[m].slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r)) }));
       const det=(typeof window!=='undefined'&&window.__CAPDETAIL)?(window.__CAPDETAIL[label]||{}):{};
-      const levOrder=['Emerging','Developing','Effective','Influential'];
+      const levOrder=['Personal','Social','Institutional','Systemic'];
       const _hx=(col.c||'#46716f').replace('#',''); const _r=parseInt(_hx.substr(0,2),16),_g2=parseInt(_hx.substr(2,2),16),_b=parseInt(_hx.substr(4,2),16);
       const _alpha=[0.38,0.58,0.79,1];
       const levels=det.levels?levOrder.filter(k=>det.levels[k]).map((k,idx)=>({

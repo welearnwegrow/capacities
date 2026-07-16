@@ -81,7 +81,7 @@
   <!-- intro / context -->
   <div style="width:1040px;max-width:100%;margin:0 auto 26px;text-align:left">
     <div style="max-width:78ch;margin:0;display:flex;flex-direction:column;gap:15px">
-      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><font color="#000000" face="PT Sans, sans-serif"><span style="font-size: 16px; white-space-collapse: preserve;">Everyday, we adapt to the systems around us, trying hard to change them towards more preferred futures. We believe that systems change work is a lifelong endeavor, with each season of our lives presenting new challenges that require different skills and capacities. This open-source framework starts with a single inquiry: <i>What do we need to learn to intervene in complex systems?</i> We landed at this map to guide <b>changemakers</b>, <b>educators</b>, and <b>leaders</b> ready for systems work. It provides orientations to ground the work in shared values, 24 learning areas with goals across four levels of practice, a process for intervening in complex systems, and a resource library from a community of system change practitioners and educators. <br></span></font></p>
+      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><font color="#000000" face="PT Sans, sans-serif"><span style="font-size: 16px; white-space-collapse: preserve;">Everyday, we adapt to the systems around us, trying hard to change them towards more preferred futures. We believe that systems change work is a lifelong endeavor, with each season of our lives presenting new challenges that require different skills and capacities. This open-source framework starts with a single inquiry: <i>What do we need to learn to intervene in complex systems?</i> We landed at this map to guide <b>changemakers</b>, <b>educators</b>, and <b>leaders</b> ready for systems work. It provides orientations to ground the work in shared values, 24 learning areas, a process for intervening in complex systems, and a resource library from a community of system change practitioners and educators. <br></span></font></p>
     </div>
   </div>
 
@@ -269,19 +269,6 @@
       <div style="padding:20px 26px 0">
         <sc-if value="{{ capDrawer.desc }}" hint-placeholder-val="">
           <p style="font-size:14px;line-height:1.62;color:#4a4438;margin:0 0 20px">{{ capDrawer.desc }}</p>
-        </sc-if>
-        <sc-if value="{{ capDrawer.hasLevels }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px">
-            <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Learning Goals</span>
-            <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
-          </div>
-          <div>
-            <sc-for list="{{ capDrawer.levels }}" as="lv" hint-placeholder-count="4">
-              <div style="padding:9px 0;border-top:1px solid rgba(120,105,75,.14)">
-                <p style="font-size:13px;line-height:1.55;color:#5a5347;margin:0"><span style="{{ lv.tierStyle }}">{{ lv.label }}:</span> {{ lv.text }}</p>
-              </div>
-            </sc-for>
-          </div>
         </sc-if>
       </div>
       <div style="padding:18px 26px 40px">
@@ -751,7 +738,7 @@ class Component extends DCLogic {
         typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },
         pickStyle:{ display:'inline-flex', alignItems:'center', gap:'4px', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'#8a6a45', color:'#fff', whiteSpace:'nowrap' } };
     });
-    const levOrder=['Emerging','Developing','Effective','Influential']; const alpha=[0.40,0.60,0.80,1];
+    const levOrder=['Personal','Social','Institutional','Systemic']; const alpha=[0.40,0.60,0.80,1];
     const levels = det.levels ? levOrder.filter(k=>det.levels[k]).map((k,idx)=>({ label:k, text:det.levels[k], tierStyle:{ fontFamily:"'PT Serif',serif", fontWeight:700, color:'rgba('+gd.rgb[0]+','+gd.rgb[1]+','+gd.rgb[2]+','+alpha[idx]+')' } })) : [];
     const n=list.length;
     return { open:true, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,

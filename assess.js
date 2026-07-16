@@ -1,7 +1,7 @@
 (function(){
   var KEY='ioc-assess-v1';
   var BANDS=[{name:'Inner Inquiry',color:'#46716f'},{name:'Collective Strategy',color:'#5b6733'},{name:'Systemic Intervention',color:'#a8542d'}];
-  var LV=['','Emerging','Developing','Effective','Influential'];
+  var LV=['','Personal','Social','Institutional','Systemic'];
   var levels={}, meta={}, assessOn=false, cellMap={};
   try{ levels=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ levels={}; }
   function save(){ try{ localStorage.setItem(KEY, JSON.stringify(levels)); }catch(e){} }

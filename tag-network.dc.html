@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;family=PT+Sans:wght@400;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./research-data.js"></script>
+<script src="notion-config.js"></script>
+<script src="data-loader.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  ::selection{background:rgba(138,106,69,.22)}
+  @keyframes tmOpen{from{opacity:0}to{opacity:1}}
+  @keyframes tmHint{0%{opacity:0;transform:translateX(-50%) translateY(8px)}10%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1}100%{opacity:0}}
+  #tm-canvas{ display:block; width:100%; height:100%; cursor:grab; touch-action:none; }
+  #tm-canvas:active{ cursor:grabbing; }
+  #tm-tip{ position:absolute; pointer-events:none; z-index:6; opacity:0; transform:translate(-50%,-140%); transition:opacity .12s ease; background:rgba(255,255,255,.96); border:1px solid rgba(120,150,135,.32); color:#33463f; font-family:'PT Sans',sans-serif; font-size:12px; line-height:1.35; padding:8px 11px; border-radius:9px; max-width:230px; box-shadow:0 8px 22px rgba(40,70,60,.18); }
+  @media (max-width:860px){
+    .tn-hero h1{ font-size:32px !important; }
+    .tn-side{ top:auto !important; bottom:12px !important; left:12px !important; right:12px !important; width:auto !important; max-height:46vh !important; }
+    #tm-stage{ height:60vh !important; }
+  }
+</style>
+<script src="./analytics.js"></script>
+</helmet>
+
+<div style="font-family:'PT Sans',system-ui,sans-serif">
+
+  <!-- LAUNCHER -->
+  <button onClick="{{ openMap }}" style="display:inline-flex;align-items:center;gap:9px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:8px 16px;border-radius:20px;border:1px solid #46716f;background:#46716f;color:#fff;cursor:pointer" style-hover="{{ launchHover }}">
+    <span style="display:inline-flex;gap:2px;align-items:center">✦</span> Map the Library
+  </button>
+
+  <!-- FULLSCREEN OVERLAY -->
+  <sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:9999;font-family:'PT Sans',system-ui,sans-serif;color:#33463f;animation:tmOpen .28s ease">
+      <div id="tm-stage" style="position:absolute;inset:0;overflow:hidden;background:radial-gradient(820px 640px at 28% 20%, rgba(150,178,108,.20), transparent 68%), radial-gradient(720px 580px at 84% 84%, rgba(120,165,150,.16), transparent 70%), linear-gradient(180deg,#eef2e6 0%,#e6ede0 100%)">
+      <canvas id="tm-canvas"></canvas>
+      <div id="tm-tip"></div>
+
+      <!-- close -->
+      <button onClick="{{ closeMap }}" title="Close" style="position:absolute;top:16px;right:16px;z-index:8;display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:22px;border:1px solid rgba(70,113,111,.3);background:rgba(255,255,255,.82);color:#33463f;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 4px 14px rgba(40,70,60,.12)">Close ✕</button>
+
+      <!-- search -->
+      <div style="position:absolute;top:16px;left:16px;z-index:5;display:flex;flex-direction:column;gap:10px;width:min(320px,calc(100% - 32px))">
+        <div style="font-size:11.5px;font-weight:700;color:#5c7469;letter-spacing:.01em">{{ statLine }}</div>
+      </div>
+
+      <!-- selected-tag panel -->
+      <sc-if value="{{ hasSelected }}" hint-placeholder-val="{{ false }}">
+        <div class="tn-side" style="position:absolute;top:62px;right:16px;z-index:5;width:min(300px,calc(100% - 32px));max-height:calc(100% - 32px);overflow-y:auto;background:rgba(255,255,255,.94);border:1px solid rgba(70,113,111,.2);border-radius:14px;padding:16px 16px 18px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(40,70,60,.2)">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px">
+            <span style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;color:{{ selColor }}">#{{ selLabel }}</span>
+            <button onClick="{{ clearSel }}" style="flex:none;width:26px;height:26px;border-radius:50%;border:1px solid rgba(70,113,111,.3);background:transparent;color:#5f8078;cursor:pointer;font-size:13px">✕</button>
+          </div>
+          <div style="font-size:11.5px;color:#6b8378;margin-bottom:13px">{{ selCount }}</div>
+          <sc-if value="{{ hasRel }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-bottom:14px">
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a9a8f;margin-bottom:7px">Related hashtags</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ relTags }}" as="t" hint-placeholder-count="4">
+                  <button onClick="{{ t.onClick }}" style="{{ t.style }}">#{{ t.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ selItems }}" as="r" hint-placeholder-count="5">
+              <a href="{{ r.url }}" target="_blank" rel="noopener" style="display:block;text-decoration:none;background:rgba(70,113,111,.06);border:1px solid rgba(70,113,111,.14);border-radius:10px;padding:10px 12px">
+                <div style="font-family:'PT Serif',serif;font-weight:700;font-size:13.5px;line-height:1.25;color:#2c3a33">{{ r.name }} <span style="color:{{ selColor }};font-weight:400">↗</span></div>
+                <div style="font-size:11px;color:#6b8378;margin-top:5px">{{ r.tagText }}</div>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- first-time hint -->
+      <sc-if value="{{ hintOn }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:7;pointer-events:none;background:rgba(31,58,54,.88);color:#eef4f0;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:11px 18px;border-radius:24px;box-shadow:0 8px 24px rgba(20,40,35,.3);animation:tmHint 5s ease forwards;white-space:nowrap">Drag to spin · tap a hashtag to explore</div>
+      </sc-if>
+
+      <!-- stat strip -->
+    </div>
+  </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = { query:'', selected:null, open:false };
+    this.rotY = 0.4; this.rotX = -0.15; this.autoRot = true;
+    this._graph = null; this._builtFor = -1;
+  }
+
+  // ---------- hashtag derivation ----------
+  _dicts(){
+    this.CLUSTER = {
+      inner:'#46716f', collective:'#5b6733', systemic:'#a8542d', format:'#8a9a92'
+    };
+    this.CLUSTER_NAME = { inner:'Inner Inquiry', collective:'Collective Strategy', systemic:'Systemic Intervention' };
+    this.CLUSTER_OF = {
+      // Inner Inquiry
+      somatics:'inner', regulation:'inner', listening:'inner', presence:'inner', spirituality:'inner', ethics:'inner', reflection:'inner', healing:'inner', love:'inner', criticalconsciousness:'inner', economics:'inner', politics:'inner', storytelling:'inner', creativity:'inner', culture:'inner', ancestral:'inner', indigenous:'inner', ecology:'inner', planetary:'inner', nature:'inner',
+      // Systemic Intervention
+      systemsthinking:'systemic', modeling:'systemic', complexity:'systemic', problemsolving:'systemic', emergence:'systemic', resilience:'systemic', feedback:'systemic', climate:'systemic', biodiversity:'systemic', regeneration:'systemic', power:'systemic', positionality:'systemic', justice:'systemic', decolonial:'systemic', gender:'systemic', narrative:'systemic', media:'systemic', futures:'systemic', foresight:'systemic', participatory:'systemic', research:'systemic', design:'systemic', data:'systemic', evaluation:'systemic',
+      // Collective Strategy
+      facilitation:'collective', collaboration:'collective', networks:'collective', community:'collective', ecosystems:'collective', prototyping:'collective', experimentation:'collective', strategy:'collective', mobilization:'collective', leadership:'collective', governance:'collective', commons:'collective', conflict:'collective', collectiveintelligence:'collective', belonging:'collective', advocacy:'collective', democracy:'collective', capital:'collective',
+      // Format (neutral)
+      book:'format', toolkit:'format', video:'format', podcast:'format', report:'format', casestudy:'format', datatool:'format', article:'format'
+    };
+    this.CAP2TAG = {
+      'Somatic Eco-Regulation':['somatics','regulation'], 'Observing & Listening':['listening','presence'],
+      'Critical Consciousness':['criticalconsciousness','power'], 'Spiritual & Moral Inquiry':['spirituality','ethics'],
+      'Socioeconomic & Political Literacy':['economics','politics'], 'Creative Expression & Storytelling':['storytelling','creativity'],
+      'Ecological & Planetary Literacy':['ecology','planetary'], 'Cultural & Ancestral Literacy':['culture','ancestral'],
+      'Systems Thinking & Modeling':['systemsthinking','modeling'], 'Complex Problem Solving':['complexity','problemsolving'],
+      'Futures Thinking & Foresight':['futures','foresight'], 'Positionality & Power Analysis':['power','positionality'],
+      'Regenerative Systems Design':['regeneration','design'], 'Narrative & Media Analysis':['narrative','media'],
+      'Participatory Research & Design':['participatory','research'], 'Data Analysis & Evaluation':['data','evaluation'],
+      'Experimenting & Building':['prototyping','experimentation'], 'Convening & Facilitating Collaborations':['facilitation','collaboration'],
+      'Conflict Transformation':['conflict','healing'], 'Planning & Resource Mobilization':['strategy','mobilization'],
+      'Leading in Complexity':['leadership','complexity'], 'Ecosystem Engagement':['ecosystems','community'],
+      'Advocacy & Political Participation':['advocacy','democracy'], 'Networking & Engaging Capital':['networks','capital']
+    };
+    this.TYPE2TAG = { 'Books':'book','Methods & Toolkits':'toolkit','Video':'video','Podcast':'podcast','Digital Publications / Reports':'report','Case Studies':'casestudy','Data Tools':'datatool','Articles / Blogposts':'article','Networks':'community' };
+    this.KW = {
+      indigenous:['indigenous','aboriginal'], decolonial:['decoloniz','decolonis','colonial'], climate:['climate'],
+      biodiversity:['biodiversity','species','wildlife'], commons:['commons','commoning','common-pool','common pool'],
+      democracy:['democracy','democratic','citizen','civic'], collectiveintelligence:['collective intelligence','collective input'],
+      resilience:['resilien'], emergence:['emergen'], governance:['governance','governing','sociocracy','self-organiz','self-manage'],
+      belonging:['belonging','othering','inclusion'], gender:['gender','feminis','women'], love:['love'],
+      justice:['justice','equity','equitable','oppress','racism','racist'], futures:['futur','foresight','speculative','scenario'],
+      storytelling:['story','narrative'], facilitation:['facilitat','circle','dialogue'],
+      systemsthinking:['systems thinking','systemic','system dynamics'], complexity:['complex'], regeneration:['regenerat'],
+      economics:['econom','finance','market'], power:['power'], leadership:['leader'],
+      spirituality:['spiritual','sacred','moral'], somatics:['somatic','embodi'], nature:['nature','ecolog','planet']
+    };
+  }
+  _hashtags(r){
+    const set=[]; const add=t=>{ if(set.indexOf(t)<0) set.push(t); };
+    (r.caps||[]).forEach(c=> (this.CAP2TAG[c]||[]).forEach(add));
+    const hay=((r.name||'')+' '+(r.desc||'')).toLowerCase();
+    for(const k in this.KW){ if(this.KW[k].some(s=>hay.indexOf(s)>=0)) add(k); }
+    (r.types||[]).forEach(t=>{ const ft=this.TYPE2TAG[t]; if(ft) add(ft); });
+    return set.slice(0,7);
+  }
+  _clusterOf(t){ return this.CLUSTER_OF[t]||'collective'; }
+  _palette(){ return ['#46716f','#5b6733','#a8542d','#7E9E9E','#A2AD68','#D08B6C','#8a6a45','#6b8f8a','#b5852f','#7d9a5e']; }
+  _colorFor(t){ const p=this._palette(); let h=0; for(let i=0;i<t.length;i++) h=(h*31+t.charCodeAt(i))>>>0; return p[h%p.length]; }
+
+  // ---------- build graph ----------
+  _build(){
+    const d=this._data(); if(!d.resources.length) return null;
+    if(!this.CLUSTER) this._dicts();
+    const tagIdx={}, tags=[], nodes=[], edges=[], tagToRes={};
+    const R=270;
+    d.resources.forEach((r,ri)=>{
+      const hs=this._hashtags(r);
+      const rNode={ type:'res', label:r.name, url:r.url||'#', tags:hs,
+        x:(Math.random()-0.5)*R*1.4, y:(Math.random()-0.5)*R*1.4, z:(Math.random()-0.5)*R*1.4, vx:0,vy:0,vz:0 };
+      const rIndex=nodes.length; nodes.push(rNode);
+      hs.forEach(t=>{
+        if(tagIdx[t]===undefined){
+          tagIdx[t]=nodes.length; tags.push(t);
+          nodes.push({ type:'tag', label:t, cluster:this._clusterOf(t), color:this._colorFor(t), deg:0,
+            x:(Math.random()-0.5)*R, y:(Math.random()-0.5)*R, z:(Math.random()-0.5)*R, vx:0,vy:0,vz:0 });
+          tagToRes[t]=[];
+        }
+        const ti=tagIdx[t];
+        nodes[ti].deg++; tagToRes[t].push(rIndex);
+        edges.push([rIndex,ti]);
+      });
+    });
+    const adj=nodes.map(()=>new Set());
+    edges.forEach(([a,b])=>{ adj[a].add(b); adj[b].add(a); });
+    return { nodes, edges, adj, tagIdx, tags, tagToRes };
+  }
+  _ensure(){ const d=this._data(); if(this._builtFor!==d.resources.length){ const g=this._build(); if(g){ this._graph=g; this._builtFor=d.resources.length; } } return this._graph; }
+  _data(){ return window.__RESEARCH || {capacities:[],resources:[],groupMeta:{}}; }
+
+  componentDidMount(){
+    window.addEventListener('research-data-updated', ()=>{ this._builtFor=-1; this.forceUpdate(); });
+    if(window.__RESEARCH_LIVE_READY) this.forceUpdate();
+    try{ const p=new URLSearchParams(window.location.search).get('tag'); if(p) this.setState({selected:p}); }catch(e){}
+    this._onKey=e=>{ if(e.key==='Escape' && this.state.open) this._close(); };
+    window.addEventListener('keydown', this._onKey);
+    this._stars=[]; for(let i=0;i<210;i++){ this._stars.push({ x:(Math.random()-0.5)*1500, y:(Math.random()-0.5)*1500, z:(Math.random()-0.5)*1500, r:0.5+Math.random()*1.3, tw:0.6+Math.random(), ph:Math.random()*6.28 }); }
+    this._loop=this._loop.bind(this);
+    this._raf=requestAnimationFrame(this._loop);
+  }
+  componentWillUnmount(){ if(this._raf) cancelAnimationFrame(this._raf); if(this._onKey) window.removeEventListener('keydown',this._onKey); document.body.style.overflow=''; }
+  _open(){ this.autoRot=true; document.body.style.overflow='hidden'; this.setState({open:true, hintOn:true});
+    clearTimeout(this._hintT); this._hintT=setTimeout(()=>this.setState({hintOn:false}), 5000); }
+  _close(){ document.body.style.overflow=''; this.setState({open:false}); }
+
+  _bind(cv){
+    if(cv._tmBound) return; cv._tmBound=true;
+    let dragging=false, moved=0, lx=0, ly=0;
+    const down=e=>{ dragging=true; moved=0; const p=this._pt(e,cv); lx=p.x; ly=p.y; this.autoRot=false; };
+    const move=e=>{ const p=this._pt(e,cv); this._mx=p.x; this._my=p.y;
+      if(dragging){ const dx=p.x-lx, dy=p.y-ly; moved+=Math.abs(dx)+Math.abs(dy); this.rotY+=dx*0.006; this.rotX+=dy*0.006; this.rotX=Math.max(-1.3,Math.min(1.3,this.rotX)); lx=p.x; ly=p.y; } };
+    const up=e=>{ if(dragging && moved<5) this._click(); dragging=false; setTimeout(()=>{ if(!dragging) this.autoRot=true; }, 2600); };
+    cv.addEventListener('mousedown',down); window.addEventListener('mousemove',move); window.addEventListener('mouseup',up);
+    cv.addEventListener('touchstart',e=>{ down(e.touches[0]); },{passive:true});
+    cv.addEventListener('touchmove',e=>{ move(e.touches[0]); },{passive:true});
+    cv.addEventListener('touchend',up);
+    cv.addEventListener('mouseleave',()=>{ this._mx=null; this._my=null; });
+  }
+  _pt(e,cv){ const r=cv.getBoundingClientRect(); return { x:e.clientX-r.left, y:e.clientY-r.top }; }
+  _click(){
+    const h=this._hit;
+    if(!h){ if(this.state.selected) this.setState({selected:null}); return; }
+    const n=this._graph.nodes[h];
+    if(n.type==='tag'){ this.setState({selected: this.state.selected===n.label?null:n.label}); }
+    else if(n.type==='res' && n.tags && n.tags.length){
+      // resource node → open its most-connected hashtag's pop-up (stay in map, never leave)
+      const g=this._graph; let best=n.tags[0], bd=-1;
+      n.tags.forEach(t=>{ const ti=g.tagIdx[t]; const dg=ti!=null?g.nodes[ti].deg:0; if(dg>bd){ bd=dg; best=t; } });
+      this.setState({selected:best});
+    }
+  }
+
+  _activeSet(g){
+    const sel=this.state.selected, q=this.state.query.trim().toLowerCase().replace(/^#/,'');
+    if(sel){ const s=new Set(); const ti=g.tagIdx[sel]; if(ti!==undefined){ s.add(ti); (g.tagToRes[sel]||[]).forEach(i=>s.add(i)); } return s; }
+    if(q){ const s=new Set(); g.nodes.forEach((n,i)=>{ if(n.label.toLowerCase().indexOf(q)>=0) s.add(i); }); const base=Array.from(s); base.forEach(i=> g.adj[i].forEach(j=>s.add(j))); return s; }
+    return null;
+  }
+
+  _step(g){
+    const nodes=g.nodes, n=nodes.length;
+    for(let i=0;i<n;i++){ const a=nodes[i];
+      for(let j=i+1;j<n;j++){ const b=nodes[j];
+        let dx=a.x-b.x, dy=a.y-b.y, dz=a.z-b.z; let d2=dx*dx+dy*dy+dz*dz; if(d2<1)d2=1; const d=Math.sqrt(d2);
+        const f=2700/d2; const ux=dx/d, uy=dy/d, uz=dz/d;
+        a.vx+=ux*f; a.vy+=uy*f; a.vz+=uz*f; b.vx-=ux*f; b.vy-=uy*f; b.vz-=uz*f;
+      }
+    }
+    g.edges.forEach(([ia,ib])=>{ const a=nodes[ia], b=nodes[ib];
+      let dx=b.x-a.x, dy=b.y-a.y, dz=b.z-a.z; const d=Math.sqrt(dx*dx+dy*dy+dz*dz)||1; const f=(d-112)*0.012;
+      const ux=dx/d, uy=dy/d, uz=dz/d; a.vx+=ux*f; a.vy+=uy*f; a.vz+=uz*f; b.vx-=ux*f; b.vy-=uy*f; b.vz-=uz*f;
+    });
+    for(let i=0;i<n;i++){ const a=nodes[i];
+      a.vx-=a.x*0.0017; a.vy-=a.y*0.0017; a.vz-=a.z*0.0017;
+      a.vx*=0.82; a.vy*=0.82; a.vz*=0.82;
+      a.x+=a.vx; a.y+=a.vy; a.z+=a.vz;
+    }
+  }
+
+  _loop(){
+    this._raf=requestAnimationFrame(this._loop);
+    const g=this._ensure(); const cv=document.getElementById('tm-canvas'); if(!g||!cv){ return; }
+    this._bind(cv);
+    const dpr=Math.min(2, window.devicePixelRatio||1);
+    const W=cv.clientWidth, H=cv.clientHeight;
+    if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){ cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); }
+    const ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,W,H);
+    this._t=(this._t||0)+1;
+    if(this.autoRot) this.rotY+=0.0007;
+    this._step(g);
+
+    const cx=W/2, cy=H/2, fov=760;
+    const cosY=Math.cos(this.rotY), sinY=Math.sin(this.rotY), cosX=Math.cos(this.rotX), sinX=Math.sin(this.rotX);
+    // floating dust (light theme)
+    if(this._stars){ ctx.save();
+      for(const s of this._stars){
+        let x1=s.x*cosY - s.z*sinY, z1=s.x*sinY + s.z*cosY;
+        let y2=s.y*cosX - z1*sinX, z2=s.y*sinX + z1*cosX, x2=x1;
+        const f=fov/(fov+z2); if(f<=0) continue;
+        const sx=cx+x2*f, sy=cy+y2*f; if(sx<-20||sx>W+20||sy<-20||sy>H+20) continue;
+        const tw=0.4+0.6*Math.abs(Math.sin(this._t*0.03*s.tw + s.ph));
+        const dep=Math.max(0,Math.min(1,(z2+750)/1500));
+        ctx.beginPath(); ctx.arc(sx,sy,s.r*f,0,6.2832);
+        ctx.fillStyle=this._rgba('#8aa08f', 0.22*tw*dep); ctx.fill();
+      }
+      ctx.restore();
+    }
+    const nodes=g.nodes; const proj=new Array(nodes.length);
+    for(let i=0;i<nodes.length;i++){ const p=nodes[i];
+      let x1=p.x*cosY - p.z*sinY, z1=p.x*sinY + p.z*cosY, y1=p.y;
+      let y2=y1*cosX - z1*sinX, z2=y1*sinX + z1*cosX, x2=x1;
+      const f=fov/(fov+z2); proj[i]={ sx:cx+x2*f, sy:cy+y2*f, f:f, z:z2 };
+    }
+    const order=proj.map((p,i)=>i).sort((a,b)=>proj[a].z-proj[b].z);
+    const active=this._activeSet(g);
+    const lit=i=> active===null ? true : active.has(i);
+    const anyFilter = active!==null;
+
+    // edges
+    ctx.save();
+    g.edges.forEach(([ia,ib])=>{
+      const on = !anyFilter ? false : (lit(ia)&&lit(ib));
+      if(anyFilter && !(lit(ia)||lit(ib))) return;
+      const pa=proj[ia], pb=proj[ib];
+      const tagNode=nodes[ia].type==='tag'?nodes[ia]:nodes[ib];
+      const col=tagNode.color||'#8fb0a3';
+      ctx.beginPath(); ctx.moveTo(pa.sx,pa.sy); ctx.lineTo(pb.sx,pb.sy);
+      if(on){ ctx.strokeStyle=this._rgba(col,0.5); ctx.lineWidth=1.3; }
+      else { ctx.strokeStyle=this._rgba('#7d9384', anyFilter?0.07:0.13); ctx.lineWidth=0.8; }
+      ctx.stroke();
+    });
+    ctx.restore();
+
+    // nodes — hashtag chips + faint resource dots
+    this._hit=null;
+    for(const i of order){ const p=proj[i], node=nodes[i]; const isTag=node.type==='tag';
+      const depth=Math.max(0.34, Math.min(1,(p.z+320)/640));
+      const on=lit(i);
+      if(!isTag){
+        const r=2.3*p.f;
+        if(this._mx!=null){ const dd=Math.hypot(p.sx-this._mx,p.sy-this._my); if(dd<Math.max(6,r+4)) this._hit=i; }
+        ctx.beginPath(); ctx.arc(p.sx,p.sy,r,0,6.2832);
+        ctx.fillStyle=this._rgba('#8ea08d',(on?0.6:0.16)*(0.5+0.5*depth)); ctx.fill();
+        continue;
+      }
+      const col=node.color||'#5b6733';
+      const fs=Math.max(11, Math.min(24, 11+node.deg*0.72));
+      ctx.font='600 '+fs+'px "Space Grotesk","PT Sans",sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+      const label='#'+node.label;
+      const tw=ctx.measureText(label).width;
+      const w=tw+fs*1.15, h=fs+fs*0.78, x=p.sx-w/2, y=p.sy-h/2, rad=h/2;
+      if(this._mx!=null && this._mx>=x-9 && this._mx<=x+w+9 && this._my>=y-9 && this._my<=y+h+9) this._hit=i;
+      // chip body
+      ctx.save();
+      ctx.shadowColor=this._rgba(col, on?0.34:0.12); ctx.shadowBlur=on?16:6; ctx.shadowOffsetY=2.5;
+      this._roundRect(ctx,x,y,w,h,rad);
+      ctx.fillStyle = on ? this._rgba(col, 0.55+0.42*depth) : this._rgba('#c3ccc0', 0.30+0.30*depth);
+      ctx.fill();
+      ctx.restore();
+      this._roundRect(ctx,x,y,w,h,rad);
+      ctx.lineWidth=1.1; ctx.strokeStyle=this._rgba(col, on?0.85:0.28); ctx.stroke();
+      // sheen
+      if(on){ this._roundRect(ctx,x+1.2,y+1.2,w-2.4,h*0.5,rad); ctx.fillStyle=this._rgba('#ffffff',0.16*depth); ctx.fill(); }
+      // text
+      ctx.fillStyle = on ? this._rgba('#ffffff',0.98) : this._rgba('#5c6b5a', 0.35+0.4*depth);
+      ctx.fillText(label, p.sx, p.sy+fs*0.04);
+    }
+    // hover tooltip + label for resources
+    const tip=document.getElementById('tm-tip');
+    if(this._hit!=null && tip){ const node=nodes[this._hit]; const p=proj[this._hit];
+      tip.style.left=p.sx+'px'; tip.style.top=p.sy+'px'; tip.style.opacity='1';
+      tip.innerHTML = node.type==='tag'
+        ? '<strong>#'+node.label+'</strong><br>'+node.deg+' resources · '+(this.CLUSTER_NAME[node.cluster]||'')
+        : '<strong>'+this._esc(node.label)+'</strong><br><span style="color:#8fb0a3">'+node.tags.map(t=>'#'+t).join(' ')+'</span>';
+      cv.style.cursor='pointer';
+    } else if(tip){ tip.style.opacity='0'; cv.style.cursor=''; }
+  }
+  _roundRect(ctx,x,y,w,h,r){ r=Math.min(r,w/2,h/2); ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+  _rgba(hex,a){ hex=hex.replace('#',''); if(hex.length===3) hex=hex.split('').map(c=>c+c).join(''); const r=parseInt(hex.substr(0,2),16),g=parseInt(hex.substr(2,2),16),b=parseInt(hex.substr(4,2),16); return 'rgba('+r+','+g+','+b+','+a+')'; }
+  _esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  renderVals(){
+    const g=this._ensure();
+    if(!this.CLUSTER) this._dicts();
+    const legend=['inner','collective','systemic'].map(k=>({ name:this.CLUSTER_NAME[k], color:this.CLUSTER[k] }));
+    const sel=this.state.selected;
+    let topTags=[], selItems=[], selColor='#8fb7a6', selCount='', statLine='', relTags=[];
+    if(g){
+      const withDeg=g.tags.map(t=>({ label:t, deg:g.nodes[g.tagIdx[t]].deg, cluster:this._clusterOf(t) }));
+      topTags=withDeg.sort((a,b)=>b.deg-a.deg).slice(0,10).map(t=>{
+        const col=this.CLUSTER[t.cluster]||'#8fb0a3'; const on=sel===t.label;
+        return { label:t.label, onClick:()=>this.setState({selected: on?null:t.label}),
+          style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'11.5px', fontWeight:700, padding:'5px 10px', borderRadius:'16px', cursor:'pointer', border:'1px solid '+this._rgba(col,0.5), background:on?col:this._rgba(col,0.14), color:on?'#0a1613':col } };
+      });
+      statLine=g.tags.length+' hashtags · '+this._data().resources.length+' resources · '+g.edges.length+' links';
+      if(sel){ selColor=this._colorFor(sel);
+        const idxs=g.tagToRes[sel]||[];
+        selItems=idxs.map(i=>g.nodes[i]).sort((a,b)=>(a.label||'').localeCompare(b.label||'')).map(n=>({ name:n.label, url:n.url, tagText:n.tags.map(t=>'#'+t).join(' ') }));
+        selCount=idxs.length+(idxs.length===1?' resource tagged':' resources tagged');
+        const co={}; idxs.forEach(i=>g.nodes[i].tags.forEach(t=>{ if(t!==sel) co[t]=(co[t]||0)+1; }));
+        relTags=Object.keys(co).sort((a,b)=>co[b]-co[a]).slice(0,6).map(t=>{
+          const c=this._colorFor(t);
+          return { label:t, onClick:()=>this.setState({selected:t}),
+            style:{ fontFamily:"'Space Grotesk','PT Sans',sans-serif", fontSize:'12px', fontWeight:600, padding:'7px 12px', borderRadius:'18px', cursor:'pointer', border:'1px solid '+this._rgba(c,0.5), background:this._rgba(c,0.12), color:c } };
+        });
+      }
+    }
+    return {
+      isOpen:this.state.open,
+      openMap:()=>this._open(), closeMap:()=>this._close(),
+      launchHover:{ background:'#3a5f5d' },
+      query:this.state.query, hasQuery:!!this.state.query,
+      onSearch:e=>this.setState({query:e.target.value}),
+      clearQuery:()=>this.setState({query:''}),
+      topTags, legend, statLine,
+      hasSelected:!!sel, selLabel:sel||'', selColor, selItems, selCount,
+      relTags, hasRel:relTags.length>0, hintOn:!!this.state.hintOn,
+      clearSel:()=>this.setState({selected:null})
+    };
+  }
+}
+</script>
+</body>
+</html>

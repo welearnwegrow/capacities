@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning to Intervene in Complex Systems</title>
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<script src="./support.js"></script>
+<script src="./analytics.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Caveat:wght@600&amp;display=swap" rel="stylesheet">
+<script src="./research-data.js"></script>
+<script src="notion-config.js"></script>
+<script src="data-loader.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  ::selection{background:rgba(138,106,69,.22)}
+  @keyframes iocFade{from{opacity:0}to{opacity:1}}
+  @keyframes iocSlide{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes iocPop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .ioc-scroll::-webkit-scrollbar{width:9px}
+  .ioc-scroll::-webkit-scrollbar-thumb{background:rgba(120,105,75,.32);border-radius:6px}
+  @media (max-width:860px){
+    .rl-hero{ padding:34px 18px 26px !important; }
+    .rl-hero h1{ font-size:34px !important; }
+    .rl-hero p{ font-size:14.5px !important; }
+    .rl-tabs{ padding:16px 18px 0 !important; }
+    .rl-main{ padding:22px 18px 64px !important; }
+  }
+</style>
+<script src="forms-config.js"></script>
+<script src="capacity-detail.js"></script>
+</helmet>
+
+<div style="min-height:100vh;background:radial-gradient(680px 460px at 14% 6%, rgba(150,178,108,.21), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(120,165,150,.12), transparent 72%), linear-gradient(180deg,#e2ebd4 0%,#eef1e3 540px);font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
+
+  <dc-import name="SiteNav" active="resources" hint-size="100%,58px" style="width:100%"></dc-import>
+
+  <!-- ===== HERO BAND ===== -->
+  <div class="rl-hero" style="position:relative;overflow:hidden;padding:54px 26px 42px">
+    <div style="position:relative;max-width:1180px;margin:0 auto">
+      <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#1f3a36">Resource Library</h1>
+      <p style="font-size:16px;line-height:1.6;color:#3e544f;margin:0;max-width:70ch">This resource library has been curated by the co-authors of this work and a growing base of systems-change practitioners. You are invited to suggest resources that have helped you in your practice of systems work. You can also contact us to propose a new learning area or resource type.&nbsp;</p>
+    </div>
+  </div>
+
+  <!-- ===== TABS ===== -->
+  <header class="rl-tabs" style="max-width:1180px;margin:0 auto;padding:20px 26px 0">
+    <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(70,90,85,.13);padding-bottom:10px;flex-wrap:wrap">
+      <span style="font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;color:#39342b">All resources <span style="{{ tabCountStyle }}">{{ totalText }}</span></span>
+      <span style="margin-left:auto;display:inline-flex;align-items:center;gap:10px">
+        <dc-import name="tag-network" hint-size="150px,38px"></dc-import>
+        <button onClick="{{ openSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:8px 15px;border-radius:20px;border:1px solid #8a6a45;background:#8a6a45;color:#fff;cursor:pointer">+ Suggest a resource</button>
+      </span>
+    </div>
+  </header>
+
+  <main class="rl-main" style="max-width:1180px;margin:0 auto;padding:28px 26px 80px">
+
+    <!-- ============ CAPACITIES TAB ============ -->
+    <sc-if value="{{ isCapacities }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:iocFade .3s ease">
+        <sc-for list="{{ groupSections }}" as="sec" hint-placeholder-count="3">
+          <section style="margin-bottom:34px">
+            <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:14px">
+              <span style="width:12px;height:12px;border-radius:50%;flex:none;background:{{ sec.dot }}"></span>
+              <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:22px;margin:0;color:{{ sec.color }}">{{ sec.name }}</h2>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:11px">
+              <sc-for list="{{ sec.caps }}" as="cap" hint-placeholder-count="8">
+                <button onClick="{{ cap.onOpen }}" style="{{ cap.style }}" style-hover="{{ cap.styleHover }}">
+                  <span style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.18;color:#3f3a31;text-align:left">{{ cap.label }}</span>
+                  <span style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+                    <span style="font-size:12.5px;color:#8a7a5f">{{ cap.countText }}</span>
+                    <span style="font-size:14px;font-weight:700;color:{{ cap.color }}">→</span>
+                  </span>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <!-- ============ LIBRARY TAB ============ -->
+    <sc-if value="{{ isLibrary }}" hint-placeholder-val="{{ true }}">
+      <div style="animation:iocFade .3s ease">
+        <!-- search -->
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+          <input value="{{ libSearch }}" onInput="{{ onSearch }}" placeholder="Search titles &amp; descriptions…" style="flex:1;min-width:220px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 14px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;outline:none">
+          <select value="{{ capFilterVal }}" onChange="{{ onCapSelect }}" style="font-family:'PT Sans',sans-serif;font-size:13px;padding:11px 12px;border:1px solid rgba(120,105,75,.4);border-radius:10px;background:#FCFBF7;color:#39342b;cursor:pointer;max-width:240px">
+            <option value="">Jump to learning area…</option>
+            <sc-for list="{{ capGroups }}" as="g" hint-placeholder-count="3">
+              <optgroup label="{{ g.label }}">
+                <sc-for list="{{ g.caps }}" as="c" hint-placeholder-count="6">
+                  <option value="{{ c.label }}">{{ c.label }}</option>
+                </sc-for>
+              </optgroup>
+            </sc-for>
+          </select>
+          <button onClick="{{ clearFilters }}" style="{{ clearStyle }}">Clear filters</button>
+        </div>
+        <sc-if value="{{ capFilterActive }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-bottom:13px">
+            <span style="display:inline-flex;align-items:center;gap:9px;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;padding:7px 8px 7px 14px;border-radius:20px;background:{{ capFilterColor }};color:#fff">Capacity: {{ capFilterLabel }} <span onClick="{{ clearCapFilter }}" title="Remove filter" style="cursor:pointer;display:inline-flex;width:18px;height:18px;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.25);font-size:13px">×</span></span>
+          </div>
+        </sc-if>
+        <!-- medium chips -->
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px">
+          <sc-for list="{{ mediumChips }}" as="m" hint-placeholder-count="9">
+            <button onClick="{{ m.onToggle }}" style="{{ m.style }}">{{ m.label }}</button>
+          </sc-for>
+        </div>
+        <div style="font-size:13px;color:#8a7a5f;margin-bottom:16px">{{ libCountText }}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:13px">
+          <sc-for list="{{ libList }}" as="res" hint-placeholder-count="9">
+            <div style="background:rgba(255,255,255,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.72);border-radius:16px;padding:15px 16px;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(40,70,65,.08)">
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px">
+                <sc-for list="{{ res.typeTags }}" as="t" hint-placeholder-count="1">
+                  <span style="{{ t.style }}">{{ t.label }}</span>
+                </sc-for>
+              </div>
+              <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }}</a>
+              <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:8px 0 11px">{{ res.desc }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:auto">
+                <sc-for list="{{ res.capTags }}" as="t" hint-placeholder-count="2">
+                  <button onClick="{{ t.onOpen }}" style="{{ t.style }}">{{ t.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ libEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:50px 20px;color:#8a7a5f;font-size:15px">No resources match these filters. <button onClick="{{ clearFilters }}" style="background:none;border:none;color:#8a6a45;font-weight:700;cursor:pointer;text-decoration:underline;font-size:15px">Clear filters</button></div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+    <!-- ============ STUDIO TAB ============ -->
+    <sc-if value="{{ isStudio }}" hint-placeholder-val="{{ false }}">
+      <div style="animation:iocFade .3s ease">
+        <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.22);border-radius:14px;padding:18px 20px;margin-bottom:22px">
+          <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 6px">Design a Learning Experience</h2>
+          <p style="font-size:14px;line-height:1.55;color:#544E45;margin:0;max-width:74ch">Assemble a learning experience: choose the <strong>methods</strong> for how learning happens, and the <strong>conditions</strong> that need to be in place for it to land. Your design builds in the panel on the right.</p>
+          <sc-if value="{{ hasContext }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:12px;font-size:13px;color:#8a6a45">Designing for learning area: <strong style="color:{{ contextColor }}">{{ contextLabel }}</strong> <button onClick="{{ clearContext }}" style="background:none;border:none;color:#a07a4f;cursor:pointer;text-decoration:underline;font-size:12px">clear</button></div>
+          </sc-if>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start">
+          <!-- left: methods + conditions -->
+          <div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">
+              <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:17px;margin:0">Methods</h3>
+              <span style="font-size:11.5px;color:#977c45;font-style:italic">more cognitive → more experiential</span>
+            </div>
+            <p style="font-size:12.5px;color:#8a7a5f;margin:0 0 12px">How learning happens. Tap to add to your design.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));gap:10px;margin-bottom:30px">
+              <sc-for list="{{ methodCards }}" as="m" hint-placeholder-count="14">
+                <button onClick="{{ m.onToggle }}" style="{{ m.style }}" style-hover="{{ m.styleHover }}">
+                  <span style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+                    <span style="{{ m.numStyle }}">{{ m.num }}</span>
+                    <span style="font-weight:700;font-size:13.5px;color:#3f3a31;text-align:left">{{ m.name }}</span>
+                  </span>
+                  <span style="font-size:11.5px;line-height:1.45;color:#5a5347;text-align:left">{{ m.desc }}</span>
+                </button>
+              </sc-for>
+            </div>
+
+            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:17px;margin:0 0 2px">Enabling Conditions</h3>
+            <p style="font-size:12.5px;color:#8a7a5f;margin:0 0 12px">What must be in place for learning to take root.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(216px,1fr));gap:10px">
+              <sc-for list="{{ conditionCards }}" as="c" hint-placeholder-count="8">
+                <button onClick="{{ c.onToggle }}" style="{{ c.style }}" style-hover="{{ c.styleHover }}">
+                  <span style="display:flex;align-items:center;gap:7px;margin-bottom:5px">
+                    <span style="{{ c.checkStyle }}">{{ c.check }}</span>
+                    <span style="font-weight:700;font-size:13.5px;color:#3f3a31;text-align:left">{{ c.name }}</span>
+                  </span>
+                  <span style="font-size:11.5px;line-height:1.45;color:#5a5347;text-align:left">{{ c.desc }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- right: the plan -->
+          <aside style="position:sticky;top:18px;background:#39342b;border-radius:15px;padding:20px;color:#F4EFE6;box-shadow:0 12px 34px rgba(40,30,20,.24)">
+            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:18px;margin:0 0 3px;color:#FDFBF7">Your learning design</h3>
+            <p style="font-size:12px;color:rgba(253,251,247,.66);margin:0 0 16px">{{ planSummaryText }}</p>
+
+            <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#cdbf8f;margin-bottom:8px">Methods</div>
+            <sc-if value="{{ planHasMethods }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
+                <sc-for list="{{ planMethods }}" as="p" hint-placeholder-count="2">
+                  <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#F4EFE6"><span style="width:18px;height:18px;border-radius:50%;background:rgba(244,239,230,.16);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex:none">{{ p.num }}</span>{{ p.name }}</div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ planNoMethods }}" hint-placeholder-val="{{ true }}">
+              <div style="font-size:12.5px;color:rgba(253,251,247,.5);font-style:italic;margin-bottom:16px">No methods chosen yet.</div>
+            </sc-if>
+
+            <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#cdbf8f;margin-bottom:8px">Conditions</div>
+            <sc-if value="{{ planHasConditions }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px">
+                <sc-for list="{{ planConditions }}" as="c" hint-placeholder-count="2">
+                  <span style="font-size:11.5px;background:rgba(244,239,230,.14);border:1px solid rgba(244,239,230,.2);padding:4px 9px;border-radius:20px;color:#F4EFE6">{{ c.name }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ planNoConditions }}" hint-placeholder-val="{{ true }}">
+              <div style="font-size:12.5px;color:rgba(253,251,247,.5);font-style:italic;margin-bottom:18px">No conditions chosen yet.</div>
+            </sc-if>
+
+            <div style="display:flex;gap:8px">
+              <button onClick="{{ copyPlan }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:10px;border-radius:9px;border:none;background:#bd8a5a;color:#2a2118;cursor:pointer">{{ copyLabel }}</button>
+              <button onClick="{{ resetPlan }}" style="font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:10px 13px;border-radius:9px;border:1px solid rgba(244,239,230,.3);background:transparent;color:#F4EFE6;cursor:pointer">Reset</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <dc-import name="SiteFooter" hint-size="100%,260px" style="width:100%"></dc-import>
+
+  <!-- ============ DEEP-DIVE DRAWER ============ -->
+  <sc-if value="{{ deepOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeDeep }}" style="position:fixed;inset:0;background:rgba(40,32,22,.42);z-index:40;animation:iocFade .2s ease"></div>
+    <aside class="ioc-scroll" style="position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:#EFE9DC;z-index:41;overflow-y:auto;box-shadow:-14px 0 40px rgba(40,30,20,.22);animation:iocSlide .26s cubic-bezier(.2,.7,.3,1)">
+      <div style="position:sticky;top:0;background:{{ deep.headerBg }};padding:22px 26px 18px;border-bottom:1px solid rgba(120,105,75,.2)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px">
+          <div>
+            <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:{{ deep.color }};margin-bottom:7px">{{ deep.groupName }}</div>
+            <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:25px;line-height:1.1;margin:0;color:#332d24">{{ deep.label }}</h2>
+            <div style="font-size:13px;color:#7a6f5c;margin-top:6px">{{ deep.countText }}</div>
+          </div>
+          <button onClick="{{ closeDeep }}" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(120,105,75,.3);background:#FCFBF7;color:#6b5527;font-size:17px;cursor:pointer;line-height:1">✕</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:16px">
+          <button onClick="{{ openSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:8px;border:1px solid rgba(120,105,75,.4);background:#FCFBF7;color:#8a6a45;cursor:pointer">+ Suggest a resource</button>
+        </div>
+      </div>
+      <div style="padding:20px 26px 0">
+        <sc-if value="{{ deep.desc }}" hint-placeholder-val="">
+          <p style="font-size:14px;line-height:1.62;color:#4a4438;margin:0 0 20px">{{ deep.desc }}</p>
+        </sc-if>
+      </div>
+      <div style="padding:18px 26px 40px">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Resources</span>
+          <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ deep.items }}" as="res" hint-placeholder-count="5">
+            <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:12px;padding:13px 15px">
+              <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:7px">
+                <sc-if value="{{ res.featured }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ res.pickStyle }}">★ Featured</span>
+                </sc-if>
+                <sc-for list="{{ res.typeTags }}" as="t" hint-placeholder-count="1">
+                  <span style="{{ t.style }}">{{ t.label }}</span>
+                </sc-for>
+              </div>
+              <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }} <span style="font-weight:400;color:{{ deep.color }};font-size:13px">↗</span></a>
+              <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:7px 0 0">{{ res.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- ============ SUBMIT OVERLAY ============ -->
+  <sc-if value="{{ submitOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeSubmit }}" style="position:fixed;inset:0;background:rgba(40,32,22,.5);z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;animation:iocFade .2s ease">
+      <div onClick="{{ stop }}" style="background:#F4EFE6;border-radius:16px;max-width:460px;width:100%;padding:26px;box-shadow:0 20px 50px rgba(40,30,20,.3);animation:iocPop .26s ease">
+        <sc-if value="{{ submitNotDone }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 5px">Suggest a resource</h3>
+            <p style="font-size:13px;line-height:1.5;color:#544E45;margin:0 0 18px">Share something that has informed your practice. It goes to the editors for curation before joining the library.</p>
+            <div style="display:flex;flex-direction:column;gap:11px">
+              <input id="ioc-sr-title" placeholder="Title" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <input id="ioc-sr-link" placeholder="Link (URL)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <input id="ioc-sr-from" placeholder="Your name &amp; email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <textarea id="ioc-sr-why" placeholder="Why it matters / how it informs a learning area" rows="3" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none;resize:vertical"></textarea>
+            </div>
+            <div style="display:flex;gap:9px;margin-top:18px">
+              <button onClick="{{ doSubmit }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Submit for curation</button>
+              <button onClick="{{ closeSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px 15px;border-radius:9px;border:1px solid rgba(120,105,75,.4);background:transparent;color:#8a6a45;cursor:pointer">Cancel</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ submitDone }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:14px 6px">
+            <div style="font-size:40px;margin-bottom:10px">🌱</div>
+            <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 6px">Thank you</h3>
+            <p style="font-size:13.5px;line-height:1.55;color:#544E45;margin:0 0 20px">Your suggestion has been sent to the editors. Once curated, it will join the growing library.</p>
+            <button onClick="{{ closeSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:10px 22px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Close</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:820},&quot;defaultTab&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;capacities&quot;,&quot;library&quot;,&quot;studio&quot;],&quot;default&quot;:&quot;library&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = {
+      tab: (props && props.defaultTab) || 'library',
+      deep: null, capFilter: null,
+      libGroups: {}, libMediums: {}, libSearch: '',
+      methods: {}, conditions: {}, contextCap: null,
+      submitOpen: false, submitDone: false, submitting: false, submitError: null, copied: false
+    };
+  }
+  componentDidMount(){
+    // Live Notion data may arrive after first paint — re-render when it does.
+    window.addEventListener('research-data-updated', () => this.forceUpdate());
+    if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
+    // In standalone bundles, data scripts may load async — re-render once data is ready.
+    if (!this._data().resources.length) {
+      let tries = 0;
+      const iv = setInterval(() => {
+        if (this._data().resources.length || tries++ > 60) { clearInterval(iv); this.forceUpdate(); }
+      }, 40);
+    }
+    try {
+      const p = new URLSearchParams(window.location.search).get('capacity');
+      if (p) {
+        const match = this._data().capacities.find(c => c.label === p);
+        if (match) this.setState({ tab:'library', capFilter: match.label });
+      }
+      if (new URLSearchParams(window.location.search).get('suggest')) {
+        this.setState({ submitOpen:true, submitDone:false });
+      }
+    } catch(e){}
+  }
+  _data(){ return window.__RESEARCH || {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}}; }
+  _cols(){ return {
+    teal:{c:'#46716f', accent:'#7E9E9E', soft:'#e2e9e7', head:'#e9efe8'},
+    green:{c:'#5b6733', accent:'#A2AD68', soft:'#eaecdb', head:'#edefdf'},
+    coral:{c:'#a8542d', accent:'#D08B6C', soft:'#f4e5db', head:'#f6e8de'}
+  }; }
+  _groupOf(label){ const c=this._data().capacities.find(x=>x.label===label); return c?c.group:'teal'; }
+  _resFor(label){ return this._data().resources.filter(r=>r.caps.indexOf(label)>=0); }
+
+  openDeep(label){ this.setState({deep:label}); }
+  closeDeep(){ this.setState({deep:null}); }
+  openSubmit(){ this.setState({submitOpen:true, submitDone:false}); }
+  closeSubmit(){ this.setState({submitOpen:false, submitDone:false}); }
+  doSubmit(){
+    var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
+    var title=g('ioc-sr-title'), link=g('ioc-sr-link'), from=g('ioc-sr-from'), why=g('ioc-sr-why');
+    if (window.track) window.track('suggest_resource', { title: title || '(untitled)' });
+    var subject='Resource suggestion: '+(title||'(untitled)');
+    var nurl=(typeof window!=='undefined' && window.NOTION_CONNECTOR_URL) ? window.NOTION_CONNECTOR_URL : '';
+    if (nurl) {
+      this.setState({submitting:true, submitError:null});
+      fetch(nurl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name:title, url:link, why:why, suggestedBy:from }) })
+        .then(r=>r.json()).then(j=>{ this.setState({submitting:false, submitDone:true, submitError: j && j.ok ? null : 'send'}); })
+        .catch(()=>{ this.setState({submitting:false, submitDone:true, submitError:'network'}); });
+      return;
+    }
+    var to='jayajohnyramchandani@gmail.com';
+    var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
+      +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs a learning area:\n'+why+'\n';
+    try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
+    this.setState({submitDone:true});
+  }
+  toggleObj(bag, key){ const b=Object.assign({}, this.state[bag]); if(b[key]) delete b[key]; else b[key]=true; const s={}; s[bag]=b; this.setState(s); }
+
+  _typeColor(t){
+    const M={
+      'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733',
+      'Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8',
+      'Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45'
+    };
+    if (M[t]) return M[t];
+    // any new/unknown type gets a stable, distinct colour derived from its name
+    let h=0; for(let i=0;i<t.length;i++){ h=(h*31 + t.charCodeAt(i))>>>0; }
+    return 'hsl('+(h%360)+' 42% 42%)';
+  }
+  _mkRes(r){
+    const cols=this._cols();
+    const t0=(r.types&&r.types.length)?r.types[0]:'Resource';
+    const tc=this._typeColor(t0);
+    return {
+      name:r.name, desc:r.desc, url:r.url||'#',
+      featured:!!r.featured,
+      typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
+      typeColor:tc,
+      typeTags:(r.types&&r.types.length?r.types:['Resource']).map(t=>{ const c=this._typeColor(t); return { label:t, style:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:c+'1f', color:c, whiteSpace:'nowrap' } }; }),
+      typeTagStyle:{ display:'inline-block', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.06em', textTransform:'uppercase', color:tc, marginBottom:'6px' },
+      typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },
+      pickStyle:{ display:'inline-flex', alignItems:'center', gap:'4px', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'#8a6a45', color:'#fff', whiteSpace:'nowrap' },
+      capTags:r.caps.map(c=>{
+        const col=cols[this._groupOf(c)];
+        return { label:c, onOpen:(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.openDeep(c); },
+          style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, padding:'3px 8px', borderRadius:'20px', border:'1px solid '+col.accent, background:col.soft, color:col.c, cursor:'pointer' } };
+      })
+    };
+  }
+
+  copyPlan(){
+    const d=this._data();
+    const ms=d.methods.filter(m=>this.state.methods[m.name]);
+    const cs=d.conditions.filter(c=>this.state.conditions[c.name]);
+    let t='LEARNING DESIGN';
+    if(this.state.contextCap) t+='\nLearning area: '+this.state.contextCap;
+    t+='\n\nMethods:\n'+(ms.length?ms.map((m,i)=>'  '+(i+1)+'. '+m.name).join('\n'):'  —');
+    t+='\n\nEnabling conditions:\n'+(cs.length?cs.map(c=>'  • '+c.name).join('\n'):'  —');
+    try{ navigator.clipboard.writeText(t); }catch(e){}
+    this.setState({copied:true});
+    clearTimeout(this._ct); this._ct=setTimeout(()=>this.setState({copied:false}),1600);
+  }
+  resetPlan(){ this.setState({methods:{}, conditions:{}, contextCap:null}); }
+
+  renderVals(){
+    const d=this._data(); const cols=this._cols(); const tab=this.state.tab;
+    const tabBase={ fontFamily:"'PT Sans',sans-serif", fontSize:'14px', fontWeight:700, padding:'11px 16px', border:'none', background:'transparent', cursor:'pointer', borderBottom:'3px solid transparent', marginBottom:'-1px', color:'#9a8d76' };
+    const tabOn=Object.assign({}, tabBase, { color:'#39342b', borderBottom:'3px solid #8a6a45' });
+    const mkTab=(name)=> tab===name ? tabOn : tabBase;
+
+    // ---- capacities sections ----
+    const meta=d.groupMeta||{};
+    const groupSections=['teal','green','coral'].map(g=>{
+      const col=cols[g];
+      const caps=d.capacities.filter(c=>c.group===g).map(c=>{
+        const n=this._resFor(c.label).length;
+        return { label:c.label, count:n, countText:n+(n===1?' resource':' resources'), color:col.c,
+          style:{ display:'flex', flexDirection:'column', textAlign:'left', background:'#FCFBF7', border:'1px solid rgba(120,105,75,.2)', borderLeft:'4px solid '+col.accent, borderRadius:'12px', padding:'14px 15px', cursor:'pointer', boxShadow:'0 1px 3px rgba(70,55,35,.05)', transition:'transform .12s ease, box-shadow .12s ease' },
+          styleHover:{ transform:'translateY(-2px)', boxShadow:'0 6px 16px rgba(70,55,35,.12)' },
+          onOpen:()=>this.openDeep(c.label) };
+      });
+      return { key:g, name:(meta[g]||{}).name||g, sub:(meta[g]||{}).sub||'', color:col.c, dot:col.accent, caps };
+    });
+
+    // ---- deep dive ----
+    let deep=null;
+    if(this.state.deep){
+      const label=this.state.deep, g=this._groupOf(label), col=cols[g];
+      const list=this._resFor(label);
+      const items=list.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
+      const order=['Books','Methods & Toolkits','Digital Publications / Reports','Data Tools','Case Studies','Networks','Podcast','Video','Articly / Blogposts','Articles / Blogposts','Other'];
+      const byMed={};
+      list.forEach(r=>{ const ts=(r.types&&r.types.length)?r.types:['Other']; ts.forEach(t=>{ (byMed[t]=byMed[t]||[]).push(r); }); });
+      const keys=Object.keys(byMed).sort((a,b)=>{ const ia=order.indexOf(a), ib=order.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });
+      const mediums=keys.map(m=>({ medium:m, count:byMed[m].length, items:byMed[m].slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r)) }));
+      const det=(typeof window!=='undefined'&&window.__CAPDETAIL)?(window.__CAPDETAIL[label]||{}):{};
+      const levOrder=['Personal','Social','Institutional','Systemic'];
+      const _hx=(col.c||'#46716f').replace('#',''); const _r=parseInt(_hx.substr(0,2),16),_g2=parseInt(_hx.substr(2,2),16),_b=parseInt(_hx.substr(4,2),16);
+      const _alpha=[0.38,0.58,0.79,1];
+      const levels=det.levels?levOrder.filter(k=>det.levels[k]).map((k,idx)=>({
+        label:k, text:det.levels[k],
+        tierStyle:{ fontFamily:"'PT Serif',serif", fontWeight:700, color:'rgba('+_r+','+_g2+','+_b+','+_alpha[idx]+')' }
+      })):[];
+      deep={ label, color:col.c, headerBg:col.head, groupName:(meta[g]||{}).name||g,
+        desc:det.desc||'', levels, hasLevels:levels.length>0,
+        countText:list.length+(list.length===1?' resource to learn about this area':' resources to learn about this area'),
+        items, onDesign:()=>{ window.location.href='design.dc.html'; } };
+    }
+
+    // ---- library ----
+    const allMediums=[]; d.resources.forEach(r=>r.types.forEach(t=>{ if(allMediums.indexOf(t)<0)allMediums.push(t); }));
+    allMediums.sort();
+    const gActive=this.state.libGroups, mActive=this.state.libMediums, q=this.state.libSearch.trim().toLowerCase();
+    const anyG=Object.keys(gActive).length>0, anyM=Object.keys(mActive).length>0;
+    const filtered=d.resources.filter(r=>{
+      if(this.state.capFilter && r.caps.indexOf(this.state.capFilter)<0) return false;
+      if(anyG && !r.caps.some(c=>gActive[this._groupOf(c)])) return false;
+      if(anyM && !r.types.some(t=>mActive[t])) return false;
+      if(q){ const hay=(r.name+' '+r.desc).toLowerCase(); if(hay.indexOf(q)<0) return false; }
+      return true;
+    });
+    const groupChips=['teal','green','coral'].map(g=>{
+      const on=!!gActive[g], col=cols[g];
+      return { label:(meta[g]||{}).name||g, onToggle:()=>this.toggleObj('libGroups',g),
+        style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12.5px', fontWeight:700, padding:'7px 13px', borderRadius:'20px', cursor:'pointer', border:'1px solid '+col.accent, background:on?col.accent:'transparent', color:on?'#fff':col.c } };
+    });
+    const medCounts={}; d.resources.forEach(r=>r.types.forEach(t=>{ medCounts[t]=(medCounts[t]||0)+1; }));
+    const mediumChips=allMediums.map(m=>{
+      const on=!!mActive[m];
+      return { label:m+' ('+(medCounts[m]||0)+')', onToggle:()=>this.toggleObj('libMediums',m),
+        style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12px', fontWeight:600, padding:'6px 11px', borderRadius:'18px', cursor:'pointer', border:'1px solid rgba(120,105,75,.35)', background:on?'#8a6a45':'#FCFBF7', color:on?'#fff':'#6b5d45' } };
+    });
+    const libList=filtered.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
+    const capGroups=['teal','green','coral'].map(g=>({ label:(meta[g]||{}).name||g, caps:d.capacities.filter(c=>c.group===g).map(c=>({label:c.label})) }));
+
+    // ---- studio ----
+    const methodCards=d.methods.map((m,i)=>{
+      const on=!!this.state.methods[m.name];
+      return { name:m.name, desc:m.desc, num:(i+1),
+        onToggle:()=>this.toggleObj('methods',m.name),
+        style:{ display:'flex', flexDirection:'column', textAlign:'left', cursor:'pointer', borderRadius:'11px', padding:'12px 13px', border:'1px solid '+(on?'#8a6a45':'rgba(120,105,75,.22)'), background:on?'#f3ead9':'#FCFBF7', boxShadow:on?'0 2px 8px rgba(138,106,69,.16)':'none', transition:'background .12s ease' },
+        styleHover:{ borderColor:'#8a6a45' },
+        numStyle:{ width:'20px', height:'20px', flex:'none', borderRadius:'50%', background:on?'#8a6a45':'rgba(120,105,75,.16)', color:on?'#fff':'#8a6a45', fontSize:'11px', fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center' } };
+    });
+    const conditionCards=d.conditions.map(c=>{
+      const on=!!this.state.conditions[c.name];
+      return { name:c.name, desc:c.desc,
+        onToggle:()=>this.toggleObj('conditions',c.name), check:on?'✓':'',
+        style:{ display:'flex', flexDirection:'column', textAlign:'left', cursor:'pointer', borderRadius:'11px', padding:'12px 13px', border:'1px solid '+(on?'#76834a':'rgba(120,105,75,.22)'), background:on?'#ebeedd':'#FCFBF7', transition:'background .12s ease' },
+        styleHover:{ borderColor:'#76834a' },
+        checkStyle:{ width:'18px', height:'18px', flex:'none', borderRadius:'5px', background:on?'#76834a':'rgba(120,105,75,.14)', color:'#fff', fontSize:'11px', fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center' } };
+    });
+    const planMethods=d.methods.map((m,i)=>({n:m.name,i:i+1})).filter(m=>this.state.methods[m.n]).map(m=>({name:m.n,num:m.i}));
+    const planConditions=d.conditions.filter(c=>this.state.conditions[c.name]).map(c=>({name:c.name}));
+    const nM=planMethods.length, nC=planConditions.length;
+    const ctx=this.state.contextCap;
+
+    return {
+      // tabs
+      setCapacities:()=>this.setState({tab:'capacities', deep:null}),
+      setLibrary:()=>this.setState({tab:'library', deep:null}),
+      setStudio:()=>this.setState({tab:'studio', deep:null}),
+      tabCapStyle:mkTab('capacities'), tabLibStyle:mkTab('library'), tabStudioStyle:mkTab('studio'),
+      tabCountStyle:{ fontSize:'11px', fontWeight:700, background:'rgba(138,106,69,.16)', color:'#8a6a45', padding:'1px 7px', borderRadius:'10px', marginLeft:'4px' },
+      totalText:String(d.resources.length),
+      isCapacities:tab==='capacities', isLibrary:tab==='library', isStudio:tab==='studio',
+      // capacities
+      groupSections,
+      // deep dive
+      deepOpen:!!deep, deep:deep||{label:'',color:'#46716f',headerBg:'#e9efe8',groupName:'',desc:'',levels:[],hasLevels:false,countText:'',items:[],onDesign:()=>{}},
+      closeDeep:()=>this.closeDeep(),
+      openSubmit:()=>this.openSubmit(),
+      // library
+      libSearch:this.state.libSearch,
+      onSearch:(e)=>this.setState({libSearch:e.target.value}),
+      clearFilters:()=>this.setState({libGroups:{},libMediums:{},libSearch:'',capFilter:null}),
+      capFilterActive:!!this.state.capFilter, capFilterLabel:this.state.capFilter||'', capFilterColor:this.state.capFilter?cols[this._groupOf(this.state.capFilter)].accent:'#8a6a45', clearCapFilter:()=>this.setState({capFilter:null}),
+      clearStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12.5px', fontWeight:700, padding:'9px 14px', borderRadius:'9px', border:'1px solid rgba(120,105,75,.32)', background:'transparent', color:'#8a6a45', cursor:'pointer' },
+      groupChips, mediumChips, libList, capGroups,
+      capFilterVal:this.state.capFilter||'',
+      onCapSelect:(e)=>this.setState({capFilter:e.target.value||null}),
+      libCountText:filtered.length+' of '+d.resources.length+' resources',
+      libEmpty:filtered.length===0,
+      // studio
+      methodCards, conditionCards,
+      hasContext:!!ctx, contextLabel:ctx||'', contextColor:ctx?cols[this._groupOf(ctx)].c:'#8a6a45',
+      clearContext:()=>this.setState({contextCap:null}),
+      planMethods, planConditions,
+      planHasMethods:nM>0, planNoMethods:nM===0, planHasConditions:nC>0, planNoConditions:nC===0,
+      planSummaryText:(nM+nC===0)?'Choose methods and conditions to compose a design.':(nM+' method'+(nM===1?'':'s')+' · '+nC+' condition'+(nC===1?'':'s')),
+      copyPlan:()=>this.copyPlan(), copyLabel:this.state.copied?'Copied ✓':'Copy design', resetPlan:()=>this.resetPlan(),
+      // submit
+      submitOpen:this.state.submitOpen, submitNotDone:!this.state.submitDone, submitDone:this.state.submitDone,
+      closeSubmit:()=>this.closeSubmit(), doSubmit:()=>this.doSubmit(), stop:(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

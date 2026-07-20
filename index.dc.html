@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning to Intervene in Complex Systems</title>
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<script src="./support.js"></script>
+<script src="./analytics.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Caveat:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
+<script src="research-data.js"></script>
+<script src="notion-config.js"></script>
+<script src="data-loader.js"></script>
+<script src="capacity-detail.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(680px 460px at 14% 6%, rgba(120,160,195,.20), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(150,185,180,.16), transparent 72%), linear-gradient(180deg,#dce7ed 0%,#eef2ef 620px);font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .ioc-root{padding:0 24px 70px}
+  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 130px), transparent 100%), linear-gradient(to right, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 130px), transparent 100%), linear-gradient(to right, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);mask-composite:intersect}
+  .ioc-stage{position:absolute;top:0;left:0;width:1040px;height:1320px;transform-origin:top left}
+  @keyframes iocFade{from{opacity:0}to{opacity:1}}
+  @keyframes iocDrawerR{from{transform:translateX(100%)}to{transform:translateX(0)}}
+  @keyframes iocFloat{0%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% + 4px),calc(-50% - 5px))}50%{transform:translate(calc(-50% - 3px),calc(-50% - 8px))}75%{transform:translate(calc(-50% - 5px),calc(-50% - 2px))}100%{transform:translate(-50%,-50%)}}
+  @keyframes iocMarch{to{stroke-dashoffset:-11}}
+  .ioc-march{animation:iocMarch 1s linear infinite}
+  @keyframes iocMarchRev{to{stroke-dashoffset:11}}
+  .ioc-march-rev{animation:iocMarchRev 1s linear infinite}
+  @keyframes iocIsleFloat{0%{transform:translate(0px,0px)}25%{transform:translate(5px,-7px)}50%{transform:translate(-4px,-11px)}75%{transform:translate(-6px,-3px)}100%{transform:translate(0px,0px)}}
+  .ioc-isle{animation-name:iocIsleFloat;animation-timing-function:ease-in-out;animation-iteration-count:infinite;transform-box:fill-box;transform-origin:center}
+  @keyframes iocWash{0%{transform:translate(0px,0px) scale(1)}50%{transform:translate(20px,-15px) scale(1.08)}100%{transform:translate(0px,0px) scale(1)}}
+  @keyframes iocBuoy{0%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 3px),calc(-50% - 5px))}100%{transform:translate(-50%,-50%)}}
+  .ioc-wash{transform-box:fill-box;transform-origin:center;animation-name:iocWash;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+  @keyframes iocNeedle{0%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}100%{transform:rotate(-7deg)}}
+  .ioc-compass-star{transform-box:fill-box;transform-origin:center;animation:iocNeedle 5.5s ease-in-out infinite}
+  .ioc-compass{transform-box:fill-box;transform-origin:center}
+  .ioc-zoom{display:none}
+  .ioc-browse{display:none}
+  .ioc-hint-desktop{display:inline}
+  .ioc-hint-mobile{display:none}
+  @media (max-width:760px){
+    .ioc-browse{display:block}
+    .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:auto}
+    .ioc-stage, .ioc-stage *{pointer-events:none!important}
+    .ioc-hint-desktop{display:none}
+    .ioc-hint-mobile{display:inline}
+    .ioc-root{padding:0 14px 48px}
+    .ioc-title{font-size:30px !important}
+    .ioc-lede{font-size:15px !important}
+    .ioc-kicker{font-size:11px !important;letter-spacing:.18em !important}
+  }
+  @media (max-width:460px){
+    .ioc-title{font-size:25px !important}
+  }
+</style>
+</helmet>
+
+<div class="ioc-root" style="position:relative;min-height:100vh;background:transparent;display:flex;flex-direction:column;align-items:center">
+
+  <dc-import name="SiteNav" active="home" hint-size="100%,58px" style="display:block;width:100vw;margin-bottom:22px"></dc-import>
+
+  <!-- title block -->
+  <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
+    <div style="position:relative">
+      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;max-width:20ch;color:#1f3a36">Learning to intervene in complex systems</h1>
+      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:16px;color:#4c6b64;margin:0;max-width:70ch">systems practice x lifelong learning for just &amp; regenerative futures</p>
+    </div>
+  </div>
+
+  <!-- intro / context -->
+  <div style="width:1040px;max-width:100%;margin:0 auto 26px;text-align:left">
+    <div style="max-width:78ch;margin:0;display:flex;flex-direction:column;gap:15px">
+      <p data-edit="intro-1" style="font-family:'PT Sans',system-ui,sans-serif;font-size:15.5px;line-height:1.72;color:#3c4a45;margin:0"><font color="#000000" face="PT Sans, sans-serif"><span style="font-size: 16px; white-space-collapse: preserve;">Everyday, we adapt to the systems around us, trying hard to change them towards more preferred futures. We believe that systems change work is a lifelong endeavor, with each season of our lives presenting new challenges that require different skills and capacities. This open-source framework starts with a single inquiry: <i>What do we need to learn to intervene in complex systems?</i> We landed at this map to guide <b>changemakers</b>, <b>educators</b>, and <b>leaders</b> ready for systems work. It provides orientations to ground the work in shared values, 24 learning areas, a process for intervening in complex systems, and a resource library from a community of system change practitioners and educators. <br></span></font></p>
+    </div>
+  </div>
+
+  <!-- ===== MAP ===== -->
+  <div style="width:1040px;max-width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em"><span class="ioc-hint-desktop">Tap to explore · drag to rearrange · pinch or +/− to zoom</span><span class="ioc-hint-mobile">A map of the whole framework — browse each part below</span></span>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div class="ioc-zoom" style="align-items:center;gap:8px">
+        <button onClick="{{ zoomOut }}" aria-label="Zoom out" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">−</button>
+        <button onClick="{{ zoomIn }}" aria-label="Zoom in" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">+</button>
+      </div>
+      <button onClick="{{ downloadMap }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:18px;padding:6px 14px;cursor:pointer;white-space:nowrap">↓ Download map (PDF)</button>
+      <button onClick="{{ resetMap }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#6b7d6a;background:rgba(255,255,255,.6);border:1px solid rgba(70,90,85,.25);border-radius:18px;padding:6px 14px;cursor:pointer;white-space:nowrap">↺ Reset map</button>
+    </div>
+  </div>
+
+  <!-- legend -->
+  <div style="width:1040px;max-width:100%;display:flex;flex-wrap:wrap;gap:22px 30px;align-items:center;margin:2px 0 14px;font-family:'PT Sans',sans-serif;font-size:12.5px;color:#52605a">
+    <div style="display:flex;align-items:center;gap:9px">
+      <svg width="26" height="26" viewBox="0 0 26 26" style="flex:none"><circle cx="13" cy="13" r="11" fill="none" stroke="#b0822f" stroke-width="1.3" stroke-opacity=".5"></circle><path d="M13 2.5 L15 11 L23.5 13 L15 15 L13 23.5 L11 15 L2.5 13 L11 11 Z" fill="#b0822f" fill-opacity=".85"></path></svg>
+      <span><strong style="color:#8a6a2f;font-weight:700">Orientations</strong> that guide our intentions</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:9px">
+      <svg width="30" height="26" viewBox="0 0 30 26" style="flex:none"><path d="M5 17 C3 13 6 9 11 8.5 C13 5 19 5 21 9 C26 9 28 14 25 17 C26 20 22 22 18 21 C15 23 9 22 8 19 C4 19 4 18 5 17 Z" fill="#6f8a80" fill-opacity=".85"></path></svg>
+      <span><strong style="color:#4f6a60;font-weight:700">Learning areas</strong> that guide our progress</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:9px">
+      <svg width="32" height="26" viewBox="0 0 32 26" style="flex:none"><line x1="2" y1="13" x2="30" y2="13" stroke="#5b6b62" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.5 6"></line></svg>
+      <span>The <strong style="color:#46514a;font-weight:700">meta-process</strong> that guides our actions</span>
+    </div>
+  </div>
+
+  <div style="width:1040px;max-width:100%">
+    <div style="position:relative;left:50%;margin-left:-50vw;width:100vw;overflow:hidden">
+  <div class="ioc-mapframe" style="box-shadow:none;max-width:1200px;margin:0 auto">
+  <div class="ioc-stage" style="overflow:hidden;background:transparent">
+
+    <!-- generated watercolour sea, islands, route, compass -->
+    {{ seaArt }}
+
+    <!-- grain -->
+    <div style="position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply; background-image: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'&gt;&lt;filter id='n'&gt;&lt;feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/&gt;&lt;feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/&gt;&lt;/filter&gt;&lt;rect width='160' height='160' filter='url(%23n)'/&gt;&lt;/svg&gt;&quot;); left: 95px; top: 76px"></div>
+    <!-- domain banners + orientation cards (lifted out of grain layer for clean white fill) -->
+    <div style="position: absolute; left: 892px; top: 469px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #69763f; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-green" data-edit="ban-collective">Collective strategy</div><div style="position: absolute; left: 203px; top: 981px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #a85c38; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-coral" data-edit="ban-action">Systemic intervention</div><div style="position: absolute; left: 371px; top: 227px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #3c5f5d; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-teal" data-edit="ban-within">Inner inquiry</div><div style="position: absolute; left: 685px; top: 183px; transform: translate(-50%,-50%); width: 123px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 37px" data-orient="recip">
+      <div data-edit="card-recip-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Reciprocity</div>
+      <div data-edit="card-recip-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we act</div>
+    </div><div style="position: absolute; left: 956px; top: 181px; transform: translate(-50%,-50%); width: 152px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 8px; height: 34px" data-orient="shared">
+      <div data-edit="card-shared-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Shared Agency</div><div data-edit="card-shared-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we make decisions</div>
+      
+    </div><div style="position: absolute; left: 816px; top: 259px; transform: translate(-50%,-50%); width: 121px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 40px" data-orient="pluri">
+      <div data-edit="card-pluri-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Plurality</div>
+      <div data-edit="card-pluri-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we know</div>
+    </div><div style="position: absolute; left: 806px; top: 100px; transform: translate(-50%,-50%); width: 202px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 39px" data-orient="jrf">
+      
+      <div data-edit="card-jrf-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Just &amp; Regenerative Futures</div><div data-edit="card-jrf-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">Where we are going</div>
+    </div>
+
+    <!-- domain banners -->
+    
+    
+    
+
+    <!-- ===== ISLAND LABELS (draggable — each island + its text moves together) ===== -->
+    {{ islands }}
+
+    <!-- ===== ROUTE WAYPOINTS (draggable) ===== -->
+    {{ waypoints }}
+
+    <!-- ===== FOUR ORIENTATIONS — bearings around the compass rose ===== -->
+    <!-- N -->
+    
+    <!-- E -->
+    
+    <!-- S -->
+    
+    <!-- W -->
+    
+
+    <!-- orientation descriptor tooltip (hover / tap) -->
+    <div class="ioc-tip" style="position:absolute;left:0;top:0;width:268px;transform:translate(-50%,-50%);background:rgba(252,251,247,0.98);border:1px solid rgba(217,187,120,0.7);border-radius:13px;padding:14px 16px;box-shadow:0 10px 30px rgba(70,55,35,0.26);opacity:0;visibility:hidden;transition:opacity .14s ease;pointer-events:none;z-index:60">
+      <button class="ioc-tip-close" type="button" aria-label="Close" style="display:none;position:absolute;top:7px;right:8px;width:22px;height:22px;align-items:center;justify-content:center;border:none;border-radius:50%;background:rgba(57,52,43,0.08);color:#6b5d45;font-size:15px;line-height:1;cursor:pointer;padding:0">×</button>
+      <div class="ioc-tip-title" style="font-family:'PT Serif',serif;font-weight:700;font-size:15px;line-height:1.16;color:#6B5527;padding-right:18px"></div>
+      <div class="ioc-tip-sub" style="font-style:italic;font-size:11px;color:#977c45;margin-top:2px;margin-bottom:7px"></div>
+      <div class="ioc-tip-body" style="font-size:11.5px;line-height:1.5;color:#544E45"></div>
+      <a class="ioc-tip-link" target="_blank" rel="noopener" style="display:none;align-items:center;gap:5px;margin-top:9px;font-size:11.5px;font-weight:700;text-decoration:none"></a>
+    </div>
+
+    <!-- handwriting -->
+    
+
+  </div>
+  </div>
+    </div>
+  </div>
+
+  <!-- ===== MOBILE BROWSE LIST (phones only) ===== -->
+  <div class="ioc-browse" style="width:1040px;max-width:100%;margin:36px auto 0;text-align:left">
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#8a6a2f">Orientations</h2>
+    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our intentions</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px">
+      <sc-for list="{{ browseOrients }}" as="o" hint-placeholder-count="4">
+        <div onClick="{{ o.onToggle }}" style="background:#fff;border:1px solid rgba(217,187,120,.55);border-radius:13px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <div>
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#6B5527">{{ o.title }}</div>
+              <div style="font-style:italic;font-size:12px;color:#977c45;margin-top:1px">{{ o.sub }}</div>
+            </div>
+            <span style="color:#b0822f;font-size:19px;font-weight:700;flex:none;line-height:1">{{ o.chev }}</span>
+          </div>
+          <sc-if value="{{ o.open }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:13px;line-height:1.62;color:#544E45;margin:11px 0 0">{{ o.body }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#4f6a60">Learning areas</h2>
+    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our progress</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
+      <sc-for list="{{ browseDomains }}" as="d" hint-placeholder-count="3">
+        <div style="border-radius:14px;overflow:hidden;border:1px solid {{ d.border }}">
+          <div onClick="{{ d.onToggle }}" style="{{ d.headStyle }}">
+            <div>
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:17px;color:#fff">{{ d.name }}</div>
+              <div style="font-family:'PT Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.82)">{{ d.sub }}</div>
+            </div>
+            <span style="color:#fff;font-size:22px;font-weight:700;flex:none;line-height:1">{{ d.chev }}</span>
+          </div>
+          <sc-if value="{{ d.open }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#fff">
+              <sc-for list="{{ d.areas }}" as="a" hint-placeholder-count="8">
+                <div onClick="{{ a.onOpen }}" style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-top:1px solid rgba(70,90,85,.09);cursor:pointer">
+                  <span style="width:9px;height:9px;border-radius:50%;flex:none;background:{{ d.dot }}"></span>
+                  <span style="font-family:'PT Sans',sans-serif;font-size:14px;color:#33403c;flex:1">{{ a.label }}</span>
+                  <span style="color:#b9b0a0;font-size:17px">›</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#46514a">Meta-process</h2>
+    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our actions</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ browseMeta }}" as="m" hint-placeholder-count="5">
+        <div onClick="{{ m.onToggle }}" style="background:#fff;border:1px solid rgba(70,90,85,.18);border-radius:13px;padding:14px 16px;cursor:pointer">
+          <div style="display:flex;align-items:center;gap:11px">
+            <span style="width:11px;height:11px;border-radius:50%;flex:none;background:{{ m.dot }}"></span>
+            <div style="flex:1">
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#46514a">{{ m.title }}</div>
+              <div style="font-style:italic;font-size:12px;color:#7a8a80;margin-top:1px">{{ m.sub }}</div>
+            </div>
+            <span style="color:#6b7d6a;font-size:19px;font-weight:700;flex:none;line-height:1">{{ m.chev }}</span>
+          </div>
+          <sc-if value="{{ m.open }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:13px;line-height:1.62;color:#544E45;margin:11px 0 0">{{ m.body }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- attribution -->
+  <div data-edit="attrib" style="width:1040px;max-width:100%;margin-top:14px;font-size:12px;color:#8a8377;letter-spacing:.02em"><br></div>
+
+  <dc-import name="SiteFooter" hint-size="100%,260px" style="display:block;width:100vw;margin-top:30px"></dc-import>
+
+  <!-- ============ CAPACITY DRAWER ============ -->
+  <sc-if value="{{ capDrawer.open }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCap }}" style="position:fixed;inset:0;background:rgba(40,32,22,.42);z-index:80;animation:iocFade .2s ease"></div>
+    <aside style="position:fixed;top:0;right:0;bottom:0;width:min(560px,94vw);background:#EFE9DC;z-index:81;overflow-y:auto;box-shadow:-14px 0 40px rgba(40,30,20,.22);animation:iocDrawerR .28s cubic-bezier(.2,.7,.3,1)">
+      <div style="position:sticky;top:0;background:{{ capDrawer.headerBg }};padding:22px 26px 18px;border-bottom:1px solid rgba(120,105,75,.2)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px">
+          <div>
+            <div style="font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:{{ capDrawer.color }};margin-bottom:7px">{{ capDrawer.groupName }}</div>
+            <h2 style="font-family:'PT Serif',serif;font-weight:700;font-size:25px;line-height:1.1;margin:0;color:#332d24">{{ capDrawer.label }}</h2>
+            <div style="font-size:13px;color:#7a6f5c;margin-top:6px">{{ capDrawer.countText }}</div>
+            <a href="{{ capDrawer.suggestHref }}" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;padding:7px 13px;border-radius:20px;border:1px solid #8a6a45;background:#FCFBF7;color:#8a6a45;text-decoration:none">+ Suggest a resource</a>
+          </div>
+          <button onClick="{{ closeCap }}" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:1px solid rgba(120,105,75,.3);background:#FCFBF7;color:#6b5527;font-size:17px;cursor:pointer;line-height:1">✕</button>
+        </div>
+      </div>
+      <div style="padding:20px 26px 0">
+        <sc-if value="{{ capDrawer.desc }}" hint-placeholder-val="">
+          <p style="font-size:14px;line-height:1.62;color:#4a4438;margin:0 0 20px">{{ capDrawer.desc }}</p>
+        </sc-if>
+      </div>
+      <div style="padding:18px 26px 40px">
+        <div style="display:flex;align-items:center;gap:7px;margin-bottom:12px">
+          <span style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9A6A4A">Resources</span>
+          <span style="flex:1;height:1px;background:rgba(120,105,75,.18)"></span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ capDrawer.items }}" as="res" hint-placeholder-count="4">
+            <div style="background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:12px;padding:13px 15px">
+              <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:7px">
+                <sc-if value="{{ res.featured }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ res.pickStyle }}">★ Featured</span>
+                </sc-if>
+                <sc-for list="{{ res.typeTags }}" as="t" hint-placeholder-count="1">
+                  <span style="{{ t.style }}">{{ t.label }}</span>
+                </sc-for>
+              </div>
+              <a href="{{ res.url }}" target="_blank" rel="noopener" style="font-family:'PT Serif',serif;font-weight:700;font-size:15.5px;line-height:1.2;color:#3f3a31;text-decoration:none">{{ res.name }} <span style="font-weight:400;color:{{ capDrawer.color }};font-size:13px">↗</span></a>
+              <p style="font-size:12.5px;line-height:1.5;color:#5a5347;margin:7px 0 0">{{ res.desc }}</p>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:18px">
+          <a href="{{ capDrawer.libHref }}" style="display:inline-flex;align-items:center;gap:6px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:{{ capDrawer.color }};text-decoration:none">Open in Resource Library →</a>
+        </div>
+      </div>
+    </aside>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1090,&quot;height&quot;:1560}}">
+class Component extends DCLogic {
+  state = {
+    openCap: null,
+    mGroup: 'teal',
+    mOrient: null,
+    bend: [[589,240],null,[538,1198]],
+    bendChord: {"fb-da":[512,1057],"fb-ps":[465,306],"fb-sd":[770,850]},
+    wp: [
+      {n:1,label:'Probe',x:241,y:104},
+      {n:2,label:'Sense',x:736,y:520},
+      {n:3,label:'Design',x:931,y:1059},
+      {n:4,label:'Adapt',x:126,y:1121},
+      {n:5,label:'Integrate',x:129,y:669}
+    ],
+    isl: [
+      {label:'Somatic Eco-Regulation',x:388,y:219,r:46,w:104,group:'teal',seed:100},
+      {label:'Observing & Listening',x:229,y:204,r:42,w:96,group:'teal',seed:107},
+      {label:'Critical Consciousness',x:590,y:302,r:46,w:104,group:'teal',seed:114},
+      {label:'Spiritual & Moral Inquiry',x:296,y:327,r:52,w:112,group:'teal',seed:121},
+      {label:'Socioeconomic & Political Literacy',x:450,y:337,r:46,w:104,group:'teal',seed:128},
+      {label:'Creative Expression & Storytelling',x:189,y:381,r:42,w:96,group:'teal',seed:135},
+      {label:'Ecological & Planetary Literacy',x:342,y:457,r:48,w:108,group:'teal',seed:142},
+      {label:'Cultural & Ancestral Literacy',x:527,y:438,r:44,w:100,group:'teal',seed:149},
+      {label:'Systems Thinking & Modeling',x:488,y:667,r:46,w:104,group:'green',seed:300},
+      {label:'Complex Problem Solving',x:350,y:625,r:44,w:100,group:'green',seed:307},
+      {label:'Futures Thinking & Foresight',x:831,y:541,r:46,w:104,group:'green',seed:314},
+      {label:'Positionality & Power Analysis',x:642,y:634,r:52,w:112,group:'green',seed:321},
+      {label:'Regenerative Systems Design',x:782,y:668,r:46,w:106,group:'green',seed:328},
+      {label:'Narrative & Media Analysis',x:479,y:559,r:42,w:98,group:'green',seed:335},
+      {label:'Participatory Research & Design',x:644,y:770,r:48,w:108,group:'green',seed:342},
+      {label:'Data Analysis & Evaluation',x:464,y:878,r:42,w:96,group:'coral',seed:349},
+      {label:'Experimenting & Building',x:289,y:829,r:46,w:104,group:'coral',seed:500},
+      {label:'Convening & Facilitating Collaborations',x:823,y:795,r:44,w:104,group:'green',seed:507},
+      {label:'Conflict Transformation',x:728,y:1051,r:46,w:104,group:'coral',seed:514},
+      {label:'Planning & Resource Mobilization',x:351,y:978,r:52,w:112,group:'coral',seed:521},
+      {label:'Leading in Complexity',x:588,y:970,r:46,w:104,group:'coral',seed:528},
+      {label:'Ecosystem Engagement',x:252,y:1077,r:42,w:96,group:'coral',seed:535},
+      {label:'Advocacy & Political Participation',x:466,y:1095,r:48,w:106,group:'coral',seed:542},
+      {label:'Networking & Engaging Capital',x:764,y:932,r:44,w:102,group:'coral',seed:549}
+    ]
+  };
+
+  _persist(arr) { try { localStorage.setItem('ioc-wp-v1', JSON.stringify(arr || this.state.wp)); } catch(e){} }
+  _persistIsl(arr) { try { localStorage.setItem('ioc-isl-v2', JSON.stringify(arr || this.state.isl)); } catch(e){} }
+  _startDrag(i, e) {
+    e.preventDefault();
+    const stage = document.querySelector('.ioc-stage');
+    const startX = e.clientX, startY = e.clientY;
+    this._wpDragged = false;
+    const move = (ev) => {
+      if (!this._wpDragged && Math.abs(ev.clientX - startX) < 4 && Math.abs(ev.clientY - startY) < 4) return;
+      this._wpDragged = true;
+      const r = stage.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
+      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
+      const wp = this.state.wp.slice();
+      wp[i] = Object.assign({}, wp[i], { x: Math.round(x), y: Math.round(y) });
+      this.setState({ wp });
+    };
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (this._wpDragged) this._persist(this.state.wp); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+  _persistBend(){ try { localStorage.setItem('ioc-bend-v1', JSON.stringify(this.state.bend || [])); } catch(e){} }
+  _persistBendChord(){ try { localStorage.setItem('ioc-bendc-v1', JSON.stringify(this.state.bendChord || {})); } catch(e){} }
+  _initBanDrag(){
+    const stage = document.querySelector('.ioc-stage');
+    if(!stage) return;
+    const keys = ['ban-within','ban-collective','ban-action'];
+    const BANDEF = {'ban-within':{dx:138,dy:9},'ban-action':{dx:23,dy:-75}};
+    let saved = {}; try { saved = JSON.parse(localStorage.getItem('ioc-ban-v1')||'{}'); } catch(e){}
+    keys.forEach(k=>{
+      const el = stage.querySelector('[data-edit="'+k+'"]');
+      if(!el || el._banBound) return;
+      el._banBound = true;
+      let off = saved[k] || BANDEF[k] || {dx:0,dy:0};
+      const apply = (dx,dy)=>{ el.style.transform = 'translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))'; };
+      if(off.dx||off.dy) apply(off.dx,off.dy);
+      el.style.cursor='grab'; el.style.pointerEvents='auto'; el.style.touchAction='none';
+      el.addEventListener('pointerdown',(e)=>{
+        e.preventDefault(); e.stopPropagation();
+        const r = stage.getBoundingClientRect();
+        const sc = r.width/1040 || 1;
+        const sx = e.clientX, sy = e.clientY, start = {dx:off.dx, dy:off.dy};
+        const move = (ev)=>{ off = {dx: start.dx+(ev.clientX-sx)/sc, dy: start.dy+(ev.clientY-sy)/sc}; apply(off.dx, off.dy); };
+        const up = ()=>{ document.removeEventListener('pointermove',move); document.removeEventListener('pointerup',up); let s={}; try { s=JSON.parse(localStorage.getItem('ioc-ban-v1')||'{}'); } catch(e2){} s[k]=off; try { localStorage.setItem('ioc-ban-v1', JSON.stringify(s)); } catch(e2){} };
+        document.addEventListener('pointermove',move); document.addEventListener('pointerup',up);
+      });
+    });
+  }
+  _startDragBendChord(key, e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const stage = document.querySelector('.ioc-stage');
+    const move = (ev) => {
+      const r = stage.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
+      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
+      const bendChord = Object.assign({}, this.state.bendChord || {});
+      bendChord[key] = [Math.round(x), Math.round(y)];
+      this.setState({ bendChord });
+    };
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); this._persistBendChord(); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+  _startDragBend(i, e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const stage = document.querySelector('.ioc-stage');
+    const move = (ev) => {
+      const r = stage.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
+      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
+      const bend = (this.state.bend || []).slice();
+      bend[i] = [Math.round(x), Math.round(y)];
+      this.setState({ bend });
+    };
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); this._persistBend(); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+  _startDragIsland(i, e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const stage = document.querySelector('.ioc-stage');
+    const r0 = stage.getBoundingClientRect();
+    const cur = this.state.isl[i];
+    const startX = e.clientX, startY = e.clientY;
+    const offX = (startX - r0.left) * 1040 / r0.width - cur.x;
+    const offY = (startY - r0.top) * 1320 / r0.height - cur.y;
+    let dragging = false;
+    this._islDragged = false;
+    const move = (ev) => {
+      if (!dragging) {
+        if (Math.abs(ev.clientX - startX) < 4 && Math.abs(ev.clientY - startY) < 4) return;
+        dragging = true; this._islDragged = true;
+      }
+      const r = stage.getBoundingClientRect();
+      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width - offX));
+      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height - offY));
+      const isl = this.state.isl.slice();
+      isl[i] = Object.assign({}, isl[i], { x: Math.round(x), y: Math.round(y) });
+      this.setState({ isl });
+    };
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (dragging) this._persistIsl(this.state.isl); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  }
+
+  componentDidMount() {
+    window.addEventListener('research-data-updated', () => this.forceUpdate());
+    if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
+    try { const s = localStorage.getItem('ioc-wp-v1'); if (s) { const wp = JSON.parse(s); if (Array.isArray(wp) && wp.length === 5) { const dwp = this.state.wp; this.setState({ wp: wp.map((p,i)=>({ ...p, label: dwp[i].label })) }); } } } catch(e){}
+    try { const s = localStorage.getItem('ioc-bend-v1'); if (s) { const b = JSON.parse(s); if (Array.isArray(b)) this.setState({ bend: b }); } } catch(e){}
+    try { const s = localStorage.getItem('ioc-bendc-v1'); if (s) { const b = JSON.parse(s); if (b && typeof b==='object') this.setState({ bendChord: b }); } } catch(e){}
+    this._initBanDrag(); setTimeout(()=>this._initBanDrag(),150); setTimeout(()=>this._initBanDrag(),500);
+    this._resetMap = () => { ['ioc-wp-v1','ioc-isl-v2','ioc-bend-v1','ioc-bendc-v1','ioc-ban-v1'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); location.reload(); };
+    this._downloadMap = async () => {
+      const frame = document.querySelector('.ioc-mapframe');
+      const stage = document.querySelector('.ioc-stage');
+      if (!frame || !stage || !window.html2canvas || !window.jspdf) return;
+      this._hideTip && this._hideTip();
+      // save state
+      const f0 = { mask: frame.style.webkitMaskImage, mask2: frame.style.maskImage, ov: frame.style.overflow, h: frame.style.height };
+      const s0 = { tr: stage.style.transform };
+      frame.style.webkitMaskImage = 'none'; frame.style.maskImage = 'none';
+      frame.style.overflow = 'visible'; frame.style.height = '1320px';
+      stage.style.transform = 'none';
+      try {
+        const S = 2;
+        const mapW = 1040, mapH = 1320, padTop = 192, padBot = 96, padX = 0;
+        const mapCanvas = await window.html2canvas(stage, { scale: S, backgroundColor: '#eef2ef', width: mapW, height: mapH, windowWidth: mapW, windowHeight: mapH, useCORS: true });
+        const outW = (mapW + padX * 2) * S, outH = (mapH + padTop + padBot) * S;
+        const out = document.createElement('canvas');
+        out.width = outW; out.height = outH;
+        const ctx = out.getContext('2d');
+        ctx.fillStyle = '#eef2ef';
+        ctx.fillRect(0, 0, outW, outH);
+        // map
+        ctx.drawImage(mapCanvas, padX * S, padTop * S, mapW * S, mapH * S);
+        // heading
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#2E2B26';
+        ctx.font = '500 ' + (40 * S) + 'px "Newsreader", Georgia, serif';
+        ctx.fillText('Learning to intervene in complex systems', outW / 2, 62 * S);
+        // ---- legend (centered row under the heading) ----
+        const legendY = 134 * S;
+        const legFont = '600 ' + (15 * S) + 'px "PT Sans", system-ui, sans-serif';
+        ctx.font = legFont;
+        const items = [
+          { type: 'compass', text: 'Orientations that guide our intentions' },
+          { type: 'island', text: 'Learning areas that guide our progress' },
+          { type: 'dash', text: 'The meta-process that guides our actions' }
+        ];
+        const glyphW = 30 * S, glyphGap = 9 * S, itemGap = 30 * S;
+        let total = 0;
+        items.forEach(it => { it.tw = ctx.measureText(it.text).width; total += glyphW + glyphGap + it.tw; });
+        total += itemGap * (items.length - 1);
+        let x = (outW - total) / 2;
+        ctx.textAlign = 'left';
+        items.forEach(it => {
+          const gcx = x + glyphW / 2, gcy = legendY;
+          if (it.type === 'compass') {
+            ctx.beginPath(); ctx.arc(gcx, gcy, 11 * S, 0, Math.PI * 2);
+            ctx.strokeStyle = 'rgba(176,130,47,0.5)'; ctx.lineWidth = 1.3 * S; ctx.stroke();
+            ctx.beginPath();
+            const pts = [[0, -11], [2, -2], [11, 0], [2, 2], [0, 11], [-2, 2], [-11, 0], [-2, -2]];
+            pts.forEach((p, k) => { const px = gcx + p[0] * S, py = gcy + p[1] * S; k ? ctx.lineTo(px, py) : ctx.moveTo(px, py); });
+            ctx.closePath(); ctx.fillStyle = 'rgba(176,130,47,0.85)'; ctx.fill();
+          } else if (it.type === 'island') {
+            ctx.beginPath();
+            const bx = gcx - 13 * S, by = gcy - 9 * S, u = S;
+            ctx.moveTo(bx + 5 * u, by + 12 * u);
+            ctx.bezierCurveTo(bx + 3 * u, by + 8 * u, bx + 6 * u, by + 4 * u, bx + 11 * u, by + 3.5 * u);
+            ctx.bezierCurveTo(bx + 13 * u, by, bx + 19 * u, by, bx + 21 * u, by + 4 * u);
+            ctx.bezierCurveTo(bx + 26 * u, by + 4 * u, bx + 28 * u, by + 9 * u, bx + 25 * u, by + 12 * u);
+            ctx.bezierCurveTo(bx + 26 * u, by + 15 * u, bx + 22 * u, by + 17 * u, bx + 18 * u, by + 16 * u);
+            ctx.bezierCurveTo(bx + 15 * u, by + 18 * u, bx + 9 * u, by + 17 * u, bx + 8 * u, by + 14 * u);
+            ctx.bezierCurveTo(bx + 4 * u, by + 14 * u, bx + 4 * u, by + 13 * u, bx + 5 * u, by + 12 * u);
+            ctx.closePath(); ctx.fillStyle = 'rgba(111,138,128,0.85)'; ctx.fill();
+          } else {
+            ctx.beginPath(); ctx.moveTo(gcx - 14 * S, gcy); ctx.lineTo(gcx + 14 * S, gcy);
+            ctx.strokeStyle = '#5b6b62'; ctx.lineWidth = 2.4 * S; ctx.lineCap = 'round';
+            ctx.setLineDash([0.5 * S, 6 * S]); ctx.stroke(); ctx.setLineDash([]);
+          }
+          ctx.fillStyle = '#52605a'; ctx.font = legFont; ctx.textBaseline = 'middle';
+          ctx.fillText(it.text, x + glyphW + glyphGap, gcy);
+          x += glyphW + glyphGap + it.tw + itemGap;
+        });
+        // license
+        ctx.textAlign = 'center';
+        ctx.fillStyle = 'rgba(70,90,85,0.7)';
+        ctx.font = '600 ' + (16 * S) + 'px "PT Sans", system-ui, sans-serif';
+        ctx.fillText('CC BY-NC-ND 4.0 · Jaya Ramchandani & Raisa Mirza', outW / 2, (padTop + mapH + padBot * 0.5) * S);
+        const img = out.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [outW / S, outH / S] });
+        pdf.addImage(img, 'PNG', 0, 0, outW / S, outH / S);
+        pdf.save('Learning-Areas-Map.pdf');
+        if (window.track) window.track('download_map', { label: 'Islands of Coherence map PDF' });
+      } catch (e) { console.warn('map pdf failed', e); }
+      // restore
+      frame.style.webkitMaskImage = f0.mask; frame.style.maskImage = f0.mask2;
+      frame.style.overflow = f0.ov; frame.style.height = f0.h;
+      stage.style.transform = s0.tr;
+      this._fit && this._fit();
+    };
+    try { const s = localStorage.getItem('ioc-isl-v2'); if (s) { const saved = JSON.parse(s); if (Array.isArray(saved) && saved.length === this.state.isl.length) {
+      // keep persisted positions, but always reconcile labels/meta from canonical defs (by seed, else index)
+      const def = this.state.isl;
+      const merged = def.map((d, i) => {
+        const m = saved.find(o => o && o.seed === d.seed) || saved[i] || {};
+        return Object.assign({}, d, { x: (typeof m.x === 'number' ? m.x : d.x), y: (typeof m.y === 'number' ? m.y : d.y) });
+      });
+      this.setState({ isl: merged });
+    } } } catch(e){}
+    this._mzoom = 1.7;
+    this._fit = () => {
+      const frame = document.querySelector('.ioc-mapframe');
+      const stage = document.querySelector('.ioc-stage');
+      if (!frame || !stage) return;
+      const w = frame.clientWidth;
+      if (w === this._lastW) return;   // guard against ResizeObserver feedback loop
+      this._lastW = w;
+      const scale = w / 1040;          // always fit full map to width (static on mobile)
+      stage.style.transform = 'scale(' + scale + ')';
+      frame.style.height = (1320 * scale) + 'px';
+      frame.style.overflowX = 'hidden';
+      frame.style.overflowY = 'hidden';
+      frame.style.webkitOverflowScrolling = 'touch';
+    };
+    this._zoomMap = (dir) => { this._mzoom = Math.max(1.0, Math.min(3.4, +(this._mzoom + dir).toFixed(2))); this._lastW = null; this._fit(); };
+    this._fit();
+    this._ro = new ResizeObserver(this._fit);
+    const frame = document.querySelector('.ioc-mapframe');
+    if (frame) this._ro.observe(frame);
+    window.addEventListener('resize', this._fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => this._fit());
+    this._initTips();
+  }
+  _tipData() {
+    if (this.__tips) return this.__tips;
+    this.__tips = {
+      jrf: { t:'Just & Regenerative Futures', s:'Where we are going — what we value', b:'Just and regenerative futures braid together justice, peace, and renewal — confronting the structural causes of harm, redistributing power, and restoring the living systems we depend on, so every community and ecosystem can thrive with dignity, security, and voice. Drawing on Indigenous sovereignty, climate justice, and intergenerational ethics, this orientation serves as both compass and collective practice.' },
+      pluri: { t:'Plurality', s:'How we know', b:'The recognition that many worlds and ways of knowing coexist, and that no single worldview can claim universality. It foregrounds Indigenous, local, land-based, and spiritual knowledge alongside scientific and technical expertise. Informed by decolonial thought and community-led innovation, it expands whose worlds are made visible.' },
+      recip: { t:'Reciprocity', s:'How we act', b:'Reciprocity calls us to act with care, responsibility, and mutual exchange, so that interventions restore balance rather than reproduce harm. It is paired with reflexivity — an ongoing awareness of how our identities, assumptions, and choices shape the systems we seek to change — which keeps that action humble and accountable. Rooted in Indigenous relational ethics and feminist standpoint theory.' },
+      shared: { t:'Shared Agency', s:'How we make decisions', b:'The capacity to act together — distributing power, voice, and responsibility so decisions are made with, rather than for, communities. Grounded in interdependence, it holds that our lives and futures are woven into a shared web of care, and that collaboration is the foundation for thriving in an interconnected world.' },
+      probe: { t:'Probe', s:'Probe the context and frame the problem field', b:'The process begins with intellectual humility and deep listening. Rather than entering a system with a pre-defined solution, you scan the environment to balance macro trends with local, lived human experiences. This phase forces you to explicitly define your boundary, search out local assets that are already working, evaluate your personal alignment with the context, and aggressively check your own blind spots.' },
+      sense: { t:'Sense', s:'Sense the field and imagineer possibilities', b:'Sense-making means rendering invisible structural blocks and cultural dynamics visible. You trace the underlying rules, behaviors, and hidden loops that protect the status quo. By mapping where power rests and analyzing the real friction points within the field, you work alongside the community to co-author an alignment strategy that points directly toward a radically transformed, preferable future.' },
+      design: { t:'Design', s:'Design the roadmap and mobilize resources', b:'Design is the process of building conditions that nudge the system toward greater health. Because complex networks cannot be strictly managed by rigid checklists, you focus on changing core conditions and constraints rather than imposing fixed blueprints. This stage maps clear points of leverage, navigates institutional barriers, mobilizes diverse capital, and designs the relational trust and baseline metrics needed to hold a shared commitment together.' },
+      adapt: { t:'Adapt', s:'Adapt to context and solve emergent problems', b:'Action is an ongoing live diagnostic test. When your intervention meets the real world, the system will actively show its true nature through defensive pushback or unexpected positive ripples. Survival here relies on staying highly agile — setting up short real-time feedback loops, positioning the action for organic community adoption, distributing the power to pivot fast, and keeping internal team trust solid when chaos hits.' },
+      integrate: { t:'Integrate', s:'Integrate feedback and weave in learnings', b:'The work concludes when learning is actively metabolized back into the community ecosystem. This phase translates ground-level outcomes into institutional data — honoring failures openly rather than sanitizing them. You evaluate whether behavioral baselines moved and whether local connections grew denser, transforming the entire messy trajectory into clear, powerful change stories that build social capital for the next cycle.' },
+      // ===== group intros (banners) =====
+      'grp-teal':  { g:'teal',  t:'Inner Inquiry', s:'The personal foundation', b:'These learning areas ground the individual in the deep work of self-awareness and world-view diversification. Without the ability to interrogate our own positionality, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the personal foundation required to remain centered while navigating the volatility of systems change.' },
+      'grp-green': { g:'green', t:'Collective Strategy', s:'Reading the field', b:'Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These learning areas equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.' },
+      'grp-coral': { g:'coral', t:'Systemic Intervention', s:'Acting & sustaining', b:'The operational and tactical domain centered on non-linear execution, asset mobilization, and relational stewardship. It governs the practical application of power and the architecture of long-term regenerative structures, ensuring that systemic shifts are sustainably maintained across generations.' },
+      // ===== individual capacities (teal) =====
+      'Somatic Eco-Regulation': { g:'teal', t:'Somatic Eco-Regulation', s:'Inner inquiry', b:'The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.' },
+      'Observing & Listening': { g:'teal', t:'Observing & Listening', s:'Inner inquiry', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
+      'Critical Consciousness': { g:'teal', t:'Critical Consciousness', s:'Inner inquiry', b:"The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective." },
+      'Spiritual & Moral Inquiry': { g:'teal', t:'Spiritual & Moral Inquiry', s:'Inner inquiry', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
+      'Socioeconomic & Political Literacy': { g:'teal', t:'Socioeconomic & Political Literacy', s:'Inner inquiry', b:'Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.' },
+      'Creative Expression & Storytelling': { g:'teal', t:'Creative Expression & Storytelling', s:'Inner inquiry', b:'Synthesizing complex systemic insights into compelling narratives and creative outputs that challenge the status quo, build relational density, and model preferable futures.' },
+      'Ecological & Planetary Literacy': { g:'teal', t:'Ecological & Planetary Literacy', s:'Inner inquiry', b:'Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.' },
+      'Cultural & Ancestral Literacy': { g:'teal', t:'Cultural & Ancestral Literacy', s:'Inner inquiry', b:'Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
+      // ===== collective capacities (green) =====
+      'Systems Thinking & Modeling': { g:'green', t:'Systems Thinking & Modeling', s:'Collective strategy', b:'Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.' },
+      'Complex Problem Solving': { g:'green', t:'Complex Problem Solving', s:'Collective strategy', b:'Categorizing problem fields across ordered, complex, or chaotic domains to determine whether an environment requires linear management or emergent experimentation.' },
+      'Futures Thinking & Foresight': { g:'green', t:'Futures Thinking & Foresight', s:'Collective strategy', b:'Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.' },
+      'Positionality & Power Analysis': { g:'green', t:'Positionality & Power Analysis', s:'Collective strategy', b:'Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.' },
+      'Regenerative Systems Design': { g:'green', t:'Regenerative Systems Design', s:'Collective strategy', b:'Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.' },
+      'Narrative & Media Analysis': { g:'green', t:'Narrative & Media Analysis', s:'Collective strategy', b:'Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.' },
+      'Participatory Research & Design': { g:'green', t:'Participatory Research & Design', s:'Collective strategy', b:'Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.' },
+      'Data Analysis & Evaluation': { g:'coral', t:'Data Analysis & Evaluation', s:'Systemic intervention', b:'Utilizing empirical data tracking, quantitative and qualitative metrics, and positive deviance mapping to identify hidden localized solutions and track system-wide trends.' },
+      // ===== systemic capacities (coral) =====
+      'Experimenting & Building': { g:'coral', t:'Experimenting & Building', s:'Systemic intervention', b:"Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback." },
+      'Convening & Facilitating Collaborations': { g:'green', t:'Convening & Facilitating Collaborations', s:'Collective strategy', b:'Designing and stewarding non-hierarchical, highly democratic spaces that cultivate distributed intelligence, deep dialogue, and shared consensus.' },
+      'Conflict Transformation': { g:'coral', t:'Conflict Transformation', s:'Systemic intervention', b:'Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.' },
+      'Planning & Resource Mobilization': { g:'coral', t:'Planning & Resource Mobilization', s:'Systemic intervention', b:'Organizing adaptive logistics, elastic operational budgets, and highly flexible, non-linear timelines that accommodate unpredictable systemic feedback loops.' },
+      'Leading in Complexity': { g:'coral', t:'Leading in Complexity', s:'Systemic intervention', b:'Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.' },
+      'Ecosystem Engagement': { g:'coral', t:'Ecosystem Engagement', s:'Systemic intervention', b:'Interweaving separate grassroots initiatives, formal institutions, and civil actors into mutually supportive networks that share resources and strategic focus.' },
+      'Advocacy & Political Participation': { g:'coral', t:'Advocacy & Political Participation', s:'Systemic intervention', b:'Actively engaging, challenging, or restructuring local legislative, policy, and civic institutional channels to secure structural and legal permanence for interventions.' },
+      'Networking & Engaging Capital': { g:'coral', t:'Networking & Engaging Capital', s:'Systemic intervention', b:'Directing financial, social, and structural capital to local projects while maintaining complete autonomy and protecting against extractive or conditional funding strings.' }
+    };
+    return this.__tips;
+  }
+  _tipTheme(key) {
+    const T = {
+      route: { bg:'rgb(57,52,43)', bd:'rgba(57,52,43,0.55)', title:'#FDFBF7', sub:'rgba(253,251,247,0.82)', body:'rgba(253,251,247,0.92)' },
+      teal:  { bg:'rgb(226,233,231)', bd:'rgba(70,113,111,0.55)', title:'#335a58', sub:'#5d7a78', body:'#3f4a48' },
+      green: { bg:'rgb(234,236,219)', bd:'rgba(118,131,74,0.55)',  title:'#5b6733', sub:'#76834a', body:'#474a39' },
+      coral: { bg:'rgb(244,229,219)', bd:'rgba(189,106,71,0.6)',   title:'#a8542d', sub:'#b06a48', body:'#5a443a' },
+      orient:{ bg:'rgba(252,251,247,0.98)', bd:'rgba(217,187,120,0.7)', title:'#6B5527', sub:'#977c45', body:'#544E45' }
+    };
+    const route = ['probe','sense','design','adapt','integrate'];
+    if (route.indexOf(key) >= 0) return T.route;
+    // group intros (banners) — inverted: deep group color bg + light text
+    const inv = {
+      'grp-teal':  { bg:'rgb(70,113,111)',  bd:'rgba(35,55,54,0.6)',  title:'#FBFDFC', sub:'rgba(251,253,252,0.82)', body:'rgba(251,253,252,0.94)' },
+      'grp-green': { bg:'rgb(118,131,74)',   bd:'rgba(60,68,36,0.6)',  title:'#FCFDF6', sub:'rgba(252,253,246,0.82)', body:'rgba(252,253,246,0.94)' },
+      'grp-coral': { bg:'rgb(189,106,71)',   bd:'rgba(120,60,38,0.6)', title:'#FFF7F2', sub:'rgba(255,247,242,0.82)', body:'rgba(255,247,242,0.94)' }
+    };
+    if (inv[key]) return inv[key];
+    const d = this._tipData()[key];
+    if (d && d.g && T[d.g]) return T[d.g];
+    return T.orient;
+  }
+  _showTip(key, cx, cy, cardW) {
+    const d = this._tipData()[key]; if (!d) return;
+    const stage = document.querySelector('.ioc-stage');
+    const tip = stage && stage.querySelector('.ioc-tip');
+    if (!tip) return;
+    const closeEl = tip.querySelector('.ioc-tip-close');
+    if (closeEl) closeEl.style.display = (this._pinned === key) ? 'flex' : 'none';
+    const th2 = this._tipTheme(key);
+    const titleEl = tip.querySelector('.ioc-tip-title');
+    const subEl = tip.querySelector('.ioc-tip-sub');
+    const bodyEl = tip.querySelector('.ioc-tip-body');
+    const isCap = d.g === 'teal' || d.g === 'green' || d.g === 'coral';
+    const isIsland = isCap && key.indexOf('grp-') !== 0;
+    this._tipKey = isIsland ? key : null;
+    const CD = (typeof window!=='undefined' && window.__CAPDETAIL) ? window.__CAPDETAIL : {};
+    const capBody = (isIsland && CD[key] && CD[key].desc) ? CD[key].desc : d.b;
+    titleEl.textContent = d.t; bodyEl.textContent = capBody;
+    subEl.textContent = isCap ? '' : d.s;
+    subEl.style.display = (isCap || !d.s) ? 'none' : '';
+    const linkEl = tip.querySelector('.ioc-tip-link');
+    if (linkEl) {
+      if (isIsland) {
+        linkEl.textContent = 'Learn more →';
+        linkEl.href = 'resources.dc.html?capacity=' + encodeURIComponent(key);
+        linkEl.target = '_self';
+        linkEl.style.display = 'inline-flex';
+        linkEl.style.color = th2.title;
+      } else {
+        linkEl.style.display = 'none';
+      }
+    }
+    tip.style.background = th2.bg; tip.style.borderColor = th2.bd;
+    titleEl.style.color = th2.title; subEl.style.color = th2.sub; bodyEl.style.color = th2.body;
+    tip.style.visibility = 'visible';
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    let tx = cx - (tw/2) - (cardW/2) - 14;                         // sit to the LEFT
+    if (tx - tw/2 < 8) tx = cx + (tw/2) + (cardW/2) + 14;          // flip right if it clips
+    let ty = cy;
+    tx = Math.max(tw/2 + 8, Math.min(1040 - tw/2 - 8, tx));
+    ty = Math.max(th/2 + 8, Math.min(1320 - th/2 - 8, ty));
+    tip.style.left = tx + 'px';
+    tip.style.top = ty + 'px';
+    tip.style.opacity = '1';
+    tip.style.pointerEvents = 'auto';
+    if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
+  }
+  _scheduleHide() {
+    if (this._pinned != null) return;
+    if (this._hideTimer) clearTimeout(this._hideTimer);
+    this._hideTimer = setTimeout(() => { if (this._pinned == null) this._hideTip(); }, 220);
+  }
+  _hideTip() {
+    if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; }
+    const tip = document.querySelector('.ioc-stage .ioc-tip');
+    if (tip) { tip.style.opacity = '0'; tip.style.visibility = 'hidden'; tip.style.pointerEvents = 'none'; }
+  }
+  _onIslEnter(i) { if (this._pinned == null) { const p = this.state.isl[i]; this._showTip(p.label, p.x, p.y, p.r*2); } }
+  _onIslLeave() { this._scheduleHide(); }
+  _onIslClick(i, e) {
+    e.stopPropagation();
+    if (this._islDragged) { this._islDragged = false; return; }
+    const p = this.state.isl[i]; const key = p.label;
+    this._pinned = null; this._hideTip();
+    this.setState({ openCap: key });
+  }
+  closeCap(){ this.setState({ openCap: null }); }
+  _capDrawer(){
+    const key = this.state.openCap;
+    if (!key) return { open:false, label:'', groupName:'', color:'#46716f', headerBg:'#e3ecea', desc:'', levels:[], hasLevels:false, countText:'', items:[] };
+    const R = (typeof window!=='undefined' && window.__RESEARCH) ? window.__RESEARCH : {capacities:[],resources:[]};
+    const CD = (typeof window!=='undefined' && window.__CAPDETAIL) ? window.__CAPDETAIL : {};
+    const capRec = (R.capacities||[]).find(c=>c.label===key) || {group:'teal'};
+    const g = capRec.group || 'teal';
+    const GRP = { teal:{c:'#46716f',name:'Inner Inquiry',head:'#e3ecea',rgb:[46,113,111]}, green:{c:'#5b6733',name:'Collective Strategy',head:'#ebeedd',rgb:[118,131,74]}, coral:{c:'#a8542d',name:'Systemic Intervention',head:'#f4e3d9',rgb:[189,106,71]} };
+    const gd = GRP[g] || GRP.teal;
+    const det = CD[key] || {};
+    const tcMap = { 'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733','Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8','Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45' };
+    const tcol = (t)=>{ if(tcMap[t]) return tcMap[t]; let h=0; for(let i=0;i<t.length;i++){ h=(h*31+t.charCodeAt(i))>>>0; } return 'hsl('+(h%360)+' 42% 42%)'; };
+    const list = (R.resources||[]).filter(r=>r.caps && r.caps.indexOf(key)>=0);
+    const items = list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:(a.r.name||'').localeCompare(b.r.name||''); }).map(x=>{
+      const r=x.r; const t0=(r.types&&r.types.length)?r.types[0]:'Resource'; const tc=tcol(t0);
+      return { name:r.name, desc:r.desc, url:r.url||'#', featured:!!r.featured,
+        typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
+        typeTags:(r.types&&r.types.length?r.types:['Resource']).map(t=>{ const c=tcol(t); return { label:t, style:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:c+'1f', color:c, whiteSpace:'nowrap' } }; }),
+        typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },
+        pickStyle:{ display:'inline-flex', alignItems:'center', gap:'4px', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:'#8a6a45', color:'#fff', whiteSpace:'nowrap' } };
+    });
+    const levOrder=['Personal','Social','Institutional','Systemic']; const alpha=[0.40,0.60,0.80,1];
+    const levels = det.levels ? levOrder.filter(k=>det.levels[k]).map((k,idx)=>({ label:k, text:det.levels[k], tierStyle:{ fontFamily:"'PT Serif',serif", fontWeight:700, color:'rgba('+gd.rgb[0]+','+gd.rgb[1]+','+gd.rgb[2]+','+alpha[idx]+')' } })) : [];
+    const n=list.length;
+    return { open:true, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,
+      desc:det.desc||'', levels, hasLevels:levels.length>0,
+      countText: n+(n===1?' resource to learn about this area':' resources to learn about this area'),
+      libHref: 'resources.dc.html?capacity='+encodeURIComponent(key),
+      suggestHref: 'resources.dc.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
+  }
+  _onWpEnter(i) { if (this._pinned == null) { const p = this.state.wp[i]; this._showTip(p.key || ['probe','sense','design','adapt','integrate'][i], p.x, p.y, 30); } }
+  _onWpLeave() { this._scheduleHide(); }
+  _onWpClick(i, e) {
+    e.stopPropagation();
+    if (this._wpDragged) { this._wpDragged = false; return; }
+    const key = ['probe','sense','design','adapt','integrate'][i];
+    if (this._pinned === key) { this._pinned = null; this._hideTip(); }
+    else { this._pinned = key; const p = this.state.wp[i]; this._showTip(key, p.x, p.y, 30); }
+  }
+  _initTips() {
+    const stage = document.querySelector('.ioc-stage');
+    if (!stage) return;
+    this._pinned = null;
+    const tipEl = stage.querySelector('.ioc-tip');
+    if (tipEl && !tipEl._bridgeWired) {
+      tipEl._bridgeWired = true;
+      tipEl.style.cursor = 'pointer';
+      tipEl.addEventListener('click', (e) => { if (e.target.closest && e.target.closest('.ioc-tip-close')) return; if (this._tipKey) { e.preventDefault(); const k = this._tipKey; this._pinned = null; this._hideTip(); this.setState({ openCap: k }); } });
+      tipEl.addEventListener('mouseenter', () => { if (this._hideTimer) { clearTimeout(this._hideTimer); this._hideTimer = null; } });
+      tipEl.addEventListener('mouseleave', () => { this._scheduleHide(); });
+      const closeEl = tipEl.querySelector('.ioc-tip-close');
+      if (closeEl) closeEl.addEventListener('click', (e) => { e.stopPropagation(); this._pinned = null; this._hideTip(); });
+    }
+    stage.querySelectorAll('[data-orient]').forEach((card) => {
+      const key = card.getAttribute('data-orient');
+      card.style.cursor = 'pointer';
+      const cx = () => parseFloat(card.style.left) || 0;
+      const cy = () => parseFloat(card.style.top) || 0;
+      card.addEventListener('mouseenter', () => { if (this._pinned == null) this._showTip(key, cx(), cy(), card.offsetWidth); });
+      card.addEventListener('mouseleave', () => { this._scheduleHide(); });
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (this._pinned === key) { this._pinned = null; this._hideTip(); }
+        else { this._pinned = key; this._showTip(key, cx(), cy(), card.offsetWidth); }
+      });
+    });
+    stage.querySelectorAll('[data-tip]').forEach((card) => {
+      const key = card.getAttribute('data-tip');
+      card.style.cursor = 'pointer';
+      const cx = () => parseFloat(card.style.left) || 0;
+      const cy = () => parseFloat(card.style.top) || 0;
+      card.addEventListener('mouseenter', () => { if (this._pinned == null) this._showTip(key, cx(), cy(), card.offsetWidth); });
+      card.addEventListener('mouseleave', () => { this._scheduleHide(); });
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (this._pinned === key) { this._pinned = null; this._hideTip(); }
+        else { this._pinned = key; this._showTip(key, cx(), cy(), card.offsetWidth); }
+      });
+    });
+    if (!this._docClickWired) {
+      this._docClickWired = true;
+      document.addEventListener('click', () => { if (this._pinned != null) { this._pinned = null; this._hideTip(); } });
+    }
+  }
+  componentWillUnmount() {
+    if (this._ro) this._ro.disconnect();
+    if (this._fit) window.removeEventListener('resize', this._fit);
+  }
+  renderVals() {
+    const h = React.createElement;
+    const C = { teal:'#7E9E9E', tealDeep:'#46716f', green:'#A2AD68', greenDeep:'#76834a', coral:'#D08B6C', coralDeep:'#bd6a47', ink:'#39342b', cream:'#F4EFE6' };
+
+    const mkRand = (s) => () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+    const blobPts = (cx, cy, r, wob, n, rand, sq=1) => { const p=[]; for(let i=0;i<n;i++){const a=i/n*Math.PI*2; const rr=r*(1-wob+rand()*wob*2); p.push([cx+Math.cos(a)*rr, cy+Math.sin(a)*rr*sq]);} return p; };
+    const smooth = (p) => { const n=p.length; let d=`M${p[0][0].toFixed(1)},${p[0][1].toFixed(1)}`; for(let i=0;i<n;i++){const p0=p[(i-1+n)%n],p1=p[i],p2=p[(i+1)%n],p3=p[(i+2)%n]; const c1x=p1[0]+(p2[0]-p0[0])/6,c1y=p1[1]+(p2[1]-p0[1])/6; const c2x=p2[0]-(p3[0]-p1[0])/6,c2y=p2[1]-(p3[1]-p1[1])/6; d+=` C${c1x.toFixed(1)},${c1y.toFixed(1)} ${c2x.toFixed(1)},${c2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;} return d+'Z'; };
+    const blob = (cx,cy,r,wob,n,seed,sq=1) => smooth(blobPts(cx,cy,r,wob,n,mkRand(seed),sq));
+
+    const island = (cx,cy,r,fill,deep,seed) => {
+      const els=[];
+      els.push(h('ellipse',{key:'sh',cx:cx,cy:cy+r*0.62,rx:r*0.94,ry:r*0.34,fill:'#241f17',opacity:.18,filter:'url(#soft)'}));
+      els.push(h('path',{key:'u',d:blob(cx,cy,r*1.16,0.3,12,seed+1,0.94),fill:fill,opacity:.26,filter:'url(#soft)'}));
+      els.push(h('path',{key:'b',d:blob(cx,cy,r,0.26,13,seed,0.94),fill:fill,opacity:.92,filter:'url(#rough)'}));
+      els.push(h('path',{key:'c',d:blob(cx,cy,r*0.62,0.3,12,seed+3,0.94),fill:deep,opacity:.36,filter:'url(#rough)'}));
+      els.push(h('path',{key:'hl',d:blob(cx-r*0.22,cy-r*0.24,r*0.46,0.32,12,seed+5,0.94),fill:'#ffffff',opacity:.16,filter:'url(#soft)'}));
+      if(r>=48){ for(let k=1;k<=2;k++) els.push(h('path',{key:'ct'+k,d:blob(cx,cy,r*(0.8-k*0.18),0.26,12,seed+10+k,0.94),fill:'none',stroke:C.ink,strokeOpacity:.4,strokeWidth:1})); }
+      return h('g',{key:'i'+seed},els);
+    };
+
+    const COL = { teal:{fill:C.teal,deep:C.tealDeep}, green:{fill:C.green,deep:C.greenDeep}, coral:{fill:C.coral,deep:C.coralDeep} };
+    const ISL = this.state.isl;
+
+    const openSmooth = (p) => { let d=`M${p[0][0]},${p[0][1]}`; for(let i=0;i<p.length-1;i++){const p0=p[i-1]||p[i],p1=p[i],p2=p[i+1],p3=p[i+2]||p2; const c1x=p1[0]+(p2[0]-p0[0])/6,c1y=p1[1]+(p2[1]-p0[1])/6; const c2x=p2[0]-(p3[0]-p1[0])/6,c2y=p2[1]-(p3[1]-p1[1])/6; d+=` C${c1x},${c1y} ${c2x},${c2y} ${p2[0]},${p2[1]}`;} return d; };
+    const WP = this.state.wp;
+    const route = WP.map(p => [p.x, p.y]);
+
+    const kids = [];
+    // defs
+    kids.push(h('defs',{key:'defs'},
+      h('filter',{id:'rough',x:'-30%',y:'-30%',width:'160%',height:'160%'},
+        h('feTurbulence',{type:'fractalNoise',baseFrequency:'0.013 0.017',numOctaves:3,seed:7,result:'n'}),
+        h('feDisplacementMap',{in:'SourceGraphic',in2:'n',scale:13,xChannelSelector:'R',yChannelSelector:'G'})),
+      h('filter',{id:'soft',x:'-40%',y:'-40%',width:'180%',height:'180%'}, h('feGaussianBlur',{stdDeviation:7})),
+      h('radialGradient',{id:'compDome',cx:'38%',cy:'30%',r:'74%'},
+        h('stop',{offset:'0%',stopColor:'#FBF6EA'}),
+        h('stop',{offset:'60%',stopColor:'#EADFC6'}),
+        h('stop',{offset:'100%',stopColor:'#C9B68F'})),
+      h('linearGradient',{id:'compLight',x1:'0',y1:'0',x2:'1',y2:'1'},
+        h('stop',{offset:'0%',stopColor:'#FFFDF8'}),
+        h('stop',{offset:'100%',stopColor:'#D6C5A1'})),
+      h('linearGradient',{id:'compDark',x1:'0',y1:'0',x2:'1',y2:'1'},
+        h('stop',{offset:'0%',stopColor:'#C0703F'}),
+        h('stop',{offset:'100%',stopColor:'#8A3F1F'}))
+    ));
+    // sea depth washes
+    kids.push(h('path',{key:'w1',className:'ioc-wash',style:{animationDuration:'15s'},d:blob(300,300,430,0.46,12,21),fill:C.teal,opacity:.12,filter:'url(#soft)'}));
+    kids.push(h('path',{key:'w2',className:'ioc-wash',style:{animationDuration:'19s',animationDelay:'-4s'},d:blob(660,650,380,0.4,12,22),fill:C.green,opacity:.12,filter:'url(#soft)'}));
+    kids.push(h('path',{key:'w3',className:'ioc-wash',style:{animationDuration:'23s',animationDelay:'-8s'},d:blob(440,1020,390,0.4,12,23),fill:C.coral,opacity:.16,filter:'url(#soft)'}));
+    kids.push(h('path',{key:'w4',className:'ioc-wash',style:{animationDuration:'17s',animationDelay:'-2s'},d:blob(880,420,300,0.4,12,24),fill:'#E7Cf9f',opacity:.3,filter:'url(#soft)'}));
+    // faint depth contour rings around bays
+    [[300,300,300],[660,650,310],[440,1020,320]].forEach((b,i)=>{ for(let k=0;k<3;k++) kids.push(h('path',{key:'ring'+i+k,d:blob(b[0],b[1],b[2]-k*46,0.16,16,90+i*5+k,0.96),fill:'none',stroke:C.ink,strokeOpacity:.13,strokeWidth:1.1})); });
+
+    // wayfinding route (under islands? draw under labels but over sea). Put before islands so islands sit on top.
+    // wayfinding route — one continuous, smooth CLOSED loop through all steps (no seam, no kink)
+    const rn = route.length;
+    const bends = this.state.bend || [];
+    const segMid = (i) => { const p0=route[(i-1+rn)%rn],p1=route[i],p2=route[(i+1)%rn],p3=route[(i+2)%rn]; const c1x=p1[0]+(p2[0]-p0[0])/6,c1y=p1[1]+(p2[1]-p0[1])/6,c2x=p2[0]-(p3[0]-p1[0])/6,c2y=p2[1]-(p3[1]-p1[1])/6; return [(p1[0]+3*c1x+3*c2x+p2[0])/8,(p1[1]+3*c1y+3*c2y+p2[1])/8]; };
+    const handlePts = route.map((_,i)=> (bends[i] && bends[i].length===2) ? bends[i] : segMid(i));
+    let routeD = `M${route[0][0]},${route[0][1]}`;
+    for(let i=0;i<rn;i++){ const A=route[i],B=route[(i+1)%rn],P=handlePts[i]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; routeD+=` Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0].toFixed(1)},${B[1].toFixed(1)}`; }
+    routeD+='Z';
+    kids.push(h('path',{key:'route',className:'ioc-march',d:routeD,fill:'none',stroke:C.ink,strokeOpacity:.72,strokeWidth:3.4,strokeDasharray:'2 9',strokeLinecap:'round'}));
+    handlePts.forEach((P,i)=>{ kids.push(h('circle',{key:'bh'+i,cx:P[0],cy:P[1],r:15,fill:'transparent',onPointerDown:(e)=>this._startDragBend(i,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:'bd'+i,cx:P[0],cy:P[1],r:4.5,fill:'#39342b',fillOpacity:.22,stroke:'#39342b',strokeOpacity:.45,strokeWidth:1,style:{pointerEvents:'none'}})); });
+    // feedback-loop chords
+    { const cen=[480,700];
+      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=this.state.bendChord||{}; const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); kids.push(h('circle',{key:key+'-h',cx:P[0],cy:P[1],r:14,fill:'transparent',onPointerDown:(e)=>this._startDragBendChord(key,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:key+'-d',cx:P[0],cy:P[1],r:4,fill:'#39342b',fillOpacity:.2,stroke:'#39342b',strokeOpacity:.4,strokeWidth:1,style:{pointerEvents:'none'}})); };
+      arc(0,1,95,'ioc-march-rev','fb-ps',.62);
+      arc(1,2,95,'ioc-march-rev','fb-sd',.62);
+      arc(4,2,64,'ioc-march','fb-id',.3);
+      arc(2,3,82,'ioc-march-rev','fb-da',.62);
+    }
+
+    // islands (positions from state — draggable)
+    ISL.forEach((p,i)=>kids.push(island(p.x,p.y,p.r,COL[p.group].fill,COL[p.group].deep,p.seed)));
+
+    // compass rose (decorative, 3D + animated) mid-right
+    const ccx=808, ccy=182, cr=52;
+    const compEls=[];
+    compEls.push(h('ellipse',{key:'cs',cx:ccx,cy:ccy+cr*0.9,rx:cr*0.82,ry:cr*0.2,fill:'#241f17',opacity:.16,filter:'url(#soft)'}));
+    compEls.push(h('circle',{key:'cd',cx:ccx,cy:ccy,r:cr,fill:'url(#compDome)',stroke:C.ink,strokeOpacity:.28,strokeWidth:1.4}));
+    compEls.push(h('circle',{key:'cd2',cx:ccx,cy:ccy,r:cr*0.74,fill:'none',stroke:C.ink,strokeOpacity:.16,strokeWidth:1}));
+    const star=[];
+    [[0.707,-0.707],[0.707,0.707],[-0.707,0.707],[-0.707,-0.707]].forEach((d,i)=>{ const len=cr*0.5, half=4, px=-d[1], py=d[0]; const T=[ccx+d[0]*len,ccy+d[1]*len], b1=[ccx+px*half,ccy+py*half], b2=[ccx-px*half,ccy-py*half]; star.push(h('path',{key:'dg'+i,d:`M${ccx},${ccy} L${b1[0]},${b1[1]} L${T[0]},${T[1]} L${b2[0]},${b2[1]} Z`,fill:'url(#compLight)',opacity:.55,stroke:C.ink,strokeOpacity:.2,strokeWidth:.5})); });
+    [[0,-1],[1,0],[0,1],[-1,0]].forEach((d,i)=>{ const len=cr*0.92, half=8, px=-d[1], py=d[0]; const T=[ccx+d[0]*len,ccy+d[1]*len], b1=[ccx+px*half,ccy+py*half], b2=[ccx-px*half,ccy-py*half]; star.push(h('path',{key:'cl'+i,d:`M${ccx},${ccy} L${b1[0]},${b1[1]} L${T[0]},${T[1]} Z`,fill:'url(#compLight)',stroke:C.ink,strokeOpacity:.25,strokeWidth:.5})); star.push(h('path',{key:'cr'+i,d:`M${ccx},${ccy} L${T[0]},${T[1]} L${b2[0]},${b2[1]} Z`,fill:'url(#compDark)',stroke:C.ink,strokeOpacity:.25,strokeWidth:.5})); });
+    star.push(h('circle',{key:'hub',cx:ccx,cy:ccy,r:4,fill:'#FBF6EA',stroke:C.ink,strokeOpacity:.4,strokeWidth:.8}));
+    compEls.push(h('g',{key:'star',className:'ioc-compass-star'},star));
+    kids.push(h('g',{key:'comp',className:'ioc-compass',opacity:.92},compEls));
+
+    const waypoints = h('div', { key:'wps', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
+      WP.map((p, i) => h('div', { key:'wp'+i, style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', animation:'iocBuoy '+(6+(i%4))+'s ease-in-out infinite', animationDelay:(-i*1.3)+'s', pointerEvents:'none' } },
+        h('div', { style:{ position:'absolute', left:'0px', top:'-38px', transform:'translateX(-50%)', whiteSpace:'nowrap', fontSize:'12px', fontWeight:700, letterSpacing:'.02em', color:'#F4EFE6', background:'rgba(57,52,43,0.92)', padding:'3px 10px', borderRadius:'9px', pointerEvents:'none' } }, p.label),
+        h('div', { title:'', onPointerDown:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to right, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
+      ))
+    );
+
+    const seaArt = h('svg',{width:1040,height:1320,viewBox:'0 0 1040 1320',style:{position:'absolute',inset:0,width:'100%',height:'100%',display:'block'}}, kids);
+
+    // draggable island labels + drag surfaces (whole island moves)
+    const islands = h('div', { key:'isls', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
+      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onPointerDown:(e)=>this._startDragIsland(i,e), onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
+          style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', width:(p.r*2)+'px', height:(p.r*2)+'px', borderRadius:'50%', cursor:'pointer', pointerEvents:'auto', touchAction:'none' } },
+        h('div', { style:{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', width:p.w+'px', textAlign:'center', fontSize:'12px', fontWeight:600, lineHeight:1.16, color:'#fff', textShadow:'0 1px 3px rgba(35,28,18,.6)', pointerEvents:'none', userSelect:'none' } }, p.label)
+      ))
+    );
+
+    const TIP = this._tipData();
+    const browseOrients = ['recip','shared','pluri','jrf'].map(k => { const d = TIP[k] || {}; const open = this.state.mOrient === k; return { title:d.t, sub:d.s, body:d.b, open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mOrient: s.mOrient===k ? null : k })) }; });
+    const GMETA = { teal:{name:'Inner Inquiry',sub:'The personal foundation',head:'#46716f',border:'rgba(70,113,111,.3)',dot:'#46716f'}, green:{name:'Collective Strategy',sub:'Reading the field',head:'#5f7a3a',border:'rgba(95,122,58,.3)',dot:'#5f7a3a'}, coral:{name:'Systemic Intervention',sub:'Acting & sustaining',head:'#a8542d',border:'rgba(168,84,45,.3)',dot:'#a8542d'} };
+    const browseDomains = ['teal','green','coral'].map(g => { const m = GMETA[g]; const open = this.state.mGroup === g; const areas = (this.state.isl||[]).filter(p=>p.group===g).map(p=>({ label:p.label, onOpen: () => this.setState({ openCap: p.label }) })); return { key:g, name:m.name, sub: m.sub+' · '+areas.length+' areas', dot:m.dot, border:m.border, open, chev: open?'–':'+', headStyle:{ background:m.head, padding:'15px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }, areas, onToggle: () => this.setState(s => ({ mGroup: s.mGroup===g ? null : g })) }; });
+
+    const MSTAGE = { probe:'#46716f', sense:'#5f7a3a', design:'#b07a3c', adapt:'#a8542d', integrate:'#3f6e74' };
+    const browseMeta = ['probe','sense','design','adapt','integrate'].map(k => { const d = TIP[k] || {}; const open = this.state.mMeta === k; return { title:d.t, sub:d.s, body:d.b, dot:MSTAGE[k], open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mMeta: s.mMeta===k ? null : k })) }; });
+
+    return { seaArt, islands, waypoints, browseOrients, browseDomains, browseMeta, capDrawer: this._capDrawer(), closeCap: () => this.closeCap(), resetMap: () => this._resetMap && this._resetMap(), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
+  }
+}
+</script>
+</body>
+</html>

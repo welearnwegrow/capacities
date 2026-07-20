@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0}
+  @media print{@page{margin:0}}
+</style>
+</helmet>
+<div style="width:816px;margin:0 auto;background:linear-gradient(180deg,#dce7ed 0%,#eef2ef 300px, #eef2ef 100%);font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;padding:64px 66px 72px">
+
+  <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:40px">
+    
+    
+    <p style="font-family:'PT Serif',serif;font-style:italic;font-size:15px;color:#4c6b64;margin:6px 0 0">The palette, type, and surfaces behind the capacity map.</p>
+  </div>
+
+  <!-- ORIENTATIONS -->
+  <div style="margin-bottom:34px">
+    <div style="display:flex;align-items:baseline;gap:10px;border-bottom:1px solid rgba(138,106,47,.28);padding-bottom:7px;margin-bottom:16px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;margin:0;color:#8a6a2f">Orientations</h2>
+      <span style="font-family:'PT Serif',serif;font-style:italic;font-size:12.5px;color:#977c45">Golds &amp; ambers — what guides our intentions</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+      <sc-for list="{{ orientSwatches }}" as="c" hint-placeholder-count="5">
+        <div style="display:flex;flex-direction:column">
+          <div style="height:74px;border-radius:10px;background:{{ c.hex }};border:1px solid rgba(0,0,0,.06)"></div>
+          <div style="font-family:'PT Serif',serif;font-weight:700;font-size:12.5px;color:#6B5527;margin-top:8px">{{ c.name }}</div>
+          <div style="font-family:'PT Sans',monospace;font-size:11px;color:#977c45;letter-spacing:.02em">{{ c.hex }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- LEARNING AREAS -->
+  <div style="margin-bottom:34px">
+    <div style="display:flex;align-items:baseline;gap:10px;border-bottom:1px solid rgba(79,106,96,.3);padding-bottom:7px;margin-bottom:16px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;margin:0;color:#4f6a60">Learning areas</h2>
+      <span style="font-family:'PT Serif',serif;font-style:italic;font-size:12.5px;color:#5b6b62">Greens — what guides our progress</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+      <sc-for list="{{ areaSwatches }}" as="c" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column">
+          <div style="height:74px;border-radius:10px;background:{{ c.hex }};border:1px solid rgba(0,0,0,.06)"></div>
+          <div style="font-family:'PT Serif',serif;font-weight:700;font-size:12.5px;color:#46514a;margin-top:8px">{{ c.name }}</div>
+          <div style="font-family:'PT Sans',monospace;font-size:11px;color:#5b6b62;letter-spacing:.02em">{{ c.hex }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- META-PROCESS -->
+  <div style="margin-bottom:34px">
+    <div style="display:flex;align-items:baseline;gap:10px;border-bottom:1px solid rgba(70,81,74,.28);padding-bottom:7px;margin-bottom:16px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;margin:0;color:#46514a">Meta-process stages</h2>
+      <span style="font-family:'PT Serif',serif;font-style:italic;font-size:12.5px;color:#6b7d6a">Five stages — what guides our actions</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+      <sc-for list="{{ metaSwatches }}" as="c" hint-placeholder-count="5">
+        <div style="display:flex;flex-direction:column">
+          <div style="height:74px;border-radius:10px;background:{{ c.hex }};border:1px solid rgba(0,0,0,.06)"></div>
+          <div style="font-family:'PT Serif',serif;font-weight:700;font-size:12.5px;color:#46514a;margin-top:8px">{{ c.name }}</div>
+          <div style="font-family:'PT Sans',monospace;font-size:11px;color:#6b7d6a;letter-spacing:.02em">{{ c.hex }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- INK & SURFACES -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px">
+    <div>
+      <div style="border-bottom:1px solid rgba(46,43,38,.2);padding-bottom:7px;margin-bottom:14px">
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;margin:0;color:#2E2B26">Ink</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <sc-for list="{{ inkSwatches }}" as="c" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:34px;height:34px;border-radius:8px;flex:none;background:{{ c.hex }};border:1px solid rgba(0,0,0,.08)"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-family:'PT Sans',sans-serif;font-weight:700;font-size:12.5px;color:#3c4a45">{{ c.name }}</div>
+              <div style="font-family:'PT Sans',monospace;font-size:11px;color:#7a6f5c">{{ c.hex }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div>
+      <div style="border-bottom:1px solid rgba(46,43,38,.2);padding-bottom:7px;margin-bottom:14px">
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;margin:0;color:#2E2B26">Surfaces</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <sc-for list="{{ surfaceSwatches }}" as="c" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:34px;height:34px;border-radius:8px;flex:none;background:{{ c.hex }};border:1px solid rgba(0,0,0,.12)"></div>
+            <div style="flex:1;min-width:0">
+              <div style="font-family:'PT Sans',sans-serif;font-weight:700;font-size:12.5px;color:#3c4a45">{{ c.name }}</div>
+              <div style="font-family:'PT Sans',monospace;font-size:11px;color:#7a6f5c">{{ c.hex }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPE -->
+  <div style="margin-top:36px;border-top:1px solid rgba(46,43,38,.14);padding-top:20px;display:flex;gap:40px;flex-wrap:wrap">
+    <div>
+      <div style="font-family:'Newsreader',serif;font-weight:500;font-size:30px;color:#1f3a36;line-height:1">Newsreader</div>
+      <div style="font-family:'PT Sans',sans-serif;font-size:11.5px;color:#7a6f5c;margin-top:4px">Display headings · weight 500</div>
+    </div>
+    <div>
+      <div style="font-family:'PT Serif',serif;font-style:italic;font-weight:700;font-size:30px;color:#6B5527;line-height:1">PT Serif</div>
+      <div style="font-family:'PT Sans',sans-serif;font-size:11.5px;color:#7a6f5c;margin-top:4px">Titles &amp; captions · italic accents</div>
+    </div>
+    <div>
+      <div style="font-family:'PT Sans',sans-serif;font-weight:700;font-size:30px;color:#3c4a45;line-height:1">PT Sans</div>
+      <div style="font-family:'PT Sans',sans-serif;font-size:11.5px;color:#7a6f5c;margin-top:4px">Body &amp; UI · regular / bold</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:816}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      orientSwatches: [
+        { name: 'Orientation head', hex: '#8a6a2f' },
+        { name: 'Gold accent', hex: '#b0822f' },
+        { name: 'Card title', hex: '#6B5527' },
+        { name: 'Card caption', hex: '#977c45' },
+        { name: 'Olive', hex: '#69763f' },
+      ],
+      areaSwatches: [
+        { name: 'Learning area', hex: '#4f6a60' },
+        { name: 'Teal', hex: '#46716f' },
+        { name: 'Leaf', hex: '#5f7a3a' },
+      ],
+      metaSwatches: [
+        { name: 'Probe', hex: '#46716f' },
+        { name: 'Sense', hex: '#5f7a3a' },
+        { name: 'Design', hex: '#b07a3c' },
+        { name: 'Adapt', hex: '#a8542d' },
+        { name: 'Integrate', hex: '#3f6e74' },
+      ],
+      inkSwatches: [
+        { name: 'Heading ink', hex: '#1f3a36' },
+        { name: 'Lede', hex: '#4c6b64' },
+        { name: 'Body', hex: '#3c4a45' },
+        { name: 'Prose', hex: '#544E45' },
+        { name: 'Base text', hex: '#2E2B26' },
+      ],
+      surfaceSwatches: [
+        { name: 'Paper card', hex: '#FCFBF7' },
+        { name: 'Warm sand', hex: '#f6f1e7' },
+        { name: 'Sky wash', hex: '#dce7ed' },
+        { name: 'Mist', hex: '#eef2ef' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

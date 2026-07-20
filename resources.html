@@ -56,7 +56,10 @@
   <header class="rl-tabs" style="max-width:1180px;margin:0 auto;padding:20px 26px 0">
     <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(70,90,85,.13);padding-bottom:10px;flex-wrap:wrap">
       <span style="font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;color:#39342b">All resources <span style="{{ tabCountStyle }}">{{ totalText }}</span></span>
-      <button onClick="{{ openSubmit }}" style="margin-left:auto;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:8px 15px;border-radius:20px;border:1px solid #8a6a45;background:#8a6a45;color:#fff;cursor:pointer">+ Suggest a resource</button>
+      <span style="margin-left:auto;display:inline-flex;align-items:center;gap:10px">
+        <dc-import name="tag-network" hint-size="150px,38px"></dc-import>
+        <button onClick="{{ openSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;padding:8px 15px;border-radius:20px;border:1px solid #8a6a45;background:#8a6a45;color:#fff;cursor:pointer">+ Suggest a resource</button>
+      </span>
     </div>
   </header>
 

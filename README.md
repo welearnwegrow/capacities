@@ -7,11 +7,12 @@ A static website for a capacity framework on systems practice and lifelong learn
 - `metaprocess.html` — Meta-process (five stages with downloadable reflection canvases)
 - `orientations.html` — Orientations
 - `resources.html` — Resource Library
+- `resources.html` — Resource Library (includes the **Map the Library** tag-cloud overlay)
 - `engage.html` — Partner with Us (contact form)
 - `design.html` — Design a Learning Experience (coming soon)
 - `privacy.html` — Privacy Policy
 
-Shared nav/footer: `SiteNav.dc.html`, `SiteFooter.dc.html`. Scripts: `support.js`, `research-data.js`, `forms-config.js`.
+Shared nav/footer: `SiteNav.dc.html`, `SiteFooter.dc.html`. The tag map overlay lives in `tag-network.dc.html` (loaded by `resources.html`). Scripts: `support.js`, `research-data.js`, `data-loader.js`, `forms-config.js`, `capacity-detail.js`, `assess.js`, `analytics.js`.
 
 ## Deploy to GitHub Pages
 1. Upload the **contents of this folder** so `index.html` sits at the repo root.

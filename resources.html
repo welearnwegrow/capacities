@@ -101,7 +101,7 @@
             <sc-for list="{{ capGroups }}" as="g" hint-placeholder-count="3">
               <optgroup label="{{ g.label }}">
                 <sc-for list="{{ g.caps }}" as="c" hint-placeholder-count="6">
-                  <option value="{{ c.label }}">{{ c.label }}</option>
+                  <option value="{{ c.label }}">{{ c.optLabel }}</option>
                 </sc-for>
               </optgroup>
             </sc-for>
@@ -286,15 +286,15 @@
         <sc-if value="{{ submitNotDone }}" hint-placeholder-val="{{ true }}">
           <div>
             <h3 style="font-family:'PT Serif',serif;font-weight:700;font-size:21px;margin:0 0 5px">Suggest a resource</h3>
-            <p style="font-size:13px;line-height:1.5;color:#544E45;margin:0 0 18px">Share something that has informed your practice. It goes to the editors for curation before joining the library.</p>
+            <p style="font-size:13px;line-height:1.5;color:#544E45;margin:0 0 18px">Share something that has informed your practice. Just the title and link — a summary and learning areas are drafted automatically, then the editors curate before it joins the library.</p>
             <div style="display:flex;flex-direction:column;gap:11px">
               <input id="ioc-sr-title" placeholder="Title" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
               <input id="ioc-sr-link" placeholder="Link (URL)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
-              <input id="ioc-sr-from" placeholder="Your name &amp; email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
-              <textarea id="ioc-sr-why" placeholder="Why it matters / how it informs a learning area" rows="3" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none;resize:vertical"></textarea>
+              <input id="ioc-sr-name" placeholder="Your name (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <input id="ioc-sr-email" type="email" placeholder="Your email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
             </div>
             <div style="display:flex;gap:9px;margin-top:18px">
-              <button onClick="{{ doSubmit }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Submit for curation</button>
+              <button onClick="{{ doSubmit }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Submit for addition</button>
               <button onClick="{{ closeSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px 15px;border-radius:9px;border:1px solid rgba(120,105,75,.4);background:transparent;color:#8a6a45;cursor:pointer">Cancel</button>
             </div>
           </div>
@@ -362,20 +362,20 @@ class Component extends DCLogic {
   closeSubmit(){ this.setState({submitOpen:false, submitDone:false}); }
   doSubmit(){
     var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
-    var title=g('ioc-sr-title'), link=g('ioc-sr-link'), from=g('ioc-sr-from'), why=g('ioc-sr-why');
+    var title=g('ioc-sr-title'), link=g('ioc-sr-link'), sname=g('ioc-sr-name'), email=g('ioc-sr-email');
     if (window.track) window.track('suggest_resource', { title: title || '(untitled)' });
     var subject='Resource suggestion: '+(title||'(untitled)');
     var nurl=(typeof window!=='undefined' && window.NOTION_CONNECTOR_URL) ? window.NOTION_CONNECTOR_URL : '';
     if (nurl) {
       this.setState({submitting:true, submitError:null});
-      fetch(nurl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name:title, url:link, why:why, suggestedBy:from }) })
+      fetch(nurl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name:title, url:link, submitterName:sname, submitterEmail:email }) })
         .then(r=>r.json()).then(j=>{ this.setState({submitting:false, submitDone:true, submitError: j && j.ok ? null : 'send'}); })
         .catch(()=>{ this.setState({submitting:false, submitDone:true, submitError:'network'}); });
       return;
     }
     var to='jayajohnyramchandani@gmail.com';
     var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
-      +'\nSuggested by: '+(from||'(not given)')+'\n\nWhy it matters / how it informs a learning area:\n'+why+'\n';
+      +'\nSubmitted by: '+(sname||'(not given)')+'\nEmail: '+(email||'(not given)')+'\n';
     try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
     this.setState({submitDone:true});
   }
@@ -496,7 +496,8 @@ class Component extends DCLogic {
         style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12px', fontWeight:600, padding:'6px 11px', borderRadius:'18px', cursor:'pointer', border:'1px solid rgba(120,105,75,.35)', background:on?'#8a6a45':'#FCFBF7', color:on?'#fff':'#6b5d45' } };
     });
     const libList=filtered.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
-    const capGroups=['teal','green','coral'].map(g=>({ label:(meta[g]||{}).name||g, caps:d.capacities.filter(c=>c.group===g).map(c=>({label:c.label})) }));
+    const capCounts={}; d.resources.forEach(r=>(r.caps||[]).forEach(c=>{ capCounts[c]=(capCounts[c]||0)+1; }));
+    const capGroups=['teal','green','coral'].map(g=>({ label:(meta[g]||{}).name||g, caps:d.capacities.filter(c=>c.group===g).map(c=>{ const n=capCounts[c.label]||0; return {label:c.label, optLabel:c.label+'  ('+n+')', count:n}; }) }));
 
     // ---- studio ----
     const methodCards=d.methods.map((m,i)=>{

@@ -22,7 +22,7 @@ window.__RESEARCH = {
    "group": "teal"
   },
   {
-   "label": "Creative Expression & Storytelling",
+   "label": "Agency & Expression",
    "group": "teal"
   },
   {
@@ -604,7 +604,7 @@ window.__RESEARCH = {
    "name": "Social Change Now",
    "caps": [
     "Convening & Facilitating Collaborations",
-    "Creative Expression & Storytelling",
+    "Agency & Expression",
     "Advocacy & Political Participation"
    ],
    "desc": "A guidebook by Deepa Iyer that offers a comprehensive set of frameworks and reflective practices for those working in social change. It helps practitioners identify their roles within an ecosystem, navigate the challenges of movement-building, and foster deep connection across diverse communities.",
@@ -753,7 +753,7 @@ window.__RESEARCH = {
    "name": "Self-Study Guide: Regenerative Leadership",
    "caps": [
     "Critical Consciousness",
-    "Creative Expression & Storytelling"
+    "Agency & Expression"
    ],
    "desc": "Designed for changemakers, this guide offers a developmental pathway toward regenerative leadership. It focuses on internal alignment, systems awareness, and the capacity to lead from a place of \"evolutionary purpose\" rather than top-down control.",
    "types": [
@@ -802,7 +802,7 @@ window.__RESEARCH = {
    "name": "Growing Wings On The Way",
    "caps": [
     "Leading in Complexity",
-    "Creative Expression & Storytelling",
+    "Agency & Expression",
     "Systems Thinking & Modeling"
    ],
    "desc": "A systems-thinking classic that uses the metaphor of learning to fly while already in the air. It provides a pragmatic approach to handling uncertainty, emphasizing that in complex environments, you must often build the framework for your actions while you are already in the middle of the process.",
@@ -961,7 +961,7 @@ window.__RESEARCH = {
    "name": "Deschooling Dialogues",
    "caps": [
     "Critical Consciousness",
-    "Creative Expression & Storytelling"
+    "Agency & Expression"
    ],
    "desc": "A podcast series exploring the boundaries of traditional education, questioning systemic norms, and interviewing practitioners who are building alternative learning spaces.",
    "types": [
@@ -1150,7 +1150,7 @@ window.__RESEARCH = {
    "name": "Design Your Own Learning: A Guided Workbook for Learning How to Learn",
    "caps": [
     "Critical Consciousness",
-    "Creative Expression & Storytelling"
+    "Agency & Expression"
    ],
    "desc": "A guided workbook designed to help individuals transition from passive learners to active drivers of their own educational journey, providing frameworks for meta-cognition and self-directed growth.",
    "types": [

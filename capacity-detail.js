@@ -21,7 +21,7 @@ window.__CAPDETAIL = {
    "Systemic": "Holds space for collective healing and recovery across large, conflict-heavy efforts, helping whole communities avoid burnout. Builds cultures and structures where wellbeing and long-term purpose are protected, not sacrificed."
   }
  },
- "Creative Expression & Storytelling": {
+ "Agency & Expression": {
   "desc": "Synthesizing complex systemic insights into compelling narratives and creative outputs that challenge the status quo, build relational density, and model preferable futures.",
   "levels": {
    "Personal": "Shifts from passive consumption to active production by using media, art, or storytelling to articulate personal viewpoints beyond standard assessments.",

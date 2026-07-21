@@ -50,9 +50,7 @@
   .ioc-hint-desktop{display:inline}
   .ioc-hint-mobile{display:none}
   @media (max-width:760px){
-    .ioc-browse{display:block}
-    .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:auto}
-    .ioc-stage, .ioc-stage *{pointer-events:none!important}
+    .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:manipulation}
     .ioc-hint-desktop{display:none}
     .ioc-hint-mobile{display:inline}
     .ioc-root{padding:0 14px 48px}
@@ -87,7 +85,7 @@
 
   <!-- ===== MAP ===== -->
   <div style="width:1040px;max-width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em"><span class="ioc-hint-desktop">Tap to explore · drag to rearrange · pinch or +/− to zoom</span><span class="ioc-hint-mobile">A map of the whole framework — browse each part below</span></span>
+    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em"><span class="ioc-hint-desktop">Tap to explore · drag to rearrange · pinch or +/− to zoom</span><span class="ioc-hint-mobile">Tap to explore · pinch to zoom</span></span>
     <div style="display:flex;align-items:center;gap:8px">
       <div class="ioc-zoom" style="align-items:center;gap:8px">
         <button onClick="{{ zoomOut }}" aria-label="Zoom out" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">−</button>
@@ -303,6 +301,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1090,&quot;height&quot;:1560}}">
 class Component extends DCLogic {
+  _isMobile = (typeof window!=='undefined' && window.matchMedia) ? window.matchMedia('(max-width:760px)').matches : false;
   state = {
     openCap: null,
     mGroup: 'teal',
@@ -380,6 +379,7 @@ class Component extends DCLogic {
       let off = saved[k] || BANDEF[k] || {dx:0,dy:0};
       const apply = (dx,dy)=>{ el.style.transform = 'translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))'; };
       if(off.dx||off.dy) apply(off.dx,off.dy);
+      if(this._isMobile){ el.style.pointerEvents='auto'; return; }
       el.style.cursor='grab'; el.style.pointerEvents='auto'; el.style.touchAction='none';
       el.addEventListener('pointerdown',(e)=>{
         e.preventDefault(); e.stopPropagation();
@@ -459,6 +459,10 @@ class Component extends DCLogic {
     try { const s = localStorage.getItem('ioc-bend-v1'); if (s) { const b = JSON.parse(s); if (Array.isArray(b)) this.setState({ bend: b }); } } catch(e){}
     try { const s = localStorage.getItem('ioc-bendc-v1'); if (s) { const b = JSON.parse(s); if (b && typeof b==='object') this.setState({ bendChord: b }); } } catch(e){}
     this._initBanDrag(); setTimeout(()=>this._initBanDrag(),150); setTimeout(()=>this._initBanDrag(),500);
+    this._mq = window.matchMedia('(max-width:760px)');
+    this._isMobile = this._mq.matches;
+    const onMq = () => { const m = this._mq.matches; if (m === this._isMobile) return; this._isMobile = m; this._initBanDrag(); this.forceUpdate(); };
+    this._mq.addEventListener ? this._mq.addEventListener('change', onMq) : this._mq.addListener(onMq);
     this._resetMap = () => { ['ioc-wp-v1','ioc-isl-v2','ioc-bend-v1','ioc-bendc-v1','ioc-ban-v1'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); location.reload(); };
     this._downloadMap = async () => {
       const frame = document.querySelector('.ioc-mapframe');
@@ -674,7 +678,7 @@ class Component extends DCLogic {
     if (linkEl) {
       if (isIsland) {
         linkEl.textContent = 'Learn more →';
-        linkEl.href = 'resources.html?capacity=' + encodeURIComponent(key);
+        linkEl.href = 'resources.dc.html?capacity=' + encodeURIComponent(key);
         linkEl.target = '_self';
         linkEl.style.display = 'inline-flex';
         linkEl.style.color = th2.title;
@@ -744,8 +748,8 @@ class Component extends DCLogic {
     return { open:true, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,
       desc:det.desc||'', levels, hasLevels:levels.length>0,
       countText: n+(n===1?' resource to learn about this area':' resources to learn about this area'),
-      libHref: 'resources.html?capacity='+encodeURIComponent(key),
-      suggestHref: 'resources.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
+      libHref: 'resources.dc.html?capacity='+encodeURIComponent(key),
+      suggestHref: 'resources.dc.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
   }
   _onWpEnter(i) { if (this._pinned == null) { const p = this.state.wp[i]; this._showTip(p.key || ['probe','sense','design','adapt','integrate'][i], p.x, p.y, 30); } }
   _onWpLeave() { this._scheduleHide(); }
@@ -807,6 +811,7 @@ class Component extends DCLogic {
   }
   renderVals() {
     const h = React.createElement;
+    const isMobile = this._isMobile;
     const C = { teal:'#7E9E9E', tealDeep:'#46716f', green:'#A2AD68', greenDeep:'#76834a', coral:'#D08B6C', coralDeep:'#bd6a47', ink:'#39342b', cream:'#F4EFE6' };
 
     const mkRand = (s) => () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
@@ -868,10 +873,10 @@ class Component extends DCLogic {
     for(let i=0;i<rn;i++){ const A=route[i],B=route[(i+1)%rn],P=handlePts[i]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; routeD+=` Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0].toFixed(1)},${B[1].toFixed(1)}`; }
     routeD+='Z';
     kids.push(h('path',{key:'route',className:'ioc-march',d:routeD,fill:'none',stroke:C.ink,strokeOpacity:.72,strokeWidth:3.4,strokeDasharray:'2 9',strokeLinecap:'round'}));
-    handlePts.forEach((P,i)=>{ kids.push(h('circle',{key:'bh'+i,cx:P[0],cy:P[1],r:15,fill:'transparent',onPointerDown:(e)=>this._startDragBend(i,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:'bd'+i,cx:P[0],cy:P[1],r:4.5,fill:'#39342b',fillOpacity:.22,stroke:'#39342b',strokeOpacity:.45,strokeWidth:1,style:{pointerEvents:'none'}})); });
+    handlePts.forEach((P,i)=>{ kids.push(h('circle',{key:'bh'+i,cx:P[0],cy:P[1],r:15,fill:'transparent',onPointerDown:isMobile?undefined:(e)=>this._startDragBend(i,e),style:{pointerEvents:isMobile?'none':'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:'bd'+i,cx:P[0],cy:P[1],r:4.5,fill:'#39342b',fillOpacity:.22,stroke:'#39342b',strokeOpacity:.45,strokeWidth:1,style:{pointerEvents:'none',display:isMobile?'none':'block'}})); });
     // feedback-loop chords
     { const cen=[480,700];
-      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=this.state.bendChord||{}; const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); kids.push(h('circle',{key:key+'-h',cx:P[0],cy:P[1],r:14,fill:'transparent',onPointerDown:(e)=>this._startDragBendChord(key,e),style:{pointerEvents:'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:key+'-d',cx:P[0],cy:P[1],r:4,fill:'#39342b',fillOpacity:.2,stroke:'#39342b',strokeOpacity:.4,strokeWidth:1,style:{pointerEvents:'none'}})); };
+      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=this.state.bendChord||{}; const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); kids.push(h('circle',{key:key+'-h',cx:P[0],cy:P[1],r:14,fill:'transparent',onPointerDown:isMobile?undefined:(e)=>this._startDragBendChord(key,e),style:{pointerEvents:isMobile?'none':'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:key+'-d',cx:P[0],cy:P[1],r:4,fill:'#39342b',fillOpacity:.2,stroke:'#39342b',strokeOpacity:.4,strokeWidth:1,style:{pointerEvents:'none',display:isMobile?'none':'block'}})); };
       arc(0,1,95,'ioc-march-rev','fb-ps',.62);
       arc(1,2,95,'ioc-march-rev','fb-sd',.62);
       arc(4,2,64,'ioc-march','fb-id',.3);
@@ -897,7 +902,7 @@ class Component extends DCLogic {
     const waypoints = h('div', { key:'wps', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
       WP.map((p, i) => h('div', { key:'wp'+i, style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', animation:'iocBuoy '+(6+(i%4))+'s ease-in-out infinite', animationDelay:(-i*1.3)+'s', pointerEvents:'none' } },
         h('div', { style:{ position:'absolute', left:'0px', top:'-38px', transform:'translateX(-50%)', whiteSpace:'nowrap', fontSize:'12px', fontWeight:700, letterSpacing:'.02em', color:'#F4EFE6', background:'rgba(57,52,43,0.92)', padding:'3px 10px', borderRadius:'9px', pointerEvents:'none' } }, p.label),
-        h('div', { title:'', onPointerDown:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to right, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
+        h('div', { title:'', onPointerDown:isMobile?undefined:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to right, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:isMobile?'manipulation':'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
       ))
     );
 
@@ -905,8 +910,8 @@ class Component extends DCLogic {
 
     // draggable island labels + drag surfaces (whole island moves)
     const islands = h('div', { key:'isls', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
-      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onPointerDown:(e)=>this._startDragIsland(i,e), onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
-          style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', width:(p.r*2)+'px', height:(p.r*2)+'px', borderRadius:'50%', cursor:'pointer', pointerEvents:'auto', touchAction:'none' } },
+      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onPointerDown:isMobile?undefined:(e)=>this._startDragIsland(i,e), onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
+          style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', width:(p.r*2)+'px', height:(p.r*2)+'px', borderRadius:'50%', cursor:'pointer', pointerEvents:'auto', touchAction:isMobile?'manipulation':'none' } },
         h('div', { style:{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', width:p.w+'px', textAlign:'center', fontSize:'12px', fontWeight:600, lineHeight:1.16, color:'#fff', textShadow:'0 1px 3px rgba(35,28,18,.6)', pointerEvents:'none', userSelect:'none' } }, p.label)
       ))
     );

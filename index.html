@@ -55,7 +55,7 @@
     .ioc-zoom{display:flex}
     .ioc-hint-desktop{display:none}
     .ioc-hint-mobile{display:inline}
-    .ioc-root{padding:0 14px 48px}
+    .ioc-root{padding:0 14px 0}
     .ioc-title{font-size:30px !important}
     .ioc-lede{font-size:15px !important}
     .ioc-kicker{font-size:11px !important;letter-spacing:.18em !important}
@@ -652,15 +652,16 @@ class Component extends DCLogic {
       const frame = document.querySelector('.ioc-mapframe');
       const stage = document.querySelector('.ioc-stage');
       if (!frame || !stage) return;
-      frame.style.height = Math.round(Math.min(window.innerHeight * 0.72, 620)) + 'px';
       frame.style.overflow = 'hidden';
       frame.style.touchAction = 'none';
       const base = frame.clientWidth / 1040;
       this._mBase = base; this._mMin = base; this._mMax = base * 3.4;
-      if (this._mScale == null) this._mScale = Math.min(this._mMax, base * 1.75);
+      // start zoomed out at full width; frame height flexes to the map's full height
+      if (this._mScale == null) this._mScale = base;
+      frame.style.height = Math.round(1320 * base) + 'px';
       const cw = 1040 * this._mScale, ch = 1320 * this._mScale;
       this._mTx = (frame.clientWidth - cw) / 2;
-      this._mTy = Math.min(0, (frame.clientHeight - ch) / 2 + 30);
+      this._mTy = ch <= frame.clientHeight ? (frame.clientHeight - ch) / 2 : 0;
       this._applyM();
       if (!frame._mBound) { frame._mBound = true; this._bindMobileGestures(frame); }
     };

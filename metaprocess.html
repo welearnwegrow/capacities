@@ -18,8 +18,17 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:wght@400;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta name="omelette-owns-print" content="1">
 <style>
   *{box-sizing:border-box}html,body{margin:0;padding:0}
+  #mp-print,#mp-print-portal{display:none}
+  @media print{
+    @page{size:A4 landscape;margin:0}
+    body.mp-printing>*{display:none!important}
+    body.mp-printing>#mp-print-portal{display:block!important}
+    #mp-print-portal *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+    #mp-print-portal .mp-print-page:last-child{break-after:auto}
+  }
   @keyframes iocBuoy{0%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 3px),calc(-50% - 5px))}100%{transform:translate(-50%,-50%)}}
   @keyframes iocMarch{to{stroke-dashoffset:-11}}
   @keyframes iocMarchRev{to{stroke-dashoffset:11}}
@@ -35,10 +44,10 @@
 
   <!-- HEADER -->
   <div style="max-width:1180px;margin:0 auto;padding:clamp(30px,6vw,54px) clamp(18px,5vw,26px) 6px">
-    <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(34px,7vw,54px);line-height:1.03;letter-spacing:-.01em;margin:0 0 16px;color:#46512a">Meta-process</h1>
-    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.65;color:#41514a;margin:0;max-width:74ch">Systems change is rarely a linear trajectory. It is an emergent, iterative dance between deep reflection and decisive action. The following stages serve as a navigation tool, not a checklist — practitioners often find themselves moving fluidly between these phases as the system responds to their interventions and new insights reshape the problem field. <span style="display: inline;">Drag the waypoints, route, and feedback loops to make the map your own, then</span> <span style="display: none;">Pinch or use the + / − buttons to zoom, swipe to pan, and</span> tap a stage to open its starter reflection canvas.</p>
+    <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(34px,7vw,54px);line-height:1.03;letter-spacing:-.01em;margin:0 0 16px;color:#46512a">Route</h1>
+    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.65;color:#41514a;margin:0;max-width:74ch">The Route is our meta-process for intervening in complex systems — five phases (Probe, Sense, Design, Adapt, Integrate) rather than a linear trajectory. It is an emergent, iterative dance between deep reflection and decisive action. These phases serve as a navigation tool, not a checklist — practitioners often find themselves moving fluidly between these phases as the system responds to their interventions and new insights reshape the problem field. <span style="display: inline;">Drag the waypoints, route, and feedback loops to make the map your own, then</span> <span style="display: none;">Pinch or use the + / − buttons to zoom, swipe to pan, and</span> tap a stage to open its starter reflection canvas.</p>
     <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px">
-      <button onClick="{{ downloadAll }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.01em;color:#fff;background:#46716f;border:none;border-radius:22px;padding:11px 22px;cursor:pointer;box-shadow:0 6px 16px rgba(70,113,111,.28)">↓ Download the full workbook (PDF)</button>
+      <button onClick="{{ downloadAllA4 }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.01em;color:#fff;background:#46716f;border:none;border-radius:22px;padding:11px 22px;cursor:pointer;box-shadow:0 6px 16px rgba(70,113,111,.28)">↓ Download the full workbook (PDF)</button>
       <span style="font-family:'PT Sans',sans-serif;font-size:13px;color:#7a8270">or open a single stage below</span>
     </div>
   </div>
@@ -70,26 +79,27 @@
 
   <!-- OVERLAY -->
   <sc-if value="{{ overlayOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:auto;background:rgba(28,38,34,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:mpFade .2s ease;padding:18px">
-      <div style="width:1180px;max-width:96vw;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px;flex:none;flex-wrap:wrap">
+    <div style="position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:auto;background:rgba(28,38,34,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);animation:mpFade .2s ease;padding:10px">
+      <div style="width:1180px;max-width:96vw;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:8px;flex:none;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:12px">
-          <button onClick="{{ prevStage }}" style="font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#eef1e6;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:8px 14px;cursor:pointer">← Prev</button>
-          <button onClick="{{ nextStage }}" style="font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#eef1e6;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:8px 14px;cursor:pointer">Next →</button>
+          <button onClick="{{ prevStage }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#eef1e6;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:6px 11px;cursor:pointer">← Prev</button>
+          <button onClick="{{ nextStage }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#eef1e6;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:6px 11px;cursor:pointer">Next →</button>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
-          <button onClick="{{ downloadOne }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#22302c;background:#f3eddb;border:none;border-radius:20px;padding:10px 20px;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.18)">↓ Download this canvas (PDF)</button>
-          <button onClick="{{ closeStage }}" aria-label="Close" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer">×</button>
+          <button onClick="{{ resetAnswers }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#eef1e6;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:6px 11px;cursor:pointer">↺ Clear</button>
+          <button onClick="{{ downloadOneA4 }}" style="font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;color:#22302c;background:#f3eddb;border:none;border-radius:14px;padding:7px 15px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.16)">↓ Download</button>
+          <button onClick="{{ closeStage }}" aria-label="Close" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:50%;cursor:pointer">×</button>
         </div>
       </div>
       <div style="{{ canvasScaleStyle }}">
         <div id="mp-canvas" style="{{ canvasStyle }}">
           <div style="{{ ac.headerStyle }}">
-            <div style="flex:1;min-width:0;padding-right:24px">
-              <div style="font-family:'PT Sans',sans-serif;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:9px">{{ ac.phrase }}</div>
-              <div style="font-family:'Newsreader',serif;font-weight:500;font-size:42px;line-height:1.02;color:#fff;letter-spacing:.01em">{{ ac.name }}</div>
-              <div style="font-family:'PT Sans',sans-serif;font-size:14px;color:rgba(255,255,255,.88);margin-top:10px;max-width:70ch;line-height:1.5">{{ ac.focus }}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:10px">
+              <div style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.78)">{{ ac.phrase }}</div>
+              <div style="flex:none;font-family:'PT Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:5px 14px;white-space:nowrap">Systems Change Reflection Canvas</div>
             </div>
-            <div style="flex:none;font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62);text-align:right;line-height:1.5">Meta-process<br>Reflection Canvas</div>
+            <div style="font-family:'Newsreader',serif;font-weight:500;font-size:40px;line-height:1;color:#fff;letter-spacing:.01em">{{ ac.name }}</div>
+            <div style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:rgba(255,255,255,.92);margin-top:10px;max-width:150ch;line-height:1.5">{{ ac.focus }}</div>
           </div>
           <svg viewBox="{{ ac.viewBox }}" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
             <path d="{{ ac.connector }}" fill="none" stroke="{{ ac.color }}" stroke-opacity="0.38" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round"></path>
@@ -97,14 +107,16 @@
           <sc-for list="{{ ac.cards }}" as="cd" hint-placeholder-count="6">
             <div style="{{ cd.style }}">
               <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16.5px;line-height:1.3;color:#2a2f26">{{ cd.q }}</div>
-              <div style="font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.46;color:#7b766a;font-style:italic;margin-top:7px">{{ cd.hint }}</div>
-              <div style="{{ cd.linesStyle }}"></div>
+              <div style="font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.46;color:#7b766a;font-style:italic;margin-top:5px">{{ cd.hint }}</div>
+              <textarea value="{{ cd.answer }}" onChange="{{ cd.onChange }}" maxLength="{{ cd.maxLen }}" placeholder="Type your thoughts here…" style="{{ cd.linesStyle }}"></textarea>
+              <div style="{{ cd.counterStyle }}">{{ cd.counter }}</div>
             </div>
           </sc-for>
           <div style="{{ ac.readyStyle }}">
             <span style="{{ ac.readyBadgeStyle }}">Move on when</span>
             <span style="{{ ac.readyTextStyle }}">{{ ac.readiness }}</span>
           </div>
+          <div style="{{ ac.footStyle }}">Systems Change Learning Studio</div>
         </div>
       </div>
 
@@ -120,7 +132,8 @@
               <div style="{{ cd.mStyle }}">
                 <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;line-height:1.32;color:#2a2f26">{{ cd.q }}</div>
                 <div style="font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.46;color:#7b766a;font-style:italic;margin-top:6px">{{ cd.hint }}</div>
-                <div style="{{ cd.mLinesStyle }}"></div>
+                <textarea value="{{ cd.answer }}" onChange="{{ cd.onChange }}" maxLength="{{ cd.maxLen }}" placeholder="Type your thoughts here…" style="{{ cd.mLinesStyle }}"></textarea>
+                <div style="{{ cd.counterStyle }}">{{ cd.counter }}</div>
               </div>
             </sc-for>
             <div style="{{ ac.mReadyStyle }}">
@@ -133,6 +146,37 @@
     </div>
   </sc-if>
 
+  <div id="mp-print">
+    <sc-for list="{{ printPages }}" as="pg" hint-placeholder-count="5">
+      <div class="mp-print-page" style="{{ pg.pageStyle }}">
+        <div style="{{ pg.headerStyle }}">
+          <div style="{{ pg.eyebrowRow }}">
+            <span style="{{ pg.phraseStyle }}">{{ pg.phrase }}</span>
+            <span style="{{ pg.pillStyle }}">Systems Change Reflection Canvas</span>
+          </div>
+          <div style="{{ pg.nameStyle }}">{{ pg.name }}</div>
+          <div style="{{ pg.focusStyle }}">{{ pg.focus }}</div>
+        </div>
+        <div style="{{ pg.gridStyle }}">
+          <sc-for list="{{ pg.cards }}" as="pc" hint-placeholder-count="6">
+            <div style="{{ pc.cardStyle }}">
+              <div style="{{ pc.qStyle }}">{{ pc.q }}</div>
+              <div style="{{ pc.hintStyle }}">{{ pc.hint }}</div>
+              <div style="{{ pc.ansStyle }}">{{ pc.answer }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="{{ pg.footStyle }}">
+          <div style="{{ pg.footLeft }}">
+            <span style="{{ pg.badgeStyle }}">Move on when</span>
+            <span style="{{ pg.readyTextStyle }}">{{ pg.readiness }}</span>
+          </div>
+          <div style="{{ pg.ccStyle }}">Systems Change Learning Studio</div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
   <sc-if value="{{ generating }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;z-index:120;left:50%;bottom:34px;transform:translateX(-50%);font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;color:#fff;background:#33413a;border-radius:24px;padding:13px 26px;box-shadow:0 10px 30px rgba(0,0,0,.3)">Generating PDF… {{ genLabel }}</div>
   </sc-if>
@@ -140,11 +184,12 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { active:null, generating:false, genLabel:'', scale:1, wp:null, bend:[], bendChord:{}, mwp:null, mbend:[], mbendChord:{}, mobile:false, mzoom:1.85 };
+  state = { active:null, generating:false, genLabel:'', scale:1, wp:null, bend:[], bendChord:{}, mwp:null, mbend:[], mbendChord:{}, mobile:false, mzoom:1.85, answers:{} };
 
   STAGE_W = 1040; STAGE_H = 660;
   MSTAGE_W = 600; MSTAGE_H = 980;
   INK = '#39342b';
+  CAP = 320;
 
   STAGES = [
     { key:'probe', name:'Probe', color:'#46716f',
@@ -189,13 +234,13 @@ class Component extends DCLogic {
     { key:'adapt', name:'Adapt', color:'#a8542d',
       phrase:'Adapt to context and solve emergent problems',
       sub:'Solve emergent problems',
-      focus:'Action is an ongoing live diagnostic test. When your intervention meets the real world, the system will actively show its true nature through defensive pushback or unexpected positive ripples. Survival here relies on staying highly agile — setting up short real-time feedback loops, positioning the action for organic community adoption, distributing the power to pivot fast, and keeping internal team trust solid when chaos hits.',
+      focus:'When your intervention meets the real world, the system will actively show its true nature through defensive pushback or unexpected positive ripples. Survival here relies on staying highly agile — setting up short real-time feedback loops, positioning the action for organic community adoption, distributing the power to pivot fast, and keeping internal team trust solid when chaos hits.',
       readiness:'This phase is ending when your experimental action probe has finished its cycle, leaving you with raw, real-world data on how the ecosystem reacts to your presence.',
       qs:[
         {q:'Is your first action designed as a probe?', h:'Treating your initial intervention as a live test to gather data rather than a final solution.'},
         {q:'How will you navigate the system\u2019s defensive pushback?', h:'Adapting to active institutional blockages, power plays, or hostile narratives that try to force your intervention out.'},
-        {q:'What real-time feedback loops will catch unexpected system reactions?', h:'Monitoring signals to catch design flaws, layout issues, or negative unintended consequences on the spot.'},
-        {q:'How will you spot and amplify unexpected positive ripples?', h:'Monitoring the field for micro-behaviors, new relationships, or unexpected allies you can quickly resource and scale.'},
+        {q:'What feedback loops will surface signals?', h:'Monitoring signals to catch wins, issues, or navigate unintended consequences.'},
+        {q:'What is the friction teaching you?', h:'Reading resistance and unexpected reactions as information about how the system really works.'},
         {q:'Who holds the power to pivot when a rapid change is needed?', h:'Distributing decision-making power so ground-level adaptation can happen fast without centralized bottlenecks.'},
         {q:'Can you maintain equanimity in chaos?', h:'Holding space for vulnerability, stress management, and trust within the team during moments of crisis.'}
       ] },
@@ -243,9 +288,13 @@ class Component extends DCLogic {
     try{ const s=localStorage.getItem('mp-wp-m'); if(s){ const a=JSON.parse(s); if(Array.isArray(a)&&a.length===5) mwp=a; } }catch(e){}
     try{ const s=localStorage.getItem('mp-bend-m'); if(s){ const a=JSON.parse(s); if(Array.isArray(a)) mbend=a; } }catch(e){}
     try{ const s=localStorage.getItem('mp-bendc-m'); if(s){ const o=JSON.parse(s); if(o&&typeof o==='object') mbendChord=o; } }catch(e){}
-    this.setState({ wp, bend, bendChord, mwp, mbend, mbendChord, mobile: window.innerWidth<=860 });
+    let answers={};
+    try{ const s=localStorage.getItem('mp-answers'); if(s){ const o=JSON.parse(s); if(o&&typeof o==='object') answers=o; } }catch(e){}
+    this.setState({ wp, bend, bendChord, mwp, mbend, mbendChord, answers, mobile: window.innerWidth<=860 });
     this._onResize = () => { this._checkMobile(); this._fitMap(); this._fitOverlay(); };
     window.addEventListener('resize', this._onResize);
+    this._afterPrint = () => { const h=document.getElementById('mp-print-portal'); if(h) h.remove(); document.body.classList.remove('mp-printing'); };
+    window.addEventListener('afterprint', this._afterPrint);
     this._fitMap(); setTimeout(()=>this._fitMap(),60); setTimeout(()=>this._fitMap(),300);
     this._ro = new ResizeObserver(()=>this._fitMap());
     const frame=document.querySelector('.mp-mapframe'); if(frame) this._ro.observe(frame);
@@ -274,11 +323,11 @@ class Component extends DCLogic {
   }
   zoomIn(){ this.setState(s=>({mzoom:Math.min(3.4, +(s.mzoom+0.4).toFixed(2))}), ()=>this._fitMap()); }
   zoomOut(){ this.setState(s=>({mzoom:Math.max(1.0, +(s.mzoom-0.4).toFixed(2))}), ()=>this._fitMap()); }
-  _canvasHeight(n){ const rows=Math.ceil(n/3); return 270 + rows*276 + 78; }
+  _canvasHeight(n){ return 1240; }
   _fitOverlay(){
     const i=this.state.active; if(i==null) return;
     const H=this._canvasHeight(this.STAGES[i].qs.length);
-    const s=Math.min((window.innerWidth-60)/1180, (window.innerHeight-150)/H, 1);
+    const s=Math.min((window.innerWidth-28)/1754, (window.innerHeight-92)/H, 1.7);
     this.setState({ scale:Math.max(0.2, s) });
   }
 
@@ -323,20 +372,68 @@ class Component extends DCLogic {
   prevStage(){ this.setState(s=>({active:(s.active+this.STAGES.length-1)%this.STAGES.length}), ()=>this._fitOverlay()); }
   nextStage(){ this.setState(s=>({active:(s.active+1)%this.STAGES.length}), ()=>this._fitOverlay()); }
 
+  _resetAnswers(){ const i=this.state.active; if(i==null) return; const st=this.STAGES[i]; const a=Object.assign({},this.state.answers); st.qs.forEach((_,qi)=>{ delete a[st.key+'::'+qi]; }); try{ localStorage.setItem('mp-answers', JSON.stringify(a)); }catch(e){} this.setState({answers:a}); }
+  _setAnswer(key,val){ this.setState(s=>{ const a=Object.assign({},s.answers,{[key]:val}); try{ localStorage.setItem('mp-answers', JSON.stringify(a)); }catch(e){} return {answers:a}; }); }
+
   // ---------- pdf ----------
   _delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
-  async _capture(){ const el=document.getElementById('mp-canvas'); if(!el||!window.html2canvas) return null; const c=await window.html2canvas(el,{scale:2,backgroundColor:'#f6f3e9',useCORS:true}); return { img:c.toDataURL('image/png'), w:el.offsetWidth, h:el.offsetHeight }; }
-  async downloadOne(){ if(this.state.active==null||!window.jspdf) return; const cap=await this._capture(); if(!cap) return; const {jsPDF}=window.jspdf; const pdf=new jsPDF({orientation:'landscape',unit:'px',format:[cap.w,cap.h]}); pdf.addImage(cap.img,'PNG',0,0,cap.w,cap.h); pdf.save('Meta-Process-'+this.STAGES[this.state.active].name+'.pdf'); if(window.track) window.track('download_canvas', {stage: this.STAGES[this.state.active].name}); }
-  async downloadAll(){ if(!window.jspdf) return; const prev=this.state.active; const {jsPDF}=window.jspdf; let pdf=null;
+  _pageDims(fmt){ return fmt==='a3' ? [420,297] : [297,210]; }
+  _fitImg(pdf,cap,pw,ph){ const ar=cap.w/cap.h, par=pw/ph; let w,h; if(ar>par){ w=pw; h=pw/ar; } else { h=ph; w=ph*ar; } pdf.addImage(cap.img,'PNG',(pw-w)/2,(ph-h)/2,w,h); }
+  async _capture(){ const el=document.getElementById('mp-canvas'); if(!el||!window.html2canvas) return null; if(document.fonts&&document.fonts.ready){ try{ await document.fonts.ready; }catch(e){} } const c=await window.html2canvas(el,{scale:3,backgroundColor:'#f6f3e9',useCORS:true,onclone:(doc)=>{ doc.querySelectorAll('#mp-canvas textarea').forEach(ta=>{ const div=doc.createElement('div'); div.textContent=ta.value; div.setAttribute('style', ta.getAttribute('style')||''); div.style.whiteSpace='pre-wrap'; div.style.overflow='hidden'; if(ta.parentNode) ta.parentNode.replaceChild(div,ta); }); }}); return { img:c.toDataURL('image/png'), w:el.offsetWidth, h:el.offsetHeight }; }
+  async downloadOne(fmt){ fmt=fmt||'a4'; if(this.state.active==null||!window.jspdf) return; const cap=await this._capture(); if(!cap) return; const {jsPDF}=window.jspdf; const [pw,ph]=this._pageDims(fmt); const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:fmt}); this._fitImg(pdf,cap,pw,ph); pdf.save('Meta-Process-'+this.STAGES[this.state.active].name+'-'+fmt.toUpperCase()+'.pdf'); if(window.track) window.track('download_canvas', {stage: this.STAGES[this.state.active].name, format:fmt}); }
+  async downloadAll(fmt){ fmt=fmt||'a4'; if(!window.jspdf) return; const prev=this.state.active; const {jsPDF}=window.jspdf; const [pw,ph]=this._pageDims(fmt); let pdf=null;
     for(let i=0;i<this.STAGES.length;i++){
       this.setState({active:i,generating:true,genLabel:(i+1)+' / '+this.STAGES.length}); this._fitOverlay();
       await this._delay(520); const cap=await this._capture(); if(!cap) continue;
-      if(!pdf){ pdf=new jsPDF({orientation:'landscape',unit:'px',format:[cap.w,cap.h]}); } else { pdf.addPage([cap.w,cap.h],'landscape'); }
-      pdf.addImage(cap.img,'PNG',0,0,cap.w,cap.h);
+      if(!pdf){ pdf=new jsPDF({orientation:'landscape',unit:'mm',format:fmt}); } else { pdf.addPage(fmt,'landscape'); }
+      this._fitImg(pdf,cap,pw,ph);
     }
-    if(pdf) pdf.save('Meta-Process-Workbook.pdf');
+    if(pdf) pdf.save('Meta-Process-Workbook-'+fmt.toUpperCase()+'.pdf');
     if(window.track) window.track('download_workbook', {label: 'Full meta-process workbook'});
     this.setState({active:prev,generating:false,genLabel:''});
+  }
+
+  // ---------- print path (vector A4 landscape) ----------
+  printAll(){ if(window.track) window.track('download_workbook',{label:'Full meta-process workbook (print)'}); this._doPrint(null); }
+  printOne(){ if(this.state.active==null) return; if(window.track) window.track('download_canvas',{stage:this.STAGES[this.state.active].name}); this._doPrint(this.state.active); }
+  _doPrint(onlyIdx){
+    if(document.getElementById('mp-print-portal')) document.getElementById('mp-print-portal').remove();
+    const src=document.getElementById('mp-print'); if(!src) return;
+    const holder=document.createElement('div'); holder.id='mp-print-portal';
+    holder.innerHTML=src.innerHTML;
+    if(onlyIdx!=null){ holder.querySelectorAll('.mp-print-page').forEach((p,i)=>{ if(i!==onlyIdx) p.remove(); }); }
+    document.body.appendChild(holder);
+    document.body.classList.add('mp-printing');
+    const done=()=>{ const h=document.getElementById('mp-print-portal'); if(h) h.remove(); document.body.classList.remove('mp-printing'); window.removeEventListener('afterprint',done); };
+    window.addEventListener('afterprint',done);
+    setTimeout(()=>{ window.print(); setTimeout(done,1500); }, 90);
+  }
+  _buildPrintPages(){
+    return this.STAGES.map((st,idx)=>{
+      const cards=st.qs.map((qq,qi)=>{
+        const akey=st.key+'::'+qi;
+        const answer=(this.state.answers&&this.state.answers[akey])||'';
+        return { q:qq.q, hint:qq.h, answer,
+          cardStyle:{ background:'#fffefb', border:'0.25mm solid '+this._hex2rgba(st.color,.32), borderTop:'1mm solid '+st.color, borderRadius:'2.5mm', padding:'2.6mm 3mm 2.4mm', display:'flex', flexDirection:'column', overflow:'hidden' },
+          qStyle:{ fontFamily:"'PT Serif',serif", fontWeight:700, fontSize:'10.5pt', lineHeight:1.16, color:'#2a2f26', margin:0 },
+          hintStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'7.5pt', fontStyle:'italic', lineHeight:1.24, color:'#8a8578', margin:'1mm 0 1.8mm' },
+          ansStyle:{ flex:1, fontFamily:"'PT Sans',sans-serif", fontSize:'10pt', lineHeight:1.4, color:'#2a2f26', whiteSpace:'pre-wrap', wordBreak:'break-word', overflow:'hidden' } };
+      });
+      return { cards, name:st.name, phrase:st.phrase, focus:st.focus, readiness:st.readiness,
+        pageStyle:{ width:'297mm', height:'210mm', padding:'7mm', background:'#f6f3e9', display:'flex', flexDirection:'column', boxSizing:'border-box', overflow:'hidden', breakAfter:'page' },
+        headerStyle:{ flex:'none', padding:'5mm 6mm', borderRadius:'3mm', color:'#fff', background:'linear-gradient(120deg, '+st.color+' 0%, '+this._darken(st.color)+' 100%)' },
+        eyebrowRow:{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:'5mm', marginBottom:'2mm' },
+        phraseStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'8pt', fontWeight:700, letterSpacing:'.12em', textTransform:'uppercase', color:'rgba(255,255,255,.82)' },
+        pillStyle:{ flex:'none', fontFamily:"'PT Sans',sans-serif", fontSize:'7pt', fontWeight:700, letterSpacing:'.1em', textTransform:'uppercase', color:'rgba(255,255,255,.72)', border:'0.25mm solid rgba(255,255,255,.5)', borderRadius:'6mm', padding:'1mm 3mm', whiteSpace:'nowrap' },
+        nameStyle:{ fontFamily:"'Newsreader',serif", fontWeight:500, fontSize:'21pt', lineHeight:1, color:'#fff' },
+        focusStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'9pt', lineHeight:1.4, color:'rgba(255,255,255,.93)', marginTop:'2mm' },
+        gridStyle:{ flex:'1', display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gridTemplateRows:'1fr 1fr', gap:'4mm', margin:'4mm 0' },
+        footStyle:{ flex:'none', display:'flex', alignItems:'center', justifyContent:'space-between', gap:'6mm' },
+        footLeft:{ display:'flex', alignItems:'center', gap:'3mm', flex:1, background:this._hex2rgba(st.color,.1), border:'0.25mm solid '+this._hex2rgba(st.color,.3), borderRadius:'2.5mm', padding:'2.5mm 3.5mm' },
+        badgeStyle:{ flex:'none', fontFamily:"'PT Sans',sans-serif", fontSize:'7pt', fontWeight:700, letterSpacing:'.1em', textTransform:'uppercase', color:'#fff', background:st.color, borderRadius:'5mm', padding:'1mm 3mm' },
+        readyTextStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'8.5pt', lineHeight:1.3, color:this._darken(st.color) },
+        ccStyle:{ flex:'none', fontFamily:"'PT Sans',sans-serif", fontSize:'7.5pt', letterSpacing:'.04em', color:this._hex2rgba(st.color,.75), whiteSpace:'nowrap' } };
+    });
   }
 
   // ---------- diagram ----------
@@ -381,33 +478,40 @@ class Component extends DCLogic {
 
   _buildCanvas(){
     const i=this.state.active;
-    if(i==null) return { cards:[], headerStyle:{}, readyStyle:{}, readyBadgeStyle:{}, readyTextStyle:{}, mHeaderStyle:{}, mReadyStyle:{}, connector:'', viewBox:'0 0 1180 998', color:'#46716f', name:'', phrase:'', focus:'', readiness:'' };
+    if(i==null) return { cards:[], headerStyle:{}, readyStyle:{}, readyBadgeStyle:{}, readyTextStyle:{}, mHeaderStyle:{}, mReadyStyle:{}, footStyle:{}, connector:'', viewBox:'0 0 1754 1240', color:'#46716f', name:'', phrase:'', focus:'', readiness:'' };
     const st=this.STAGES[i];
     const n=st.qs.length, H=this._canvasHeight(n);
-    const cardW=364, gapX=20, marginX=24, cardH=250, gapY=26, contentTop=270;
+    const A4W=1754, A4H=1240;
+    const marginX=44, gapX=22, gapY=20, cols=3;
+    const headerH=248, contentTop=headerH+28, bottomReserve=124;
+    const cardW=Math.round((A4W-2*marginX-(cols-1)*gapX)/cols);
+    const rowsN=Math.ceil(n/cols);
+    const cardH=Math.round((A4H-contentTop-bottomReserve-(rowsN-1)*gapY)/rowsN);
     const centers=[];
     const cards=st.qs.map((qq,qi)=>{
-      const row=Math.floor(qi/3); const col=qi%3;
+      const row=Math.floor(qi/cols); const col=qi%cols;
       const x=marginX+col*(cardW+gapX); const y=contentTop+row*(cardH+gapY);
       centers.push([x+cardW/2,y+cardH/2]);
+      const akey=st.key+'::'+qi;
       return {
-        q:qq.q, hint:qq.h,
-        style:{ position:'absolute', left:x+'px', top:y+'px', width:cardW+'px', height:cardH+'px', background:'#fffefb', border:'1px solid '+this._hex2rgba(st.color,.28), borderTop:'4px solid '+st.color, borderRadius:'14px', padding:'18px 20px 16px', boxShadow:'0 8px 22px rgba(60,55,35,.10)', display:'flex', flexDirection:'column' },
-        linesStyle:{ marginTop:'auto', height:'80px', borderRadius:'8px', backgroundImage:'repeating-linear-gradient(to bottom, transparent 0, transparent 23px, '+this._hex2rgba(st.color,.16)+' 23px, '+this._hex2rgba(st.color,.16)+' 24px)', backgroundColor:this._hex2rgba(st.color,.04) },
+        q:qq.q, hint:qq.h, akey, answer:(this.state.answers&&this.state.answers[akey])||'', onChange:(e)=>this._setAnswer(akey,e.target.value), maxLen:this.CAP, counter:(this.CAP-((this.state.answers&&this.state.answers[akey])||'').length)+' characters left', counterStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'11px', fontWeight:700, textAlign:'right', marginTop:'5px', letterSpacing:'.02em', color:(this.CAP-((this.state.answers&&this.state.answers[akey])||'').length)<=25?'#b0662a':'#a49d8c' },
+        style:{ position:'absolute', left:x+'px', top:y+'px', width:cardW+'px', height:cardH+'px', background:'#fffefb', border:'1px solid '+this._hex2rgba(st.color,.28), borderTop:'4px solid '+st.color, borderRadius:'14px', padding:'15px 18px 13px', boxShadow:'0 8px 22px rgba(60,55,35,.10)', display:'flex', flexDirection:'column' },
+        linesStyle:{ flex:'1', minHeight:'180px', marginTop:'10px', borderRadius:'8px', backgroundImage:'repeating-linear-gradient(to bottom, transparent 0, transparent 25px, '+this._hex2rgba(st.color,.16)+' 25px, '+this._hex2rgba(st.color,.16)+' 26px)', backgroundColor:this._hex2rgba(st.color,.04), border:'none', outline:'none', resize:'none', width:'100%', display:'block', boxSizing:'border-box', fontFamily:"'PT Sans',sans-serif", fontSize:'15px', lineHeight:'26px', color:'#2a2f26', padding:'0 8px' },
         mStyle:{ position:'relative', width:'100%', background:'#fffefb', border:'1px solid '+this._hex2rgba(st.color,.28), borderTop:'4px solid '+st.color, borderRadius:'13px', padding:'15px 16px 14px', marginBottom:'13px', boxShadow:'0 4px 14px rgba(60,55,35,.07)' },
-        mLinesStyle:{ marginTop:'12px', height:'66px', borderRadius:'7px', backgroundImage:'repeating-linear-gradient(to bottom, transparent 0, transparent 21px, '+this._hex2rgba(st.color,.16)+' 21px, '+this._hex2rgba(st.color,.16)+' 22px)', backgroundColor:this._hex2rgba(st.color,.04) }
+        mLinesStyle:{ marginTop:'10px', height:'220px', borderRadius:'7px', backgroundImage:'repeating-linear-gradient(to bottom, transparent 0, transparent 21px, '+this._hex2rgba(st.color,.16)+' 21px, '+this._hex2rgba(st.color,.16)+' 22px)', backgroundColor:this._hex2rgba(st.color,.04), border:'none', outline:'none', resize:'none', width:'100%', display:'block', boxSizing:'border-box', fontFamily:"'PT Sans',sans-serif", fontSize:'13px', lineHeight:'22px', color:'#2a2f26', padding:'0 8px' }
       };
     });
     // connector following snake order
     let connector='';
     centers.forEach((c,idx)=>{ connector += (idx===0?'M ':'L ')+c[0].toFixed(1)+' '+c[1].toFixed(1)+' '; });
-    const rows=Math.ceil(n/3); const readyTop=270+rows*276+2;
+    const rows=Math.ceil(n/cols); const readyTop=contentTop+rows*(cardH+gapY)+6;
     return {
-      cards, connector, viewBox:'0 0 1180 '+H, color:st.color, name:st.name, phrase:st.phrase, focus:st.focus, readiness:st.readiness, H,
-      headerStyle:{ position:'absolute', left:0, right:0, top:0, height:'250px', padding:'30px 38px', display:'flex', alignItems:'center', justifyContent:'space-between', background:'linear-gradient(120deg, '+st.color+' 0%, '+this._darken(st.color)+' 100%)' },
-      readyStyle:{ position:'absolute', left:'24px', right:'24px', top:readyTop+'px', display:'flex', alignItems:'center', gap:'12px', background:this._hex2rgba(st.color,.1), border:'1px solid '+this._hex2rgba(st.color,.3), borderRadius:'12px', padding:'14px 20px' },
+      cards, connector, viewBox:'0 0 '+A4W+' '+H, color:st.color, name:st.name, phrase:st.phrase, focus:st.focus, readiness:st.readiness, H,
+      headerStyle:{ position:'absolute', left:0, right:0, top:0, height:headerH+'px', padding:'26px 44px', display:'flex', flexDirection:'column', justifyContent:'center', background:'linear-gradient(120deg, '+st.color+' 0%, '+this._darken(st.color)+' 100%)' },
+      readyStyle:{ position:'absolute', left:'44px', right:'44px', bottom:'56px', display:'flex', alignItems:'center', gap:'12px', background:this._hex2rgba(st.color,.1), border:'1px solid '+this._hex2rgba(st.color,.3), borderRadius:'12px', padding:'14px 20px' },
       readyBadgeStyle:{ flex:'none', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.12em', textTransform:'uppercase', color:'#fff', background:st.color, borderRadius:'20px', padding:'5px 12px' },
       readyTextStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'13px', lineHeight:1.45, color:this._darken(st.color) },
+      footStyle:{ position:'absolute', left:'44px', right:'44px', bottom:'22px', textAlign:'right', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', letterSpacing:'.05em', color:this._hex2rgba(st.color,.7) },
       mHeaderStyle:{ padding:'22px 20px', background:'linear-gradient(120deg, '+st.color+' 0%, '+this._darken(st.color)+' 100%)' },
       mReadyStyle:{ display:'flex', flexDirection:'column', alignItems:'flex-start', gap:'8px', background:this._hex2rgba(st.color,.1), border:'1px solid '+this._hex2rgba(st.color,.3), borderRadius:'12px', padding:'14px 16px', marginTop:'2px' }
     };
@@ -417,9 +521,11 @@ class Component extends DCLogic {
     const rootStyle={ minHeight:'100vh', background:'radial-gradient(680px 460px at 14% 6%, rgba(150,170,95,.18), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(120,165,160,.12), transparent 72%), linear-gradient(180deg,#e6edcf 0%,#eef1e2 620px)', fontFamily:"'PT Sans',system-ui,sans-serif", color:'#39342b' };
     const map=this._buildMap();
     const ac=this._buildCanvas();
+    const printPages=this._buildPrintPages();
     const mob=this.state.mobile;
     return {
       rootStyle,
+      printPages,
       mapSvg:map.mapSvg, mapWaypoints:map.mapWaypoints,
       mobile:mob,
       overlayOpen:this.state.active!=null,
@@ -431,9 +537,10 @@ class Component extends DCLogic {
       canvasScaleStyle: mob
         ? { position:'absolute', left:'-99999px', top:'0', transform:'scale(1)', flex:'none' }
         : { transform:'scale('+this.state.scale+')', transformOrigin:'center top', animation:'mpPop .22s ease', flex:'none' },
-      canvasStyle:{ position:'relative', width:'1180px', height:ac.H+'px', background:'#f6f3e9', borderRadius:'10px', overflow:'hidden', boxShadow:'0 30px 70px rgba(0,0,0,.4)' },
-      downloadAll:()=>this.downloadAll(),
-      downloadOne:()=>this.downloadOne(),
+      canvasStyle:{ position:'relative', width:'1754px', height:ac.H+'px', background:'#f6f3e9', borderRadius:'10px', overflow:'hidden', boxShadow:'0 30px 70px rgba(0,0,0,.4)' },
+      downloadAllA4:()=>this.printAll(),
+      downloadOneA4:()=>this.printOne(),
+      resetAnswers:()=>this._resetAnswers(),
       closeStage:()=>this.closeStage(),
       prevStage:()=>this.prevStage(),
       nextStage:()=>this.nextStage(),

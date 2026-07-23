@@ -1290,7 +1290,7 @@ window.__RESEARCH = {
  ],
  "groupMeta": {
   "teal": {
-   "name": "Inner Inquiry",
+   "name": "Personal Grounding",
    "sub": "Self-awareness & worldview"
   },
   "green": {

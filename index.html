@@ -225,7 +225,7 @@
       </sc-for>
     </div>
 
-    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#46514a">Meta-process</h2>
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#46514a">Route</h2>
     <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our actions</p>
     <div style="display:flex;flex-direction:column;gap:10px">
       <sc-for list="{{ browseMeta }}" as="m" hint-placeholder-count="5">
@@ -755,6 +755,7 @@ class Component extends DCLogic {
     return T.orient;
   }
   _showTip(key, cx, cy, cardW) {
+    if (this._isMobile) return;
     const d = this._tipData()[key]; if (!d) return;
     const stage = document.querySelector('.ioc-stage');
     const tip = stage && stage.querySelector('.ioc-tip');

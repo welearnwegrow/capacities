@@ -87,14 +87,13 @@
 
   <!-- ===== MAP ===== -->
   <div style="width:1040px;max-width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em"><span class="ioc-hint-desktop">Tap to explore · drag to rearrange · pinch or +/− to zoom</span><span class="ioc-hint-mobile">Tap to explore · pinch to zoom</span></span>
+    <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em"><span class="ioc-hint-desktop">Tap to explore · pinch or +/− to zoom</span><span class="ioc-hint-mobile">Tap to explore · pinch to zoom</span></span>
     <div style="display:flex;align-items:center;gap:8px">
       <div class="ioc-zoom" style="align-items:center;gap:8px">
         <button onClick="{{ zoomOut }}" aria-label="Zoom out" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">−</button>
         <button onClick="{{ zoomIn }}" aria-label="Zoom in" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">+</button>
       </div>
       <button onClick="{{ downloadMap }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#46716f;background:rgba(255,255,255,.7);border:1px solid rgba(70,90,85,.25);border-radius:18px;padding:6px 14px;cursor:pointer;white-space:nowrap">↓ Download map (PDF)</button>
-      <button onClick="{{ resetMap }}" style="font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;color:#6b7d6a;background:rgba(255,255,255,.6);border:1px solid rgba(70,90,85,.25);border-radius:18px;padding:6px 14px;cursor:pointer;white-space:nowrap">↺ Reset map</button>
     </div>
   </div>
 
@@ -144,10 +143,10 @@
     
     
 
-    <!-- ===== ISLAND LABELS (draggable — each island + its text moves together) ===== -->
+    <!-- ===== ISLAND LABELS ===== -->
     {{ islands }}
 
-    <!-- ===== ROUTE WAYPOINTS (draggable) ===== -->
+    <!-- ===== ROUTE WAYPOINTS ===== -->
     {{ waypoints }}
 
     <!-- ===== FOUR ORIENTATIONS — bearings around the compass rose ===== -->
@@ -371,127 +370,27 @@ class Component extends DCLogic {
     ]
   };
 
-  _persist(arr) { try { localStorage.setItem('ioc-wp-v1', JSON.stringify(arr || this.state.wp)); } catch(e){} }
-  _persistIsl(arr) { try { localStorage.setItem('ioc-isl-v2', JSON.stringify(arr || this.state.isl)); } catch(e){} }
-  _startDrag(i, e) {
-    e.preventDefault();
-    const stage = document.querySelector('.ioc-stage');
-    const startX = e.clientX, startY = e.clientY;
-    this._wpDragged = false;
-    const move = (ev) => {
-      if (!this._wpDragged && Math.abs(ev.clientX - startX) < 4 && Math.abs(ev.clientY - startY) < 4) return;
-      this._wpDragged = true;
-      const r = stage.getBoundingClientRect();
-      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
-      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
-      const wp = this.state.wp.slice();
-      wp[i] = Object.assign({}, wp[i], { x: Math.round(x), y: Math.round(y) });
-      this.setState({ wp });
-    };
-    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (this._wpDragged) this._persist(this.state.wp); };
-    window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
-  }
-  _persistBend(){ try { localStorage.setItem('ioc-bend-v1', JSON.stringify(this.state.bend || [])); } catch(e){} }
-  _persistBendChord(){ try { localStorage.setItem('ioc-bendc-v1', JSON.stringify(this.state.bendChord || {})); } catch(e){} }
   _initBanDrag(){
     const stage = document.querySelector('.ioc-stage');
     if(!stage) return;
     const keys = ['ban-within','ban-collective','ban-action'];
-    const BANDEF = {'ban-within':{dx:138,dy:9},'ban-action':{dx:23,dy:-75}};
-    let saved = {}; try { saved = JSON.parse(localStorage.getItem('ioc-ban-v1')||'{}'); } catch(e){}
+    const BANDEF = {'ban-within':{dx:170,dy:9},'ban-action':{dx:23,dy:-75}};
     keys.forEach(k=>{
       const el = stage.querySelector('[data-edit="'+k+'"]');
-      if(!el || el._banBound) return;
-      el._banBound = true;
-      let off = saved[k] || BANDEF[k] || {dx:0,dy:0};
-      const apply = (dx,dy)=>{ el.style.transform = 'translate(calc(-50% + '+dx+'px), calc(-50% + '+dy+'px))'; };
-      if(off.dx||off.dy) apply(off.dx,off.dy);
-      if(this._isMobile){ el.style.pointerEvents='auto'; return; }
-      el.style.cursor='grab'; el.style.pointerEvents='auto'; el.style.touchAction='none';
-      el.addEventListener('pointerdown',(e)=>{
-        e.preventDefault(); e.stopPropagation();
-        const r = stage.getBoundingClientRect();
-        const sc = r.width/1040 || 1;
-        const sx = e.clientX, sy = e.clientY, start = {dx:off.dx, dy:off.dy};
-        const move = (ev)=>{ off = {dx: start.dx+(ev.clientX-sx)/sc, dy: start.dy+(ev.clientY-sy)/sc}; apply(off.dx, off.dy); };
-        const up = ()=>{ document.removeEventListener('pointermove',move); document.removeEventListener('pointerup',up); let s={}; try { s=JSON.parse(localStorage.getItem('ioc-ban-v1')||'{}'); } catch(e2){} s[k]=off; try { localStorage.setItem('ioc-ban-v1', JSON.stringify(s)); } catch(e2){} };
-        document.addEventListener('pointermove',move); document.addEventListener('pointerup',up);
-      });
+      if(!el) return;
+      const off = BANDEF[k] || {dx:0,dy:0};
+      if(off.dx||off.dy) el.style.transform = 'translate(calc(-50% + '+off.dx+'px), calc(-50% + '+off.dy+'px))';
     });
-  }
-  _startDragBendChord(key, e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const stage = document.querySelector('.ioc-stage');
-    const move = (ev) => {
-      const r = stage.getBoundingClientRect();
-      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
-      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
-      const bendChord = Object.assign({}, this.state.bendChord || {});
-      bendChord[key] = [Math.round(x), Math.round(y)];
-      this.setState({ bendChord });
-    };
-    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); this._persistBendChord(); };
-    window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
-  }
-  _startDragBend(i, e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const stage = document.querySelector('.ioc-stage');
-    const move = (ev) => {
-      const r = stage.getBoundingClientRect();
-      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width));
-      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height));
-      const bend = (this.state.bend || []).slice();
-      bend[i] = [Math.round(x), Math.round(y)];
-      this.setState({ bend });
-    };
-    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); this._persistBend(); };
-    window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
-  }
-  _startDragIsland(i, e) {
-    e.preventDefault();
-    e.stopPropagation();
-    const stage = document.querySelector('.ioc-stage');
-    const r0 = stage.getBoundingClientRect();
-    const cur = this.state.isl[i];
-    const startX = e.clientX, startY = e.clientY;
-    const offX = (startX - r0.left) * 1040 / r0.width - cur.x;
-    const offY = (startY - r0.top) * 1320 / r0.height - cur.y;
-    let dragging = false;
-    this._islDragged = false;
-    const move = (ev) => {
-      if (!dragging) {
-        if (Math.abs(ev.clientX - startX) < 4 && Math.abs(ev.clientY - startY) < 4) return;
-        dragging = true; this._islDragged = true;
-      }
-      const r = stage.getBoundingClientRect();
-      const x = Math.max(0, Math.min(1040, (ev.clientX - r.left) * 1040 / r.width - offX));
-      const y = Math.max(0, Math.min(1320, (ev.clientY - r.top) * 1320 / r.height - offY));
-      const isl = this.state.isl.slice();
-      isl[i] = Object.assign({}, isl[i], { x: Math.round(x), y: Math.round(y) });
-      this.setState({ isl });
-    };
-    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); if (dragging) this._persistIsl(this.state.isl); };
-    window.addEventListener('pointermove', move);
-    window.addEventListener('pointerup', up);
   }
 
   componentDidMount() {
     window.addEventListener('research-data-updated', () => this.forceUpdate());
     if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
-    try { const s = localStorage.getItem('ioc-wp-v1'); if (s) { const wp = JSON.parse(s); if (Array.isArray(wp) && wp.length === 5) { const dwp = this.state.wp; this.setState({ wp: wp.map((p,i)=>({ ...p, label: dwp[i].label })) }); } } } catch(e){}
-    try { const s = localStorage.getItem('ioc-bend-v1'); if (s) { const b = JSON.parse(s); if (Array.isArray(b)) this.setState({ bend: b }); } } catch(e){}
-    try { const s = localStorage.getItem('ioc-bendc-v1'); if (s) { const b = JSON.parse(s); if (b && typeof b==='object') this.setState({ bendChord: b }); } } catch(e){}
     this._initBanDrag(); setTimeout(()=>this._initBanDrag(),150); setTimeout(()=>this._initBanDrag(),500);
     this._mq = window.matchMedia('(max-width:760px)');
     this._isMobile = this._mq.matches;
     const onMq = () => { const m = this._mq.matches; if (m === this._isMobile) return; this._isMobile = m; this._lastW = null; this._mLastW = null; if (!m) this._mScale = null; this._initBanDrag(); this.forceUpdate(); this._refit && this._refit(); };
     this._mq.addEventListener ? this._mq.addEventListener('change', onMq) : this._mq.addListener(onMq);
-    this._resetMap = () => { ['ioc-wp-v1','ioc-isl-v2','ioc-bend-v1','ioc-bendc-v1','ioc-ban-v1'].forEach(k=>{ try{ localStorage.removeItem(k); }catch(e){} }); location.reload(); };
     this._downloadMap = async () => {
       const frame = document.querySelector('.ioc-mapframe');
       const stage = document.querySelector('.ioc-stage');
@@ -816,7 +715,6 @@ class Component extends DCLogic {
   _onIslClick(i, e) {
     e.stopPropagation();
     if (this._panMoved) return;
-    if (this._islDragged) { this._islDragged = false; return; }
     const p = this.state.isl[i]; const key = p.label;
     this._pinned = null; this._hideTip();
     this.setState({ openCap: key, openInfo: null }, this._sync);
@@ -902,7 +800,6 @@ class Component extends DCLogic {
   _onWpClick(i, e) {
     e.stopPropagation();
     if (this._panMoved) return;
-    if (this._wpDragged) { this._wpDragged = false; return; }
     const key = ['probe','sense','design','adapt','integrate'][i];
     if (this._isMobile) { this.setState({ openInfo: key, openCap: null }, this._sync); return; }
     if (this._pinned === key) { this._pinned = null; this._hideTip(); }
@@ -1025,17 +922,17 @@ class Component extends DCLogic {
     for(let i=0;i<rn;i++){ const A=route[i],B=route[(i+1)%rn],P=handlePts[i]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; routeD+=` Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0].toFixed(1)},${B[1].toFixed(1)}`; }
     routeD+='Z';
     kids.push(h('path',{key:'route',className:'ioc-march',d:routeD,fill:'none',stroke:C.ink,strokeOpacity:.72,strokeWidth:3.4,strokeDasharray:'2 9',strokeLinecap:'round'}));
-    handlePts.forEach((P,i)=>{ kids.push(h('circle',{key:'bh'+i,cx:P[0],cy:P[1],r:15,fill:'transparent',onPointerDown:isMobile?undefined:(e)=>this._startDragBend(i,e),style:{pointerEvents:isMobile?'none':'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:'bd'+i,cx:P[0],cy:P[1],r:4.5,fill:'#39342b',fillOpacity:.22,stroke:'#39342b',strokeOpacity:.45,strokeWidth:1,style:{pointerEvents:'none',display:isMobile?'none':'block'}})); });
+    // route bend handles removed (map is no longer editable)
     // feedback-loop chords
     { const cen=[480,700];
-      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=this.state.bendChord||{}; const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); kids.push(h('circle',{key:key+'-h',cx:P[0],cy:P[1],r:14,fill:'transparent',onPointerDown:isMobile?undefined:(e)=>this._startDragBendChord(key,e),style:{pointerEvents:isMobile?'none':'auto',cursor:'grab',touchAction:'none'}})); kids.push(h('circle',{key:key+'-d',cx:P[0],cy:P[1],r:4,fill:'#39342b',fillOpacity:.2,stroke:'#39342b',strokeOpacity:.4,strokeWidth:1,style:{pointerEvents:'none',display:isMobile?'none':'block'}})); };
+      const arc=(a,b,off,cls,key,op)=>{ const A=route[a],B=route[b],mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2; let dx=mx-cen[0],dy=my-cen[1]; const L=Math.hypot(dx,dy)||1; const bc=this.state.bendChord||{}; const P=(bc[key]&&bc[key].length===2)?bc[key]:[mx+dx/L*off/2,my+dy/L*off/2]; const qx=2*P[0]-(A[0]+B[0])/2, qy=2*P[1]-(A[1]+B[1])/2; kids.push(h('path',{key:key,className:cls,d:`M${A[0]},${A[1]} Q${qx.toFixed(1)},${qy.toFixed(1)} ${B[0]},${B[1]}`,fill:'none',stroke:C.ink,strokeOpacity:(op==null?.6:op),strokeWidth:2.8,strokeDasharray:'2 9',strokeLinecap:'round'})); };
       arc(0,1,95,'ioc-march-rev','fb-ps',.62);
       arc(1,2,95,'ioc-march-rev','fb-sd',.62);
       arc(4,2,64,'ioc-march','fb-id',.3);
       arc(2,3,82,'ioc-march-rev','fb-da',.62);
     }
 
-    // islands (positions from state — draggable)
+    // islands
     ISL.forEach((p,i)=>kids.push(island(p.x,p.y,p.r,COL[p.group].fill,COL[p.group].deep,p.seed)));
 
     // compass rose (decorative, 3D + animated) mid-right
@@ -1054,15 +951,15 @@ class Component extends DCLogic {
     const waypoints = h('div', { key:'wps', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
       WP.map((p, i) => h('div', { key:'wp'+i, style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', animation:'iocBuoy '+(6+(i%4))+'s ease-in-out infinite', animationDelay:(-i*1.3)+'s', pointerEvents:'none' } },
         h('div', { style:{ position:'absolute', left:'0px', top:'-38px', transform:'translateX(-50%)', whiteSpace:'nowrap', fontSize:'12px', fontWeight:700, letterSpacing:'.02em', color:'#F4EFE6', background:'rgba(57,52,43,0.92)', padding:'3px 10px', borderRadius:'9px', pointerEvents:'none' } }, p.label),
-        h('div', { title:'', onPointerDown:isMobile?undefined:(e)=>this._startDrag(i,e), onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to right, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:isMobile?'none':'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
+        h('div', { title:'', onClick:(e)=>this._onWpClick(i,e), onMouseEnter:()=>this._onWpEnter(i), onMouseLeave:()=>this._onWpLeave(), style:{ position:'absolute', left:'-15px', top:'-15px', width:'30px', height:'30px', borderRadius:'50%', background:'linear-gradient(to right, #39342b '+Math.round(i/(WP.length-1)*100)+'%, #F4EFE6 '+Math.round(i/(WP.length-1)*100)+'%)', border:'2px solid #39342b', cursor:'pointer', pointerEvents:'auto', touchAction:isMobile?'none':'none', userSelect:'none', boxShadow:'0 2px 6px rgba(40,30,20,.30)' } })
       ))
     );
 
     const seaArt = h('svg',{width:1040,height:1320,viewBox:'0 0 1040 1320',style:{position:'absolute',inset:0,width:'100%',height:'100%',display:'block'}}, kids);
 
-    // draggable island labels + drag surfaces (whole island moves)
+    // island labels
     const islands = h('div', { key:'isls', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
-      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onPointerDown:isMobile?undefined:(e)=>this._startDragIsland(i,e), onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
+      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
           style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', width:(p.r*2)+'px', height:(p.r*2)+'px', borderRadius:'50%', cursor:'pointer', pointerEvents:'auto', touchAction:'none' } },
         h('div', { style:{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', width:p.w+'px', textAlign:'center', fontSize:'12px', fontWeight:600, lineHeight:1.16, color:'#fff', textShadow:'0 1px 3px rgba(35,28,18,.6)', pointerEvents:'none', userSelect:'none' } }, p.label)
       ))
@@ -1076,7 +973,7 @@ class Component extends DCLogic {
     const MSTAGE = { probe:'#46716f', sense:'#5f7a3a', design:'#b07a3c', adapt:'#a8542d', integrate:'#3f6e74' };
     const browseMeta = ['probe','sense','design','adapt','integrate'].map(k => { const d = TIP[k] || {}; const open = this.state.mMeta === k; return { title:d.t, sub:d.s, body:d.b, dot:MSTAGE[k], open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mMeta: s.mMeta===k ? null : k })) }; });
 
-    return { seaArt, islands, waypoints, browseOrients, browseDomains, browseMeta, capDrawer: this._capDrawer(), infoSheet: this._infoSheet(), closeCap: () => this.closeCap(), closeInfo: () => this.closeInfo(), sheetDragStart: (e) => this._sheetDragStart(e), resetMap: () => this._resetMap && this._resetMap(), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
+    return { seaArt, islands, waypoints, browseOrients, browseDomains, browseMeta, capDrawer: this._capDrawer(), infoSheet: this._infoSheet(), closeCap: () => this.closeCap(), closeInfo: () => this.closeInfo(), sheetDragStart: (e) => this._sheetDragStart(e), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
   }
 }
 </script>

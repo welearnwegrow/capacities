@@ -672,7 +672,7 @@ class Component extends DCLogic {
     if (linkEl) {
       if (isIsland) {
         linkEl.textContent = 'Learn more →';
-        linkEl.href = 'resources.dc.html?capacity=' + encodeURIComponent(key);
+        linkEl.href = 'resources.html?capacity=' + encodeURIComponent(key);
         linkEl.target = '_self';
         linkEl.style.display = 'inline-flex';
         linkEl.style.color = th2.title;
@@ -787,8 +787,8 @@ class Component extends DCLogic {
     return { open:true, asideStyle, handleStyle, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,
       desc:det.desc||'', levels, hasLevels:levels.length>0,
       countText: n+(n===1?' resource to learn about this area':' resources to learn about this area'),
-      libHref: 'resources.dc.html?capacity='+encodeURIComponent(key),
-      suggestHref: 'resources.dc.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
+      libHref: 'resources.html?capacity='+encodeURIComponent(key),
+      suggestHref: 'resources.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
   }
   _onWpEnter(i) { if (this._pinned == null) { const p = this.state.wp[i]; this._showTip(p.key || ['probe','sense','design','adapt','integrate'][i], p.x, p.y, 30); } }
   _onWpLeave() { this._scheduleHide(); }

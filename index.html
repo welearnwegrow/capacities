@@ -15,8 +15,7 @@
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=Caveat:wght@400;600;700&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;display=swap" rel="stylesheet">
 <script src="research-data.js"></script>
 <script src="notion-config.js"></script>
@@ -33,13 +32,10 @@
   @keyframes iocFade{from{opacity:0}to{opacity:1}}
   @keyframes iocDrawerR{from{transform:translateX(100%)}to{transform:translateX(0)}}
   @keyframes iocSheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-  @keyframes iocFloat{0%{transform:translate(-50%,-50%)}25%{transform:translate(calc(-50% + 4px),calc(-50% - 5px))}50%{transform:translate(calc(-50% - 3px),calc(-50% - 8px))}75%{transform:translate(calc(-50% - 5px),calc(-50% - 2px))}100%{transform:translate(-50%,-50%)}}
   @keyframes iocMarch{to{stroke-dashoffset:-11}}
   .ioc-march{animation:iocMarch 1s linear infinite}
   @keyframes iocMarchRev{to{stroke-dashoffset:11}}
   .ioc-march-rev{animation:iocMarchRev 1s linear infinite}
-  @keyframes iocIsleFloat{0%{transform:translate(0px,0px)}25%{transform:translate(5px,-7px)}50%{transform:translate(-4px,-11px)}75%{transform:translate(-6px,-3px)}100%{transform:translate(0px,0px)}}
-  .ioc-isle{animation-name:iocIsleFloat;animation-timing-function:ease-in-out;animation-iteration-count:infinite;transform-box:fill-box;transform-origin:center}
   @keyframes iocWash{0%{transform:translate(0px,0px) scale(1)}50%{transform:translate(20px,-15px) scale(1.08)}100%{transform:translate(0px,0px) scale(1)}}
   @keyframes iocBuoy{0%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 3px),calc(-50% - 5px))}100%{transform:translate(-50%,-50%)}}
   .ioc-wash{transform-box:fill-box;transform-origin:center;animation-name:iocWash;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
@@ -58,7 +54,6 @@
     .ioc-root{padding:0 14px 0}
     .ioc-title{font-size:30px !important}
     .ioc-lede{font-size:15px !important}
-    .ioc-kicker{font-size:11px !important;letter-spacing:.18em !important}
   }
   @media (max-width:460px){
     .ioc-title{font-size:25px !important}

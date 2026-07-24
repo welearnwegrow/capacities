@@ -326,7 +326,6 @@ class Component extends DCLogic {
 
   // ---------- colour helpers ----------
   _hex2rgba(hex,a){ const n=parseInt(hex.replace('#',''),16); return 'rgba('+((n>>16)&255)+','+((n>>8)&255)+','+(n&255)+','+a+')'; }
-  _lighten(hex){ const n=parseInt(hex.replace('#',''),16); let r=(n>>16)&255,g=(n>>8)&255,b=n&255; r=Math.round(r+(255-r)*.5); g=Math.round(g+(255-g)*.5); b=Math.round(b+(255-b)*.5); return 'rgb('+r+','+g+','+b+')'; }
   _darken(hex){ const n=parseInt(hex.replace('#',''),16); let r=(n>>16)&255,g=(n>>8)&255,b=n&255; r=Math.round(r*.66); g=Math.round(g*.66); b=Math.round(b*.66); return 'rgb('+r+','+g+','+b+')'; }
 
   // ---------- drag ----------

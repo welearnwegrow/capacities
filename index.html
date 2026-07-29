@@ -27,7 +27,7 @@
   *{box-sizing:border-box}
   body{margin:0;background:radial-gradient(680px 460px at 14% 6%, rgba(120,160,195,.20), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(150,185,180,.16), transparent 72%), linear-gradient(180deg,#dce7ed 0%,#eef2ef 620px);font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .ioc-root{padding:0 24px 70px}
-  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 130px), transparent 100%), linear-gradient(to right, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom, transparent 0, #000 80px, #000 calc(100% - 130px), transparent 100%), linear-gradient(to right, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);mask-composite:intersect}
+  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 110px), transparent 100%);mask-image:linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 110px), transparent 100%)}
   .ioc-stage{position:absolute;top:0;left:0;width:1040px;height:1320px;transform-origin:top left}
   @keyframes iocFade{from{opacity:0}to{opacity:1}}
   @keyframes iocDrawerR{from{transform:translateX(100%)}to{transform:translateX(0)}}
@@ -104,7 +104,7 @@
     </div>
     <div style="display:flex;align-items:center;gap:9px">
       <svg width="32" height="26" viewBox="0 0 32 26" style="flex:none"><line x1="2" y1="13" x2="30" y2="13" stroke="#5b6b62" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.5 6"></line></svg>
-      <span>The <strong style="color:#46514a;font-weight:700">meta-process</strong> that guides our actions</span>
+      <span>The <strong style="color:#46514a;font-weight:700">route</strong> that guides our actions</span>
     </div>
   </div>
 
@@ -122,7 +122,7 @@
     <div style="position: absolute; left: 892px; top: 469px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #69763f; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-green" data-edit="ban-collective">Collective strategy</div><div style="position: absolute; left: 203px; top: 981px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #a85c38; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-coral" data-edit="ban-action">Systemic intervention</div><div style="position: absolute; left: 371px; top: 227px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #3c5f5d; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-teal" data-edit="ban-within">Personal grounding</div><div style="position: absolute; left: 685px; top: 183px; transform: translate(-50%,-50%); width: 123px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 37px" data-orient="recip">
       <div data-edit="card-recip-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Reciprocity</div>
       <div data-edit="card-recip-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we act</div>
-    </div><div style="position: absolute; left: 956px; top: 181px; transform: translate(-50%,-50%); width: 152px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 8px; height: 34px" data-orient="shared">
+    </div><div style="position: absolute; left: 956px; top: 181px; transform: translate(-50%,-50%); width: 152px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 5px 10px" data-orient="shared">
       <div data-edit="card-shared-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Shared Agency</div><div data-edit="card-shared-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we make decisions</div>
       
     </div><div style="position: absolute; left: 816px; top: 259px; transform: translate(-50%,-50%); width: 121px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 40px" data-orient="pluri">
@@ -398,37 +398,49 @@ class Component extends DCLogic {
       frame.style.overflow = 'visible'; frame.style.height = '1320px';
       stage.style.transform = 'none';
       try {
-        const S = 2;
-        const mapW = 1040, mapH = 1320, padTop = 192, padBot = 96, padX = 0;
+        const S = 3;
+        const mapW = 1040, mapH = 1320, padTop = 262, padBot = 118, padX = 96;
         const mapCanvas = await window.html2canvas(stage, { scale: S, backgroundColor: '#eef2ef', width: mapW, height: mapH, windowWidth: mapW, windowHeight: mapH, useCORS: true });
         const outW = (mapW + padX * 2) * S, outH = (mapH + padTop + padBot) * S;
         const out = document.createElement('canvas');
         out.width = outW; out.height = outH;
         const ctx = out.getContext('2d');
-        ctx.fillStyle = '#eef2ef';
+        const cx = outW / 2;
+        const roundRect = (rx, ry, rw, rh, rr) => { ctx.beginPath(); if (ctx.roundRect) { ctx.roundRect(rx, ry, rw, rh, rr); } else { ctx.rect(rx, ry, rw, rh); } ctx.closePath(); };
+        // paper
+        ctx.fillStyle = '#faf8f3';
         ctx.fillRect(0, 0, outW, outH);
-        // map
-        ctx.drawImage(mapCanvas, padX * S, padTop * S, mapW * S, mapH * S);
-        // heading
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
+        // kicker
+        ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = '#b0822f';
+        ctx.font = '700 ' + (14 * S) + 'px "PT Sans", system-ui, sans-serif';
+        if ('letterSpacing' in ctx) ctx.letterSpacing = (2 * S) + 'px';
+        ctx.fillText('SYSTEMS CHANGE LEARNING STUDIO', padX * S, 92 * S);
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+        // title
         ctx.fillStyle = '#2E2B26';
-        ctx.font = '500 ' + (40 * S) + 'px "Newsreader", Georgia, serif';
-        ctx.fillText('Learning to intervene in complex systems', outW / 2, 62 * S);
-        // ---- legend (centered row under the heading) ----
-        const legendY = 134 * S;
+        ctx.font = '500 ' + (46 * S) + 'px "Newsreader", Georgia, serif';
+        ctx.fillText('Learning to intervene in complex systems', padX * S, 150 * S);
+        // map card (soft shadow, no hard border)
+        const mx = padX * S, my = padTop * S, mw = mapW * S, mh = mapH * S, cr = 18 * S;
+        ctx.save(); ctx.shadowColor = 'rgba(50,60,55,0.20)'; ctx.shadowBlur = 26 * S; ctx.shadowOffsetY = 10 * S;
+        roundRect(mx, my, mw, mh, cr); ctx.fillStyle = '#eef2ef'; ctx.fill(); ctx.restore();
+        ctx.save(); roundRect(mx, my, mw, mh, cr); ctx.clip();
+        ctx.drawImage(mapCanvas, mx, my, mw, mh); ctx.restore();
+        // ---- legend (left-aligned row above the map) ----
+        const legendY = 214 * S;
         const legFont = '600 ' + (15 * S) + 'px "PT Sans", system-ui, sans-serif';
         ctx.font = legFont;
         const items = [
           { type: 'compass', text: 'Orientations that guide our intentions' },
           { type: 'island', text: 'Learning areas that guide our progress' },
-          { type: 'dash', text: 'The meta-process that guides our actions' }
+          { type: 'dash', text: 'The route that guides our actions' }
         ];
         const glyphW = 30 * S, glyphGap = 9 * S, itemGap = 30 * S;
         let total = 0;
         items.forEach(it => { it.tw = ctx.measureText(it.text).width; total += glyphW + glyphGap + it.tw; });
         total += itemGap * (items.length - 1);
-        let x = (outW - total) / 2;
+        let x = padX * S;
         ctx.textAlign = 'left';
         items.forEach(it => {
           const gcx = x + glyphW / 2, gcy = legendY;
@@ -459,11 +471,14 @@ class Component extends DCLogic {
           ctx.fillText(it.text, x + glyphW + glyphGap, gcy);
           x += glyphW + glyphGap + it.tw + itemGap;
         });
-        // license
-        ctx.textAlign = 'center';
-        ctx.fillStyle = 'rgba(70,90,85,0.7)';
-        ctx.font = '600 ' + (16 * S) + 'px "PT Sans", system-ui, sans-serif';
-        ctx.fillText('CC BY-NC-ND 4.0 · Jaya Ramchandani & Raisa Mirza', outW / 2, (padTop + mapH + padBot * 0.5) * S);
+        // license footer
+        const fy = (padTop + mapH + 46);
+        ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(70,90,85,0.72)';
+        ctx.font = '600 ' + (15 * S) + 'px "PT Sans", system-ui, sans-serif';
+        if ('letterSpacing' in ctx) ctx.letterSpacing = (0.3 * S) + 'px';
+        ctx.fillText('CC BY-NC-ND 4.0 · Systems Change Learning Studio', padX * S, (fy + 40) * S);
+        if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
         const img = out.toDataURL('image/png');
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF({ orientation: 'portrait', unit: 'px', format: [outW / S, outH / S] });
@@ -748,7 +763,7 @@ class Component extends DCLogic {
     const d = this._tipData()[key]; if (!d) return base;
     const route = ['probe','sense','design','adapt','integrate'];
     let accent = '#6B5527', head = '#f6efdd', kicker = 'Orientation';
-    if (route.indexOf(key) >= 0) { accent = '#46514a'; head = '#e8e4d8'; kicker = 'Meta-process'; }
+    if (route.indexOf(key) >= 0) { accent = '#46514a'; head = '#e8e4d8'; kicker = 'Route'; }
     else if (key === 'grp-teal') { accent = '#46716f'; head = '#e3ecea'; kicker = 'Learning domain'; }
     else if (key === 'grp-green') { accent = '#5b6733'; head = '#ebeedd'; kicker = 'Learning domain'; }
     else if (key === 'grp-coral') { accent = '#a8542d'; head = '#f4e3d9'; kicker = 'Learning domain'; }

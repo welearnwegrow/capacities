@@ -115,7 +115,7 @@
             <span style="{{ ac.readyBadgeStyle }}">Move on when</span>
             <span style="{{ ac.readyTextStyle }}">{{ ac.readiness }}</span>
           </div>
-          <div style="{{ ac.footStyle }}">CC BY-NC-ND 4.0 · Jaya Ramchandani & Raisa Mirza</div>
+          <div style="{{ ac.footStyle }}">CC BY-NC-ND 4.0 · Systems Change Learning Studio</div>
         </div>
       </div>
 
@@ -170,7 +170,7 @@
             <span style="{{ pg.badgeStyle }}">Move on when</span>
             <span style="{{ pg.readyTextStyle }}">{{ pg.readiness }}</span>
           </div>
-          <div style="{{ pg.ccStyle }}">CC BY-NC-ND 4.0 · Jaya Ramchandani & Raisa Mirza</div>
+          <div style="{{ pg.ccStyle }}">CC BY-NC-ND 4.0 · Systems Change Learning Studio</div>
         </div>
       </div>
     </sc-for>
@@ -358,8 +358,8 @@ class Component extends DCLogic {
   }
 
   // ---------- print path (vector A4 landscape) ----------
-  printAll(){ if(window.track) window.track('download_workbook',{label:'Full meta-process workbook (print)'}); this._doPrint(null); }
-  printOne(){ if(this.state.active==null) return; if(window.track) window.track('download_canvas',{stage:this.STAGES[this.state.active].name}); this._doPrint(this.state.active); }
+  printAll(){ if(this.state.mobile){ return this.downloadAll('a4'); } if(window.track) window.track('download_workbook',{label:'Full meta-process workbook (print)'}); this._doPrint(null); }
+  printOne(){ if(this.state.active==null) return; if(this.state.mobile){ return this.downloadOne('a4'); } if(window.track) window.track('download_canvas',{stage:this.STAGES[this.state.active].name}); this._doPrint(this.state.active); }
   _doPrint(onlyIdx){
     if(document.getElementById('mp-print-portal')) document.getElementById('mp-print-portal').remove();
     const src=document.getElementById('mp-print'); if(!src) return;

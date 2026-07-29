@@ -27,7 +27,8 @@
   *{box-sizing:border-box}
   body{margin:0;background:radial-gradient(680px 460px at 14% 6%, rgba(120,160,195,.20), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(150,185,180,.16), transparent 72%), linear-gradient(180deg,#dce7ed 0%,#eef2ef 620px);font-family:'PT Sans',system-ui,sans-serif;color:#2E2B26;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   .ioc-root{padding:0 24px 70px}
-  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 110px), transparent 100%);mask-image:linear-gradient(to bottom, transparent 0, #000 30px, #000 calc(100% - 110px), transparent 100%)}
+  .ioc-mapframe{position:relative;width:100%;max-width:1040px;overflow:hidden}
+  .ioc-stage>svg{-webkit-mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%), linear-gradient(to bottom, transparent 0, #000 4%, #000 96%, transparent 100%);mask-composite:intersect}
   .ioc-stage{position:absolute;top:0;left:0;width:1040px;height:1320px;transform-origin:top left}
   @keyframes iocFade{from{opacity:0}to{opacity:1}}
   @keyframes iocDrawerR{from{transform:translateX(100%)}to{transform:translateX(0)}}
@@ -47,7 +48,8 @@
   .ioc-hint-desktop{display:inline}
   .ioc-hint-mobile{display:none}
   @media (max-width:760px){
-    .ioc-mapframe{-webkit-mask-image:none;mask-image:none;touch-action:none}
+    .ioc-mapframe{touch-action:none}
+    .ioc-stage>svg{-webkit-mask-image:none;mask-image:none}
     .ioc-zoom{display:flex}
     .ioc-hint-desktop{display:none}
     .ioc-hint-mobile{display:inline}
@@ -392,9 +394,12 @@ class Component extends DCLogic {
       if (!frame || !stage || !window.html2canvas || !window.jspdf) return;
       this._hideTip && this._hideTip();
       // save state
+      const svg = stage.querySelector('svg');
       const f0 = { mask: frame.style.webkitMaskImage, mask2: frame.style.maskImage, ov: frame.style.overflow, h: frame.style.height };
+      const sv0 = svg ? { m1: svg.style.webkitMaskImage, m2: svg.style.maskImage } : null;
       const s0 = { tr: stage.style.transform };
       frame.style.webkitMaskImage = 'none'; frame.style.maskImage = 'none';
+      if (svg) { svg.style.webkitMaskImage = 'none'; svg.style.maskImage = 'none'; }
       frame.style.overflow = 'visible'; frame.style.height = '1320px';
       stage.style.transform = 'none';
       try {
@@ -488,6 +493,7 @@ class Component extends DCLogic {
       } catch (e) { console.warn('map pdf failed', e); }
       // restore
       frame.style.webkitMaskImage = f0.mask; frame.style.maskImage = f0.mask2;
+      if (svg && sv0) { svg.style.webkitMaskImage = sv0.m1; svg.style.maskImage = sv0.m2; }
       frame.style.overflow = f0.ov; frame.style.height = f0.h;
       stage.style.transform = s0.tr;
       this._refit && this._refit();

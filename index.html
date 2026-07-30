@@ -70,8 +70,7 @@
   <!-- title block -->
   <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
     <div style="position:relative">
-      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;max-width:20ch;color:#1f3a36">Learning to intervene in complex systems</h1>
-      <p class="ioc-lede" data-edit="lede" style="font-family:'PT Serif',serif;font-style:italic;font-size:16px;color:#4c6b64;margin:0;max-width:70ch">systems change x lifelong learning for just &amp; regenerative futures</p>
+      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-.015em;margin:0;max-width:18ch;color:#1f3a36">Are you trying to change the <span class="ioc-rotword" style="color:#46716f;transition:opacity .34s ease;opacity:1">Social</span> systems you belong to?</h1>
     </div>
   </div>
 
@@ -381,6 +380,18 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    const words = ['Social','Technological','Economic','Environmental','Political','Legal','Ethical'];
+    let ri = 0;
+    this._rotTimer = setInterval(() => {
+      const el = document.querySelector('.ioc-rotword');
+      if (!el) return;
+      el.style.opacity = '0';
+      this._rotSwap = setTimeout(() => {
+        ri = (ri + 1) % words.length;
+        el.textContent = words[ri];
+        el.style.opacity = '1';
+      }, 340);
+    }, 2200);
     window.addEventListener('research-data-updated', () => this.forceUpdate());
     if (window.__RESEARCH_LIVE_READY) this.forceUpdate();
     this._initBanDrag(); setTimeout(()=>this._initBanDrag(),150); setTimeout(()=>this._initBanDrag(),500);
@@ -693,7 +704,7 @@ class Component extends DCLogic {
     if (linkEl) {
       if (isIsland) {
         linkEl.textContent = 'Learn more →';
-        linkEl.href = 'resources.html?capacity=' + encodeURIComponent(key);
+        linkEl.href = 'resources.dc.html?capacity=' + encodeURIComponent(key);
         linkEl.target = '_self';
         linkEl.style.display = 'inline-flex';
         linkEl.style.color = th2.title;
@@ -808,8 +819,8 @@ class Component extends DCLogic {
     return { open:true, asideStyle, handleStyle, label:key, groupName:gd.name, color:gd.c, headerBg:gd.head,
       desc:det.desc||'', levels, hasLevels:levels.length>0,
       countText: n+(n===1?' resource to learn about this area':' resources to learn about this area'),
-      libHref: 'resources.html?capacity='+encodeURIComponent(key),
-      suggestHref: 'resources.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
+      libHref: 'resources.dc.html?capacity='+encodeURIComponent(key),
+      suggestHref: 'resources.dc.html?capacity='+encodeURIComponent(key)+'&suggest=1', items };
   }
   _onWpEnter(i) { if (this._pinned == null) { const p = this.state.wp[i]; this._showTip(p.key || ['probe','sense','design','adapt','integrate'][i], p.x, p.y, 30); } }
   _onWpLeave() { this._scheduleHide(); }
@@ -871,6 +882,8 @@ class Component extends DCLogic {
     }
   }
   componentWillUnmount() {
+    if (this._rotTimer) clearInterval(this._rotTimer);
+    if (this._rotSwap) clearTimeout(this._rotSwap);
     if (this._ro) this._ro.disconnect();
     if (this._fit) window.removeEventListener('resize', this._fit);
   }

@@ -799,10 +799,11 @@ class Component extends DCLogic {
     const det = CD[key] || {};
     const tcMap = { 'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733','Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8','Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45' };
     const tcol = (t)=>{ if(tcMap[t]) return tcMap[t]; let h=0; for(let i=0;i<t.length;i++){ h=(h*31+t.charCodeAt(i))>>>0; } return 'hsl('+(h%360)+' 42% 42%)'; };
+    const normUrl = (u)=>{ if(!u) return '#'; u=String(u).trim(); if(!u||u==='#') return '#'; if(/^(https?:\/\/|mailto:|tel:)/i.test(u)) return u; if(/^\/\//.test(u)) return 'https:'+u; return 'https://'+u.replace(/^\/+/,''); };
     const list = (R.resources||[]).filter(r=>r.caps && r.caps.indexOf(key)>=0);
     const items = list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:(a.r.name||'').localeCompare(b.r.name||''); }).map(x=>{
       const r=x.r; const t0=(r.types&&r.types.length)?r.types[0]:'Resource'; const tc=tcol(t0);
-      return { name:r.name, desc:r.desc, url:r.url||'#', featured:!!r.featured,
+      return { name:r.name, desc:r.desc, url:normUrl(r.url), featured:!!r.featured,
         typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
         typeTags:(r.types&&r.types.length?r.types:['Resource']).map(t=>{ const c=tcol(t); return { label:t, style:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:c+'1f', color:c, whiteSpace:'nowrap' } }; }),
         typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },

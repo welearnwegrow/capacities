@@ -54,7 +54,7 @@
     .ioc-hint-desktop{display:none}
     .ioc-hint-mobile{display:inline}
     .ioc-root{padding:0 14px 0}
-    .ioc-title{font-size:34px !important}
+    .ioc-title{font-size:30px !important}
     .ioc-lede{font-size:15px !important}
   }
   @media (max-width:460px){
@@ -70,7 +70,7 @@
   <!-- title block -->
   <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
     <div style="position:relative">
-      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-.015em;margin:0;max-width:none;color:#1f3a36">Are you trying to change the<br><span class="ioc-rotword" style="display:inline-block;text-align:left;vertical-align:baseline;color:#46716f;transition:opacity .3s ease;opacity:1">Natural &amp; Environmental</span><br>systems you belong to?</h1>
+      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-.015em;margin:0;max-width:18ch;color:#1f3a36">Are you trying to change the <span class="ioc-rotword" style="color:#46716f;transition:opacity .34s ease;opacity:1">Social</span> systems you belong to?</h1>
     </div>
   </div>
 
@@ -343,10 +343,10 @@ class Component extends DCLogic {
       {label:'Observing & Listening',x:229,y:204,r:42,w:96,group:'teal',seed:107},
       {label:'Critical Consciousness',x:590,y:302,r:46,w:104,group:'teal',seed:114},
       {label:'Spiritual & Moral Inquiry',x:296,y:327,r:52,w:112,group:'teal',seed:121},
-      {label:'Socioeconomic & Political Inquiry',x:450,y:337,r:46,w:104,group:'teal',seed:128},
+      {label:'Socioeconomic & Political Literacy',x:450,y:337,r:46,w:104,group:'teal',seed:128},
       {label:'Agency & Expression',x:189,y:381,r:42,w:96,group:'teal',seed:135},
-      {label:'Ecological & Planetary Inquiry',x:342,y:457,r:48,w:108,group:'teal',seed:142},
-      {label:'Cultural & Ancestral Inquiry',x:527,y:438,r:44,w:100,group:'teal',seed:149},
+      {label:'Ecological & Planetary Literacy',x:342,y:457,r:48,w:108,group:'teal',seed:142},
+      {label:'Cultural & Ancestral Literacy',x:527,y:438,r:44,w:100,group:'teal',seed:149},
       {label:'Systems Thinking & Modeling',x:488,y:667,r:46,w:104,group:'green',seed:300},
       {label:'Complex Problem Solving',x:350,y:625,r:44,w:100,group:'green',seed:307},
       {label:'Futures Thinking & Foresight',x:831,y:541,r:46,w:104,group:'green',seed:314},
@@ -380,23 +380,8 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
-    const words = ['Natural & Environmental','Education & Learning','Media & Information','Political & Governance','Legal & Justice','Economic & Monetary','Work & Livelihood','Health & Wellbeing','Food & Water','Energy & Power','Digital & Technological','Development & Infrastructure'];
+    const words = ['Social','Technological','Economic','Environmental','Political','Legal','Ethical'];
     let ri = 0;
-    this._sizeRotSlot = () => {
-      const el = document.querySelector('.ioc-rotword');
-      if (!el) return;
-      const cur = el.textContent;
-      el.style.minWidth = '0px';
-      let max = 0;
-      words.forEach(w => { el.textContent = w; if (el.offsetWidth > max) max = el.offsetWidth; });
-      el.textContent = cur;
-      el.style.minWidth = Math.ceil(max) + 'px';
-    };
-    this._sizeRotSlot();
-    setTimeout(this._sizeRotSlot, 300);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this._sizeRotSlot);
-    this._onRotResize = () => this._sizeRotSlot();
-    window.addEventListener('resize', this._onRotResize);
     this._rotTimer = setInterval(() => {
       const el = document.querySelector('.ioc-rotword');
       if (!el) return;
@@ -649,10 +634,10 @@ class Component extends DCLogic {
       'Observing & Listening': { g:'teal', t:'Observing & Listening', s:'Personal grounding', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
       'Critical Consciousness': { g:'teal', t:'Critical Consciousness', s:'Personal grounding', b:"The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective." },
       'Spiritual & Moral Inquiry': { g:'teal', t:'Spiritual & Moral Inquiry', s:'Personal grounding', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
-      'Socioeconomic & Political Inquiry': { g:'teal', t:'Socioeconomic & Political Inquiry', s:'Personal grounding', b:'Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.' },
+      'Socioeconomic & Political Literacy': { g:'teal', t:'Socioeconomic & Political Literacy', s:'Personal grounding', b:'Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.' },
       'Agency & Expression': { g:'teal', t:'Agency & Expression', s:'Personal grounding', b:'Synthesizing complex systemic insights into compelling narratives and creative outputs that challenge the status quo, build relational density, and model preferable futures.' },
-      'Ecological & Planetary Inquiry': { g:'teal', t:'Ecological & Planetary Inquiry', s:'Personal grounding', b:'Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.' },
-      'Cultural & Ancestral Inquiry': { g:'teal', t:'Cultural & Ancestral Inquiry', s:'Personal grounding', b:'Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
+      'Ecological & Planetary Literacy': { g:'teal', t:'Ecological & Planetary Literacy', s:'Personal grounding', b:'Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.' },
+      'Cultural & Ancestral Literacy': { g:'teal', t:'Cultural & Ancestral Literacy', s:'Personal grounding', b:'Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
       // ===== collective capacities (green) =====
       'Systems Thinking & Modeling': { g:'green', t:'Systems Thinking & Modeling', s:'Collective strategy', b:'Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.' },
       'Complex Problem Solving': { g:'green', t:'Complex Problem Solving', s:'Collective strategy', b:'Categorizing problem fields across ordered, complex, or chaotic domains to determine whether an environment requires linear management or emergent experimentation.' },
@@ -814,11 +799,10 @@ class Component extends DCLogic {
     const det = CD[key] || {};
     const tcMap = { 'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733','Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8','Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45' };
     const tcol = (t)=>{ if(tcMap[t]) return tcMap[t]; let h=0; for(let i=0;i<t.length;i++){ h=(h*31+t.charCodeAt(i))>>>0; } return 'hsl('+(h%360)+' 42% 42%)'; };
-    const normUrl = (u)=>{ if(!u) return '#'; u=String(u).trim(); if(!u||u==='#') return '#'; if(/^(https?:\/\/|mailto:|tel:)/i.test(u)) return u; if(/^\/\//.test(u)) return 'https:'+u; return 'https://'+u.replace(/^\/+/,''); };
     const list = (R.resources||[]).filter(r=>r.caps && r.caps.indexOf(key)>=0);
     const items = list.map((r,i)=>({r,i})).sort((a,b)=>{ const f=(b.r.featured?1:0)-(a.r.featured?1:0); return f!==0?f:(a.r.name||'').localeCompare(b.r.name||''); }).map(x=>{
       const r=x.r; const t0=(r.types&&r.types.length)?r.types[0]:'Resource'; const tc=tcol(t0);
-      return { name:r.name, desc:r.desc, url:normUrl(r.url), featured:!!r.featured,
+      return { name:r.name, desc:r.desc, url:r.url||'#', featured:!!r.featured,
         typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
         typeTags:(r.types&&r.types.length?r.types:['Resource']).map(t=>{ const c=tcol(t); return { label:t, style:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:c+'1f', color:c, whiteSpace:'nowrap' } }; }),
         typeStyle:{ display:'inline-flex', alignItems:'center', fontFamily:"'PT Sans',sans-serif", fontSize:'10.5px', fontWeight:700, letterSpacing:'.04em', textTransform:'uppercase', padding:'3px 9px', borderRadius:'20px', background:tc+'1f', color:tc, whiteSpace:'nowrap' },
@@ -898,7 +882,6 @@ class Component extends DCLogic {
     }
   }
   componentWillUnmount() {
-    if (this._onRotResize) window.removeEventListener('resize', this._onRotResize);
     if (this._rotTimer) clearInterval(this._rotTimer);
     if (this._rotSwap) clearTimeout(this._rotSwap);
     if (this._ro) this._ro.disconnect();

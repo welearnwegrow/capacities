@@ -28,15 +28,5 @@
     })
     .catch(function (e) {
       console.warn("[Notion] live data unavailable — using bundled copy:", e.message);
-      window.__RESEARCH_LIVE_FAILED = true;
-      window.dispatchEvent(new Event("research-data-updated"));
     });
-
-  // Safety net: if live data hasn't arrived in time, fall back to the bundled copy
-  setTimeout(function () {
-    if (!window.__RESEARCH_LIVE_READY && !window.__RESEARCH_LIVE_FAILED) {
-      window.__RESEARCH_LIVE_FAILED = true;
-      window.dispatchEvent(new Event("research-data-updated"));
-    }
-  }, 7000);
 })();

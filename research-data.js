@@ -18,7 +18,7 @@ window.__RESEARCH = {
    "group": "teal"
   },
   {
-   "label": "Socioeconomic & Political Inquiry",
+   "label": "Socioeconomic & Political Literacy",
    "group": "teal"
   },
   {
@@ -26,11 +26,11 @@ window.__RESEARCH = {
    "group": "teal"
   },
   {
-   "label": "Ecological & Planetary Inquiry",
+   "label": "Ecological & Planetary Literacy",
    "group": "teal"
   },
   {
-   "label": "Cultural & Ancestral Inquiry",
+   "label": "Cultural & Ancestral Literacy",
    "group": "teal"
   },
   {
@@ -103,7 +103,7 @@ window.__RESEARCH = {
    "name": "The Commoner's Catalog for Changemaking",
    "caps": [
     "Experimenting & Building",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "Explore the world of commoning, where communities steward everything from water to finance. This catalog provides a practical blueprint for self-reliance, showing how grassroots collaboration can reclaim control over our resources and culture. It’s an essential guide for building alternative, regenerative social futures",
    "types": [
@@ -127,8 +127,8 @@ window.__RESEARCH = {
   {
    "name": "This Can't be Happening",
    "caps": [
-    "Ecological & Planetary Inquiry",
-    "Socioeconomic & Political Inquiry"
+    "Ecological & Planetary Literacy",
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "Real climate justice requires an equitable lens. This primer shifts the focus from simple environmentalism to the systemic inequalities driving the crisis. It’s a vital resource for ensuring our collective future is built on fairness, centering the voices and needs of those most impacted by our changing world.",
    "types": [
@@ -139,9 +139,9 @@ window.__RESEARCH = {
   {
    "name": "Climate Change is Racist",
    "caps": [
-    "Ecological & Planetary Inquiry",
+    "Ecological & Planetary Literacy",
     "Positionality & Power Analysis",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "This uncomfortable, essential read exposes the structural racism embedded within the climate crisis and its solutions. It’s a call to look deeper, reminding us that true sustainability is impossible without racial justice. A  resource for ensuring our systems transformation is equitable for everyone, everywhere.",
    "types": [
@@ -165,7 +165,7 @@ window.__RESEARCH = {
    "name": "Living Planet Report",
    "caps": [
     "Data Analysis & Evaluation",
-    "Ecological & Planetary Inquiry"
+    "Ecological & Planetary Literacy"
    ],
    "desc": "Global wildlife populations have dropped about 73% since 1970, with freshwater and Latin American species hit hardest. The report warns that habitat loss, overexploitation, and other pressures could trigger environmental tipping points without urgent action on food, energy, finance, and conservation.",
    "types": [
@@ -188,7 +188,7 @@ window.__RESEARCH = {
   {
    "name": "Heritage Crafts: Preserving Traditional Skills and Culture 🛠️",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Ancestral Literacy",
     "Observing & Listening"
    ],
    "desc": "This article from the Weald & Downland Living Museum highlights heritage crafts, such as blacksmithing and weaving, as vital cultural links to our ancestors and history. These traditional skills demonstrate how earlier generations utilized local materials to survive. Because many of these crafts are now endangered, museum workshops and training programs are vital to preserve them.",
@@ -200,7 +200,7 @@ window.__RESEARCH = {
   {
    "name": "Planetary Boundaries: Defining a Safe Operating Space for Humanity",
    "caps": [
-    "Ecological & Planetary Inquiry",
+    "Ecological & Planetary Literacy",
     "Systems Thinking & Modeling"
    ],
    "desc": "The Planetary Boundaries concept from the Stockholm Resilience Centre outlines nine critical Earth system processes—including climate change and biodiversity loss—that define a \"safe operating space for humanity.\" Staying within these limits ensures a stable, resilient planet. However, research warns that several boundaries have already been crossed, increasing the risk of irreversible environmental disruptions.",
@@ -250,8 +250,8 @@ window.__RESEARCH = {
    "name": "Hospicing Modernity: Facing Humanity's Wrongs and the Implications for Social Activism",
    "caps": [
     "Critical Consciousness",
-    "Ecological & Planetary Inquiry",
-    "Socioeconomic & Political Inquiry"
+    "Ecological & Planetary Literacy",
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "Vanessa Machado de Oliveira provides a profound guide on how to face global crises, systemic harms, and climate collapse with maturity, humility, and integrity without relying on simplistic quick-fix solutions.",
    "types": [
@@ -262,7 +262,7 @@ window.__RESEARCH = {
   {
    "name": "Thinking in Systems: A Primer",
    "caps": [
-    "Ecological & Planetary Inquiry",
+    "Ecological & Planetary Literacy",
     "Systems Thinking & Modeling"
    ],
    "desc": "Donella Meadows’ classic manual serves as an essential introduction to understanding how complex systems function, offering vital problem-solving insights that span from personal dynamics to global challenges.",
@@ -310,7 +310,7 @@ window.__RESEARCH = {
   {
    "name": "Resilience Thinking: Sustaining Ecosystems and People in a Changing World",
    "caps": [
-    "Ecological & Planetary Inquiry",
+    "Ecological & Planetary Literacy",
     "Systems Thinking & Modeling"
    ],
    "desc": "Brian Walker and David Salt present an essential overview of social-ecological systems and resilience theory, demonstrating how communities and environments can absorb disturbance while maintaining their core functions.",
@@ -335,7 +335,7 @@ window.__RESEARCH = {
    "name": "Decolonizing Methodologies: Research and Indigenous Peoples",
    "caps": [
     "Critical Consciousness",
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Ancestral Literacy",
     "Participatory Research & Design"
    ],
    "desc": "Linda Tuhiwai Smith's foundational text critiques Eurocentric scientific and academic paradigms, exploring how research can be reclaimed, decolonized, and re-centered through Indigenous knowledge and systemic practices.",
@@ -408,7 +408,7 @@ window.__RESEARCH = {
   {
    "name": "Decolonising the Mind: The Politics of Language in African Literature",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Ancestral Literacy",
     "Narrative & Media Analysis"
    ],
    "desc": "Ngũgĩ wa Thiong'o explores the systemic impacts of cultural imperialism, arguing that true structural and intellectual decolonization requires a return to indigenous languages and storytelling traditions.",
@@ -459,7 +459,7 @@ window.__RESEARCH = {
   {
    "name": "Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge and the Teachings of Plants",
    "caps": [
-    "Ecological & Planetary Inquiry"
+    "Ecological & Planetary Literacy"
    ],
    "desc": "Drawing on her life as an indigenous scientist, and as a woman, Robin Wall Kimmerer shows how other living beings—asters and goldenrod, strawberries and squash, salamanders, algae, and sweetgrass—offer us gifts and lessons, even if we've forgotten how to hear their voices.",
    "types": [
@@ -483,7 +483,7 @@ window.__RESEARCH = {
    "name": "Sand Talk: How Indigenous Thinking Can Save the World",
    "caps": [
     "Complex Problem Solving",
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Ancestral Literacy",
     "Systems Thinking & Modeling"
    ],
    "desc": "This book brings an indigenous perspective to critical questions about world systems and how they are breaking down. It looks at global systems from an Indigenous perspective, showing how contemporary complex problems can be re-evaluated through ancient sustainability models.",
@@ -507,8 +507,8 @@ window.__RESEARCH = {
   {
    "name": "The Dawn of Everything: A New History of Humanity",
    "caps": [
-    "Cultural & Ancestral Inquiry",
-    "Socioeconomic & Political Inquiry"
+    "Cultural & Ancestral Literacy",
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "A fundamentally transformed understanding of the human past and offers a path toward imagining new forms of freedom, new ways of organizing society. This pathbreaking book fundamentally transforms our understanding of the human past, challenging foundational myths about social evolution, hierarchy, and state origins.",
    "types": [
@@ -592,7 +592,7 @@ window.__RESEARCH = {
    "name": "Governing the Commons: The Evolution of Institutions for Collective Action",
    "caps": [
     "Ecosystem Engagement",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "Elinor Ostrom's Nobel Prize-winning seminal text evaluates how local communities successfully govern common-pool natural resources through self-organized institutions rather than relying on state coercion or complete privatization.",
    "types": [
@@ -667,7 +667,7 @@ window.__RESEARCH = {
    "name": "All About Power",
    "caps": [
     "Positionality & Power Analysis",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "A seminal primer by Srilatha Batliwala that demystifies power by analyzing both formal structures and informal relations. It provides a shared lexicon for social justice advocates to map how power operates, enabling them to build more effective, evidence-based strategies for systemic change.",
    "types": [
@@ -691,7 +691,7 @@ window.__RESEARCH = {
   {
    "name": "Culture Hack: M2U2",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Ancestral Literacy",
     "Narrative & Media Analysis"
    ],
    "desc": "A curriculum focused on the \"narrative space\" of social change, teaching practitioners how to identify and \"hack\" the underlying logics and metaphors that sustain inequality. It provides tools for shifting public discourse by deconstructing dominant myths and co-creating new, dignity-affirming stories.",
@@ -704,7 +704,7 @@ window.__RESEARCH = {
    "name": "Regenerative Economics",
    "caps": [
     "Networking & Engaging Capital",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "This resource provides educational frameworks for understanding economic models that prioritize planetary health and social well-being over extraction. It aims to equip educators and students with the systemic understanding needed to move beyond traditional growth-based paradigms toward circular and regenerative futures.",
    "types": [
@@ -888,7 +888,7 @@ window.__RESEARCH = {
    "name": "Our World in Data",
    "caps": [
     "Data Analysis & Evaluation",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "A comprehensive online publication that presents empirical research and data on global development challenges, helping users visualize long-term trends in health, poverty, and environmental sustainability.",
    "types": [
@@ -900,7 +900,7 @@ window.__RESEARCH = {
    "name": "SDG Tracker",
    "caps": [
     "Data Analysis & Evaluation",
-    "Ecological & Planetary Inquiry"
+    "Ecological & Planetary Literacy"
    ],
    "desc": "An interactive tool that monitors global progress toward the United Nations Sustainable Development Goals, providing data-driven insights into how countries are performing against specific targets.",
    "types": [
@@ -924,7 +924,7 @@ window.__RESEARCH = {
    "name": "Map of Life",
    "caps": [
     "Data Analysis & Evaluation",
-    "Ecological & Planetary Inquiry"
+    "Ecological & Planetary Literacy"
    ],
    "desc": "A scientific platform that integrates global biodiversity data to map species distributions and habitat health, providing essential insights for ecological systems management.",
    "types": [
@@ -972,8 +972,8 @@ window.__RESEARCH = {
   {
    "name": "For The Wild",
    "caps": [
-    "Cultural & Ancestral Inquiry",
-    "Ecological & Planetary Inquiry"
+    "Cultural & Ancestral Literacy",
+    "Ecological & Planetary Literacy"
    ],
    "desc": "An anthology of the Anthropocene that explores ecological conservation, indigenous wisdom, and the systemic shifts needed to live in better relationship with the natural world.",
    "types": [
@@ -984,7 +984,7 @@ window.__RESEARCH = {
   {
    "name": "Life Worlds",
    "caps": [
-    "Ecological & Planetary Inquiry",
+    "Ecological & Planetary Literacy",
     "Observing & Listening",
     "Somatic Eco-Regulation"
    ],
@@ -998,7 +998,7 @@ window.__RESEARCH = {
    "name": "Green Dreamer",
    "caps": [
     "Critical Consciousness",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "A podcast and community platform hosted by Kamea Chayne, focusing on radical solutions for climate justice and collective healing through systemic re-alignment.",
    "types": [
@@ -1011,7 +1011,7 @@ window.__RESEARCH = {
    "caps": [
     "Leading in Complexity",
     "Regenerative Systems Design",
-    "Socioeconomic & Political Inquiry"
+    "Socioeconomic & Political Literacy"
    ],
    "desc": "Hosted by Nate Hagens, this podcast investigates the complex, interconnected global systems—energy, economy, and ecology—and the necessary transitions to a lower-entropy future.",
    "types": [
@@ -1186,7 +1186,7 @@ window.__RESEARCH = {
   {
    "name": "Tools for regenerative practice",
    "caps": [
-    "Ecological & Planetary Inquiry",
+    "Ecological & Planetary Literacy",
     "Regenerative Systems Design"
    ],
    "desc": "Tools for regenerative practice is a practical guide designed to help organisations, communities, initiatives and facilitators explore how human systems can better align with the regenerative dynamics of life. Bringing together 30 frameworks, exercises and methods, the toolkit supports people in deepening systems awareness, reconnecting with nature, strengthening collaboration, expanding imagination, and moving from reflection into meaningful action.",

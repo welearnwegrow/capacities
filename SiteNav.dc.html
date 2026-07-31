@@ -19,8 +19,17 @@
     .sn-burger{ display:flex !important; }
     .sn-nav{ flex-wrap:nowrap !important; gap:12px !important; padding-left:20px !important; padding-right:20px !important; }
     .sn-nav > a{ min-width:0 !important; }
+    .sn-logo{ width:32px !important; height:32px !important; }
+    .sn-wordmark{ font-size:14.5px !important; }
+    .sn-tagline{ font-size:10px !important; }
+    .sn-brand{ min-width:0 !important; overflow:hidden; }
     .sn-panel{ position:absolute; top:100%; left:0; right:0; background:rgba(247,248,243,0.96); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); padding:4px 20px 10px; box-shadow:0 10px 22px rgba(60,90,85,.10); }
     .sn-nav.sn-open .sn-panel{ display:flex !important; }
+  }
+  @media (max-width:400px){
+    .sn-wordmark{ font-size:13px !important; }
+    .sn-tagline{ font-size:9.5px !important; }
+    .sn-logo{ width:28px !important; height:28px !important; }
   }
   .sn-burger span{ display:block; width:21px; height:2px; background:#1f3a36; border-radius:2px; transition:transform .22s ease, opacity .18s ease; }
   .sn-burger span + span{ margin-top:5px; }
@@ -30,11 +39,11 @@
 </style>
 </helmet>
 <nav class="sn-nav {{ openClass }}" style="position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:18px 26px;flex-wrap:wrap;padding:16px 30px;background:rgba(247,248,243,0.62);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid rgba(255,255,255,.55);box-shadow:0 1px 0 rgba(70,90,85,.06),0 6px 22px rgba(60,90,85,.05);font-family:'PT Sans',system-ui,sans-serif">
-  <a href="index.html" style="margin-right:auto;display:flex;align-items:center;gap:10px;text-decoration:none">
-    <img src="favicon.png" alt="" style="width:40px;height:40px;display:block;flex:none"></img>
-    <span style="display:flex;flex-direction:column;line-height:1.15;gap:3px">
-      <span style="font-family:'Fraunces',serif;font-weight:600;font-size:17px;letter-spacing:-.01em;color:#1f3a36;white-space:nowrap">Systems Change Learning Studio</span>
-      <span style="font-family:'PT Serif',serif;font-style:italic;font-size:11.5px;color:#4c6b64;white-space:nowrap">Lifelong Learning for Just &amp; Regenerative Futures</span>
+  <a href="index.dc.html" style="margin-right:auto;display:flex;align-items:center;gap:10px;text-decoration:none">
+    <img src="favicon.png" alt="" class="sn-logo" style="width:40px;height:40px;display:block;flex:none"></img>
+    <span class="sn-brand" style="display:flex;flex-direction:column;line-height:1.15;gap:3px">
+      <span class="sn-wordmark" style="font-family:'Fraunces',serif;font-weight:600;font-size:17px;letter-spacing:-.01em;color:#1f3a36;white-space:nowrap">Systems Change Learning Studio</span>
+      <span class="sn-tagline" style="font-family:'PT Serif',serif;font-style:italic;font-size:11.5px;color:#4c6b64;white-space:nowrap">Lifelong Learning for Just &amp; Regenerative Futures</span>
     </span>
   </a>
   <div class="sn-links" style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
@@ -62,11 +71,11 @@ class Component extends DCLogic {
     const pBase = { fontFamily:"'PT Sans',sans-serif", fontSize:'16px', fontWeight:700, letterSpacing:'.01em', textDecoration:'none', color:'#3a544e', padding:'15px 4px', borderTop:'1px solid rgba(70,90,85,.14)' };
     const pOn = Object.assign({}, pBase, { color:'#1f3a36' });
     const items = [
-      { key:'home', label:'Home', href:'index.html' },
-      { key:'orientations', label:'Orientations', href:'orientations.html' },
-      { key:'about', label:'Route', href:'metaprocess.html' },
-      { key:'resources', label:'Learning Resources', href:'resources.html' },
-      { key:'engage', label:'Partner with Us', href:'engage.html' }
+      { key:'home', label:'Home', href:'index.dc.html' },
+      { key:'orientations', label:'Orientations', href:'orientations.dc.html' },
+      { key:'about', label:'Route', href:'metaprocess.dc.html' },
+      { key:'resources', label:'Learning Resources', href:'resources.dc.html' },
+      { key:'engage', label:'Partner with Us', href:'engage.dc.html' }
     ];
     return {
       open: this.state.open,

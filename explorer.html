@@ -192,6 +192,17 @@ class Component extends DCLogic {
     };
   }
 
+  // Uses in-editor window.claude when present; otherwise proxies through the worker (/ai) so the live static site can match with AI too.
+  async _complete(opts){
+    if(window.claude && window.claude.complete){ return await window.claude.complete(opts); }
+    var url=window.NOTION_CONNECTOR_URL;
+    if(!url) throw new Error('no AI transport');
+    var r=await fetch(url.replace(/\/+$/,'')+'/ai',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ model:opts.model, max_tokens:opts.max_tokens, system:opts.system, messages:opts.messages }) });
+    var data=await r.json().catch(function(){ return {}; });
+    if(!r.ok || data.error) throw new Error((data && data.error) || ('HTTP '+r.status));
+    return data.text||'';
+  }
+
   // ---------- AI match ----------
   async _aiMatch(query){
     const lib=(this._data().resources||[]).map(r=>({ name:r.name, desc:(r.desc||'').slice(0,240), areas:r.caps||[], type:(r.types||[])[0]||'' }));
@@ -200,7 +211,7 @@ class Component extends DCLogic {
     const sys='You are a guide for a systems-change learning library. Given a practitioner\'s problem, you recommend where it sits on a 5-step "Route", which "learning areas" matter most, and which library resources to start with. Only ever recommend resources by their EXACT name from the provided list. Respond with STRICT JSON only, no prose, no markdown.';
     const schema='{"summary": string (one warm sentence reflecting their situation back), "route": string[] (1-2 Route step names, most relevant first), "routeWhy": string (one sentence), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one actionable sentence, starting with "Use this to \u2026", that ties the resource directly to THEIR specific situation and names the concrete thing they could do with it}] (3-5 items)}';
     const user='ROUTE STEPS: '+route+'\n\nLEARNING AREAS (pick names from here): '+caps.join(', ')+'\n\nLIBRARY RESOURCES (JSON): '+JSON.stringify(lib)+'\n\nPRACTITIONER PROBLEM:\n'+query+'\n\nReturn JSON exactly in this shape: '+schema;
-    const raw=await window.claude.complete({ model:'claude-sonnet-4-5', max_tokens:1400, system:sys, messages:[{role:'user',content:user}] });
+    const raw=await this._complete({ model:'claude-sonnet-4-5', max_tokens:1400, system:sys, messages:[{role:'user',content:user}] });
     let txt=(raw||'').trim();
     const a=txt.indexOf('{'), b=txt.lastIndexOf('}');
     if(a>=0&&b>a) txt=txt.slice(a,b+1);

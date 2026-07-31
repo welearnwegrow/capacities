@@ -596,13 +596,17 @@ class Component extends DCLogic {
       frame.style.overflow = 'hidden';
       frame.style.touchAction = 'none';
       const base = frame.clientWidth / 1040;
-      this._mBase = base; this._mMin = base; this._mMax = base * 3.4;
-      // start zoomed out at full width; frame height flexes to the map's full height
-      if (this._mScale == null) this._mScale = base;
-      frame.style.height = Math.round(1320 * base) + 'px';
+      const vh = (window.innerHeight || 800);
+      const frameH = Math.max(Math.round(vh * 0.82), 480);
+      frame.style.height = frameH + 'px';
+      // cover: map must fill the frame both ways, so no empty bands (reads as a full-page map)
+      const coverScale = Math.max(base, frameH / 1320);
+      this._mBase = base; this._mMin = base; this._mMax = coverScale * 3.4;
+      if (this._mScale == null) this._mScale = coverScale;
+      if (this._mScale < base) this._mScale = base;
       const cw = 1040 * this._mScale, ch = 1320 * this._mScale;
       this._mTx = (frame.clientWidth - cw) / 2;
-      this._mTy = ch <= frame.clientHeight ? (frame.clientHeight - ch) / 2 : 0;
+      this._mTy = ch <= frameH ? (frameH - ch) / 2 : 0;
       this._applyM();
       if (!frame._mBound) { frame._mBound = true; this._bindMobileGestures(frame); }
     };

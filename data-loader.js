@@ -38,5 +38,5 @@
       window.__RESEARCH_LIVE_FAILED = true;
       window.dispatchEvent(new Event("research-data-updated"));
     }
-  }, 7000);
+  }, 20000);
 })();

@@ -48,7 +48,7 @@
   <div class="rl-hero" style="position:relative;overflow:hidden;padding:54px 26px 42px">
     <div style="position:relative;max-width:1180px;margin:0 auto">
       <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:50px;line-height:1.02;letter-spacing:-.01em;margin:0 0 14px;color:#1f3a36">Learning Resources</h1>
-      <p style="font-size:16px;line-height:1.6;color:#3e544f;margin:0;max-width:70ch">These learning resources have been curated by the co-authors of this work and a growing base of systems changemakers. You are invited to suggest resources that have helped you in your systems work. You can also contact us to propose a new learning area or resource type.&nbsp;</p>
+      <p style="font-size:16px;line-height:1.6;color:#3e544f;margin:0;max-width:70ch">These learning resources have been curated by the authors of this work and a growing base of systems changemakers. You are invited to suggest resources that have helped you in your systems work. You can also contact us to propose a new learning area or resource type.&nbsp;</p>
     </div>
   </div>
 
@@ -347,7 +347,13 @@ class Component extends DCLogic {
       }
     } catch(e){}
   }
-  _data(){ return window.__RESEARCH || {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}}; }
+  _data(){
+    var live = (typeof window!=='undefined') && window.__RESEARCH_LIVE_READY;
+    var failed = (typeof window!=='undefined') && window.__RESEARCH_LIVE_FAILED;
+    var awaiting = (typeof window!=='undefined') && !!window.NOTION_CONNECTOR_URL && !live && !failed;
+    if (awaiting) return {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}};
+    return window.__RESEARCH || {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}};
+  }
   _cols(){ return {
     teal:{c:'#46716f', accent:'#7E9E9E', soft:'#e2e9e7', head:'#e9efe8'},
     green:{c:'#5b6733', accent:'#A2AD68', soft:'#eaecdb', head:'#edefdf'},
@@ -392,12 +398,20 @@ class Component extends DCLogic {
     let h=0; for(let i=0;i<t.length;i++){ h=(h*31 + t.charCodeAt(i))>>>0; }
     return 'hsl('+(h%360)+' 42% 42%)';
   }
+  _normUrl(u){
+    if(!u) return '#';
+    u = String(u).trim();
+    if(!u || u==='#') return '#';
+    if(/^(https?:\/\/|mailto:|tel:)/i.test(u)) return u;
+    if(/^\/\//.test(u)) return 'https:'+u;
+    return 'https://'+u.replace(/^\/+/,'');
+  }
   _mkRes(r){
     const cols=this._cols();
     const t0=(r.types&&r.types.length)?r.types[0]:'Resource';
     const tc=this._typeColor(t0);
     return {
-      name:r.name, desc:r.desc, url:r.url||'#',
+      name:r.name, desc:r.desc, url:this._normUrl(r.url),
       featured:!!r.featured,
       typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource',
       typeColor:tc,
@@ -429,6 +443,7 @@ class Component extends DCLogic {
 
   renderVals(){
     const d=this._data(); const cols=this._cols(); const tab=this.state.tab;
+    const awaitingLive = (typeof window!=='undefined') && !!window.NOTION_CONNECTOR_URL && !window.__RESEARCH_LIVE_READY && !window.__RESEARCH_LIVE_FAILED;
     const tabBase={ fontFamily:"'PT Sans',sans-serif", fontSize:'14px', fontWeight:700, padding:'11px 16px', border:'none', background:'transparent', cursor:'pointer', borderBottom:'3px solid transparent', marginBottom:'-1px', color:'#9a8d76' };
     const tabOn=Object.assign({}, tabBase, { color:'#39342b', borderBottom:'3px solid #8a6a45' });
     const mkTab=(name)=> tab===name ? tabOn : tabBase;
@@ -469,7 +484,7 @@ class Component extends DCLogic {
       deep={ label, color:col.c, headerBg:col.head, groupName:(meta[g]||{}).name||g,
         desc:det.desc||'', levels, hasLevels:levels.length>0,
         countText:list.length+(list.length===1?' resource to learn about this area':' resources to learn about this area'),
-        items, onDesign:()=>{ window.location.href='design.dc.html'; } };
+        items, onDesign:()=>{ window.location.href='design.html'; } };
     }
 
     // ---- library ----
@@ -528,7 +543,7 @@ class Component extends DCLogic {
       setStudio:()=>this.setState({tab:'studio', deep:null}),
       tabCapStyle:mkTab('capacities'), tabLibStyle:mkTab('library'), tabStudioStyle:mkTab('studio'),
       tabCountStyle:{ fontSize:'11px', fontWeight:700, background:'rgba(138,106,69,.16)', color:'#8a6a45', padding:'1px 7px', borderRadius:'10px', marginLeft:'4px' },
-      totalText:String(d.resources.length),
+      totalText: awaitingLive ? '…' : String(d.resources.length),
       isCapacities:tab==='capacities', isLibrary:tab==='library', isStudio:tab==='studio',
       // capacities
       groupSections,

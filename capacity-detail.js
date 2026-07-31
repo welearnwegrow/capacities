@@ -48,7 +48,7 @@ window.__CAPDETAIL = {
    "Systemic": "Anchors large funding and stewardship decisions in deep ethics, ensuring long-term care for people and the living world. Helps institutions hold themselves accountable to justice and repair, not just compliance."
   }
  },
- "Socioeconomic & Political Literacy": {
+ "Socioeconomic & Political Inquiry": {
   "desc": "Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.",
   "levels": {
    "Personal": "Understands the basics of how economies and politics work, and can trace how large forces — markets, policy, institutions — shape everyday life. Reads beyond the headlines to the structures underneath.",
@@ -57,7 +57,7 @@ window.__CAPDETAIL = {
    "Systemic": "Reshapes how money and policy flow at large scales to counter extraction and keep power from concentrating in few hands. Influences the rules and financing structures that govern whole sectors or regions."
   }
  },
- "Ecological & Planetary Literacy": {
+ "Ecological & Planetary Inquiry": {
   "desc": "Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.",
   "levels": {
    "Personal": "Explains how natural systems work, the climate and ecological risks nearby, and the idea that the planet has real limits. Connects personal choices to their ecological footprint and begins to act on that awareness.",
@@ -66,7 +66,7 @@ window.__CAPDETAIL = {
    "Systemic": "Guides large-scale conservation and land policy that restores ecosystems and makes room for many species to thrive across borders. Shapes how institutions understand and respect planetary boundaries."
   }
  },
- "Cultural & Ancestral Literacy": {
+ "Cultural & Ancestral Inquiry": {
   "desc": "Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.",
   "levels": {
    "Personal": "Values local histories, oral traditions, and lineages, and respects cultural ways of knowing different from your own. Listens to ancestral and land-based knowledge with humility rather than extraction.",

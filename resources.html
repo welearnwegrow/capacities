@@ -16,9 +16,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:ital,wght@0,400;0,700;1,400&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&amp;family=Caveat:wght@600&amp;display=swap" rel="stylesheet">
-<script src="./research-data.js"></script>
-<script src="notion-config.js"></script>
-<script src="data-loader.js"></script>
+<script src="./research-data.js?v=20260731c"></script>
+<script src="notion-config.js?v=20260731c"></script>
+<script src="data-loader.js?v=20260731c"></script>
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -37,7 +37,7 @@
   }
 </style>
 <script src="forms-config.js"></script>
-<script src="capacity-detail.js"></script>
+<script src="capacity-detail.js?v=20260731c"></script>
 </helmet>
 
 <div style="min-height:100vh;background:radial-gradient(680px 460px at 14% 6%, rgba(150,178,108,.21), transparent 72%), radial-gradient(560px 400px at 86% 2%, rgba(120,165,150,.12), transparent 72%), linear-gradient(180deg,#e2ebd4 0%,#eef1e3 540px);font-family:'PT Sans',system-ui,sans-serif;color:#39342b">
@@ -348,10 +348,6 @@ class Component extends DCLogic {
     } catch(e){}
   }
   _data(){
-    var live = (typeof window!=='undefined') && window.__RESEARCH_LIVE_READY;
-    var failed = (typeof window!=='undefined') && window.__RESEARCH_LIVE_FAILED;
-    var awaiting = (typeof window!=='undefined') && !!window.NOTION_CONNECTOR_URL && !live && !failed;
-    if (awaiting) return {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}};
     return window.__RESEARCH || {capacities:[],resources:[],conditions:[],methods:[],groupMeta:{}};
   }
   _cols(){ return {
@@ -443,7 +439,7 @@ class Component extends DCLogic {
 
   renderVals(){
     const d=this._data(); const cols=this._cols(); const tab=this.state.tab;
-    const awaitingLive = (typeof window!=='undefined') && !!window.NOTION_CONNECTOR_URL && !window.__RESEARCH_LIVE_READY && !window.__RESEARCH_LIVE_FAILED;
+    const awaitingLive = false;
     const tabBase={ fontFamily:"'PT Sans',sans-serif", fontSize:'14px', fontWeight:700, padding:'11px 16px', border:'none', background:'transparent', cursor:'pointer', borderBottom:'3px solid transparent', marginBottom:'-1px', color:'#9a8d76' };
     const tabOn=Object.assign({}, tabBase, { color:'#39342b', borderBottom:'3px solid #8a6a45' });
     const mkTab=(name)=> tab===name ? tabOn : tabBase;

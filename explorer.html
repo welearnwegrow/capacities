@@ -14,9 +14,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:wght@400;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-<script src="./research-data.js"></script>
-<script src="notion-config.js"></script>
-<script src="data-loader.js"></script>
+<script src="./research-data.js?v=20260731c"></script>
+<script src="notion-config.js?v=20260731c"></script>
+<script src="data-loader.js?v=20260731c"></script>
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -230,8 +230,9 @@ class Component extends DCLogic {
     if(!query || query.length<12){ this.setState({ error:'Add a little more about what you\u2019re working on \u2014 a sentence or two is plenty.' }); return; }
     this.setState({ loading:true, error:null, results:null, dirty:false });
     let out=null, usedAI=false;
+    const hasAI = (window.claude && window.claude.complete) || !!window.NOTION_CONNECTOR_URL;
     try {
-      if(window.claude && window.claude.complete){ out=await this._aiMatch(query); usedAI=true; }
+      if(hasAI){ out=await this._aiMatch(query); usedAI=true; }
     } catch(e){ console.warn('[explorer] AI match failed, using keyword fallback:', e && e.message); }
     if(!out || !out.resources || !out.resources.length){ out=this._keywordMatch(query); usedAI=false; }
     this.setState({ loading:false, results:out, usedAI });

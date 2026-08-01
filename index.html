@@ -1,9 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Learning to Intervene in Complex Systems</title>
+<meta name="description" content="An open-source capacity framework for systems change — an interactive map of 24 learning areas, a suggested route for intervening in complex systems, and a curated library of learning resources.">
+<link rel="canonical" href="https://welearnwegrow.github.io/capacities/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Learning to Intervene in Complex Systems">
+<meta property="og:title" content="Learning to Intervene in Complex Systems">
+<meta property="og:description" content="An open-source capacity framework for systems change — an interactive map of 24 learning areas, a suggested route for intervening in complex systems, and a curated library of learning resources.">
+<meta property="og:url" content="https://welearnwegrow.github.io/capacities/">
+<meta property="og:image" content="https://welearnwegrow.github.io/capacities/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Learning to Intervene in Complex Systems">
+<meta name="twitter:description" content="An open-source capacity framework for systems change — an interactive map of 24 learning areas, a suggested route for intervening in complex systems, and a curated library of learning resources.">
+<meta name="twitter:image" content="https://welearnwegrow.github.io/capacities/og-image.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="favicon-180.png">
@@ -70,7 +82,7 @@
   <!-- title block -->
   <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
     <div style="position:relative">
-      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-.015em;margin:0;max-width:none;color:#1f3a36">Are you trying to change the<br><span class="ioc-rotword" style="display:inline-block;text-align:left;vertical-align:baseline;color:#46716f;transition:opacity .3s ease;opacity:1">education</span> systems you belong to?</h1>
+      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-.015em;margin:0;max-width:none;color:#1f3a36"><span class="ioc-l1" style="white-space:nowrap">Want to change the <span class="ioc-rotword" style="display:inline-block;text-align:left;vertical-align:baseline;color:#46716f;transition:opacity .3s ease;opacity:1">education</span></span><br>systems you're a part of?</h1>
     </div>
   </div>
 
@@ -379,18 +391,27 @@ class Component extends DCLogic {
     });
   }
 
+  componentDidUpdate() { if (this._sizeRotSlot) this._sizeRotSlot(); }
+
   componentDidMount() {
     const words = ['education','information','governance','justice','financial','health','food','energy','infrastructure'];
     let ri = 0;
     this._sizeRotSlot = () => {
       const el = document.querySelector('.ioc-rotword');
       if (!el) return;
+      el.style.minWidth = '0px';
+      const h1 = document.querySelector('.ioc-title');
+      const l1 = document.querySelector('.ioc-l1');
+      if (!h1 || !l1) return;
+      if (!this._baseFS) this._baseFS = parseFloat(getComputedStyle(h1).fontSize) || 62;
+      const base = this._baseFS;
       const cur = el.textContent;
-      el.style.minWidth = '0px';
+      h1.style.fontSize = base + 'px';
       let max = 0;
-      words.forEach(w => { el.textContent = w; if (el.offsetWidth > max) max = el.offsetWidth; });
+      words.forEach(w => { el.textContent = w; const wdt = l1.getBoundingClientRect().width; if (wdt > max) max = wdt; });
       el.textContent = cur;
-      el.style.minWidth = '0px';
+      const avail = h1.clientWidth;
+      h1.style.fontSize = (max > avail && max > 0) ? (Math.floor(base * avail / max * 100) / 100 * 0.985) + 'px' : base + 'px';
     };
     this._sizeRotSlot();
     setTimeout(this._sizeRotSlot, 300);

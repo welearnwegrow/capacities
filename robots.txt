@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://welearnwegrow.github.io/capacities/sitemap.xml

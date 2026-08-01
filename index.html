@@ -70,7 +70,7 @@
   <!-- title block -->
   <div style="position:relative;width:1040px;max-width:100%;margin-bottom:22px;padding-top:30px;text-align:left">
     <div style="position:relative">
-      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-.015em;margin:0;max-width:none;color:#1f3a36">Are you trying to change the<br><span class="ioc-rotword" style="display:inline-block;text-align:left;vertical-align:baseline;color:#46716f;transition:opacity .3s ease;opacity:1">Natural &amp; Environmental</span><br>systems you belong to?</h1>
+      <h1 class="ioc-title" data-edit="title" style="font-family:'Newsreader',serif;font-weight:500;font-size:62px;line-height:1.04;letter-spacing:-.015em;margin:0;max-width:none;color:#1f3a36">Are you trying to change the<br><span class="ioc-rotword" style="display:inline-block;text-align:left;vertical-align:baseline;color:#46716f;transition:opacity .3s ease;opacity:1">education</span> systems you belong to?</h1>
     </div>
   </div>
 
@@ -380,7 +380,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
-    const words = ['Natural & Environmental','Education & Learning','Media & Information','Political & Governance','Legal & Justice','Economic & Monetary','Work & Livelihood','Health & Wellbeing','Food & Water','Energy & Power','Digital & Technological','Development & Infrastructure'];
+    const words = ['education','information','governance','justice','financial','health','food','energy','infrastructure'];
     let ri = 0;
     this._sizeRotSlot = () => {
       const el = document.querySelector('.ioc-rotword');
@@ -390,7 +390,7 @@ class Component extends DCLogic {
       let max = 0;
       words.forEach(w => { el.textContent = w; if (el.offsetWidth > max) max = el.offsetWidth; });
       el.textContent = cur;
-      el.style.minWidth = Math.ceil(max) + 'px';
+      el.style.minWidth = '0px';
     };
     this._sizeRotSlot();
     setTimeout(this._sizeRotSlot, 300);

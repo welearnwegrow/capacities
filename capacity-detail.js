@@ -66,8 +66,8 @@ window.__CAPDETAIL = {
    "Systemic": "Guides large-scale conservation and land policy that restores ecosystems and makes room for many species to thrive across borders. Shapes how institutions understand and respect planetary boundaries."
   }
  },
- "Cultural & Ancestral Inquiry": {
-  "desc": "Engaging with and preserving knowledge architectures, indigenous lifeways, land-based histories, and intergenerational oral traditions.",
+ "Cultural & Epistemic Inquiry": {
+  "desc": "Engaging with diverse cultural knowledge systems, epistemologies, and ways of knowing — honoring indigenous lifeways, land-based histories, and intergenerational oral traditions.",
   "levels": {
    "Personal": "Values local histories, oral traditions, and lineages, and respects cultural ways of knowing different from your own. Listens to ancestral and land-based knowledge with humility rather than extraction.",
    "Social": "Brings traditional and Indigenous knowledge into the design of programs, with care, consent, and respect. Recognises whose knowledge is present and whose has been erased.",

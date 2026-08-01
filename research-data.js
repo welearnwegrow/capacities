@@ -30,7 +30,7 @@ window.__RESEARCH = {
    "group": "teal"
   },
   {
-   "label": "Cultural & Ancestral Inquiry",
+   "label": "Cultural & Epistemic Inquiry",
    "group": "teal"
   },
   {
@@ -443,7 +443,7 @@ window.__RESEARCH = {
   {
    "name": "Culture Hack: M2U2",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Narrative & Media Analysis"
    ],
    "desc": "A curriculum focused on the \"narrative space\" of social change, teaching practitioners how to identify and \"hack\" the underlying logics and metaphors that sustain inequality. It provides tools for shifting public discourse by deconstructing dominant myths and co-creating new, dignity-affirming stories.",
@@ -515,7 +515,7 @@ window.__RESEARCH = {
   {
    "name": "Declaration of Decolonizing Education",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Critical Consciousness"
    ],
    "desc": "Manish Jain’s \"Declaration of Decolonizing Education\" challenges the institutionalization of learning as a form of \"cognitive colonization.\" He argues that modern schooling functions as a monoculture that systematically replaces diverse, indigenous, and life-centered ways of knowing with a standardized, industrial worldview. By separating learners from their communities, environments, and innate intelligence, the current system ensures dependency. The declaration advocates for \"de-schooling\" society, urging a reclamation of localized, autonomous learning ecosystems that foster ecological consciousness, communal agency, and epistemic liberation.",
@@ -527,7 +527,7 @@ window.__RESEARCH = {
   {
    "name": "Decolonising the Mind: The Politics of Language in African Literature",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Narrative & Media Analysis"
    ],
    "desc": "Ngũgĩ wa Thiong'o explores the systemic impacts of cultural imperialism, arguing that true structural and intellectual decolonization requires a return to indigenous languages and storytelling traditions.",
@@ -540,7 +540,7 @@ window.__RESEARCH = {
    "name": "Decolonizing Methodologies: Research and Indigenous Peoples",
    "caps": [
     "Critical Consciousness",
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Participatory Research & Design"
    ],
    "desc": "Linda Tuhiwai Smith's foundational text critiques Eurocentric scientific and academic paradigms, exploring how research can be reclaimed, decolonized, and re-centered through Indigenous knowledge and systemic practices.",
@@ -702,7 +702,7 @@ window.__RESEARCH = {
   {
    "name": "For The Wild",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Ecological & Planetary Inquiry"
    ],
    "desc": "An anthology of the Anthropocene that explores ecological conservation, indigenous wisdom, and the systemic shifts needed to live in better relationship with the natural world.",
@@ -811,7 +811,7 @@ window.__RESEARCH = {
   {
    "name": "Heritage Crafts: Preserving Traditional Skills and Culture 🛠️",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Observing & Listening"
    ],
    "desc": "This article from the Weald & Downland Living Museum highlights heritage crafts, such as blacksmithing and weaving, as vital cultural links to our ancestors and history. These traditional skills demonstrate how earlier generations utilized local materials to survive. Because many of these crafts are now endangered, museum workshops and training programs are vital to preserve them.",
@@ -1155,7 +1155,7 @@ window.__RESEARCH = {
   {
    "name": "Research is Ceremony: Indigenous Research Methods",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Participatory Research & Design",
     "Positionality & Power Analysis"
    ],
@@ -1181,7 +1181,7 @@ window.__RESEARCH = {
    "name": "Sand Talk: How Indigenous Thinking Can Save the World",
    "caps": [
     "Complex Problem Solving",
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Systems Thinking & Modeling"
    ],
    "desc": "This book brings an indigenous perspective to critical questions about world systems and how they are breaking down. It looks at global systems from an Indigenous perspective, showing how contemporary complex problems can be re-evaluated through ancient sustainability models.",
@@ -1580,7 +1580,7 @@ window.__RESEARCH = {
    "name": "The Colonization of Cognition",
    "caps": [
     "Critical Consciousness",
-    "Cultural & Ancestral Inquiry"
+    "Cultural & Epistemic Inquiry"
    ],
    "desc": "Jinan KB critiques modern schooling for prioritizing abstract, textual information over the natural, experiential learning he terms \"existential knowledge.\" He argues that formal education colonizes cognition, disconnecting individuals from their innate ability to observe and engage with the world. Through extensive documentation of children’s play and indigenous practices, he illustrates how we must \"unlearn\" industrial educational habits. This perspective is vital for systems change, as it seeks to restore autonomous, biologically-rooted processes of understanding and creation.",
    "types": [
@@ -1651,7 +1651,7 @@ window.__RESEARCH = {
   {
    "name": "The Dawn of Everything: A New History of Humanity",
    "caps": [
-    "Cultural & Ancestral Inquiry",
+    "Cultural & Epistemic Inquiry",
     "Socioeconomic & Political Inquiry"
    ],
    "desc": "A fundamentally transformed understanding of the human past and offers a path toward imagining new forms of freedom, new ways of organizing society. This pathbreaking book fundamentally transforms our understanding of the human past, challenging foundational myths about social evolution, hierarchy, and state origins.",
@@ -1686,7 +1686,7 @@ window.__RESEARCH = {
    "name": "The Ecoversities Alliance",
    "caps": [
     "Regenerative Systems Design",
-    "Cultural & Ancestral Inquiry"
+    "Cultural & Epistemic Inquiry"
    ],
    "desc": "The Ecoversities Alliance is a trans-local community of practitioners dedicated to radically re-imagining higher education to foster human and ecological flourishing. Moving beyond institutional constraints, this network supports learners in reclaiming diverse knowledge systems, decolonizing pedagogical practices, and restoring connections to local lands. Through mutual aid, intercultural dialogue, and experiential inquiry, it provides an ecology of learning spaces where participants co-create meaningful pathways that shift education from a standardized model to a tool for systemic regeneration.",
    "types": [
@@ -1828,7 +1828,7 @@ window.__RESEARCH = {
    "caps": [
     "Narrative & Media Analysis",
     "Ecosystem Engagement",
-    "Cultural & Ancestral Inquiry"
+    "Cultural & Epistemic Inquiry"
    ],
    "desc": "The People’s Archive of Rural India (PARI) is a multimedia, collaborative project that documents the immense diversity of rural India’s livelihoods, cultures, and struggles. By prioritizing stories from marginalized voices and preserving disappearing oral histories and traditional knowledge, it challenges the erasure of rural perspectives in mainstream media and policy. PARI functions as a crucial \"living archive,\" providing granular, grounded evidence of systemic inequality and resilience that is often overlooked in top-down development discourse.",
    "types": [
@@ -1865,7 +1865,7 @@ window.__RESEARCH = {
    "caps": [
     "Ecosystem Engagement",
     "Experimenting & Building",
-    "Cultural & Ancestral Inquiry"
+    "Cultural & Epistemic Inquiry"
    ],
    "desc": "SECMOL (Students' Educational and Cultural Movement of Ladakh) is a pioneering educational collective that addresses the systemic mismatch between conventional schooling and the realities of life in the high-altitude Ladakh region. Founded to empower local youth, it emphasizes experiential learning, cultural preservation, and ecological sustainability. By integrating traditional wisdom with modern knowledge, SECMOL creates a \"living school\" model where students directly manage their campus, fostering self-reliance, community governance, and a profound sense of regional identity.",
    "types": [

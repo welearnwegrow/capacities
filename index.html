@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Learning to Intervene in Complex Systems</title>
+<title>Systems Change Learning Guide</title>
 <meta name="description" content="An open-source capacity framework for systems change — an interactive map of 24 learning areas, a suggested route for intervening in complex systems, and a curated library of learning resources.">
 <link rel="canonical" href="https://welearnwegrow.github.io/capacities/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Learning to Intervene in Complex Systems">
-<meta property="og:title" content="Learning to Intervene in Complex Systems">
+<meta property="og:site_name" content="Systems Change Learning Guide">
+<meta property="og:title" content="Systems Change Learning Guide">
 <meta property="og:description" content="An open-source capacity framework for systems change — an interactive map of 24 learning areas, a suggested route for intervening in complex systems, and a curated library of learning resources.">
 <meta property="og:url" content="https://welearnwegrow.github.io/capacities/">
 <meta property="og:image" content="https://welearnwegrow.github.io/capacities/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Learning to Intervene in Complex Systems">
+<meta name="twitter:title" content="Systems Change Learning Guide">
 <meta name="twitter:description" content="An open-source capacity framework for systems change — an interactive map of 24 learning areas, a suggested route for intervening in complex systems, and a curated library of learning resources.">
 <meta name="twitter:image" content="https://welearnwegrow.github.io/capacities/og-image.png">
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
@@ -462,17 +462,11 @@ class Component extends DCLogic {
         // paper
         ctx.fillStyle = '#faf8f3';
         ctx.fillRect(0, 0, outW, outH);
-        // kicker
-        ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-        ctx.fillStyle = '#b0822f';
-        ctx.font = '700 ' + (14 * S) + 'px "PT Sans", system-ui, sans-serif';
-        if ('letterSpacing' in ctx) ctx.letterSpacing = (2 * S) + 'px';
-        ctx.fillText('SYSTEMS CHANGE LEARNING STUDIO', padX * S, 92 * S);
-        if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
         // title
+        ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
         ctx.fillStyle = '#2E2B26';
         ctx.font = '500 ' + (46 * S) + 'px "Newsreader", Georgia, serif';
-        ctx.fillText('Learning to intervene in complex systems', padX * S, 150 * S);
+        ctx.fillText('Systems Change Learning Guide', padX * S, 122 * S);
         // map card (soft shadow, no hard border)
         const mx = padX * S, my = padTop * S, mw = mapW * S, mh = mapH * S, cr = 18 * S;
         ctx.save(); ctx.shadowColor = 'rgba(50,60,55,0.20)'; ctx.shadowBlur = 26 * S; ctx.shadowOffsetY = 10 * S;

@@ -1,4 +1,4 @@
-# Learning to Intervene in Complex Systems
+# Systems Change Learning Guide
 
 A static website for a capacity framework on systems practice and lifelong learning — an interactive map, a curated resource library, and supporting pages.
 

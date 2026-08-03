@@ -80,7 +80,7 @@
 <script src="./analytics.js"></script>
 </helmet>
 
-<div style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:radial-gradient(760px 560px at 22% 8%, rgba(201,164,79,.20), transparent 66%), radial-gradient(720px 560px at 88% 92%, rgba(176,130,47,.13), transparent 68%), linear-gradient(180deg,#f8f4ea 0%,#f1ead9 100%)">
+<div style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:#ffffff">
 
   <div class="gm-noprint gm-embed-hide"><dc-import name="SiteNav" active="explorer" hint-size="100%,58px"></dc-import></div>
 
@@ -148,21 +148,19 @@
       <!-- LIVING MAP -->
       <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
       <aside id="gm-map" class="gm-panel" style="background:rgba(255,255,255,.6);border:1px solid rgba(70,113,111,.16);border-radius:18px;padding:22px 24px 26px">
-        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <div class="gm-noprint" style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap">
           <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b8378">Where this points</div>
           <span style="font-size:11px;color:#9aa89e">{{ turnLabel }}</span>
         </div>
           <div style="{{ mapWrapStyle }}">
-            <div class="gm-printonly" style="margin-bottom:22px;border-bottom:1px solid #dccaa6;padding-bottom:18px">
-              <div style="font-family:'Newsreader',serif;font-weight:500;font-size:26px;color:#233029;line-height:1.1">Your Guide Me map</div>
-              <div style="font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-top:6px">Systems Change Learning Guide</div>
-              <sc-if value="{{ firstProblem }}" hint-placeholder-val="{{ false }}">
-                <div style="margin-top:18px"><div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7a4a;margin-bottom:5px">What you shared</div><div style="font-size:13px;line-height:1.55;color:#3e433a">{{ firstProblem }}</div></div>
-              </sc-if>
+            <div class="gm-printonly" style="margin-bottom:22px;border-bottom:1px solid #d8dcd0;padding-bottom:18px">
+              <div style="font-family:'Newsreader',serif;font-weight:500;font-size:26px;color:#233029;line-height:1.1">Your Guide Map</div>
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6b8378;margin-top:6px">Systems Change Learning Guide</div>
               <sc-if value="{{ summary }}" hint-placeholder-val="{{ false }}">
-                <div style="margin-top:14px"><div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7a4a;margin-bottom:5px">What we heard</div><div style="font-family:'PT Serif',serif;font-size:13.5px;line-height:1.5;color:#2c3a33">{{ summary }}</div></div>
+                <div style="margin-top:18px"><div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7a4a;margin-bottom:5px">What we heard</div><div style="font-family:'PT Serif',serif;font-size:13.5px;line-height:1.5;color:#2c3a33">{{ summary }}</div></div>
               </sc-if>
             </div>
+            <div class="gm-printonly" style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b8378;margin-bottom:14px">Where this points</div>
             <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:9px">On the Route</div>
             <div style="display:flex;flex-wrap:wrap;gap:7px">
               <sc-for list="{{ routeSteps }}" as="s" hint-placeholder-count="5"><div style="{{ s.style }}">{{ s.name }}</div></sc-for>

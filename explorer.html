@@ -56,12 +56,18 @@
   .gm-scroll::-webkit-scrollbar-thumb{background:rgba(70,113,111,.3);border-radius:6px}
   .ex-res:hover{box-shadow:0 10px 26px rgba(40,70,60,.1) !important;transform:translateY(-1px)}
   .gm-send:hover{background:#96701c !important}
+  .gm-printonly{display:none}
   @media print {
+    @page{margin:1.8cm}
     body{background:#fff !important}
     .gm-noprint{display:none !important}
+    .gm-printonly{display:block !important}
     .ex-wrap{padding:0 !important;max-width:100% !important}
     .gm-panel{border:none !important;background:#fff !important;padding:0 !important}
     .gm-grid{gap:0 !important}
+    #gm-map a[href]{color:#233029 !important}
+    .ex-res{break-inside:avoid;page-break-inside:avoid}
+    #gm-map > div > div{break-inside:avoid}
   }
   @media (max-width:820px){
     .gm-grid{grid-template-columns:1fr !important}
@@ -84,7 +90,7 @@
     <div class="gm-noprint" style="margin-bottom:24px">
       <div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a8823a;margin-bottom:12px">✦ Guide Me · a thinking partner</div>
       <h1 class="ex-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:44px;line-height:1.06;color:#233029;margin:0 0 12px">Talk through what you're working on</h1>
-      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:64ch">Describe the system you're trying to change and where you're stuck. As we talk, a live map builds below — where it sits on the <strong style="font-weight:700;color:#46514a">Route</strong>, <strong style="font-weight:700;color:#46514a">practical next steps</strong>, the <strong style="font-weight:700;color:#46514a">learning areas</strong> that matter most, and <strong style="font-weight:700;color:#46514a">resources</strong> to start with.</p>
+      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:64ch">Describe the problem you're working on, the systems it touches, and where you're stuck. As we talk, a live map builds below — where you are on the <strong style="font-weight: 700; color: rgb(70, 81, 74);">route</strong>, <strong style="font-weight: 700; color: rgb(70, 81, 74);">practical next steps</strong>, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">learning areas</strong> that matter most, and <strong style="font-weight: 700; color: rgb(70, 81, 74);">resources</strong> to start with.</p>
     </div>
 
     <div class="gm-grid" style="display:grid;grid-template-columns:1fr;gap:20px;align-items:start">
@@ -147,6 +153,16 @@
           <span style="font-size:11px;color:#9aa89e">{{ turnLabel }}</span>
         </div>
           <div style="{{ mapWrapStyle }}">
+            <div class="gm-printonly" style="margin-bottom:22px;border-bottom:1px solid #dccaa6;padding-bottom:18px">
+              <div style="font-family:'Newsreader',serif;font-weight:500;font-size:26px;color:#233029;line-height:1.1">Your Guide Me map</div>
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-top:6px">Systems Change Learning Guide</div>
+              <sc-if value="{{ firstProblem }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:18px"><div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7a4a;margin-bottom:5px">What you shared</div><div style="font-size:13px;line-height:1.55;color:#3e433a">{{ firstProblem }}</div></div>
+              </sc-if>
+              <sc-if value="{{ summary }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:14px"><div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7a4a;margin-bottom:5px">What we heard</div><div style="font-family:'PT Serif',serif;font-size:13.5px;line-height:1.5;color:#2c3a33">{{ summary }}</div></div>
+              </sc-if>
+            </div>
             <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:9px">On the Route</div>
             <div style="display:flex;flex-wrap:wrap;gap:7px">
               <sc-for list="{{ routeSteps }}" as="s" hint-placeholder-count="5"><div style="{{ s.style }}">{{ s.name }}</div></sc-for>
@@ -439,7 +455,7 @@ class Component extends DCLogic {
       briefName: st.brief? st.brief.name : '',
       briefMeta: st.brief? (st.brief.chars.toLocaleString()+' chars') : '',
       hasBriefError: !!st.briefError, briefError: st.briefError||'',
-      hasMap, noMap:!hasMap, summary, routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0,
+      hasMap, noMap:!hasMap, summary, firstProblem:((st.messages.find(m=>m.role==='user')||{}).content||''), routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0,
       turnLabel: turnCount>1 ? ('Sharpened over '+turnCount+' exchanges') : 'From what you shared',
       mapWrapStyle: { animation: (turnCount%2 ? 'exIn' : 'exInB')+' .4s ease' },
       onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },

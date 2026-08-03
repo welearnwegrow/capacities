@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  .gm-fab{transition:transform .18s ease, box-shadow .18s ease}
+  .gm-fab:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(120,90,20,.36) !important}
+  @keyframes gmOverlayIn{from{opacity:0}to{opacity:1}}
+  .gm-close:hover{background:#43473a !important}
+</style>
+</helmet>
+
+<div style="font-family:'PT Sans',system-ui,sans-serif">
+  <button class="gm-fab" onClick="{{ onOpen }}" title="Guide Me — talk through what you're working on" style="position:fixed;z-index:61;right:24px;bottom:24px;height:58px;display:flex;align-items:center;gap:11px;padding:0 22px 0 15px;border:none;border-radius:30px;background:linear-gradient(120deg,#bd8f34,#96701c);color:#fff;cursor:pointer;box-shadow:0 10px 28px rgba(120,90,20,.3);font-family:'PT Sans',sans-serif">
+    <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:none">
+      <span style="font-size:19px;line-height:1;color:#fff">✦</span>
+    </span>
+    <span style="font-size:15px;font-weight:700;letter-spacing:.01em">Guide Me</span>
+  </button>
+
+  <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:2147483000;background:rgba(38,42,32,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:gmOverlayIn .2s ease">
+      <button class="gm-close" onClick="{{ onClose }}" title="Close" aria-label="Close Guide Me" style="position:fixed;top:18px;right:22px;z-index:2147483001;width:44px;height:44px;border:none;border-radius:50%;background:#2c2f26;color:#fff;font-size:23px;line-height:1;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.3);transition:background .16s ease">×</button>
+      <iframe src="{{ frameSrc }}" title="Guide Me" style="position:fixed;inset:0;width:100%;height:100%;border:none;background:#f7f4ec"></iframe>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { open:false };
+  componentDidMount(){
+    this._esc = (e)=>{ if(e.key==='Escape' && this.state.open) this._set(false); };
+    document.addEventListener('keydown', this._esc);
+  }
+  componentWillUnmount(){ document.removeEventListener('keydown', this._esc); this._set(false); }
+  _set(v){ this.setState({ open:v }); try{ document.body.style.overflow = v ? 'hidden' : ''; }catch(e){} }
+  renderVals(){
+    return {
+      open: this.state.open,
+      frameSrc: (/\.dc\.html$/.test(location.pathname) ? 'explorer.dc.html' : 'explorer.html') + '?embed=1',
+      onOpen: ()=>this._set(true),
+      onClose: ()=>this._set(false)
+    };
+  }
+}
+</script>
+</body>
+</html>

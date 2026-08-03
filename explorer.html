@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Guide Me — Systems Change Learning Guide</title>
-<meta name="description" content="Describe your context and challenge to get relevant resources — matched to your situation, each with a short note on why it fits.">
+<meta name="description" content="Talk through the system you're trying to change. Guide Me reflects your situation, points to where it sits on the Route, the learning areas that matter, and resources to start with.">
 <link rel="canonical" href="https://welearnwegrow.github.io/capacities/explorer.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Systems Change Learning Guide">
 <meta property="og:title" content="Guide Me — Systems Change Learning Guide">
-<meta property="og:description" content="Describe your context and challenge to get relevant resources — matched to your situation, each with a short note on why it fits.">
+<meta property="og:description" content="Talk through the system you're trying to change and get matched to learning areas, Route steps, and resources.">
 <meta property="og:url" content="https://welearnwegrow.github.io/capacities/explorer.html">
 <meta property="og:image" content="https://welearnwegrow.github.io/capacities/og-image.png">
 <meta property="og:image:secure_url" content="https://welearnwegrow.github.io/capacities/og-image.png">
@@ -19,22 +25,20 @@
 <meta property="og:image:alt" content="Systems Change Learning Guide — a map, a route, and a library for changemakers.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Guide Me — Systems Change Learning Guide">
-<meta name="twitter:description" content="Describe your context and challenge to get relevant resources — matched to your situation, each with a short note on why it fits.">
+<meta name="twitter:description" content="Talk through the system you're trying to change and get matched to learning areas, Route steps, and resources.">
 <meta name="twitter:image" content="https://welearnwegrow.github.io/capacities/og-image.png">
-<script src="./support.js"></script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Guide Me — Systems Change Learning Guide</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&amp;family=PT+Sans:wght@400;700&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
 <script src="./research-data.js?v=20260731c"></script>
 <script src="notion-config.js?v=20260731c"></script>
+<script src="capacity-detail.js?v=20260731c"></script>
 <script src="data-loader.js?v=20260731c"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>try{if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}catch(e){}</script>
+<script>try{if(location.search.indexOf('embed')>=0||window.top!==window.self)document.documentElement.setAttribute('data-embed','1');}catch(e){}</script>
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -42,124 +46,172 @@
   a:hover{color:#33534f}
   ::selection{background:rgba(138,106,69,.22)}
   @keyframes exIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes exInB{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  html[data-embed] .gm-embed-hide{display:none !important}
+  html[data-embed] .ex-wrap{padding-top:20px !important}
   @keyframes exSpin{to{transform:rotate(360deg)}}
-  @keyframes exPulse{0%,100%{opacity:.4}50%{opacity:1}}
-  .ex-res:hover{border-color:rgba(70,113,111,.42) !important;box-shadow:0 10px 26px rgba(40,70,60,.1) !important}
-  .ex-ex:hover{border-color:rgba(70,113,111,.4) !important;background:rgba(255,255,255,.9) !important}
-  @media (max-width:720px){
-    .ex-h1{ font-size:32px !important; }
-    .ex-wrap{ padding:28px 16px 60px !important; }
-    .ex-sub{ grid-template-columns:1fr !important; }
+  @keyframes gmDot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+  .gm-scroll{scrollbar-width:thin;scrollbar-color:rgba(70,113,111,.3) transparent}
+  .gm-scroll::-webkit-scrollbar{width:7px}
+  .gm-scroll::-webkit-scrollbar-thumb{background:rgba(70,113,111,.3);border-radius:6px}
+  .ex-res:hover{box-shadow:0 10px 26px rgba(40,70,60,.1) !important;transform:translateY(-1px)}
+  .gm-send:hover{background:#96701c !important}
+  @media print {
+    body{background:#fff !important}
+    .gm-noprint{display:none !important}
+    .ex-wrap{padding:0 !important;max-width:100% !important}
+    .gm-panel{border:none !important;background:#fff !important;padding:0 !important}
+    .gm-grid{gap:0 !important}
+  }
+  @media (max-width:820px){
+    .gm-grid{grid-template-columns:1fr !important}
+    .gm-panel{position:static !important;max-height:none !important}
+    .gm-chat{max-height:none !important}
+    .ex-h1{font-size:32px !important}
+    .ex-wrap{padding:28px 16px 60px !important}
   }
 </style>
 <script src="./analytics.js"></script>
 </helmet>
 
-<div style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:radial-gradient(760px 560px at 22% 8%, rgba(150,178,108,.18), transparent 66%), radial-gradient(720px 560px at 88% 92%, rgba(120,165,150,.15), transparent 68%), linear-gradient(180deg,#f5f7ef 0%,#eef2e7 100%)">
+<div style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:radial-gradient(760px 560px at 22% 8%, rgba(201,164,79,.20), transparent 66%), radial-gradient(720px 560px at 88% 92%, rgba(176,130,47,.13), transparent 68%), linear-gradient(180deg,#f8f4ea 0%,#f1ead9 100%)">
 
-  <dc-import name="SiteNav" active="explorer" hint-size="100%,58px"></dc-import>
+  <div class="gm-noprint gm-embed-hide"><dc-import name="SiteNav" active="explorer" hint-size="100%,58px"></dc-import></div>
 
-  <div class="ex-wrap" style="max-width:900px;margin:0 auto;padding:44px 26px 72px">
+  <div class="ex-wrap" style="max-width:1120px;margin:0 auto;padding:40px 26px 72px">
 
     <!-- INTRO -->
-    <div style="margin-bottom:26px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a8823a;margin-bottom:12px">Guided resource finder · Experimental</div>
-      <h1 class="ex-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:44px;line-height:1.06;color:#233029;margin:0 0 12px">Describe what you're working on</h1>
-      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:60ch">Tell us about the challenge you're facing in a complex system. We'll suggest where it sits on the <strong style="font-weight:700;color:#46514a">route</strong>, the <strong style="font-weight:700;color:#46514a">learning areas</strong> that matter most, and a handful of <strong style="font-weight:700;color:#46514a">resources</strong> to start with.</p>
+    <div class="gm-noprint" style="margin-bottom:24px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a8823a;margin-bottom:12px">✦ Guide Me · a thinking partner</div>
+      <h1 class="ex-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:44px;line-height:1.06;color:#233029;margin:0 0 12px">Talk through what you're working on</h1>
+      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:64ch">Describe the system you're trying to change and where you're stuck. As we talk, a live map builds below — where it sits on the <strong style="font-weight:700;color:#46514a">Route</strong>, <strong style="font-weight:700;color:#46514a">practical next steps</strong>, the <strong style="font-weight:700;color:#46514a">learning areas</strong> that matter most, and <strong style="font-weight:700;color:#46514a">resources</strong> to start with.</p>
     </div>
 
-    <!-- INPUT CARD -->
-    <div style="background:rgba(255,255,255,.72);border:1px solid rgba(70,113,111,.16);border-radius:18px;padding:22px 22px 20px;box-shadow:0 8px 28px rgba(40,70,60,.06)">
-      <label style="display:block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#7a8b81;margin-bottom:8px">The challenge you're working on — and where you're stuck</label>
-      <textarea id="ex-problem" placeholder="e.g., We run a network of low-cost schools and keep seeing strong pilots fail to scale. Teachers revert to old habits once our facilitators leave, and district officials don't feel ownership of the change. How do we make the shift stick?" onInput="{{ onInput }}" style="width:100%;min-height:120px;resize:vertical;font-family:'PT Sans',sans-serif;font-size:15px;line-height:1.55;color:#2c3a33;background:#fff;border:1px solid rgba(70,113,111,.22);border-radius:12px;padding:13px 14px;outline:none"></textarea>
+    <div class="gm-grid" style="display:grid;grid-template-columns:1fr;gap:20px;align-items:start">
 
-      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:16px">
-        <button onClick="{{ onFind }}" style="{{ findBtnStyle }}">
-          <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}"><span style="display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:exSpin .7s linear infinite;margin-right:8px;vertical-align:-2px"></span></sc-if>
-          {{ findLabel }}
-        </button>
-        <sc-if value="{{ canClear }}" hint-placeholder-val="{{ false }}">
-          <button onClick="{{ onClear }}" style="font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#7a8b81;background:transparent;border:none;cursor:pointer">Clear</button>
-        </sc-if>
-        <span style="font-size:12.5px;color:#9aa89e">{{ modeNote }}</span>
-      </div>
-      <label style="display:flex;align-items:center;gap:8px;margin-top:14px;cursor:pointer;font-size:12.5px;color:#7a8b81">
-        <input type="checkbox" id="ex-consent" defaultChecked="{{ true }}" style="width:15px;height:15px;accent-color:#46716f;cursor:pointer" />
-        Save anonymised prompts to improve this tool
-      </label>
-    </div>
-
-    <!-- ERROR -->
-    <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
-      <div style="margin-top:22px;background:rgba(200,90,60,.08);border:1px solid rgba(200,90,60,.25);border-radius:12px;padding:14px 16px;font-size:14px;color:#9a4a2d">{{ errorMsg }}</div>
-    </sc-if>
-
-    <!-- RESULTS -->
-    <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ false }}">
-      <div style="margin-top:34px;animation:exIn .3s ease">
-
-        <!-- reflection -->
-        <div style="background:rgba(70,113,111,.07);border-left:3px solid #46716f;border-radius:0 12px 12px 0;padding:15px 18px;margin-bottom:28px">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b8378;margin-bottom:5px">What we heard</div>
-          <div style="font-family:'PT Serif',serif;font-size:16px;line-height:1.5;color:#2c3a33">{{ summary }}</div>
+      <!-- LEFT: CHAT -->
+      <div class="gm-chat gm-noprint" style="display:flex;flex-direction:column;background:rgba(255,255,255,.74);border:1px solid rgba(70,113,111,.16);border-radius:18px;box-shadow:0 8px 28px rgba(40,70,60,.06);min-height:auto;overflow:hidden">
+        <div id="gm-scroll" class="gm-scroll" style="overflow:visible;padding:20px 20px 8px;display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ messages }}" as="m" hint-placeholder-count="1">
+            <div style="{{ m.rowStyle }}"><div style="{{ m.bubbleStyle }}">{{ m.text }}</div></div>
+          </sc-for>
+          <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;justify-content:flex-start">
+              <div style="background:#fff;border:1px solid rgba(70,113,111,.16);border-radius:16px 16px 16px 5px;padding:12px 15px;display:flex;gap:5px">
+                <span style="width:7px;height:7px;border-radius:50%;background:#46716f;animation:gmDot 1.2s infinite"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:#46716f;animation:gmDot 1.2s .2s infinite"></span>
+                <span style="width:7px;height:7px;border-radius:50%;background:#46716f;animation:gmDot 1.2s .4s infinite"></span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:13px;color:#9a4a2d;background:rgba(200,90,60,.08);border:1px solid rgba(200,90,60,.22);border-radius:10px;padding:10px 13px">{{ errorMsg }}</div>
+          </sc-if>
         </div>
 
-        <!-- route + learning areas -->
-        <div style="display:grid;grid-template-columns:1fr;gap:22px;margin-bottom:32px">
-          <div>
-            <div style="font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:10px">Where this sits on the Route</div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px">
-              <sc-for list="{{ routeSteps }}" as="s" hint-placeholder-count="5">
-                <div style="{{ s.style }}">{{ s.name }}</div>
-              </sc-for>
+        <div style="order:-1;padding:14px 16px;border-bottom:1px solid rgba(70,113,111,.12)">
+          <sc-if value="{{ briefLoading }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:#7a8b81;margin-bottom:8px"><span style="display:inline-block;width:11px;height:11px;border:2px solid rgba(70,113,111,.3);border-top-color:#46716f;border-radius:50%;animation:exSpin .7s linear infinite;margin-right:7px;vertical-align:-1px"></span>Reading your brief…</div></sc-if>
+          <sc-if value="{{ hasBrief }}" hint-placeholder-val="{{ false }}">
+            <div style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#3d635f;background:rgba(90,103,51,.1);border:1px solid rgba(90,103,51,.24);border-radius:16px;padding:6px 7px 6px 11px;margin-bottom:8px;max-width:100%">
+              <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ briefName }}</span><span style="font-weight:400;color:#7a8b81;flex:none">· {{ briefMeta }}</span>
+              <button onClick="{{ onRemoveBrief }}" title="Remove brief" style="width:17px;height:17px;flex:none;line-height:1;border:none;border-radius:50%;background:rgba(70,90,85,.14);color:#54655c;font-size:12px;cursor:pointer;padding:0">×</button>
             </div>
-            <sc-if value="{{ routeWhy }}" hint-placeholder-val="{{ false }}"><div style="font-size:13.5px;line-height:1.5;color:#54655c;margin-top:10px">{{ routeWhy }}</div></sc-if>
+          </sc-if>
+          <sc-if value="{{ hasBriefError }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:#9a4a2d;background:rgba(200,90,60,.08);border:1px solid rgba(200,90,60,.22);border-radius:9px;padding:8px 11px;margin-bottom:8px">{{ briefError }}</div></sc-if>
+          <div style="display:flex;align-items:flex-end;gap:7px;background:#fff;border:1px solid rgba(70,113,111,.24);border-radius:14px;padding:8px 8px 8px 10px">
+            <label title="Attach a brief (PDF or Word)" style="width:34px;height:34px;flex:none;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#7a8b81" style-hover="background:rgba(70,113,111,.1)">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+              <input type="file" accept=".pdf,.docx,.txt,application/pdf" onChange="{{ onFile }}" style="display:none" />
+            </label>
+            <textarea id="gm-input" rows="1" placeholder="Describe what you're working on…" onKeyDown="{{ onKey }}" onInput="{{ onGrow }}" style="flex:1;border:none;outline:none;resize:none;max-height:130px;font-family:'PT Sans',sans-serif;font-size:14.5px;line-height:1.45;color:#2c3a33;background:transparent;padding-bottom:6px"></textarea>
+            <button class="gm-send" onClick="{{ onSend }}" title="Send" style="width:38px;height:38px;flex:none;border:none;border-radius:10px;background:#b0822f;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+            </button>
           </div>
-          <div>
-            <div style="font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:10px">Learning areas to build</div>
-            <div style="display:flex;flex-direction:column;gap:9px">
+          <label style="display:flex;align-items:center;gap:7px;margin-top:10px;cursor:pointer;font-size:11.5px;color:#8a978c">
+            <input type="checkbox" id="gm-consent" defaultChecked="{{ true }}" style="width:14px;height:14px;accent-color:#46716f;cursor:pointer" />
+            Save an anonymised summary to improve this tool
+          </label>
+        </div>
+      </div>
+
+      <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
+        <div class="gm-noprint" style="text-align:center;margin-bottom:2px"><button onClick="{{ onJumpMap }}" style="display:inline-flex;align-items:center;gap:6px;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;color:#8a6a18;background:rgba(176,130,47,.10);border:1px solid rgba(176,130,47,.30);border-radius:20px;padding:7px 15px;cursor:pointer">Your map ↓</button></div>
+      </sc-if>
+
+      <!-- LIVING MAP -->
+      <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
+      <aside id="gm-map" class="gm-panel" style="background:rgba(255,255,255,.6);border:1px solid rgba(70,113,111,.16);border-radius:18px;padding:22px 24px 26px">
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+          <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b8378">Where this points</div>
+          <span style="font-size:11px;color:#9aa89e">{{ turnLabel }}</span>
+        </div>
+          <div style="{{ mapWrapStyle }}">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:9px">On the Route</div>
+            <div style="display:flex;flex-wrap:wrap;gap:7px">
+              <sc-for list="{{ routeSteps }}" as="s" hint-placeholder-count="5"><div style="{{ s.style }}">{{ s.name }}</div></sc-for>
+            </div>
+            <sc-if value="{{ routeWhy }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;line-height:1.5;color:#54655c;margin-top:9px">{{ routeWhy }}</div></sc-if>
+
+            <sc-if value="{{ hasNextSteps }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Practical next steps</div>
+              <div style="display:flex;flex-direction:column;gap:9px">
+                <sc-for list="{{ nextSteps }}" as="n" hint-placeholder-count="3">
+                  <div style="display:flex;gap:10px;align-items:flex-start">
+                    <span style="width:20px;height:20px;flex:none;border-radius:50%;background:rgba(70,113,111,.12);color:#46716f;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px">{{ n.num }}</span>
+                    <div style="font-size:13px;line-height:1.5;color:#54655c">{{ n.text }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Learning areas to build</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 20px">
               <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
-                <div style="display:flex;gap:11px;align-items:flex-start">
+                <div style="display:flex;gap:10px;align-items:flex-start">
                   <span style="{{ a.dot }}"></span>
                   <div>
-                    <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:14.5px;font-weight:600;color:#2c3a33">{{ a.name }}</div>
-                    <sc-if value="{{ a.why }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.45;color:#6b7c72;margin-top:1px">{{ a.why }}</div></sc-if>
+                    <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:600;color:#2c3a33">{{ a.name }}</div>
+                    <sc-if value="{{ a.why }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;line-height:1.42;color:#6b7c72;margin-top:1px">{{ a.why }}</div></sc-if>
                   </div>
                 </div>
               </sc-for>
             </div>
+
+            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Resources to start with</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
+              <sc-for list="{{ picks }}" as="r" hint-placeholder-count="4">
+                <a class="ex-res" href="{{ r.url }}" target="_blank" rel="noopener" onClick="{{ r.onClick }}" style="{{ r.cardStyle }}">
+                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+                    <span style="font-family:'PT Serif',serif;font-weight:700;font-size:14.5px;line-height:1.25;color:#2c3a33">{{ r.name }}</span>
+                    <span style="color:#46716f;font-size:13px">↗</span>
+                  </div>
+                  <div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#9a7a4a;margin-top:5px">{{ r.typeText }}</div>
+                  <div style="font-size:12.5px;line-height:1.45;color:#54655c;margin-top:6px">{{ r.why }}</div>
+                </a>
+              </sc-for>
+            </div>
+
+            <div class="gm-noprint" style="margin-top:18px;font-size:12px;color:#9aa89e">Keep talking to sharpen this, or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
+            <button onClick="{{ onPrint }}" class="gm-noprint" style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;background:#b0822f;border:none;border-radius:20px;padding:9px 18px;cursor:pointer">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+              Save this map (PDF)
+            </button>
           </div>
-        </div>
+        </aside>
+      </sc-if>
 
-        <!-- resources -->
-        <div style="font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:12px">Resources to start with</div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <sc-for list="{{ picks }}" as="r" hint-placeholder-count="4">
-            <a class="ex-res" href="{{ r.url }}" target="_blank" rel="noopener" onClick="{{ r.onClick }}" style="display:block;text-decoration:none;background:rgba(255,255,255,.8);border:1px solid rgba(70,113,111,.16);border-radius:14px;padding:16px 18px;transition:.16s ease">
-              <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
-                <span style="font-family:'PT Serif',serif;font-weight:700;font-size:16.5px;line-height:1.25;color:#2c3a33">{{ r.name }}</span>
-                <span style="color:#46716f;font-size:14px">↗</span>
-              </div>
-              <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#9a7a4a;margin-top:6px">{{ r.typeText }}</div>
-              <div style="font-size:14px;line-height:1.5;color:#54655c;margin-top:8px">{{ r.why }}</div>
-            </a>
-          </sc-for>
-        </div>
-
-        <div style="margin-top:26px;font-size:13px;color:#9aa89e">Not quite right? Edit your description above and search again, or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
-      </div>
-    </sc-if>
-
+    </div>
   </div>
 
-  <dc-import name="SiteFooter" hint-size="100%,300px"></dc-import>
+  <div class="gm-noprint gm-embed-hide"><dc-import name="SiteFooter" hint-size="100%,300px"></dc-import></div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    this.state = { loading:false, results:null, error:null, dirty:false, usedAI:false };
+    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null };
+    this._saved = false;
     this.ROUTE = [
       { name:'Probe', desc:'Probe the context and frame the problem field' },
       { name:'Sense', desc:'Sense the field and imagineer possibilities' },
@@ -168,49 +220,69 @@ class Component extends DCLogic {
       { name:'Integrate', desc:'Integrate feedback and weave in learnings' }
     ];
     this.GROUP = { teal:{name:'Personal Grounding',color:'#46716f'}, green:{name:'Collective Strategy',color:'#5b6733'}, coral:{name:'Systemic Intervention',color:'#a8542d'} };
-    this.EXAMPLES = [
-      { tag:'Education · systems change', text:"We run a network of low-cost schools and keep seeing strong pilots fail to scale. Teachers revert to old habits once our facilitators leave, and district officials don't feel ownership of the change. How do we make the shift stick?" },
-      { tag:'Water · climate · cities', text:"Our city faces a deepening water crisis \u2014 over-extraction of groundwater, sinking land, and worsening floods all feed one another, while utilities, developers, and residents each optimise for themselves. We can map the pieces but not how to intervene in one part without harming another." },
-      { tag:'Regenerative development', text:"We're redeveloping a neighbourhood and want the housing to genuinely nurture wellbeing and ecological health, not just add units. But funders measure success in cost-per-unit and speed, and residents feel done-to rather than involved. How do we design this as a living system?" }
-    ];
   }
 
   componentDidMount(){
     window.addEventListener('research-data-updated', ()=>this.forceUpdate());
     if(window.__RESEARCH_LIVE_READY) this.forceUpdate();
+    this._onHide=()=>{ if(document.visibilityState==='hidden') this._saveLog(); };
+    document.addEventListener('visibilitychange', this._onHide);
   }
+  componentWillUnmount(){ if(this._onHide) document.removeEventListener('visibilitychange', this._onHide); }
+  componentDidUpdate(){ this._scroll(); }
+  _scroll(){ const el=document.getElementById('gm-scroll'); if(el){ requestAnimationFrame(()=>{ el.scrollTop=el.scrollHeight; }); } }
 
   _data(){ return window.__RESEARCH || {capacities:[],resources:[]}; }
   _normUrl(u){ if(!u) return '#'; u=String(u).trim(); if(!u||u==='#') return '#'; if(/^(https?:\/\/|mailto:|tel:)/i.test(u)) return u; if(/^\/\//.test(u)) return 'https:'+u; return 'https://'+u.replace(/^\/+/,''); }
   _groupOf(cap){ const c=(this._data().capacities||[]).find(x=>x.label===cap); return (c&&c.group)||'green'; }
   _val(id){ const el=document.getElementById(id); return el?el.value.trim():''; }
-  _composed(){ return this._val('ex-problem').trim(); }
+  _fmt(t){ let s=(t||'').trim(); s=s.replace(/\*\*([^*]+)\*\*/g,'$1'); s=s.replace(/(^|[^*])\*([^*\n]+)\*(?!\*)/g,'$1$2'); s=s.replace(/\n{3,}/g,'\n\n'); return s; }
 
-  // ---------- keyword fallback ----------
-  _tokenize(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>3); }
-  _keywordMatch(query){
-    const STOP={which:1,that:1,this:1,with:1,from:1,they:1,them:1,have:1,will:1,your:1,work:1,working:1,about:1,into:1,when:1,what:1,where:1,does:1,cant:1,were:1,been:1,make:1,want:1,need:1,like:1,just:1,much:1,many:1,more:1,most:1,some:1,even:1,also:1,then:1,than:1};
-    const qt=this._tokenize(query).filter(w=>!STOP[w]);
-    const qset={}; qt.forEach(w=>qset[w]=(qset[w]||0)+1);
-    const res=(this._data().resources||[]).map(r=>{
-      const hay=((r.name||'')+' '+(r.desc||'')+' '+((r.caps||[]).join(' '))+' '+((r.types||[]).join(' '))).toLowerCase();
-      let score=0;
-      for(const w in qset){ if(hay.indexOf(w)>=0) score+= (hay.indexOf(w.slice(0,Math.max(4,w.length-1)))>=0?2:1); }
-      return { r, score };
-    }).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,5);
-    // infer learning areas from top resources
-    const capCount={};
-    res.forEach(x=> (x.r.caps||[]).forEach(c=> capCount[c]=(capCount[c]||0)+x.score));
-    const areas=Object.keys(capCount).sort((a,b)=>capCount[b]-capCount[a]).slice(0,3).map(name=>({name,why:''}));
-    return {
-      summary:'A quick keyword match on your description — connect a live matcher for sharper, explained suggestions.',
-      route:['Probe'], routeWhy:'',
-      areas,
-      resources: res.map(x=>({ name:x.r.name, why:(x.r.desc||'').split('. ')[0]+'.' }))
-    };
+  // ---------- file brief ----------
+  async _onFile(e){
+    const file=e && e.target && e.target.files && e.target.files[0];
+    if(e && e.target) e.target.value='';
+    if(!file) return;
+    if(file.size > 15*1024*1024){ this.setState({ briefError:'That file is over 15 MB — please attach a smaller PDF or Word file.', brief:null }); return; }
+    this.setState({ briefLoading:true, briefError:null, brief:null });
+    try{
+      let text=await this._extractFile(file);
+      text=(text||'').replace(/\r/g,'').replace(/[ \t]{2,}/g,' ').replace(/\n{3,}/g,'\n\n').trim();
+      if(text.replace(/\s/g,'').length < 40){ this.setState({ briefLoading:false, briefError:'This looks like a scanned or image-only file — no readable text found. Please paste the key points instead.' }); return; }
+      this.setState({ briefLoading:false, brief:{ name:file.name, text:text, chars:text.length } });
+    }catch(err){ this.setState({ briefLoading:false, briefError:(err&&err.message)||'Couldn\u2019t read that file. Please try a PDF or paste the text instead.' }); }
+  }
+  async _extractFile(file){
+    const n=(file.name||'').toLowerCase();
+    if(n.endsWith('.pdf')||file.type==='application/pdf') return await this._extractPdf(file);
+    if(n.endsWith('.docx')) return await this._extractDocx(file);
+    if(n.endsWith('.doc')) throw new Error('Old Word (.doc) isn\u2019t supported \u2014 please save as .docx or PDF.');
+    if(n.endsWith('.txt')||file.type==='text/plain') return await file.text();
+    throw new Error('Please attach a PDF, Word (.docx), or plain-text file.');
+  }
+  async _extractPdf(file){
+    if(!window.pdfjsLib) throw new Error('The PDF reader is still loading \u2014 try again in a moment.');
+    try{ if(!window.pdfjsLib.GlobalWorkerOptions.workerSrc) window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }catch(e){}
+    const buf=await file.arrayBuffer();
+    const pdf=await window.pdfjsLib.getDocument({ data:buf }).promise;
+    let out='';
+    for(let i=1;i<=pdf.numPages;i++){ const pg=await pdf.getPage(i); const tc=await pg.getTextContent(); out += tc.items.map(function(it){ return it.str; }).join(' ')+'\n'; }
+    return out;
+  }
+  async _extractDocx(file){
+    if(!window.JSZip) throw new Error('The Word reader is still loading \u2014 try again in a moment.');
+    const buf=await file.arrayBuffer();
+    const zip=await window.JSZip.loadAsync(buf);
+    const doc=zip.file('word/document.xml');
+    if(!doc) throw new Error('Couldn\u2019t read that Word file \u2014 please save as PDF and retry.');
+    const xml=await doc.async('string');
+    const parts=[]; const re=/<w:t[^>]*>([\s\S]*?)<\/w:t>/g; let m;
+    while((m=re.exec(xml))){ parts.push(m[1]); }
+    let txt=parts.join(' ');
+    txt=txt.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'");
+    return txt;
   }
 
-  // Uses in-editor window.claude when present; otherwise proxies through the worker (/ai) so the live static site can match with AI too.
   async _complete(opts){
     if(window.claude && window.claude.complete){ return await window.claude.complete(opts); }
     var url=window.NOTION_CONNECTOR_URL;
@@ -221,61 +293,107 @@ class Component extends DCLogic {
     return data.text||'';
   }
 
-  // ---------- AI match ----------
-  async _aiMatch(query){
-    const lib=(this._data().resources||[]).map(r=>({ name:r.name, desc:(r.desc||'').slice(0,240), areas:r.caps||[], type:(r.types||[])[0]||'' }));
-    const caps=(this._data().capacities||[]).map(c=>c.label);
+  _areasText(){
+    const cap=window.__CAPDETAIL||{};
+    const keys=Object.keys(cap);
+    if(!keys.length){ return ((this._data().capacities)||[]).map(c=>'• '+c.label).join('\n'); }
+    return keys.map(k=>'• '+k+' — '+(cap[k].desc||'')).join('\n');
+  }
+  _resourcesText(){ return ((this._data().resources)||[]).map(r=>r.name+' ['+((r.caps||[]).join(', '))+']').join('\n'); }
+  _systemPrompt(){
     const route=this.ROUTE.map(r=>r.name+' — '+r.desc).join('; ');
-    const sys='You are a guide for a systems-change learning library. Given a practitioner\'s problem, you recommend where it sits on a 5-step "Route", which "learning areas" matter most, and which library resources to start with. Only ever recommend resources by their EXACT name from the provided list. Respond with STRICT JSON only, no prose, no markdown.';
-    const schema='{"summary": string (one warm sentence reflecting their situation back), "route": string[] (1-2 Route step names, most relevant first), "routeWhy": string (one sentence), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one actionable sentence, starting with "Use this to \u2026", that ties the resource directly to THEIR specific situation and names the concrete thing they could do with it}] (3-5 items)}';
-    const user='ROUTE STEPS: '+route+'\n\nLEARNING AREAS (pick names from here): '+caps.join(', ')+'\n\nLIBRARY RESOURCES (JSON): '+JSON.stringify(lib)+'\n\nPRACTITIONER PROBLEM:\n'+query+'\n\nReturn JSON exactly in this shape: '+schema;
-    const raw=await this._complete({ model:'claude-sonnet-4-5', max_tokens:1400, system:sys, messages:[{role:'user',content:user}] });
+    return [
+      "You are Guide Me, a warm, grounded, Socratic coach for the Systems Change Learning Studio. Each turn you do TWO things at once:",
+      "(1) Reply conversationally to the person. Open by reflecting back what you heard in a sentence or two (what's really going on), then ask ONE sharp question that sharpens the problem or surfaces a blind spot, and offer one concrete next step. Warm and human, under ~150 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets).",
+      "(2) Maintain a living 'map' of their situation from the framework below.",
+      "Respond with STRICT JSON ONLY — no prose or code fences — exactly in this shape:",
+      '{"reply": string, "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
+      "Only ever use Route steps, learning areas, and resources from the lists below, by their EXACT names. Refine the map as the conversation deepens. If the person only greets you or asks what you do, give a brief friendly reply and you may return empty arrays for route/areas/resources and an empty summary.",
+      "",
+      "THE 5-STEP ROUTE: "+route,
+      "",
+      "THE 24 LEARNING AREAS:",
+      this._areasText(),
+      "",
+      "LIBRARY RESOURCES (name [learning areas]) — cite only by exact name:",
+      this._resourcesText()
+    ].join('\n');
+  }
+
+  async _aiTurn(chatMsgs){
+    const raw=await this._complete({ model:'claude-sonnet-4-5', max_tokens:1300, system:this._systemPrompt(), messages:chatMsgs });
     let txt=(raw||'').trim();
     const a=txt.indexOf('{'), b=txt.lastIndexOf('}');
     if(a>=0&&b>a) txt=txt.slice(a,b+1);
-    const parsed=JSON.parse(txt);
+    const p=JSON.parse(txt);
+    const hasMap=(Array.isArray(p.resources)&&p.resources.length)||(Array.isArray(p.areas)&&p.areas.length)||(Array.isArray(p.nextSteps)&&p.nextSteps.length);
     return {
-      summary:parsed.summary||'',
-      route:Array.isArray(parsed.route)?parsed.route:[],
-      routeWhy:parsed.routeWhy||'',
-      areas:Array.isArray(parsed.areas)?parsed.areas:[],
-      resources:Array.isArray(parsed.resources)?parsed.resources:[]
+      reply: (p.reply||'').trim() || 'Tell me a little more and I\u2019ll point you to the right places.',
+      map: hasMap ? { summary:p.summary||'', route:Array.isArray(p.route)?p.route:[], routeWhy:p.routeWhy||'', nextSteps:Array.isArray(p.nextSteps)?p.nextSteps:[], areas:Array.isArray(p.areas)?p.areas:[], resources:Array.isArray(p.resources)?p.resources:[] } : null
     };
   }
 
-  async _find(){
-    const query=this._composed();
-    if(!query || query.length<12){ this.setState({ error:'Add a little more about what you\u2019re working on \u2014 a sentence or two is plenty.' }); return; }
-    this.setState({ loading:true, error:null, results:null, dirty:false });
-    let out=null, usedAI=false;
-    const hasAI = (window.claude && window.claude.complete) || !!window.NOTION_CONNECTOR_URL;
-    try {
-      if(hasAI){ out=await this._aiMatch(query); usedAI=true; }
-    } catch(e){ console.warn('[explorer] AI match failed, using keyword fallback:', e && e.message); }
-    if(!out || !out.resources || !out.resources.length){ out=this._keywordMatch(query); usedAI=false; }
-    this.setState({ loading:false, results:out, usedAI });
-    this._logQuery(query, out, usedAI);
+  // keyword fallback → produces a reply + map
+  _tokenize(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>3); }
+  _keywordTurn(query){
+    const STOP={which:1,that:1,this:1,with:1,from:1,they:1,them:1,have:1,will:1,your:1,work:1,working:1,about:1,into:1,when:1,what:1,where:1,does:1,cant:1,were:1,been:1,make:1,want:1,need:1,like:1,just:1,much:1,many:1,more:1,most:1,some:1,even:1,also:1,then:1,than:1};
+    const qt=this._tokenize(query).filter(w=>!STOP[w]); const qset={}; qt.forEach(w=>qset[w]=1);
+    const res=(this._data().resources||[]).map(r=>{ const hay=((r.name||'')+' '+(r.desc||'')+' '+((r.caps||[]).join(' '))).toLowerCase(); let s=0; for(const w in qset){ if(hay.indexOf(w)>=0) s++; } return { r, s }; }).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,4);
+    const capCount={}; res.forEach(x=> (x.r.caps||[]).forEach(c=> capCount[c]=(capCount[c]||0)+x.s));
+    const areas=Object.keys(capCount).sort((a,b)=>capCount[b]-capCount[a]).slice(0,3).map(name=>({name,why:''}));
+    return {
+      reply:'I had trouble reaching the live guide just now, so here\u2019s a quick keyword match. Send that again in a moment and I\u2019ll give you a fuller response.',
+      map: res.length ? { summary:'', route:['Probe'], routeWhy:'', areas, resources:res.map(x=>({ name:x.r.name, why:(x.r.desc||'').split('. ')[0]+'.' })) } : null
+    };
   }
 
-  _logQuery(problem, out, usedAI){
-    try {
-      var url = window.NOTION_CONNECTOR_URL;
-      if(!url || !out) return;
-      var consentEl = document.getElementById('ex-consent');
-      var consent = consentEl ? !!consentEl.checked : true;
-      var payload = {
+  async _send(text){
+    text=(text||'').trim();
+    const brief=this.state.brief;
+    if((!text && !brief) || this.state.loading) return;
+    const display = text + (brief? ((text?'\n\n':'')+'[Attached: '+brief.name+']') : '');
+    const send = text + (brief? ((text?'\n\n':'')+'--- ATTACHED BRIEF ('+brief.name+') ---\n'+brief.text) : '');
+    const msgs=this.state.messages.concat([{ role:'user', content:display, send:send }]);
+    this._saved=false;
+    this.setState({ messages:msgs, loading:true, error:null, brief:null, briefError:null });
+    const el=document.getElementById('gm-input'); if(el){ el.value=''; el.style.height='auto'; }
+    const chatMsgs=msgs.map(m=>({ role:m.role, content:m.send||m.content }));
+    let out=null;
+    const hasAI=(window.claude && window.claude.complete) || !!window.NOTION_CONNECTOR_URL;
+    if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
+    if(!out){ out=this._keywordTurn(send); }
+    const nextMap = out.map || this.state.map;
+    this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply }]), map:nextMap, loading:false });
+    this._logTurn(text||brief&&brief.name||'', nextMap);
+  }
+
+  _logTurn(problem, map){
+    try{
+      const url=window.NOTION_CONNECTOR_URL; if(!url || !map) return;
+      const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
+      const payload={
         problem: consent ? problem : '(prompt not saved — user opted out)',
-        route: consent ? (out.route || []) : [],
-        areas: consent ? (out.areas||[]).map(function(a){ return a.name; }) : [],
-        resources: consent ? (out.resources||[]).map(function(r){ return r.name; }) : [],
-        matchedBy: usedAI ? 'AI' : 'Keyword',
-        consent: consent,
-        source: 'guide-me'
+        route: consent ? (map.route||[]) : [],
+        areas: consent ? (map.areas||[]).map(a=>a.name) : [],
+        resources: consent ? (map.resources||[]).map(r=>r.name) : [],
+        matchedBy:'AI', consent:consent, source:'guide-me-chat'
       };
-      fetch(url.replace(/\/+$/,'') + '/log-query', {
-        method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), keepalive:true
-      }).catch(function(){});
-    } catch(e){}
+      fetch(url.replace(/\/+$/,'')+'/log-query',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), keepalive:true }).catch(function(){});
+    }catch(e){}
+  }
+
+  async _saveLog(){
+    try{
+      if(this._saved) return;
+      const url=window.NOTION_CONNECTOR_URL; if(!url) return;
+      const userTurns=this.state.messages.filter(m=>m.role==='user'); if(!userTurns.length) return;
+      const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
+      this._saved=true; if(!consent) return;
+      const map=this.state.map||{};
+      const transcript=this.state.messages.map(m=>(m.role==='user'?'User: ':'Guide: ')+(m.send||m.content)).join('\n\n');
+      fetch(url.replace(/\/+$/,'')+'/log-chat',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
+        body:JSON.stringify({ title:(userTurns[0].content||'Guide Me conversation').slice(0,80), summary:map.summary||transcript.slice(0,400), areas:(map.areas||[]).map(a=>a.name), route:map.route||[], resources:(map.resources||[]).map(r=>r.name), turns:userTurns.length, consent:true, source:'guide-me-chat', transcript:transcript.slice(0,1900) }) }).catch(function(){});
+    }catch(e){}
   }
 
   _resolveRes(name){
@@ -286,47 +404,46 @@ class Component extends DCLogic {
   }
 
   renderVals(){
-    const st=this.state, res=st.results;
-    const hasResults=!!res && (res.resources||[]).length>0;
-    const findBase={ fontFamily:"'PT Sans',sans-serif", fontSize:'15px', fontWeight:700, padding:'12px 24px', borderRadius:'24px', border:'1px solid #3d635f', background:'#46716f', color:'#fff', cursor:'pointer', boxShadow:'0 4px 12px rgba(70,113,111,.26)' };
+    const st=this.state, map=st.map;
+    const userBubble={ maxWidth:'82%', background:'#b0822f', color:'#fff', fontSize:'14px', lineHeight:'1.5', padding:'11px 14px', borderRadius:'16px 16px 5px 16px', whiteSpace:'pre-wrap', wordBreak:'break-word' };
+    const botBubble={ maxWidth:'90%', background:'#fff', color:'#2c3a33', fontSize:'14px', lineHeight:'1.55', padding:'12px 15px', borderRadius:'16px 16px 16px 5px', border:'1px solid rgba(70,113,111,.16)', whiteSpace:'pre-wrap', wordBreak:'break-word', boxShadow:'0 3px 12px rgba(40,70,60,.05)' };
+    const hasMap=!!map;
 
-    let routeSteps=[], areas=[], picks=[], summary='', routeWhy='';
-    if(hasResults){
-      summary=res.summary||'';
-      routeWhy=res.routeWhy||'';
-      const activeRoute={}; (res.route||[]).forEach(n=>activeRoute[String(n).toLowerCase()]=true);
-      routeSteps=this.ROUTE.map(s=>{
-        const on=activeRoute[s.name.toLowerCase()];
-        return { name:s.name,
-          style:{ fontFamily:"'Space Grotesk','PT Sans',sans-serif", fontSize:'13px', fontWeight:on?700:600, padding:'7px 14px', borderRadius:'20px',
-            border:on?'1px solid #46514a':'1px solid rgba(70,90,85,.2)', background:on?'#46514a':'rgba(255,255,255,.6)', color:on?'#fff':'#9aa89e', opacity:on?1:.7 } };
-      });
-      areas=(res.areas||[]).map(a=>{
-        const g=this._groupOf(a.name), col=(this.GROUP[g]||this.GROUP.green).color;
-        return { name:a.name, why:a.why||'', dot:{ width:'11px', height:'11px', borderRadius:'50%', flex:'none', marginTop:'5px', background:col, boxShadow:'0 0 0 4px '+this._rgbaHex(col,.16) } };
-      });
-      picks=(res.resources||[]).map(p=>{
-        const r=this._resolveRes(p.name);
-        return { name:(r&&r.name)||p.name, url:this._normUrl(r&&r.url), typeText:(r&&r.types&&r.types.length)?r.types.join(' · '):'Resource',
-          why:p.why||((r&&r.desc)?r.desc.split('. ')[0]+'.':''),
-          onClick:()=>{ if(window.track) window.track('explorer_open_resource',{name:(r&&r.name)||p.name}); } };
-      });
+    let routeSteps=[], areas=[], picks=[], nextSteps=[], summary='', routeWhy='';
+    if(hasMap){
+      summary=map.summary||''; routeWhy=map.routeWhy||'';
+      nextSteps=(map.nextSteps||[]).map((t,i)=>({ num:i+1, text:String(t) }));
+      const activeRoute={}; (map.route||[]).forEach(n=>activeRoute[String(n).toLowerCase()]=true);
+      routeSteps=this.ROUTE.map(s=>{ const on=activeRoute[s.name.toLowerCase()];
+        return { name:s.name, style:{ fontFamily:"'Space Grotesk','PT Sans',sans-serif", fontSize:'12.5px', fontWeight:on?700:600, textTransform:'lowercase', padding:'6px 12px', borderRadius:'18px', border:on?'1px solid #46514a':'1px solid rgba(70,90,85,.2)', background:on?'#46514a':'rgba(255,255,255,.6)', color:on?'#fff':'#9aa89e', opacity:on?1:.7 } }; });
+      areas=(map.areas||[]).map(a=>{ const g=this._groupOf(a.name), col=(this.GROUP[g]||this.GROUP.green).color;
+        return { name:a.name, why:a.why||'', dot:{ width:'10px', height:'10px', borderRadius:'50%', flex:'none', marginTop:'5px', background:col, boxShadow:'0 0 0 4px '+this._rgbaHex(col,.16) } }; });
+      picks=(map.resources||[]).map(p=>{ const r=this._resolveRes(p.name);
+        const cap=(r&&r.caps&&r.caps[0])||''; const accent=(this.GROUP[this._groupOf(cap)]||this.GROUP.green).color;
+        return { name:(r&&r.name)||p.name, url:this._normUrl(r&&r.url), typeText:(r&&r.types&&r.types.length)?r.types.join(' · '):'Resource', why:p.why||((r&&r.desc)?r.desc.split('. ')[0]+'.':''), onClick:()=>{ if(window.track) window.track('guideme_open_resource',{name:(r&&r.name)||p.name}); },
+          cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid '+accent, borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }; });
     }
+    const turnCount=st.messages.filter(m=>m.role==='user').length;
 
-    const dirty=st.dirty;
     return {
-      loading:st.loading,
-      findLabel: st.loading ? 'Finding resources…' : (hasResults ? 'Search again' : 'Find resources'),
-      findBtnStyle: st.loading ? Object.assign({},findBase,{opacity:.7,cursor:'default'}) : findBase,
-      onInput:()=>{ if(!this.state.dirty) this.setState({ dirty:true }); },
-      onFind:()=>this._find(),
-      onClear:()=>{ const el=document.getElementById('ex-problem'); if(el) el.value=''; this.setState({ results:null, error:null, dirty:false }); },
-      canClear: hasResults || dirty,
-      showExamples: !hasResults && !st.loading,
-      examples:this.EXAMPLES.map(ex=>({ tag:ex.tag, text:ex.text, onClick:()=>{ const el=document.getElementById('ex-problem'); if(el){ el.value=ex.text; el.focus(); } this.setState({ dirty:true, error:null }); } })),
-      hasError:!!st.error, errorMsg:st.error||'',
-      modeNote: st.loading ? '' : (hasResults ? (st.usedAI ? 'Matched with AI' : 'Keyword match') : 'Takes a few seconds'),
-      hasResults, summary, routeSteps, routeWhy, areas, picks
+      messages: st.messages.map((m,i)=>({ key:i, text: m.role==='user'? m.content : this._fmt(m.content), rowStyle:{ display:'flex', justifyContent: m.role==='user'?'flex-end':'flex-start' }, bubbleStyle: m.role==='user'? userBubble : botBubble })),
+      loading: st.loading,
+      hasError: !!st.error, errorMsg: st.error||'',
+      onSend: ()=>{ const el=document.getElementById('gm-input'); this._send(el?el.value:''); },
+      onKey: (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); this._send(e.target.value); } },
+      onGrow: (e)=>{ const t=e.target; t.style.height='auto'; t.style.height=Math.min(t.scrollHeight,130)+'px'; },
+      onFile: (e)=>this._onFile(e),
+      onRemoveBrief: ()=>this.setState({ brief:null, briefError:null }),
+      briefLoading: st.briefLoading,
+      hasBrief: !!st.brief,
+      briefName: st.brief? st.brief.name : '',
+      briefMeta: st.brief? (st.brief.chars.toLocaleString()+' chars') : '',
+      hasBriefError: !!st.briefError, briefError: st.briefError||'',
+      hasMap, noMap:!hasMap, summary, routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0,
+      turnLabel: turnCount>1 ? ('Sharpened over '+turnCount+' exchanges') : 'From what you shared',
+      mapWrapStyle: { animation: (turnCount%2 ? 'exIn' : 'exInB')+' .4s ease' },
+      onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },
+      onPrint: ()=>{ try{ window.print(); }catch(e){} }
     };
   }
   _rgbaHex(hex,a){ hex=hex.replace('#',''); if(hex.length===3) hex=hex.split('').map(c=>c+c).join(''); const r=parseInt(hex.substr(0,2),16),g=parseInt(hex.substr(2,2),16),b=parseInt(hex.substr(4,2),16); return 'rgba('+r+','+g+','+b+','+a+')'; }

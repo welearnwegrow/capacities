@@ -97,7 +97,14 @@
     <div class="gm-grid" style="display:grid;grid-template-columns:1fr;gap:20px;align-items:start">
 
       <!-- LEFT: CHAT -->
-      <div class="gm-chat gm-noprint" style="display:flex;flex-direction:column;background:rgba(255,255,255,.74);border:1px solid rgba(70,113,111,.16);border-radius:18px;box-shadow:0 8px 28px rgba(40,70,60,.06);min-height:auto;overflow:hidden">
+      <div class="gm-chat gm-noprint" onDragOver="{{ onDragOver }}" onDragLeave="{{ onDragLeave }}" onDrop="{{ onDrop }}" style="position:relative;display:flex;flex-direction:column;background:rgba(255,255,255,.74);border:1px solid rgba(70,113,111,.16);border-radius:18px;box-shadow:0 8px 28px rgba(40,70,60,.06);min-height:auto;overflow:hidden">
+        <sc-if value="{{ dragOver }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;inset:0;z-index:5;background:rgba(247,244,236,.94);border:2px dashed #b0822f;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none">
+            <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#b0822f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+            <div style="font-size:15px;font-weight:700;color:#8a6a18">Drop your brief to read it</div>
+            <div style="font-size:12.5px;color:#9a8a5a;margin-top:3px">PDF, Word (.docx) or text</div>
+          </div>
+        </sc-if>
         <div id="gm-scroll" class="gm-scroll" style="overflow:visible;padding:20px 20px 8px;display:flex;flex-direction:column;gap:12px">
           <sc-for list="{{ messages }}" as="m" hint-placeholder-count="1">
             <div style="{{ m.rowStyle }}"><div style="{{ m.bubbleStyle }}">{{ m.text }}</div></div>
@@ -225,7 +232,7 @@
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null };
+    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false };
     this._saved = false;
     this.ROUTE = [
       { name:'Probe', desc:'Probe the context and frame the problem field' },
@@ -257,9 +264,12 @@ class Component extends DCLogic {
   async _onFile(e){
     const file=e && e.target && e.target.files && e.target.files[0];
     if(e && e.target) e.target.value='';
+    await this._ingestFile(file);
+  }
+  async _ingestFile(file){
     if(!file) return;
-    if(file.size > 15*1024*1024){ this.setState({ briefError:'That file is over 15 MB — please attach a smaller PDF or Word file.', brief:null }); return; }
-    this.setState({ briefLoading:true, briefError:null, brief:null });
+    if(file.size > 15*1024*1024){ this.setState({ briefError:'That file is over 15 MB — please attach a smaller PDF or Word file.', brief:null, dragOver:false }); return; }
+    this.setState({ briefLoading:true, briefError:null, brief:null, dragOver:false });
     try{
       let text=await this._extractFile(file);
       text=(text||'').replace(/\r/g,'').replace(/[ \t]{2,}/g,' ').replace(/\n{3,}/g,'\n\n').trim();
@@ -267,6 +277,9 @@ class Component extends DCLogic {
       this.setState({ briefLoading:false, brief:{ name:file.name, text:text, chars:text.length } });
     }catch(err){ this.setState({ briefLoading:false, briefError:(err&&err.message)||'Couldn\u2019t read that file. Please try a PDF or paste the text instead.' }); }
   }
+  _onDragOver(e){ if(e){ e.preventDefault(); if(e.dataTransfer) e.dataTransfer.dropEffect='copy'; } if(!this.state.dragOver) this.setState({ dragOver:true }); }
+  _onDragLeave(e){ if(e && e.currentTarget && e.relatedTarget && e.currentTarget.contains(e.relatedTarget)) return; this.setState({ dragOver:false }); }
+  _onDrop(e){ if(e){ e.preventDefault(); } const f=e && e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; this.setState({ dragOver:false }); if(f) this._ingestFile(f); }
   async _extractFile(file){
     const n=(file.name||'').toLowerCase();
     if(n.endsWith('.pdf')||file.type==='application/pdf') return await this._extractPdf(file);
@@ -379,7 +392,6 @@ class Component extends DCLogic {
     if(!out){ out=this._keywordTurn(send); }
     const nextMap = out.map || this.state.map;
     this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply }]), map:nextMap, loading:false });
-    this._logTurn(text||brief&&brief.name||'', nextMap);
   }
 
   _logTurn(problem, map){
@@ -448,6 +460,10 @@ class Component extends DCLogic {
       onKey: (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); this._send(e.target.value); } },
       onGrow: (e)=>{ const t=e.target; t.style.height='auto'; t.style.height=Math.min(t.scrollHeight,130)+'px'; },
       onFile: (e)=>this._onFile(e),
+      onDragOver: (e)=>this._onDragOver(e),
+      onDragLeave: (e)=>this._onDragLeave(e),
+      onDrop: (e)=>this._onDrop(e),
+      dragOver: st.dragOver,
       onRemoveBrief: ()=>this.setState({ brief:null, briefError:null }),
       briefLoading: st.briefLoading,
       hasBrief: !!st.brief,

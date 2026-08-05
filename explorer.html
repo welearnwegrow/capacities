@@ -335,7 +335,7 @@ class Component extends DCLogic {
       "(1) Reply conversationally to the person. Open by reflecting back what you heard in a sentence or two (what's really going on), then ask ONE sharp question that sharpens the problem or surfaces a blind spot, and offer one concrete next step. Warm and human, under ~150 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets).",
       "(2) Maintain a living 'map' of their situation from the framework below.",
       "Respond with STRICT JSON ONLY — no prose or code fences — exactly in this shape:",
-      '{"reply": string, "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
+      '{"reply": string, "topic": a 5-10 word summary of the person\u2019s core problem or need (for a database title), "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
       "Only ever use Route steps, learning areas, and resources from the lists below, by their EXACT names. Refine the map as the conversation deepens. If the person only greets you or asks what you do, give a brief friendly reply and you may return empty arrays for route/areas/resources and an empty summary.",
       "",
       "THE 5-STEP ROUTE: "+route,
@@ -357,7 +357,7 @@ class Component extends DCLogic {
     const hasMap=(Array.isArray(p.resources)&&p.resources.length)||(Array.isArray(p.areas)&&p.areas.length)||(Array.isArray(p.nextSteps)&&p.nextSteps.length);
     return {
       reply: (p.reply||'').trim() || 'Tell me a little more and I\u2019ll point you to the right places.',
-      map: hasMap ? { summary:p.summary||'', route:Array.isArray(p.route)?p.route:[], routeWhy:p.routeWhy||'', nextSteps:Array.isArray(p.nextSteps)?p.nextSteps:[], areas:Array.isArray(p.areas)?p.areas:[], resources:Array.isArray(p.resources)?p.resources:[] } : null
+      map: hasMap ? { topic:p.topic||'', summary:p.summary||'', route:Array.isArray(p.route)?p.route:[], routeWhy:p.routeWhy||'', nextSteps:Array.isArray(p.nextSteps)?p.nextSteps:[], areas:Array.isArray(p.areas)?p.areas:[], resources:Array.isArray(p.resources)?p.resources:[] } : null
     };
   }
 
@@ -419,7 +419,7 @@ class Component extends DCLogic {
       const map=this.state.map||{};
       const transcript=this.state.messages.map(m=>(m.role==='user'?'User: ':'Guide: ')+(m.send||m.content)).join('\n\n');
       fetch(url.replace(/\/+$/,'')+'/log-chat',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
-        body:JSON.stringify({ title:(userTurns[0].content||'Guide Me conversation').slice(0,80), summary:map.summary||transcript.slice(0,400), areas:(map.areas||[]).map(a=>a.name), route:map.route||[], resources:(map.resources||[]).map(r=>r.name), turns:userTurns.length, consent:true, source:'guide-me-chat', transcript:transcript.slice(0,1900) }) }).catch(function(){});
+        body:JSON.stringify({ title:(map.topic||userTurns[0].content||'Guide Me conversation').slice(0,120), summary:map.summary||transcript.slice(0,400), areas:(map.areas||[]).map(a=>a.name), route:map.route||[], resources:(map.resources||[]).map(r=>r.name), turns:userTurns.length, consent:true, source:'guide-me-chat', transcript:transcript.slice(0,1900) }) }).catch(function(){});
     }catch(e){}
   }
 

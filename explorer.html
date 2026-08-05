@@ -406,7 +406,8 @@ class Component extends DCLogic {
     const chatMsgs=msgs.map(m=>({ role:m.role, content: m.role==='assistant' ? (m.raw||m.content) : (m.send||m.content) }));
     let out=null;
     const hasAI=(window.claude && window.claude.complete) || !!window.NOTION_CONNECTOR_URL;
-    if(hasAI){
+    const userTurnCount=msgs.filter(m=>m.role==='user').length;
+    if(hasAI && userTurnCount>=2){
       const convo=msgs.filter(m=>m.role==='user').map(m=>m.send||m.content).join('\n\n');
       this._casesTurn(convo).then((cs)=>{
         if(cs && cs.length){ this.setState(function(s){ return { map: Object.assign({}, s.map||{}, { cases: cs }) }; }); }
@@ -419,7 +420,19 @@ class Component extends DCLogic {
   }
 
   async _casesTurn(context){
-    const sys = "You are a systems-change librarian. Given someone's situation, name up to 2 REAL, well-known real-world cases (an initiative, organisation, programme, movement or project that genuinely exists and that you are confident about) whose experience offers a transferable lesson. ACCURACY IS CRITICAL: only include an example if you are sure it is real and relevant; never invent one, and do NOT state specific locations, dates or figures unless you are certain. If you cannot think of a verified example, return an empty array []. Keep 'org' short (do not guess exact place names if unsure). Do NOT include URLs. Return STRICT JSON ONLY (no prose, no code fences): an array like [{\"title\": short case name, \"org\": organisation (short, only if certain), \"why\": one sentence on the practical lesson for this person}].";
+    // Prefer the worker's web-search-grounded endpoint → VERIFIED real URLs.
+    var url = window.NOTION_CONNECTOR_URL;
+    if(url){
+      try{
+        var r = await fetch(url.replace(/\/+$/,'')+'/cases', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ context: context.slice(0,6000) }) });
+        var data = await r.json().catch(function(){ return {}; });
+        if(data && Array.isArray(data.cases) && data.cases.length){
+          return data.cases.slice(0,3).map(function(c){ return { title:String(c.title||'').slice(0,140), org:String(c.org||'').slice(0,140), url:(/^https?:\/\//i.test(String(c.url||'')) ? String(c.url) : ''), why:String(c.why||'').slice(0,240) }; }).filter(function(c){ return c.title && c.url; });
+        }
+        if(data && Array.isArray(data.cases)) return [];
+      }catch(e){ }
+    }
+    const sys = "You are a systems-change librarian. Given someone's situation, name up to 2 REAL, well-known real-world cases (an initiative, organisation, programme, movement or project that genuinely exists and that you are confident about) whose experience offers a transferable lesson. ACCURACY IS CRITICAL: only include an example if you are sure it is real and relevant; never invent one, and do NOT state specific locations, dates or figures unless you are certain. If you cannot think of a verified example, return an empty array []. Keep 'org' short. Do NOT include URLs. Return STRICT JSON ONLY (no prose, no code fences): an array like [{\"title\": short case name, \"org\": organisation (short, only if certain), \"why\": one sentence on the practical lesson for this person}].";
     let raw;
     try{ raw = await this._complete({ model:'claude-sonnet-4-5', max_tokens:700, system:sys, messages:[{ role:'user', content:context.slice(0,6000) }] }); }
     catch(e){ return []; }

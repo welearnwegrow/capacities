@@ -420,12 +420,13 @@ class Component extends DCLogic {
     if(hasAI && userTurnCount>=2){
       const convo=msgs.filter(m=>m.role==='user').map(m=>m.send||m.content).join('\n\n');
       this._casesTurn(convo).then((cs)=>{
-        if(cs && cs.length){ this.setState(function(s){ return { map: Object.assign({}, s.map||{}, { cases: cs }) }; }); }
+        if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); }
       }).catch(()=>{});
     }
     if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
     if(!out){ out=this._keywordTurn(send); }
     const nextMap = this._mergeMap(this.state.map, out.map);
+    this._lastMap = nextMap;
     this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply, raw:out.rawJson||'' }]), map:nextMap, loading:false });
   }
 
@@ -492,8 +493,11 @@ class Component extends DCLogic {
       const url=window.NOTION_CONNECTOR_URL; if(!url) return;
       const userTurns=this.state.messages.filter(m=>m.role==='user'); if(!userTurns.length) return;
       const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
-      this._saved=true; if(!consent) return;
-      const map=this.state.map||{};
+      if(!consent){ this._saved=true; return; }
+      const map=this._lastMap || this.state.map || {};
+      const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.summary&&map.summary.trim());
+      if(!hasContent) return;
+      this._saved=true;
       const transcript=this.state.messages.map(m=>(m.role==='user'?'User: ':'Guide: ')+(m.send||m.content)).join('\n\n');
       fetch(url.replace(/\/+$/,'')+'/log-chat',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
         body:JSON.stringify({ title:(map.topic||userTurns[0].content||'Guide Me conversation').slice(0,120), summary:map.summary||transcript.slice(0,400), areas:(map.areas||[]).map(a=>a.name), route:map.route||[], resources:(map.resources||[]).map(r=>r.name), cases:(map.cases||[]).map(c=>c.title+(c.url?' — '+c.url:'')), turns:userTurns.length, consent:true, source:'guide-me-chat', transcript:transcript.slice(0,1900) }) }).catch(function(){});

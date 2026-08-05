@@ -264,8 +264,18 @@ class Component extends DCLogic {
     if(window.__RESEARCH_LIVE_READY) this.forceUpdate();
     this._onHide=()=>{ if(document.visibilityState==='hidden') this._saveLog(); };
     document.addEventListener('visibilitychange', this._onHide);
+    this._onPageHide=()=>{ this._saveLog(); };
+    window.addEventListener('pagehide', this._onPageHide);
+    window.addEventListener('beforeunload', this._onPageHide);
+    this._onMsg=(e)=>{ if(e && e.data && e.data.type==='gm-close') this._saveLog(); };
+    window.addEventListener('message', this._onMsg);
   }
-  componentWillUnmount(){ if(this._onHide) document.removeEventListener('visibilitychange', this._onHide); }
+  componentWillUnmount(){
+    if(this._onHide) document.removeEventListener('visibilitychange', this._onHide);
+    if(this._onPageHide){ window.removeEventListener('pagehide', this._onPageHide); window.removeEventListener('beforeunload', this._onPageHide); }
+    if(this._onMsg) window.removeEventListener('message', this._onMsg);
+    this._saveLog();
+  }
   componentDidUpdate(){ this._scroll(); }
   _scroll(){ const el=document.getElementById('gm-scroll'); if(el){ requestAnimationFrame(()=>{ el.scrollTop=el.scrollHeight; }); } }
 

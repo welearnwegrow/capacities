@@ -266,7 +266,7 @@ window.__RESEARCH = {
    "types": [
     "Books"
    ],
-   "url": "https://www.amazon.com/Belonging-without-Othering-Ourselves-World/dp/1415211244"
+   "url": "https://www.sup.org/books/law/belonging-without-othering"
   },
   {
    "name": "Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge and the Teachings of Plants",
@@ -534,7 +534,7 @@ window.__RESEARCH = {
    "types": [
     "Books"
    ],
-   "url": "https://www.boydellandbrewer.com/9780852550090/decolonising-the-mind/"
+   "url": "https://ngugiwathiongo.com/decolonising-the-mind/"
   },
   {
    "name": "Decolonizing Methodologies: Research and Indigenous Peoples",

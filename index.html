@@ -618,7 +618,7 @@ class Component extends DCLogic {
       frame.style.touchAction = 'none';
       const base = frame.clientWidth / 1040;
       const vh = (window.innerHeight || 800);
-      const frameH = Math.max(Math.round(vh * 0.82), 480);
+      const frameH = Math.max(Math.round(vh), 480);
       frame.style.height = frameH + 'px';
       // cover: map must fill the frame both ways, so no empty bands (reads as a full-page map)
       const coverScale = Math.max(base, frameH / 1320);

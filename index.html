@@ -617,7 +617,7 @@ class Component extends DCLogic {
       frame.style.overflow = 'hidden';
       frame.style.touchAction = 'none';
       const base = frame.clientWidth / 1040;
-      const vh = (window.innerHeight || 800);
+      const vh = ((window.visualViewport && window.visualViewport.height) || window.innerHeight || 800);
       const frameH = Math.max(Math.round(vh), 480);
       frame.style.height = frameH + 'px';
       // cover: map must fill the frame both ways, so no empty bands (reads as a full-page map)
@@ -650,6 +650,7 @@ class Component extends DCLogic {
     const frame = document.querySelector('.ioc-mapframe');
     if (frame) this._ro.observe(frame);
     window.addEventListener('resize', () => this._refit());
+    if (window.visualViewport) window.visualViewport.addEventListener('resize', () => { if (this._isMobile) { this._mLastW = null; this._refit(); } });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { this._lastW = null; this._mLastW = null; this._refit(); });
     this._initTips();
   }

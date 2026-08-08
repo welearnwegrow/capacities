@@ -83,6 +83,29 @@
 
 <div class="gm-page" style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:radial-gradient(760px 560px at 22% 8%, rgba(201,164,79,.20), transparent 66%), radial-gradient(720px 560px at 88% 92%, rgba(176,130,47,.13), transparent 68%), linear-gradient(180deg,#f8f4ea 0%,#f1ead9 100%)">
 
+  <sc-if value="{{ showFeedback }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:2147483600;background:rgba(38,42,32,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:24px;animation:exIn .25s ease">
+      <div style="width:100%;max-width:440px;background:linear-gradient(180deg,#fbf8f0,#f4eedf);border:1px solid rgba(70,113,111,.18);border-radius:20px;box-shadow:0 24px 60px rgba(40,50,35,.34);padding:26px 26px 22px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-bottom:10px">✦ Before you go</div>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:25px;line-height:1.12;color:#233029;margin:0 0 6px">How was this?</h2>
+        <p style="font-size:13.5px;line-height:1.5;color:#6b7c72;margin:0 0 16px">Your feedback helps us make Guide Me more useful. All fields are optional.</p>
+        <div style="display:flex;gap:9px;margin-bottom:16px">
+          <sc-for list="{{ fbOptions }}" as="o" hint-placeholder-count="3">
+            <button onClick="{{ o.onClick }}" style="{{ o.style }}"><span style="font-size:19px;line-height:1">{{ o.icon }}</span><span>{{ o.label }}</span></button>
+          </sc-for>
+        </div>
+        <textarea id="gm-fb-comment" rows="3" placeholder="What worked, what didn't, what you were hoping for…" style="width:100%;box-sizing:border-box;border:1px solid rgba(70,113,111,.24);border-radius:12px;padding:11px 13px;font-family:'PT Sans',sans-serif;font-size:14px;line-height:1.45;color:#2c3a33;background:#fff;resize:vertical;outline:none;margin-bottom:11px"></textarea>
+        <label style="display:block;font-size:11.5px;font-weight:700;letter-spacing:.03em;color:#8a7a4a;margin-bottom:6px">Email (optional) — if you're open to us following up</label>
+        <input id="gm-fb-email" type="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;border:1px solid rgba(70,113,111,.24);border-radius:12px;padding:10px 13px;font-family:'PT Sans',sans-serif;font-size:14px;color:#2c3a33;background:#fff;outline:none;margin-bottom:20px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <button onClick="{{ fbSkip }}" style="border:none;background:transparent;color:#8a978c;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;padding:8px 4px">Skip</button>
+          <button onClick="{{ fbSubmit }}" style="border:none;border-radius:12px;background:#b0822f;color:#fff;font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;padding:11px 26px;box-shadow:0 8px 20px rgba(120,90,20,.24)">Send &amp; close</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+
   <div class="gm-noprint gm-embed-hide"><dc-import name="SiteNav" active="explorer" hint-size="100%,58px"></dc-import></div>
 
   <div class="ex-wrap" style="max-width:1120px;margin:0 auto;padding:40px 26px 72px">
@@ -247,7 +270,7 @@
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false };
+    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'' };
     this._saved = false;
     this.ROUTE = [
       { name:'Probe', desc:'Probe the context and frame the problem field' },
@@ -267,7 +290,7 @@ class Component extends DCLogic {
     this._onPageHide=()=>{ this._saveLog(); };
     window.addEventListener('pagehide', this._onPageHide);
     window.addEventListener('beforeunload', this._onPageHide);
-    this._onMsg=(e)=>{ if(e && e.data && e.data.type==='gm-close') this._saveLog(); };
+    this._onMsg=(e)=>{ if(e && e.data && e.data.type==='gm-close') this._requestClose(); };
     window.addEventListener('message', this._onMsg);
   }
   componentWillUnmount(){
@@ -358,10 +381,9 @@ class Component extends DCLogic {
     return [
       "You are Guide Me, a warm, grounded, Socratic coach for the Systems Change Learning Studio. Each turn you do TWO things at once:",
       "(1) Reply conversationally to the person. Open by reflecting back what you heard in a sentence or two (what's really going on), then ask ONE sharp question that sharpens the problem or surfaces a blind spot, and offer one concrete next step. Warm and human, under ~150 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets).",
-      "(2) Maintain a living 'map' of their situation from the framework below. Actively look for a real, well-known case (an initiative, organisation, city, movement or programme you actually know) that parallels their situation — most problems have one. Mention it briefly in your reply — what was done, what worked, the transferable lesson — and add it to the 'cases' array. Cite only real examples you are confident about; never invent one, but do include one whenever a genuine parallel exists.",
-"IMPORTANT: the \"cases\" array is a required, valued part of every substantive answer. Fill it with 1-2 real, well-known real-world examples (an initiative, organisation, city, movement or programme you actually know) that parallel their situation, each with the practical lesson it offers. Almost every systemic problem has a real parallel you know — include it. Only leave the array empty if the person merely greeted you.",
+      "(2) Maintain a living 'map' of their situation from the framework below. If a real, well-known case genuinely parallels their situation you may mention it briefly in your conversational reply, but do NOT return a cases array — related real-world cases are gathered separately by a live web search that looks for bioregionally-close examples.",
       "Respond with STRICT JSON ONLY — no prose or code fences — exactly in this shape:",
-      '{"reply": string, "topic": a 5-10 word summary of the person\u2019s core problem or need (for a database title), "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "cases": [{"title": name of a REAL, well-known initiative, organisation, city, movement or programme from your own knowledge that parallels their situation, "why": one sentence on the practical lesson it offers them}] (include 1-2 whenever you can think of a genuine real-world parallel — most situations have one; only omit if nothing real fits; never invent), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
+      '{"reply": string, "topic": a 5-10 word summary of the person\u2019s core problem or need (for a database title), "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
       "ACCURACY IS CRITICAL: never state a specific fact you are not sure of — no invented locations, dates, figures, names, or URLs. If you are not confident an example is accurate, describe it only in general terms or leave it out. It is always better to be general than wrong. Only ever use Route steps, learning areas, and resources from the lists below, by their EXACT names. Refine the map as the conversation deepens. If the person only greets you or asks what you do, give a brief friendly reply and you may return empty arrays for route/areas/resources and an empty summary.",
       "",
       "THE 5-STEP ROUTE: "+route,
@@ -416,19 +438,20 @@ class Component extends DCLogic {
     const chatMsgs=msgs.map(m=>({ role:m.role, content: m.role==='assistant' ? (m.raw||m.content) : (m.send||m.content) }));
     let out=null;
     const hasAI=(window.claude && window.claude.complete) || !!window.NOTION_CONNECTOR_URL;
-    const userTurnCount=msgs.filter(m=>m.role==='user').length;
-    if(hasAI && userTurnCount>=2){
-      const convo=msgs.filter(m=>m.role==='user').map(m=>m.send||m.content).join('\n\n');
-      const priorRes=((this.state.map&&this.state.map.resources)||[]).map(r=>r.name).filter(Boolean);
-      this._casesTurn(convo, priorRes).then((cs)=>{
-        if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); }
-      }).catch(()=>{});
-    }
     if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
     if(!out){ out=this._keywordTurn(send); }
     const nextMap = this._mergeMap(this.state.map, out.map);
     this._lastMap = nextMap;
     this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply, raw:out.rawJson||'' }]), map:nextMap, loading:false });
+    // From the first user turn, gather bioregionally-close REAL cases via web search,
+    // excluding the library resources we just suggested so the two lists stay distinct.
+    if(hasAI){
+      const convo=msgs.filter(m=>m.role==='user').map(m=>m.send||m.content).join('\n\n');
+      const priorRes=((nextMap&&nextMap.resources)||[]).map(r=>r.name).filter(Boolean);
+      this._casesTurn(convo, priorRes).then((cs)=>{
+        if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); }
+      }).catch(()=>{});
+    }
   }
 
   async _casesTurn(context, exclude){
@@ -445,7 +468,7 @@ class Component extends DCLogic {
         if(data && Array.isArray(data.cases)) return [];
       }catch(e){ }
     }
-    const sys = "You are a systems-change librarian. Given someone's situation, name up to 3 REAL, well-known real-world cases (a concrete initiative, organisation, programme, movement, cooperative or project that genuinely exists and that you are confident about) whose experience offers a transferable lesson. These are CASES, not learning resources: do NOT return books, reports, toolkits, courses, guides, frameworks or podcasts — those belong in a separate resource library. Keep the three VARIED (different contexts or places). ACCURACY IS CRITICAL: only include an example if you are sure it is real and relevant; never invent one, and do NOT state specific locations, dates or figures unless you are certain. If you cannot think of a verified example, return an empty array []. Keep 'org' short. Do NOT include URLs. "+(exclude.length?("Do NOT repeat resources the person already has: "+exclude.join('; ')+". "):"")+"Return STRICT JSON ONLY (no prose, no code fences): an array like [{\"title\": short case name, \"org\": organisation (short, only if certain), \"why\": one sentence on the practical lesson for this person}].";
+    const sys = "You are a systems-change librarian. Given someone's situation, name up to 3 REAL, well-known real-world cases (a concrete initiative, organisation, programme, movement, city or regional project, cooperative, campaign, experiment, policy, or a documented body of work that genuinely exists and that you are confident about) whose experience offers a transferable lesson. Cast a WIDE net beyond any curated library, and keep the three VARIED (different contexts or places). ACCURACY IS CRITICAL: only include an example if you are sure it is real and relevant; never invent one, and do NOT state specific locations, dates or figures unless you are certain. If you cannot think of a verified example, return an empty array []. Keep 'org' short. Do NOT include URLs. "+(exclude.length?("Avoid duplicating these specific resources the person already has: "+exclude.join('; ')+". "):"")+"Return STRICT JSON ONLY (no prose, no code fences): an array like [{\"title\": short case name, \"org\": organisation (short, only if certain), \"why\": one sentence on the practical lesson for this person}].";
     let raw;
     try{ raw = await this._complete({ model:'claude-sonnet-4-5', max_tokens:700, system:sys, messages:[{ role:'user', content:context.slice(0,6000) }] }); }
     catch(e){ return []; }
@@ -489,6 +512,35 @@ class Component extends DCLogic {
     }catch(e){}
   }
 
+  _postParent(type, extra){ try{ if(window.parent && window.parent!==window) window.parent.postMessage(Object.assign({ type:type }, extra||{}), '*'); }catch(e){} }
+
+  // Parent overlay asked to close. Save the log, then — if there was a real
+  // exchange — show a one-step feedback card before letting the overlay close.
+  _requestClose(){
+    this._saveLog();
+    if(this.state.showFeedback) return;
+    const userTurns=this.state.messages.filter(m=>m.role==='user');
+    if(!userTurns.length){ this._postParent('gm-dismiss'); return; }
+    this.setState({ showFeedback:true });
+    this._postParent('gm-feedback-open');
+  }
+  _setRating(v){ this.setState(s=>({ fbRating: s.fbRating===v ? '' : v })); }
+  _submitFeedback(send){
+    if(send){
+      const url=window.NOTION_CONNECTOR_URL;
+      const commentEl=document.getElementById('gm-fb-comment');
+      const emailEl=document.getElementById('gm-fb-email');
+      const comment=commentEl? commentEl.value.trim() : '';
+      const email=emailEl? emailEl.value.trim() : '';
+      const map=this._lastMap || this.state.map || {};
+      if(url && (this.state.fbRating || comment || email)){
+        try{ fetch(url.replace(/\/+$/,'')+'/log-feedback',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
+          body:JSON.stringify({ topic:(map.topic||'Guide Me feedback').slice(0,120), rating:this.state.fbRating||'', comment:comment.slice(0,4000), email:email.slice(0,200), turns:this.state.messages.filter(m=>m.role==='user').length, source:'guide-me-feedback' }) }).catch(function(){}); }catch(e){}
+      }
+    }
+    this._postParent('gm-dismiss');
+  }
+
   async _saveLog(){
     try{
       if(this._saved) return;
@@ -502,7 +554,7 @@ class Component extends DCLogic {
       this._saved=true;
       const transcript=this.state.messages.map(m=>(m.role==='user'?'User: ':'Guide: ')+(m.send||m.content)).join('\n\n');
       fetch(url.replace(/\/+$/,'')+'/log-chat',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
-        body:JSON.stringify({ title:(map.topic||userTurns[0].content||'Guide Me conversation').slice(0,120), summary:map.summary||transcript.slice(0,400), areas:(map.areas||[]).map(a=>a.name), route:map.route||[], resources:(map.resources||[]).map(r=>r.name), cases:(map.cases||[]).map(c=>c.title+(c.url?' — '+c.url:'')), turns:userTurns.length, consent:true, source:'guide-me-chat', transcript:transcript.slice(0,1900) }) }).catch(function(){});
+        body:JSON.stringify({ title:(map.topic||userTurns[0].content||'Guide Me conversation').slice(0,120), summary:map.summary||transcript.slice(0,400), areas:(map.areas||[]).map(a=>a.name), route:map.route||[], resources:(map.resources||[]).map(r=>r.name), cases:(map.cases||[]).map(c=>c.title+(c.url?' — '+c.url:'')), turns:userTurns.length, consent:true, source:'guide-me-chat', transcript:transcript.slice(0,180000) }) }).catch(function(){});
     }catch(e){}
   }
 
@@ -536,6 +588,10 @@ class Component extends DCLogic {
           cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid #5b6733', borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }));
     }
     const turnCount=st.messages.filter(m=>m.role==='user').length;
+    const fbOpts=[['\u2639','Not helpful'],['\u2022','It was OK'],['\u2661','Really helpful']].map(([icon,label])=>{
+      const on=st.fbRating===label;
+      return { icon, label, onClick:()=>this._setRating(label), style:{ flex:'1', display:'flex', flexDirection:'column', alignItems:'center', gap:'5px', padding:'12px 8px', cursor:'pointer', borderRadius:'12px', border:'1px solid '+(on?'#b0822f':'rgba(70,113,111,.22)'), background:on?'rgba(176,130,47,.12)':'#fff', color:on?'#8a6a18':'#54655c', fontFamily:"'PT Sans',sans-serif", fontSize:'12.5px', fontWeight:on?700:600, transition:'.14s ease' } };
+    });
 
     return {
       messages: st.messages.map((m,i)=>({ key:i, text: m.role==='user'? m.content : this._fmt(m.content), rowStyle:{ display:'flex', justifyContent: m.role==='user'?'flex-end':'flex-start' }, bubbleStyle: m.role==='user'? userBubble : botBubble })),
@@ -559,7 +615,11 @@ class Component extends DCLogic {
       turnLabel: turnCount>1 ? ('Sharpened over '+turnCount+' exchanges') : 'From what you shared',
       mapWrapStyle: { animation: (turnCount%2 ? 'exIn' : 'exInB')+' .4s ease' },
       onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },
-      onPrint: ()=>{ try{ window.print(); }catch(e){} }
+      onPrint: ()=>{ try{ window.print(); }catch(e){} },
+      showFeedback: st.showFeedback,
+      fbOptions: fbOpts,
+      fbSubmit: ()=>this._submitFeedback(true),
+      fbSkip: ()=>this._submitFeedback(false)
     };
   }
   _rgbaHex(hex,a){ hex=hex.replace('#',''); if(hex.length===3) hex=hex.split('').map(c=>c+c).join(''); const r=parseInt(hex.substr(0,2),16),g=parseInt(hex.substr(2,2),16),b=parseInt(hex.substr(4,2),16); return 'rgba('+r+','+g+','+b+','+a+')'; }

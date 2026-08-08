@@ -40,11 +40,24 @@ class Component extends DCLogic {
   componentDidMount(){
     this._esc = (e)=>{ if(e.key==='Escape' && this.state.open) this._set(false); };
     document.addEventListener('keydown', this._esc);
+    // The embedded guide runs a feedback step on close: it replies gm-feedback-open
+    // (cancel the safety timer) and finally gm-dismiss (actually close the overlay).
+    this._msg = (e)=>{ if(!e||!e.data) return;
+      if(e.data.type==='gm-dismiss') this._finishClose();
+      else if(e.data.type==='gm-feedback-open'){ clearTimeout(this._closeTimer); }
+    };
+    window.addEventListener('message', this._msg);
   }
-  componentWillUnmount(){ document.removeEventListener('keydown', this._esc); this._set(false); }
+  componentWillUnmount(){ document.removeEventListener('keydown', this._esc); window.removeEventListener('message', this._msg); clearTimeout(this._closeTimer); this._finishClose(); }
+  _finishClose(){ clearTimeout(this._closeTimer); this._closing=false; this.setState({ open:false }); try{ document.body.style.overflow=''; }catch(e){} }
   _set(v){
-    if(!v){ try{ var f=document.getElementById('gm-frame'); if(f && f.contentWindow) f.contentWindow.postMessage({ type:'gm-close' }, '*'); }catch(e){} }
-    this.setState({ open:v }); try{ document.body.style.overflow = v ? 'hidden' : ''; }catch(e){}
+    if(v){ this.setState({ open:true }); try{ document.body.style.overflow='hidden'; }catch(e){} return; }
+    // Closing: hand off to the frame (saves the log, may show feedback). Wait for
+    // its gm-dismiss; a short safety timer covers an old/cached frame that can't reply.
+    try{ var f=document.getElementById('gm-frame'); if(f && f.contentWindow) f.contentWindow.postMessage({ type:'gm-close' }, '*'); }catch(e){}
+    if(this._closing) return;
+    this._closing=true;
+    this._closeTimer=setTimeout(()=>this._finishClose(), 1400);
   }
   renderVals(){
     return {

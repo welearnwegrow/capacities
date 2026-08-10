@@ -50,7 +50,7 @@
       html+='</div>';
     })(lv2); }
     html+='</div>';
-    html+='<div style="margin-top:22px;padding-top:14px;border-top:1px solid #e4dcc8;text-align:center"><span style="font-family:PT Sans,sans-serif;font-size:11px;color:#8a7a5f">CC BY-NC-ND 4.0 · Systems Change Learning Studio</span></div>';
+    html+='<div style="margin-top:22px;padding-top:14px;border-top:1px solid #e4dcc8;text-align:center"><span style="font-family:PT Sans,sans-serif;font-size:11px;color:#8a7a5f">CC BY-NC-ND 4.0 · Systems Change Learning Guide</span></div>';
     html+='</div>';
     var box=document.getElementById('ioc-assess-results'); box.innerHTML=html;
     document.getElementById('ioc-assess-overlay').style.display='block';

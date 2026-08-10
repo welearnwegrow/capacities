@@ -529,7 +529,7 @@ class Component extends DCLogic {
         ctx.fillStyle = 'rgba(70,90,85,0.72)';
         ctx.font = '600 ' + (15 * S) + 'px "PT Sans", system-ui, sans-serif';
         if ('letterSpacing' in ctx) ctx.letterSpacing = (0.3 * S) + 'px';
-        ctx.fillText('CC BY-NC-ND 4.0 · Systems Change Learning Studio', padX * S, (fy + 40) * S);
+        ctx.fillText('CC BY-NC-ND 4.0 · Systems Change Learning Guide', padX * S, (fy + 40) * S);
         if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
         const img = out.toDataURL('image/png');
         const { jsPDF } = window.jspdf;

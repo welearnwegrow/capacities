@@ -156,11 +156,11 @@
           </sc-if>
           <sc-if value="{{ hasBriefError }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:#9a4a2d;background:rgba(200,90,60,.08);border:1px solid rgba(200,90,60,.22);border-radius:9px;padding:8px 11px;margin-bottom:8px">{{ briefError }}</div></sc-if>
           <div style="display:flex;align-items:flex-end;gap:7px;background:#fff;border:1px solid rgba(70,113,111,.24);border-radius:14px;padding:8px 8px 8px 10px">
-            <label title="Attach a brief (PDF or Word)" style="width:34px;height:34px;flex:none;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#7a8b81" style-hover="background:rgba(70,113,111,.1)">
+            <label title="Attach a brief (PDF, Word, PowerPoint, Excel, or text/code)" style="width:34px;height:34px;flex:none;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#7a8b81" style-hover="background:rgba(70,113,111,.1)">
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
-              <input type="file" accept=".pdf,.docx,.txt,application/pdf" onChange="{{ onFile }}" style="display:none" />
+              <input type="file" accept=".pdf,.docx,.pptx,.xlsx,.txt,.md,.markdown,.html,.htm,.js,.jsx,.ts,.tsx,.mjs,.cjs,.css,.scss,.json,.jsonc,.csv,.tsv,.xml,.yml,.yaml,.toml,.ini,.py,.rb,.go,.rs,.java,.c,.cpp,.h,.sh,.sql,.log,application/pdf" onChange="{{ onFile }}" style="display:none" />
             </label>
-            <textarea id="gm-input" rows="1" placeholder="Describe what you're working on…" onKeyDown="{{ onKey }}" onInput="{{ onGrow }}" style="flex:1;border:none;outline:none;resize:none;max-height:130px;font-family:'PT Sans',sans-serif;font-size:14.5px;line-height:1.45;color:#2c3a33;background:transparent;padding-bottom:6px"></textarea>
+            <textarea id="gm-input" rows="1" placeholder="Describe what you're working on in as much detail as possible. You can drop relevant files." onKeyDown="{{ onKey }}" onInput="{{ onGrow }}" style="flex:1;border:none;outline:none;resize:none;max-height:130px;font-family:'PT Sans',sans-serif;font-size:14.5px;line-height:1.45;color:#2c3a33;background:transparent;padding-bottom:6px"></textarea>
             <button class="gm-send" onClick="{{ onSend }}" title="Send" style="width:38px;height:38px;flex:none;border:none;border-radius:10px;background:#b0822f;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
             </button>
@@ -316,7 +316,7 @@ class Component extends DCLogic {
   }
   async _ingestFile(file){
     if(!file) return;
-    if(file.size > 15*1024*1024){ this.setState({ briefError:'That file is over 15 MB — please attach a smaller PDF or Word file.', brief:null, dragOver:false }); return; }
+    if(file.size > 15*1024*1024){ this.setState({ briefError:'That file is over 15 MB — please attach a smaller file.', brief:null, dragOver:false }); return; }
     this.setState({ briefLoading:true, briefError:null, brief:null, dragOver:false });
     try{
       let text=await this._extractFile(file);
@@ -332,9 +332,14 @@ class Component extends DCLogic {
     const n=(file.name||'').toLowerCase();
     if(n.endsWith('.pdf')||file.type==='application/pdf') return await this._extractPdf(file);
     if(n.endsWith('.docx')) return await this._extractDocx(file);
+    if(n.endsWith('.pptx')) return await this._extractPptx(file);
+    if(n.endsWith('.xlsx')) return await this._extractXlsx(file);
     if(n.endsWith('.doc')) throw new Error('Old Word (.doc) isn\u2019t supported \u2014 please save as .docx or PDF.');
+    if(n.endsWith('.ppt')) throw new Error('Old PowerPoint (.ppt) isn\u2019t supported \u2014 please save as .pptx or PDF.');
+    if(n.endsWith('.xls')) throw new Error('Old Excel (.xls) isn\u2019t supported \u2014 please save as .xlsx or CSV.');
     if(n.endsWith('.txt')||file.type==='text/plain') return await file.text();
-    throw new Error('Please attach a PDF, Word (.docx), or plain-text file.');
+    if(/\.(md|markdown|html?|jsx?|tsx?|mjs|cjs|css|scss|json|jsonc|csv|tsv|xml|ya?ml|toml|ini|py|rb|go|rs|java|c|cpp|h|sh|sql|log)$/.test(n) || /^text\//.test(file.type||'') || file.type==='application/json') return await file.text();
+    throw new Error('Please attach a PDF, Office file (Word, PowerPoint, Excel), or a text/code file.');
   }
   async _extractPdf(file){
     if(!window.pdfjsLib) throw new Error('The PDF reader is still loading \u2014 try again in a moment.');
@@ -357,6 +362,56 @@ class Component extends DCLogic {
     let txt=parts.join(' ');
     txt=txt.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'");
     return txt;
+  }
+  async _extractPptx(file){
+    if(!window.JSZip) throw new Error('The file reader is still loading \u2014 try again in a moment.');
+    const un=function(s){ return String(s==null?'':s).replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'"); };
+    const buf=await file.arrayBuffer();
+    const zip=await window.JSZip.loadAsync(buf);
+    const names=Object.keys(zip.files).filter(function(p){ return /^ppt\/slides\/slide\d+\.xml$/.test(p); })
+      .sort(function(a,b){ return (parseInt(a.replace(/\D/g,''),10)||0)-(parseInt(b.replace(/\D/g,''),10)||0); });
+    if(!names.length) throw new Error('Couldn\u2019t read that PowerPoint \u2014 please save as PDF and retry.');
+    const out=[];
+    for(let i=0;i<names.length;i++){
+      const xml=await zip.file(names[i]).async('string');
+      const parts=[]; const re=/<a:t[^>]*>([\s\S]*?)<\/a:t>/g; let m;
+      while((m=re.exec(xml))){ parts.push(un(m[1])); }
+      const line=parts.join(' ').replace(/\s{2,}/g,' ').trim();
+      if(line) out.push('Slide '+(i+1)+': '+line);
+    }
+    return out.join('\n');
+  }
+  async _extractXlsx(file){
+    if(!window.JSZip) throw new Error('The file reader is still loading \u2014 try again in a moment.');
+    const un=function(s){ return String(s==null?'':s).replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&apos;/g,"'"); };
+    const buf=await file.arrayBuffer();
+    const zip=await window.JSZip.loadAsync(buf);
+    const shared=[];
+    const ss=zip.file('xl/sharedStrings.xml');
+    if(ss){ const sx=await ss.async('string'); const re=/<si>([\s\S]*?)<\/si>/g; let m;
+      while((m=re.exec(sx))){ const tp=[]; const tre=/<t[^>]*>([\s\S]*?)<\/t>/g; let tm; while((tm=tre.exec(m[1]))){ tp.push(tm[1]); } shared.push(un(tp.join(''))); } }
+    const sheetNames=Object.keys(zip.files).filter(function(p){ return /^xl\/worksheets\/sheet\d+\.xml$/.test(p); })
+      .sort(function(a,b){ return (parseInt(a.replace(/\D/g,''),10)||0)-(parseInt(b.replace(/\D/g,''),10)||0); });
+    if(!sheetNames.length) throw new Error('Couldn\u2019t read that spreadsheet \u2014 please save as CSV and retry.');
+    const out=[];
+    for(let s=0;s<sheetNames.length;s++){
+      const xml=await zip.file(sheetNames[s]).async('string');
+      const rows=[]; const rowRe=/<row[^>]*>([\s\S]*?)<\/row>/g; let rm;
+      while((rm=rowRe.exec(xml))){
+        const cells=[]; const cRe=/<c\b([^>]*)>([\s\S]*?)<\/c>/g; let cm;
+        while((cm=cRe.exec(rm[1]))){
+          const attrs=cm[1]||'', body=cm[2]||''; const tM=/\bt="([^"]*)"/.exec(attrs); const type=tM?tM[1]:'';
+          let val=''; const isM=/<t[^>]*>([\s\S]*?)<\/t>/.exec(body); const vM=/<v>([\s\S]*?)<\/v>/.exec(body);
+          if(type==='inlineStr' && isM){ val=un(isM[1]); }
+          else if(vM){ val = type==='s' ? (shared[parseInt(vM[1],10)]||'') : un(vM[1]); }
+          if(val!=='') cells.push(val);
+        }
+        if(cells.length) rows.push(cells.join(' | '));
+      }
+      if(rows.length) out.push((sheetNames.length>1?('Sheet '+(s+1)+':\n'):'')+rows.join('\n'));
+    }
+    if(!out.length) throw new Error('No readable cells found \u2014 please save as CSV and retry.');
+    return out.join('\n\n');
   }
 
   async _complete(opts){

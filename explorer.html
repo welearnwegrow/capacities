@@ -308,10 +308,13 @@ class Component extends DCLogic {
     // Users rarely use the close button, so also surface feedback on exit intent:
     // pointer leaving the top edge of the window (heading for the tab bar / close).
     this._onExitIntent=(e)=>{
-      if(this._fbDone || this.state.showFeedback) return;
+      if(this._fbDone || this.state.showFeedback || this.state.loading) return;
       if(e.clientY > 4) return;                       // only the very top edge
       if(e.relatedTarget || e.toElement) return;      // must be leaving the window
       if(!this.state.messages.some(m=>m.role==='user')) return;
+      // Only after a real result exists — never mid-conversation / before results.
+      const m=this._lastMap||this.state.map;
+      if(!m || !((m.route&&m.route.length)||(m.resources&&m.resources.length))) return;
       this._requestClose();
     };
     document.addEventListener('mouseout', this._onExitIntent);

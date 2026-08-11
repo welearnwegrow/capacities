@@ -292,11 +292,32 @@ class Component extends DCLogic {
     window.addEventListener('beforeunload', this._onPageHide);
     this._onMsg=(e)=>{ if(e && e.data && e.data.type==='gm-close') this._requestClose(); };
     window.addEventListener('message', this._onMsg);
+    // Users rarely use the close button, so also surface feedback on exit intent:
+    // pointer leaving the top edge of the window (heading for the tab bar / close).
+    this._onExitIntent=(e)=>{
+      if(this._fbDone || this.state.showFeedback) return;
+      if(e.clientY > 4) return;                       // only the very top edge
+      if(e.relatedTarget || e.toElement) return;      // must be leaving the window
+      if(!this.state.messages.some(m=>m.role==='user')) return;
+      this._requestClose();
+    };
+    document.addEventListener('mouseout', this._onExitIntent);
+    // Real tab close / navigation: fire the browser's native confirm once, so an
+    // accidental close is caught and the card is there when they come back.
+    this._onBeforeUnload=(e)=>{
+      this._saveLog();
+      if(this._fbDone || this.state.showFeedback) return;
+      if(!this.state.messages.some(m=>m.role==='user')) return;
+      e.preventDefault(); e.returnValue=''; return '';
+    };
+    window.addEventListener('beforeunload', this._onBeforeUnload);
   }
   componentWillUnmount(){
     if(this._onHide) document.removeEventListener('visibilitychange', this._onHide);
     if(this._onPageHide){ window.removeEventListener('pagehide', this._onPageHide); window.removeEventListener('beforeunload', this._onPageHide); }
     if(this._onMsg) window.removeEventListener('message', this._onMsg);
+    if(this._onExitIntent) document.removeEventListener('mouseout', this._onExitIntent);
+    if(this._onBeforeUnload) window.removeEventListener('beforeunload', this._onBeforeUnload);
     this._saveLog();
   }
   componentDidUpdate(){ this._scroll(); }
@@ -581,6 +602,7 @@ class Component extends DCLogic {
   }
   _setRating(v){ this.setState(s=>({ fbRating: s.fbRating===v ? '' : v })); }
   _submitFeedback(send){
+    this._fbDone = true;
     if(send){
       const url=window.NOTION_CONNECTOR_URL;
       const commentEl=document.getElementById('gm-fb-comment');

@@ -312,18 +312,25 @@ class Component extends DCLogic {
       if(e.clientY > 4) return;                       // only the very top edge
       if(e.relatedTarget || e.toElement) return;      // must be leaving the window
       if(!this.state.messages.some(m=>m.role==='user')) return;
-      // Only after a real result exists — never mid-conversation / before results.
+      // Only after a real result exists AND the person has scrolled it into view.
       const m=this._lastMap||this.state.map;
       if(!m || !((m.route&&m.route.length)||(m.resources&&m.resources.length))) return;
+      if(!this._viewedResults) return;
       this._requestClose();
     };
     document.addEventListener('mouseout', this._onExitIntent);
+    // Track whether the person has actually scrolled the result map into view, so
+    // feedback is only ever offered after they've had a chance to read the results.
+    this._viewedResults=false;
+    this._onScrollView=()=>{ if(this._viewedResults) return; const el=document.getElementById('gm-map'); if(el){ const r=el.getBoundingClientRect(); if(r.top < (window.innerHeight||800)*0.8){ this._viewedResults=true; window.removeEventListener('scroll', this._onScrollView); } } };
+    window.addEventListener('scroll', this._onScrollView, { passive:true });
     // Real tab close / navigation: fire the browser's native confirm once, so an
     // accidental close is caught and the card is there when they come back.
     this._onBeforeUnload=(e)=>{
       this._saveLog();
-      if(this._fbDone || this.state.showFeedback) return;
-      if(!this.state.messages.some(m=>m.role==='user')) return;
+      if(this._fbDone || this.state.showFeedback || this.state.loading) return;
+      const m=this._lastMap||this.state.map;
+      if(!m || !((m.route&&m.route.length)||(m.resources&&m.resources.length))) return;
       e.preventDefault(); e.returnValue=''; return '';
     };
     window.addEventListener('beforeunload', this._onBeforeUnload);
@@ -333,6 +340,7 @@ class Component extends DCLogic {
     if(this._onPageHide){ window.removeEventListener('pagehide', this._onPageHide); window.removeEventListener('beforeunload', this._onPageHide); }
     if(this._onMsg) window.removeEventListener('message', this._onMsg);
     if(this._onExitIntent) document.removeEventListener('mouseout', this._onExitIntent);
+    if(this._onScrollView) window.removeEventListener('scroll', this._onScrollView);
     if(this._onBeforeUnload) window.removeEventListener('beforeunload', this._onBeforeUnload);
     this._saveLog();
   }

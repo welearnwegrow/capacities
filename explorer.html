@@ -125,7 +125,7 @@
           <div style="position:absolute;inset:0;z-index:5;background:rgba(247,244,236,.94);border:2px dashed #b0822f;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none">
             <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#b0822f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
             <div style="font-size:15px;font-weight:700;color:#8a6a18">Drop your brief to read it</div>
-            <div style="font-size:12.5px;color:#9a8a5a;margin-top:3px">PDF, Word (.docx) or text</div>
+            <div style="font-size:12.5px;color:#9a8a5a;margin-top:3px">PDF, Word, PowerPoint, Excel or text</div>
           </div>
         </sc-if>
         <div id="gm-scroll" class="gm-scroll" style="overflow:visible;padding:20px 20px 8px;display:flex;flex-direction:column;gap:12px">
@@ -252,10 +252,22 @@
               </div>
             </sc-if>
             <div class="gm-noprint" style="margin-top:18px;font-size:12px;color:#9aa89e">Keep talking to sharpen this, or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
-            <button onClick="{{ onPrint }}" class="gm-noprint" style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;background:#b0822f;border:none;border-radius:20px;padding:9px 18px;cursor:pointer">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
-              Save this map (PDF)
-            </button>
+            <sc-if value="{{ routeComplete }}" hint-placeholder-val="{{ false }}">
+              <div class="gm-noprint" style="margin-top:20px;background:linear-gradient(180deg,#fbf5e6,#f6eecf);border:1px solid rgba(176,130,47,.32);border-radius:14px;padding:16px 18px">
+                <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#8a6a18;margin-bottom:4px">Your map is ready</div>
+                <div style="font-size:12.5px;line-height:1.5;color:#6b5a2a;margin-bottom:13px">Sessions aren’t saved — download your map to keep it and pick up where you left off.</div>
+                <button onClick="{{ onPrint }}" style="display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#fff;background:#b0822f;border:none;border-radius:20px;padding:10px 20px;cursor:pointer;box-shadow:0 8px 20px rgba(120,90,20,.24)">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+                  Save this map (PDF)
+                </button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ notRouteComplete }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ onPrint }}" class="gm-noprint" style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;background:#b0822f;border:none;border-radius:20px;padding:9px 18px;cursor:pointer">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+                Save this map (PDF)
+              </button>
+            </sc-if>
           </div>
         </aside>
       </sc-if>
@@ -272,6 +284,7 @@ class Component extends DCLogic {
     super(props);
     this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'' };
     this._saved = false;
+    this._queryPageId=null; this._chatPageId=null; this._candidatesText=''; this._lastStatus='ok'; this._lastError=''; this._lastMatchedBy='AI'; this._caseToken=0;
     this.ROUTE = [
       { name:'Probe', desc:'Probe the context and frame the problem field' },
       { name:'Sense', desc:'Sense the field and imagineer possibilities' },
@@ -463,6 +476,7 @@ class Component extends DCLogic {
       "ACCURACY IS CRITICAL: never state a specific fact you are not sure of — no invented locations, dates, figures, names, or URLs. If you are not confident an example is accurate, describe it only in general terms or leave it out. It is always better to be general than wrong. Only ever use Route steps, learning areas, and resources from the lists below, by their EXACT names. Refine the map as the conversation deepens. If the person only greets you or asks what you do, give a brief friendly reply and you may return empty arrays for route/areas/resources and an empty summary.",
       "",
       "THE 5-STEP ROUTE: "+route,
+      "ROUTE BY THE STAGE THE PERSON IS ACTUALLY IN — do not default to early phases when the stage is clear. Brand-new or still-uncertain framing → Probe or Sense. Actively designing a plan or mobilising resources → Design. A running intervention being adjusted, one that has plateaued or hit friction after months or years → Adapt. Wrapping up, harvesting lessons, or holding what was learned at the close of an effort → Integrate. When the person clearly describes a running or closing intervention, route to Adapt and/or Integrate rather than Probe/Sense.",
       "",
       "THE 24 LEARNING AREAS:",
       this._areasText(),
@@ -508,35 +522,53 @@ class Component extends DCLogic {
     const display = text + (brief? ((text?'\n\n':'')+'[Attached: '+brief.name+']') : '');
     const send = text + (brief? ((text?'\n\n':'')+'--- ATTACHED BRIEF ('+brief.name+') ---\n'+brief.text) : '');
     const msgs=this.state.messages.concat([{ role:'user', content:display, send:send }]);
-    this._saved=false;
     this.setState({ messages:msgs, loading:true, error:null, brief:null, briefError:null });
     const el=document.getElementById('gm-input'); if(el){ el.value=''; el.style.height='auto'; }
     const chatMsgs=msgs.map(m=>({ role:m.role, content: m.role==='assistant' ? (m.raw||m.content) : (m.send||m.content) }));
-    let out=null;
+    let out=null, matchedBy='AI';
     const hasAI=(window.claude && window.claude.complete) || !!window.NOTION_CONNECTOR_URL;
     if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
-    if(!out){ out=this._keywordTurn(send); }
+    if(!out){ out=this._keywordTurn(send); matchedBy='Keyword'; }
+    // P0 library fix: drop learning-area labels / unresolved names from resources and
+    // refill from the real library rather than padding with capacity names.
+    if(out && out.map){ out.map.resources=this._validateResources(out.map.resources, send, out.map.areas||[]); }
+    this._lastMatchedBy=matchedBy;
+    // Full ranked candidate list (beyond the 5 written) so concentration is measurable.
+    const rankAreas=(out&&out.map&&out.map.areas)||[];
+    this._candidatesText=this._rankCandidates(send, rankAreas).slice(0,20).map((c,i)=>((i+1)+'. '+c.name+' ('+c.score+')')).join('\n');
+    // Success = a usable route was produced. Otherwise it's an error (no partial state).
+    const ok=!!(out && out.map && Array.isArray(out.map.route) && out.map.route.length);
+    this._lastStatus = ok ? 'ok' : 'error';
+    this._lastError = ok ? '' : (matchedBy==='Keyword' ? 'AI turn failed; keyword fallback produced no route.' : 'No route produced.');
     const nextMap = this._mergeMap(this.state.map, out.map);
+    if(nextMap) nextMap.cases=[];               // never carry cases across turns (kills cross-session/turn bleed)
     this._lastMap = nextMap;
-    this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply, raw:out.rawJson||'' }]), map:nextMap, loading:false });
-    // From the first user turn, gather bioregionally-close REAL cases via web search,
-    // excluding the library resources we just suggested so the two lists stay distinct.
-    if(hasAI){
-      const convo=msgs.filter(m=>m.role==='user').map(m=>m.send||m.content).join('\n\n');
+    const errMsg = ok ? null : 'Something went wrong reaching the guide. Please try sending that again in a moment.';
+    this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply, raw:out.rawJson||'' }]), map:nextMap, loading:false, error:errMsg });
+    // Log this turn (in place) to both databases — analytics + transcript.
+    this._saveLog();
+    // Gather bioregionally-close REAL cases from the CURRENT problem statement only,
+    // with a stale-response guard so an earlier turn's search can never repaint a later map.
+    if(hasAI && ok){
+      const cur=(msgs.filter(m=>m.role==='user').slice(-1)[0]||{});
+      const caseContext=(cur.send||cur.content||'');
       const priorRes=((nextMap&&nextMap.resources)||[]).map(r=>r.name).filter(Boolean);
-      this._casesTurn(convo, priorRes).then((cs)=>{
-        if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); }
+      const sid=this._sessionId();
+      const token=(this._caseToken=(this._caseToken||0)+1);
+      this._casesTurn(caseContext, priorRes, sid).then((cs)=>{
+        if(token!==this._caseToken) return;      // superseded by a newer turn
+        if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); this._saveLog(); }
       }).catch(()=>{});
     }
   }
 
-  async _casesTurn(context, exclude){
+  async _casesTurn(context, exclude, sessionId){
     exclude = Array.isArray(exclude) ? exclude : [];
     // Prefer the worker's web-search-grounded endpoint → VERIFIED real URLs.
     var url = window.NOTION_CONNECTOR_URL;
     if(url){
       try{
-        var r = await fetch(url.replace(/\/+$/,'')+'/cases', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ context: context.slice(0,6000), exclude: exclude }) });
+        var r = await fetch(url.replace(/\/+$/,'')+'/cases', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ context: context.slice(0,6000), exclude: exclude, sessionId: sessionId||'' }) });
         var data = await r.json().catch(function(){ return {}; });
         if(data && Array.isArray(data.cases) && data.cases.length){
           return data.cases.slice(0,3).map(function(c){ return { title:String(c.title||'').slice(0,140), org:String(c.org||'').slice(0,140), url:(/^https?:\/\//i.test(String(c.url||'')) ? String(c.url) : ''), why:String(c.why||'').slice(0,240) }; }).filter(function(c){ return c.title && c.url; });
@@ -620,18 +652,46 @@ class Component extends DCLogic {
 
   async _saveLog(){
     try{
-      if(this._saved) return;
       const url=window.NOTION_CONNECTOR_URL; if(!url) return;
       const userTurns=this.state.messages.filter(m=>m.role==='user'); if(!userTurns.length) return;
       const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
-      if(!consent){ this._saved=true; return; }
       const map=this._lastMap || this.state.map || {};
+      const status=this._lastStatus||'ok';
       const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.summary&&map.summary.trim());
-      if(!hasContent) return;
-      this._saved=true;
-      const transcript=this.state.messages.map(m=>(m.role==='user'?'User: ':'Guide: ')+(m.send||m.content)).join('\n\n');
-      fetch(url.replace(/\/+$/,'')+'/log-chat',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
-        body:JSON.stringify({ title:(map.topic||userTurns[0].content||'Guide Me conversation').slice(0,120), summary:map.summary||transcript.slice(0,400), areas:(map.areas||[]).map(a=>a.name), route:map.route||[], resources:(map.resources||[]).map(r=>r.name), cases:(map.cases||[]).map(c=>c.title+(c.url?' — '+c.url:'')), turns:userTurns.length, consent:true, source:'guide-me-chat', transcript:transcript.slice(0,180000) }) }).catch(function(){});
+      // Wait for real content before the FIRST write (unless this turn errored — errors are logged).
+      if(status!=='error' && !hasContent && !this._queryPageId) return;
+      const self=this;
+      // In-flight guard: don't fire a second CREATE before the first returns a pageId (avoids dup rows).
+      function postLog(pathSeg, payload, idKey, flightKey){
+        if(!self[idKey] && self[flightKey]) return;
+        self[flightKey]=true;
+        fetch(url.replace(/\/+$/,'')+pathSeg,{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true, body:JSON.stringify(payload) })
+          .then(function(r){ return r.json(); }).then(function(d){ if(d&&d.pageId) self[idKey]=d.pageId; })
+          .catch(function(){}).finally(function(){ self[flightKey]=false; });
+      }
+      const topic=this._labelClamp(map.topic||userTurns[0].content||'Guide Me conversation',80);
+      const base={
+        sessionId:this._sessionId(), visitorId:this._visitorId(), turnIndex:userTurns.length,
+        status:status, error:this._lastError||'', entryPoint:this._entryPoint(), consent:consent,
+        promptRaw: userTurns.map(function(m,i){ return '['+(i+1)+'] '+(m.send||m.content); }).join('\n\n'),
+        candidates: this._candidatesText||''
+      };
+      // Analytics row → /log-query, updated in place each turn.
+      postLog('/log-query', Object.assign({}, base, {
+        problem: userTurns[0].content||'', topic: topic,
+        route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}),
+        matchedBy: this._lastMatchedBy||'AI', source:'guide-me-chat', pageId:this._queryPageId||undefined
+      }), '_queryPageId', '_qInFlight');
+      // Transcript row → /log-chat, updated in place (consent + real content only).
+      if(consent && hasContent){
+        const transcript=this.state.messages.map(function(m){ return (m.role==='user'?'User: ':'Guide: ')+(m.send||m.content); }).join('\n\n');
+        postLog('/log-chat', Object.assign({}, base, {
+          title: topic, summary: map.summary||transcript.slice(0,400),
+          areas:(map.areas||[]).map(function(a){return a.name;}), route:map.route||[], resources:(map.resources||[]).map(function(r){return r.name;}),
+          cases:(map.cases||[]).map(function(c){return c.title+(c.url?' — '+c.url:'');}), turns:userTurns.length,
+          source:'guide-me-chat', transcript:transcript.slice(0,180000), pageId:this._chatPageId||undefined
+        }), '_chatPageId', '_cInFlight');
+      }
     }catch(e){}
   }
 
@@ -640,6 +700,50 @@ class Component extends DCLogic {
     let r=list.find(x=>x.name===name);
     if(!r){ const n=(name||'').toLowerCase(); r=list.find(x=>(x.name||'').toLowerCase()===n) || list.find(x=>(x.name||'').toLowerCase().indexOf(n)>=0 || n.indexOf((x.name||'').toLowerCase())>=0); }
     return r;
+  }
+
+  // ---------- session identity + analytics helpers ----------
+  _uuid(){ try{ if(window.crypto && crypto.randomUUID) return crypto.randomUUID(); }catch(e){} return 'x-'+Date.now().toString(16)+'-'+Math.random().toString(16).slice(2); }
+  _sessionId(){ if(!this._sid) this._sid=this._uuid(); return this._sid; }
+  _visitorId(){ try{ let v=sessionStorage.getItem('gm_visitor'); if(!v){ v=this._uuid(); sessionStorage.setItem('gm_visitor', v); } return v; }catch(e){ return ''; } }
+  _entryPoint(){
+    try{ const p=new URLSearchParams(location.search).get('from'); if(p) return String(p).slice(0,120); }catch(e){}
+    try{ if(document.referrer){ const h=new URL(document.referrer).host; if(h && h!==location.host) return h; } }catch(e){}
+    return 'direct';
+  }
+  _labelClamp(s,n){ s=String(s||'').replace(/\s+/g,' ').trim(); n=n||80; if(s.length<=n) return s; let cut=s.slice(0,n); const sp=cut.lastIndexOf(' '); if(sp>40) cut=cut.slice(0,sp); return cut.replace(/[\s,;:.\-–—]+$/,''); }
+  _learningAreaLabels(){ const set={}; ((this._data().capacities)||[]).forEach(function(c){ if(c&&c.label) set[c.label.toLowerCase().replace(/\s+/g,' ').trim()]=true; }); return set; }
+  // Rank the WHOLE library against the problem + picked areas, so concentration is measurable.
+  _rankCandidates(problemText, areas){
+    const areaSet={}; (areas||[]).forEach(function(a){ const n=((a&&a.name)||a||'').toString().toLowerCase(); if(n) areaSet[n]=true; });
+    const qt=this._tokenize(problemText||''); const qset={}; qt.forEach(function(w){ qset[w]=1; });
+    return ((this._data().resources)||[]).map(function(r){
+      const hay=((r.name||'')+' '+(r.desc||'')+' '+((r.caps||[]).join(' '))).toLowerCase();
+      let s=0; for(const w in qset){ if(hay.indexOf(w)>=0) s++; }
+      (r.caps||[]).forEach(function(c){ if(areaSet[(c||'').toLowerCase()]) s+=2; });
+      return { name:r.name, score:s };
+    }).filter(function(x){ return x.score>0; }).sort(function(a,b){ return b.score-a.score; });
+  }
+  // P0 library fix: keep only real resources (drop learning-area labels + unresolved
+  // names), then refill from the library rather than padding with capacity names.
+  _validateResources(picks, problemText, areas){
+    const laSet=this._learningAreaLabels(); const seen={};
+    let valid=(picks||[]).filter(function(p){
+      const nm=((p&&p.name)||'').toLowerCase().replace(/\s+/g,' ').trim();
+      if(!nm||seen[nm]) return false;
+      if(laSet[nm]) return false;
+      if(!this._resolveRes(p.name)) return false;
+      seen[nm]=true; return true;
+    }.bind(this));
+    if(valid.length<3){
+      const ranked=this._rankCandidates(problemText, areas);
+      for(let i=0;i<ranked.length && valid.length<5;i++){
+        const nm=ranked[i].name.toLowerCase().replace(/\s+/g,' ').trim();
+        if(seen[nm]||laSet[nm]) continue;
+        seen[nm]=true; valid.push({ name:ranked[i].name, why:'' });
+      }
+    }
+    return valid.slice(0,5);
   }
 
   renderVals(){
@@ -689,6 +793,7 @@ class Component extends DCLogic {
       briefMeta: st.brief? (st.brief.chars.toLocaleString()+' chars') : '',
       hasBriefError: !!st.briefError, briefError: st.briefError||'',
       hasMap, noMap:!hasMap, summary, firstProblem:((st.messages.find(m=>m.role==='user')||{}).content||''), routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0, cases, hasCases: cases.length>0,
+      routeComplete: hasMap && !!(map&&(map.route||[]).length) && picks.length>0, notRouteComplete: !(hasMap && !!(map&&(map.route||[]).length) && picks.length>0),
       turnLabel: turnCount>1 ? ('Sharpened over '+turnCount+' exchanges') : 'From what you shared',
       mapWrapStyle: { animation: (turnCount%2 ? 'exIn' : 'exInB')+' .4s ease' },
       onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },

@@ -98,7 +98,10 @@
         <label style="display:block;font-size:11.5px;font-weight:700;letter-spacing:.03em;color:#8a7a4a;margin-bottom:6px">Email (optional) — if you're open to us following up</label>
         <input id="gm-fb-email" type="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;border:1px solid rgba(70,113,111,.24);border-radius:12px;padding:10px 13px;font-family:'PT Sans',sans-serif;font-size:14px;color:#2c3a33;background:#fff;outline:none;margin-bottom:20px">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <button onClick="{{ fbSkip }}" style="border:none;background:transparent;color:#8a978c;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;padding:8px 4px">Skip</button>
+          <div style="display:flex;align-items:center;gap:4px">
+            <button onClick="{{ fbBack }}" style="border:none;background:transparent;color:#46716f;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;padding:8px 8px;display:inline-flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#46716f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back</button>
+            <button onClick="{{ fbSkip }}" style="border:none;background:transparent;color:#8a978c;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;padding:8px 4px">Skip</button>
+          </div>
           <button onClick="{{ fbSubmit }}" style="border:none;border-radius:12px;background:#b0822f;color:#fff;font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;padding:11px 26px;box-shadow:0 8px 20px rgba(120,90,20,.24)">Send &amp; close</button>
         </div>
       </div>
@@ -813,7 +816,8 @@ class Component extends DCLogic {
       showFeedback: st.showFeedback,
       fbOptions: fbOpts,
       fbSubmit: ()=>this._submitFeedback(true),
-      fbSkip: ()=>this._submitFeedback(false)
+      fbSkip: ()=>this._submitFeedback(false),
+      fbBack: ()=>{ this.setState({ showFeedback:false }); this._postParent('gm-feedback-close'); }
     };
   }
   _rgbaHex(hex,a){ hex=hex.replace('#',''); if(hex.length===3) hex=hex.split('').map(c=>c+c).join(''); const r=parseInt(hex.substr(0,2),16),g=parseInt(hex.substr(2,2),16),b=parseInt(hex.substr(4,2),16); return 'rgba('+r+','+g+','+b+','+a+')'; }

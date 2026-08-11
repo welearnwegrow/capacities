@@ -308,7 +308,7 @@ class Component extends DCLogic {
     // Users rarely use the close button, so also surface feedback on exit intent:
     // pointer leaving the top edge of the window (heading for the tab bar / close).
     this._onExitIntent=(e)=>{
-      if(this._fbDone || this.state.showFeedback || this.state.loading) return;
+      if(this._fbDone || this.state.showFeedback || this.state.loading || this._busy) return;
       if(e.clientY > 4) return;                       // only the very top edge
       if(e.relatedTarget || e.toElement) return;      // must be leaving the window
       if(!this.state.messages.some(m=>m.role==='user')) return;
@@ -328,7 +328,7 @@ class Component extends DCLogic {
     // accidental close is caught and the card is there when they come back.
     this._onBeforeUnload=(e)=>{
       this._saveLog();
-      if(this._fbDone || this.state.showFeedback || this.state.loading) return;
+      if(this._fbDone || this.state.showFeedback || this.state.loading || this._busy) return;
       const m=this._lastMap||this.state.map;
       if(!m || !((m.route&&m.route.length)||(m.resources&&m.resources.length))) return;
       e.preventDefault(); e.returnValue=''; return '';
@@ -533,6 +533,7 @@ class Component extends DCLogic {
     const display = text + (brief? ((text?'\n\n':'')+'[Attached: '+brief.name+']') : '');
     const send = text + (brief? ((text?'\n\n':'')+'--- ATTACHED BRIEF ('+brief.name+') ---\n'+brief.text) : '');
     const msgs=this.state.messages.concat([{ role:'user', content:display, send:send }]);
+    this._busy=true;
     this.setState({ messages:msgs, loading:true, error:null, brief:null, briefError:null });
     const el=document.getElementById('gm-input'); if(el){ el.value=''; el.style.height='auto'; }
     const chatMsgs=msgs.map(m=>({ role:m.role, content: m.role==='assistant' ? (m.raw||m.content) : (m.send||m.content) }));
@@ -569,8 +570,8 @@ class Component extends DCLogic {
       this._casesTurn(caseContext, priorRes, sid).then((cs)=>{
         if(token!==this._caseToken) return;      // superseded by a newer turn
         if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); this._saveLog(); }
-      }).catch(()=>{});
-    }
+      }).catch(()=>{}).finally(()=>{ if(token===this._caseToken) this._busy=false; });
+    } else { this._busy=false; }
   }
 
   async _casesTurn(context, exclude, sessionId){

@@ -32,12 +32,11 @@ Worker endpoints:
 - `POST /ai` — proxied Claude completion (Guide Me's conversation).
 - `POST /cases` — web-search-grounded **Other cases to learn from**: 3 verified real-world cases (first two bioregionally close to the person's situation, the third the strongest match from anywhere), de-duplicated against the resources already suggested.
 - `POST /log-query` — logs a Guide Me query to Notion.
-- `POST /log-chat` — logs a full conversation transcript (chunked so nothing is truncated) to Notion.
 - `POST /log-feedback` — saves the on-close feedback card (rating, comment, optional email) to Notion.
 - `GET /` / `POST /` — read / suggest resources from a Notion Resources DB.
 - `POST /subscribe` — newsletter signup.
 
-Worker env vars (see the header of `connector/worker.js`): `NOTION_TOKEN`, `NOTION_DB_ID` (Resources), `QUERIES_DB_ID`, `COACH_DB_ID` (transcripts), `FEEDBACK_DB_ID` (Guide Me feedback), `ANTHROPIC_API_KEY`. Each Notion database must be shared with the integration used by `NOTION_TOKEN`.
+Worker env vars (see the header of `connector/worker.js`): `NOTION_TOKEN`, `NOTION_DB_ID` (Resources), `QUERIES_DB_ID`, `FEEDBACK_DB_ID` (Guide Me feedback), `ANTHROPIC_API_KEY`. Each Notion database must be shared with the integration used by `NOTION_TOKEN`.
 
 ## Forms (Web3Forms)
 The **Suggest a resource** and **Partner with Us** forms send through [Web3Forms](https://web3forms.com). Get an Access Key at web3forms.com and paste it into `forms-config.js`:

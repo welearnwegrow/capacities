@@ -287,7 +287,7 @@ class Component extends DCLogic {
     super(props);
     this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'' };
     this._saved = false;
-    this._queryPageId=null; this._chatPageId=null; this._candidatesText=''; this._lastStatus='ok'; this._lastError=''; this._lastMatchedBy='AI'; this._caseToken=0;
+    this._queryPageId=null; this._candidatesText=''; this._lastStatus='ok'; this._lastError=''; this._lastMatchedBy='AI'; this._caseToken=0;
     this.ROUTE = [
       { name:'Probe', desc:'Probe the context and frame the problem field' },
       { name:'Sense', desc:'Sense the field and imagineer possibilities' },
@@ -469,6 +469,7 @@ class Component extends DCLogic {
     var r=await fetch(url.replace(/\/+$/,'')+'/ai',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ model:opts.model, max_tokens:opts.max_tokens, system:opts.system, messages:opts.messages }) });
     var data=await r.json().catch(function(){ return {}; });
     if(!r.ok || data.error) throw new Error((data && data.error) || ('HTTP '+r.status));
+    if(typeof data.cost==='number') this._turnCost=(this._turnCost||0)+data.cost;
     return data.text||'';
   }
 
@@ -585,6 +586,7 @@ class Component extends DCLogic {
       try{
         var r = await fetch(url.replace(/\/+$/,'')+'/cases', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ context: context.slice(0,6000), exclude: exclude, sessionId: sessionId||'' }) });
         var data = await r.json().catch(function(){ return {}; });
+        if(data && typeof data.cost==='number') this._turnCost=(this._turnCost||0)+data.cost;
         if(data && Array.isArray(data.cases) && data.cases.length){
           return data.cases.slice(0,3).map(function(c){ return { title:String(c.title||'').slice(0,140), org:String(c.org||'').slice(0,140), url:(/^https?:\/\//i.test(String(c.url||'')) ? String(c.url) : ''), why:String(c.why||'').slice(0,240) }; }).filter(function(c){ return c.title && c.url; });
         }
@@ -620,21 +622,6 @@ class Component extends DCLogic {
       resources: pick('resources')
     };
   }
-  _logTurn(problem, map){
-    try{
-      const url=window.NOTION_CONNECTOR_URL; if(!url || !map) return;
-      const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
-      const payload={
-        problem: consent ? problem : '(prompt not saved — user opted out)',
-        route: consent ? (map.route||[]) : [],
-        areas: consent ? (map.areas||[]).map(a=>a.name) : [],
-        resources: consent ? (map.resources||[]).map(r=>r.name) : [],
-        matchedBy:'AI', consent:consent, source:'guide-me-chat'
-      };
-      fetch(url.replace(/\/+$/,'')+'/log-query',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), keepalive:true }).catch(function(){});
-    }catch(e){}
-  }
-
   _postParent(type, extra){ try{ if(window.parent && window.parent!==window) window.parent.postMessage(Object.assign({ type:type }, extra||{}), '*'); }catch(e){} }
 
   // Parent overlay asked to close. Save the log, then — if there was a real
@@ -685,28 +672,21 @@ class Component extends DCLogic {
           .catch(function(){}).finally(function(){ self[flightKey]=false; });
       }
       const topic=this._labelClamp(map.topic||userTurns[0].content||'Guide Me conversation',80);
-      const base={
+      const transcript=this.state.messages.map(function(m){ return (m.role==='user'?'User: ':'Guide: ')+(m.send||m.content); }).join('\n\n');
+      // Single consolidated write → /log-query, one row per session, updated in place.
+      // Transcript + cases fold in here (consent + real content only) so we never open a second row.
+      postLog('/log-query', {
         sessionId:this._sessionId(), visitorId:this._visitorId(), turnIndex:userTurns.length,
         status:status, error:this._lastError||'', entryPoint:this._entryPoint(), consent:consent,
         promptRaw: userTurns.map(function(m,i){ return '['+(i+1)+'] '+(m.send||m.content); }).join('\n\n'),
-        candidates: this._candidatesText||''
-      };
-      // Analytics row → /log-query, updated in place each turn.
-      postLog('/log-query', Object.assign({}, base, {
+        candidates: this._candidatesText||'', estCost: this._turnCost||0,
         problem: userTurns[0].content||'', topic: topic,
         route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}),
-        matchedBy: this._lastMatchedBy||'AI', source:'guide-me-chat', pageId:this._queryPageId||undefined
-      }), '_queryPageId', '_qInFlight');
-      // Transcript row → /log-chat, updated in place (consent + real content only).
-      if(consent && hasContent){
-        const transcript=this.state.messages.map(function(m){ return (m.role==='user'?'User: ':'Guide: ')+(m.send||m.content); }).join('\n\n');
-        postLog('/log-chat', Object.assign({}, base, {
-          title: topic, summary: map.summary||transcript.slice(0,400),
-          areas:(map.areas||[]).map(function(a){return a.name;}), route:map.route||[], resources:(map.resources||[]).map(function(r){return r.name;}),
-          cases:(map.cases||[]).map(function(c){return c.title+(c.url?' — '+c.url:'');}), turns:userTurns.length,
-          source:'guide-me-chat', transcript:transcript.slice(0,180000), pageId:this._chatPageId||undefined
-        }), '_chatPageId', '_cInFlight');
-      }
+        matchedBy: this._lastMatchedBy||'AI', source:'guide-me-chat',
+        cases:(consent && hasContent)?(map.cases||[]).map(function(c){return c.title+(c.url?' — '+c.url:'');}):[],
+        transcript:(consent && hasContent)?transcript.slice(0,180000):'',
+        pageId:this._queryPageId||undefined
+      }, '_queryPageId', '_qInFlight');
     }catch(e){}
   }
 

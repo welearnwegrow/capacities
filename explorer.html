@@ -476,15 +476,16 @@ class Component extends DCLogic {
   _areasText(){
     const cap=window.__CAPDETAIL||{};
     const keys=Object.keys(cap);
-    if(!keys.length){ return ((this._data().capacities)||[]).map(c=>'• '+c.label).join('\n'); }
-    return keys.map(k=>'• '+k+' — '+(cap[k].desc||'')).join('\n');
+    const arc=(n)=>((this.GROUP[this._groupOf(n)]||this.GROUP.green).name);
+    if(!keys.length){ return ((this._data().capacities)||[]).map(c=>'• ['+arc(c.label)+'] '+c.label).join('\n'); }
+    return keys.map(k=>'• ['+arc(k)+'] '+k+' — '+(cap[k].desc||'')).join('\n');
   }
-  _resourcesText(){ return ((this._data().resources)||[]).map(r=>r.name+' ['+((r.caps||[]).join(', '))+']').join('\n'); }
+  _resourcesText(){ const arc=(n)=>((this.GROUP[this._groupOf(n)]||this.GROUP.green).name); return ((this._data().resources)||[]).map(function(r){ let d=(r.desc||'').replace(/\s+/g,' ').trim(); if(d.length>200) d=d.slice(0,200).replace(/\s+\S*$/,'')+'…'; const a=(r.caps&&r.caps.length)?arc(r.caps[0]):''; return r.name+' ['+((r.caps||[]).join(', '))+']'+(a?' {'+a+'}':'')+(d?' — '+d:''); }).join('\n'); }
   _systemPrompt(){
     const route=this.ROUTE.map(r=>r.name+' — '+r.desc).join('; ');
     return [
       "You are Guide Me, a warm, grounded, Socratic coach for the Systems Change Learning Guide. Each turn you do TWO things at once:",
-      "(1) Reply conversationally to the person. Open by reflecting back what you heard in a sentence or two (what's really going on), then ask ONE sharp question that sharpens the problem or surfaces a blind spot, and offer one concrete next step. Warm and human, under ~150 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets).",
+      "(1) Reply conversationally to the person. Open by reflecting back what you heard in a sentence or two (what's really going on), then ask ONE sharp question that sharpens the problem or surfaces a blind spot, and offer one concrete next step. Warm and human, under ~150 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets). Let the ideas and wisdom in the library below inform your advice even when you are not naming a specific resource — draw on what those resources actually teach.",
       "(2) Maintain a living 'map' of their situation from the framework below. If a real, well-known case genuinely parallels their situation you may mention it briefly in your conversational reply, but do NOT return a cases array — related real-world cases are gathered separately by a live web search that looks for bioregionally-close examples.",
       "Respond with STRICT JSON ONLY — no prose or code fences — exactly in this shape:",
       '{"reply": string, "topic": a 5-10 word summary of the person\u2019s core problem or need (for a database title), "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
@@ -493,10 +494,13 @@ class Component extends DCLogic {
       "THE 5-STEP ROUTE: "+route,
       "ROUTE BY THE STAGE THE PERSON IS ACTUALLY IN — do not default to early phases when the stage is clear. Brand-new or still-uncertain framing → Probe or Sense. Actively designing a plan or mobilising resources → Design. A running intervention being adjusted, one that has plateaued or hit friction after months or years → Adapt. Wrapping up, harvesting lessons, or holding what was learned at the close of an effort → Integrate. When the person clearly describes a running or closing intervention, route to Adapt and/or Integrate rather than Probe/Sense.",
       "",
+      "THE THREE ARCS: every learning area and resource sits in one of three arcs — Personal Grounding (steadying and resourcing yourself), Collective Strategy (working and organising with others), and Systemic Intervention (acting on the wider system). Each area is tagged [arc] below and each resource carries its primary arc in {braces}.",
+      "SPAN THE ARCS WHEN IT HELPS: when the situation would benefit from more than one arc, let your advice and your 3-5 resources draw from more than one — for instance one that steadies the person, one that helps them move with others, and one that acts on the system — and note in a phrase why each arc matters here. It is completely fine to stay within a single arc when that is genuinely where the need sits; never force breadth for its own sake.",
+      "",
       "THE 24 LEARNING AREAS:",
       this._areasText(),
       "",
-      "LIBRARY RESOURCES (name [learning areas]) — cite only by exact name:",
+      "LIBRARY RESOURCES (name [learning areas] {arc} — description) — cite only by exact name, and let the descriptions inform both your advice and which resources you recommend:",
       this._resourcesText()
     ].join('\n');
   }
@@ -543,6 +547,14 @@ class Component extends DCLogic {
     const chatMsgs=msgs.map(m=>({ role:m.role, content: m.role==='assistant' ? (m.raw||m.content) : (m.send||m.content) }));
     let out=null, matchedBy='AI';
     const hasAI=(window.claude && window.claude.complete) || !!window.NOTION_CONNECTOR_URL;
+    // Kick off the real-case web search IN PARALLEL with the chat turn so its ~20s
+    // latency overlaps the reply (and retries) instead of starting after it — this way
+    // cases usually resolve by the time the row is written / the visitor leaves.
+    const caseCtx=send;
+    const caseExclude=((this.state.map&&this.state.map.resources)||[]).map(r=>r.name).filter(Boolean);
+    const caseToken=(this._caseToken=(this._caseToken||0)+1);
+    const casePromise=hasAI ? this._casesTurn(caseCtx, caseExclude, this._sessionId()) : null;
+    if(casePromise) casePromise.catch(()=>{});
     if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
     if(!out){ out=this._keywordTurn(send); matchedBy='Keyword'; }
     // P0 library fix: drop learning-area labels / unresolved names from resources and
@@ -565,16 +577,11 @@ class Component extends DCLogic {
     this._saveLog();
     // Gather bioregionally-close REAL cases from the CURRENT problem statement only,
     // with a stale-response guard so an earlier turn's search can never repaint a later map.
-    if(hasAI && ok){
-      const cur=(msgs.filter(m=>m.role==='user').slice(-1)[0]||{});
-      const caseContext=(cur.send||cur.content||'');
-      const priorRes=((nextMap&&nextMap.resources)||[]).map(r=>r.name).filter(Boolean);
-      const sid=this._sessionId();
-      const token=(this._caseToken=(this._caseToken||0)+1);
-      this._casesTurn(caseContext, priorRes, sid).then((cs)=>{
-        if(token!==this._caseToken) return;      // superseded by a newer turn
+    if(casePromise && ok){
+      casePromise.then((cs)=>{
+        if(caseToken!==this._caseToken) return;  // superseded by a newer turn
         if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); this._saveLog(); }
-      }).catch(()=>{}).finally(()=>{ if(token===this._caseToken) this._busy=false; });
+      }).catch(()=>{}).finally(()=>{ if(caseToken===this._caseToken) this._busy=false; });
     } else { this._busy=false; }
   }
 

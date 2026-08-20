@@ -580,7 +580,7 @@ class Component extends DCLogic {
     if(casePromise && ok){
       casePromise.then((cs)=>{
         if(caseToken!==this._caseToken) return;  // superseded by a newer turn
-        if(cs && cs.length){ this.setState(function(s){ var m=Object.assign({}, s.map||{}, { cases: cs }); this._lastMap=m; return { map:m }; }.bind(this)); this._saveLog(); }
+        if(cs && cs.length){ var m=Object.assign({}, this._lastMap||this.state.map||{}, { cases: cs }); this._lastMap=m; this.setState({ map:m }); this._saveLog(); }
       }).catch(()=>{}).finally(()=>{ if(caseToken===this._caseToken) this._busy=false; });
     } else { this._busy=false; }
   }

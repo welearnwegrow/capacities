@@ -83,12 +83,18 @@
 
 <div class="gm-page" style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:radial-gradient(760px 560px at 22% 8%, rgba(201,164,79,.20), transparent 66%), radial-gradient(720px 560px at 88% 92%, rgba(176,130,47,.13), transparent 68%), linear-gradient(180deg,#f8f4ea 0%,#f1ead9 100%)">
 
+  <button onClick="{{ fbOpen }}" class="gm-noprint gm-embed-hide" title="Share feedback" style="position:fixed;right:22px;bottom:22px;z-index:2147483500;display:inline-flex;align-items:center;gap:8px;background:#b0822f;color:#fff;border:none;border-radius:26px;padding:12px 18px;font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 10px 26px rgba(120,90,20,.32)" style-hover="background:#96701c">
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    {{ fbBtnLabel }}
+  </button>
+
   <sc-if value="{{ showFeedback }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:2147483600;background:rgba(38,42,32,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:24px;animation:exIn .25s ease">
-      <div style="width:100%;max-width:440px;background:linear-gradient(180deg,#fbf8f0,#f4eedf);border:1px solid rgba(70,113,111,.18);border-radius:20px;box-shadow:0 24px 60px rgba(40,50,35,.34);padding:26px 26px 22px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-bottom:10px">✦ Before you go</div>
-        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:25px;line-height:1.12;color:#233029;margin:0 0 6px">How was this?</h2>
-        <p style="font-size:13.5px;line-height:1.5;color:#6b7c72;margin:0 0 16px">Your feedback helps us make Guide Me more useful. All fields are optional.</p>
+      <div style="width:100%;max-width:440px;background:linear-gradient(180deg,#fbf8f0,#f4eedf);border:1px solid rgba(70,113,111,.18);border-radius:20px;box-shadow:0 24px 60px rgba(40,50,35,.34);padding:26px 26px 22px;position:relative">
+        <button onClick="{{ fbSkip }}" title="Close" aria-label="Close" style="position:absolute;top:14px;right:14px;width:30px;height:30px;border:none;border-radius:50%;background:rgba(70,113,111,.10);color:#6b7c72;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-bottom:10px">✦ Help shape Guide Me</div>
+        <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:25px;line-height:1.12;color:#233029;margin:0 0 6px">Is this pointing you somewhere good?</h2>
+        <p style="font-size:13.5px;line-height:1.5;color:#6b7c72;margin:0 0 16px">Guide Me is still learning the terrain. Tell us what landed, what missed, or what you wish it had said — every note trains it to give the next person sharper directions. A few seconds, all optional.</p>
         <div style="display:flex;gap:9px;margin-bottom:16px">
           <sc-for list="{{ fbOptions }}" as="o" hint-placeholder-count="3">
             <button onClick="{{ o.onClick }}" style="{{ o.style }}"><span style="font-size:19px;line-height:1">{{ o.icon }}</span><span>{{ o.label }}</span></button>
@@ -98,11 +104,8 @@
         <label style="display:block;font-size:11.5px;font-weight:700;letter-spacing:.03em;color:#8a7a4a;margin-bottom:6px">Email (optional) — if you're open to us following up</label>
         <input id="gm-fb-email" type="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;border:1px solid rgba(70,113,111,.24);border-radius:12px;padding:10px 13px;font-family:'PT Sans',sans-serif;font-size:14px;color:#2c3a33;background:#fff;outline:none;margin-bottom:20px">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <div style="display:flex;align-items:center;gap:4px">
-            <button onClick="{{ fbBack }}" style="border:none;background:transparent;color:#46716f;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;padding:8px 8px;display:inline-flex;align-items:center;gap:5px"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#46716f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>Back</button>
-            <button onClick="{{ fbSkip }}" style="border:none;background:transparent;color:#8a978c;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;padding:8px 4px">Skip</button>
-          </div>
-          <button onClick="{{ fbSubmit }}" style="border:none;border-radius:12px;background:#b0822f;color:#fff;font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;padding:11px 26px;box-shadow:0 8px 20px rgba(120,90,20,.24)">Send &amp; close</button>
+          <button onClick="{{ fbSkip }}" style="border:none;background:transparent;color:#8a978c;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;padding:8px 4px">Maybe later</button>
+          <button onClick="{{ fbSubmit }}" style="border:none;border-radius:12px;background:#b0822f;color:#fff;font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;padding:11px 26px;box-shadow:0 8px 20px rgba(120,90,20,.24)">Send feedback</button>
         </div>
       </div>
     </div>
@@ -225,20 +228,6 @@
               </sc-for>
             </div>
 
-            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Resources to start with</div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
-              <sc-for list="{{ picks }}" as="r" hint-placeholder-count="4">
-                <a class="ex-res" href="{{ r.url }}" target="_blank" rel="noopener" onClick="{{ r.onClick }}" style="{{ r.cardStyle }}">
-                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
-                    <span style="font-family:'PT Serif',serif;font-weight:700;font-size:14.5px;line-height:1.25;color:#2c3a33">{{ r.name }}</span>
-                    <span style="color:#46716f;font-size:13px">↗</span>
-                  </div>
-                  <div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#9a7a4a;margin-top:5px">{{ r.typeText }}</div>
-                  <div style="font-size:12.5px;line-height:1.45;color:#54655c;margin-top:6px">{{ r.why }}</div>
-                </a>
-              </sc-for>
-            </div>
-
             <sc-if value="{{ hasCases }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Other cases to learn from</div>
               <div style="display:flex;flex-direction:column;gap:10px">
@@ -254,6 +243,21 @@
                 </sc-for>
               </div>
             </sc-if>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Resources to go deeper</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
+              <sc-for list="{{ picks }}" as="r" hint-placeholder-count="4">
+                <a class="ex-res" href="{{ r.url }}" target="_blank" rel="noopener" onClick="{{ r.onClick }}" style="{{ r.cardStyle }}">
+                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
+                    <span style="font-family:'PT Serif',serif;font-weight:700;font-size:14.5px;line-height:1.25;color:#2c3a33">{{ r.name }}</span>
+                    <span style="color:#46716f;font-size:13px">↗</span>
+                  </div>
+                  <div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#9a7a4a;margin-top:5px">{{ r.typeText }}</div>
+                  <div style="font-size:12.5px;line-height:1.45;color:#54655c;margin-top:6px">{{ r.why }}</div>
+                </a>
+              </sc-for>
+            </div>
+
+
             <div class="gm-noprint" style="margin-top:18px;font-size:12px;color:#9aa89e">Keep talking to sharpen this, or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
             <sc-if value="{{ routeComplete }}" hint-placeholder-val="{{ false }}">
               <div class="gm-noprint" style="margin-top:20px;background:linear-gradient(180deg,#fbf5e6,#f6eecf);border:1px solid rgba(176,130,47,.32);border-radius:14px;padding:16px 18px">
@@ -285,7 +289,7 @@
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'' };
+    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'', fbSent:false };
     this._saved = false;
     this._queryPageId=null; this._candidatesText=''; this._lastStatus='ok'; this._lastError=''; this._lastMatchedBy='AI'; this._caseToken=0;
     this.ROUTE = [
@@ -308,43 +312,11 @@ class Component extends DCLogic {
     window.addEventListener('beforeunload', this._onPageHide);
     this._onMsg=(e)=>{ if(e && e.data && e.data.type==='gm-close') this._requestClose(); };
     window.addEventListener('message', this._onMsg);
-    // Users rarely use the close button, so also surface feedback on exit intent:
-    // pointer leaving the top edge of the window (heading for the tab bar / close).
-    this._onExitIntent=(e)=>{
-      if(this._fbDone || this.state.showFeedback || this.state.loading || this._busy) return;
-      if(e.clientY > 4) return;                       // only the very top edge
-      if(e.relatedTarget || e.toElement) return;      // must be leaving the window
-      if(!this.state.messages.some(m=>m.role==='user')) return;
-      // Only after a real result exists AND the person has scrolled it into view.
-      const m=this._lastMap||this.state.map;
-      if(!m || !((m.route&&m.route.length)||(m.resources&&m.resources.length))) return;
-      if(!this._viewedResults) return;
-      this._requestClose();
-    };
-    document.addEventListener('mouseout', this._onExitIntent);
-    // Track whether the person has actually scrolled the result map into view, so
-    // feedback is only ever offered after they've had a chance to read the results.
-    this._viewedResults=false;
-    this._onScrollView=()=>{ if(this._viewedResults) return; const el=document.getElementById('gm-map'); if(el){ const r=el.getBoundingClientRect(); if(r.top < (window.innerHeight||800)*0.8){ this._viewedResults=true; window.removeEventListener('scroll', this._onScrollView); } } };
-    window.addEventListener('scroll', this._onScrollView, { passive:true });
-    // Real tab close / navigation: fire the browser's native confirm once, so an
-    // accidental close is caught and the card is there when they come back.
-    this._onBeforeUnload=(e)=>{
-      this._saveLog();
-      if(this._fbDone || this.state.showFeedback || this.state.loading || this._busy) return;
-      const m=this._lastMap||this.state.map;
-      if(!m || !((m.route&&m.route.length)||(m.resources&&m.resources.length))) return;
-      e.preventDefault(); e.returnValue=''; return '';
-    };
-    window.addEventListener('beforeunload', this._onBeforeUnload);
   }
   componentWillUnmount(){
     if(this._onHide) document.removeEventListener('visibilitychange', this._onHide);
     if(this._onPageHide){ window.removeEventListener('pagehide', this._onPageHide); window.removeEventListener('beforeunload', this._onPageHide); }
     if(this._onMsg) window.removeEventListener('message', this._onMsg);
-    if(this._onExitIntent) document.removeEventListener('mouseout', this._onExitIntent);
-    if(this._onScrollView) window.removeEventListener('scroll', this._onScrollView);
-    if(this._onBeforeUnload) window.removeEventListener('beforeunload', this._onBeforeUnload);
     this._saveLog();
   }
   componentDidUpdate(){ this._scroll(); }
@@ -554,12 +526,14 @@ class Component extends DCLogic {
     const caseExclude=((this.state.map&&this.state.map.resources)||[]).map(r=>r.name).filter(Boolean);
     const caseToken=(this._caseToken=(this._caseToken||0)+1);
     const casePromise=hasAI ? this._casesTurn(caseCtx, caseExclude, this._sessionId()) : null;
+    const webResPromise=hasAI ? this._webResourcesTurn(caseCtx, caseExclude, this._sessionId()) : null;
     if(casePromise) casePromise.catch(()=>{});
+    if(webResPromise) webResPromise.catch(()=>{});
     if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
     if(!out){ out=this._keywordTurn(send); matchedBy='Keyword'; }
     // P0 library fix: drop learning-area labels / unresolved names from resources and
     // refill from the real library rather than padding with capacity names.
-    if(out && out.map){ out.map.resources=this._validateResources(out.map.resources, send, out.map.areas||[]); }
+    if(out && out.map){ out.map.resources=this._areaResources(out.map.areas||[], send); }
     this._lastMatchedBy=matchedBy;
     // Full ranked candidate list (beyond the 5 written) so concentration is measurable.
     const rankAreas=(out&&out.map&&out.map.areas)||[];
@@ -570,6 +544,7 @@ class Component extends DCLogic {
     this._lastError = ok ? '' : (matchedBy==='Keyword' ? 'AI turn failed; keyword fallback produced no route.' : 'No route produced.');
     const nextMap = this._mergeMap(this.state.map, out.map);
     if(nextMap) nextMap.cases=[];               // never carry cases across turns (kills cross-session/turn bleed)
+    if(nextMap) nextMap.webResources=[];        // web resources are per-turn too
     this._lastMap = nextMap;
     const errMsg = ok ? null : 'Something went wrong reaching the guide. Please try sending that again in a moment.';
     this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply, raw:out.rawJson||'' }]), map:nextMap, loading:false, error:errMsg });
@@ -577,11 +552,17 @@ class Component extends DCLogic {
     this._saveLog();
     // Gather bioregionally-close REAL cases from the CURRENT problem statement only,
     // with a stale-response guard so an earlier turn's search can never repaint a later map.
-    if(casePromise && ok){
-      casePromise.then((cs)=>{
-        if(caseToken!==this._caseToken) return;  // superseded by a newer turn
-        if(cs && cs.length){ var m=Object.assign({}, this._lastMap||this.state.map||{}, { cases: cs }); this._lastMap=m; this.setState({ map:m }); this._saveLog(); }
-      }).catch(()=>{}).finally(()=>{ if(caseToken===this._caseToken) this._busy=false; });
+    if(ok && (casePromise || webResPromise)){
+      let pending=0; const self=this;
+      const settle=function(){ if(--pending<=0 && caseToken===self._caseToken) self._busy=false; };
+      if(casePromise){ pending++; casePromise.then(function(cs){
+        if(caseToken!==self._caseToken) return;
+        if(cs && cs.length){ var m=Object.assign({}, self._lastMap||self.state.map||{}, { cases: cs }); self._lastMap=m; self.setState({ map:m }); self._saveLog(); }
+      }).catch(function(){}).finally(settle); }
+      if(webResPromise){ pending++; webResPromise.then(function(ws){
+        if(caseToken!==self._caseToken) return;
+        if(ws && ws.length){ var m=Object.assign({}, self._lastMap||self.state.map||{}, { webResources: ws }); self._lastMap=m; self.setState({ map:m }); self._saveLog(); }
+      }).catch(function(){}).finally(settle); }
     } else { this._busy=false; }
   }
 
@@ -609,6 +590,21 @@ class Component extends DCLogic {
     if(!Array.isArray(arr)) return [];
     return arr.slice(0,3).map(c=>({ title:String(c.title||'').slice(0,120), org:String(c.org||'').slice(0,120), url:this._caseUrl(c), why:String(c.why||'').slice(0,220) })).filter(c=>c.title);
   }
+  async _webResourcesTurn(context, exclude, sessionId){
+    exclude = Array.isArray(exclude) ? exclude : [];
+    var url = window.NOTION_CONNECTOR_URL;
+    if(url){
+      try{
+        var r = await fetch(url.replace(/\/+$/,'')+'/resources', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ context: context.slice(0,6000), exclude: exclude, sessionId: sessionId||'' }) });
+        var data = await r.json().catch(function(){ return {}; });
+        if(data && typeof data.cost==='number') this._turnCost=(this._turnCost||0)+data.cost;
+        if(data && Array.isArray(data.resources)){
+          return data.resources.slice(0,3).map(function(c){ return { title:String(c.title||'').slice(0,140), author:String(c.author||'').slice(0,140), type:String(c.type||'').slice(0,40), url:(/^https?:\/\//i.test(String(c.url||'')) ? String(c.url) : ''), why:String(c.why||'').slice(0,240) }; }).filter(function(c){ return c.title && c.url; });
+        }
+      }catch(e){ }
+    }
+    return [];
+  }
   _caseUrl(c){
     const q=encodeURIComponent((((c&&c.title)||'')+' '+((c&&c.org)||'')).trim());
     return 'https://duckduckgo.com/?q='+q;
@@ -625,6 +621,7 @@ class Component extends DCLogic {
       routeWhy: next.routeWhy || prev.routeWhy || '',
       nextSteps: pick('nextSteps'),
       cases: pick('cases'),
+      webResources: pick('webResources'),
       areas: pick('areas'),
       resources: pick('resources')
     };
@@ -635,11 +632,8 @@ class Component extends DCLogic {
   // exchange — show a one-step feedback card before letting the overlay close.
   _requestClose(){
     this._saveLog();
-    if(this.state.showFeedback) return;
-    const userTurns=this.state.messages.filter(m=>m.role==='user');
-    if(!userTurns.length){ this._postParent('gm-dismiss'); return; }
-    this.setState({ showFeedback:true });
-    this._postParent('gm-feedback-open');
+    if(send){ var c=document.getElementById('gm-fb-comment'); var em=document.getElementById('gm-fb-email'); if(c) c.value=''; if(em) em.value=''; }
+    this.setState({ showFeedback:false, fbSent: send || this.state.fbSent, fbRating: send ? '' : this.state.fbRating });
   }
   _setRating(v){ this.setState(s=>({ fbRating: s.fbRating===v ? '' : v })); }
   _submitFeedback(send){
@@ -656,7 +650,8 @@ class Component extends DCLogic {
           body:JSON.stringify({ topic:(map.topic||'Guide Me feedback').slice(0,120), rating:this.state.fbRating||'', comment:comment.slice(0,4000), email:email.slice(0,200), turns:this.state.messages.filter(m=>m.role==='user').length, source:'guide-me-feedback' }) }).catch(function(){}); }catch(e){}
       }
     }
-    this._postParent('gm-dismiss');
+    if(send){ var c=document.getElementById('gm-fb-comment'); var em=document.getElementById('gm-fb-email'); if(c) c.value=''; if(em) em.value=''; }
+    this.setState({ showFeedback:false, fbSent: send || this.state.fbSent, fbRating: send ? '' : this.state.fbRating });
   }
 
   async _saveLog(){
@@ -666,17 +661,26 @@ class Component extends DCLogic {
       const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
       const map=this._lastMap || this.state.map || {};
       const status=this._lastStatus||'ok';
-      const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.summary&&map.summary.trim());
+      const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.webResources&&map.webResources.length)||(map.summary&&map.summary.trim());
       // Wait for real content before the FIRST write (unless this turn errored — errors are logged).
       if(status!=='error' && !hasContent && !this._queryPageId) return;
       const self=this;
-      // In-flight guard: don't fire a second CREATE before the first returns a pageId (avoids dup rows).
+      // In-flight COALESCING: never drop a write. If one is already in flight (e.g. the
+      // empty-cases create), stash the newest payload and re-fire it — carrying the learned
+      // pageId — the moment the first returns. This is what lets the ~20s-later cases update
+      // land in the same row instead of being silently discarded.
       function postLog(pathSeg, payload, idKey, flightKey){
-        if(!self[idKey] && self[flightKey]) return;
+        var pendKey=flightKey+'_pending';
+        if(self[flightKey]){ self[pendKey]={pathSeg:pathSeg, payload:payload, idKey:idKey, flightKey:flightKey}; return; }
         self[flightKey]=true;
         fetch(url.replace(/\/+$/,'')+pathSeg,{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true, body:JSON.stringify(payload) })
           .then(function(r){ return r.json(); }).then(function(d){ if(d&&d.pageId) self[idKey]=d.pageId; })
-          .catch(function(){}).finally(function(){ self[flightKey]=false; });
+          .catch(function(){})
+          .finally(function(){
+            self[flightKey]=false;
+            var pend=self[pendKey];
+            if(pend){ self[pendKey]=null; if(self[idKey]) pend.payload.pageId=self[idKey]; postLog(pend.pathSeg, pend.payload, pend.idKey, pend.flightKey); }
+          });
       }
       const topic=this._labelClamp(map.topic||userTurns[0].content||'Guide Me conversation',80);
       const transcript=this.state.messages.map(function(m){ return (m.role==='user'?'User: ':'Guide: ')+(m.send||m.content); }).join('\n\n');
@@ -688,7 +692,7 @@ class Component extends DCLogic {
         promptRaw: userTurns.map(function(m,i){ return '['+(i+1)+'] '+(m.send||m.content); }).join('\n\n'),
         candidates: this._candidatesText||'', estCost: this._turnCost||0,
         problem: userTurns[0].content||'', topic: topic,
-        route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}),
+        route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}).concat((map.webResources||[]).map(function(w){return w.title+(w.url?' \u2014 '+w.url:'');})),
         matchedBy: this._lastMatchedBy||'AI', source:'guide-me-chat',
         cases:(consent && hasContent)?(map.cases||[]).map(function(c){return c.title+(c.url?' — '+c.url:'');}):[],
         transcript:(consent && hasContent)?transcript.slice(0,180000):'',
@@ -748,6 +752,25 @@ class Component extends DCLogic {
     return valid.slice(0,5);
   }
 
+  // Pick exactly one library resource per learning area (best problem match within the area).
+  _areaResources(areas, problemText){
+    const qt=this._tokenize(problemText||''); const qset={}; qt.forEach(function(w){ qset[w]=1; });
+    const list=(this._data().resources)||[]; const seen={}; const out=[];
+    (areas||[]).slice(0,3).forEach(function(area){
+      const an=((area&&area.name)||area||'').toString().toLowerCase();
+      let best=null, bestScore=-Infinity;
+      list.forEach(function(r){
+        const nm=(r.name||'').toLowerCase(); if(seen[nm]) return;
+        const caps=(r.caps||[]).map(function(c){ return (c||'').toLowerCase(); });
+        const hay=((r.name||'')+' '+(r.desc||'')+' '+caps.join(' ')).toLowerCase();
+        let s=0; for(const w in qset){ if(hay.indexOf(w)>=0) s++; }
+        if(caps.indexOf(an)>=0) s+=5;
+        if(s>bestScore){ bestScore=s; best=r; }
+      });
+      if(best){ seen[(best.name||'').toLowerCase()]=true; out.push({ name:best.name, area:(area&&area.name)||'', why:'' }); }
+    });
+    return out;
+  }
   renderVals(){
     const st=this.state, map=st.map;
     const userBubble={ maxWidth:'82%', background:'#b0822f', color:'#fff', fontSize:'14px', lineHeight:'1.5', padding:'11px 14px', borderRadius:'16px 16px 5px 16px', whiteSpace:'pre-wrap', wordBreak:'break-word' };
@@ -767,6 +790,9 @@ class Component extends DCLogic {
         const cap=(r&&r.caps&&r.caps[0])||''; const accent=(this.GROUP[this._groupOf(cap)]||this.GROUP.green).color;
         return { name:(r&&r.name)||p.name, url:this._normUrl(r&&r.url), typeText:(r&&r.types&&r.types.length)?r.types.join(' · '):'Resource', why:p.why||((r&&r.desc)?r.desc.split('. ')[0]+'.':''), onClick:()=>{ if(window.track) window.track('guideme_open_resource',{name:(r&&r.name)||p.name}); },
           cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid '+accent, borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }; });
+      const webPicks=(map.webResources||[]).map(w=>({ name:w.title, url:this._normUrl(w.url), typeText:[w.type||'Resource', w.author].filter(Boolean).join(' · '), why:w.why||'', onClick:()=>{ if(window.track) window.track('guideme_open_webresource',{name:w.title}); },
+          cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid #b0822f', borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }));
+      picks=picks.concat(webPicks);
       cases=(map.cases||[]).map(c=>({ title:c.title, source:c.org||'Real-world example', url:c.url||('https://duckduckgo.com/?q='+encodeURIComponent(c.title||'')), hasUrl:true, why:c.why||'',
           cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid #5b6733', borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }));
     }
@@ -804,7 +830,9 @@ class Component extends DCLogic {
       fbOptions: fbOpts,
       fbSubmit: ()=>this._submitFeedback(true),
       fbSkip: ()=>this._submitFeedback(false),
-      fbBack: ()=>{ this.setState({ showFeedback:false }); this._postParent('gm-feedback-close'); }
+      fbOpen: ()=>this.setState({ showFeedback:true }),
+      fbSent: st.fbSent,
+      fbBtnLabel: st.fbSent ? 'Thanks \u2014 sent!' : 'Share feedback'
     };
   }
   _rgbaHex(hex,a){ hex=hex.replace('#',''); if(hex.length===3) hex=hex.split('').map(c=>c+c).join(''); const r=parseInt(hex.substr(0,2),16),g=parseInt(hex.substr(2,2),16),b=parseInt(hex.substr(4,2),16); return 'rgba('+r+','+g+','+b+','+a+')'; }

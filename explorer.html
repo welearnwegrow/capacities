@@ -83,11 +83,6 @@
 
 <div class="gm-page" style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:radial-gradient(760px 560px at 22% 8%, rgba(201,164,79,.20), transparent 66%), radial-gradient(720px 560px at 88% 92%, rgba(176,130,47,.13), transparent 68%), linear-gradient(180deg,#f8f4ea 0%,#f1ead9 100%)">
 
-  <button onClick="{{ fbOpen }}" class="gm-noprint gm-embed-hide" title="Share feedback" style="position:fixed;right:22px;bottom:22px;z-index:2147483500;display:inline-flex;align-items:center;gap:8px;background:#b0822f;color:#fff;border:none;border-radius:26px;padding:12px 18px;font-family:'PT Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 10px 26px rgba(120,90,20,.32)" style-hover="background:#96701c">
-    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-    {{ fbBtnLabel }}
-  </button>
-
   <sc-if value="{{ showFeedback }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:2147483600;background:rgba(38,42,32,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:24px;animation:exIn .25s ease">
       <div style="width:100%;max-width:440px;background:linear-gradient(180deg,#fbf8f0,#f4eedf);border:1px solid rgba(70,113,111,.18);border-radius:20px;box-shadow:0 24px 60px rgba(40,50,35,.34);padding:26px 26px 22px;position:relative">
@@ -258,7 +253,7 @@
             </div>
 
 
-            <div class="gm-noprint" style="margin-top:18px;font-size:12px;color:#9aa89e">Keep talking to sharpen this, or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
+            <div class="gm-noprint" style="margin-top:18px;font-size:12px;color:#9aa89e">Keep talking to sharpen this, or <a href="resources.html" style="font-weight:700">browse the full library</a>. <button onClick="{{ fbOpen }}" style="border:none;background:transparent;color:#b0822f;font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;padding:0;text-decoration:underline">{{ fbBtnLabel }}</button></div>
             <sc-if value="{{ routeComplete }}" hint-placeholder-val="{{ false }}">
               <div class="gm-noprint" style="margin-top:20px;background:linear-gradient(180deg,#fbf5e6,#f6eecf);border:1px solid rgba(176,130,47,.32);border-radius:14px;padding:16px 18px">
                 <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#8a6a18;margin-bottom:4px">Your map is ready</div>

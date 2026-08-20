@@ -521,9 +521,7 @@ class Component extends DCLogic {
     const caseExclude=((this.state.map&&this.state.map.resources)||[]).map(r=>r.name).filter(Boolean);
     const caseToken=(this._caseToken=(this._caseToken||0)+1);
     const casePromise=hasAI ? this._casesTurn(caseCtx, caseExclude, this._sessionId()) : null;
-    const webResPromise=hasAI ? this._webResourcesTurn(caseCtx, caseExclude, this._sessionId()) : null;
     if(casePromise) casePromise.catch(()=>{});
-    if(webResPromise) webResPromise.catch(()=>{});
     if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
     if(!out){ out=this._keywordTurn(send); matchedBy='Keyword'; }
     // P0 library fix: drop learning-area labels / unresolved names from resources and
@@ -539,7 +537,6 @@ class Component extends DCLogic {
     this._lastError = ok ? '' : (matchedBy==='Keyword' ? 'AI turn failed; keyword fallback produced no route.' : 'No route produced.');
     const nextMap = this._mergeMap(this.state.map, out.map);
     if(nextMap) nextMap.cases=[];               // never carry cases across turns (kills cross-session/turn bleed)
-    if(nextMap) nextMap.webResources=[];        // web resources are per-turn too
     this._lastMap = nextMap;
     const errMsg = ok ? null : 'Something went wrong reaching the guide. Please try sending that again in a moment.';
     this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply, raw:out.rawJson||'' }]), map:nextMap, loading:false, error:errMsg });
@@ -547,16 +544,12 @@ class Component extends DCLogic {
     this._saveLog();
     // Gather bioregionally-close REAL cases from the CURRENT problem statement only,
     // with a stale-response guard so an earlier turn's search can never repaint a later map.
-    if(ok && (casePromise || webResPromise)){
+    if(ok && casePromise){
       let pending=0; const self=this;
       const settle=function(){ if(--pending<=0 && caseToken===self._caseToken) self._busy=false; };
       if(casePromise){ pending++; casePromise.then(function(cs){
         if(caseToken!==self._caseToken) return;
         if(cs && cs.length){ var m=Object.assign({}, self._lastMap||self.state.map||{}, { cases: cs }); self._lastMap=m; self.setState({ map:m }); self._saveLog(); }
-      }).catch(function(){}).finally(settle); }
-      if(webResPromise){ pending++; webResPromise.then(function(ws){
-        if(caseToken!==self._caseToken) return;
-        if(ws && ws.length){ var m=Object.assign({}, self._lastMap||self.state.map||{}, { webResources: ws }); self._lastMap=m; self.setState({ map:m }); self._saveLog(); }
       }).catch(function(){}).finally(settle); }
     } else { this._busy=false; }
   }
@@ -585,21 +578,6 @@ class Component extends DCLogic {
     if(!Array.isArray(arr)) return [];
     return arr.slice(0,3).map(c=>({ title:String(c.title||'').slice(0,120), org:String(c.org||'').slice(0,120), url:this._caseUrl(c), why:String(c.why||'').slice(0,220) })).filter(c=>c.title);
   }
-  async _webResourcesTurn(context, exclude, sessionId){
-    exclude = Array.isArray(exclude) ? exclude : [];
-    var url = window.NOTION_CONNECTOR_URL;
-    if(url){
-      try{
-        var r = await fetch(url.replace(/\/+$/,'')+'/resources', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ context: context.slice(0,6000), exclude: exclude, sessionId: sessionId||'' }) });
-        var data = await r.json().catch(function(){ return {}; });
-        if(data && typeof data.cost==='number') this._turnCost=(this._turnCost||0)+data.cost;
-        if(data && Array.isArray(data.resources)){
-          return data.resources.slice(0,3).map(function(c){ return { title:String(c.title||'').slice(0,140), author:String(c.author||'').slice(0,140), type:String(c.type||'').slice(0,40), url:(/^https?:\/\//i.test(String(c.url||'')) ? String(c.url) : ''), why:String(c.why||'').slice(0,240) }; }).filter(function(c){ return c.title && c.url; });
-        }
-      }catch(e){ }
-    }
-    return [];
-  }
   _caseUrl(c){
     const q=encodeURIComponent((((c&&c.title)||'')+' '+((c&&c.org)||'')).trim());
     return 'https://duckduckgo.com/?q='+q;
@@ -616,7 +594,6 @@ class Component extends DCLogic {
       routeWhy: next.routeWhy || prev.routeWhy || '',
       nextSteps: pick('nextSteps'),
       cases: pick('cases'),
-      webResources: pick('webResources'),
       areas: pick('areas'),
       resources: pick('resources')
     };
@@ -656,7 +633,7 @@ class Component extends DCLogic {
       const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
       const map=this._lastMap || this.state.map || {};
       const status=this._lastStatus||'ok';
-      const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.webResources&&map.webResources.length)||(map.summary&&map.summary.trim());
+      const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.summary&&map.summary.trim());
       // Wait for real content before the FIRST write (unless this turn errored — errors are logged).
       if(status!=='error' && !hasContent && !this._queryPageId) return;
       const self=this;
@@ -687,7 +664,7 @@ class Component extends DCLogic {
         promptRaw: userTurns.map(function(m,i){ return '['+(i+1)+'] '+(m.send||m.content); }).join('\n\n'),
         candidates: this._candidatesText||'', estCost: this._turnCost||0,
         problem: userTurns[0].content||'', topic: topic,
-        route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}).concat((map.webResources||[]).map(function(w){return w.title+(w.url?' \u2014 '+w.url:'');})),
+        route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}),
         matchedBy: this._lastMatchedBy||'AI', source:'guide-me-chat',
         cases:(consent && hasContent)?(map.cases||[]).map(function(c){return c.title+(c.url?' — '+c.url:'');}):[],
         transcript:(consent && hasContent)?transcript.slice(0,180000):'',
@@ -785,9 +762,6 @@ class Component extends DCLogic {
         const cap=(r&&r.caps&&r.caps[0])||''; const accent=(this.GROUP[this._groupOf(cap)]||this.GROUP.green).color;
         return { name:(r&&r.name)||p.name, url:this._normUrl(r&&r.url), typeText:(r&&r.types&&r.types.length)?r.types.join(' · '):'Resource', why:p.why||((r&&r.desc)?r.desc.split('. ')[0]+'.':''), onClick:()=>{ if(window.track) window.track('guideme_open_resource',{name:(r&&r.name)||p.name}); },
           cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid '+accent, borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }; });
-      const webPicks=(map.webResources||[]).map(w=>({ name:w.title, url:this._normUrl(w.url), typeText:[w.type||'Resource', w.author].filter(Boolean).join(' · '), why:w.why||'', onClick:()=>{ if(window.track) window.track('guideme_open_webresource',{name:w.title}); },
-          cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid #b0822f', borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }));
-      picks=picks.concat(webPicks);
       cases=(map.cases||[]).map(c=>({ title:c.title, source:c.org||'Real-world example', url:c.url||('https://duckduckgo.com/?q='+encodeURIComponent(c.title||'')), hasUrl:true, why:c.why||'',
           cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid #5b6733', borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }));
     }

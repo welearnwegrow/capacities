@@ -70,6 +70,9 @@
     .ex-res{break-inside:avoid;page-break-inside:avoid}
     #gm-map > div > div{break-inside:avoid}
   }
+  @media (max-width:900px){
+    .gm-canvas-cols{grid-template-columns:1fr !important}
+  }
   @media (max-width:820px){
     .gm-grid{grid-template-columns:1fr !important}
     .gm-panel{position:static !important;max-height:none !important}
@@ -121,7 +124,7 @@
     <div class="gm-grid" style="display:grid;grid-template-columns:1fr;gap:20px;align-items:start">
 
       <!-- LEFT: CHAT -->
-      <div class="gm-chat gm-noprint" onDragOver="{{ onDragOver }}" onDragLeave="{{ onDragLeave }}" onDrop="{{ onDrop }}" style="position:relative;display:flex;flex-direction:column;background:rgba(255,255,255,.74);border:1px solid rgba(70,113,111,.16);border-radius:18px;box-shadow:0 8px 28px rgba(40,70,60,.06);min-height:auto;overflow:hidden">
+      <div id="gm-chat" class="gm-chat gm-noprint" onDragOver="{{ onDragOver }}" onDragLeave="{{ onDragLeave }}" onDrop="{{ onDrop }}" style="order:1;position:relative;display:flex;flex-direction:column;background:rgba(255,255,255,.74);border:1px solid rgba(70,113,111,.16);border-radius:18px;box-shadow:0 8px 28px rgba(40,70,60,.06);min-height:auto;overflow:hidden">
         <sc-if value="{{ dragOver }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;inset:0;z-index:5;background:rgba(247,244,236,.94);border:2px dashed #b0822f;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none">
             <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#b0822f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:10px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
@@ -173,13 +176,10 @@
         </div>
       </div>
 
-      <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
-        <div class="gm-noprint" style="text-align:center;margin-bottom:2px"><button onClick="{{ onJumpMap }}" style="display:inline-flex;align-items:center;gap:6px;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;color:#8a6a18;background:rgba(176,130,47,.10);border:1px solid rgba(176,130,47,.30);border-radius:20px;padding:7px 15px;cursor:pointer">Your map ↓</button></div>
-      </sc-if>
 
       <!-- LIVING MAP -->
       <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
-      <aside id="gm-map" class="gm-panel" style="background:rgba(255,255,255,.6);border:1px solid rgba(70,113,111,.16);border-radius:18px;padding:22px 24px 26px">
+      <aside id="gm-map" class="gm-panel" style="order:2;background:rgba(255,255,255,.6);border:1px solid rgba(70,113,111,.16);border-radius:18px;padding:22px 24px 26px">
         <div class="gm-noprint" style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px;flex-wrap:wrap">
           <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b8378">Where this points</div>
           <span style="font-size:11px;color:#9aa89e">{{ turnLabel }}</span>
@@ -210,19 +210,24 @@
                 </sc-for>
               </div>
             </sc-if>
-            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Learning areas to build</div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 20px">
-              <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
-                <div style="display:flex;gap:10px;align-items:flex-start">
-                  <span style="{{ a.dot }}"></span>
-                  <div>
-                    <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:600;color:#2c3a33">{{ a.name }}</div>
-                    <sc-if value="{{ a.why }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;line-height:1.42;color:#6b7c72;margin-top:1px">{{ a.why }}</div></sc-if>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
+            <sc-if value="{{ hasCanvases }}" hint-placeholder-val="{{ false }}">
+              <div class="gm-noprint" style="margin-top:24px;border:1px solid rgba(70,113,111,.2);border-radius:14px;padding:16px 18px;background:rgba(255,255,255,.5)">
+                <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:6px">Working canvases</div>
+                <div style="font-size:12.5px;line-height:1.5;color:#5d6d63;margin-bottom:13px">{{ canvasBlurb }} Print them and work through the questions with your team — each one has space to write.</div>
+                <button onClick="{{ onPrintCanvases }}" style="display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#46716f;background:transparent;border:1.5px solid #46716f;border-radius:20px;padding:9px 18px;cursor:pointer">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#46716f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+                  Download canvases (PDF)
+                </button>
+              </div>
+            </sc-if>
 
+          </div>
+        </aside>
+      </sc-if>
+
+      <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
+      <aside id="gm-map-b" class="gm-panel" style="order:3;background:rgba(255,255,255,.6);border:1px solid rgba(70,113,111,.16);border-radius:18px;padding:22px 24px 26px">
+          <div style="{{ mapWrapStyle }}">
             <sc-if value="{{ hasCases }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Other cases to learn from</div>
               <div style="display:flex;flex-direction:column;gap:10px">
@@ -238,6 +243,19 @@
                 </sc-for>
               </div>
             </sc-if>
+            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Learning areas to build</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 20px">
+              <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <span style="{{ a.dot }}"></span>
+                  <div>
+                    <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:600;color:#2c3a33">{{ a.name }}</div>
+                    <sc-if value="{{ a.why }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;line-height:1.42;color:#6b7c72;margin-top:1px">{{ a.why }}</div></sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
             <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Resources to go deeper</div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
               <sc-for list="{{ picks }}" as="r" hint-placeholder-count="4">
@@ -253,25 +271,23 @@
             </div>
 
 
-            <div class="gm-noprint" style="margin-top:18px;font-size:12px;color:#9aa89e">Keep talking to sharpen this, or <a href="resources.html" style="font-weight:700">browse the full library</a>. <button onClick="{{ fbOpen }}" style="border:none;background:transparent;color:#b0822f;font-family:'PT Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;padding:0;text-decoration:underline">{{ fbBtnLabel }}</button></div>
-            <sc-if value="{{ routeComplete }}" hint-placeholder-val="{{ false }}">
-              <div class="gm-noprint" style="margin-top:20px;background:linear-gradient(180deg,#fbf5e6,#f6eecf);border:1px solid rgba(176,130,47,.32);border-radius:14px;padding:16px 18px">
-                <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#8a6a18;margin-bottom:4px">Your map is ready</div>
-                <div style="font-size:12.5px;line-height:1.5;color:#6b5a2a;margin-bottom:13px">Sessions aren’t saved — download your map to keep it and pick up where you left off.</div>
-                <button onClick="{{ onPrint }}" style="display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#fff;background:#b0822f;border:none;border-radius:20px;padding:10px 20px;cursor:pointer;box-shadow:0 8px 20px rgba(120,90,20,.24)">
-                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
-                  Save this map (PDF)
-                </button>
-              </div>
-            </sc-if>
-            <sc-if value="{{ notRouteComplete }}" hint-placeholder-val="{{ true }}">
-              <button onClick="{{ onPrint }}" class="gm-noprint" style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;background:#b0822f;border:none;border-radius:20px;padding:9px 18px;cursor:pointer">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
-                Save this map (PDF)
-              </button>
-            </sc-if>
           </div>
         </aside>
+      </sc-if>
+
+      <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
+      <div class="gm-noprint" style="order:4">
+        <div class="gm-noprint" style="background:linear-gradient(180deg,#fbf5e6,#f6eecf);border:1px solid rgba(176,130,47,.32);border-radius:18px;padding:22px 24px 24px">
+          <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#8a6a18;margin-bottom:4px">Where to from here</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#6b5a2a;margin-bottom:14px">Sessions aren’t saved — download your map to keep it. Or carry on describing your situation and the map will sharpen as you go.</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <button onClick="{{ onPrint }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#fff;background:#b0822f;border:1.5px solid #b0822f;box-shadow:0 8px 20px rgba(120,90,20,.24)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>Download your map (PDF)</button>
+            <button onClick="{{ onJumpChat }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#8a6a18;background:transparent;border:1.5px solid rgba(176,130,47,.6)">Keep talking to sharpen it</button>
+            <button onClick="{{ fbOpen }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#8a6a18;background:transparent;border:1.5px solid rgba(176,130,47,.6)">{{ fbBtnLabel }}</button>
+          </div>
+        </div>
+        <div class="gm-noprint" style="margin-top:12px;font-size:12px;color:#9aa89e">Or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
+      </div>
       </sc-if>
 
     </div>
@@ -297,7 +313,64 @@ class Component extends DCLogic {
     this.GROUP = { teal:{name:'Personal Grounding',color:'#46716f'}, green:{name:'Collective Strategy',color:'#5b6733'}, coral:{name:'Systemic Intervention',color:'#a8542d'} };
   }
 
+  DEMO_MAP = {
+    topic:'Restoring a polluted urban river stretch',
+    summary:'You want to restore a polluted stretch of urban river and bring residents into caring for it, but the landowners and the council are pulling in different directions and nobody has named who actually decides.',
+    route:['Sense','Design'],
+    routeWhy:'You have a clear enough issue to be past pure framing, but the power dynamics and the shared picture of the future are still unresolved \u2014 so you sit across Sense and Design.',
+    nextSteps:[
+      'Map every riparian landowner along the stretch and note who has actually met whom.',
+      'Run ten doorstep conversations on the estate before writing any plan.',
+      'Name one 200m reach as your first site and write down why in three sentences.'
+    ],
+    areas:[
+      { name:'Participatory Research & Design', area:'Sense', why:'You need residents co-authoring this, not consulted at the end.' },
+      { name:'Positionality & Power Analysis', area:'Sense', why:'The council and landowner stalemate is a power question before it is a technical one.' },
+      { name:'Experimenting & Building', area:'Design', why:'Your first move should be a probe small enough to survive being wrong.' }
+    ],
+    resources:[
+      { name:'Transformative Research Toolkit', area:'Participatory Research & Design', why:'' },
+      { name:'The Right Use of Power Institute', area:'Positionality & Power Analysis', why:'' },
+      { name:'System Change: A Guidebook for Adopting Portfolio Approaches', area:'Experimenting & Building', why:'' }
+    ],
+    cases:[
+      { title:'Sheffield Wildlife Trust \u2014 River Sheaf daylighting', org:'Sheffield, UK', url:'https://example.org/sheaf', why:'A city river partnership that started with a single short reach and a residents\u2019 monitoring group.' },
+      { title:'Mersey Rivers Trust catchment partnership', org:'North West England', url:'https://example.org/mersey', why:'Shows how a named decision forum unblocked a multi-landowner stretch.' }
+    ],
+    canvases:[
+      { stage:'Sense', focus:'Make the invisible blocks around riverside land visible before you commit to a plan.', phases:[
+        { key:'divergence', items:[
+          { q:'Which upstream landowners have never been in a room with the angling club?', step:'List every riparian owner along the stretch and mark who has actually met whom.' },
+          { q:'What does the river mean to the families on the estate, in their own words?', step:'Ten doorstep conversations, recorded with permission. No survey form.' } ] },
+        { key:'emergence', items:[
+          { q:'Where do the anglers and the wild-swimming group genuinely disagree?', step:'Name the disagreement out loud at the next meeting and write it on the wall without putting it to a vote.' },
+          { q:'What would tell you the council has actually shifted, rather than just attended?', step:'Watch for who forwards your emails internally without being asked, and note the date it first happens.' } ] },
+        { key:'convergence', items:[
+          { q:'Which single stretch of bank would show change soonest?', step:'Pick one 200m reach and write down why in three sentences.' },
+          { q:'Who holds the decision if the funding lands late?', step:'Agree a named decision-maker at the next steering call.' } ] }
+      ] },
+      { stage:'Design', focus:'Turn what you sensed into a first intervention the council and the landowners can both live with.', phases:[
+        { key:'divergence', items:[
+          { q:'What are all the ways the bank could be restored without asking permission first?', step:'List twenty options with no filtering, including the ones that sound unreasonable.' },
+          { q:'Who benefits if the council keeps this slow, and what would make speed serve them?', step:'Sketch the incentives of the three officers who touch this file.' } ] },
+        { key:'emergence', items:[
+          { q:'Your group wants visible change and the landowners want no liability. Can you hold both?', step:'Put both statements at the top of the agenda as fixed constraints, and design within them rather than debating them.' },
+          { q:'Which option keeps resurfacing from people who have not spoken to each other?', step:'Tally repeat mentions across your notes; treat anything named three times independently as a real signal.' } ] },
+        { key:'convergence', items:[
+          { q:'What is the smallest thing you could do in six weeks that could not be reversed?', step:'Choose it, name a date, and tell one person outside the group.' },
+          { q:'How will you know in a year whether trust between residents and landowners improved?', step:'Pick one observable marker now and record where it stands today.' } ] }
+      ] }
+    ]
+  };
+  _loadDemo(){
+    const problem='[TEST] Our group wants to restore a polluted urban river stretch in Sheffield and get residents involved in monitoring it, but the landowners and the council are not aligned and nobody has said who actually decides.';
+    const reply='Thanks \u2014 that is a clear picture. Before you design anything, the live question is who actually holds the decision, because the landowner/council stalemate will shape every option below. Start with the doorstep conversations: they give you standing that neither party can dismiss.';
+    this._lastMap=this.DEMO_MAP;
+    this.setState({ messages:[{role:'user',content:problem},{role:'assistant',content:reply}], map:this.DEMO_MAP, loading:false });
+  }
   componentDidMount(){
+    this._demo = /[?&]demo=1/.test(location.search || '');
+    if(this._demo) setTimeout(()=>this._loadDemo(), 0);
     window.addEventListener('research-data-updated', ()=>this.forceUpdate());
     if(window.__RESEARCH_LIVE_READY) this.forceUpdate();
     this._onHide=()=>{ if(document.visibilityState==='hidden') this._saveLog(); };
@@ -537,6 +610,7 @@ class Component extends DCLogic {
     this._lastError = ok ? '' : (matchedBy==='Keyword' ? 'AI turn failed; keyword fallback produced no route.' : 'No route produced.');
     const nextMap = this._mergeMap(this.state.map, out.map);
     if(nextMap) nextMap.cases=[];               // never carry cases across turns (kills cross-session/turn bleed)
+    if(nextMap) nextMap.canvases=[];            // canvases are rebuilt per turn too
     this._lastMap = nextMap;
     const errMsg = ok ? null : 'Something went wrong reaching the guide. Please try sending that again in a moment.';
     this.setState({ messages:this.state.messages.concat([{ role:'assistant', content:out.reply, raw:out.rawJson||'' }]), map:nextMap, loading:false, error:errMsg });
@@ -550,6 +624,12 @@ class Component extends DCLogic {
       if(casePromise){ pending++; casePromise.then(function(cs){
         if(caseToken!==self._caseToken) return;
         if(cs && cs.length){ var m=Object.assign({}, self._lastMap||self.state.map||{}, { cases: cs }); self._lastMap=m; self.setState({ map:m }); self._saveLog(); }
+      }).catch(function(){}).finally(settle); }
+      // Canvas needs the route, which only exists after the chat turn resolved.
+      var stages=((out&&out.map&&out.map.route)||[]).map(function(n){return String(n);}).slice(0,3);
+      if(stages.length){ pending++; this._canvasTurn(caseCtx, stages, this._sessionId()).then(function(cvs){
+        if(caseToken!==self._caseToken) return;
+        if(cvs && cvs.length){ var m=Object.assign({}, self._lastMap||self.state.map||{}, { canvases: cvs }); self._lastMap=m; self.setState({ map:m }); self._saveLog(); }
       }).catch(function(){}).finally(settle); }
     } else { this._busy=false; }
   }
@@ -578,6 +658,17 @@ class Component extends DCLogic {
     if(!Array.isArray(arr)) return [];
     return arr.slice(0,3).map(c=>({ title:String(c.title||'').slice(0,120), org:String(c.org||'').slice(0,120), url:this._caseUrl(c), why:String(c.why||'').slice(0,220) })).filter(c=>c.title);
   }
+  async _canvasTurn(context, stages, sessionId){
+    var url = window.NOTION_CONNECTOR_URL;
+    if(!url || !stages || !stages.length) return [];
+    try{
+      var r = await fetch(url.replace(/\/+$/,'')+'/canvas', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ context:String(context||'').slice(0,6000), stages:stages, sessionId:sessionId||'' }) });
+      var data = await r.json().catch(function(){ return {}; });
+      if(data && typeof data.cost==='number') this._turnCost=(this._turnCost||0)+data.cost;
+      if(data && Array.isArray(data.canvases)) return data.canvases;
+    }catch(e){ }
+    return [];
+  }
   _caseUrl(c){
     const q=encodeURIComponent((((c&&c.title)||'')+' '+((c&&c.org)||'')).trim());
     return 'https://duckduckgo.com/?q='+q;
@@ -594,6 +685,7 @@ class Component extends DCLogic {
       routeWhy: next.routeWhy || prev.routeWhy || '',
       nextSteps: pick('nextSteps'),
       cases: pick('cases'),
+      canvases: pick('canvases'),
       areas: pick('areas'),
       resources: pick('resources')
     };
@@ -628,12 +720,13 @@ class Component extends DCLogic {
 
   async _saveLog(){
     try{
+      if(this._demo) return;                     // demo preview never writes to Notion
       const url=window.NOTION_CONNECTOR_URL; if(!url) return;
       const userTurns=this.state.messages.filter(m=>m.role==='user'); if(!userTurns.length) return;
       const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : true;
       const map=this._lastMap || this.state.map || {};
       const status=this._lastStatus||'ok';
-      const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.summary&&map.summary.trim());
+      const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.canvases&&map.canvases.length)||(map.summary&&map.summary.trim());
       // Wait for real content before the FIRST write (unless this turn errored — errors are logged).
       if(status!=='error' && !hasContent && !this._queryPageId) return;
       const self=this;
@@ -666,6 +759,7 @@ class Component extends DCLogic {
         problem: userTurns[0].content||'', topic: topic,
         route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}),
         matchedBy: this._lastMatchedBy||'AI', source:'guide-me-chat',
+        canvases:(consent && hasContent)?(map.canvases||[]).map(function(c){ return c.stage+'\n'+(c.phases||[]).map(function(p){ return '  '+p.key.toUpperCase()+'\n'+(p.items||[]).map(function(it){ return '   \u2022 '+it.q+'\n     \u2192 '+it.step; }).join('\n'); }).join('\n'); }).join('\n\n'):'',
         cases:(consent && hasContent)?(map.cases||[]).map(function(c){return c.title+(c.url?' — '+c.url:'');}):[],
         transcript:(consent && hasContent)?transcript.slice(0,180000):'',
         pageId:this._queryPageId||undefined
@@ -743,6 +837,53 @@ class Component extends DCLogic {
     });
     return out;
   }
+  // Bespoke divergence → emergence → convergence canvases, one per active route stage.
+  PHASE_COLOR = ['#4e6530','#635f52','#3a5f5d'];
+  _canvasList(){ const m=this.state.map||{}; return m.canvases||[]; }
+  _printCanvases(){
+    const self=this, list=this._canvasList(); if(!list.length) return;
+    const esc=function(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); };
+    const stageColor={ probe:'#46716f', sense:'#5f7a3a', design:'#b07a3c', adapt:'#a8542d', integrate:'#3f6e74' };
+    const pages=list.map(function(c){
+      const col=stageColor[String(c.stage||'').toLowerCase()]||'#46716f';
+      const byKey={}; (c.phases||[]).forEach(function(p){ byKey[p.key]=p; });
+      const cols=['divergence','emergence','convergence'].map(function(k,i){
+        const accent=self.PHASE_COLOR[i], items=((byKey[k]||{}).items||[]).slice(0,2);
+        return '<div class="col">'+items.map(function(it){
+          return '<div class="card" style="border-color:'+self._hex2rgba(accent,.3)+';border-top-color:'+accent+'">'+
+            '<div class="q">'+esc(it.q)+'</div>'+
+            '<div class="s">'+esc(it.step)+'</div>'+
+            '<div class="lines" style="background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 7mm,'+self._hex2rgba(accent,.2)+' 7mm,'+self._hex2rgba(accent,.2)+' calc(7mm + 1px))"></div>'+
+          '</div>';
+        }).join('')+'</div>';
+      }).join('');
+      return '<section class="page"><header style="background:linear-gradient(120deg,'+col+' 0%,'+self._darken(col)+' 100%)">'+
+        '<div class="st">'+esc(c.stage)+'</div><div class="fo">'+esc(c.focus||'')+'</div></header>'+
+        '<div class="cols">'+cols+'</div>'+
+        '<footer>Systems Change Learning Guide \u00b7 working canvas</footer></section>';
+    }).join('');
+    const html='<!doctype html><html><head><meta charset="utf-8"><title>Working canvases</title>'+
+      '<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=PT+Sans:wght@400;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">'+
+      '<style>@page{size:A4 landscape;margin:10mm}'+
+      '*{box-sizing:border-box}body{margin:0;font-family:"PT Sans",sans-serif;background:#e9e6dd;-webkit-print-color-adjust:exact;print-color-adjust:exact}'+
+      '.page{width:277mm;height:190mm;margin:8mm auto;background:#fff;display:flex;flex-direction:column;overflow:hidden;page-break-after:always;box-shadow:0 6px 24px rgba(0,0,0,.12)}'+
+      '@media print{body{background:#fff}.page{margin:0;box-shadow:none}}'+
+      'header{padding:9mm 10mm 7mm;color:#fff}.st{font-family:"Newsreader",serif;font-weight:500;font-size:26pt;line-height:1}'+
+      '.fo{font-size:10.5pt;line-height:1.4;margin-top:3mm;max-width:200mm;color:rgba(255,255,255,.9)}'+
+      '.cols{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;padding:7mm 10mm 4mm;min-height:0}'+
+      '.col{display:flex;flex-direction:column;gap:5mm;min-height:0}'+
+      '.card{flex:1;display:flex;flex-direction:column;min-height:0;background:#fdfcf7;border:1px solid #ccc;border-top:3px solid #888;border-radius:3mm;padding:4mm 5mm}'+
+      '.q{font-family:"PT Serif",serif;font-weight:700;font-size:11pt;line-height:1.28;color:#26302a}'+
+      '.s{font-family:"PT Serif",serif;font-style:italic;font-size:9.5pt;line-height:1.35;color:#5a6a5f;margin-top:2mm}'+
+      '.lines{flex:1;margin-top:3mm;min-height:14mm;border-radius:2mm;background-color:#f4f1e6}'+
+      'footer{padding:0 10mm 6mm;font-size:8pt;letter-spacing:.1em;text-transform:uppercase;color:#9aa89e}'+
+      '</style></head><body>'+pages+
+      '<script>window.onload=function(){setTimeout(function(){window.print();},400);};<\/script></body></html>';
+    const w=window.open('','_blank'); if(!w) return;
+    w.document.open(); w.document.write(html); w.document.close();
+  }
+  _darken(h){ const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h||''); if(!m) return '#333'; return '#'+[1,2,3].map(function(i){ return Math.round(parseInt(m[i],16)*0.62).toString(16).padStart(2,'0'); }).join(''); }
+  _hex2rgba(h,a){ const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h||''); if(!m) return 'rgba(0,0,0,'+a+')'; return 'rgba('+parseInt(m[1],16)+','+parseInt(m[2],16)+','+parseInt(m[3],16)+','+a+')'; }
   renderVals(){
     const st=this.state, map=st.map;
     const userBubble={ maxWidth:'82%', background:'#b0822f', color:'#fff', fontSize:'14px', lineHeight:'1.5', padding:'11px 14px', borderRadius:'16px 16px 5px 16px', whiteSpace:'pre-wrap', wordBreak:'break-word' };
@@ -790,9 +931,13 @@ class Component extends DCLogic {
       briefMeta: st.brief? (st.brief.chars.toLocaleString()+' chars') : '',
       hasBriefError: !!st.briefError, briefError: st.briefError||'',
       hasMap, noMap:!hasMap, summary, firstProblem:((st.messages.find(m=>m.role==='user')||{}).content||''), routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0, cases, hasCases: cases.length>0,
+      hasCanvases: !!(hasMap && (map.canvases||[]).length),
+      canvasBlurb: 'We\u2019ve turned what you described into '+(((map&&map.canvases)||[]).length>1?'a set of printable canvases, one per stage you\u2019re in.':'a printable canvas for the stage you\u2019re in.'),
+      onPrintCanvases: ()=>this._printCanvases(),
       routeComplete: hasMap && !!(map&&(map.route||[]).length) && picks.length>0, notRouteComplete: !(hasMap && !!(map&&(map.route||[]).length) && picks.length>0),
       turnLabel: turnCount>1 ? ('Sharpened over '+turnCount+' exchanges') : 'From what you shared',
       mapWrapStyle: { animation: (turnCount%2 ? 'exIn' : 'exInB')+' .4s ease' },
+      onJumpChat: ()=>{ const el=document.getElementById('gm-chat'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); const t=document.getElementById('gm-input'); if(t) setTimeout(function(){ t.focus(); },420); } },
       onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },
       onPrint: ()=>{ try{ window.print(); }catch(e){} },
       showFeedback: st.showFeedback,

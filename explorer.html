@@ -512,7 +512,7 @@ class Component extends DCLogic {
     if(!url) throw new Error('no AI transport');
     var r=await fetch(url.replace(/\/+$/,'')+'/ai',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ model:opts.model, max_tokens:opts.max_tokens, system:opts.system, messages:opts.messages }) });
     var data=await r.json().catch(function(){ return {}; });
-    if(!r.ok || data.error) throw new Error((data && data.error) || ('HTTP '+r.status));
+    if(!r.ok || data.error) throw new Error([(data&&data.error)||('HTTP '+r.status), data&&data.detail].filter(Boolean).join(' — '));
     if(typeof data.cost==='number') this._turnCost=(this._turnCost||0)+data.cost;
     return data.text||'';
   }
@@ -655,7 +655,7 @@ class Component extends DCLogic {
     const capCount={}; res.forEach(x=> (x.r.caps||[]).forEach(c=> capCount[c]=(capCount[c]||0)+x.s));
     const areas=Object.keys(capCount).sort((a,b)=>capCount[b]-capCount[a]).slice(0,3).map(name=>({name,why:''}));
     return {
-      reply:'I had trouble reaching the live guide just now, so here\u2019s a quick keyword match. Send that again in a moment and I\u2019ll give you a fuller response.',
+      reply:('I had trouble reaching the live guide just now, so here\u2019s a quick keyword match. Send that again in a moment and I\u2019ll give you a fuller response.'+((/[?&]debug=1/.test(location.search||'')&&this._aiError)?'\n\n[debug] '+this._aiError:'')),
       map: res.length ? { summary:'', route:['Probe'], routeWhy:'', areas, resources:res.map(x=>({ name:x.r.name, why:(x.r.desc||'').split('. ')[0]+'.' })) } : null
     };
   }
@@ -681,7 +681,19 @@ class Component extends DCLogic {
     const caseToken=(this._caseToken=(this._caseToken||0)+1);
     const casePromise=hasAI ? this._casesTurn(caseCtx, caseExclude, this._sessionId()) : null;
     if(casePromise) casePromise.catch(()=>{});
-    if(hasAI){ for(let attempt=0; attempt<2 && !out; attempt++){ try{ out=await this._aiTurn(chatMsgs); }catch(e){ console.warn('[guideme] AI turn failed (attempt '+(attempt+1)+'):', e && e.message); } } }
+    // Three attempts with backoff: transient 429/5xx from the AI proxy is the main
+    // cause of the keyword fallback, and an immediate retry hits the same rate window.
+    if(hasAI){
+      const waits=[0,1200,3000];
+      for(let attempt=0; attempt<3 && !out; attempt++){
+        if(waits[attempt]) await new Promise(r=>setTimeout(r,waits[attempt]));
+        try{ out=await this._aiTurn(chatMsgs); }
+        catch(e){
+          this._aiError=(e&&e.message)||String(e);
+          console.error('[guideme] AI turn failed (attempt '+(attempt+1)+'/3):', this._aiError);
+        }
+      }
+    } else { this._aiError='no AI transport (window.NOTION_CONNECTOR_URL is not set)'; console.error('[guideme] '+this._aiError); }
     if(!out){ out=this._keywordTurn(send); matchedBy='Keyword'; }
     // P0 library fix: drop learning-area labels / unresolved names from resources and
     // refill from the real library rather than padding with capacity names.

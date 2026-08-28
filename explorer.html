@@ -573,12 +573,60 @@ class Component extends DCLogic {
     ].join('\n');
   }
 
+  // Repair a JSON object that was cut off mid-flight (max_tokens exhausted):
+  // drop any incomplete trailing token, then close the open strings/brackets.
+  _repairJson(s){
+    let t=String(s||'').replace(/^[\s\S]*?\{/, '{');
+    try{ return JSON.parse(t); }catch(e){}
+    let inStr=false, esc=false; const stack=[]; let lastSafe=-1;
+    for(let i=0;i<t.length;i++){
+      const ch=t[i];
+      if(inStr){
+        if(esc){ esc=false; continue; }
+        if(ch==='\\'){ esc=true; continue; }
+        if(ch==='"') inStr=false;
+        continue;
+      }
+      if(ch==='"'){ inStr=true; continue; }
+      if(ch==='{'||ch==='[') stack.push(ch==='{'?'}':']');
+      else if(ch==='}'||ch===']') stack.pop();
+      else if(ch===',' && stack.length) lastSafe=i;   // last clean element boundary
+    }
+    let head=t;
+    if(inStr || /[:,]\s*$/.test(head) || /"[^"]*$/.test(head)){
+      if(lastSafe>0) head=t.slice(0,lastSafe);        // cut back to the last complete value
+    }
+    head=head.replace(/[\s,]+$/,'');
+    // recount what is still open after the cut
+    inStr=false; esc=false; const st2=[];
+    for(let i=0;i<head.length;i++){
+      const ch=head[i];
+      if(inStr){ if(esc){esc=false;continue;} if(ch==='\\'){esc=true;continue;} if(ch==='"') inStr=false; continue; }
+      if(ch==='"'){ inStr=true; continue; }
+      if(ch==='{'||ch==='[') st2.push(ch==='{'?'}':']');
+      else if(ch==='}'||ch===']') st2.pop();
+    }
+    if(inStr) head+='"';
+    head=head.replace(/[\s,]+$/,'');
+    while(st2.length) head+=st2.pop();
+    try{ return JSON.parse(head); }catch(e){}
+    // last resort: at least keep the conversation alive with the reply text
+    const m=/"reply"\s*:\s*"((?:[^"\\]|\\.)*)/.exec(t);
+    if(m){ try{ return { reply: JSON.parse('"'+m[1].replace(/\\?$/,'')+'"') }; }catch(e2){ return { reply: m[1] }; } }
+    return null;
+  }
   async _aiTurn(chatMsgs){
-    const raw=await this._complete({ model:'claude-sonnet-4-5', max_tokens:1300, system:this._systemPrompt(), messages:chatMsgs });
+    const raw=await this._complete({ model:'claude-sonnet-4-5', max_tokens:4000, system:this._systemPrompt(), messages:chatMsgs });
     let txt=(raw||'').trim();
     const a=txt.indexOf('{'), b=txt.lastIndexOf('}');
     if(a>=0&&b>a) txt=txt.slice(a,b+1);
-    const p=JSON.parse(txt);
+    let p;
+    try{ p=JSON.parse(txt); }
+    catch(err){
+      p=this._repairJson(txt);
+      if(!p) throw new Error('unparseable JSON ('+txt.length+' chars): '+(err&&err.message));
+      console.warn('[guideme] recovered a truncated JSON turn ('+txt.length+' chars)');
+    }
     const rawJson=txt;
     const hasMap=(Array.isArray(p.resources)&&p.resources.length)||(Array.isArray(p.areas)&&p.areas.length)||(Array.isArray(p.nextSteps)&&p.nextSteps.length)||(Array.isArray(p.cases)&&p.cases.length);
     return {
@@ -662,6 +710,19 @@ class Component extends DCLogic {
     } else { this._busy=false; }
   }
 
+  _clean(s, n){
+    let t = String(s == null ? '' : s)
+      .replace(/<\/?cite[^>]*>/gi, '')       // web-search citation markup
+      .replace(/\[\s*\d+(?:\s*[-,:]\s*\d+)*\s*\]/g, '') // [4-8,4-9] style refs
+      .replace(/<[^>]+>/g, '')
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([.,;:])/g, '$1')
+      .trim();
+    if(n && t.length > n){                    // truncate on a word boundary, not mid-word
+      t = t.slice(0, n).replace(/\s+\S*$/, '').replace(/[\s,;:\u2014-]+$/, '') + '\u2026';
+    }
+    return t;
+  }
   async _casesTurn(context, exclude, sessionId){
     exclude = Array.isArray(exclude) ? exclude : [];
     // Prefer the worker's web-search-grounded endpoint → VERIFIED real URLs.
@@ -672,7 +733,7 @@ class Component extends DCLogic {
         var data = await r.json().catch(function(){ return {}; });
         if(data && typeof data.cost==='number') this._turnCost=(this._turnCost||0)+data.cost;
         if(data && Array.isArray(data.cases) && data.cases.length){
-          return data.cases.slice(0,3).map(function(c){ return { title:String(c.title||'').slice(0,140), org:String(c.org||'').slice(0,140), url:(/^https?:\/\//i.test(String(c.url||'')) ? String(c.url) : ''), why:String(c.why||'').slice(0,240) }; }).filter(function(c){ return c.title && c.url; });
+          var self=this; return data.cases.slice(0,3).map(function(c){ return { title:self._clean(c.title,140), org:self._clean(c.org,140), url:(/^https?:\/\//i.test(String(c.url||'')) ? String(c.url) : ''), why:self._clean(c.why,220) }; }).filter(function(c){ return c.title && c.url; });
         }
         if(data && Array.isArray(data.cases)) return [];
       }catch(e){ }
@@ -684,7 +745,7 @@ class Component extends DCLogic {
     let t=(raw||'').trim(); const a=t.indexOf('['), b=t.lastIndexOf(']'); if(a>=0&&b>a) t=t.slice(a,b+1);
     let arr; try{ arr=JSON.parse(t); }catch(e){ return []; }
     if(!Array.isArray(arr)) return [];
-    return arr.slice(0,3).map(c=>({ title:String(c.title||'').slice(0,120), org:String(c.org||'').slice(0,120), url:this._caseUrl(c), why:String(c.why||'').slice(0,220) })).filter(c=>c.title);
+    return arr.slice(0,3).map(c=>({ title:this._clean(c.title,120), org:this._clean(c.org,120), url:this._caseUrl(c), why:this._clean(c.why,220) })).filter(c=>c.title);
   }
   async _canvasTurn(context, stages, sessionId){
     var url = window.NOTION_CONNECTOR_URL;

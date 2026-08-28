@@ -212,11 +212,11 @@
             </sc-if>
             <sc-if value="{{ hasCanvases }}" hint-placeholder-val="{{ false }}">
               <div class="gm-noprint" style="margin-top:24px;border:1px solid rgba(70,113,111,.2);border-radius:14px;padding:16px 18px;background:rgba(255,255,255,.5)">
-                <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:6px">Working canvases</div>
-                <div style="font-size:12.5px;line-height:1.5;color:#5d6d63;margin-bottom:13px">{{ canvasBlurb }} Print them and work through the questions with your team — each one has space to write.</div>
+                <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin-bottom:6px">{{ canvasKindLabel }}</div>
+                <div style="font-size:12.5px;line-height:1.5;color:#5d6d63;margin-bottom:13px">{{ canvasBlurb }} There is space on it to write.</div>
                 <button onClick="{{ onPrintCanvases }}" style="display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#46716f;background:transparent;border:1.5px solid #46716f;border-radius:20px;padding:9px 18px;cursor:pointer">
                   <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#46716f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
-                  Download canvases (PDF)
+                  Download canvas (PDF)
                 </button>
               </div>
             </sc-if>
@@ -353,27 +353,16 @@ class Component extends DCLogic {
       { title:'Mersey Rivers Trust catchment partnership', org:'North West England', url:'https://example.org/mersey', why:'Shows how a named decision forum unblocked a multi-landowner stretch.' }
     ],
     canvases:[
-      { stage:'Sense', focus:'Make the invisible blocks around riverside land visible before you commit to a plan.', phases:[
-        { key:'divergence', items:[
+      { label:'Power and decision map', stage:'Who can unblock the bank', focus:'See who actually holds this stretch before you commit to a plan.', phases:[
+        { key:'divergence', title:'Who is in play', items:[
           { q:'Which upstream landowners have never been in a room with the angling club?', step:'List every riparian owner along the stretch and mark who has actually met whom.' },
           { q:'What does the river mean to the families on the estate, in their own words?', step:'Ten doorstep conversations, recorded with permission. No survey form.' } ] },
-        { key:'emergence', items:[
-          { q:'Where do the anglers and the wild-swimming group genuinely disagree?', step:'Name the disagreement out loud at the next meeting and write it on the wall without putting it to a vote.' },
-          { q:'What would tell you the council has actually shifted, rather than just attended?', step:'Watch for who forwards your emails internally without being asked, and note the date it first happens.' } ] },
-        { key:'convergence', items:[
+        { key:'emergence', title:'Where interests collide', items:[
+          { q:'Your group wants visible change; the landowners want no liability. Can you hold both?', step:'Put both statements at the top of the agenda as fixed constraints, and design within them.' },
+          { q:'Where do the anglers and the wild-swimming group genuinely disagree?', step:'Name it out loud at the next meeting and write it on the wall without putting it to a vote.' } ] },
+        { key:'convergence', title:'Where your leverage is', items:[
           { q:'Which single stretch of bank would show change soonest?', step:'Pick one 200m reach and write down why in three sentences.' },
           { q:'Who holds the decision if the funding lands late?', step:'Agree a named decision-maker at the next steering call.' } ] }
-      ] },
-      { stage:'Design', focus:'Turn what you sensed into a first intervention the council and the landowners can both live with.', phases:[
-        { key:'divergence', items:[
-          { q:'What are all the ways the bank could be restored without asking permission first?', step:'List twenty options with no filtering, including the ones that sound unreasonable.' },
-          { q:'Who benefits if the council keeps this slow, and what would make speed serve them?', step:'Sketch the incentives of the three officers who touch this file.' } ] },
-        { key:'emergence', items:[
-          { q:'Your group wants visible change and the landowners want no liability. Can you hold both?', step:'Put both statements at the top of the agenda as fixed constraints, and design within them rather than debating them.' },
-          { q:'Which option keeps resurfacing from people who have not spoken to each other?', step:'Tally repeat mentions across your notes; treat anything named three times independently as a real signal.' } ] },
-        { key:'convergence', items:[
-          { q:'What is the smallest thing you could do in six weeks that could not be reversed?', step:'Choose it, name a date, and tell one person outside the group.' },
-          { q:'How will you know in a year whether trust between residents and landowners improved?', step:'Pick one observable marker now and record where it stands today.' } ] }
       ] }
     ]
   };
@@ -540,12 +529,29 @@ class Component extends DCLogic {
     const route=this.ROUTE.map(r=>r.name+' — '+r.desc+(r.qs?'\n    diagnostic questions: '+r.qs.join(' / '):'')).join('\n');
     return [
       "You are Guide Me, a warm, grounded, Socratic coach for the Systems Change Learning Guide. Each turn you do TWO things at once:",
-      "(1) Reply conversationally to the person, moving through a coaching arc that bridges awareness and action: FIRST reflect back what you heard in a sentence or two — name what's really going on, including the tension or competing commitment underneath it, so they feel seen; THEN ask ONE sharp question that raises awareness (surfaces a blind spot, an assumption, or what they are not yet looking at); THEN, only once they have had a real question to sit with, offer one concrete next step — as an invitation they are free to refuse, not an instruction. Warm and human, under ~160 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets). Let the ideas and wisdom in the library below inform your advice even when you are not naming a specific resource — draw on what those resources actually teach.",
-      "GROUND YOUR ADVICE IN A LINEAGE: don't only say what to do — say what informs it, so the person hears both the practical move and the thinking behind it. When it genuinely illuminates their situation, connect your reflection or next step to the thinker, author, practice or framework that actually informs it. Draw freely from the whole library below and from the wider field it sits in — systems, ecological, economic, decolonial, organisational, participatory and contemplative thought — choosing whatever genuinely fits THIS person's situation rather than reaching for the same few familiar names. Attribute an IDEA, never a fabricated quote, statistic, date, or book title — if you are not fully confident a thinker or work is real and correctly attributed, describe the idea plainly without the name. Do this sparingly and naturally — at most one well-placed reference per reply, woven into the sentence; never name-drop or lecture.",
+      "(1) Reply conversationally. Your reply has only TWO moves, and it ends on the question:",
+      "   FIRST, REFLECT — but reflect as a systems coach, not a summariser. Name what is really going on underneath what they said, and read it THROUGH THE LENS OF THE LEARNING AREA that matters most in their situation, using that area's own language and concepts.",
+      "   YOUR LENSES ARE THE LEARNING AREAS LISTED BELOW — the 24 areas of the framework, each with its own description. Work out which one their situation is really about, then reflect in that area's vocabulary. Complex Problem Solving speaks of emergence, feedback and what cannot be known in advance; Convening & Facilitating Collaborations of who is in the room, what is sayable there and how disagreement is held; Positionality & Power Analysis of whose interests the arrangement serves and who is able to act; Regenerative Systems Design of leverage, sequencing and what a small move would reveal; and so on through all 24. Read each area's description below and use ITS concepts, not a generic systems vocabulary.",
+      "   IF NOTHING IN THE FRAMEWORK FITS, say it in that field's own terms anyway. Some situations turn on something the 24 areas do not cover — a technical, legal, financial, clinical, regulatory or domain-specific matter. Reflect it in the language that actually belongs to it rather than forcing it into the nearest learning area. Note that the map's learning areas must still come from the framework.",
+      "   Do not name the learning area as a label in your reply — let it shape the way you see and speak.",
+      "   THEN, ASK ONE QUESTION and stop there. Exactly one, genuinely open, arising from what you just reflected. End the reply on it.",
+      "   DO NOT put practical next steps, action lists or recommendations in your reply. Those belong in the map and the canvas below, which you are building in parallel. Your reply summarises and coaches; the map carries the doing. The one exception: if a single small next move is the natural answer to what they just asked you outright, offer it in one short sentence — as an invitation, never an instruction.",
+      "   Warm and human, aim for 90-140 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets). Be on point. A tight reply that lands is worth more than a full one.",
+      "GROUND THE REFLECTION IN A LINEAGE — this is expected in most replies, not an occasional flourish. Many people have contributed wisdom to this field; when you reflect, let the person hear whose thinking helps you see their situation this way. Weave ONE such reference into the reflection itself (not appended after it), in a clause: the thinker, author, tradition or practice whose idea genuinely illuminates what they are facing.",
+      "   PUT GLOBAL SOUTH THINKERS, PRACTITIONERS AND TRADITIONS FIRST. Where a Southern, Indigenous, or otherwise non-Western lineage speaks to their situation, reach for it before the familiar Anglo-American names — including scholars, movements, practitioner communities and knowledge traditions from South and Southeast Asia, Africa, Latin America, the Caribbean, the Pacific and West Asia. Only where no such lineage genuinely fits should you reach elsewhere. Draw also on the whole library below and the wider field it sits in — systems, ecological, economic, decolonial, organisational, participatory and contemplative thought — and vary who you name across a conversation rather than returning to the same few.",
+      "   Attribute an IDEA, never a fabricated quote, statistic, date, or title. If you are not fully confident a thinker or work is real and correctly attributed, carry the idea plainly without the name — a real idea unattributed is always better than a misattributed one. One reference per reply at most, woven in a clause. Never name-drop, never lecture, never explain who the person is at length.",
       "",
       "CALIBRATE DEPTH TO WHAT YOU ACTUALLY KNOW. A one-line problem statement does not give you enough to advise well, and pretending otherwise is the single biggest failure mode here. On an early turn with thin input, do NOT deliver generic strategy. Reflect briefly, say plainly what you would need to know, and ask the one thing that would most change your advice — typically: where this is happening and at what scale, what has already been tried and what came of it, how far along the effort is, and above all WHERE THE PERSON THEMSELVES STANDS in this system (a member of the affected community, an outside organiser, a funder, a researcher, a public servant, a newcomer). Advice that does not know the person's own position and stake cannot be good advice. Let depth escalate across the conversation: early turns orient and ask, middle turns sharpen and offer one well-grounded move, later turns can get strategic and sequential.",
       "",
-      "BRING SUBSTANCE, BUT AS A COACH AND NOT A CONSULTANT. Two things are true at once: generic advice is useless, and you are not the expert on their situation — they are. So bring substance in service of their thinking, never in place of it. Your reflection should still give them something they did not already say: name the specific mechanisms, actors, incentives, timelines and pressure points that characterise THIS kind of system rather than the generic shape of change work. Advice that would be equally true of any campaign, any organisation and any issue is a failure even when technically correct: 'map the decision-makers', 'gather community knowledge', 'build a coalition', 'tell your own story', 'find allies' are worthless on their own. But offer that substance the way a good coach does — tentatively, and where possible as a question or an offer rather than an instruction. Ask what they already know about a mechanism before you explain it, and when you do name something concrete, name it as a possibility to test against their reality rather than a finding ('in fights like this the decision often turns well before the public hearing — is that how it works where you are?'). Where a domain has known chokepoints, approval routes, financing structures, regulatory windows, or things people typically discover too late, it is a gift to name them; it is never a gift to lecture. Bounded by the accuracy rule: be concrete about mechanisms you are genuinely confident exist, general where you are not, and never invent specifics to sound expert.",
+      "HELP THEM WORK OUT WHAT THEY ACTUALLY NEED — this is part of the coaching, not a preliminary to it. People arrive naming a topic, rarely the form of help that would move them. Someone describing a coordination problem may need a session they can run, or may need to see who can say no to them; someone describing burnout may need a boundary they can hold, not a change strategy. Listen for which it is, and where it is genuinely unclear, ASK — put the choice to them plainly in your one question ('would it help more to design the session itself, or to get clear first on who can actually block it?'). Two named options at most, both real. This is the one place a two-option question is allowed, because you are asking them to direct the work rather than answer for you.",
+      "   NOTE THAT MANY PEOPLE HERE ARE NOT RUNNING A CHANGE PROGRAMME. They are a person inside a system that is costing them something — an unfitting role, an eroding boundary, a pattern in a relationship, work that contradicts what they care about. Meet that as it is. Do not translate it into project language, do not hand them a strategy, and do not treat their own life as a system to be optimised.",
+      "",
+      "HONOUR A DIRECT REQUEST. Coaching does not mean withholding. If the person asks you outright for something you can genuinely give — a format, a method, a way to structure something, a resource, an example, your view — GIVE IT, in the same turn, and then ask your question. Someone who says 'I tried running sessions but I need help with the design' has told you what they need; answering with three more diagnostic questions is not Socratic, it is evasive, and it is the fastest way to lose their trust. The rule of thumb: if you could name the thing that would help and you choose not to, you have stopped serving them. Keep it to ONE concrete offer, still framed as theirs to take or leave, and still end on a question.",
+      "   WHEN THEY ASK FOR A METHOD OR FORMAT, NAME A SPECIFIC ONE FROM THE LIBRARY BELOW in your reply — the single resource that most directly answers what they asked, by exact name, with one clause on why it fits their case. One only. This is the one place a named resource belongs in the reply rather than only in the map.",
+      "",
+      "ANSWER WHAT THEY ACTUALLY ASKED. If the person put a question to you, your reply must engage that question — not the adjacent one you would rather answer, and not the same general advice you would give anyone. Reread their last message before you reply and check that what you are about to say could only have been said to them, in response to that. Never repeat a move you have already offered earlier in the conversation; if you have said it once, go further or go elsewhere.",
+      "",
+      "BRING SUBSTANCE, BUT AS A COACH AND NOT A CONSULTANT. Two things are true at once: generic advice is useless, and you are not the expert on their situation — they are. So bring substance in service of their thinking, never in place of it. Your reflection should still give them something they did not already say: name the specific mechanisms, actors, incentives, timelines and pressure points that characterise THIS kind of system rather than the generic shape of change work. Advice that would be equally true of any campaign, any organisation and any issue is a failure even when technically correct. Phrases of that kind — 'map the decision-makers', 'gather community knowledge', 'build a coalition', 'tell your own story', 'find allies' — are examples of the FAILURE MODE, not a menu to choose from: they are worthless on their own, and reaching for them repeatedly across a conversation is the clearest sign you have stopped listening. But offer that substance the way a good coach does — tentatively, and where possible as a question or an offer rather than an instruction. Ask what they already know about a mechanism before you explain it, and when you do name something concrete, name it as a possibility to test against their reality rather than a finding ('in fights like this the decision often turns well before the public hearing — is that how it works where you are?'). Where a domain has known chokepoints, approval routes, financing structures, regulatory windows, or things people typically discover too late, it is a gift to name them; it is never a gift to lecture. Bounded by the accuracy rule: be concrete about mechanisms you are genuinely confident exist, general where you are not, and never invent specifics to sound expert.",
       "",
       "LET THE ROUTE DO COACHING WORK. Each Route stage below carries diagnostic questions. Once you have placed the person on the Route, let your one question come from — or be sharpened by — that stage's questions, adapted to their actual situation rather than asked verbatim. That is what makes the Route a working instrument rather than a label. If they sit across two stages, the more uncomfortable stage's question is usually the more useful one.",
       "",
@@ -567,6 +573,8 @@ class Component extends DCLogic {
       "",
       "THE 24 LEARNING AREAS:",
       this._areasText(),
+      "",
+      "CHOOSING RESOURCES FOR THE MAP — match the ASK, not just the label. A resource that shares a learning area with their situation is not automatically the right one. Work out what KIND of help they actually need and let that pick the type of resource: someone who needs a way to run something needs a methods or toolkit resource, not a network or a membership body; someone trying to understand why a pattern persists needs a book, essay or piece of research; someone looking for peers doing the same work needs a network or community; someone who needs to build a skill needs a course or capacity-building centre. If they asked for a format, a structure or a process, a resource that merely discusses the topic is a wrong answer even when the subject matches perfectly. Read the resource descriptions below and pick the one that would actually answer the question they asked, and prefer the most specific and directly usable resource over the most prestigious or general one.",
       "",
       "LIBRARY RESOURCES (name [learning areas] {arc} — description) — cite only by exact name, and let the descriptions inform both your advice and which resources you recommend:",
       this._resourcesText()
@@ -747,6 +755,21 @@ class Component extends DCLogic {
     if(!Array.isArray(arr)) return [];
     return arr.slice(0,3).map(c=>({ title:this._clean(c.title,120), org:this._clean(c.org,120), url:this._caseUrl(c), why:this._clean(c.why,220) })).filter(c=>c.title);
   }
+  _canvasKind(c){ return (c&&c.label)||'Working canvas'; }
+  _canvasBlurb(list){
+    const c=(list&&list[0])||{};
+    const label=String(c.label||'').trim();
+    if(!label) return 'We\u2019ve turned what you described into a printable canvas to work through.';
+    const head='We\u2019ve turned what you described into a printable '+label.charAt(0).toLowerCase()+label.slice(1)+'.';
+    return c.focus ? head+' '+c.focus.replace(/\.?$/,'.') : head;
+  }
+  // Stable accent per canvas label, so different frameworks read differently.
+  _canvasColor(c){
+    const P=['#46716f','#b07a3c','#a8542d','#5f7a3a','#3f6e74','#6b5a8e'];
+    const k=String((c&&c.label)||'');
+    let h=0; for(let i=0;i<k.length;i++) h=(h*31+k.charCodeAt(i))>>>0;
+    return P[h%P.length];
+  }
   async _canvasTurn(context, stages, sessionId){
     var url = window.NOTION_CONNECTOR_URL;
     if(!url || !stages || !stages.length) return [];
@@ -848,7 +871,7 @@ class Component extends DCLogic {
         problem: userTurns[0].content||'', topic: topic,
         route: map.route||[], areas:(map.areas||[]).map(function(a){return a.name;}), resources:(map.resources||[]).map(function(r){return r.name;}),
         matchedBy: this._lastMatchedBy||'AI', source:'guide-me-chat',
-        canvases:(consent && hasContent)?(map.canvases||[]).map(function(c){ return c.stage+'\n'+(c.phases||[]).map(function(p){ return '  '+p.key.toUpperCase()+'\n'+(p.items||[]).map(function(it){ return '   \u2022 '+it.q+'\n     \u2192 '+it.step; }).join('\n'); }).join('\n'); }).join('\n\n'):'',
+        canvases:(consent && hasContent)?(map.canvases||[]).map(function(c){ return c.stage+' ['+(c.label||'canvas')+']\n'+(c.phases||[]).map(function(p){ return '  '+String(p.title||p.key).toUpperCase()+'\n'+(p.items||[]).map(function(it){ return '   \u2022 '+it.q+'\n     \u2192 '+it.step; }).join('\n'); }).join('\n'); }).join('\n\n'):'',
         cases:(consent && hasContent)?(map.cases||[]).map(function(c){return c.title+(c.url?' — '+c.url:'');}):[],
         transcript:(consent && hasContent)?transcript.slice(0,180000):'',
         pageId:this._queryPageId||undefined
@@ -926,7 +949,7 @@ class Component extends DCLogic {
     });
     return out;
   }
-  // Bespoke divergence → emergence → convergence canvases, one per active route stage.
+  // One bespoke canvas: a framework designed for this person, with named movements.
   PHASE_COLOR = ['#4e6530','#635f52','#3a5f5d'];
   _canvasList(){ const m=this.state.map||{}; return m.canvases||[]; }
   _printCanvases(){
@@ -934,11 +957,12 @@ class Component extends DCLogic {
     const esc=function(s){ return String(s==null?'':s).replace(/[&<>]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); };
     const stageColor={ probe:'#46716f', sense:'#5f7a3a', design:'#b07a3c', adapt:'#a8542d', integrate:'#3f6e74' };
     const pages=list.map(function(c){
-      const col=stageColor[String(c.stage||'').toLowerCase()]||'#46716f';
+      const col=self._canvasColor(c)||stageColor[String(c.stage||'').toLowerCase()]||'#46716f';
       const byKey={}; (c.phases||[]).forEach(function(p){ byKey[p.key]=p; });
       const cols=['divergence','emergence','convergence'].map(function(k,i){
-        const accent=self.PHASE_COLOR[i], items=((byKey[k]||{}).items||[]).slice(0,2);
-        return '<div class="col">'+items.map(function(it){
+        const ph=byKey[k]||{}, accent=self.PHASE_COLOR[i], items=(ph.items||[]).slice(0,2);
+        const head=ph.title?'<div class="mv" style="color:'+accent+';border-bottom-color:'+self._hex2rgba(accent,.35)+'">'+esc(ph.title)+'</div>':'';
+        return '<div class="col">'+head+items.map(function(it){
           return '<div class="card" style="border-color:'+self._hex2rgba(accent,.3)+';border-top-color:'+accent+'">'+
             '<div class="q">'+esc(it.q)+'</div>'+
             '<div class="s">'+esc(it.step)+'</div>'+
@@ -961,6 +985,7 @@ class Component extends DCLogic {
       '.fo{font-size:10.5pt;line-height:1.4;margin-top:3mm;max-width:200mm;color:rgba(255,255,255,.9)}'+
       '.cols{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;padding:7mm 10mm 4mm;min-height:0}'+
       '.col{display:flex;flex-direction:column;gap:5mm;min-height:0}'+
+      '.mv{font-family:"PT Sans",sans-serif;font-weight:700;font-size:9pt;letter-spacing:.08em;text-transform:uppercase;padding-bottom:1.5mm;border-bottom:1px solid #ccc;flex:0 0 auto}'+
       '.card{flex:1;display:flex;flex-direction:column;min-height:0;background:#fdfcf7;border:1px solid #ccc;border-top:3px solid #888;border-radius:3mm;padding:4mm 5mm}'+
       '.q{font-family:"PT Serif",serif;font-weight:700;font-size:11pt;line-height:1.28;color:#26302a}'+
       '.s{font-family:"PT Serif",serif;font-style:italic;font-size:9.5pt;line-height:1.35;color:#5a6a5f;margin-top:2mm}'+
@@ -1021,7 +1046,8 @@ class Component extends DCLogic {
       hasBriefError: !!st.briefError, briefError: st.briefError||'',
       hasMap, noMap:!hasMap, summary, firstProblem:((st.messages.find(m=>m.role==='user')||{}).content||''), routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0, cases, hasCases: cases.length>0,
       hasCanvases: !!(hasMap && (map.canvases||[]).length),
-      canvasBlurb: 'We\u2019ve turned what you described into '+(((map&&map.canvases)||[]).length>1?'a set of printable canvases, one per stage you\u2019re in.':'a printable canvas for the stage you\u2019re in.'),
+      canvasBlurb: this._canvasBlurb((map&&map.canvases)||[]),
+      canvasKindLabel: this._canvasKind(((map&&map.canvases)||[])[0]),
       onPrintCanvases: ()=>this._printCanvases(),
       routeComplete: hasMap && !!(map&&(map.route||[]).length) && picks.length>0, notRouteComplete: !(hasMap && !!(map&&(map.route||[]).length) && picks.length>0),
       turnLabel: turnCount>1 ? ('Sharpened over '+turnCount+' exchanges') : 'From what you shared',

@@ -218,13 +218,40 @@
             </div>
             <sc-if value="{{ routeWhy }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;line-height:1.5;color:#54655c;margin-top:9px">{{ routeWhy }}</div></sc-if>
 
+            <sc-if value="{{ hasAreas }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Learning areas to build</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 20px">
+              <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <span style="{{ a.dot }}"></span>
+                  <div>
+                    <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:600;color:#2c3a33">{{ a.name }}</div>
+                    <sc-if value="{{ a.why }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;line-height:1.42;color:#6b7c72;margin-top:1px">{{ a.why }}</div></sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            </sc-if>
+
             <sc-if value="{{ hasNextSteps }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Practical next steps</div>
               <div style="display:flex;flex-direction:column;gap:9px">
                 <sc-for list="{{ nextSteps }}" as="n" hint-placeholder-count="3">
                   <div style="display:flex;gap:10px;align-items:flex-start">
                     <span style="width:20px;height:20px;flex:none;border-radius:50%;background:rgba(70,113,111,.12);color:#46716f;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px">{{ n.num }}</span>
-                    <div style="font-size:13px;line-height:1.5;color:#54655c">{{ n.text }}</div>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:13px;line-height:1.5;color:#54655c">{{ n.text }}</div>
+                      <sc-if value="{{ n.hasRes }}" hint-placeholder-val="{{ false }}">
+                        <a class="ex-res" href="{{ n.res.url }}" target="_blank" rel="noopener" onClick="{{ n.res.onClick }}" style="{{ n.res.cardStyle }}">
+                          <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap">
+                            <span style="font-family:'PT Serif',serif;font-weight:700;font-size:12.5px;line-height:1.2;color:#2c3a33">{{ n.res.name }}</span>
+                            <span style="color:#46716f;font-size:12px">↗</span>
+                            <span style="font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#9a7a4a">{{ n.res.typeText }}</span>
+                          </div>
+                          <div style="font-size:12px;line-height:1.4;color:#54655c;margin-top:3px">{{ n.res.why }}</div>
+                        </a>
+                      </sc-if>
+                    </div>
                   </div>
                 </sc-for>
               </div>
@@ -240,13 +267,6 @@
               </div>
             </sc-if>
 
-          </div>
-        </aside>
-      </sc-if>
-
-      <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
-      <aside id="gm-map-b" class="gm-panel" style="order:3;background:rgba(255,255,255,.6);border:1px solid rgba(70,113,111,.16);border-radius:18px;padding:22px 24px 26px">
-          <div style="{{ mapWrapStyle }}">
             <sc-if value="{{ hasCases }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Other cases to learn from</div>
               <div style="display:flex;flex-direction:column;gap:10px">
@@ -262,49 +282,14 @@
                 </sc-for>
               </div>
             </sc-if>
-            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Learning areas to build</div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 20px">
-              <sc-for list="{{ areas }}" as="a" hint-placeholder-count="3">
-                <div style="display:flex;gap:10px;align-items:flex-start">
-                  <span style="{{ a.dot }}"></span>
-                  <div>
-                    <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:600;color:#2c3a33">{{ a.name }}</div>
-                    <sc-if value="{{ a.why }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;line-height:1.42;color:#6b7c72;margin-top:1px">{{ a.why }}</div></sc-if>
-                  </div>
-                </div>
-              </sc-for>
-            </div>
-
-            <div style="font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a7a4a;margin:22px 0 10px">Resources to go deeper</div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px">
-              <sc-for list="{{ picks }}" as="r" hint-placeholder-count="4">
-                <a class="ex-res" href="{{ r.url }}" target="_blank" rel="noopener" onClick="{{ r.onClick }}" style="{{ r.cardStyle }}">
-                  <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap">
-                    <span style="font-family:'PT Serif',serif;font-weight:700;font-size:14.5px;line-height:1.25;color:#2c3a33">{{ r.name }}</span>
-                    <span style="color:#46716f;font-size:13px">↗</span>
-                  </div>
-                  <div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#9a7a4a;margin-top:5px">{{ r.typeText }}</div>
-                  <div style="font-size:12.5px;line-height:1.45;color:#54655c;margin-top:6px">{{ r.why }}</div>
-                </a>
-              </sc-for>
-            </div>
-
 
           </div>
         </aside>
       </sc-if>
 
       <sc-if value="{{ hasMap }}" hint-placeholder-val="{{ false }}">
-      <div class="gm-noprint" style="order:4">
-        <div class="gm-noprint" style="background:linear-gradient(180deg,#fbf5e6,#f6eecf);border:1px solid rgba(176,130,47,.32);border-radius:18px;padding:22px 24px 24px">
-          <div style="font-family:'Space Grotesk','PT Sans',sans-serif;font-size:13.5px;font-weight:700;color:#8a6a18;margin-bottom:4px">Where to from here</div>
-          <div style="font-size:12.5px;line-height:1.5;color:#6b5a2a;margin-bottom:14px">Sessions aren’t saved — download your map to keep it. Or carry on describing your situation and the map will sharpen as you go.</div>
-          <div style="display:flex;flex-wrap:wrap;gap:10px">
-            <button onClick="{{ onPrint }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#fff;background:#b0822f;border:1.5px solid #b0822f;box-shadow:0 8px 20px rgba(120,90,20,.24)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>Download your map (PDF)</button>
-            <button onClick="{{ onJumpChat }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#8a6a18;background:transparent;border:1.5px solid rgba(176,130,47,.6)">Keep talking to sharpen it</button>
-          </div>
-        </div>
-        <div class="gm-noprint" style="margin-top:12px;font-size:12px;color:#9aa89e">Or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
+      <div class="gm-noprint" style="order:4;display:flex;justify-content:center;padding:6px 0 2px">
+        <button onClick="{{ onJumpChat }}" style="display:inline-flex;align-items:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:22px;padding:11px 26px;cursor:pointer;color:#8a6a18;background:transparent;border:1.5px solid rgba(176,130,47,.6)"><span aria-hidden="true">↑</span> Keep talking to sharpen it</button>
       </div>
       </sc-if>
 
@@ -354,9 +339,9 @@ class Component extends DCLogic {
     route:['Sense','Design'],
     routeWhy:'You have a clear enough issue to be past pure framing, but the power dynamics and the shared picture of the future are still unresolved \u2014 so you sit across Sense and Design.',
     nextSteps:[
-      'Map every riparian landowner along the stretch and note who has actually met whom.',
-      'Run ten doorstep conversations on the estate before writing any plan.',
-      'Name one 200m reach as your first site and write down why in three sentences.'
+      { step:'Map every riparian landowner along the stretch and note who has actually met whom.', resource:'All About Power', resourceWhy:'Use it to read where influence really sits before you try to convene anyone.' },
+      { step:'Run ten doorstep conversations on the estate before writing any plan.', resource:'Transformative Research Toolkit', resourceWhy:'A practical guide to gathering residents’ knowledge as co-authors, not subjects.' },
+      { step:'Name one 200m reach as your first site and write down why in three sentences.', resource:'System Change: A Guidebook for Adopting Portfolio Approaches', resourceWhy:'Helps you frame a first move small enough to survive being wrong.' }
     ],
     areas:[
       { name:'Participatory Research & Design', area:'Sense', why:'You need residents co-authoring this, not consulted at the end.' },
@@ -585,7 +570,7 @@ class Component extends DCLogic {
       "(2) Maintain a living 'map' of their situation from the framework below. If a real, well-known case genuinely parallels their situation you may mention it briefly in your conversational reply, but do NOT return a cases array — related real-world cases are gathered separately by a live web search that looks for bioregionally-close examples.",
       "OUTPUT FORMAT — THIS OVERRIDES THE CONVERSATIONAL TONE ABOVE: your ENTIRE response must be ONE valid JSON object and nothing else. Do NOT begin with a sentence, a greeting, or any prose. The very first character you output must be '{' and the very last must be '}'. The coaching reply goes INSIDE the \"reply\" field. If you output prose outside the JSON, the response is discarded.",
       "Respond with STRICT JSON ONLY — no prose or code fences — exactly in this shape:",
-      '{"reply": string, "topic": a 5-10 word summary of the person\u2019s core problem or need (for a database title), "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
+      '{"reply": string, "topic": a 5-10 word summary of the person\u2019s core problem or need (for a database title), "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": [{"step": a short practical imperative that comes out of THIS conversation, "resource": the EXACT name of the ONE library resource below that best ENABLES this step (or "" if none genuinely fits), "resourceWhy": one short sentence on how that resource helps do this step}] (2-4 items), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items)}',
       "ACCURACY IS CRITICAL: never state a specific fact you are not sure of — no invented locations, dates, figures, names, or URLs. If you are not confident an example is accurate, describe it only in general terms or leave it out. It is always better to be general than wrong. Only ever use Route steps, learning areas, and resources from the lists below, by their EXACT names. Refine the map as the conversation deepens. If the person only greets you or asks what you do, give a brief friendly reply and you may return empty arrays for route/areas/resources and an empty summary.",
       "",
       "THE 5-STEP ROUTE: "+route,
@@ -597,7 +582,7 @@ class Component extends DCLogic {
       "THE 24 LEARNING AREAS:",
       this._areasText(),
       "",
-      "CHOOSING RESOURCES FOR THE MAP — match the ASK, not just the label. A resource that shares a learning area with their situation is not automatically the right one. Work out what KIND of help they actually need and let that pick the type of resource: someone who needs a way to run something needs a methods or toolkit resource, not a network or a membership body; someone trying to understand why a pattern persists needs a book, essay or piece of research; someone looking for peers doing the same work needs a network or community; someone who needs to build a skill needs a course or capacity-building centre. If they asked for a format, a structure or a process, a resource that merely discusses the topic is a wrong answer even when the subject matches perfectly. Read the resource descriptions below and pick the one that would actually answer the question they asked, and prefer the most specific and directly usable resource over the most prestigious or general one.",
+      "ATTACH RESOURCES TO NEXT STEPS — do NOT return a separate resources list; instead each next step may carry ONE library resource that helps the person actually DO that step, chosen from the list below by its EXACT name (leave it empty when nothing genuinely fits — an empty resource is far better than a loose one). Match the specific ACTION, not the topic: a step that means running something needs a methods or toolkit resource, not a network or membership body; a step about understanding why a pattern persists needs a book, essay or research; a step about finding peers needs a network or community; a step about building a skill needs a course or capacity-building centre. A resource that merely discusses the subject is a wrong answer when the step calls for something to use. Prefer the most specific, directly usable resource over the most prestigious or general one, and never repeat the same resource across steps.",
       "",
       "LIBRARY RESOURCES (name [learning areas] {arc} — description) — cite only by exact name, and let the descriptions inform both your advice and which resources you recommend:",
       this._resourcesText()
@@ -739,7 +724,12 @@ class Component extends DCLogic {
     else if(!out.map){ const kw=this._keywordTurn(send); out.map=kw.map; matchedBy='AI+kw'; }
     // P0 library fix: drop learning-area labels / unresolved names from resources and
     // refill from the real library rather than padding with capacity names.
-    if(out && out.map){ out.map.resources=this._areaResources(out.map.areas||[], send); }
+    if(out && out.map){
+      const _rawSteps=Array.isArray(out.map.nextSteps)?out.map.nextSteps:[];
+      out.map.nextSteps=_rawSteps.map(function(s){ return (typeof s==='string')?{step:s,resource:'',resourceWhy:''}:(s||{}); });
+      const _derived=out.map.nextSteps.map((s)=>{ const r=s.resource?this._resolveRes(s.resource):null; return r?{name:r.name,why:s.resourceWhy||''}:null; }).filter(Boolean);
+      if(_derived.length || matchedBy==='AI') out.map.resources=_derived;
+    }
     this._lastMatchedBy=matchedBy;
     // Full ranked candidate list (beyond the 5 written) so concentration is measurable.
     const rankAreas=(out&&out.map&&out.map.areas)||[];
@@ -1084,7 +1074,16 @@ class Component extends DCLogic {
     let routeSteps=[], areas=[], picks=[], nextSteps=[], cases=[], summary='', routeWhy='';
     if(hasMap){
       summary=map.summary||''; routeWhy=map.routeWhy||'';
-      nextSteps=(map.nextSteps||[]).map((t,i)=>({ num:i+1, text:String(t) }));
+      nextSteps=(map.nextSteps||[]).map((s,i)=>{
+        const step=(typeof s==='string')?{step:s}:(s||{});
+        const rname=step.resource||''; const r=rname?this._resolveRes(rname):null;
+        let res=null;
+        if(r){ const cap=(r.caps&&r.caps[0])||''; const accent=(this.GROUP[this._groupOf(cap)]||this.GROUP.green).color;
+          res={ name:r.name, url:this._normUrl(r.url), typeText:(r.types&&r.types.length)?r.types.join(' · '):'Resource', why:step.resourceWhy||((r.desc)?r.desc.split('. ')[0]+'.':''),
+            onClick:()=>{ if(window.track) window.track('guideme_open_resource',{name:r.name}); },
+            cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.7)', border:'1px solid rgba(70,113,111,.16)', borderLeft:'3px solid '+accent, borderRadius:'10px', padding:'9px 11px', marginTop:'8px', transition:'.16s ease' } }; }
+        return { num:i+1, text:String(step.step||step.text||''), hasRes:!!res, res:res||{ url:'', name:'', typeText:'', why:'', onClick:()=>{}, cardStyle:{} } };
+      });
       const activeRoute={}; (map.route||[]).forEach(n=>activeRoute[String(n).toLowerCase()]=true);
       routeSteps=this.ROUTE.map(s=>{ const on=activeRoute[s.name.toLowerCase()];
         return { name:s.name, style:{ fontFamily:"'Space Grotesk','PT Sans',sans-serif", fontSize:'12.5px', fontWeight:on?700:600, textTransform:'lowercase', padding:'6px 12px', borderRadius:'18px', border:on?'1px solid #46514a':'1px solid rgba(70,90,85,.2)', background:on?'#46514a':'rgba(255,255,255,.6)', color:on?'#fff':'#9aa89e', opacity:on?1:.7 } }; });
@@ -1127,7 +1126,7 @@ class Component extends DCLogic {
       briefName: st.brief? st.brief.name : '',
       briefMeta: st.brief? (st.brief.chars.toLocaleString()+' chars') : '',
       hasBriefError: !!st.briefError, briefError: st.briefError||'',
-      hasMap, noMap:!hasMap, summary, firstProblem:((st.messages.find(m=>m.role==='user')||{}).content||''), routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0, cases, hasCases: cases.length>0,
+      hasMap, noMap:!hasMap, summary, firstProblem:((st.messages.find(m=>m.role==='user')||{}).content||''), routeSteps, routeWhy, areas, picks, nextSteps, hasNextSteps: nextSteps.length>0, hasAreas: !!(st.map && (st.map.areas||[]).length), cases, hasCases: cases.length>0,
       hasCanvases: !!(hasMap && (map.canvases||[]).length),
       canCanvas: !!(hasMap && (map.route||[]).length),
       canvasBusy: !!st.canvasBusy,

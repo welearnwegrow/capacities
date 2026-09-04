@@ -127,6 +127,12 @@
 
   <div class="ex-wrap" style="max-width:1120px;margin:0 auto;padding:40px 26px 72px">
 
+    <sc-if value="{{ showClose }}" hint-placeholder-val="{{ false }}">
+      <div class="gm-noprint gm-embed-hide" style="display:flex;justify-content:flex-end;margin-bottom:-14px">
+        <button onClick="{{ onCloseGuide }}" title="Close Guide Me" style="display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(70,113,111,.24);background:rgba(255,255,255,.7);color:#54655c;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:600;border-radius:22px;padding:8px 15px;cursor:pointer">Close <span aria-hidden="true" style="font-size:15px;line-height:1">\u2715</span></button>
+      </div>
+    </sc-if>
+
     <!-- INTRO -->
     <div class="gm-noprint" style="margin-bottom:24px">
       <div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a8823a;margin-bottom:12px">✦ Guide Me · a thinking partner</div>
@@ -184,7 +190,7 @@
           </div>
           <label style="display:flex;align-items:center;gap:7px;margin-top:10px;cursor:pointer;font-size:11.5px;color:#8a978c">
             <input type="checkbox" id="gm-consent" defaultChecked="{{ true }}" style="width:14px;height:14px;accent-color:#46716f;cursor:pointer" />
-            Save an anonymised summary to improve this tool
+            Save a summary to improve this tool
           </label>
         </div>
       </div>
@@ -847,8 +853,16 @@ class Component extends DCLogic {
   // exchange — show a one-step feedback card before letting the overlay close.
   _requestClose(){
     this._saveLog();
-    if(send){ var c=document.getElementById('gm-fb-comment'); var em=document.getElementById('gm-fb-email'); if(c) c.value=''; if(em) em.value=''; }
-    this.setState({ showFeedback:false, fbSent: send || this.state.fbSent, fbRating: send ? '' : this.state.fbRating });
+    this._exitAfterFeedback = true;
+    const hadExchange = this.state.messages.some(function(m){ return m.role==='user'; });
+    if(hadExchange && !this.state.fbSent){ this.setState({ showFeedback:true }); }
+    else this._exitNow();
+  }
+  _exitNow(){
+    if(this._demo){ this.setState({ showFeedback:false }); return; }
+    var back=document.referrer||'index.html';
+    try{ if(window.parent && window.parent!==window){ this._postParent('gm-close-done'); return; } }catch(e){}
+    try{ location.href=back; }catch(e){ location.href='index.html'; }
   }
   _setRating(v){ this.setState(s=>({ fbRating: s.fbRating===v ? '' : v })); }
   _submitFeedback(send){
@@ -867,6 +881,7 @@ class Component extends DCLogic {
     }
     if(send){ var c=document.getElementById('gm-fb-comment'); var em=document.getElementById('gm-fb-email'); if(c) c.value=''; if(em) em.value=''; }
     this.setState({ showFeedback:false, fbSent: send || this.state.fbSent, fbRating: send ? '' : this.state.fbRating });
+    if(this._exitAfterFeedback){ var self=this; setTimeout(function(){ self._exitNow(); }, send?350:0); }
   }
 
   async _saveLog(){
@@ -1071,6 +1086,8 @@ class Component extends DCLogic {
       hasError: !!st.error, errorMsg: st.error||'',
       onSend: ()=>{ const el=document.getElementById('gm-input'); this._send(el?el.value:''); },
       needsGate: !st.gateEmail && !this._demo,
+      showClose: !this._demo,
+      onCloseGuide: ()=>this._requestClose(),
       gateErr: st.gateErr||'',
       onGateKey: (e)=>{ if(e.key==='Enter'){ e.preventDefault(); this._submitGate(); } },
       onGateSubmit: ()=>this._submitGate(),

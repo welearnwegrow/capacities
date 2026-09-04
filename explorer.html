@@ -103,9 +103,9 @@
     <div style="position:fixed;inset:0;z-index:2147483600;background:rgba(38,42,32,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:24px;animation:exIn .25s ease">
       <div style="width:100%;max-width:440px;background:linear-gradient(180deg,#fbf8f0,#f4eedf);border:1px solid rgba(70,113,111,.18);border-radius:20px;box-shadow:0 24px 60px rgba(40,50,35,.34);padding:26px 26px 22px;position:relative">
         <button onClick="{{ fbSkip }}" title="Close" aria-label="Close" style="position:absolute;top:14px;right:14px;width:30px;height:30px;border:none;border-radius:50%;background:rgba(70,113,111,.10);color:#6b7c72;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-bottom:10px">✦ Help shape Guide Me</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-bottom:10px">✦ Help shape Systems Change Coach</div>
         <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:25px;line-height:1.12;color:#233029;margin:0 0 6px">Is this pointing you somewhere good?</h2>
-        <p style="font-size:13.5px;line-height:1.5;color:#6b7c72;margin:0 0 16px">Guide Me is still learning the terrain. Tell us what landed, what missed, or what you wish it had said — every note trains it to give the next person sharper directions. A few seconds, all optional.</p>
+        <p style="font-size:13.5px;line-height:1.5;color:#6b7c72;margin:0 0 16px">Systems Change Coach is still learning the terrain. Tell us what landed, what missed, or what you wish it had said — every note trains it to give the next person sharper directions. A few seconds, all optional.</p>
         <div style="display:flex;gap:9px;margin-bottom:16px">
           <sc-for list="{{ fbOptions }}" as="o" hint-placeholder-count="3">
             <button onClick="{{ o.onClick }}" style="{{ o.style }}"><span style="font-size:19px;line-height:1">{{ o.icon }}</span><span>{{ o.label }}</span></button>
@@ -302,7 +302,6 @@
           <div style="display:flex;flex-wrap:wrap;gap:10px">
             <button onClick="{{ onPrint }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#fff;background:#b0822f;border:1.5px solid #b0822f;box-shadow:0 8px 20px rgba(120,90,20,.24)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>Download your map (PDF)</button>
             <button onClick="{{ onJumpChat }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#8a6a18;background:transparent;border:1.5px solid rgba(176,130,47,.6)">Keep talking to sharpen it</button>
-            <button onClick="{{ fbOpen }}" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;border-radius:20px;padding:10px 20px;cursor:pointer;color:#8a6a18;background:transparent;border:1.5px solid rgba(176,130,47,.6)">{{ fbBtnLabel }}</button>
           </div>
         </div>
         <div class="gm-noprint" style="margin-top:12px;font-size:12px;color:#9aa89e">Or <a href="resources.html" style="font-weight:700">browse the full library</a>.</div>
@@ -557,7 +556,7 @@ class Component extends DCLogic {
       "   Do not name the learning area as a label in your reply — let it shape the way you see and speak.",
       "   THEN, ASK ONE QUESTION and stop there. Exactly one, genuinely open, arising from what you just reflected. End the reply on it.",
       "   DO NOT put practical next steps, action lists or recommendations in your reply. Those belong in the map and the canvas below, which you are building in parallel. Your reply summarises and coaches; the map carries the doing. The one exception: if a single small next move is the natural answer to what they just asked you outright, offer it in one short sentence — as an invitation, never an instruction.",
-      "   Warm and human, aim for 90-140 words, PLAIN TEXT ONLY (no markdown, no asterisks, no headers, no bullets). Be on point. A tight reply that lands is worth more than a full one.",
+      "   Warm and human, aim for 90-140 words, PLAIN TEXT (no markdown, no asterisks, no headers, no bullets) INSIDE the JSON \"reply\" string. This 'plain text' rule governs ONLY the text you put in the reply field — your whole response is STILL a single JSON object, never bare prose. Be on point. A tight reply that lands is worth more than a full one.",
       "GROUND THE REFLECTION IN A LINEAGE — this is expected in most replies, not an occasional flourish. Many people have contributed wisdom to this field; when you reflect, let the person hear whose thinking helps you see their situation this way. Weave ONE such reference into the reflection itself (not appended after it), in a clause: the thinker, author, tradition or practice whose idea genuinely illuminates what they are facing.",
       "   PUT GLOBAL SOUTH THINKERS, PRACTITIONERS AND TRADITIONS FIRST. Where a Southern, Indigenous, or otherwise non-Western lineage speaks to their situation, reach for it before the familiar Anglo-American names — including scholars, movements, practitioner communities and knowledge traditions from South and Southeast Asia, Africa, Latin America, the Caribbean, the Pacific and West Asia. Only where no such lineage genuinely fits should you reach elsewhere. Draw also on the whole library below and the wider field it sits in — systems, ecological, economic, decolonial, organisational, participatory and contemplative thought — and vary who you name across a conversation rather than returning to the same few.",
       "   Attribute an IDEA, never a fabricated quote, statistic, date, or title. If you are not fully confident a thinker or work is real and correctly attributed, carry the idea plainly without the name — a real idea unattributed is always better than a misattributed one. One reference per reply at most, woven in a clause. Never name-drop, never lecture, never explain who the person is at length.",
@@ -584,6 +583,7 @@ class Component extends DCLogic {
       "",
       "WHERE THIS VOICE COMES FROM. Draw on the coaching traditions of the global South and of practitioners working in and from those contexts, rather than the register of Anglo-American corporate coaching. Concretely: assume agency is often collective rather than individual, so ask who holds this with them — colleagues, community, elders, family, movement — instead of framing them as a lone actor; treat their own and their community's knowledge as legitimate evidence rather than anecdote awaiting external validation; stay alert to how power, caste, class, language, gender and colonial history shape what is sayable and doable in their setting, without lecturing them about it; and drop corporate-coaching jargon, growth-industry cliché and motivational uplift. Warmth here means respect and attention, not enthusiasm. No exclamation marks, no hype, and never call them brave, inspiring, or a change-maker.",
       "(2) Maintain a living 'map' of their situation from the framework below. If a real, well-known case genuinely parallels their situation you may mention it briefly in your conversational reply, but do NOT return a cases array — related real-world cases are gathered separately by a live web search that looks for bioregionally-close examples.",
+      "OUTPUT FORMAT — THIS OVERRIDES THE CONVERSATIONAL TONE ABOVE: your ENTIRE response must be ONE valid JSON object and nothing else. Do NOT begin with a sentence, a greeting, or any prose. The very first character you output must be '{' and the very last must be '}'. The coaching reply goes INSIDE the \"reply\" field. If you output prose outside the JSON, the response is discarded.",
       "Respond with STRICT JSON ONLY — no prose or code fences — exactly in this shape:",
       '{"reply": string, "topic": a 5-10 word summary of the person\u2019s core problem or need (for a database title), "summary": one warm sentence reflecting their situation back, "route": string[] (1-2 Route step names, most relevant first), "routeWhy": one sentence, "nextSteps": string[] (2-4 concrete, practical next steps that come out of THIS conversation, each a short imperative), "areas": [{"name": exact learning-area name, "why": one short sentence}] (2-3 items), "resources": [{"name": exact resource name from the list, "why": one sentence starting \\"Use this to \u2026\\" tying it to their situation}] (3-5 items)}',
       "ACCURACY IS CRITICAL: never state a specific fact you are not sure of — no invented locations, dates, figures, names, or URLs. If you are not confident an example is accurate, describe it only in general terms or leave it out. It is always better to be general than wrong. Only ever use Route steps, learning areas, and resources from the lists below, by their EXACT names. Refine the map as the conversation deepens. If the person only greets you or asks what you do, give a brief friendly reply and you may return empty arrays for route/areas/resources and an empty summary.",
@@ -655,7 +655,13 @@ class Component extends DCLogic {
     try{ p=JSON.parse(txt); }
     catch(err){
       p=this._repairJson(txt);
-      if(!p) throw new Error('unparseable JSON ('+txt.length+' chars): '+(err&&err.message));
+      if(!p){
+        // Model replied in prose instead of JSON — salvage it as the reply so the
+        // person still gets a coaching answer; the map fills from keywords upstream.
+        const prose=(raw||'').trim();
+        if(prose && a<0){ console.warn('[guideme] model returned prose, using as reply'); return { reply:prose, rawJson:prose, map:null }; }
+        throw new Error('unparseable JSON ('+txt.length+' chars): '+(err&&err.message));
+      }
       console.warn('[guideme] recovered a truncated JSON turn ('+txt.length+' chars)');
     }
     const rawJson=txt;
@@ -689,6 +695,10 @@ class Component extends DCLogic {
     this._gateEmail=v;
     this.setState({ gateEmail:v, gateErr:'' });
     if(window.track) window.track('guideme_gate_email',{});
+  }
+  _prefillFbEmail(){
+    const self=this;
+    setTimeout(function(){ const el=document.getElementById('gm-fb-email'); if(el && !el.value && self._gateEmail) el.value=self._gateEmail; }, 30);
   }
   async _send(text){
     text=(text||'').trim();
@@ -726,6 +736,7 @@ class Component extends DCLogic {
       }
     } else { this._aiError='no AI transport (window.NOTION_CONNECTOR_URL is not set)'; console.error('[guideme] '+this._aiError); }
     if(!out){ out=this._keywordTurn(send); matchedBy='Keyword'; }
+    else if(!out.map){ const kw=this._keywordTurn(send); out.map=kw.map; matchedBy='AI+kw'; }
     // P0 library fix: drop learning-area labels / unresolved names from resources and
     // refill from the real library rather than padding with capacity names.
     if(out && out.map){ out.map.resources=this._areaResources(out.map.areas||[], send); }
@@ -850,7 +861,7 @@ class Component extends DCLogic {
     this._saveLog();
     this._exitAfterFeedback = true;
     const hadExchange = this.state.messages.some(function(m){ return m.role==='user'; });
-    if(hadExchange && !this.state.fbSent){ this.setState({ showFeedback:true }); }
+    if(hadExchange && !this.state.fbSent){ this.setState({ showFeedback:true }); this._prefillFbEmail(); }
     else this._exitNow();
   }
   _exitNow(){
@@ -1134,7 +1145,7 @@ class Component extends DCLogic {
       fbOptions: fbOpts,
       fbSubmit: ()=>this._submitFeedback(true),
       fbSkip: ()=>this._submitFeedback(false),
-      fbOpen: ()=>this.setState({ showFeedback:true }),
+      fbOpen: ()=>{ this.setState({ showFeedback:true }); this._prefillFbEmail(); },
       fbSent: st.fbSent,
       fbBtnLabel: st.fbSent ? 'Thanks \u2014 sent!' : 'Share feedback'
     };

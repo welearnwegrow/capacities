@@ -2265,7 +2265,7 @@ window.__RESEARCH = {
  ],
  "groupMeta": {
   "teal": {
-   "name": "Personal Grounding",
+   "name": "Contextual awareness",
    "sub": "Self-awareness & worldview"
   },
   "green": {

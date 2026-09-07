@@ -1,6 +1,6 @@
 (function(){
   var KEY='ioc-assess-v1';
-  var BANDS=[{name:'Personal Grounding',color:'#46716f'},{name:'Collective Strategy',color:'#5b6733'},{name:'Systemic Intervention',color:'#a8542d'}];
+  var BANDS=[{name:'Contextual awareness',color:'#46716f'},{name:'Collective Strategy',color:'#5b6733'},{name:'Systemic Intervention',color:'#a8542d'}];
   var LV=['','Personal','Social','Institutional','Systemic'];
   var levels={}, meta={}, assessOn=false, cellMap={};
   try{ levels=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ levels={}; }

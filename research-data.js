@@ -70,7 +70,7 @@ window.__RESEARCH = {
    "group": "coral"
   },
   {
-   "label": "Convening & Facilitating Collaborations",
+   "label": "Organizing & Facilitating",
    "group": "green"
   },
   {
@@ -197,7 +197,7 @@ window.__RESEARCH = {
   {
    "name": "Audrey Tang: The Power of Collective Intelligence",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Narrative & Media Analysis",
     "Participatory Research & Design"
    ],
@@ -342,7 +342,7 @@ window.__RESEARCH = {
   {
    "name": "Cocreative Toolkit",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Participatory Research & Design",
     "Agency & Expression"
    ],
@@ -355,7 +355,7 @@ window.__RESEARCH = {
   {
    "name": "Collective Intelligence Design Playbook",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Participatory Research & Design",
     "Systems Thinking & Modeling"
    ],
@@ -380,7 +380,7 @@ window.__RESEARCH = {
   {
    "name": "Community Weaving",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Ecosystem Engagement",
     "Networking & Engaging Capital"
    ],
@@ -407,7 +407,7 @@ window.__RESEARCH = {
    "name": "Convening for System Level Impact Toolkit",
    "caps": [
     "Leading in Complexity",
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "The Bill & Melinda Gates Foundation’s Convening for System-Level Impact Toolkit provides a practical, human-centered guide for leaders and grantees working across multiple institutional stakeholders to drive sustainable agricultural transformation in complex environments. Moving beyond traditional meeting logistics, it focuses on the relational and structural dynamics of collaboration, offering modular frameworks for purpose-led convening, design, facilitation, and sustaining long-term momentum.",
    "types": [
@@ -679,7 +679,7 @@ window.__RESEARCH = {
    "name": "Facilitator's Guide to Participatory Decision-Making",
    "caps": [
     "Conflict Transformation",
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Participatory Research & Design"
    ],
    "desc": "Sam Kaner and colleagues lay out a comprehensive sourcebook packed with visual tools and strategies designed to maximize collaboration, foster mutual understanding, and lead groups through complex choices to sustainable agreements.",
@@ -869,7 +869,7 @@ window.__RESEARCH = {
   {
    "name": "Liberating Structures",
    "caps": [
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "Liberating Structures are a collection of 33 practical, menu-driven interaction methods designed to replace conventional, restrictive formats like open discussions or presentations. By altering structural constraints—such as time allocation, group configuration, and participation sequences—these micro-structures ensure that every voice is included and heard simultaneously. They shift group dynamics from passive listening to active engagement, distributing power equitably across teams. This practice builds collective intelligence and shared agency, making collaborative decision-making and rapid innovation accessible to any group size.",
    "types": [
@@ -1095,7 +1095,7 @@ window.__RESEARCH = {
    "name": "Radical Collaboration",
    "caps": [
     "Conflict Transformation",
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "A tactical guidebook for those tackling the climate crisis. It focuses on the mechanics of building \"impact networks\"—collaborations that bridge sectors and scales—by emphasizing speed, justice, and the alignment of diverse stakeholders around shared systemic goals.",
    "types": [
@@ -1142,7 +1142,7 @@ window.__RESEARCH = {
   {
    "name": "Reinventing Organizations: An Illustrated Invitation to Join the Conversation on Next-Stage Organizations",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Leading in Complexity",
     "Planning & Resource Mobilization"
    ],
@@ -1266,7 +1266,7 @@ window.__RESEARCH = {
   {
    "name": "Social Change Now",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Agency & Expression",
     "Advocacy & Political Participation"
    ],
@@ -1279,7 +1279,7 @@ window.__RESEARCH = {
   {
    "name": "Sociocracy 3.0",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Leading in Complexity"
    ],
    "desc": "A comprehensive framework for evolutionary, self-organizing systems. It provides modular, practical patterns for decentralized decision-making, effective meeting facilitation, and organizational governance, helping groups increase transparency and collective agency.",
@@ -1354,7 +1354,7 @@ window.__RESEARCH = {
    "name": "Successful Collaboration Starts With Eight Simple Rules",
    "caps": [
     "Conflict Transformation",
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "This article outlines eight foundational principles for effective collaborative work. It provides actionable strategies for fostering mutual understanding, maintaining clear communication, and creating the psychological safety necessary for teams to thrive in complex environments.",
    "types": [
@@ -1425,7 +1425,7 @@ window.__RESEARCH = {
    "name": "Systems Change Educators Unite",
    "caps": [
     "Complex Problem Solving",
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "Systems Change Educators Unite is a global community and collaborative network dedicated to transforming education by embedding systems thinking and complexity practice into learning environments. It brings together educators, designers, and change-makers who are moving away from traditional, fragmented instructional models toward holistic, place-based, and regenerative pedagogical approaches. By sharing resources, peer methodologies, and lived experiences, the network supports practitioners in designing learning ecosystems that empower students to navigate ambiguity, challenge underlying mental models, and actively participate in systemic transformation.",
    "types": [
@@ -1567,7 +1567,7 @@ window.__RESEARCH = {
   {
    "name": "The Circle Way: A Leader in Every Chair",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Leading in Complexity"
    ],
    "desc": "Christina Baldwin and Ann Linnea outline a foundational methodology for group facilitation, detailing how to use structured circle dynamics to foster deep listening, collaborative leadership, and shared decision-making.",
@@ -1708,7 +1708,7 @@ window.__RESEARCH = {
   {
    "name": "The Facilitator's Toolkit",
    "caps": [
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "The NHS Facilitator's Toolkit provides a structured collection of practical methods, exercises, and tips designed to improve the effectiveness of collaborative workshops and group sessions. It covers the full lifecycle of facilitation—beginning with icebreakers and introductions, moving through group management and constraint-resolution techniques, and concluding with methods for session closure and review. Emphasizing preparation, active participation, and psychological safety, it serves as a foundational guide for practitioners leading participatory learning and change processes.",
    "types": [
@@ -1876,7 +1876,7 @@ window.__RESEARCH = {
   {
    "name": "The Systems Thinking Playbook",
    "caps": [
-    "Convening & Facilitating Collaborations",
+    "Organizing & Facilitating",
     "Systems Thinking & Modeling"
    ],
    "desc": "Linda Booth Sweeney and Dennis Meadows compile thirty short experiential gaming exercises designed to help educators and corporate consultants introduce and build mental capacity for systems thinking.",
@@ -2052,7 +2052,7 @@ window.__RESEARCH = {
    "name": "TWIST (Together We Invest for Systems Transformation)",
    "caps": [
     "Systems Thinking & Modeling",
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "TWIST (The Worldview Intelligence and Systems Thinking) focuses on the intersection of individual perspectives and structural change. By exploring how diverse worldviews shape our understanding of problems, it provides processes to help groups move beyond polarization. This is highly useful for systems change because it emphasizes that technical solutions fail if the underlying human stories and mental models remain misaligned; it builds the necessary cohesion for groups to co-design and sustain shared, long-term systemic shifts.",
    "types": [
@@ -2139,7 +2139,7 @@ window.__RESEARCH = {
   {
    "name": "Working Together: Collective Action, the Commons, and Multiple Methods in Practice",
    "caps": [
-    "Convening & Facilitating Collaborations"
+    "Organizing & Facilitating"
    ],
    "desc": "Amy R. Poteete, Marco A. Janssen, and Elinor Ostrom evaluate how combining diverse research methodologies (experiments, field observations, and models) deepens scientific understanding of collective action and institutional structures.",
    "types": [

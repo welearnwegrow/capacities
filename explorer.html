@@ -204,6 +204,14 @@
             Save a summary to improve this tool
           </label>
           </sc-if>
+          <sc-if value="{{ showInlineFb }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:12px;display:flex;align-items:center;gap:8px;background:rgba(90,103,51,.07);border:1px solid rgba(90,103,51,.2);border-radius:12px;padding:9px 10px 9px 13px;animation:exIn .3s ease">
+              <span style="font-size:12.5px;color:#54655c;flex:1">Is this helping?</span>
+              <button onClick="{{ fbThumbUp }}" style="border:1px solid rgba(90,103,51,.3);background:#fff;color:#4a5a2e;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:9px;padding:6px 12px">Yes</button>
+              <button onClick="{{ fbThumbDown }}" style="border:1px solid rgba(70,113,111,.24);background:#fff;color:#6b7c72;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:9px;padding:6px 12px">Not really</button>
+              <button onClick="{{ fbDismissInline }}" title="Dismiss" style="width:24px;height:24px;flex:none;border:none;border-radius:50%;background:transparent;color:#9aa89e;font-size:15px;line-height:1;cursor:pointer;padding:0">×</button>
+            </div>
+          </sc-if>
         </div>
       </div>
 
@@ -317,7 +325,7 @@ class Component extends DCLogic {
     super(props);
     let _ge=''; try{ _ge=localStorage.getItem('gm_email')||''; }catch(e){}
     this._gateEmail=_ge;
-    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'', fbSent:false, gateEmail:_ge, gateErr:'' };
+    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'', fbSent:false, inlineFbDismissed:false, gateEmail:_ge, gateErr:'' };
     this._saved = false;
     this._queryPageId=null; this._candidatesText=''; this._lastStatus='ok'; this._lastError=''; this._lastMatchedBy='AI'; this._caseToken=0;
     this.ROUTE = [
@@ -385,7 +393,7 @@ class Component extends DCLogic {
   };
   _loadDemo(){
     const problem='[TEST] Our group wants to restore a polluted urban river stretch in Sheffield and get residents involved in monitoring it, but the landowners and the council are not aligned and nobody has said who actually decides.';
-    const reply='Thanks \u2014 that is a clear picture. Before you design anything, the live question is who actually holds the decision, because the landowner/council stalemate will shape every option below. Start with the doorstep conversations: they give you standing that neither party can dismiss.';
+    const reply='Thanks \u2014 that is a clear picture. A polluted river with a stalled council and landowners reads less as a pollution problem and more as one of who holds the decision, and who has standing to move it.\n\nThe residents you want to involve are also your source of legitimacy here. Elinor Ostrom\u2019s work on the commons is useful: shared resources get governed well when the people closest to them have a real, recognised role in the rules \u2014 not just a monitoring task handed down to them.\n\nBefore you design anything, the live question is where the actual decision sits, because the landowner\u2013council stalemate will shape every option on the map below.\n\nWho, in practice, can say no to this \u2014 and have you heard it from them directly, or are you assuming it?';
     this._lastMap=this.DEMO_MAP;
     this.setState({ messages:[{role:'user',content:problem},{role:'assistant',content:reply}], map:this.DEMO_MAP, loading:false });
   }
@@ -547,13 +555,13 @@ class Component extends DCLogic {
     return [
       "You are Guide Me, a warm, grounded, Socratic coach for the Systems Change Learning Guide. Each turn you do TWO things at once:",
       "(1) Reply conversationally. Your reply has only TWO moves, and it ends on the question:",
-      "   FIRST, REFLECT — but reflect as a systems coach, not a summariser. Name what is really going on underneath what they said, and read it THROUGH THE LENS OF THE LEARNING AREA that matters most in their situation, using that area's own language and concepts.",
-      "   YOUR LENSES ARE THE LEARNING AREAS LISTED BELOW — the 24 areas of the framework, each with its own description. Work out which one their situation is really about, then reflect in that area's vocabulary. Complex Problem Solving speaks of emergence, feedback and what cannot be known in advance; Convening & Facilitating Collaborations of who is in the room, what is sayable there and how disagreement is held; Positionality & Power Analysis of whose interests the arrangement serves and who is able to act; Regenerative Systems Design of leverage, sequencing and what a small move would reveal; and so on through all 24. Read each area's description below and use ITS concepts, not a generic systems vocabulary.",
+      "   FIRST, REFLECT — but reflect as a systems coach, not a summariser. Read what they said THROUGH THE LENS OF THE LEARNING AREA that matters most in their situation, using that area's own language and concepts.",
+      "   YOUR LENSES ARE THE LEARNING AREAS LISTED BELOW — the 24 areas of the framework, each with its own description. Work out which one their situation is really about, then reflect in that area's vocabulary. Complex Problem Solving speaks of emergence, feedback and what cannot be known in advance; Organizing & Facilitating of who is in the room, what is sayable there and how disagreement is held; Positionality & Power Analysis of whose interests the arrangement serves and who is able to act; Regenerative Systems Design of leverage, sequencing and what a small move would reveal; and so on through all 24. Read each area's description below and use ITS concepts, not a generic systems vocabulary.",
       "   IF NOTHING IN THE FRAMEWORK FITS, say it in that field's own terms anyway. Some situations turn on something the 24 areas do not cover — a technical, legal, financial, clinical, regulatory or domain-specific matter. Reflect it in the language that actually belongs to it rather than forcing it into the nearest learning area. Note that the map's learning areas must still come from the framework.",
       "   Do not name the learning area as a label in your reply — let it shape the way you see and speak.",
       "   THEN, ASK ONE QUESTION and stop there. Exactly one, genuinely open, arising from what you just reflected. End the reply on it.",
       "   DO NOT put practical next steps, action lists or recommendations in your reply. Those belong in the map and the canvas below, which you are building in parallel. Your reply summarises and coaches; the map carries the doing. The one exception: if a single small next move is the natural answer to what they just asked you outright, offer it in one short sentence — as an invitation, never an instruction.",
-      "   Warm and human, aim for 90-140 words, PLAIN TEXT (no markdown, no asterisks, no headers, no bullets) INSIDE the JSON \"reply\" string. This 'plain text' rule governs ONLY the text you put in the reply field — your whole response is STILL a single JSON object, never bare prose. Be on point. A tight reply that lands is worth more than a full one.",
+      "   Warm and human, aim for 90-140 words. FORMAT THE REPLY FOR EASY READING: break it into TWO or THREE short paragraphs separated by a blank line (a literal \\n\\n between them), and put your closing question on its OWN final line, preceded by a blank line. Keep paragraphs to 2-3 sentences. NO markdown, no asterisks, no headers, no bullets — plain sentences only, just with paragraph breaks. This formatting rule governs ONLY the text you put in the reply field — your whole response is STILL a single JSON object, never bare prose. Be on point. A tight reply that lands is worth more than a full one.",
       "GROUND THE REFLECTION IN A LINEAGE — this is expected in most replies, not an occasional flourish. Many people have contributed wisdom to this field; when you reflect, let the person hear whose thinking helps you see their situation this way. Weave ONE such reference into the reflection itself (not appended after it), in a clause: the thinker, author, tradition or practice whose idea genuinely illuminates what they are facing.",
       "   PUT GLOBAL SOUTH THINKERS, PRACTITIONERS AND TRADITIONS FIRST. Where a Southern, Indigenous, or otherwise non-Western lineage speaks to their situation, reach for it before the familiar Anglo-American names — including scholars, movements, practitioner communities and knowledge traditions from South and Southeast Asia, Africa, Latin America, the Caribbean, the Pacific and West Asia. Only where no such lineage genuinely fits should you reach elsewhere. Draw also on the whole library below and the wider field it sits in — systems, ecological, economic, decolonial, organisational, participatory and contemplative thought — and vary who you name across a conversation rather than returning to the same few.",
       "   Attribute an IDEA, never a fabricated quote, statistic, date, or title. If you are not fully confident a thinker or work is real and correctly attributed, carry the idea plainly without the name — a real idea unattributed is always better than a misattributed one. One reference per reply at most, woven in a clause. Never name-drop, never lecture, never explain who the person is at length.",
@@ -688,8 +696,12 @@ class Component extends DCLogic {
     const el=document.getElementById('gm-gate-email');
     const v=(el?el.value:'').trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ this.setState({ gateErr:'Please enter a valid email address.' }); return; }
+    this._acceptGate(v,'email');
+  }
+  _acceptGate(v,method){
     try{ localStorage.setItem('gm_email', v); }catch(e){}
-    this._gateEmail=v;
+    try{ if(method) localStorage.setItem('gm_email_method', method); }catch(e){}
+    this._gateEmail=v; this._emailMethod=method||'email';
     this.setState({ gateEmail:v, gateErr:'' });
     if(window.track) window.track('guideme_gate_email',{});
   }
@@ -874,6 +886,8 @@ class Component extends DCLogic {
     try{ location.href=back; }catch(e){ location.href='index.html'; }
   }
   _setRating(v){ this.setState(s=>({ fbRating: s.fbRating===v ? '' : v })); }
+  _inlineThumb(rating){ if(window.track) window.track('guideme_inline_fb',{rating:rating}); this.setState({ fbRating:rating, showFeedback:true, inlineFbDismissed:true }); this._prefillFbEmail(); }
+  _dismissInline(){ this.setState({ inlineFbDismissed:true }); }
   _submitFeedback(send){
     this._fbDone = true;
     if(send){
@@ -1110,6 +1124,8 @@ class Component extends DCLogic {
           cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid #5b6733', borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }));
     }
     const turnCount=st.messages.filter(m=>m.role==='user').length;
+    const _mapContent=st.map && ((st.map.areas&&st.map.areas.length)||(st.map.route&&st.map.route.length)||(st.map.resources&&st.map.resources.length));
+    const showInlineFb = !this._demo && turnCount>=2 && !!_mapContent && !st.loading && !st.fbSent && !st.showFeedback && !st.inlineFbDismissed;
     const firstTurn=st.messages.length===0;
     const composerPlaceholder=firstTurn
       ? "Start anywhere \u2014 or drop a brief to read."
@@ -1160,6 +1176,10 @@ class Component extends DCLogic {
       onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },
       onPrint: ()=>{ try{ window.print(); }catch(e){} },
       showFeedback: st.showFeedback,
+      showInlineFb,
+      fbThumbUp: ()=>this._inlineThumb('Really helpful'),
+      fbThumbDown: ()=>this._inlineThumb('Not helpful'),
+      fbDismissInline: ()=>this._dismissInline(),
       fbOptions: fbOpts,
       fbSubmit: ()=>this._submitFeedback(true),
       fbSkip: ()=>this._submitFeedback(false),

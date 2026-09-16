@@ -156,8 +156,8 @@ window.__CAPDETAIL = {
    "Systemic": "Creates the funding and policy conditions that let whole networks prototype alternatives. Builds the experimental spaces and permissions that allow a field to try, learn, and adapt at scale."
   }
  },
- "Convening & Facilitating Collaborations": {
-  "desc": "Designing and stewarding non-hierarchical, highly democratic spaces that cultivate distributed intelligence, deep dialogue, and shared consensus.",
+ "Organizing & Facilitating": {
+  "desc": "Bringing people together and organizing them into durable structures, then stewarding the spaces where they think, decide, and act — cultivating distributed intelligence, honest dialogue, and shared direction.",
   "levels": {
    "Personal": "Hosts balanced group conversations where quieter voices are heard and the work is genuinely shared. Co-creates norms and agreements that reflect the group's needs.",
    "Social": "Facilitates workshops that help diverse community groups reach real agreement, using participatory methods that make power and decision-making visible. Adapts the process to meet the group where it is.",

@@ -204,14 +204,6 @@
             Save a summary to improve this tool
           </label>
           </sc-if>
-          <sc-if value="{{ showInlineFb }}" hint-placeholder-val="{{ false }}">
-            <div style="margin-top:12px;display:flex;align-items:center;gap:8px;background:rgba(90,103,51,.07);border:1px solid rgba(90,103,51,.2);border-radius:12px;padding:9px 10px 9px 13px;animation:exIn .3s ease">
-              <span style="font-size:12.5px;color:#54655c;flex:1">Is this helping?</span>
-              <button onClick="{{ fbThumbUp }}" style="border:1px solid rgba(90,103,51,.3);background:#fff;color:#4a5a2e;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:9px;padding:6px 12px">Yes</button>
-              <button onClick="{{ fbThumbDown }}" style="border:1px solid rgba(70,113,111,.24);background:#fff;color:#6b7c72;font-family:'PT Sans',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:9px;padding:6px 12px">Not really</button>
-              <button onClick="{{ fbDismissInline }}" title="Dismiss" style="width:24px;height:24px;flex:none;border:none;border-radius:50%;background:transparent;color:#9aa89e;font-size:15px;line-height:1;cursor:pointer;padding:0">×</button>
-            </div>
-          </sc-if>
         </div>
       </div>
 
@@ -325,7 +317,7 @@ class Component extends DCLogic {
     super(props);
     let _ge=''; try{ _ge=localStorage.getItem('gm_email')||''; }catch(e){}
     this._gateEmail=_ge;
-    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'', fbSent:false, inlineFbDismissed:false, gateEmail:_ge, gateErr:'' };
+    this.state = { messages:[], map:null, loading:false, error:null, brief:null, briefLoading:false, briefError:null, dragOver:false, showFeedback:false, fbRating:'', fbSent:false, gateEmail:_ge, gateErr:'' };
     this._saved = false;
     this._queryPageId=null; this._candidatesText=''; this._lastStatus='ok'; this._lastError=''; this._lastMatchedBy='AI'; this._caseToken=0;
     this.ROUTE = [
@@ -556,7 +548,7 @@ class Component extends DCLogic {
       "You are Guide Me, a warm, grounded, Socratic coach for the Systems Change Learning Guide. Each turn you do TWO things at once:",
       "(1) Reply conversationally. Your reply has only TWO moves, and it ends on the question:",
       "   FIRST, REFLECT — but reflect as a systems coach, not a summariser. Name what is really going on underneath what they said, and read it THROUGH THE LENS OF THE LEARNING AREA that matters most in their situation, using that area's own language and concepts.",
-      "   YOUR LENSES ARE THE LEARNING AREAS LISTED BELOW — the 24 areas of the framework, each with its own description. Work out which one their situation is really about, then reflect in that area's vocabulary. Complex Problem Solving speaks of emergence, feedback and what cannot be known in advance; Organizing & Facilitating of who is in the room, what is sayable there and how disagreement is held; Positionality & Power Analysis of whose interests the arrangement serves and who is able to act; Regenerative Systems Design of leverage, sequencing and what a small move would reveal; and so on through all 24. Read each area's description below and use ITS concepts, not a generic systems vocabulary.",
+      "   YOUR LENSES ARE THE LEARNING AREAS LISTED BELOW — the 24 areas of the framework, each with its own description. Work out which one their situation is really about, then reflect in that area's vocabulary. Complex Problem Solving speaks of emergence, feedback and what cannot be known in advance; Convening & Facilitating Collaborations of who is in the room, what is sayable there and how disagreement is held; Positionality & Power Analysis of whose interests the arrangement serves and who is able to act; Regenerative Systems Design of leverage, sequencing and what a small move would reveal; and so on through all 24. Read each area's description below and use ITS concepts, not a generic systems vocabulary.",
       "   IF NOTHING IN THE FRAMEWORK FITS, say it in that field's own terms anyway. Some situations turn on something the 24 areas do not cover — a technical, legal, financial, clinical, regulatory or domain-specific matter. Reflect it in the language that actually belongs to it rather than forcing it into the nearest learning area. Note that the map's learning areas must still come from the framework.",
       "   Do not name the learning area as a label in your reply — let it shape the way you see and speak.",
       "   THEN, ASK ONE QUESTION and stop there. Exactly one, genuinely open, arising from what you just reflected. End the reply on it.",
@@ -696,12 +688,8 @@ class Component extends DCLogic {
     const el=document.getElementById('gm-gate-email');
     const v=(el?el.value:'').trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ this.setState({ gateErr:'Please enter a valid email address.' }); return; }
-    this._acceptGate(v,'email');
-  }
-  _acceptGate(v,method){
     try{ localStorage.setItem('gm_email', v); }catch(e){}
-    try{ if(method) localStorage.setItem('gm_email_method', method); }catch(e){}
-    this._gateEmail=v; this._emailMethod=method||'email';
+    this._gateEmail=v;
     this.setState({ gateEmail:v, gateErr:'' });
     if(window.track) window.track('guideme_gate_email',{});
   }
@@ -886,8 +874,6 @@ class Component extends DCLogic {
     try{ location.href=back; }catch(e){ location.href='index.html'; }
   }
   _setRating(v){ this.setState(s=>({ fbRating: s.fbRating===v ? '' : v })); }
-  _inlineThumb(rating){ if(window.track) window.track('guideme_inline_fb',{rating:rating}); this.setState({ fbRating:rating, showFeedback:true, inlineFbDismissed:true }); this._prefillFbEmail(); }
-  _dismissInline(){ this.setState({ inlineFbDismissed:true }); }
   _submitFeedback(send){
     this._fbDone = true;
     if(send){
@@ -1124,8 +1110,6 @@ class Component extends DCLogic {
           cardStyle:{ display:'block', textDecoration:'none', background:'rgba(255,255,255,.85)', border:'1px solid rgba(70,113,111,.16)', borderTop:'3px solid #5b6733', borderRadius:'12px', padding:'12px 14px', transition:'.16s ease' } }));
     }
     const turnCount=st.messages.filter(m=>m.role==='user').length;
-    const _mapContent=st.map && ((st.map.areas&&st.map.areas.length)||(st.map.route&&st.map.route.length)||(st.map.resources&&st.map.resources.length));
-    const showInlineFb = !this._demo && turnCount>=2 && !!_mapContent && !st.loading && !st.fbSent && !st.showFeedback && !st.inlineFbDismissed;
     const firstTurn=st.messages.length===0;
     const composerPlaceholder=firstTurn
       ? "Start anywhere \u2014 or drop a brief to read."
@@ -1176,10 +1160,6 @@ class Component extends DCLogic {
       onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },
       onPrint: ()=>{ try{ window.print(); }catch(e){} },
       showFeedback: st.showFeedback,
-      showInlineFb,
-      fbThumbUp: ()=>this._inlineThumb('Really helpful'),
-      fbThumbDown: ()=>this._inlineThumb('Not helpful'),
-      fbDismissInline: ()=>this._dismissInline(),
       fbOptions: fbOpts,
       fbSubmit: ()=>this._submitFeedback(true),
       fbSkip: ()=>this._submitFeedback(false),

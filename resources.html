@@ -311,7 +311,7 @@
               <input id="ioc-sr-email" type="email" placeholder="Your email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
             </div>
             <sc-if value="{{ submitFailed }}" hint-placeholder-val="{{ false }}">
-              <div style="margin-top:14px;padding:10px 12px;border-radius:9px;background:#f6e3db;border:1px solid rgba(168,84,45,.4);font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.5;color:#8a3f1f">Couldn’t save that just now. Please try again — or email it to <a href="mailto:jayajohnyramchandani@gmail.com" style="color:#a8542d;font-weight:700">the editors</a>.</div>
+              <div style="margin-top:14px;padding:10px 12px;border-radius:9px;background:#f6e3db;border:1px solid rgba(168,84,45,.4);font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.5;color:#8a3f1f">{{ submitErrorMsg }}</div>
             </sc-if>
             <div style="display:flex;gap:9px;margin-top:18px">
               <button onClick="{{ doSubmit }}" disabled="{{ submitting }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer;opacity:{{ submitBtnOpacity }}">{{ submitBtnLabel }}</button>
@@ -386,7 +386,8 @@ class Component extends DCLogic {
     if (this.state.submitting) return;
     var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
     var title=g('ioc-sr-title'), link=g('ioc-sr-link'), sname=g('ioc-sr-name'), email=g('ioc-sr-email');
-    if (!title && !link) { this.setState({submitError:'empty'}); return; }
+    if (!title) { this.setState({submitError:'notitle'}); return; }
+    if (!link) { this.setState({submitError:'nolink'}); return; }
     if (window.track) window.track('suggest_resource', { title: title || '(untitled)' });
     var nurl=(typeof window!=='undefined' && window.NOTION_CONNECTOR_URL) ? window.NOTION_CONNECTOR_URL : '';
     if (!nurl) { this.setState({submitError:'network'}); return; }
@@ -588,6 +589,11 @@ class Component extends DCLogic {
       submitOpen:this.state.submitOpen, submitNotDone:!this.state.submitDone, submitDone:this.state.submitDone,
       submitting:this.state.submitting,
       submitFailed: !!this.state.submitError,
+      submitErrorMsg: (function(e){
+        if (e==='notitle') return 'Please add a title.';
+        if (e==='nolink') return 'Please add a link.';
+        return React.createElement('span',null,'Couldn\u2019t save that just now. Please try again \u2014 or email it to ', React.createElement('a',{href:'mailto:jayajohnyramchandani@gmail.com',style:{color:'#a8542d',fontWeight:700}},'the editors'), '.');
+      })(this.state.submitError),
       submitBtnLabel: this.state.submitting ? 'Sending…' : (this.state.submitError ? 'Try again' : 'Submit for addition'),
       submitBtnOpacity: this.state.submitting ? 0.6 : 1,
       closeSubmit:()=>this.closeSubmit(), doSubmit:()=>this.doSubmit(), stop:(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); }

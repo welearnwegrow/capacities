@@ -310,8 +310,11 @@
               <input id="ioc-sr-name" placeholder="Your name (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
               <input id="ioc-sr-email" type="email" placeholder="Your email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
             </div>
+            <sc-if value="{{ submitFailed }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:14px;padding:10px 12px;border-radius:9px;background:#f6e3db;border:1px solid rgba(168,84,45,.4);font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.5;color:#8a3f1f">Couldn’t save that just now. Please try again — or email it to <a href="mailto:jayajohnyramchandani@gmail.com" style="color:#a8542d;font-weight:700">the editors</a>.</div>
+            </sc-if>
             <div style="display:flex;gap:9px;margin-top:18px">
-              <button onClick="{{ doSubmit }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer">Submit for addition</button>
+              <button onClick="{{ doSubmit }}" disabled="{{ submitting }}" style="flex:1;font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px;border-radius:9px;border:none;background:#8a6a45;color:#fff;cursor:pointer;opacity:{{ submitBtnOpacity }}">{{ submitBtnLabel }}</button>
               <button onClick="{{ closeSubmit }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;padding:11px 15px;border-radius:9px;border:1px solid rgba(120,105,75,.4);background:transparent;color:#8a6a45;cursor:pointer">Cancel</button>
             </div>
           </div>
@@ -377,26 +380,24 @@ class Component extends DCLogic {
 
   openDeep(label){ this.setState({deep:label}); }
   closeDeep(){ this.setState({deep:null}); }
-  openSubmit(){ this.setState({submitOpen:true, submitDone:false}); }
-  closeSubmit(){ this.setState({submitOpen:false, submitDone:false}); }
+  openSubmit(){ this.setState({submitOpen:true, submitDone:false, submitError:null, submitting:false}); }
+  closeSubmit(){ this.setState({submitOpen:false, submitDone:false, submitError:null, submitting:false}); }
   doSubmit(){
+    if (this.state.submitting) return;
     var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
     var title=g('ioc-sr-title'), link=g('ioc-sr-link'), sname=g('ioc-sr-name'), email=g('ioc-sr-email');
+    if (!title && !link) { this.setState({submitError:'empty'}); return; }
     if (window.track) window.track('suggest_resource', { title: title || '(untitled)' });
-    var subject='Resource suggestion: '+(title||'(untitled)');
     var nurl=(typeof window!=='undefined' && window.NOTION_CONNECTOR_URL) ? window.NOTION_CONNECTOR_URL : '';
-    if (nurl) {
-      this.setState({submitting:true, submitError:null});
-      fetch(nurl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name:title, url:link, submitterName:sname, submitterEmail:email }) })
-        .then(r=>r.json()).then(j=>{ this.setState({submitting:false, submitDone:true, submitError: j && j.ok ? null : 'send'}); })
-        .catch(()=>{ this.setState({submitting:false, submitDone:true, submitError:'network'}); });
-      return;
-    }
-    var to='jayajohnyramchandani@gmail.com';
-    var body='A resource has been suggested for the library.\n\nTitle: '+title+'\nLink: '+link
-      +'\nSubmitted by: '+(sname||'(not given)')+'\nEmail: '+(email||'(not given)')+'\n';
-    try { window.location.href='mailto:'+to+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); } catch(e){}
-    this.setState({submitDone:true});
+    if (!nurl) { this.setState({submitError:'network'}); return; }
+    this.setState({submitting:true, submitError:null});
+    fetch(nurl, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name:title, url:link, submitterName:sname, submitterEmail:email }) })
+      .then(r=>r.json().catch(()=>null))
+      .then(j=>{
+        if (j && j.ok) this.setState({submitting:false, submitDone:true, submitError:null});
+        else this.setState({submitting:false, submitError:'send'});
+      })
+      .catch(()=>{ this.setState({submitting:false, submitError:'network'}); });
   }
   toggleObj(bag, key){ const b=Object.assign({}, this.state[bag]); if(b[key]) delete b[key]; else b[key]=true; const s={}; s[bag]=b; this.setState(s); }
 
@@ -585,6 +586,10 @@ class Component extends DCLogic {
       copyPlan:()=>this.copyPlan(), copyLabel:this.state.copied?'Copied ✓':'Copy design', resetPlan:()=>this.resetPlan(),
       // submit
       submitOpen:this.state.submitOpen, submitNotDone:!this.state.submitDone, submitDone:this.state.submitDone,
+      submitting:this.state.submitting,
+      submitFailed: !!this.state.submitError,
+      submitBtnLabel: this.state.submitting ? 'Sending…' : (this.state.submitError ? 'Try again' : 'Submit for addition'),
+      submitBtnOpacity: this.state.submitting ? 0.6 : 1,
       closeSubmit:()=>this.closeSubmit(), doSubmit:()=>this.doSubmit(), stop:(e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); }
     };
   }

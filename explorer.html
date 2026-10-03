@@ -409,11 +409,34 @@ class Component extends DCLogic {
     window.addEventListener('beforeunload', this._onPageHide);
     this._onMsg=(e)=>{ if(e && e.data && e.data.type==='gm-close') this._requestClose(); };
     window.addEventListener('message', this._onMsg);
+    // Exit intent: cursor leaves through the top of the window (towards tab bar / close) — ask once.
+    this._onExit=(e)=>{ if(e.relatedTarget || e.clientY>0) return; this._maybeAskOnExit(); };
+    document.addEventListener('mouseout', this._onExit);
+  }
+  _fbEligible(){
+    const st=this.state;
+    const turns=st.messages.filter(m=>m.role==='user').length;
+    const m=st.map; const has=m && ((m.areas&&m.areas.length)||(m.route&&m.route.length)||(m.resources&&m.resources.length));
+    return !this._demo && turns>=1 && !!has && !st.loading && !st.fbSent && !this._ratingSent && !st.showFeedback;
+  }
+  _maybeAskOnExit(){
+    if(/[?&]inline=1/.test(location.search||'')) return;
+    if(this._exitAsked || !this._fbEligible()) return;
+    this._exitAsked=true;
+    if(window.track) window.track('guideme_exit_fb',{});
+    this.setState({ showFeedback:true }); this._prefillFbEmail();
+  }
+  _postFb(rating, comment, email){
+    const url=window.NOTION_CONNECTOR_URL; if(!url) return;
+    const map=this._lastMap || this.state.map || {};
+    try{ fetch(url.replace(/\/+$/,'')+'/log-feedback',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
+      body:JSON.stringify({ topic:(map.topic||'Guide Me feedback').slice(0,120), rating:rating||'', comment:(comment||'').slice(0,4000), email:(email||'').slice(0,200), turns:this.state.messages.filter(m=>m.role==='user').length, source:'guide-me-feedback' }) }).catch(function(){}); }catch(e){}
   }
   componentWillUnmount(){
     if(this._onHide) document.removeEventListener('visibilitychange', this._onHide);
     if(this._onPageHide){ window.removeEventListener('pagehide', this._onPageHide); window.removeEventListener('beforeunload', this._onPageHide); }
     if(this._onMsg) window.removeEventListener('message', this._onMsg);
+    if(this._onExit) document.removeEventListener('mouseout', this._onExit);
     this._saveLog();
   }
   componentDidUpdate(){ this._scroll(); }
@@ -872,7 +895,7 @@ class Component extends DCLogic {
     this._saveLog();
     this._exitAfterFeedback = true;
     const hadExchange = this.state.messages.some(function(m){ return m.role==='user'; });
-    if(hadExchange && !this.state.fbSent){ this.setState({ showFeedback:true }); this._prefillFbEmail(); }
+    if(hadExchange && !this.state.fbSent && !this._ratingSent){ this.setState({ showFeedback:true }); this._prefillFbEmail(); }
     else this._exitNow();
   }
   _exitNow(){
@@ -882,21 +905,23 @@ class Component extends DCLogic {
     try{ location.href=back; }catch(e){ location.href='index.html'; }
   }
   _setRating(v){ this.setState(s=>({ fbRating: s.fbRating===v ? '' : v })); }
-  _inlineThumb(rating){ if(window.track) window.track('guideme_inline_fb',{rating:rating}); this.setState({ fbRating:rating, showFeedback:true, inlineFbDismissed:true }); this._prefillFbEmail(); }
+  _inlineThumb(rating){
+    if(window.track) window.track('guideme_inline_fb',{rating:rating});
+    this._postFb(rating,'',''); this._ratingSent=rating;
+    this.setState({ fbRating:rating, showFeedback:true, inlineFbDismissed:true }); this._prefillFbEmail();
+  }
   _dismissInline(){ this.setState({ inlineFbDismissed:true }); }
   _submitFeedback(send){
     this._fbDone = true;
     if(send){
-      const url=window.NOTION_CONNECTOR_URL;
       const commentEl=document.getElementById('gm-fb-comment');
       const emailEl=document.getElementById('gm-fb-email');
       const comment=commentEl? commentEl.value.trim() : '';
       const email=emailEl? emailEl.value.trim() : '';
-      const map=this._lastMap || this.state.map || {};
-      if(url && (this.state.fbRating || comment || email)){
-        try{ fetch(url.replace(/\/+$/,'')+'/log-feedback',{ method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
-          body:JSON.stringify({ topic:(map.topic||'Guide Me feedback').slice(0,120), rating:this.state.fbRating||'', comment:comment.slice(0,4000), email:email.slice(0,200), turns:this.state.messages.filter(m=>m.role==='user').length, source:'guide-me-feedback' }) }).catch(function(){}); }catch(e){}
-      }
+      const rating=this.state.fbRating||'';
+      // The inline click already saved the rating; only send again if there's something new.
+      const alreadySaved = this._ratingSent && this._ratingSent===rating && !comment && !email;
+      if(!alreadySaved && (rating || comment || email)) this._postFb(rating, comment, email);
     }
     if(send){ var c=document.getElementById('gm-fb-comment'); var em=document.getElementById('gm-fb-email'); if(c) c.value=''; if(em) em.value=''; }
     this.setState({ showFeedback:false, fbSent: send || this.state.fbSent, fbRating: send ? '' : this.state.fbRating });
@@ -1121,7 +1146,7 @@ class Component extends DCLogic {
     }
     const turnCount=st.messages.filter(m=>m.role==='user').length;
     const _mapContent=st.map && ((st.map.areas&&st.map.areas.length)||(st.map.route&&st.map.route.length)||(st.map.resources&&st.map.resources.length));
-    const showInlineFb = !this._demo && turnCount>=2 && !!_mapContent && !st.loading && !st.fbSent && !st.showFeedback && !st.inlineFbDismissed;
+    const showInlineFb = !this._demo && turnCount>=1 && !!_mapContent && !this._ratingSent && !st.loading && !st.fbSent && !st.showFeedback && !st.inlineFbDismissed;
     const firstTurn=st.messages.length===0;
     const composerPlaceholder=firstTurn
       ? "Start anywhere \u2014 or drop a brief to read."

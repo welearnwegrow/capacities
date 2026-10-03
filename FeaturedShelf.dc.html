@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<section style="width:100%;display:flex;flex-direction:column;gap:14px;background:{{ panelBg }};border:1px solid {{ panelBd }};border-radius:20px;padding:24px 26px 20px;box-shadow:0 14px 36px rgba(40,50,35,.10)">
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div style="font-family:'PT Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:{{ panelInk2 }}">This week's learning area</div>
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:36px;line-height:1.06;margin:0;color:{{ panelInk }};text-wrap:pretty">{{ areaName }}</h2>
+  </div>
+
+  <div style="position:relative;width:100%">
+    <div data-shelf-row="" ref="{{ rowRef }}" onScroll="{{ onRowScroll }}" style="display:flex;align-items:flex-end;gap:12px;overflow-x:auto;overflow-y:visible;padding:30px 4px 0;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;-ms-overflow-style:none">
+      <sc-for list="{{ books }}" as="b" hint-placeholder-count="5">
+        <div onMouseEnter="{{ b.enter }}" onMouseLeave="{{ b.leave }}" onClick="{{ b.tap }}" style="position:relative;flex:0 0 auto;width:{{ b.w }};height:{{ b.h }};transition:width .45s cubic-bezier(.2,.7,.2,1), transform .3s ease;transform:translateY({{ b.lift }});perspective:1300px;cursor:pointer;scroll-snap-align:start">
+          <sc-if value="{{ b.isSpine }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;border-radius:3px 3px 2px 2px;background:{{ b.bg }};background-image:{{ b.spineFx }};box-shadow:inset 3px 0 0 rgba(255,255,255,.10), inset -3px 0 0 rgba(0,0,0,.14), 0 8px 18px rgba(40,50,35,.16);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14px 0 12px;overflow:hidden">
+              <div style="width:22px;height:2px;background:{{ b.ink2 }}"></div>
+              <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Newsreader',serif;font-weight:500;font-size:15px;line-height:1.1;color:{{ b.ink }};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-height:78%">{{ b.title }}</div>
+              <div style="width:22px;height:2px;background:{{ b.ink2 }}"></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ b.isCover }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.7,.2,1);transform:rotateY({{ b.flipDeg }})">
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:3px 10px 10px 3px;overflow:hidden;background:{{ b.bg }};box-shadow:0 16px 30px rgba(40,50,35,.24), inset 0 0 0 1px rgba(255,255,255,.08);display:flex">
+                <div style="width:12px;flex:0 0 12px;background:linear-gradient(90deg, rgba(0,0,0,.28), rgba(0,0,0,.06) 60%, rgba(255,255,255,.10))"></div>
+                <div style="flex:1;min-width:0;padding:20px 16px 14px 13px;display:flex;flex-direction:column;gap:9px;background-image:{{ b.pattern }}">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:6px">
+                    <span style="font-family:'PT Sans',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:{{ b.ink2 }};min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.type }}</span>
+                    <sc-if value="{{ b.open }}" hint-placeholder-val="{{ false }}">
+                      <span style="flex:0 0 auto;font-family:'PT Sans',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:{{ b.bg }};background:{{ b.ink }};border-radius:999px;padding:3px 7px">Open Source</span>
+                    </sc-if>
+                  </div>
+                  <div style="width:28px;height:2px;background:{{ b.ink2 }}"></div>
+                  <div style="font-family:'Newsreader',serif;font-weight:500;font-size:{{ b.titleSize }};line-height:1.08;color:{{ b.ink }};text-wrap:balance;flex:1;overflow:hidden">{{ b.title }}</div>
+                  <sc-if value="{{ b.subtitle }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-family:'Newsreader',serif;font-style:italic;font-size:12px;line-height:1.3;color:{{ b.ink2 }};overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical">{{ b.subtitle }}</div>
+                  </sc-if>
+                  <div style="border-top:1px solid {{ b.rule }};padding-top:7px;font-family:'PT Sans',sans-serif;font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:{{ b.ink2 }}">Systems Change Learning Guide</div>
+                </div>
+              </div>
+              <div style="position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);border-radius:10px 3px 3px 10px;overflow:hidden;background:#FCFBF7;border:1px solid rgba(120,105,75,.22);box-shadow:0 16px 30px rgba(40,50,35,.2);padding:16px 15px 13px;display:flex;flex-direction:column;gap:8px">
+                <div style="font-family:'Newsreader',serif;font-weight:500;font-size:15px;line-height:1.2;color:#233029;text-wrap:pretty">{{ b.title }}</div>
+                <p style="font-family:'PT Sans',sans-serif;font-size:12px;line-height:1.5;color:#3f4a48;margin:0;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:10;-webkit-box-orient:vertical">{{ b.desc }}</p>
+                <a href="{{ b.url }}" target="_blank" rel="noopener" onClick="{{ stop }}" style="font-family:'PT Sans',sans-serif;font-weight:700;font-size:12px;text-decoration:none;color:#46716f;border-top:1px solid rgba(120,105,75,.14);padding-top:8px">Open resource →</a>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <div style="height:12px;border-radius:2px;background:linear-gradient(180deg,#c9b48f 0%,#b29a72 55%,#9c8460 100%);box-shadow:0 10px 18px rgba(60,48,30,.22), inset 0 1px 0 rgba(255,255,255,.35)"></div>
+    <div style="height:8px;margin:0 10px;background:linear-gradient(180deg, rgba(60,48,30,.18), transparent)"></div>
+  </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a">Hover a cover to read the back</div>
+    <sc-if value="{{ showDots }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;gap:6px;align-items:center">
+        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="5">
+          <button onClick="{{ d.go }}" aria-label="{{ d.label }}" style="width:{{ d.w }};height:7px;border-radius:999px;border:none;padding:0;cursor:pointer;background:{{ d.bg }};transition:width .3s"></button>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1040,&quot;height&quot;:440},&quot;weekOffset&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { faceOut: [0, 1, 2, 3, 4], hover: -1 };
+  componentDidMount(){
+    this._u = () => this.forceUpdate();
+    window.addEventListener('research-data-updated', this._u);
+    this._rs = () => { const el = this._row; if (!el) return; const ov = el.scrollWidth > el.clientWidth + 4; if (ov !== !!this.state.overflow) this.setState({ overflow: ov }); };
+    window.addEventListener('resize', this._rs);
+  }
+  componentWillUnmount(){ window.removeEventListener('research-data-updated', this._u); window.removeEventListener('resize', this._rs); }
+  _week(){
+    const start = Date.UTC(2026, 0, 5);
+    const now = new Date(); const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.floor((today - start) / (7 * 864e5)) + (this.props.weekOffset ?? 0);
+  }
+  _hash(s){ let h = 2166136261; for (let k = 0; k < s.length; k++){ h ^= s.charCodeAt(k); h = Math.imul(h, 16777619); } return h >>> 0; }
+  _pull(k){
+    this.setState(s => {
+      if (s.faceOut.indexOf(k) >= 0) return null;
+      const f = s.faceOut.slice(1).concat(k); // oldest open cover goes back to a spine
+      return { faceOut: f, hover: -1 };
+    });
+  }
+  renderVals(){
+    const R = window.__RESEARCH || { capacities: [], resources: [] };
+    const caps = R.capacities || [];
+    const n = caps.length || 1;
+    const w = this._week();
+    const area = caps[((w % n) + n) % n] || { label: '', group: 'teal' };
+    const PAL = {
+      teal:  [['#2f5552','#f4efe6','#b9d0cc'],['#d9e6e3','#233f3d','#46716f'],['#46716f','#fdfbf7','#cfe0dd']],
+      green: [['#4c572a','#f4efe6','#cdd5a8'],['#e6e9d2','#3b4420','#5b6733'],['#76834a','#fdfbf7','#e4e8cc']],
+      coral: [['#8e4524','#fbf2ea','#f0c7ae'],['#f3e1d4','#6e3317','#a8542d'],['#bd6a47','#fff8f2','#f8d9c8']]
+    };
+    const g = PAL[area.group] ? area.group : 'teal';
+    const pats = [
+      'repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px)',
+      'radial-gradient(circle at 85% 18%, rgba(255,255,255,.14) 0 36px, transparent 37px), radial-gradient(circle at 85% 18%, rgba(255,255,255,.08) 0 62px, transparent 63px)',
+      'linear-gradient(0deg, transparent 62%, rgba(0,0,0,.07) 62% 63%, transparent 63%)',
+      'repeating-radial-gradient(circle at 100% 100%, rgba(255,255,255,.06) 0 1px, transparent 1px 16px)'
+    ];
+    const pool = (R.resources || []).filter(r => r.caps && r.caps.indexOf(area.label) >= 0 && r.desc);
+    const featFor = r => (r.featuredIn && r.featuredIn.length) ? r.featuredIn.indexOf(area.label) >= 0 : !!r.featured;
+    // Pick: featured-for-this-area first, then Global South voices, then the rest (weekly shuffle).
+    const picked = pool.map(r => ({ r, k: ((featFor(r) ? 0 : 2) + (r.globalSouth ? 0 : 1)) * 1e10 + this._hash(r.name + '|' + w) }))
+      .sort((a, b) => a.k - b.k).slice(0, 5).map(x => x.r)
+      // Display: Global South voices at the start of the shelf.
+      .map((r, i) => ({ r, i })).sort((a, b) => ((b.r.globalSouth ? 1 : 0) - (a.r.globalSouth ? 1 : 0)) || (a.i - b.i)).map(x => x.r);
+    const norm = u => { if (!u) return '#'; u = String(u).trim(); return /^https?:\/\//i.test(u) ? u : 'https://' + u.replace(/^\/+/, ''); };
+    const touch = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(hover: none)').matches;
+    const st = this.state;
+    const books = picked.map((r, k) => {
+      const h = this._hash(r.name || 'x');
+      const pal = PAL[g][h % 3];
+      const parts = String(r.name || '').split(/:\s+| - | \| /);
+      const title = parts[0]; const tLen = title.length;
+      const types = (r.types || []).filter(t => t !== 'Open Source');
+      const cover = st.faceOut.indexOf(k) >= 0;
+      const hov = st.hover === k;
+      const heights = [292, 276, 300, 284, 268];
+      return {
+        isCover: cover, isSpine: !cover,
+        w: cover ? '190px' : (40 + (h % 3) * 6) + 'px',
+        h: (cover ? 292 : heights[k % 5]) + 'px',
+        lift: (!cover && hov) ? '-10px' : '0px',
+        flipDeg: (cover && hov) ? '180deg' : '0deg',
+        bg: pal[0], ink: pal[1], ink2: pal[2], rule: pal[2] + '55',
+        pattern: pats[(h >> 3) % pats.length],
+        spineFx: 'linear-gradient(90deg, rgba(0,0,0,.10), transparent 30%, transparent 70%, rgba(0,0,0,.12))',
+        type: types[0] || 'Resource', open: (r.types || []).indexOf('Open Source') >= 0,
+        title, subtitle: parts.slice(1).join(': '),
+        titleSize: tLen > 60 ? '17px' : tLen > 34 ? '20px' : tLen > 18 ? '24px' : '28px',
+        desc: r.desc, url: norm(r.url),
+        enter: () => { if (touch) return; clearTimeout(this._pt);
+          if (!cover) { this._pt = setTimeout(() => this._pull(k), 350); this.setState({ hover: k }); }
+          else this.setState({ hover: k }); },
+        leave: () => { if (touch) return; clearTimeout(this._pt); this.setState({ hover: -1 }); },
+        tap: () => { if (!touch) return; if (!cover) { this._pull(k); this.setState({ hover: -1 }); } else this.setState(s => ({ hover: s.hover === k ? -1 : k })); }
+      };
+    });
+    const act = st.active || 0;
+    const scrollTo = (k) => { const el = this._row; if (!el) return; const kid = el.children[k]; if (kid) el.scrollTo({ left: kid.offsetLeft - el.offsetLeft - 4, behavior: 'smooth' }); };
+    return {
+      areaName: area.label, books, stop: (e) => e.stopPropagation(),
+      panelBg: ({ teal: 'linear-gradient(180deg,#e6efed,#d7e5e2)', green: 'linear-gradient(180deg,#eef0df,#e1e6c8)', coral: 'linear-gradient(180deg,#f7eae1,#efd9ca)' })[g],
+      panelBd: ({ teal: 'rgba(70,113,111,.30)', green: 'rgba(118,131,74,.32)', coral: 'rgba(189,106,71,.32)' })[g],
+      panelInk: ({ teal: '#233f3d', green: '#3b4420', coral: '#6e3317' })[g],
+      panelInk2: ({ teal: '#46716f', green: '#5b6733', coral: '#a8542d' })[g],
+      rowRef: (el) => { this._row = el; if (el) requestAnimationFrame(() => { const ov = el.scrollWidth > el.clientWidth + 4; if (ov !== !!this.state.overflow) this.setState({ overflow: ov }); }); },
+      onRowScroll: (e) => { const el = e.currentTarget; const max = el.scrollWidth - el.clientWidth; const k = max > 0 ? Math.round((el.scrollLeft / max) * (books.length - 1)) : 0; if (k !== act) this.setState({ active: k }); },
+      showDots: !!st.overflow && books.length > 1,
+      dots: books.map((_, k) => ({ go: () => scrollTo(k), label: 'Show book ' + (k + 1), w: k === act ? '18px' : '7px', bg: k === act ? '#46716f' : 'rgba(70,113,111,.28)' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

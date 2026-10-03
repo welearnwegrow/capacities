@@ -406,7 +406,7 @@ class Component extends DCLogic {
     const M={
       'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733',
       'Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8',
-      'Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45'
+      'Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Courses':'#3f6e74','Open Source':'#5f7a3a','Other':'#6b5d45'
     };
     if (M[t]) return M[t];
     // any new/unknown type gets a stable, distinct colour derived from its name
@@ -481,9 +481,10 @@ class Component extends DCLogic {
     let deep=null;
     if(this.state.deep){
       const label=this.state.deep, g=this._groupOf(label), col=cols[g];
-      const list=this._resFor(label);
+      const featFor=(r,a)=>(r.featuredIn&&r.featuredIn.length)?r.featuredIn.indexOf(a)>=0:!!r.featured;
+      const list=this._resFor(label).map(r=>Object.assign({},r,{featured:featFor(r,label)}));
       const items=list.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
-      const order=['Books','Methods & Toolkits','Digital Publications / Reports','Data Tools','Case Studies','Networks','Podcast','Video','Articly / Blogposts','Articles / Blogposts','Other'];
+      const order=['Books','Methods & Toolkits','Digital Publications / Reports','Data Tools','Case Studies','Networks','Podcast','Video','Articly / Blogposts','Articles / Blogposts','Courses','Open Source','Other'];
       const byMed={};
       list.forEach(r=>{ const ts=(r.types&&r.types.length)?r.types:['Other']; ts.forEach(t=>{ (byMed[t]=byMed[t]||[]).push(r); }); });
       const keys=Object.keys(byMed).sort((a,b)=>{ const ia=order.indexOf(a), ib=order.indexOf(b); return (ia<0?99:ia)-(ib<0?99:ib); });

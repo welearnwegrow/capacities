@@ -481,8 +481,7 @@ class Component extends DCLogic {
     let deep=null;
     if(this.state.deep){
       const label=this.state.deep, g=this._groupOf(label), col=cols[g];
-      const featFor=(r,a)=>(r.featuredIn&&r.featuredIn.length)?r.featuredIn.indexOf(a)>=0:!!r.featured;
-      const list=this._resFor(label).map(r=>Object.assign({},r,{featured:featFor(r,label)}));
+      const list=this._resFor(label);
       const items=list.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
       const order=['Books','Methods & Toolkits','Digital Publications / Reports','Data Tools','Case Studies','Networks','Podcast','Video','Articly / Blogposts','Articles / Blogposts','Courses','Open Source','Other'];
       const byMed={};

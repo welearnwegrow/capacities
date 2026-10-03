@@ -96,7 +96,14 @@ class Component extends DCLogic {
     const caps = R.capacities || [];
     const n = caps.length || 1;
     const w = this._week();
-    const area = caps[((w % n) + n) % n] || { label: '', group: 'teal' };
+    const featFor = (r, a) => !!r.featured && (r.caps || []).indexOf(a) >= 0;
+    // Only rotate through learning areas that have at least one featured resource.
+    const res = (R.resources || []).filter(r => r.desc);
+    // Calendar runs through all 24 areas in order; if this week's area has nothing featured, move on to the next one that does.
+    const has = c => res.some(r => featFor(r, c.label));
+    let idx = ((w % n) + n) % n;
+    for (let k = 0; k < n && caps[idx] && !has(caps[idx]); k++) idx = (idx + 1) % n;
+    const area = caps[idx] || { label: '', group: 'teal' };
     const PAL = {
       teal:  [['#2f5552','#f4efe6','#b9d0cc'],['#d9e6e3','#233f3d','#46716f'],['#46716f','#fdfbf7','#cfe0dd']],
       green: [['#4c572a','#f4efe6','#cdd5a8'],['#e6e9d2','#3b4420','#5b6733'],['#76834a','#fdfbf7','#e4e8cc']],
@@ -109,13 +116,10 @@ class Component extends DCLogic {
       'linear-gradient(0deg, transparent 62%, rgba(0,0,0,.07) 62% 63%, transparent 63%)',
       'repeating-radial-gradient(circle at 100% 100%, rgba(255,255,255,.06) 0 1px, transparent 1px 16px)'
     ];
-    const pool = (R.resources || []).filter(r => r.caps && r.caps.indexOf(area.label) >= 0 && r.desc);
-    const featFor = r => (r.featuredIn && r.featuredIn.length) ? r.featuredIn.indexOf(area.label) >= 0 : !!r.featured;
-    // Pick: featured-for-this-area first, then Global South voices, then the rest (weekly shuffle).
-    const picked = pool.map(r => ({ r, k: ((featFor(r) ? 0 : 2) + (r.globalSouth ? 0 : 1)) * 1e10 + this._hash(r.name + '|' + w) }))
-      .sort((a, b) => a.k - b.k).slice(0, 5).map(x => x.r)
-      // Display: Global South voices at the start of the shelf.
-      .map((r, i) => ({ r, i })).sort((a, b) => ((b.r.globalSouth ? 1 : 0) - (a.r.globalSouth ? 1 : 0)) || (a.i - b.i)).map(x => x.r);
+    // Only resources featured for this area (max 5). Global South voices first, then the rest; weekly shuffle within each.
+    const picked = res.filter(r => featFor(r, area.label))
+      .map(r => ({ r, k: (r.globalSouth ? 0 : 1) * 1e10 + this._hash(r.name + '|' + w) }))
+      .sort((a, b) => a.k - b.k).slice(0, 5).map(x => x.r);
     const norm = u => { if (!u) return '#'; u = String(u).trim(); return /^https?:\/\//i.test(u) ? u : 'https://' + u.replace(/^\/+/, ''); };
     const touch = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(hover: none)').matches;
     const st = this.state;

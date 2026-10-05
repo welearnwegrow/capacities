@@ -148,7 +148,7 @@ class Component extends DCLogic {
     const featFor = (r, a) => !!r.featured && (r.caps || []).indexOf(a) >= 0;
     // Only rotate through learning areas that have at least one featured resource.
     const res = (R.resources || []).filter(r => r.desc);
-    // Calendar runs through all 24 areas in order; if this week's area has nothing featured, move on to the next one that does.
+    // Calendar runs through all 21 areas in order; if this week's area has nothing featured, move on to the next one that does.
     const has = c => res.some(r => featFor(r, c.label));
     let idx = ((w % n) + n) % n;
     for (let k = 0; k < n && caps[idx] && !has(caps[idx]); k++) idx = (idx + 1) % n;

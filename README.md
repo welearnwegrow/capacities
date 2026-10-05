@@ -1,6 +1,6 @@
 # Systems Change Learning Guide
 
-An open-source capacity framework for systems change: an interactive map of 24 learning areas, a five-stage route for intervening in complex systems, a community-curated resource library, and the Systems Change Coach, an AI companion that helps people think through a situation they are working on.
+An open-source capacity framework for systems change: an interactive map of 21 learning areas, a five-stage route for intervening in complex systems, a community-curated resource library, and the Systems Change Coach, an AI companion that helps people think through a situation they are working on.
 
 Live at https://welearnwegrow.github.io/capacities/
 

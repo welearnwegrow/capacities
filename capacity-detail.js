@@ -3,7 +3,7 @@
 // levels = a 4-tier progression (Personal / Social / Institutional / Systemic),
 //   written for people new to the field, age-agnostic (16+), grounded in the framework sources.
 window.__CAPDETAIL = {
- "Observing & Listening": {
+ "Listening Deeply": {
   "desc": "Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.",
   "levels": {
    "Personal": "Notices your own assumptions and filters, and chooses to listen to people whose views differ from yours — including those usually overlooked — without rushing to judge. Practices active, empathic listening: summarising what you heard before responding.",
@@ -12,7 +12,7 @@ window.__CAPDETAIL = {
    "Systemic": "Senses wider shifts across regions, cultures, and ecosystems, and designs settings where groups who usually talk past each other can genuinely hear one another. Models the kind of attentive presence that helps whole fields listen better."
   }
  },
- "Somatic Eco-Regulation": {
+ "Staying Grounded": {
   "desc": "The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.",
   "levels": {
    "Personal": "Notices how stress, grief, or overwhelm show up in your body, and learns simple ways to steady yourself, such as breathwork, body scans, or time in nature. Begins to name emotions without being swept away by them.",
@@ -21,25 +21,16 @@ window.__CAPDETAIL = {
    "Systemic": "Holds space for collective healing and recovery across large, conflict-heavy efforts, helping whole communities avoid burnout. Builds cultures and structures where wellbeing and long-term purpose are protected, not sacrificed."
   }
  },
- "Agency & Expression": {
-  "desc": "Synthesizing complex systemic insights into compelling narratives and creative outputs that challenge the status quo, build relational density, and model preferable futures.",
+ "Engaging Capital": {
+  "desc": "Mobilising financial, social and relational capital for systems change: understanding how funding, investment and markets shape what is possible, and aligning money with long-term, community-led work.",
   "levels": {
-   "Personal": "Shifts from passive consumption to active production by using media, art, or storytelling to articulate personal viewpoints beyond standard assessments.",
-   "Social": "Translates complex research or lived experience into creative outputs—such as workshops, digital narratives, or visual formats—to actively engage others in collective sense-making.",
-   "Institutional": "Synthesizes intricate data and systemic patterns into accessible, creative interventions that shift institutional behaviors, communication norms, or public perception.",
-   "Systemic": "Deconstructs dominant communication paradigms across global networks. Establishes alternative, creative-led ecosystems where storytelling is utilized as a vehicle for systemic reform and cultural transformation."
+   "Personal": "Understands where money comes from in their field and how funding terms shape the work. Can describe a project's needs plainly to a funder or investor.",
+   "Social": "Builds trusting relationships with funders and investors, and helps peers navigate funding terms. Brings community voice into conversations about money.",
+   "Institutional": "Designs funding or investment models that support long-term, adaptive work, such as multi-year, flexible or pooled funds. Aligns organisational finance with systems-change goals.",
+   "Systemic": "Shifts how capital flows across a field by organising funders, shaping markets or influencing finance policy, so that resources reach the people and places driving change."
   }
  },
- "Critical Consciousness": {
-  "desc": "The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective.",
-  "levels": {
-   "Personal": "Questions things usually taken for granted, and begins to see how your own background, identity, and advantages shape the way you see the world. Practices surfacing hidden assumptions before acting on them.",
-   "Social": "Spots biases built into common ways of researching or running projects, and is willing to name and challenge them. Maps how identity, worldview, and power intersect in a given situation.",
-   "Institutional": "Examines how an organisation's own habits and structures can quietly reproduce inequality or exclusion — and works to change them. Turns reflexive insight into concrete shifts in language, strategy, and behaviour.",
-   "Systemic": "Challenges deep-rooted economic and cultural assumptions at the level of policy and funding, opening space for many ways of knowing. Models the humility and accountability that lets whole fields question their own foundations."
-  }
- },
- "Spiritual & Moral Inquiry": {
+ "Acting with Integrity": {
   "desc": "Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.",
   "levels": {
    "Personal": "Develops a personal sense of right relationship, grounded in care and respect rather than what's merely useful or transactional. Begins to clarify the values that guide your decisions.",
@@ -48,7 +39,7 @@ window.__CAPDETAIL = {
    "Systemic": "Anchors large funding and stewardship decisions in deep ethics, ensuring long-term care for people and the living world. Helps institutions hold themselves accountable to justice and repair, not just compliance."
   }
  },
- "Socioeconomic & Political Inquiry": {
+ "Reading Economic & Political Forces": {
   "desc": "Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.",
   "levels": {
    "Personal": "Understands the basics of how economies and politics work, and can trace how large forces — markets, policy, institutions — shape everyday life. Reads beyond the headlines to the structures underneath.",
@@ -57,7 +48,7 @@ window.__CAPDETAIL = {
    "Systemic": "Reshapes how money and policy flow at large scales to counter extraction and keep power from concentrating in few hands. Influences the rules and financing structures that govern whole sectors or regions."
   }
  },
- "Ecological & Planetary Inquiry": {
+ "Living Within Planetary Limits": {
   "desc": "Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.",
   "levels": {
    "Personal": "Explains how natural systems work, the climate and ecological risks nearby, and the idea that the planet has real limits. Connects personal choices to their ecological footprint and begins to act on that awareness.",
@@ -66,7 +57,7 @@ window.__CAPDETAIL = {
    "Systemic": "Guides large-scale conservation and land policy that restores ecosystems and makes room for many species to thrive across borders. Shapes how institutions understand and respect planetary boundaries."
   }
  },
- "Cultural & Epistemic Inquiry": {
+ "Honoring Many Ways of Knowing": {
   "desc": "Engaging with diverse cultural knowledge systems, epistemologies, and ways of knowing — honoring indigenous lifeways, land-based histories, and intergenerational oral traditions.",
   "levels": {
    "Personal": "Values local histories, oral traditions, and lineages, and respects cultural ways of knowing different from your own. Listens to ancestral and land-based knowledge with humility rather than extraction.",
@@ -75,7 +66,7 @@ window.__CAPDETAIL = {
    "Systemic": "Helps many ways of knowing gain genuine standing within large institutions, protecting Indigenous and land-based sovereignty. Normalises pluriversal knowledge in spaces that have long excluded it."
   }
  },
- "Systems Thinking & Modeling": {
+ "Thinking in Systems": {
   "desc": "Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.",
   "levels": {
    "Personal": "Traces simple cause-and-effect and feedback loops in a situation close to you, seeing how one thing influences another over time. Begins to look for patterns rather than blaming single events or people.",
@@ -84,16 +75,7 @@ window.__CAPDETAIL = {
    "Systemic": "Builds and maintains large-scale system models that guide major, multi-partner efforts over time. Helps whole networks reason about feedback, delay, and consequence before they act."
   }
  },
- "Complex Problem Solving": {
-  "desc": "Categorizing problem fields across ordered, complex, or chaotic domains to determine whether an environment requires linear management or emergent experimentation.",
-  "levels": {
-   "Personal": "Tells the difference between 'complicated' problems — solvable by experts and analysis — and 'complex' challenges that need emergence and experimentation. Resists the urge to apply tidy, one-size-fits-all fixes to messy situations.",
-   "Social": "Identifies and maps the non-linear feedback loops and time delays inside a system, recognising that simple 'root cause' analysis is often not enough. Designs small experiments suited to genuine uncertainty.",
-   "Institutional": "Uses probe–sense–respond approaches to navigate uncertainty, favouring rapid learning and safe-to-fail experiments over rigid long-term prediction. Guides teams to adjust the plan as new information emerges.",
-   "Systemic": "Fosters 'adaptive space' that lets groups self-organise, shaping the underlying constraints and relationships of a system rather than trying to control its outputs. Coordinates large, many-sided efforts in fast-changing, high-stakes environments."
-  }
- },
- "Positionality & Power Analysis": {
+ "Navigating Power": {
   "desc": "Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.",
   "levels": {
    "Personal": "Maps who holds influence — both official and unofficial — in a space you're part of, and who benefits or loses from how things are arranged. Begins to notice the hidden and invisible forms of power, not just the obvious ones.",
@@ -102,7 +84,7 @@ window.__CAPDETAIL = {
    "Systemic": "Shifts deeply entrenched power imbalances across large funding systems and institutions toward those most affected. Helps return agency and decision-making to communities long kept on the margins."
   }
  },
- "Narrative & Media Analysis": {
+ "Shifting Narratives": {
   "desc": "Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.",
   "levels": {
    "Personal": "Spots bias, spin, framing, and stereotypes in news and online spaces, and asks whose voice is centred and whose is missing. Begins to see stories as something designed, not just given.",
@@ -111,7 +93,7 @@ window.__CAPDETAIL = {
    "Systemic": "Shifts large-scale cultural narratives across networks and media, reshaping what societies treat as success, wealth, and resilience. Changes the stories a whole field tells about what's possible."
   }
  },
- "Futures Thinking & Foresight": {
+ "Imagining Futures": {
   "desc": "Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.",
   "levels": {
    "Personal": "Imagines different possible futures instead of assuming things must stay as they are, distinguishing probable, plausible, possible, and preferred futures. Notices early signals and emerging trends.",
@@ -120,7 +102,7 @@ window.__CAPDETAIL = {
    "Systemic": "Shapes long-horizon agendas at large scale, designing systems meant to hold up and stay just across generations. Helps institutions take intergenerational responsibility seriously."
   }
  },
- "Regenerative Systems Design": {
+ "Designing Regenerative Systems": {
   "desc": "Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.",
   "levels": {
    "Personal": "Grasps the idea of circular, waste-free design and starts noticing resource use and waste streams around you. Sees the difference between extracting from a system and renewing it.",
@@ -129,7 +111,7 @@ window.__CAPDETAIL = {
    "Systemic": "Designs large shared-resource systems and commons that revitalise whole ecosystems and restore relationships with land. Helps shift entire sectors from extractive habits to regenerative ones."
   }
  },
- "Participatory Research & Design": {
+ "Deciding Together": {
   "desc": "Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.",
   "levels": {
    "Personal": "Gathers people's input through respectful conversation and inquiry rather than assuming you already know best. Frames questions that centre relevance, justice, and mutual learning.",
@@ -138,7 +120,7 @@ window.__CAPDETAIL = {
    "Systemic": "Shapes research norms and policy so that community-led design and many knowledge traditions become the standard. Helps redefine whose knowledge counts across a whole field."
   }
  },
- "Data Analysis & Evaluation": {
+ "Learning from Impact": {
   "desc": "Utilizing empirical data tracking, quantitative and qualitative metrics, and positive deviance mapping to identify hidden localized solutions and track system-wide trends.",
   "levels": {
    "Personal": "Reads public data and basic statistics to build clear, evidence-based arguments for change. Asks what the numbers do — and don't — actually show.",
@@ -147,7 +129,7 @@ window.__CAPDETAIL = {
    "Systemic": "Overhauls how large funders and institutions judge success, shifting from rigid targets toward measures of genuine systems change. Reshapes what a whole field treats as evidence of impact."
   }
  },
- "Experimenting & Building": {
+ "Prototyping & Testing": {
   "desc": "Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback.",
   "levels": {
    "Personal": "Tries small, safe-to-fail prototypes — a pop-up, a pilot, a quick test — to learn fast from real feedback rather than over-planning. Treats each attempt as a probe, not a final answer.",
@@ -156,7 +138,7 @@ window.__CAPDETAIL = {
    "Systemic": "Creates the funding and policy conditions that let whole networks prototype alternatives. Builds the experimental spaces and permissions that allow a field to try, learn, and adapt at scale."
   }
  },
- "Organizing & Facilitating": {
+ "Cultivating Collaboration": {
   "desc": "Bringing people together and organizing them into durable structures, then stewarding the spaces where they think, decide, and act — cultivating distributed intelligence, honest dialogue, and shared direction.",
   "levels": {
    "Personal": "Hosts balanced group conversations where quieter voices are heard and the work is genuinely shared. Co-creates norms and agreements that reflect the group's needs.",
@@ -165,7 +147,7 @@ window.__CAPDETAIL = {
    "Systemic": "Leads large multi-party gatherings where even rivals or competing interests can design solutions together. Stewards the kind of collective spaces that move whole systems forward."
   }
  },
- "Conflict Transformation": {
+ "Transforming Conflict": {
   "desc": "Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.",
   "levels": {
    "Personal": "Handles disagreements constructively, easing tension through listening and finding common ground. Engages with conflict without avoidance, aggression, or collapse.",
@@ -174,7 +156,7 @@ window.__CAPDETAIL = {
    "Systemic": "Guides reconciliation across deeply divided regions, sectors, or interests, helping rebuild trust where it has broken down. Transforms long-standing conflict into shared, generative direction."
   }
  },
- "Planning & Resource Mobilization": {
+ "Mobilizing Resources": {
   "desc": "Organizing adaptive logistics, elastic operational budgets, and highly flexible, non-linear timelines that accommodate unpredictable systemic feedback loops.",
   "levels": {
    "Personal": "Manages a timeline and a simple budget, keeping clear track of what's needed and when. Balances getting things done with caring for the people doing them.",
@@ -183,7 +165,7 @@ window.__CAPDETAIL = {
    "Systemic": "Designs large-scale funding and resource structures for major, long-term efforts and networks. Builds the financial and organisational backbone that lets ambitious change endure."
   }
  },
- "Ecosystem Engagement": {
+ "Strengthening Ecosystems": {
   "desc": "Interweaving separate grassroots initiatives, formal institutions, and civil actors into mutually supportive networks that share resources and strategic focus.",
   "levels": {
    "Personal": "Connects nearby groups to organise shared events or support each other's work. Begins to see the wider ecosystem of actors around an issue.",
@@ -192,7 +174,7 @@ window.__CAPDETAIL = {
    "Systemic": "Builds large cooperative networks and platforms that coordinate resources and advocacy across regions and borders. Helps a whole field act with more coherence than its parts could alone."
   }
  },
- "Advocacy & Political Participation": {
+ "Advocating for Policy Change": {
   "desc": "Actively engaging, challenging, or restructuring local legislative, policy, and civic institutional channels to secure structural and legal permanence for interventions.",
   "levels": {
    "Personal": "Takes part in civic life — petitions, local actions, voting, councils — and learns how decisions actually get made. Understands the paths through which ordinary people can shape policy.",
@@ -201,7 +183,7 @@ window.__CAPDETAIL = {
    "Systemic": "Shifts policy priorities and secures lasting legal protections for the common good and future generations. Helps reshape the rules that govern whole systems."
   }
  },
- "Leading in Complexity": {
+ "Developing Leaders": {
   "desc": "Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.",
   "levels": {
    "Personal": "Leads among peers, organising shared work fairly and celebrating the whole group's effort. Recognises the difference between complicated and complex challenges and adjusts accordingly.",
@@ -209,18 +191,9 @@ window.__CAPDETAIL = {
    "Institutional": "Leads teams by setting clear values and direction while leaving real room for experimentation and self-organisation. Balances clarity with flexibility as conditions change.",
    "Systemic": "Guides large networks through deep, paradigm-level change, modelling steady, trust-based, learning-in-action leadership. Holds shared purpose across many actors without dominating it."
   }
- },
- "Networking & Engaging Capital": {
-  "desc": "Directing financial, social, and structural capital to local projects while maintaining complete autonomy and protecting against extractive or conditional funding strings.",
-  "levels": {
-   "Personal": "Runs simple crowdfunding or mutual-aid efforts to meet immediate, concrete needs. Learns how resources flow and how to ask for support with integrity.",
-   "Social": "Secures small grants and seed funding, handling relationships with funders honestly and guarding against strings that distort the work. Builds the trust that early resourcing depends on.",
-   "Institutional": "Raises and manages larger impact investment and funding for sustainability work, keeping the mission in control of the money rather than the reverse. Structures deals that protect autonomy.",
-   "Systemic": "Builds community-owned funds and financial infrastructure that keep wealth and decision-making local, especially in the Global South. Designs alternatives to extractive finance at scale."
-  }
  }
 };
 // Defensive aliases: resolve renamed/legacy capacity labels to the same detail.
-if (window.__CAPDETAIL["Advocacy & Political Participation"]) {
-  window.__CAPDETAIL["Political Participation"] = window.__CAPDETAIL["Advocacy & Political Participation"];
+if (window.__CAPDETAIL["Advocating for Policy Change"]) {
+  window.__CAPDETAIL["Political Participation"] = window.__CAPDETAIL["Advocating for Policy Change"];
 }

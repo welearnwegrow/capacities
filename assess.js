@@ -6,7 +6,7 @@
   try{ levels=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ levels={}; }
   function save(){ try{ localStorage.setItem(KEY, JSON.stringify(levels)); }catch(e){} }
   function paint(cell,on,color){ if(on){ cell.style.boxShadow='inset 0 0 0 2px '+color; cell.style.background=color+'22'; } else { cell.style.boxShadow=''; cell.style.background=''; } }
-  function updateCount(){ var el=document.getElementById('ioc-assess-count'); if(el){ el.textContent=Object.keys(levels).length+' of 24 rated'; } }
+  function updateCount(){ var el=document.getElementById('ioc-assess-count'); if(el){ el.textContent=Object.keys(levels).length+' of 21 rated'; } }
   function setLevel(name,cells,lv){
     var cur=levels[name];
     cells.forEach(function(c){ paint(c,false); });
@@ -32,7 +32,7 @@
     var dstr=new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'});
     var html='<div style="padding:34px 34px 30px">';
     html+='<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:4px"><h2 style="font-family:Newsreader,serif;font-weight:600;font-size:26px;color:#6e4f1e;margin:0">Your Learning Areas Self-Assessment</h2><button id="ioc-assess-print" type="button" class="ioc-noprint" style="font-family:PT Sans,sans-serif;font-size:13px;font-weight:700;color:#fff;background:#6e4f1e;border:none;border-radius:20px;padding:9px 18px;cursor:pointer">Download / Print PDF</button></div>';
-    html+='<p style="font-size:12.5px;color:#8a7a5f;margin:0 0 16px">Systems Change Learning Guide \u00b7 '+dstr+' \u00b7 '+rated+' of 24 learning areas rated</p>';
+    html+='<p style="font-size:12.5px;color:#8a7a5f;margin:0 0 16px">Systems Change Learning Guide \u00b7 '+dstr+' \u00b7 '+rated+' of 21 learning areas rated</p>';
     html+='<div style="display:flex;flex-wrap:wrap;gap:14px 22px;padding:11px 16px;background:rgba(244,238,225,.6);border-radius:10px;margin-bottom:22px"><span style="font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a7a4a">Scale:</span>';
     LV.forEach(function(label,i){ if(!i) return; html+='<span style="display:flex;align-items:center;gap:7px;font-size:12px;color:#5a5347"><span style="width:12px;height:12px;border-radius:50%;background:rgba(70,113,111,'+(0.2+i*0.2)+')"></span>'+['','Emerging','Developing','Effective','Influential'][i]+'</span>'; });
     html+='</div>';

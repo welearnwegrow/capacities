@@ -17,9 +17,7 @@ Live at https://welearnwegrow.github.io/capacities/
 | `descriptors.html` | Learning area descriptors. |
 | `privacy.html` | Privacy policy. |
 
-Shared pieces: `SiteNav.dc.html`, `SiteFooter.dc.html`, `FeaturedShelf.dc.html` (home page bookshelf), and `Guide Me.dc.html` (the floating Coach button used on every page except the home page, where the Coach is built in).
-
-`index-v1-backup.html` is the previous home page, kept for reference. It is set to `noindex`; you don't need to upload it.
+Shared pieces: `SiteNav.dc.html`, `SiteFooter.dc.html`, `FeaturedShelf.dc.html` (bookshelf on the home page and the Learning Resources page, same size on both), and `Guide Me.dc.html` (the floating Coach button used on every page except the home page, where the Coach is built in).
 
 ## Deploy (GitHub Pages)
 

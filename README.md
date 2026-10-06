@@ -16,7 +16,7 @@ Live at https://welearnwegrow.github.io/capacities/
 | `descriptors.html` | Learning area descriptors. |
 | `privacy.html` | Privacy policy. |
 
-Shared pieces: `SiteNav.dc.html`, `SiteFooter.dc.html`, `FeaturedShelf.dc.html` (bookshelf on the home page and the Learning Resources page, same size on both), and `Guide Me.dc.html` (the Coach overlay, opened from the Guide Me button in the header on every page).
+Shared pieces: `SiteNav.dc.html`, `SiteFooter.dc.html`, `FeaturedShelf.dc.html` (this week's bookshelf on the home page), and `Guide Me.dc.html` (the Coach overlay, opened from the Guide Me button in the header on every page).
 
 ## Deploy (GitHub Pages)
 

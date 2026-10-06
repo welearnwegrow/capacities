@@ -2233,16 +2233,16 @@ window.__RESEARCH = {
  ],
  "groupMeta": {
   "teal": {
-   "name": "Change Begins Within",
+   "name": "Contextual Awareness",
    "sub": "Self-awareness & worldview"
   },
   "green": {
-   "name": "Moves through Collective Work",
-   "sub": "Reading the field"
+   "name": "Collective Design",
+   "sub": "Collective Design"
   },
   "coral": {
-   "name": "And Manifests in Action",
-   "sub": "Acting & sustaining"
+   "name": "Systemic Action",
+   "sub": "Systemic Action"
   }
  },
  "submitFormUrl": ""

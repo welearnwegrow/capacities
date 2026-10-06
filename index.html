@@ -126,7 +126,7 @@
   <div style="width:1040px;max-width:100%;margin:0 auto 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px">
       <a href="metaprocess.html" style="display:flex;flex-direction:column;gap:8px;text-decoration:none;background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:16px;padding:20px 20px 18px;box-shadow:0 8px 22px rgba(40,50,35,.07)">
         <span style="font-family:'PT Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8a7a4a">I need a method</span>
-        <span style="font-family:'Newsreader',serif;font-weight:500;font-size:23px;line-height:1.15;color:#1f3a36">Follow the route →</span>
+        <span style="font-family:'Newsreader',serif;font-weight:500;font-size:23px;line-height:1.15;color:#1f3a36">Use our design canvas →</span>
         <span style="font-family:'PT Sans',sans-serif;font-size:14px;line-height:1.5;color:#4a5752">Five stages for intervening in complex systems, each with a reflection canvas you can download and work through.</span>
       </a>
       <a href="resources.html" style="display:flex;flex-direction:column;gap:8px;text-decoration:none;background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:16px;padding:20px 20px 18px;box-shadow:0 8px 22px rgba(40,50,35,.07)">
@@ -151,11 +151,8 @@
 
   <!-- ===== MOBILE LEARNING AREAS (phones only) ===== -->
   <div class="ioc-browse" style="width:1040px;max-width:100%;margin:6px auto 0;text-align:left">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 14px">
-      <div>
-        
-        
-      </div>
+    <div style="margin:0 0 14px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#39342b">The learning areas guide our progress</h2>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px">
       <sc-for list="{{ browseDomains }}" as="d" hint-placeholder-count="3">
@@ -181,6 +178,48 @@
         </div>
       </sc-for>
     </div>
+    <div style="margin:28px 0 14px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#39342b">The route guides our actions</h2>
+      
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ browseMeta }}" as="m" hint-placeholder-count="5">
+        <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(57,52,43,.16);background:#fff">
+          <div onClick="{{ m.onToggle }}" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;min-height:52px">
+            <span style="width:11px;height:11px;border-radius:50%;flex:none;background:{{ m.dot }}"></span>
+            <div style="flex:1;min-width:0">
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#39342b">{{ m.title }}</div>
+              <div style="font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.4;color:#7a6f5c">{{ m.sub }}</div>
+            </div>
+            <span style="color:#39342b;font-size:20px;font-weight:700;flex:none;line-height:1">{{ m.chev }}</span>
+          </div>
+          <sc-if value="{{ m.open }}" hint-placeholder-val="{{ false }}">
+            <p style="font-family:'PT Sans',sans-serif;font-size:14px;line-height:1.6;color:#4a4435;margin:0;padding:0 16px 16px 39px">{{ m.body }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    
+    <div style="margin:28px 0 14px">
+      <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#39342b">The orientations guide our intentions</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <sc-for list="{{ browseOrients }}" as="o" hint-placeholder-count="4">
+        <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(176,130,47,.35);background:#fffdf8">
+          <div onClick="{{ o.onToggle }}" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;min-height:52px">
+            <div style="flex:1;min-width:0">
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#6B5527">{{ o.title }}</div>
+              <div style="font-family:'PT Sans',sans-serif;font-style:italic;font-size:12.5px;line-height:1.4;color:#977c45">{{ o.sub }}</div>
+            </div>
+            <span style="color:#6B5527;font-size:20px;font-weight:700;flex:none;line-height:1">{{ o.chev }}</span>
+          </div>
+          <sc-if value="{{ o.open }}" hint-placeholder-val="{{ false }}">
+            <p style="font-family:'PT Sans',sans-serif;font-size:14px;line-height:1.6;color:#4a4435;margin:0;padding:0 16px 16px">{{ o.body }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    
     <button onClick="{{ openMapFull }}" style="margin-top:16px;width:100%;min-height:48px;display:flex;align-items:center;justify-content:center;gap:9px;font-family:'PT Sans',sans-serif;font-size:15px;font-weight:700;color:#fff;background:#46716f;border:none;border-radius:26px;cursor:pointer;box-shadow:0 6px 16px rgba(70,113,111,.28)">Explore as map →</button>
   </div>
 
@@ -228,7 +267,7 @@
     <!-- grain -->
     <div style="position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply; background-image: url(&quot;data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'&gt;&lt;filter id='n'&gt;&lt;feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/&gt;&lt;feColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/&gt;&lt;/filter&gt;&lt;rect width='160' height='160' filter='url(%23n)'/&gt;&lt;/svg&gt;&quot;); left: 95px; top: 76px"></div>
     <!-- domain banners + orientation cards (lifted out of grain layer for clean white fill) -->
-    <div style="position: absolute; left: 892px; top: 469px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #69763f; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-green" data-edit="ban-collective">Moves through Collective Work</div><div style="position: absolute; left: 203px; top: 981px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #a85c38; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-coral" data-edit="ban-action">And Manifests in Action</div><div style="position: absolute; left: 371px; top: 227px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #3c5f5d; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-teal" data-edit="ban-within">Change Begins Within</div><div style="position: absolute; left: 685px; top: 183px; transform: translate(-50%,-50%); width: 123px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 37px" data-orient="recip">
+    <div style="position: absolute; left: 892px; top: 469px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #69763f; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-green" data-edit="ban-collective">Collective Design</div><div style="position: absolute; left: 203px; top: 981px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #a85c38; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-coral" data-edit="ban-action">Systemic Action</div><div style="position: absolute; left: 371px; top: 227px; transform: translate(-50%,-50%); font-family: 'PT Serif',serif; font-weight: 700; font-size: 15px; letter-spacing: .04em; color: #3c5f5d; background: rgba(252,251,247,0.42); padding: 5px 13px; border-radius: 11px; white-space: nowrap" data-tip="grp-teal" data-edit="ban-within">Contextual Awareness</div><div style="position: absolute; left: 685px; top: 183px; transform: translate(-50%,-50%); width: 123px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 4px 9px; height: 37px" data-orient="recip">
       <div data-edit="card-recip-t" style="font-family:'PT Serif',serif;font-weight:700;font-size:13px;line-height:1.14;color:#6B5527">Reciprocity</div>
       <div data-edit="card-recip-s" style="font-style:italic;font-size:10.5px;color:#977c45;margin-top: 1px">How we act</div>
     </div><div style="position: absolute; left: 956px; top: 181px; transform: translate(-50%,-50%); width: 152px; text-align: center; background: rgba(252,251,247,0.96); border: 1px solid rgba(217,187,120,0.55); border-radius: 9px; padding: 5px 10px" data-orient="shared">
@@ -291,7 +330,7 @@
   <!-- ===== WHO IT'S FOR ===== -->
   <section style="width:1040px;max-width:100%;margin:40px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px 28px">
       <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;color:#1f3a36">Changemakers</span><span style="font-family:'PT Sans',sans-serif;font-size:13.5px;line-height:1.5;color:#4a5752">Make sense of the system you are trying to shift, and find the learning areas and next steps that fit it.</span></div>
-      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;color:#1f3a36">Educators</span><span style="font-family:'PT Sans',sans-serif;font-size:13.5px;line-height:1.5;color:#4a5752">Draw on the map, the Route and the library to design courses, workshops and learning journeys.</span></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;color:#1f3a36">Educators</span><span style="font-family:'PT Sans',sans-serif;font-size:13.5px;line-height:1.5;color:#4a5752">Draw on the map, the design canvas, and the library to design courses, workshops and learning journeys.</span></div>
       <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'Newsreader',serif;font-weight:500;font-size:20px;color:#1f3a36">Leaders</span><span style="font-family:'PT Sans',sans-serif;font-size:13.5px;line-height:1.5;color:#4a5752">See which capacities your team already has, which it needs to grow, and where to begin.</span></div>
   </section>
 
@@ -732,33 +771,33 @@ class Component extends DCLogic {
       adapt: { t:'Adapt', s:'Adapt to context and solve emergent problems', b:'When your intervention meets the real world, the system will actively show its true nature through defensive pushback or unexpected positive ripples. Survival here relies on staying highly agile — setting up short real-time feedback loops, positioning the action for organic community adoption, distributing the power to pivot fast, and keeping internal team trust solid when chaos hits.' },
       integrate: { t:'Integrate', s:'Integrate feedback and weave in learnings', b:'The work concludes when learning is actively metabolized back into the community ecosystem. This phase translates ground-level outcomes into institutional data — honoring failures openly rather than sanitizing them. You evaluate whether behavioral baselines moved and whether local connections grew denser, transforming the entire messy trajectory into clear, powerful change stories that build social capital for the next cycle.' },
       // ===== group intros (banners) =====
-      'grp-teal':  { g:'teal',  t:'Change Begins Within', s:'Reading your context', b:'These learning areas sharpen awareness of the context you act within — your own positionality, the histories alive in the field, and the many ways of knowing at play. Without the ability to interrogate our assumptions, engage somatically, and honor ancestral and ecological ways of knowing, we risk replicating colonial mindsets. They build the situated awareness required to stay oriented while navigating the volatility of systems change.' },
-      'grp-green': { g:'green', t:'Moves through Collective Work', s:'Reading the field', b:'Understanding that we are embedded in nested systems is essential to avoid quick-fix solutions that mask systemic issues. These learning areas equip the learner to read the field — analyzing power, modeling feedback loops, and visualizing futures — so that interventions are rooted in the structural reality of the systems we seek to transform.' },
-      'grp-coral': { g:'coral', t:'And Manifests in Action', s:'Acting & sustaining', b:'The operational and tactical domain centered on non-linear execution, asset mobilization, and relational stewardship. It governs the practical application of power and the architecture of long-term regenerative structures, ensuring that systemic shifts are sustainably maintained across generations.' },
+      'grp-teal':  { g:'teal',  t:'Contextual Awareness', s:'', b:"These learning areas keep you grounded in the context you act within: your own position and power, the histories and ways of knowing around you, the living world, and how systems behave. Staying steady and seeing clearly are practices you carry through every stage of the work." },
+      'grp-green': { g:'green', t:'Collective Design', s:'', b:"These learning areas are about shaping change with others: hosting collaboration, sharing decisions, imagining futures, shifting narratives, aligning money, and redesigning the rules that hold a system in place." },
+      'grp-coral': { g:'coral', t:'Systemic Action', s:'', b:"These learning areas carry the work into the wider system: testing in practice, working through conflict, advocating for policy, developing leaders, learning as you go, strengthening networks, and telling the story of change so it spreads and lasts." },
       // ===== individual capacities (teal) =====
-      'Staying Grounded': { g:'teal', t:'Staying Grounded', s:'Change Begins Within', b:'The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.' },
-      'Listening Deeply': { g:'teal', t:'Listening Deeply', s:'Change Begins Within', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
-      'Engaging Capital': { g:'green', t:'Engaging Capital', s:'Moves through Collective Work', b:"Learning how money shapes systems change: where funding and investment come from, how their terms shape the work, and how to align grants, budgets and investment with long-term, community-led change, including flexible and blended funding that can change as the work does." },
-      'Acting with Integrity': { g:'teal', t:'Acting with Integrity', s:'Change Begins Within', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
-      'Reshaping Economies & States': { g:'green', t:'Reshaping Economies & States', s:'Moves through Collective Work', b:'Learning to change the economic and governance rules that shape a place, including ownership, growth, public finance, the commons, and how institutions are designed, so that wealth and decision-making serve communities instead of concentrating in few hands.' },
-      'Living Within Planetary Limits': { g:'teal', t:'Living Within Planetary Limits', s:'Change Begins Within', b:'Learning how the living world works, including earth systems, biodiversity, resource limits and ecological feedback, and putting that into practice through regenerative and circular ways of living, producing and restoring land.' },
-      'Honoring Many Ways of Knowing': { g:'teal', t:'Honoring Many Ways of Knowing', s:'Change Begins Within', b:'Engaging with diverse cultural knowledge systems, epistemologies, and ways of knowing — honoring indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
+      'Staying Grounded': { g:'teal', t:'Staying Grounded', s:'Contextual Awareness', b:'The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.' },
+      'Listening Deeply': { g:'teal', t:'Listening Deeply', s:'Contextual Awareness', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
+      'Engaging Capital': { g:'green', t:'Engaging Capital', s:'Collective Design', b:"Learning how money shapes systems change: where funding and investment come from, how their terms shape the work, and how to align grants, budgets and investment with long-term, community-led change, including flexible and blended funding that can change as the work does." },
+      'Acting with Integrity': { g:'teal', t:'Acting with Integrity', s:'Contextual Awareness', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
+      'Reshaping Economies & States': { g:'green', t:'Reshaping Economies & States', s:'Collective Design', b:'Learning to change the economic and governance rules that shape a place, including ownership, growth, public finance, the commons, and how institutions are designed, so that wealth and decision-making serve communities instead of concentrating in few hands.' },
+      'Living Within Planetary Limits': { g:'teal', t:'Living Within Planetary Limits', s:'Contextual Awareness', b:'Learning how the living world works, including earth systems, biodiversity, resource limits and ecological feedback, and putting that into practice through regenerative and circular ways of living, producing and restoring land.' },
+      'Honoring Many Ways of Knowing': { g:'teal', t:'Honoring Many Ways of Knowing', s:'Contextual Awareness', b:'Engaging with diverse cultural knowledge systems, epistemologies, and ways of knowing — honoring indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
       // ===== collective capacities (green) =====
-      'Thinking in Systems': { g:'teal', t:'Thinking in Systems', s:'Change Begins Within', b:'Learning the core tools of systems thinking: tracing feedback loops, delays, stocks and flows, and mapping how a system’s structure produces its behaviour, so you can find leverage points in any field.' },
-      'Imagining Futures': { g:'green', t:'Imagining Futures', s:'Moves through Collective Work', b:'Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.' },
-      'Building Power & Agency': { g:'teal', t:'Building Power & Agency', s:'Change Begins Within', b:'Learning to see how power works, formally and informally, and to build the agency of people who have been kept from it. Changing the rules of economies and states sits with Reshaping Economies & States.' },
-      'Designing for Complexity': { g:'green', t:'Designing for Complexity', s:'Moves through Collective Work', b:'Designing interventions for systems that cannot be fully predicted or controlled: trying several options at once, building in feedback, and creating the conditions for change to emerge, so that designs renew rather than deplete the people and places they touch.' },
-      'Shifting Narratives': { g:'green', t:'Shifting Narratives', s:'Moves through Collective Work', b:'Learning to read and shift the dominant stories in a culture: how media, framing and shared myths shape what people believe is normal or possible, and how new narratives take hold.' },
-      'Deciding Together': { g:'green', t:'Deciding Together', s:'Moves through Collective Work', b:'Learning to share real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research and shared governance are ways of doing this.' },
-      'Adaptive Monitoring Evaluation & Learning': { g:'coral', t:'Adaptive Monitoring Evaluation & Learning', s:'And Manifests in Action', b:'Tracking what is changing through data and people’s stories, spotting positive deviance, and using what is learned to adjust plans, budgets and timelines as the system responds.' },
+      'Thinking in Systems': { g:'teal', t:'Thinking in Systems', s:'Contextual Awareness', b:'Learning the core tools of systems thinking: tracing feedback loops, delays, stocks and flows, and mapping how a system’s structure produces its behaviour, so you can find leverage points in any field.' },
+      'Imagining Futures': { g:'green', t:'Imagining Futures', s:'Collective Design', b:'Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.' },
+      'Building Power & Agency': { g:'teal', t:'Building Power & Agency', s:'Contextual Awareness', b:'Learning to see how power works, formally and informally, and to build the agency of people who have been kept from it. Changing the rules of economies and states sits with Reshaping Economies & States.' },
+      'Designing for Complexity': { g:'green', t:'Designing for Complexity', s:'Collective Design', b:'Designing interventions for systems that cannot be fully predicted or controlled: trying several options at once, building in feedback, and creating the conditions for change to emerge, so that designs renew rather than deplete the people and places they touch.' },
+      'Shifting Narratives': { g:'green', t:'Shifting Narratives', s:'Collective Design', b:'Learning to read and shift the dominant stories in a culture: how media, framing and shared myths shape what people believe is normal or possible, and how new narratives take hold.' },
+      'Deciding Together': { g:'green', t:'Deciding Together', s:'Collective Design', b:'Learning to share real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research and shared governance are ways of doing this.' },
+      'Adaptive Monitoring Evaluation & Learning': { g:'coral', t:'Adaptive Monitoring Evaluation & Learning', s:'Systemic Action', b:'Tracking what is changing through data and people’s stories, spotting positive deviance, and using what is learned to adjust plans, budgets and timelines as the system responds.' },
       // ===== systemic capacities (coral) =====
-      'Prototyping & Testing': { g:'coral', t:'Prototyping & Testing', s:'And Manifests in Action', b:"Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what you learn to decide what to try next." },
-      'Cultivating Collaboration': { g:'green', t:'Cultivating Collaboration', s:'Moves through Collective Work', b:'Learning to host groups well: designing conversations, building trust and shared norms, and facilitating so people can think and work together. Who holds power over the group’s decisions sits with Deciding Together.' },
-      'Transforming Conflict': { g:'coral', t:'Transforming Conflict', s:'And Manifests in Action', b:'Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.' },
-      'Telling Stories of Systems Change': { g:'coral', t:'Telling Stories of Systems Change', s:'And Manifests in Action', b:'Learning to tell the story of your own change work as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.' },
-      'Developing Leaders': { g:'coral', t:'Developing Leaders', s:'And Manifests in Action', b:'Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.' },
-      'Strengthening Ecosystems': { g:'coral', t:'Strengthening Ecosystems', s:'And Manifests in Action', b:'Learning to weave separate organisations, initiatives and institutions into networks that share resources, learning and strategy, so that the work holds together across a whole field rather than inside one group.' },
-      'Advocating for Policy Change': { g:'coral', t:'Advocating for Policy Change', s:'And Manifests in Action', b:'Actively engaging, challenging, or restructuring local legislative, policy, and civic institutional channels to secure structural and legal permanence for interventions.' }
+      'Prototyping & Testing': { g:'coral', t:'Prototyping & Testing', s:'Systemic Action', b:"Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what you learn to decide what to try next." },
+      'Cultivating Collaboration': { g:'green', t:'Cultivating Collaboration', s:'Collective Design', b:'Learning to host groups well: designing conversations, building trust and shared norms, and facilitating so people can think and work together. Who holds power over the group’s decisions sits with Deciding Together.' },
+      'Transforming Conflict': { g:'coral', t:'Transforming Conflict', s:'Systemic Action', b:'Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.' },
+      'Telling Stories of Systems Change': { g:'coral', t:'Telling Stories of Systems Change', s:'Systemic Action', b:'Learning to tell the story of your own change work as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.' },
+      'Developing Leaders': { g:'coral', t:'Developing Leaders', s:'Systemic Action', b:'Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.' },
+      'Strengthening Ecosystems': { g:'coral', t:'Strengthening Ecosystems', s:'Systemic Action', b:'Learning to weave separate organisations, initiatives and institutions into networks that share resources, learning and strategy, so that the work holds together across a whole field rather than inside one group.' },
+      'Advocating for Policy Change': { g:'coral', t:'Advocating for Policy Change', s:'Systemic Action', b:'Actively engaging, challenging, or restructuring local legislative, policy, and civic institutional channels to secure structural and legal permanence for interventions.' }
     };
     return this.__tips;
   }
@@ -897,7 +936,7 @@ class Component extends DCLogic {
     const CD = (typeof window!=='undefined' && window.__CAPDETAIL) ? window.__CAPDETAIL : {};
     const capRec = (R.capacities||[]).find(c=>c.label===key) || {group:'teal'};
     const g = capRec.group || 'teal';
-    const GRP = { teal:{c:'#46716f',name:'Change Begins Within',head:'#e3ecea',rgb:[46,113,111]}, green:{c:'#5b6733',name:'Moves through Collective Work',head:'#ebeedd',rgb:[118,131,74]}, coral:{c:'#a8542d',name:'And Manifests in Action',head:'#f4e3d9',rgb:[189,106,71]} };
+    const GRP = { teal:{c:'#46716f',name:'Contextual Awareness',head:'#e3ecea',rgb:[46,113,111]}, green:{c:'#5b6733',name:'Collective Design',head:'#ebeedd',rgb:[118,131,74]}, coral:{c:'#a8542d',name:'Systemic Action',head:'#f4e3d9',rgb:[189,106,71]} };
     const gd = GRP[g] || GRP.teal;
     const det = CD[key] || {};
     const tcMap = { 'Books':'#46716f','Methods & Toolkits':'#8a6a45','Digital Publications / Reports':'#5b6733','Data Tools':'#2f6f8f','Case Studies':'#a8542d','Networks':'#7a5ea8','Podcast':'#b5852f','Video':'#b14a6b','Articles / Blogposts':'#4a7c59','Articly / Blogposts':'#4a7c59','Other':'#6b5d45' };
@@ -994,7 +1033,7 @@ class Component extends DCLogic {
   }
   _v2Vals(){
     const scrollToId = (id) => (e) => { if (e && e.preventDefault) e.preventDefault(); const el = document.getElementById(id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 16, behavior: 'smooth' }); };
-    const GM = { teal:{name:'Change Begins Within',sub:'Reading your context',color:'#335a58',chip:'#e3ecea',border:'rgba(70,113,111,.28)'}, green:{name:'Moves through Collective Work',sub:'Reading the field',color:'#4f5a2b',chip:'#ebeedd',border:'rgba(118,131,74,.3)'}, coral:{name:'And Manifests in Action',sub:'Acting on the system',color:'#94471f',chip:'#f4e5db',border:'rgba(189,106,71,.3)'} };
+    const GM = { teal:{name:'Contextual Awareness',sub:'',color:'#335a58',chip:'#e3ecea',border:'rgba(70,113,111,.28)'}, green:{name:'Collective Design',sub:'',color:'#4f5a2b',chip:'#ebeedd',border:'rgba(118,131,74,.3)'}, coral:{name:'Systemic Action',sub:'Acting on the system',color:'#94471f',chip:'#f4e5db',border:'rgba(189,106,71,.3)'} };
     const isl = this.state.isl || [];
     const pickGroups = ['teal','green','coral'].map(g => Object.assign({}, GM[g], { areas: isl.filter(p => p.group === g).map(p => ({ label: p.label, open: () => { this._pinned = null; this._hideTip && this._hideTip(); this.setState({ openCap: p.label, openInfo: null }, this._sync); } })) }));
     const TIP = this._tipData();
@@ -1111,7 +1150,7 @@ class Component extends DCLogic {
 
     const TIP = this._tipData();
     const browseOrients = ['recip','shared','pluri','jrf'].map(k => { const d = TIP[k] || {}; const open = this.state.mOrient === k; return { title:d.t, sub:d.s, body:d.b, open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mOrient: s.mOrient===k ? null : k })) }; });
-    const GMETA = { teal:{name:'Change Begins Within',sub:'Reading your context',head:'#46716f',border:'rgba(70,113,111,.3)',dot:'#46716f'}, green:{name:'Moves through Collective Work',sub:'Reading the field',head:'#5f7a3a',border:'rgba(95,122,58,.3)',dot:'#5f7a3a'}, coral:{name:'And Manifests in Action',sub:'Acting & sustaining',head:'#a8542d',border:'rgba(168,84,45,.3)',dot:'#a8542d'} };
+    const GMETA = { teal:{name:'Contextual Awareness',sub:'',head:'#46716f',border:'rgba(70,113,111,.3)',dot:'#46716f'}, green:{name:'Collective Design',sub:'',head:'#5f7a3a',border:'rgba(95,122,58,.3)',dot:'#5f7a3a'}, coral:{name:'Systemic Action',sub:'',head:'#a8542d',border:'rgba(168,84,45,.3)',dot:'#a8542d'} };
     const browseDomains = ['teal','green','coral'].map(g => { const m = GMETA[g]; const open = this.state.mGroup === g; const areas = (this.state.isl||[]).filter(p=>p.group===g).map(p=>({ label:p.label, onOpen: () => this.setState({ openCap: p.label, openInfo: null }, this._sync) })); return { key:g, name:m.name, sub: areas.map(a=>a.label).join(' · '), dot:m.dot, border:m.border, open, chev: open?'–':'+', headStyle:{ background:m.head, padding:'15px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }, areas, onToggle: () => this.setState(s => ({ mGroup: s.mGroup===g ? null : g })) }; });
 
     const MSTAGE = { probe:'#46716f', sense:'#5f7a3a', design:'#b07a3c', adapt:'#a8542d', integrate:'#3f6e74' };

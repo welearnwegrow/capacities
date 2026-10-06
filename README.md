@@ -53,7 +53,7 @@ Endpoints:
 - `POST /ai`: the Coach conversation (Claude).
 - `POST /cases`: real-world cases to learn from (one web search per turn).
 - `POST /log-query`: saves each Coach session to *Problem Statements from Guide Me*.
-- `POST /log-feedback`: saves "Is this helping?" ratings and comments to *Guide Me Feedback*.
+- `POST /log-feedback`: saves "Is this helping?" ratings and comments to *Users & Feedback*.
 
 Environment variables (details in the header of `worker.js`): `NOTION_TOKEN`, `NOTION_DB_ID` (Resources), `QUERIES_DB_ID`, `FEEDBACK_DB_ID`, `ANTHROPIC_API_KEY`. Share each Notion database with the integration behind `NOTION_TOKEN`.
 

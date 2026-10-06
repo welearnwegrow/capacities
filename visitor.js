@@ -1,5 +1,5 @@
 /* Visitor sign-in: asks once for name + email ("Before you begin"), logs it to
-   Notion (Guide Me Feedback, Source = enter-site) and reuses it across the site:
+   Notion (Users & Feedback, Source = enter-site) and reuses it across the site:
    self-assessment, Guide Me, resource suggestions and the contact form. */
 (function(){
   var KEY='ioc-visitor';

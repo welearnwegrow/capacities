@@ -408,6 +408,7 @@ class Component extends DCLogic {
     this.setState({ messages:[{role:'user',content:problem},{role:'assistant',content:reply}], map:this.DEMO_MAP, loading:false });
   }
   componentDidMount(){
+    setTimeout(()=>this._postInlineState(),0);
     this._demo = this.props.demo === true || /[?&]demo=1/.test(location.search || '');
     if(this._demo) setTimeout(()=>this._loadDemo(), 0);
     window.addEventListener('research-data-updated', ()=>this.forceUpdate());
@@ -449,7 +450,8 @@ class Component extends DCLogic {
     if(this._onExit) document.removeEventListener('mouseout', this._onExit);
     this._saveLog();
   }
-  componentDidUpdate(){ this._scroll(); }
+  componentDidUpdate(){ this._scroll(); this._postInlineState(); }
+  _postInlineState(){ if(!/[?&]inline=1/.test(location.search||'')) return; const started=!!((this.state.messages||[]).length||this.state.loading); const ov=started?'auto':'hidden'; try{ const sc=document.getElementById('gm-scroll'); if(sc) sc.style.overflowY=ov; document.documentElement.style.overflowY=ov; document.body.style.overflowY=ov; }catch(e){} if(started===this._lastStarted) return; this._lastStarted=started; this._postParent('gm-inline-state',{started:started}); }
   _scroll(){ const el=document.getElementById('gm-scroll'); if(el){ requestAnimationFrame(()=>{ el.scrollTop=el.scrollHeight; }); } }
 
   _data(){ return window.__RESEARCH || {capacities:[],resources:[]}; }

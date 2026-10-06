@@ -62,7 +62,7 @@
   function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
   function done(extra){ var d=document.getElementById('ioc-eg-done'); if(d){ if(extra) d.textContent=extra; d.style.display='block'; } }
   function send(){
-    var name=val('ioc-eg-name'), email=val('ioc-eg-email'), org=val('ioc-eg-org'), msg=val('ioc-eg-msg');
+    var _v=(window.iocVisitor&&window.iocVisitor())||{}; var name=val('ioc-eg-name')||_v.n||'', email=val('ioc-eg-email')||_v.e||'', org=val('ioc-eg-org'), msg=val('ioc-eg-msg');
     var subject='Partner with Us enquiry'+(name?(' from '+name):'');
     var keys=[window.WEB3FORMS_ACCESS_KEY].filter(function(k){return k;});
     if (keys.length) {
@@ -188,7 +188,7 @@
             </sc-for>
           </div>
         </div>
-        <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="display:none">
           <input id="ioc-eg-name" placeholder="Your name" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none">
           <input id="ioc-eg-email" type="email" placeholder="Your email" style="flex:1;min-width:160px;font-family:'PT Sans',sans-serif;font-size:14px;padding:11px 13px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#fff;outline:none">
         </div>

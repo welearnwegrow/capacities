@@ -357,7 +357,7 @@
       <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:32px;line-height:1.1;margin:0;color:#1f3a36">Where are you stuck?</h2>
       <p style="font-family:'PT Sans',sans-serif;font-size:14.5px;line-height:1.55;color:#4a5752;margin:0;max-width:70ch">Describe a situation you are working on. The coach reads it through the learning areas, shows where you are on the route, and offers practical next steps, resources and cases.</p>
     </div>
-    <iframe src="explorer.html?embed=1&amp;inline=1" title="Systems Change Coach" loading="lazy" style="width:100%;height:780px;border:1px solid rgba(70,113,111,.22);border-radius:18px;background:#f4eedf;box-shadow:0 14px 36px rgba(40,50,35,.10)"></iframe>
+    <iframe id="ioc-coach-frame" src="explorer.html?embed=1&amp;inline=1" title="Systems Change Coach" loading="lazy" style="width:100%;height:520px;transition:height .35s ease;border:1px solid rgba(70,113,111,.22);border-radius:18px;background:#f4eedf;box-shadow:0 14px 36px rgba(40,50,35,.10)"></iframe>
   </section>
 
 
@@ -515,6 +515,7 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    window.addEventListener('message', (ev) => { const d = ev.data || {}; if (d.type === 'gm-inline-state') { const f = document.getElementById('ioc-coach-frame'); if (f) f.style.height = d.started ? '780px' : '520px'; } });
     if (this._islEditing()) { this._islDefault = this.state.isl.map(p=>Object.assign({},p)); try { const d = JSON.parse(localStorage.getItem('ioc-isl-draft')||'null'); if (Array.isArray(d)) { const m={}; d.forEach(q=>m[q.label]=q); this.setState({ isl: this.state.isl.map(p=> m[p.label] ? Object.assign({},p,{x:m[p.label].x,y:m[p.label].y}) : p) }); } } catch(err){} }
     const words = ['governance','health','food','energy','economic','justice'];
     let ri = 0;

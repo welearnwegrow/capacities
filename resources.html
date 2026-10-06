@@ -315,8 +315,8 @@
             <div style="display:flex;flex-direction:column;gap:11px">
               <input id="ioc-sr-title" placeholder="Title" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
               <input id="ioc-sr-link" placeholder="Link (URL)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
-              <input id="ioc-sr-name" placeholder="Your name (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
-              <input id="ioc-sr-email" type="email" placeholder="Your email (optional)" style="font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <input id="ioc-sr-name" placeholder="Your name (optional)" type="hidden" style="display:none;font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
+              <input id="ioc-sr-email" type="hidden" placeholder="Your email (optional)" style="display:none;font-family:'PT Sans',sans-serif;font-size:14px;padding:10px 12px;border:1px solid rgba(120,105,75,.4);border-radius:9px;background:#FCFBF7;outline:none">
             </div>
             <sc-if value="{{ submitFailed }}" hint-placeholder-val="{{ false }}">
               <div style="margin-top:14px;padding:10px 12px;border-radius:9px;background:#f6e3db;border:1px solid rgba(168,84,45,.4);font-family:'PT Sans',sans-serif;font-size:12.5px;line-height:1.5;color:#8a3f1f">{{ submitErrorMsg }}</div>
@@ -393,7 +393,7 @@ class Component extends DCLogic {
   doSubmit(){
     if (this.state.submitting) return;
     var g=function(id){ var el=document.getElementById(id); return el?el.value.trim():''; };
-    var title=g('ioc-sr-title'), link=g('ioc-sr-link'), sname=g('ioc-sr-name'), email=g('ioc-sr-email');
+    var _v=(window.iocVisitor&&window.iocVisitor())||{}; var title=g('ioc-sr-title'), link=g('ioc-sr-link'), sname=g('ioc-sr-name')||_v.n||'', email=g('ioc-sr-email')||_v.e||'';
     if (!title) { this.setState({submitError:'notitle'}); return; }
     if (!link) { this.setState({submitError:'nolink'}); return; }
     if (window.track) window.track('suggest_resource', { title: title || '(untitled)' });

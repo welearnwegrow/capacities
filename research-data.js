@@ -18,8 +18,8 @@ window.__RESEARCH = {
    "group": "teal"
   },
   {
-   "label": "Reading Economic & Political Forces",
-   "group": "teal"
+   "label": "Reshaping Economies & States",
+   "group": "green"
   },
   {
    "label": "Living Within Planetary Limits",
@@ -31,14 +31,14 @@ window.__RESEARCH = {
   },
   {
    "label": "Thinking in Systems",
-   "group": "green"
+   "group": "teal"
   },
   {
    "label": "Imagining Futures",
    "group": "green"
   },
   {
-   "label": "Navigating Power",
+   "label": "Building Power and Agency",
    "group": "teal"
   },
   {
@@ -125,8 +125,8 @@ window.__RESEARCH = {
   {
    "name": "All About Power",
    "caps": [
-    "Navigating Power",
-    "Reading Economic & Political Forces"
+    "Building Power and Agency",
+    "Reshaping Economies & States"
    ],
    "desc": "A seminal primer by Srilatha Batliwala that demystifies power by analyzing both formal structures and informal relations. It provides a shared lexicon for social justice advocates to map how power operates, enabling them to build more effective, evidence-based strategies for systemic change.",
    "types": [
@@ -209,7 +209,7 @@ window.__RESEARCH = {
    "name": "Bayo Akomolafe’s Essays",
    "caps": [
     "Acting with Integrity",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "Bayo Akomolafe’s essays challenge the traditional Western paradigms of progress, individuality, and linear activism. By weaving together post-humanist philosophy, indigenous wisdom, and critical inquiry, he invites readers to embrace \"entanglement\" and the \"inappropriate\" rather than seeking simple solutions to systemic crises. His work critiques modernity’s obsession with control, urging a shift toward slowing down, grieving, and finding generative possibilities in the breakdown of dominant systems. It is a profound, poetic disruption of normative thinking.",
    "types": [
@@ -233,7 +233,7 @@ window.__RESEARCH = {
   {
    "name": "Belonging Design Principles",
    "caps": [
-    "Navigating Power",
+    "Building Power and Agency",
     "Designing Regenerative Systems"
    ],
    "desc": "Created by the Othering & Belonging Institute, this guide outlines architectural and social principles for building genuine inclusion. It offers a blueprint for organizations to dismantle structural exclusion by intentionally designing spaces, policies, and narratives that foster universal belonging.",
@@ -246,7 +246,7 @@ window.__RESEARCH = {
   {
    "name": "Belonging without Othering: How We Save Ourselves and the World",
    "caps": [
-    "Navigating Power",
+    "Building Power and Agency",
     "Acting with Integrity"
    ],
    "desc": "john a. powell and Stephen Menendian explore the systemic dynamics of exclusion and structural racism, presenting structural \"targeted universalism\" frameworks to foster true societal belonging without marginalizing others.",
@@ -317,8 +317,8 @@ window.__RESEARCH = {
    "name": "Climate Change is Racist",
    "caps": [
     "Living Within Planetary Limits",
-    "Navigating Power",
-    "Reading Economic & Political Forces"
+    "Building Power and Agency",
+    "Reshaping Economies & States"
    ],
    "desc": "This uncomfortable, essential read exposes the structural racism embedded within the climate crisis and its solutions. It’s a call to look deeper, reminding us that true sustainability is impossible without racial justice. A  resource for ensuring our systems transformation is equitable for everyone, everywhere.",
    "types": [
@@ -526,7 +526,7 @@ window.__RESEARCH = {
    "caps": [
     "Honoring Many Ways of Knowing",
     "Deciding Together",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "Linda Tuhiwai Smith's foundational text critiques Eurocentric scientific and academic paradigms, exploring how research can be reclaimed, decolonized, and re-centered through Indigenous knowledge and systemic practices.",
    "types": [
@@ -561,7 +561,7 @@ window.__RESEARCH = {
    "name": "Design Social Change: Take Action, Work toward Equity, and Challenge the Status Quo",
    "caps": [
     "Designing Regenerative Systems",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "This article explores the concept of \"un-learning\" as a critical practice for fostering systemic change. It argues that traditional educational models often reinforce existing, extractive worldviews, making it difficult to envision or build genuinely regenerative futures. By applying pedagogical strategies that dismantle ingrained, colonial, and hierarchical mental models, the authors propose that practitioners can cultivate the \"epistemic agency\" required to design more equitable, community-led, and adaptive systems. It emphasizes that before new systems can take root, the old cognitive patterns that sustain them must be actively and intentionally un-learned.",
    "types": [
@@ -610,7 +610,7 @@ window.__RESEARCH = {
   {
    "name": "Dismantling the Master's Tools",
    "caps": [
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "This project offers a deep dive into the somatic and systemic practice of interrogating white supremacy in social R&D. It provides reflective tools for practitioners to recognize how their own bodies and habits are conditioned by colonial structures, offering paths toward radical transformation.",
    "types": [
@@ -622,7 +622,7 @@ window.__RESEARCH = {
    "name": "Donought Economics",
    "caps": [
     "Living Within Planetary Limits",
-    "Reading Economic & Political Forces",
+    "Reshaping Economies & States",
     "Designing Regenerative Systems"
    ],
    "desc": "The Doughnut Economics model provides a compass for 21st-century prosperity, balancing human needs with planetary limits. It features two concentric rings: a social foundation to prevent deprivation and an ecological ceiling to avoid environmental degradation. The space between, the \"doughnut,\" represents a safe and just operating space for humanity. This framework is vital for systems change as it shifts the goal of economic activity from endless growth to thriving within regenerative, life-sustaining boundaries.",
@@ -648,7 +648,7 @@ window.__RESEARCH = {
    "caps": [
     "Thinking in Systems",
     "Strengthening Ecosystems",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "Adam Kahane’s exploration of everyday habits highlights how systemic transformation is not solely the result of major strategic interventions but is built through the iterative, daily practices of those within the system. By focusing on cultivating skills like deep listening, reflecting on one’s own mental models, and fostering candid dialogue, practitioners can disrupt entrenched patterns from within. This approach is highly relevant for systems change as it democratizes agency, shifting the responsibility for transformation from external \"experts\" to the everyday choices of those navigating the system.",
    "types": [
@@ -755,7 +755,7 @@ window.__RESEARCH = {
    "name": "Governing the Commons: The Evolution of Institutions for Collective Action",
    "caps": [
     "Strengthening Ecosystems",
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "Elinor Ostrom's Nobel Prize-winning seminal text evaluates how local communities successfully govern common-pool natural resources through self-organized institutions rather than relying on state coercion or complete privatization.",
    "types": [
@@ -766,7 +766,7 @@ window.__RESEARCH = {
   {
    "name": "Green Dreamer",
    "caps": [
-    "Reading Economic & Political Forces",
+    "Reshaping Economies & States",
     "Living Within Planetary Limits"
    ],
    "desc": "A podcast and community platform hosted by Kamea Chayne, focusing on radical solutions for climate justice and collective healing through systemic re-alignment.",
@@ -804,8 +804,8 @@ window.__RESEARCH = {
    "name": "Hospicing Modernity: Facing Humanity's Wrongs and the Implications for Social Activism",
    "caps": [
     "Living Within Planetary Limits",
-    "Reading Economic & Political Forces",
-    "Navigating Power"
+    "Reshaping Economies & States",
+    "Building Power and Agency"
    ],
    "desc": "Vanessa Machado de Oliveira provides a profound guide on how to face global crises, systemic harms, and climate collapse with maturity, humility, and integrity without relying on simplistic quick-fix solutions.",
    "types": [
@@ -827,7 +827,7 @@ window.__RESEARCH = {
   {
    "name": "Inequality Reexamined",
    "caps": [
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "Inequality Reexamined by Amartya Sen argues that equality in one space (such as income) frequently masks deep inequalities in others (such as physical capability, social standing, or agency). Sen introduces the \"capability approach,\" which evaluates quality of life based on the actual freedoms individuals possess to achieve the lives they value. This shifts the focus from static resource distribution to the systemic conditions that enable or inhibit human flourishing, providing a critical framework for designing more equitable, multidimensional social systems.",
    "types": [
@@ -838,7 +838,7 @@ window.__RESEARCH = {
   {
    "name": "Jacobin Radio",
    "caps": [
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "Jacobin Radio is a podcast series from the American socialist publication Jacobin, offering commentary on politics, economics, and culture from a leftist perspective. It features interviews with activists, journalists, and academics who analyze power structures, labor movements, and systemic inequality. For those focused on systems change, it provides a critical examination of institutional failures and historical policy outcomes, challenging dominant neoliberal frameworks by centering class-based analysis and the political economy as primary drivers of social structure.",
    "types": [
@@ -897,7 +897,7 @@ window.__RESEARCH = {
   {
    "name": "Map the System Case Library",
    "caps": [
-    "Navigating Power",
+    "Building Power and Agency",
     "Thinking in Systems"
    ],
    "desc": "An investigation into the dual water crisis in Jakarta, Indonesia, mapping the complex systemic interactions between urban development, climate change, and resource depletion.",
@@ -1006,7 +1006,7 @@ window.__RESEARCH = {
    "name": "Our World in Data",
    "caps": [
     "Learning from Impact",
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "A comprehensive online publication that presents empirical research and data on global development challenges, helping users visualize long-term trends in health, poverty, and environmental sustainability.",
    "types": [
@@ -1029,7 +1029,7 @@ window.__RESEARCH = {
   {
    "name": "Pedagogy of the Oppressed",
    "caps": [
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "Paulo Freire's seminal text introduces a liberating education framework, championing critical pedagogy and dialogic practices to empower communities to overcome systemic oppression.",
    "types": [
@@ -1111,7 +1111,7 @@ window.__RESEARCH = {
    "name": "Regenerative Economics",
    "caps": [
     "Mobilizing Resources",
-    "Reading Economic & Political Forces",
+    "Reshaping Economies & States",
     "Engaging Capital"
    ],
    "desc": "This resource provides educational frameworks for understanding economic models that prioritize planetary health and social well-being over extraction. It aims to equip educators and students with the systemic understanding needed to move beyond traditional growth-based paradigms toward circular and regenerative futures.",
@@ -1138,7 +1138,7 @@ window.__RESEARCH = {
    "caps": [
     "Honoring Many Ways of Knowing",
     "Deciding Together",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "Shawn Wilson's foundational text presents research as a relational, ceremonial practice grounded in Indigenous epistemologies, where knowledge is built through relationship and accountability to community, land, and ancestors.",
    "types": [
@@ -1198,7 +1198,7 @@ window.__RESEARCH = {
   {
    "name": "Seeing Like a State",
    "caps": [
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "Written by James C. Scott, Seeing Like a State explores how certain large-scale authoritarian schemes to improve the human condition have tragically failed. The book analyzes how states utilize \"legibility\" to simplify complex, social, and ecological realities into manageable, top-down data metrics. Scott argues that these rigid, modernist designs fail because they disregard metis—the localized, practical, and experiential knowledge essential to functioning systems. It serves as a vital resource for understanding the limits of centralized control and the importance of organic, adaptive complex systems.",
    "types": [
@@ -1220,8 +1220,8 @@ window.__RESEARCH = {
   {
    "name": "Shikshantar",
    "caps": [
-    "Reading Economic & Political Forces",
-    "Navigating Power"
+    "Reshaping Economies & States",
+    "Building Power and Agency"
    ],
    "desc": "Shikshantar, the Institute for Hand-rearing Minds, functions as a laboratory for \"deschooling\" and building diverse, autonomous learning societies. Based in Udaipur, it critiques the industrial-schooling model as a form of colonial conditioning that suppresses natural intelligence and creativity. By fostering \"gift culture,\" community-led mentorship, and self-directed learning paths, it provides a practical framework for creating resilient, localized ecosystems that prioritize human connection, ecological regeneration, and the reclamation of our innate capacity to design our own lives.",
    "types": [
@@ -1248,7 +1248,7 @@ window.__RESEARCH = {
    "caps": [
     "Cultivating Collaboration",
     "Advocating for Policy Change",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "A guidebook by Deepa Iyer that offers a comprehensive set of frameworks and reflective practices for those working in social change. It helps practitioners identify their roles within an ecosystem, navigate the challenges of movement-building, and foster deep connection across diverse communities.",
    "types": [
@@ -1296,7 +1296,7 @@ window.__RESEARCH = {
    "caps": [
     "Listening Deeply",
     "Staying Grounded",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "Staci Haines focuses on \"somatics\"—the intersection of body, movement, and social change. Her work asserts that systemic transformation requires not just intellectual analysis, but the physical capacity to embody new ways of being. By addressing how trauma, habits, and power dynamics are physically held, her approach helps individuals and groups develop the resilience needed to disrupt oppressive systems and sustain generative, equitable action. It bridges the gap between personal internal state and external collective political movement.",
    "types": [
@@ -1569,7 +1569,7 @@ window.__RESEARCH = {
    "name": "The Commoner's Catalog for Changemaking",
    "caps": [
     "Prototyping & Testing",
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "Explore the world of commoning, where communities steward everything from water to finance. This catalog provides a practical blueprint for self-reliance, showing how grassroots collaboration can reclaim control over our resources and culture. It’s an essential guide for building alternative, regenerative social futures",
    "types": [
@@ -1629,7 +1629,7 @@ window.__RESEARCH = {
    "name": "The Dawn of Everything: A New History of Humanity",
    "caps": [
     "Honoring Many Ways of Knowing",
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "A fundamentally transformed understanding of the human past and offers a path toward imagining new forms of freedom, new ways of organizing society. This pathbreaking book fundamentally transforms our understanding of the human past, challenging foundational myths about social evolution, hierarchy, and state origins.",
    "types": [
@@ -1709,7 +1709,7 @@ window.__RESEARCH = {
   {
    "name": "The Future is Degrowth",
    "caps": [
-    "Reading Economic & Political Forces",
+    "Reshaping Economies & States",
     "Designing Regenerative Systems"
    ],
    "desc": "The Future Is Degrowth provides a rigorous political-economic critique of the \"growth imperative\" that underpins modern capitalism. It argues that infinite growth on a finite planet is ecologically impossible and socially corrosive, necessitating a planned, democratic, and redistributive transition to a post-growth society. By synthesizing history, political theory, and ecological science, the authors offer a roadmap for dismantling the growth hegemony while centering human wellbeing, social justice, and reduced consumption as the foundational metrics of a resilient future.",
@@ -1733,7 +1733,7 @@ window.__RESEARCH = {
   {
    "name": "The Great Simplification",
    "caps": [
-    "Reading Economic & Political Forces",
+    "Reshaping Economies & States",
     "Designing Regenerative Systems"
    ],
    "desc": "Hosted by Nate Hagens, this podcast investigates the complex, interconnected global systems—energy, economy, and ecology—and the necessary transitions to a lower-entropy future.",
@@ -1827,7 +1827,7 @@ window.__RESEARCH = {
   {
    "name": "The Right Use of Power Institute",
    "caps": [
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "The Right Use of Power Institute provides a transformative framework for ethics, leadership, and relational dynamics, shifting the paradigm of power from \"power over\" to \"power with.\" It emphasizes that power is an inherent energy, dynamic, and capacity that can be used for healing, harm, or neutral impact. By cultivating deep self-awareness, emotional fluency, and ethical mindfulness, practitioners learn to recognize their own power footprint, navigate power differentials safely, and wield influence in ways that are collaborative, compassionate, and empowering to others.",
    "types": [
@@ -1876,7 +1876,7 @@ window.__RESEARCH = {
   {
    "name": "The Unaccountability Machine",
    "caps": [
-    "Reading Economic & Political Forces",
+    "Reshaping Economies & States",
     "Thinking in Systems"
    ],
    "desc": "Dan Davies’s The Unaccountability Machine provides a critical diagnosis of why large-scale systems inevitably produce catastrophic, unfixable errors. He identifies \"accountability sinks\"—bureaucratic structures that diffuse responsibility until no individual remains answerable for systemic failure. By applying Stafford Beer’s cybernetic principles, Davies argues that modern institutions have prioritized abstract efficiency over functional feedback. For those designing systems change, this work serves as an essential warning: without deliberate, human-centric accountability and transparent feedback loops, even well-intentioned structures will devolve into dysfunction.",
@@ -1947,7 +1947,7 @@ window.__RESEARCH = {
    "name": "This Can't be Happening",
    "caps": [
     "Living Within Planetary Limits",
-    "Reading Economic & Political Forces"
+    "Reshaping Economies & States"
    ],
    "desc": "Real climate justice requires an equitable lens. This primer shifts the focus from simple environmentalism to the systemic inequalities driving the crisis. It’s a vital resource for ensuring our collective future is built on fairness, centering the voices and needs of those most impacted by our changing world.",
    "types": [
@@ -2052,7 +2052,7 @@ window.__RESEARCH = {
    "caps": [
     "Strengthening Ecosystems",
     "Shifting Narratives",
-    "Navigating Power"
+    "Building Power and Agency"
    ],
    "desc": "Unearthodox shifts biodiversity conservation from reactive, top-down interventions toward fundamental systemic stewardship. By interrogating the power dynamics, economic structures, and dominant narratives that drive ecological extraction, they challenge the traditional conservationist paradigm. Their approach prioritizes the integration of indigenous, local, and scientific knowledge to reshape how we value nature. For systems change practitioners, Unearthodox provides a vital model for building field catalysts that address the root causes of environmental degradation, fostering more equitable, resilient governance.",
    "types": [
@@ -2123,7 +2123,7 @@ window.__RESEARCH = {
   {
    "name": "World Systems Theory",
    "caps": [
-    "Reading Economic & Political Forces",
+    "Reshaping Economies & States",
     "Thinking in Systems"
    ],
    "desc": "World-systems theory offers a macro-level analytical framework for understanding the global economy as a single, integrated system rather than isolated national units. It categorizes regions into a hierarchy—core, semi-periphery, and periphery—based on their role in the international division of labor and extraction of resources. For systems change, this perspective is crucial, as it exposes the structural dependencies and historical inequalities that reinforce global disparities, demonstrating that localized solutions are often constrained by these overarching geopolitical and economic power dynamics.",

@@ -39,11 +39,11 @@ window.__CAPDETAIL = {
    "Systemic": "Anchors large funding and stewardship decisions in deep ethics, ensuring long-term care for people and the living world. Helps institutions hold themselves accountable to justice and repair, not just compliance."
   }
  },
- "Reading Economic & Political Forces": {
-  "desc": "Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.",
+ "Reshaping Economies & States": {
+  "desc": "Changing the economic and governance rules that shape a place, including ownership, public finance, the commons, and how institutions are designed, so that wealth and decision-making serve communities instead of concentrating in few hands.",
   "levels": {
-   "Personal": "Understands the basics of how economies and politics work, and can trace how large forces — markets, policy, institutions — shape everyday life. Reads beyond the headlines to the structures underneath.",
-   "Social": "Sees how race, class, and history layer together to create the social and economic challenges a place faces. Connects local struggles to the wider systems that produce them.",
+   "Personal": "Understands how economies and states shape everyday life, and that their rules were made by people and can be remade. Notices who owns what, who decides, and where alternatives already exist.",
+   "Social": "Works with others to try different economic arrangements locally, such as cooperatives, commons, community land trusts or participatory budgets. Connects local struggles to the wider rules that produce them, including how race, class and history are built into them.",
    "Institutional": "Navigates laws, budgets, and economic rules well enough to spot where real change can be made, and designs strategies around those leverage points. Reads how money and policy actually move through a system.",
    "Systemic": "Reshapes how money and policy flow at large scales to counter extraction and keep power from concentrating in few hands. Influences the rules and financing structures that govern whole sectors or regions."
   }
@@ -75,7 +75,7 @@ window.__CAPDETAIL = {
    "Systemic": "Builds and maintains large-scale system models that guide major, multi-partner efforts over time. Helps whole networks reason about feedback, delay, and consequence before they act."
   }
  },
- "Navigating Power": {
+ "Building Power and Agency": {
   "desc": "Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.",
   "levels": {
    "Personal": "Maps who holds influence — both official and unofficial — in a space you're part of, and who benefits or loses from how things are arranged. Begins to notice the hidden and invisible forms of power, not just the obvious ones.",
@@ -112,12 +112,12 @@ window.__CAPDETAIL = {
   }
  },
  "Deciding Together": {
-  "desc": "Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.",
+  "desc": "Sharing real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research is one way of doing this.",
   "levels": {
-   "Personal": "Gathers people's input through respectful conversation and inquiry rather than assuming you already know best. Frames questions that centre relevance, justice, and mutual learning.",
-   "Social": "Runs research and design where the affected community are genuine co-creators, not just subjects or data points. Reflects with the group on how power shapes the inquiry itself.",
-   "Institutional": "Builds community-led design into how organisations and public services actually work, sharing decision-making power throughout. Holds accountability to participants and context, not just to funders.",
-   "Systemic": "Shapes research norms and policy so that community-led design and many knowledge traditions become the standard. Helps redefine whose knowledge counts across a whole field."
+   "Personal": "Asks the people affected by a decision what matters to them before deciding, and does not assume you already know best. Notices who is usually left out when decisions are made, and starts to make room for them.",
+   "Social": "Facilitates group processes where affected people set the agenda and make decisions together, using methods such as participatory research, consent-based decision-making or community assemblies. Reflects with the group on how power shapes who speaks and who decides.",
+   "Institutional": "Builds shared governance into how organisations, programmes and public services work, for example through community boards, participatory budgets or participant-led research. Holds the organisation accountable to the people it serves, not just to its funders.",
+   "Systemic": "Shifts the norms, funding rules and policies of a whole field so that affected communities hold lasting power over priorities, research and resources. Helps redefine who gets to decide, and whose knowledge counts."
   }
  },
  "Learning from Impact": {

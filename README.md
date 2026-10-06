@@ -8,16 +8,15 @@ Live at https://welearnwegrow.github.io/capacities/
 
 | File | What it is |
 |---|---|
-| `index.html` | Home. The question, three entry cards (route, library, AI Coach), intro, the learning map, who it's for, this week's bookshelf, and the Coach built into the page. |
-| `metaprocess.html` | Route. Probe, Sense, Design, Adapt, Integrate, each with a downloadable reflection canvas. |
-| `orientations.html` | Orientations that ground the work in shared values. |
+| `index.html` | Home. The question, three entry cards (route, library, talk to us), intro, the learning map (on phones: a list of the three groups with an "Explore as map" button that opens the map full screen), who it's for, this week's bookshelf, and the Coach built into the page. |
+| `metaprocess.html` | Route. Probe, Sense, Design, Adapt, Integrate, each with a downloadable reflection canvas, followed by the Orientations that ground the work in shared values (`metaprocess.html#orientations`). |
 | `resources.html` | Resource library, with the **Map the Library** tag network (`tag-network.dc.html`). |
 | `explorer.html` | Systems Change Coach (full page). `explorer.html?demo=1` shows a pre-loaded example. |
-| `engage.html` | Partner with us (contact form). |
+| `engage.html` | About Us, with the Talk to Us contact form. |
 | `descriptors.html` | Learning area descriptors. |
 | `privacy.html` | Privacy policy. |
 
-Shared pieces: `SiteNav.dc.html`, `SiteFooter.dc.html`, `FeaturedShelf.dc.html` (bookshelf on the home page and the Learning Resources page, same size on both), and `Guide Me.dc.html` (the floating Coach button used on every page except the home page, where the Coach is built in).
+Shared pieces: `SiteNav.dc.html`, `SiteFooter.dc.html`, `FeaturedShelf.dc.html` (bookshelf on the home page and the Learning Resources page, same size on both), and `Guide Me.dc.html` (the Coach overlay, opened from the Guide Me button in the header on every page).
 
 ## Deploy (GitHub Pages)
 
@@ -65,7 +64,7 @@ People are asked for feedback in three ways: an inline "Is this helping?" after 
 
 ## Forms (Web3Forms)
 
-**Partner with us** sends through [Web3Forms](https://web3forms.com). Put your access key in `forms-config.js`:
+**Talk to Us** (About Us page) sends through [Web3Forms](https://web3forms.com). Put your access key in `forms-config.js`:
 `window.WEB3FORMS_ACCESS_KEY = "your-key-here";`
 Without a key, the form opens the visitor's email app instead.
 

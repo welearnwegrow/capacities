@@ -58,6 +58,7 @@
     <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="5">
       <a href="{{ it.href }}" style="{{ it.style }}">{{ it.label }}</a>
     </sc-for>
+    <button onClick="{{ openGuide }}" style="display:flex;align-items:center;gap:7px;font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:.02em;color:#fff;background:linear-gradient(120deg,#bd8f34,#96701c);border:none;border-radius:20px;padding:8px 16px;cursor:pointer;box-shadow:0 4px 12px rgba(120,90,20,.25);white-space:nowrap"><span style="font-size:13px;line-height:1">✦</span><span>Guide Me</span></button>
   </div>
   <button class="sn-burger" onClick="{{ toggle }}" aria-label="Menu" aria-expanded="{{ open }}" style="align-items:center;justify-content:center;width:44px;height:44px;flex-direction:column;background:rgba(255,255,255,.55);border:1px solid rgba(70,90,85,.18);border-radius:11px;cursor:pointer;padding:0">
     <span></span><span></span><span></span>
@@ -66,10 +67,12 @@
     <sc-for list="{{ navItems }}" as="it" hint-placeholder-count="5">
       <a href="{{ it.href }}" style="{{ it.panelStyle }}">{{ it.label }}</a>
     </sc-for>
+    <button onClick="{{ openGuide }}" style="display:flex;align-items:center;justify-content:center;gap:8px;font-family:'PT Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;background:linear-gradient(120deg,#bd8f34,#96701c);border:none;border-radius:24px;padding:13px 18px;margin-top:10px;cursor:pointer"><span>✦</span><span>Guide Me</span></button>
   </div>
 </nav>
+<dc-import name="Guide Me" fab="false" hint-size="0px,0px" style="display:block;width:0;height:0;overflow:visible"></dc-import>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;orientations&quot;,&quot;about&quot;,&quot;resources&quot;,&quot;tagmatch&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;active&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;home&quot;,&quot;about&quot;,&quot;resources&quot;,&quot;tagmatch&quot;,&quot;engage&quot;],&quot;default&quot;:&quot;home&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { open:false };
   renderVals(){
@@ -80,7 +83,6 @@ class Component extends DCLogic {
     const pOn = Object.assign({}, pBase, { color:'#1f3a36' });
     const items = [
       { key:'home', label:'Home', href:'index.html' },
-      { key:'orientations', label:'Orientations', href:'orientations.html' },
       { key:'about', label:'Route', href:'metaprocess.html' },
       { key:'resources', label:'Learning Resources', href:'resources.html' },
       { key:'engage', label:'About Us', href:'engage.html' }
@@ -89,6 +91,7 @@ class Component extends DCLogic {
       open: this.state.open,
       openClass: this.state.open ? 'sn-open' : '',
       toggle: () => this.setState(s => ({ open: !s.open })),
+      openGuide: () => { this.setState({ open:false }); window.dispatchEvent(new CustomEvent('gm-open')); },
       navItems: items.map(it => ({ label:it.label, href:it.href, style: active===it.key ? on : base, panelStyle: active===it.key ? pOn : pBase }))
     };
   }

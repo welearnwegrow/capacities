@@ -28,12 +28,14 @@
 </helmet>
 
 <div style="font-family:'PT Sans',system-ui,sans-serif">
+  <sc-if value="{{ showFab }}" hint-placeholder-val="{{ false }}">
   <button class="gm-fab" onClick="{{ onOpen }}" title="Guide Me — talk through what you're working on" style="position:fixed;z-index:61;right:24px;bottom:24px;height:58px;display:flex;align-items:center;gap:11px;padding:0 22px 0 15px;border:none;border-radius:30px;background:linear-gradient(120deg,#bd8f34,#96701c);color:#fff;cursor:pointer;box-shadow:0 10px 28px rgba(120,90,20,.3);font-family:'PT Sans',sans-serif">
     <span style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:none">
       <span style="font-size:19px;line-height:1;color:#fff">✦</span>
     </span>
     <span style="font-size:15px;font-weight:700;letter-spacing:.01em">Guide Me</span>
   </button>
+  </sc-if>
 
   <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
     <div style="position:fixed;inset:0;z-index:2147483000;background:rgba(38,42,32,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:gmOverlayIn .2s ease">
@@ -56,8 +58,10 @@ class Component extends DCLogic {
       else if(e.data.type==='gm-feedback-open'){ clearTimeout(this._closeTimer); }
     };
     window.addEventListener('message', this._msg);
+    this._openEv = ()=>this._set(true);
+    window.addEventListener('gm-open', this._openEv);
   }
-  componentWillUnmount(){ document.removeEventListener('keydown', this._esc); window.removeEventListener('message', this._msg); clearTimeout(this._closeTimer); this._finishClose(); }
+  componentWillUnmount(){ document.removeEventListener('keydown', this._esc); window.removeEventListener('message', this._msg); window.removeEventListener('gm-open', this._openEv); clearTimeout(this._closeTimer); this._finishClose(); }
   _finishClose(){ clearTimeout(this._closeTimer); this._closing=false; this.setState({ open:false }); try{ document.body.style.overflow=''; }catch(e){} }
   _set(v){
     if(v){ this.setState({ open:true }); try{ document.body.style.overflow='hidden'; }catch(e){} return; }
@@ -71,7 +75,8 @@ class Component extends DCLogic {
   renderVals(){
     return {
       open: this.state.open,
-      frameSrc: (/\.dc\.html$/.test(location.pathname) ? 'explorer.dc.html' : 'explorer.html') + '?embed=1',
+      showFab: this.props.fab !== false && this.props.fab !== 'false',
+      frameSrc: (/\.dc\.html$/.test(location.pathname) ? 'explorer.dc.html' : 'explorer.dc.html') + '?embed=1',
       onOpen: ()=>this._set(true),
       onClose: ()=>this._set(false)
     };

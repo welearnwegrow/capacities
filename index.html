@@ -85,9 +85,17 @@
   [data-shelf-row]::-webkit-scrollbar{display:none}
   .ioc-zoom{display:none}
   .ioc-browse{display:none}
+  .ioc-fullbar{display:none}
   .ioc-hint-desktop{display:inline}
   .ioc-hint-mobile{display:none}
   @media (max-width:760px){
+    .ioc-browse{display:block}
+    .ioc-mapsec{display:none !important}
+    body.ioc-mapfull{overflow:hidden}
+    body.ioc-mapfull .ioc-mapsec{display:flex !important;position:fixed;inset:0;z-index:70;width:100vw !important;max-width:none !important;background:#eef2ef;padding-top:10px}
+    body.ioc-mapfull .ioc-fullbar{display:flex}
+    body.ioc-mapfull .ioc-maphead{padding:0 14px}
+    body.ioc-mapfull .ioc-legend{gap:6px 16px !important;margin:0 0 6px !important;padding:0 14px;font-size:11.5px !important}
     .ioc-mapframe{touch-action:none}
     .ioc-stage>svg{-webkit-mask-image:none;mask-image:none}
     .ioc-zoom{display:flex}
@@ -126,10 +134,10 @@
         <span style="font-family:'Newsreader',serif;font-weight:500;font-size:23px;line-height:1.15;color:#1f3a36">Browse the library →</span>
         <span style="font-family:'PT Sans',sans-serif;font-size:14px;line-height:1.5;color:#4a5752">Books, toolkits, courses and cases gathered by a community of changemakers and educators.</span>
       </a>
-      <a href="#coach" onClick="{{ goCoach }}" style="display:flex;flex-direction:column;gap:8px;text-decoration:none;background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:16px;padding:20px 20px 18px;box-shadow:0 8px 22px rgba(40,50,35,.07)">
+      <a href="engage.html#eg-contact" style="display:flex;flex-direction:column;gap:8px;text-decoration:none;background:#FCFBF7;border:1px solid rgba(120,105,75,.2);border-radius:16px;padding:20px 20px 18px;box-shadow:0 8px 22px rgba(40,50,35,.07)">
         <span style="font-family:'PT Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8a7a4a">I need guidance</span>
-        <span style="font-family:'Newsreader',serif;font-weight:500;font-size:23px;line-height:1.15;color:#1f3a36">Talk to the AI Coach →</span>
-        <span style="font-family:'PT Sans',sans-serif;font-size:14px;line-height:1.5;color:#4a5752">Describe where you are stuck. The Systems Change Coach reflects it back through the learning areas and suggests next steps.</span>
+        <span style="font-family:'Newsreader',serif;font-weight:500;font-size:23px;line-height:1.15;color:#1f3a36">Talk to us →</span>
+        <span style="font-family:'PT Sans',sans-serif;font-size:14px;line-height:1.5;color:#4a5752">A custom pathway designed with your team, on a sliding scale so budget is never the barrier.</span>
       </a>
   </div>
 
@@ -141,8 +149,48 @@
     </div>
   </div>
 
+  <!-- ===== MOBILE LEARNING AREAS (phones only) ===== -->
+  <div class="ioc-browse" style="width:1040px;max-width:100%;margin:6px auto 0;text-align:left">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 14px">
+      <div>
+        
+        
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ browseDomains }}" as="d" hint-placeholder-count="3">
+        <div style="border-radius:14px;overflow:hidden;border:1px solid {{ d.border }}">
+          <div onClick="{{ d.onToggle }}" style="{{ d.headStyle }}">
+            <div>
+              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:17px;color:#fff">{{ d.name }}</div>
+              <div style="font-family:'PT Sans',sans-serif;font-size:12px;line-height:1.45;color:rgba(255,255,255,.9);margin-top:3px;text-wrap:pretty">{{ d.sub }}</div>
+            </div>
+            <span style="color:#fff;font-size:22px;font-weight:700;flex:none;line-height:1">{{ d.chev }}</span>
+          </div>
+          <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#fff">
+              <sc-for list="{{ d.areas }}" as="a" hint-placeholder-count="8">
+                <div onClick="{{ a.onOpen }}" style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-top:1px solid rgba(70,90,85,.09);cursor:pointer;min-height:48px">
+                  <span style="width:9px;height:9px;border-radius:50%;flex:none;background:{{ d.dot }}"></span>
+                  <span style="font-family:'PT Sans',sans-serif;font-size:14.5px;color:#33403c;flex:1">{{ a.label }}</span>
+                  <span style="color:#b9b0a0;font-size:17px">›</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <button onClick="{{ openMapFull }}" style="margin-top:16px;width:100%;min-height:48px;display:flex;align-items:center;justify-content:center;gap:9px;font-family:'PT Sans',sans-serif;font-size:15px;font-weight:700;color:#fff;background:#46716f;border:none;border-radius:26px;cursor:pointer;box-shadow:0 6px 16px rgba(70,113,111,.28)">Explore as map →</button>
+  </div>
+
+  <div class="ioc-mapsec" style="width:1040px;max-width:100%;display:flex;flex-direction:column;align-items:center">
+  <div class="ioc-fullbar" style="width:100%;align-items:center;justify-content:space-between;gap:12px;padding:0 14px 8px">
+    <span style="font-family:'Newsreader',serif;font-weight:500;font-size:21px;color:#1f3a36">Learning areas map</span>
+    <button onClick="{{ closeMapFull }}" aria-label="Close map" style="width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;font-size:23px;line-height:1;color:#fff;background:#2c3a36;border:none;border-radius:50%;cursor:pointer">×</button>
+  </div>
   <!-- ===== MAP ===== -->
-  <div style="width:1040px;max-width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+  <div class="ioc-maphead" style="width:1040px;max-width:100%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
     <span style="font-family:'PT Sans',sans-serif;font-size:12px;color:#6b7d6a;letter-spacing:.01em"><span class="ioc-hint-desktop">Tap to explore · pinch or +/− to zoom</span><span class="ioc-hint-mobile">Tap to explore · pinch to zoom</span></span>
     <div style="display:flex;align-items:center;gap:8px">
       <div class="ioc-zoom" style="align-items:center;gap:8px">
@@ -154,7 +202,7 @@
   </div>
 
   <!-- legend -->
-  <div style="width:1040px;max-width:100%;display:flex;flex-wrap:wrap;gap:22px 30px;align-items:center;margin:2px 0 14px;font-family:'PT Sans',sans-serif;font-size:12.5px;color:#52605a">
+  <div class="ioc-legend" style="width:1040px;max-width:100%;display:flex;flex-wrap:wrap;gap:22px 30px;align-items:center;margin:2px 0 14px;font-family:'PT Sans',sans-serif;font-size:12.5px;color:#52605a">
     <div style="display:flex;align-items:center;gap:9px">
       <svg width="26" height="26" viewBox="0 0 26 26" style="flex:none"><circle cx="13" cy="13" r="11" fill="none" stroke="#b0822f" stroke-width="1.3" stroke-opacity=".5"></circle><path d="M13 2.5 L15 11 L23.5 13 L15 15 L13 23.5 L11 15 L2.5 13 L11 11 Z" fill="#b0822f" fill-opacity=".85"></path></svg>
       <span><strong style="color:#8a6a2f;font-weight:700">Orientations</strong> that guide our intentions</span>
@@ -231,6 +279,14 @@
   </div>
     </div>
   </div>
+  </div>
+
+  <sc-if value="{{ islEditing }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:95;display:flex;align-items:center;gap:12px;background:#2c3a36;color:#fff;font-family:'PT Sans',sans-serif;font-size:13.5px;padding:10px 12px 10px 18px;border-radius:24px;box-shadow:0 10px 28px rgba(20,30,25,.3)">
+      <span>Layout mode: drag the islands. Positions are kept in this browser until frozen.</span>
+      <button onClick="{{ resetIslands }}" style="font-family:'PT Sans',sans-serif;font-size:13px;font-weight:700;color:#2c3a36;background:#f4efe6;border:none;border-radius:16px;padding:7px 14px;cursor:pointer">Reset</button>
+    </div>
+  </sc-if>
 
   <!-- ===== WHO IT'S FOR ===== -->
   <section style="width:1040px;max-width:100%;margin:40px auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px 28px">
@@ -247,82 +303,13 @@
   <!-- ===== COACH (inline on the home page) ===== -->
   <section id="coach" style="width:1040px;max-width:100%;margin:48px auto 0;display:flex;flex-direction:column;gap:14px;scroll-margin-top:20px">
     <div style="display:flex;flex-direction:column;gap:4px">
-      <div style="font-family:'PT Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a8823a">✦ Systems Change Coach</div>
+      <div style="font-family:'PT Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a8823a">✦ GUIDE ME</div>
       <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:32px;line-height:1.1;margin:0;color:#1f3a36">Where are you stuck?</h2>
       <p style="font-family:'PT Sans',sans-serif;font-size:14.5px;line-height:1.55;color:#4a5752;margin:0;max-width:70ch">Describe a situation you are working on. The coach reads it through the learning areas, shows where you are on the route, and offers practical next steps, resources and cases.</p>
     </div>
-    <iframe src="explorer.html?embed=1&amp;inline=1" title="Systems Change Coach" loading="lazy" style="width:100%;height:780px;border:1px solid rgba(70,113,111,.22);border-radius:18px;background:#f4eedf;box-shadow:0 14px 36px rgba(40,50,35,.10)"></iframe>
+    <iframe src="site/explorer.html?embed=1&amp;inline=1" title="Systems Change Coach" loading="lazy" style="width:100%;height:780px;border:1px solid rgba(70,113,111,.22);border-radius:18px;background:#f4eedf;box-shadow:0 14px 36px rgba(40,50,35,.10)"></iframe>
   </section>
 
-
-  <!-- ===== MOBILE BROWSE LIST (phones only) ===== -->
-  <div class="ioc-browse" style="width:1040px;max-width:100%;margin:36px auto 0;text-align:left">
-    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#8a6a2f">Orientations</h2>
-    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our intentions</p>
-    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:32px">
-      <sc-for list="{{ browseOrients }}" as="o" hint-placeholder-count="4">
-        <div onClick="{{ o.onToggle }}" style="background:#fff;border:1px solid rgba(217,187,120,.55);border-radius:13px;padding:14px 16px;cursor:pointer">
-          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
-            <div>
-              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#6B5527">{{ o.title }}</div>
-              <div style="font-style:italic;font-size:12px;color:#977c45;margin-top:1px">{{ o.sub }}</div>
-            </div>
-            <span style="color:#b0822f;font-size:19px;font-weight:700;flex:none;line-height:1">{{ o.chev }}</span>
-          </div>
-          <sc-if value="{{ o.open }}" hint-placeholder-val="{{ false }}">
-            <p style="font-size:13px;line-height:1.62;color:#544E45;margin:11px 0 0">{{ o.body }}</p>
-          </sc-if>
-        </div>
-      </sc-for>
-    </div>
-
-    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#4f6a60">Learning areas</h2>
-    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our progress</p>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
-      <sc-for list="{{ browseDomains }}" as="d" hint-placeholder-count="3">
-        <div style="border-radius:14px;overflow:hidden;border:1px solid {{ d.border }}">
-          <div onClick="{{ d.onToggle }}" style="{{ d.headStyle }}">
-            <div>
-              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:17px;color:#fff">{{ d.name }}</div>
-              <div style="font-family:'PT Sans',sans-serif;font-size:12px;color:rgba(255,255,255,.82)">{{ d.sub }}</div>
-            </div>
-            <span style="color:#fff;font-size:22px;font-weight:700;flex:none;line-height:1">{{ d.chev }}</span>
-          </div>
-          <sc-if value="{{ d.open }}" hint-placeholder-val="{{ true }}">
-            <div style="background:#fff">
-              <sc-for list="{{ d.areas }}" as="a" hint-placeholder-count="8">
-                <div onClick="{{ a.onOpen }}" style="display:flex;align-items:center;gap:11px;padding:13px 16px;border-top:1px solid rgba(70,90,85,.09);cursor:pointer">
-                  <span style="width:9px;height:9px;border-radius:50%;flex:none;background:{{ d.dot }}"></span>
-                  <span style="font-family:'PT Sans',sans-serif;font-size:14px;color:#33403c;flex:1">{{ a.label }}</span>
-                  <span style="color:#b9b0a0;font-size:17px">›</span>
-                </div>
-              </sc-for>
-            </div>
-          </sc-if>
-        </div>
-      </sc-for>
-    </div>
-
-    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:27px;line-height:1.08;margin:0 0 3px;color:#46514a">Route</h2>
-    <p style="font-family:'PT Sans',sans-serif;font-size:13.5px;color:#7a6f5c;margin:0 0 14px">What guides our actions</p>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <sc-for list="{{ browseMeta }}" as="m" hint-placeholder-count="5">
-        <div onClick="{{ m.onToggle }}" style="background:#fff;border:1px solid rgba(70,90,85,.18);border-radius:13px;padding:14px 16px;cursor:pointer">
-          <div style="display:flex;align-items:center;gap:11px">
-            <span style="width:11px;height:11px;border-radius:50%;flex:none;background:{{ m.dot }}"></span>
-            <div style="flex:1">
-              <div style="font-family:'PT Serif',serif;font-weight:700;font-size:16px;color:#46514a">{{ m.title }}</div>
-              <div style="font-style:italic;font-size:12px;color:#7a8a80;margin-top:1px">{{ m.sub }}</div>
-            </div>
-            <span style="color:#6b7d6a;font-size:19px;font-weight:700;flex:none;line-height:1">{{ m.chev }}</span>
-          </div>
-          <sc-if value="{{ m.open }}" hint-placeholder-val="{{ false }}">
-            <p style="font-size:13px;line-height:1.62;color:#544E45;margin:11px 0 0">{{ m.body }}</p>
-          </sc-if>
-        </div>
-      </sc-for>
-    </div>
-  </div>
 
   <!-- attribution -->
   <div data-edit="attrib" style="width:1040px;max-width:100%;margin-top:14px;font-size:12px;color:#8a8377;letter-spacing:.02em"><br></div>
@@ -410,7 +397,7 @@ class Component extends DCLogic {
   _sync = () => this._lockBody(!!(this.state.openCap || this.state.openInfo));
   state = {
     openCap: null,
-    mGroup: 'teal',
+    mGroup: null,
     mOrient: null,
     bend: [[589,240],null,[538,1198]],
     bendChord: {"fb-da":[512,1057],"fb-ps":[465,306],"fb-sd":[770,850]},
@@ -422,27 +409,27 @@ class Component extends DCLogic {
       {n:5,label:'Integrate',x:129,y:669}
     ],
     isl: [
-      {label:'Staying Grounded',x:388,y:219,r:46,w:104,group:'teal',seed:100},
-      {label:'Listening Deeply',x:229,y:204,r:42,w:96,group:'teal',seed:107},
-      {label:'Navigating Power',x:590,y:302,r:46,w:104,group:'teal',seed:114},
-      {label:'Acting with Integrity',x:296,y:327,r:52,w:112,group:'teal',seed:121},
-      {label:'Reading Economic & Political Forces',x:450,y:337,r:46,w:104,group:'teal',seed:128},
-      {label:'Living Within Planetary Limits',x:342,y:457,r:48,w:108,group:'teal',seed:142},
-      {label:'Honoring Many Ways of Knowing',x:527,y:438,r:44,w:100,group:'teal',seed:149},
-      {label:'Thinking in Systems',x:488,y:667,r:46,w:104,group:'green',seed:300},
-      {label:'Imagining Futures',x:831,y:541,r:46,w:104,group:'green',seed:314},
-      {label:'Engaging Capital',x:642,y:634,r:52,w:112,group:'green',seed:321},
-      {label:'Designing Regenerative Systems',x:782,y:668,r:46,w:106,group:'green',seed:328},
+      {label:'Listening Deeply',x:246,y:215,r:42,w:96,group:'teal',seed:107},
+      {label:'Thinking in Systems',x:337,y:325,r:46,w:104,group:'teal',seed:300},
+      {label:'Honoring Many Ways of Knowing',x:375,y:222,r:44,w:100,group:'teal',seed:149},
+      {label:'Building Power and Agency',x:551,y:313,r:46,w:104,group:'teal',seed:114},
+      {label:'Staying Grounded',x:486,y:421,r:46,w:104,group:'teal',seed:100},
+      {label:'Living Within Planetary Limits',x:220,y:397,r:48,w:108,group:'teal',seed:142},
+      {label:'Acting with Integrity',x:354,y:467,r:52,w:112,group:'teal',seed:121},
       {label:'Shifting Narratives',x:479,y:559,r:42,w:98,group:'green',seed:335},
-      {label:'Deciding Together',x:644,y:770,r:48,w:108,group:'green',seed:342},
-      {label:'Learning from Impact',x:464,y:878,r:42,w:96,group:'coral',seed:349},
-      {label:'Prototyping & Testing',x:289,y:829,r:46,w:104,group:'coral',seed:500},
-      {label:'Cultivating Collaboration',x:823,y:795,r:44,w:104,group:'green',seed:507},
-      {label:'Transforming Conflict',x:728,y:1051,r:46,w:104,group:'coral',seed:514},
-      {label:'Mobilizing Resources',x:351,y:978,r:52,w:112,group:'coral',seed:521},
-      {label:'Developing Leaders',x:588,y:970,r:46,w:104,group:'coral',seed:528},
-      {label:'Strengthening Ecosystems',x:252,y:1077,r:42,w:96,group:'coral',seed:535},
-      {label:'Advocating for Policy Change',x:466,y:1095,r:48,w:106,group:'coral',seed:542},
+      {label:'Imagining Futures',x:644,y:531,r:46,w:104,group:'green',seed:314},
+      {label:'Reshaping Economies & States',x:439,y:699,r:46,w:104,group:'green',seed:128},
+      {label:'Cultivating Collaboration',x:600,y:662,r:44,w:104,group:'green',seed:507},
+      {label:'Engaging Capital',x:800,y:809,r:52,w:112,group:'green',seed:321},
+      {label:'Deciding Together',x:623,y:791,r:48,w:108,group:'green',seed:342},
+      {label:'Designing Regenerative Systems',x:750,y:668,r:46,w:106,group:'green',seed:328},
+      {label:'Prototyping & Testing',x:316,y:818,r:46,w:104,group:'coral',seed:500},
+      {label:'Mobilizing Resources',x:380,y:987,r:52,w:112,group:'coral',seed:521},
+      {label:'Transforming Conflict',x:715,y:1069,r:46,w:104,group:'coral',seed:514},
+      {label:'Advocating for Policy Change',x:490,y:1097,r:48,w:106,group:'coral',seed:542},
+      {label:'Developing Leaders',x:584,y:980,r:46,w:104,group:'coral',seed:528},
+      {label:'Learning from Impact',x:475,y:880,r:42,w:96,group:'coral',seed:349},
+      {label:'Strengthening Ecosystems',x:248,y:1071,r:42,w:96,group:'coral',seed:535}
     ]
   };
 
@@ -461,7 +448,24 @@ class Component extends DCLogic {
 
   componentDidUpdate() { if (this._sizeRotSlot) this._sizeRotSlot(); }
 
+  _islEditing(){ return (typeof location!=='undefined' && /[?&]edit=1/.test(location.search)); }
+  _islDragStart(i, e){
+    e.preventDefault(); e.stopPropagation();
+    const stage = document.querySelector('.ioc-stage'); if(!stage) return;
+    const sc = stage.getBoundingClientRect().width / 1040 || 1;
+    const p0 = this.state.isl[i], sx = e.clientX, sy = e.clientY;
+    this._hideTip && this._hideTip();
+    let moved = false;
+    const mv = (ev) => { const dx=(ev.clientX-sx)/sc, dy=(ev.clientY-sy)/sc; if(Math.abs(dx)+Math.abs(dy)>2) moved=true;
+      const isl = this.state.isl.slice(); isl[i] = Object.assign({}, p0, { x: Math.round(p0.x+dx), y: Math.round(p0.y+dy) }); this.setState({ isl }); };
+    const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up);
+      if(moved){ this._panMoved = true; setTimeout(()=>{ this._panMoved=false; }, 60); }
+      try { localStorage.setItem('ioc-isl-draft', JSON.stringify(this.state.isl.map(p=>({label:p.label,x:p.x,y:p.y})))); } catch(err){} };
+    window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+  }
+
   componentDidMount() {
+    if (this._islEditing()) { this._islDefault = this.state.isl.map(p=>Object.assign({},p)); try { const d = JSON.parse(localStorage.getItem('ioc-isl-draft')||'null'); if (Array.isArray(d)) { const m={}; d.forEach(q=>m[q.label]=q); this.setState({ isl: this.state.isl.map(p=> m[p.label] ? Object.assign({},p,{x:m[p.label].x,y:m[p.label].y}) : p) }); } } catch(err){} }
     const words = ['governance','health','food','energy','economic','justice'];
     let ri = 0;
     this._sizeRotSlot = () => {
@@ -680,7 +684,8 @@ class Component extends DCLogic {
       frame.style.touchAction = 'none';
       const base = frame.clientWidth / 1040;
       // fit the map to the full frame width so the whole map shows at 100% width on phones
-      const frameH = Math.max(Math.round(1320 * base), 320);
+      const full = document.body.classList.contains('ioc-mapfull');
+      const frameH = full ? Math.max(window.innerHeight - Math.round(frame.getBoundingClientRect().top), 320) : Math.max(Math.round(1320 * base), 320);
       frame.style.height = frameH + 'px';
       this._mBase = base; this._mMin = base; this._mMax = base * 3.4;
       if (this._mScale == null) this._mScale = base;
@@ -735,16 +740,16 @@ class Component extends DCLogic {
       'Listening Deeply': { g:'teal', t:'Listening Deeply', s:'Change Begins Within', b:'Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.' },
       'Engaging Capital': { g:'green', t:'Engaging Capital', s:'Moves through Collective Work', b:"The continuous interrogation of personal assumptions, institutional positionality, and internalized historical biases to understand the structural limitations of one's own perspective." },
       'Acting with Integrity': { g:'teal', t:'Acting with Integrity', s:'Change Begins Within', b:'Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.' },
-      'Reading Economic & Political Forces': { g:'teal', t:'Reading Economic & Political Forces', s:'Change Begins Within', b:'Understanding the structural mechanics, historical trajectories, and operational patterns of global political-economic systems and state architectures.' },
+      'Reshaping Economies & States': { g:'green', t:'Reshaping Economies & States', s:'Moves through Collective Work', b:'Changing the economic and governance rules that shape a place, including ownership, public finance, the commons, and how institutions are designed, so that wealth and decision-making serve communities instead of concentrating in few hands.' },
       'Living Within Planetary Limits': { g:'teal', t:'Living Within Planetary Limits', s:'Change Begins Within', b:'Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.' },
       'Honoring Many Ways of Knowing': { g:'teal', t:'Honoring Many Ways of Knowing', s:'Change Begins Within', b:'Engaging with diverse cultural knowledge systems, epistemologies, and ways of knowing — honoring indigenous lifeways, land-based histories, and intergenerational oral traditions.' },
       // ===== collective capacities (green) =====
-      'Thinking in Systems': { g:'green', t:'Thinking in Systems', s:'Moves through Collective Work', b:'Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.' },
+      'Thinking in Systems': { g:'teal', t:'Thinking in Systems', s:'Change Begins Within', b:'Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.' },
       'Imagining Futures': { g:'green', t:'Imagining Futures', s:'Moves through Collective Work', b:'Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.' },
-      'Navigating Power': { g:'teal', t:'Navigating Power', s:'Change Begins Within', b:'Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.' },
+      'Building Power and Agency': { g:'teal', t:'Building Power and Agency', s:'Change Begins Within', b:'Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.' },
       'Designing Regenerative Systems': { g:'green', t:'Designing Regenerative Systems', s:'Moves through Collective Work', b:'Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.' },
       'Shifting Narratives': { g:'green', t:'Shifting Narratives', s:'Moves through Collective Work', b:'Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.' },
-      'Deciding Together': { g:'green', t:'Deciding Together', s:'Moves through Collective Work', b:'Structuring collaborative investigative loops where the community directly impacted by a systemic problem holds equal agency in defining research questions and analyzing data.' },
+      'Deciding Together': { g:'green', t:'Deciding Together', s:'Moves through Collective Work', b:'Sharing real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research is one way of doing this.' },
       'Learning from Impact': { g:'coral', t:'Learning from Impact', s:'And Manifests in Action', b:'Utilizing empirical data tracking, quantitative and qualitative metrics, and positive deviance mapping to identify hidden localized solutions and track system-wide trends.' },
       // ===== systemic capacities (coral) =====
       'Prototyping & Testing': { g:'coral', t:'Prototyping & Testing', s:'And Manifests in Action', b:"Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback." },
@@ -1096,9 +1101,10 @@ class Component extends DCLogic {
     const seaArt = h('svg',{width:1040,height:1320,viewBox:'0 0 1040 1320',style:{position:'absolute',inset:0,width:'100%',height:'100%',display:'block'}}, kids);
 
     // island labels
+    const editing = this._islEditing();
     const islands = h('div', { key:'isls', style:{ position:'absolute', inset:0, pointerEvents:'none' } },
-      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onClick:(e)=>this._onIslClick(i,e), onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
-          style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', width:(p.r*2)+'px', height:(p.r*2)+'px', borderRadius:'50%', cursor:'pointer', pointerEvents:'auto', touchAction:'none' } },
+      ISL.map((p, i) => h('div', { key:'isl'+i, title:'', onPointerDown: editing ? (e)=>this._islDragStart(i,e) : undefined, onClick:(e)=>{ if(editing){ e.stopPropagation(); return; } this._onIslClick(i,e); }, onMouseEnter:()=>this._onIslEnter(i), onMouseLeave:()=>this._onIslLeave(),
+          style:{ position:'absolute', left:p.x+'px', top:p.y+'px', transform:'translate(-50%,-50%)', width:(p.r*2)+'px', height:(p.r*2)+'px', borderRadius:'50%', cursor: editing ? 'grab' : 'pointer', pointerEvents:'auto', touchAction:'none', outline: editing ? '2px dashed rgba(255,255,255,.75)' : 'none' } },
         h('div', { style:{ position:'absolute', left:'50%', top:'50%', transform:'translate(-50%,-50%)', width:p.w+'px', textAlign:'center', fontSize:'12px', fontWeight:600, lineHeight:1.16, color:'#fff', textShadow:'0 1px 3px rgba(35,28,18,.6)', pointerEvents:'none', userSelect:'none' } }, p.label)
       ))
     );
@@ -1106,12 +1112,13 @@ class Component extends DCLogic {
     const TIP = this._tipData();
     const browseOrients = ['recip','shared','pluri','jrf'].map(k => { const d = TIP[k] || {}; const open = this.state.mOrient === k; return { title:d.t, sub:d.s, body:d.b, open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mOrient: s.mOrient===k ? null : k })) }; });
     const GMETA = { teal:{name:'Change Begins Within',sub:'Reading your context',head:'#46716f',border:'rgba(70,113,111,.3)',dot:'#46716f'}, green:{name:'Moves through Collective Work',sub:'Reading the field',head:'#5f7a3a',border:'rgba(95,122,58,.3)',dot:'#5f7a3a'}, coral:{name:'And Manifests in Action',sub:'Acting & sustaining',head:'#a8542d',border:'rgba(168,84,45,.3)',dot:'#a8542d'} };
-    const browseDomains = ['teal','green','coral'].map(g => { const m = GMETA[g]; const open = this.state.mGroup === g; const areas = (this.state.isl||[]).filter(p=>p.group===g).map(p=>({ label:p.label, onOpen: () => this.setState({ openCap: p.label }) })); return { key:g, name:m.name, sub: m.sub+' · '+areas.length+' areas', dot:m.dot, border:m.border, open, chev: open?'–':'+', headStyle:{ background:m.head, padding:'15px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }, areas, onToggle: () => this.setState(s => ({ mGroup: s.mGroup===g ? null : g })) }; });
+    const browseDomains = ['teal','green','coral'].map(g => { const m = GMETA[g]; const open = this.state.mGroup === g; const areas = (this.state.isl||[]).filter(p=>p.group===g).map(p=>({ label:p.label, onOpen: () => this.setState({ openCap: p.label, openInfo: null }, this._sync) })); return { key:g, name:m.name, sub: areas.map(a=>a.label).join(' · '), dot:m.dot, border:m.border, open, chev: open?'–':'+', headStyle:{ background:m.head, padding:'15px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }, areas, onToggle: () => this.setState(s => ({ mGroup: s.mGroup===g ? null : g })) }; });
 
     const MSTAGE = { probe:'#46716f', sense:'#5f7a3a', design:'#b07a3c', adapt:'#a8542d', integrate:'#3f6e74' };
     const browseMeta = ['probe','sense','design','adapt','integrate'].map(k => { const d = TIP[k] || {}; const open = this.state.mMeta === k; return { title:d.t, sub:d.s, body:d.b, dot:MSTAGE[k], open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mMeta: s.mMeta===k ? null : k })) }; });
 
-    return { ...this._v2Vals(), seaArt, islands, waypoints, browseOrients, browseDomains, browseMeta, capDrawer: this._capDrawer(), infoSheet: this._infoSheet(), closeCap: () => this.closeCap(), closeInfo: () => this.closeInfo(), sheetDragStart: (e) => this._sheetDragStart(e), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
+    const setFull = (on) => { document.body.classList.toggle('ioc-mapfull', on); if (window.track && on) window.track('open_map_fullscreen', {}); this._mLastW = null; this._mScale = null; requestAnimationFrame(() => { this._initMobileMap && this._initMobileMap(); }); };
+    return { ...this._v2Vals(), islEditing: editing, resetIslands: () => { try{ localStorage.removeItem('ioc-isl-draft'); }catch(err){} if(this._islDefault) this.setState({ isl: this._islDefault.map(p=>Object.assign({},p)) }); }, seaArt, islands, waypoints, browseOrients, browseDomains, browseMeta, openMapFull: () => setFull(true), closeMapFull: () => setFull(false), capDrawer: this._capDrawer(), infoSheet: this._infoSheet(), closeCap: () => this.closeCap(), closeInfo: () => this.closeInfo(), sheetDragStart: (e) => this._sheetDragStart(e), downloadMap: () => this._downloadMap && this._downloadMap(), zoomIn: () => this._zoomMap && this._zoomMap(0.4), zoomOut: () => this._zoomMap && this._zoomMap(-0.4) };
   }
 }
 </script>

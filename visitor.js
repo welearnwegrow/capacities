@@ -18,11 +18,11 @@
   window.iocVisitor=get;
   window.iocLogAction=function(source,comment){ try{ var w=get(); var base=window.NOTION_CONNECTOR_URL; if(!w||!base||base.indexOf('<')>-1) return; fetch(base.replace(/\/$/,'')+'/log-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:w.n,email:w.e,source:source,comment:comment}),keepalive:true}).catch(function(){}); }catch(err){} };
 
-  function log(n,e,r){
+  function log(n,e,r,u){
     try{
       var base=window.NOTION_CONNECTOR_URL; if(!base||base.indexOf('<')>-1) return;
       fetch(base.replace(/\/$/,'')+'/log-feedback',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({topic:n,email:e,source:'enter-site',comment:'Entered the site',referredBy:r||''}),keepalive:true}).catch(function(){});
+        body:JSON.stringify({topic:n,email:e,source:'enter-site',comment:'Entered the site',referredBy:r||'',emailUpdates:u?'Yes':'No'}),keepalive:true}).catch(function(){});
     }catch(err){}
   }
 
@@ -47,6 +47,7 @@
       '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#46514a">Name<input name="n" required autocomplete="name" style="'+inp+'"></label>'+
       '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#46514a">Email<input name="e" type="email" required autocomplete="email" style="'+inp+'"></label>'+
       '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#46514a"><span>Who sent you here? <span style="font-weight:400;color:#7a8a83">(optional)</span></span><input name="r" placeholder="A person, organization or link" style="'+inp+'"></label>'+
+      '<label style="display:flex;align-items:flex-start;gap:9px;font-size:13.5px;line-height:1.45;color:#46514a;cursor:pointer"><input name="u" type="checkbox" checked style="width:17px;height:17px;margin:1px 0 0;flex:none;accent-color:#46716f">Keep me posted by email as the guide grows. Untick to opt out.</label>'+
       '<div data-err style="display:none;font-size:12.5px;color:#9a4a2d">Please enter your name and a valid email address.</div>'+
       '<button type="submit" style="margin-top:4px;font-family:PT Sans,sans-serif;font-size:15.5px;font-weight:700;color:#fff;background:#46716f;border:none;border-radius:26px;padding:14px 22px;cursor:pointer;box-shadow:0 8px 20px rgba(70,113,111,.3)">Enter site →</button>'+
       '<p style="margin:0;font-size:12px;line-height:1.5;color:#7a8a83;text-align:center">See our <a href="privacy.html" style="color:#46716f">privacy policy</a>.</p></form>';
@@ -55,9 +56,9 @@
     setTimeout(function(){ try{ f.n.focus(); }catch(e){} },50);
     f.addEventListener('submit',function(ev){
       ev.preventDefault();
-      var n=f.n.value.trim(), e=f.e.value.trim(), r=(f.r.value||'').trim().slice(0,300);
+      var n=f.n.value.trim(), e=f.e.value.trim(), r=(f.r.value||'').trim().slice(0,300), u=!!f.u.checked;
       if(!n||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){ ov.querySelector('[data-err]').style.display='block'; return; }
-      set(n,e); log(n,e,r);
+      set(n,e); log(n,e,r,u);
       if(window.track){ try{ window.track('enter_site'); }catch(err){} }
       ov.remove(); fill();
       try{ document.querySelectorAll('iframe[src*="explorer"]').forEach(function(fr){ fr.src=fr.src; }); }catch(err){}

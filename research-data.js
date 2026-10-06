@@ -42,7 +42,7 @@ window.__RESEARCH = {
    "group": "teal"
   },
   {
-   "label": "Designing Regenerative Systems",
+   "label": "Designing for Complexity",
    "group": "green"
   },
   {
@@ -54,7 +54,7 @@ window.__RESEARCH = {
    "group": "green"
   },
   {
-   "label": "Learning from Impact",
+   "label": "Adaptive Monitoring Evaluation & Learning",
    "group": "coral"
   },
   {
@@ -70,7 +70,7 @@ window.__RESEARCH = {
    "group": "coral"
   },
   {
-   "label": "Mobilizing Resources",
+   "label": "Telling the Story of Systems Change",
    "group": "coral"
   },
   {
@@ -90,9 +90,9 @@ window.__RESEARCH = {
   {
    "name": "Active Hope: How to Face the Mess We're in with Unexpected Resilience and Creative Power",
    "caps": [
-    "Staying Grounded",
-    "Acting with Integrity"
-   ],
+     "Staying Grounded",
+     "Acting with Integrity"
+    ],
    "desc": "This book guides readers through a transformational systemic journey, drawing on interconnectedness and resilience, showing how to face global crises with gratitude, creative response, and a sense of shared purpose.",
    "types": [
     "Books"
@@ -102,8 +102,8 @@ window.__RESEARCH = {
   {
    "name": "Acumen Academy",
    "caps": [
-    "Prototyping & Testing"
-   ],
+     "Prototyping & Testing"
+    ],
    "desc": "Acumen Academy offers a diverse catalog of courses designed to cultivate social entrepreneurship and leadership skills. Their curriculum focuses on the \"human side\" of systems change, teaching participants how to navigate complex power dynamics, build sustainable business models, and manage the emotional labor inherent in social transformation. This is essential for systems change because it provides the practical, pedagogical, and tactical training needed to turn abstract visions of a better future into viable, impactful, and community-centered realities.",
    "types": [
     "Capacity-Building Centers"
@@ -113,9 +113,9 @@ window.__RESEARCH = {
   {
    "name": "All About Love: New Visions",
    "caps": [
-    "Transforming Conflict",
-    "Acting with Integrity"
-   ],
+     "Transforming Conflict",
+     "Acting with Integrity"
+    ],
    "desc": "bell hooks provides transformative, systemic insights into how modern society separates people, offering a blueprint for systemic healing through communal and personal love.",
    "types": [
     "Books"
@@ -125,9 +125,9 @@ window.__RESEARCH = {
   {
    "name": "All About Power",
    "caps": [
-    "Building Power and Agency",
-    "Reshaping Economies & States"
-   ],
+     "Building Power and Agency",
+     "Reshaping Economies & States"
+    ],
    "desc": "A seminal primer by Srilatha Batliwala that demystifies power by analyzing both formal structures and informal relations. It provides a shared lexicon for social justice advocates to map how power operates, enabling them to build more effective, evidence-based strategies for systemic change.",
    "types": [
     "Digital Publications / Reports"
@@ -137,8 +137,8 @@ window.__RESEARCH = {
   {
    "name": "An introduction to regenerative dynamics",
    "caps": [
-    "Designing Regenerative Systems"
-   ],
+     "Designing for Complexity"
+    ],
    "desc": "This guide explores regenerative dynamics by linking the Regenerative Lens framework with 25 diverse global case studies. Spanning from local farms to international organizations, the initiatives demonstrate how regenerative patterns function in practice, highlighting both the potential for abundance and the inherent challenges of systemic work. Together, these materials provide practical entry points for anyone seeking to understand and apply regenerative principles across different scales and contexts.",
    "types": [
     "Case Studies"
@@ -148,8 +148,8 @@ window.__RESEARCH = {
   {
    "name": "An Introduction to Systems Thinking",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "Barry Richmond delivers a foundational introduction to system dynamics, exploring how computer simulation modeling can uncover non-linear relationships within complex structures.",
    "types": [
     "Books"
@@ -159,9 +159,9 @@ window.__RESEARCH = {
   {
    "name": "Apurva LENS (Learning for Evolutionary Network Systems)",
    "caps": [
-    "Deciding Together",
-    "Thinking in Systems"
-   ],
+     "Deciding Together",
+     "Thinking in Systems"
+    ],
    "desc": "Apurva LENS (Learning for Evolutionary Network Systems) is a digital platform designed to facilitate collective sensemaking and systems mapping. By providing a collaborative interface for visualizing interdependencies, it allows users to move beyond siloed analysis. This tool is instrumental for systems change as it democratizes the process of mapping complex, non-linear relationships, enabling teams to build shared agency, identify leverage points for intervention, and iterate on regenerative strategies within their own local and professional contexts.",
    "types": [
     "Data Tools"
@@ -171,10 +171,10 @@ window.__RESEARCH = {
   {
    "name": "Ashoka Case Study Library",
    "caps": [
-    "Prototyping & Testing",
-    "Developing Leaders",
-    "Mobilizing Resources"
-   ],
+     "Prototyping & Testing",
+     "Developing Leaders",
+     "Engaging Capital"
+    ],
    "desc": "A curated collection of strategies used by social entrepreneurs to catalyze networks of changemakers, providing replicable models for scaling systemic impact.",
    "types": [
     "Case Studies"
@@ -184,10 +184,10 @@ window.__RESEARCH = {
   {
    "name": "Audrey Tang: The Power of Collective Intelligence",
    "caps": [
-    "Cultivating Collaboration",
-    "Shifting Narratives",
-    "Deciding Together"
-   ],
+     "Cultivating Collaboration",
+     "Shifting Narratives",
+     "Deciding Together"
+    ],
    "desc": "Can AI actually strengthen democracy? Audrey Tang illustrates how synthesizing collective input through open data builds radical transparency and trust. It’s a powerful shift toward real-time collaboration, where technology empowers every citizen to contribute to a more resilient\nand innovative society.",
    "types": [
     "Video"
@@ -197,8 +197,8 @@ window.__RESEARCH = {
   {
    "name": "Autopoiesis and Cognition: The Realization of the Living",
    "caps": [
-    "Staying Grounded"
-   ],
+     "Staying Grounded"
+    ],
    "desc": "\"Autopoiesis and Cognition\" introduces the radical concept of living entities as autopoietic systems: autonomous, self-referring, and self-constructing unities. Maturana and Varela argue that cognition is not an intellectual add-on but a fundamental biological phenomenon, intrinsic to life itself. This framework challenges observers to rethink their position, suggesting that language, description, and knowledge emerge as secondary phenomena from interactions between these closed systems. It offers a profound, transformative lens for re-examining the nature of agency and systemic evolution.",
    "types": [
     "Books"
@@ -208,9 +208,9 @@ window.__RESEARCH = {
   {
    "name": "Bayo Akomolafe’s Essays",
    "caps": [
-    "Acting with Integrity",
-    "Building Power and Agency"
-   ],
+     "Acting with Integrity",
+     "Building Power and Agency"
+    ],
    "desc": "Bayo Akomolafe’s essays challenge the traditional Western paradigms of progress, individuality, and linear activism. By weaving together post-humanist philosophy, indigenous wisdom, and critical inquiry, he invites readers to embrace \"entanglement\" and the \"inappropriate\" rather than seeking simple solutions to systemic crises. His work critiques modernity’s obsession with control, urging a shift toward slowing down, grieving, and finding generative possibilities in the breakdown of dominant systems. It is a profound, poetic disruption of normative thinking.",
    "types": [
     "Articles / Essays"
@@ -220,9 +220,9 @@ window.__RESEARCH = {
   {
    "name": "Beautiful Trouble",
    "caps": [
-    "Advocating for Policy Change",
-    "Strengthening Ecosystems"
-   ],
+     "Advocating for Policy Change",
+     "Strengthening Ecosystems"
+    ],
    "desc": "Beautiful Trouble is a toolkit and creative hub for artful activism, bridging the gap between grassroots movements and effective systemic disruption. By synthesizing lessons from past social movements into tactical, methodological, and principle-based frameworks, it empowers organizers to craft more imaginative, high-impact campaigns. It treats creative expression not as an accessory to protest, but as a strategic asset for changing narratives, shifting power dynamics, and sustaining long-term social and political transformation.",
    "types": [
     "Methods & Toolkits",
@@ -233,9 +233,9 @@ window.__RESEARCH = {
   {
    "name": "Belonging Design Principles",
    "caps": [
-    "Building Power and Agency",
-    "Designing Regenerative Systems"
-   ],
+     "Building Power and Agency",
+     "Designing for Complexity"
+    ],
    "desc": "Created by the Othering & Belonging Institute, this guide outlines architectural and social principles for building genuine inclusion. It offers a blueprint for organizations to dismantle structural exclusion by intentionally designing spaces, policies, and narratives that foster universal belonging.",
    "types": [
     "Digital Publications / Reports",
@@ -246,9 +246,9 @@ window.__RESEARCH = {
   {
    "name": "Belonging without Othering: How We Save Ourselves and the World",
    "caps": [
-    "Building Power and Agency",
-    "Acting with Integrity"
-   ],
+     "Building Power and Agency",
+     "Acting with Integrity"
+    ],
    "desc": "john a. powell and Stephen Menendian explore the systemic dynamics of exclusion and structural racism, presenting structural \"targeted universalism\" frameworks to foster true societal belonging without marginalizing others.",
    "types": [
     "Books"
@@ -258,8 +258,8 @@ window.__RESEARCH = {
   {
    "name": "Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge and the Teachings of Plants",
    "caps": [
-    "Living Within Planetary Limits"
-   ],
+     "Living Within Planetary Limits"
+    ],
    "desc": "Drawing on her life as an indigenous scientist, and as a woman, Robin Wall Kimmerer shows how other living beings—asters and goldenrod, strawberries and squash, salamanders, algae, and sweetgrass—offer us gifts and lessons, even if we've forgotten how to hear their voices.",
    "types": [
     "Books"
@@ -269,8 +269,8 @@ window.__RESEARCH = {
   {
    "name": "Buddhist Philosophy and Sustainable Development: Integrating Society, Economy, and Environment",
    "caps": [
-    "Acting with Integrity"
-   ],
+     "Acting with Integrity"
+    ],
    "desc": "The article \"Buddhist Philosophy and Sustainable Development: Integrating Society, Economy, and Environment\" explores how core Buddhist principles—such as Dhammika (righteousness), Majjhima Patipada (the Middle Way), and Interdependent Co-arising (Paticcasamuppada)—provide a holistic framework for sustainable development. It argues that modern sustainability, often trapped in purely material metrics, requires a shift toward moral and cognitive alignment with ecological reality. By emphasizing non-attachment, sufficiency, and the interconnectedness of all life, the article positions Buddhist ethics as a regenerative methodology for balancing human needs with planetary limits.",
    "types": [
     "Articles / Essays"
@@ -280,9 +280,9 @@ window.__RESEARCH = {
   {
    "name": "Catalyst Now",
    "caps": [
-    "Strengthening Ecosystems",
-    "Mobilizing Resources"
-   ],
+     "Strengthening Ecosystems",
+     "Engaging Capital"
+    ],
    "desc": "A network dedicated to facilitating social impact by connecting systems change practitioners with the tools and mindsets necessary for effective, scalable interventions.",
    "types": [
     "Networks"
@@ -292,9 +292,9 @@ window.__RESEARCH = {
   {
    "name": "Changemakers’ Toolkit",
    "caps": [
-    "Deciding Together",
-    "Advocating for Policy Change"
-   ],
+     "Deciding Together",
+     "Advocating for Policy Change"
+    ],
    "desc": "The Social Movement Builders (SMK) toolkit provides practical, field-tested guidance for designing and leading effective campaigns. It focuses on the mechanics of social change, offering frameworks to help activists move beyond awareness-raising toward tangible impact. By clarifying strategy, identifying clear objectives, and mapping power dynamics, the resources help campaigners organize communities effectively. This is useful for systems change as it bridges the gap between high-level social theory and the granular, often demanding work of mobilizing collective action.",
    "types": [
     "Methods & Toolkits"
@@ -304,8 +304,8 @@ window.__RESEARCH = {
   {
    "name": "Civic Square",
    "caps": [
-    "Designing Regenerative Systems"
-   ],
+     "Designing for Complexity"
+    ],
    "desc": "CIVIC SQUARE pioneers local \"civic infrastructure\" by transitioning neighbourhoods toward regenerative, distributive, and resilient futures. Rather than traditional advocacy, it utilizes practical \"system demonstrators\"—such as street-level retrofitting and neighbourhood-scale implementations of Doughnut Economics—to rethink resource management and collective governance. By empowering residents to lead their own social and ecological shifts, the project bridges everyday lived experience with the complex, systemic redesign needed to address contemporary climate and social challenges at the community level.",
    "types": [
     "Think Tanks",
@@ -316,10 +316,10 @@ window.__RESEARCH = {
   {
    "name": "Climate Change is Racist",
    "caps": [
-    "Living Within Planetary Limits",
-    "Building Power and Agency",
-    "Reshaping Economies & States"
-   ],
+     "Living Within Planetary Limits",
+     "Building Power and Agency",
+     "Reshaping Economies & States"
+    ],
    "desc": "This uncomfortable, essential read exposes the structural racism embedded within the climate crisis and its solutions. It’s a call to look deeper, reminding us that true sustainability is impossible without racial justice. A  resource for ensuring our systems transformation is equitable for everyone, everywhere.",
    "types": [
     "Books"
@@ -329,10 +329,10 @@ window.__RESEARCH = {
   {
    "name": "Cocreative Toolkit",
    "caps": [
-    "Cultivating Collaboration",
-    "Deciding Together",
-    "Acting with Integrity"
-   ],
+     "Cultivating Collaboration",
+     "Deciding Together",
+     "Acting with Integrity"
+    ],
    "desc": "A free collection of facilitation tools and creative methods from We Are Cocreative for running participatory, collaborative sessions that engage groups in co-designing solutions.",
    "types": [
     "Methods & Toolkits"
@@ -342,10 +342,10 @@ window.__RESEARCH = {
   {
    "name": "Collective Intelligence Design Playbook",
    "caps": [
-    "Cultivating Collaboration",
-    "Deciding Together",
-    "Thinking in Systems"
-   ],
+     "Cultivating Collaboration",
+     "Deciding Together",
+     "Thinking in Systems"
+    ],
    "desc": "A comprehensive playbook from Nesta that outlines how to combine human ingenuity with digital data. It provides methods for harnessing collective intelligence to solve complex problems, detailing how to design for diversity, deliberation, and actionable insights.",
    "types": [
     "Methods & Toolkits"
@@ -355,9 +355,9 @@ window.__RESEARCH = {
   {
    "name": "Combining",
    "caps": [
-    "Listening Deeply",
-    "Thinking in Systems"
-   ],
+     "Listening Deeply",
+     "Thinking in Systems"
+    ],
    "desc": "Nora Bateson explores the interconnectedness of ecology, biology, and human behavior, offering deep reflections on how living systems communicate, learn, and evolve together.",
    "types": [
     "Books"
@@ -367,10 +367,10 @@ window.__RESEARCH = {
   {
    "name": "Community Weaving",
    "caps": [
-    "Cultivating Collaboration",
-    "Strengthening Ecosystems",
-    "Mobilizing Resources"
-   ],
+     "Cultivating Collaboration",
+     "Strengthening Ecosystems",
+     "Engaging Capital"
+    ],
    "desc": "A holistic framework built on five interconnected elements—The Fire, The Web, The Rhythm, The Circles, and The Spiral. It provides a structured yet flexible approach for network builders and community organizers to strengthen relational webs and cultivate healthy, resilient, and purposeful communities.",
    "types": [
     "Methods & Toolkits"
@@ -380,9 +380,9 @@ window.__RESEARCH = {
   {
    "name": "Connecting Lines: Strategic Collaboration for NGO Leaders",
    "caps": [
-    "Strengthening Ecosystems",
-    "Mobilizing Resources"
-   ],
+     "Strengthening Ecosystems",
+     "Engaging Capital"
+    ],
    "desc": "David Ehrlichman delivers a foundational guide for leaders on how to intentionally design, scale, and manage purpose-built networks to address complex systemic issues.",
    "types": [
     "Books"
@@ -392,9 +392,9 @@ window.__RESEARCH = {
   {
    "name": "Convening for System Level Impact Toolkit",
    "caps": [
-    "Developing Leaders",
-    "Cultivating Collaboration"
-   ],
+     "Developing Leaders",
+     "Cultivating Collaboration"
+    ],
    "desc": "The Bill & Melinda Gates Foundation’s Convening for System-Level Impact Toolkit provides a practical, human-centered guide for leaders and grantees working across multiple institutional stakeholders to drive sustainable agricultural transformation in complex environments. Moving beyond traditional meeting logistics, it focuses on the relational and structural dynamics of collaboration, offering modular frameworks for purpose-led convening, design, facilitation, and sustaining long-term momentum.",
    "types": [
     "Methods & Toolkits"
@@ -404,9 +404,9 @@ window.__RESEARCH = {
   {
    "name": "Creative Research Methods in the Social Sciences",
    "caps": [
-    "Deciding Together",
-    "Shifting Narratives"
-   ],
+     "Deciding Together",
+     "Shifting Narratives"
+    ],
    "desc": "Helen Kara's overview of arts-based, mixed, and transformative research methods, offering a map of creative approaches for investigating complex social questions.",
    "types": [
     "Books"
@@ -416,10 +416,10 @@ window.__RESEARCH = {
   {
    "name": "Creative Writing for Social Research",
    "caps": [
-    "Shifting Narratives",
-    "Deciding Together",
-    "Acting with Integrity"
-   ],
+     "Shifting Narratives",
+     "Deciding Together",
+     "Acting with Integrity"
+    ],
    "desc": "A practical guide (Richardson & Coles) to using poetry, fiction, and creative nonfiction as legitimate methods for producing and communicating social research.",
    "types": [
     "Books"
@@ -429,9 +429,9 @@ window.__RESEARCH = {
   {
    "name": "Culture Hack: M2U2",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Shifting Narratives"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Shifting Narratives"
+    ],
    "desc": "A curriculum focused on the \"narrative space\" of social change, teaching practitioners how to identify and \"hack\" the underlying logics and metaphors that sustain inequality. It provides tools for shifting public discourse by deconstructing dominant myths and co-creating new, dignity-affirming stories.",
    "types": [
     "Methods & Toolkits"
@@ -441,8 +441,8 @@ window.__RESEARCH = {
   {
    "name": "Cynefin",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "Developed by Dave Snowden, this sense-making framework helps leaders and communities distinguish between ordered, complex, and chaotic domains. It provides a vital mental model for making decisions and acting skillfully in environments characterized by uncertainty and non-linear dynamics.",
    "types": [
     "Books",
@@ -453,9 +453,9 @@ window.__RESEARCH = {
   {
    "name": "Dark Matter Labs",
    "caps": [
-    "Thinking in Systems",
-    "Designing Regenerative Systems"
-   ],
+     "Thinking in Systems",
+     "Designing for Complexity"
+    ],
    "desc": "Dark Matter Labs is a multidisciplinary design research organization focused on transforming the underlying institutional infrastructure—the \"dark matter\"—of our societies. This includes reshaping archaic financial instruments, regulatory frameworks, property rights, and organizational governance models to effectively respond to complex, systemic planetary challenges. By researching and designing new civic, economic, and technological protocols, the laboratory aims to build collective capacity for system-wide transition, collaborative ownership, and ecological regeneration.",
    "types": [
     "Think Tanks"
@@ -465,8 +465,8 @@ window.__RESEARCH = {
   {
    "name": "Data Feminism",
    "caps": [
-    "Learning from Impact"
-   ],
+     "Adaptive Monitoring Evaluation & Learning"
+    ],
    "desc": "Data Feminism by Catherine D'Ignazio and Lauren F. Klein applies intersectional feminist theory to data science. It argues that data is never neutral; it reflects the power dynamics and biases of the societies that collect it. The book provides a framework for recognizing and challenging these \"power-laden\" systems, advocating for design practices that center marginalized experiences. This is critical for systems change as it demands that we interrogate the ethics, transparency, and equity of the systems—both technical and social—that govern our information and decision-making environments.",
    "types": [
     "Books"
@@ -476,9 +476,9 @@ window.__RESEARCH = {
   {
    "name": "Data-Driven Storytelling",
    "caps": [
-    "Shifting Narratives",
-    "Learning from Impact"
-   ],
+     "Shifting Narratives",
+     "Adaptive Monitoring Evaluation & Learning"
+    ],
    "desc": "An edited volume on how data and narrative combine to communicate complex findings, covering visualization, narrative structure, and audience engagement for turning evidence into stories that move people.",
    "types": [
     "Books"
@@ -488,9 +488,9 @@ window.__RESEARCH = {
   {
    "name": "Data-Powered Positive Deviance",
    "caps": [
-    "Learning from Impact",
-    "Prototyping & Testing"
-   ],
+     "Adaptive Monitoring Evaluation & Learning",
+     "Prototyping & Testing"
+    ],
    "desc": "This handbook details the Data-Powered Positive Deviance (DPPD) method, which uses big data to identify outliers who are succeeding despite systemic constraints. It provides a rigorous step-by-step process for extracting these \"uncommon practices\" and scaling them to create effective, community-led interventions.",
    "types": [
     "Methods & Toolkits"
@@ -500,9 +500,9 @@ window.__RESEARCH = {
   {
    "name": "Declaration of Decolonizing Education",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Acting with Integrity"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Acting with Integrity"
+    ],
    "desc": "Manish Jain’s \"Declaration of Decolonizing Education\" challenges the institutionalization of learning as a form of \"cognitive colonization.\" He argues that modern schooling functions as a monoculture that systematically replaces diverse, indigenous, and life-centered ways of knowing with a standardized, industrial worldview. By separating learners from their communities, environments, and innate intelligence, the current system ensures dependency. The declaration advocates for \"de-schooling\" society, urging a reclamation of localized, autonomous learning ecosystems that foster ecological consciousness, communal agency, and epistemic liberation.",
    "types": [
     "Articles / Essays"
@@ -512,9 +512,9 @@ window.__RESEARCH = {
   {
    "name": "Decolonising the Mind: The Politics of Language in African Literature",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Shifting Narratives"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Shifting Narratives"
+    ],
    "desc": "Ngũgĩ wa Thiong'o explores the systemic impacts of cultural imperialism, arguing that true structural and intellectual decolonization requires a return to indigenous languages and storytelling traditions.",
    "types": [
     "Books"
@@ -524,10 +524,10 @@ window.__RESEARCH = {
   {
    "name": "Decolonizing Methodologies: Research and Indigenous Peoples",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Deciding Together",
-    "Building Power and Agency"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Deciding Together",
+     "Building Power and Agency"
+    ],
    "desc": "Linda Tuhiwai Smith's foundational text critiques Eurocentric scientific and academic paradigms, exploring how research can be reclaimed, decolonized, and re-centered through Indigenous knowledge and systemic practices.",
    "types": [
     "Books"
@@ -537,8 +537,8 @@ window.__RESEARCH = {
   {
    "name": "Deschooling Dialogues",
    "caps": [
-    "Acting with Integrity"
-   ],
+     "Acting with Integrity"
+    ],
    "desc": "A podcast series exploring the boundaries of traditional education, questioning systemic norms, and interviewing practitioners who are building alternative learning spaces.",
    "types": [
     "Podcast"
@@ -548,9 +548,9 @@ window.__RESEARCH = {
   {
    "name": "Design Journeys through Complex Systems: Practice Tools for Systemic Design",
    "caps": [
-    "Thinking in Systems",
-    "Designing Regenerative Systems"
-   ],
+     "Thinking in Systems",
+     "Designing for Complexity"
+    ],
    "desc": "Kristel van Ael and Peter H. Jones present a practical handbook detailing systemic design tools to help facilitators map hyper-complexity and engage stakeholder groups in addressing large-scale societal challenges.",
    "types": [
     "Methods & Toolkits"
@@ -560,9 +560,9 @@ window.__RESEARCH = {
   {
    "name": "Design Social Change: Take Action, Work toward Equity, and Challenge the Status Quo",
    "caps": [
-    "Designing Regenerative Systems",
-    "Building Power and Agency"
-   ],
+     "Designing for Complexity",
+     "Building Power and Agency"
+    ],
    "desc": "This article explores the concept of \"un-learning\" as a critical practice for fostering systemic change. It argues that traditional educational models often reinforce existing, extractive worldviews, making it difficult to envision or build genuinely regenerative futures. By applying pedagogical strategies that dismantle ingrained, colonial, and hierarchical mental models, the authors propose that practitioners can cultivate the \"epistemic agency\" required to design more equitable, community-led, and adaptive systems. It emphasizes that before new systems can take root, the old cognitive patterns that sustain them must be actively and intentionally un-learned.",
    "types": [
     "Articles / Essays"
@@ -572,10 +572,10 @@ window.__RESEARCH = {
   {
    "name": "Design Thinking Toolkit",
    "caps": [
-    "Prototyping & Testing",
-    "Deciding Together",
-    "Designing Regenerative Systems"
-   ],
+     "Prototyping & Testing",
+     "Deciding Together",
+     "Designing for Complexity"
+    ],
    "desc": "An introductory resource for social innovators that breaks down the design-thinking process into manageable modules. It focuses on empathetic engagement, collaborative brainstorming, and rapid prototyping to help changemakers navigate the early, messy stages of social project development.",
    "types": [
     "Methods & Toolkits"
@@ -585,8 +585,8 @@ window.__RESEARCH = {
   {
    "name": "Design Your Own Learning: A Guided Workbook for Learning How to Learn",
    "caps": [
-    "Acting with Integrity"
-   ],
+     "Acting with Integrity"
+    ],
    "desc": "A guided workbook designed to help individuals transition from passive learners to active drivers of their own educational journey, providing frameworks for meta-cognition and self-directed growth.",
    "types": [
     "Books",
@@ -597,10 +597,10 @@ window.__RESEARCH = {
   {
    "name": "Design. Think. Make. Break. Repeat.",
    "caps": [
-    "Prototyping & Testing",
-    "Deciding Together",
-    "Designing Regenerative Systems"
-   ],
+     "Prototyping & Testing",
+     "Deciding Together",
+     "Designing for Complexity"
+    ],
    "desc": "A practical handbook containing 80 methods for design and innovation. It takes a life-centred approach, guiding teams through an iterative process of questioning, prototyping, and \"breaking\" their ideas to find solutions that are robust, creative, and socially relevant.",
    "types": [
     "Books"
@@ -610,8 +610,8 @@ window.__RESEARCH = {
   {
    "name": "Dismantling the Master's Tools",
    "caps": [
-    "Building Power and Agency"
-   ],
+     "Building Power and Agency"
+    ],
    "desc": "This project offers a deep dive into the somatic and systemic practice of interrogating white supremacy in social R&D. It provides reflective tools for practitioners to recognize how their own bodies and habits are conditioned by colonial structures, offering paths toward radical transformation.",
    "types": [
     "Methods & Toolkits"
@@ -621,10 +621,10 @@ window.__RESEARCH = {
   {
    "name": "Donought Economics",
    "caps": [
-    "Living Within Planetary Limits",
-    "Reshaping Economies & States",
-    "Designing Regenerative Systems"
-   ],
+     "Living Within Planetary Limits",
+     "Reshaping Economies & States",
+     "Designing for Complexity"
+    ],
    "desc": "The Doughnut Economics model provides a compass for 21st-century prosperity, balancing human needs with planetary limits. It features two concentric rings: a social foundation to prevent deprivation and an ecological ceiling to avoid environmental degradation. The space between, the \"doughnut,\" represents a safe and just operating space for humanity. This framework is vital for systems change as it shifts the goal of economic activity from endless growth to thriving within regenerative, life-sustaining boundaries.",
    "types": [
     "Methods & Toolkits"
@@ -634,9 +634,9 @@ window.__RESEARCH = {
   {
    "name": "Emergent Strategy: Shaping Change, Changing Worlds",
    "caps": [
-    "Thinking in Systems",
-    "Developing Leaders"
-   ],
+     "Thinking in Systems",
+     "Developing Leaders"
+    ],
    "desc": "Inspired by science fiction and biomimicry, adrienne maree brown explores how complex patterns arise from simple interactions, offering a radical framework for building adaptive, resilient, and decentralized social change.",
    "types": [
     "Books"
@@ -646,10 +646,10 @@ window.__RESEARCH = {
   {
    "name": "Everyday Habits for Transforming Systems: The Catalytic Power of Radical Engagement",
    "caps": [
-    "Thinking in Systems",
-    "Strengthening Ecosystems",
-    "Building Power and Agency"
-   ],
+     "Thinking in Systems",
+     "Strengthening Ecosystems",
+     "Building Power and Agency"
+    ],
    "desc": "Adam Kahane’s exploration of everyday habits highlights how systemic transformation is not solely the result of major strategic interventions but is built through the iterative, daily practices of those within the system. By focusing on cultivating skills like deep listening, reflecting on one’s own mental models, and fostering candid dialogue, practitioners can disrupt entrenched patterns from within. This approach is highly relevant for systems change as it democratizes agency, shifting the responsibility for transformation from external \"experts\" to the everyday choices of those navigating the system.",
    "types": [
     "Books"
@@ -659,10 +659,10 @@ window.__RESEARCH = {
   {
    "name": "Facilitator's Guide to Participatory Decision-Making",
    "caps": [
-    "Transforming Conflict",
-    "Cultivating Collaboration",
-    "Deciding Together"
-   ],
+     "Transforming Conflict",
+     "Cultivating Collaboration",
+     "Deciding Together"
+    ],
    "desc": "Sam Kaner and colleagues lay out a comprehensive sourcebook packed with visual tools and strategies designed to maximize collaboration, foster mutual understanding, and lead groups through complex choices to sustainable agreements.",
    "types": [
     "Methods & Toolkits"
@@ -672,8 +672,8 @@ window.__RESEARCH = {
   {
    "name": "Feldenkrais",
    "caps": [
-    "Staying Grounded"
-   ],
+     "Staying Grounded"
+    ],
    "desc": "The Feldenkrais Method is a somatic educational system that uses movement to improve self-awareness and functional integration. By focusing on the relationship between the nervous system, the skeletal structure, and the environment, it teaches practitioners to recognize and refine habitual patterns of tension or restriction. Rather than prescribing specific corrective exercises, it fosters \"organic learning,\" empowering individuals to develop greater efficiency, ease, and adaptability in how they move and exist within their own physical systems.",
    "types": [
     "Methods & Toolkits"
@@ -683,9 +683,9 @@ window.__RESEARCH = {
   {
    "name": "For The Wild",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Living Within Planetary Limits"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Living Within Planetary Limits"
+    ],
    "desc": "An anthology of the Anthropocene that explores ecological conservation, indigenous wisdom, and the systemic shifts needed to live in better relationship with the natural world.",
    "types": [
     "Podcast"
@@ -695,10 +695,10 @@ window.__RESEARCH = {
   {
    "name": "Forum for the Future",
    "caps": [
-    "Imagining Futures",
-    "Mobilizing Resources",
-    "Designing Regenerative Systems"
-   ],
+     "Imagining Futures",
+     "Engaging Capital",
+     "Designing for Complexity"
+    ],
    "desc": "An international sustainability non-profit that works with partners to design and scale deep systemic solutions to global challenges.",
    "types": [
     "Networks"
@@ -708,9 +708,9 @@ window.__RESEARCH = {
   {
    "name": "Gaia Education",
    "caps": [
-    "Designing Regenerative Systems",
-    "Living Within Planetary Limits"
-   ],
+     "Designing for Complexity",
+     "Living Within Planetary Limits"
+    ],
    "desc": "Gaia Education focuses on whole-system design for regenerative development, providing a framework for creating communities that thrive within planetary boundaries. By integrating four dimensions—social, ecological, economic, and worldview—they offer curriculum and training for \"designing the world we want.\" Their approach is essentially a blueprint for transitioning from extractive human systems to life-affirming ones, emphasizing that systemic change requires a holistic redesign of how we live, work, and collaborate.",
    "types": [
     "Capacity-Building Centers"
@@ -720,8 +720,8 @@ window.__RESEARCH = {
   {
    "name": "Gapminder",
    "caps": [
-    "Learning from Impact"
-   ],
+     "Adaptive Monitoring Evaluation & Learning"
+    ],
    "desc": "An independent educational foundation that provides tools to visualize global development data, aimed at dismantling misconceptions about how the world is changing.",
    "types": [
     "Data Tools"
@@ -731,8 +731,8 @@ window.__RESEARCH = {
   {
    "name": "Gelephu Mindfulness City (GMC)",
    "caps": [
-    "Prototyping & Testing"
-   ],
+     "Prototyping & Testing"
+    ],
    "desc": "Gelephu Mindfulness City (GMC) is a planned Special Administrative Region in Bhutan, envisioned as a carbon-negative economic hub that integrates spirituality, sustainability, and modern technology. Rooted in Bhutan’s philosophy of Gross National Happiness, it aims to serve as a global sanctuary for wellness, finance, and green innovation. By leveraging bespoke, business-friendly legal frameworks and renewable infrastructure, it seeks to create a regenerative urban model that balances traditional Bhutanese values with the requirements of a 21st-century economy.",
    "types": [
     "Think Tanks",
@@ -743,8 +743,8 @@ window.__RESEARCH = {
   {
    "name": "Global Changemakers",
    "caps": [
-    "Prototyping & Testing"
-   ],
+     "Prototyping & Testing"
+    ],
    "desc": "Global Changemakers is a Swiss-based international youth organization that supports young leaders in driving community-led social impact. Their grant model is unique: rather than a generic application, funding is unlocked through participation in their specialized training programs, such as the \"Project Management for Changemakers\" course. By combining seed funding with capacity building, mentorship, and a global alumni network, they ensure that youth-led initiatives are technically sound, sustainable, and strategically aligned with systemic change goals.",
    "types": [
     "Fellowships"
@@ -754,9 +754,9 @@ window.__RESEARCH = {
   {
    "name": "Governing the Commons: The Evolution of Institutions for Collective Action",
    "caps": [
-    "Strengthening Ecosystems",
-    "Reshaping Economies & States"
-   ],
+     "Strengthening Ecosystems",
+     "Reshaping Economies & States"
+    ],
    "desc": "Elinor Ostrom's Nobel Prize-winning seminal text evaluates how local communities successfully govern common-pool natural resources through self-organized institutions rather than relying on state coercion or complete privatization.",
    "types": [
     "Books"
@@ -766,9 +766,9 @@ window.__RESEARCH = {
   {
    "name": "Green Dreamer",
    "caps": [
-    "Reshaping Economies & States",
-    "Living Within Planetary Limits"
-   ],
+     "Reshaping Economies & States",
+     "Living Within Planetary Limits"
+    ],
    "desc": "A podcast and community platform hosted by Kamea Chayne, focusing on radical solutions for climate justice and collective healing through systemic re-alignment.",
    "types": [
     "Podcast"
@@ -778,10 +778,10 @@ window.__RESEARCH = {
   {
    "name": "Growing Wings On The Way",
    "caps": [
-    "Developing Leaders",
-    "Thinking in Systems",
-    "Acting with Integrity"
-   ],
+     "Developing Leaders",
+     "Thinking in Systems",
+     "Acting with Integrity"
+    ],
    "desc": "A systems-thinking classic that uses the metaphor of learning to fly while already in the air. It provides a pragmatic approach to handling uncertainty, emphasizing that in complex environments, you must often build the framework for your actions while you are already in the middle of the process.",
    "types": [
     "Books"
@@ -791,9 +791,9 @@ window.__RESEARCH = {
   {
    "name": "Heritage Crafts: Preserving Traditional Skills and Culture 🛠️",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Listening Deeply"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Listening Deeply"
+    ],
    "desc": "This article from the Weald & Downland Living Museum highlights heritage crafts, such as blacksmithing and weaving, as vital cultural links to our ancestors and history. These traditional skills demonstrate how earlier generations utilized local materials to survive. Because many of these crafts are now endangered, museum workshops and training programs are vital to preserve them.",
    "types": [
     "Articles / Blogposts"
@@ -803,10 +803,10 @@ window.__RESEARCH = {
   {
    "name": "Hospicing Modernity: Facing Humanity's Wrongs and the Implications for Social Activism",
    "caps": [
-    "Living Within Planetary Limits",
-    "Reshaping Economies & States",
-    "Building Power and Agency"
-   ],
+     "Living Within Planetary Limits",
+     "Reshaping Economies & States",
+     "Building Power and Agency"
+    ],
    "desc": "Vanessa Machado de Oliveira provides a profound guide on how to face global crises, systemic harms, and climate collapse with maturity, humility, and integrity without relying on simplistic quick-fix solutions.",
    "types": [
     "Books"
@@ -816,8 +816,8 @@ window.__RESEARCH = {
   {
    "name": "How Field Catalysts Accelerate Collective Impact",
    "caps": [
-    "Strengthening Ecosystems"
-   ],
+     "Strengthening Ecosystems"
+    ],
    "desc": "\"How Field Catalysts Accelerate Collective Impact,\" published in the Stanford Social Innovation Review, defines \"field catalysts\" as organizations that focus on driving systemic change rather than just delivering services. These entities accelerate impact by building shared infrastructure, mobilizing resources, and fostering the collaborative conditions necessary for a field to mature. For systems change practitioners, this approach highlights the importance of institutionalizing a support structure that empowers a broader ecosystem to align its efforts toward solving complex, entrenched social problems.",
    "types": [
     "Articles / Essays"
@@ -827,8 +827,8 @@ window.__RESEARCH = {
   {
    "name": "Inequality Reexamined",
    "caps": [
-    "Reshaping Economies & States"
-   ],
+     "Reshaping Economies & States"
+    ],
    "desc": "Inequality Reexamined by Amartya Sen argues that equality in one space (such as income) frequently masks deep inequalities in others (such as physical capability, social standing, or agency). Sen introduces the \"capability approach,\" which evaluates quality of life based on the actual freedoms individuals possess to achieve the lives they value. This shifts the focus from static resource distribution to the systemic conditions that enable or inhibit human flourishing, providing a critical framework for designing more equitable, multidimensional social systems.",
    "types": [
     "Books"
@@ -838,8 +838,8 @@ window.__RESEARCH = {
   {
    "name": "Jacobin Radio",
    "caps": [
-    "Reshaping Economies & States"
-   ],
+     "Reshaping Economies & States"
+    ],
    "desc": "Jacobin Radio is a podcast series from the American socialist publication Jacobin, offering commentary on politics, economics, and culture from a leftist perspective. It features interviews with activists, journalists, and academics who analyze power structures, labor movements, and systemic inequality. For those focused on systems change, it provides a critical examination of institutional failures and historical policy outcomes, challenging dominant neoliberal frameworks by centering class-based analysis and the political economy as primary drivers of social structure.",
    "types": [
     "Podcasts"
@@ -849,8 +849,8 @@ window.__RESEARCH = {
   {
    "name": "Liberating Structures",
    "caps": [
-    "Cultivating Collaboration"
-   ],
+     "Cultivating Collaboration"
+    ],
    "desc": "Liberating Structures are a collection of 33 practical, menu-driven interaction methods designed to replace conventional, restrictive formats like open discussions or presentations. By altering structural constraints—such as time allocation, group configuration, and participation sequences—these micro-structures ensure that every voice is included and heard simultaneously. They shift group dynamics from passive listening to active engagement, distributing power equitably across teams. This practice builds collective intelligence and shared agency, making collaborative decision-making and rapid innovation accessible to any group size.",
    "types": [
     "Methods & Toolkits"
@@ -860,10 +860,10 @@ window.__RESEARCH = {
   {
    "name": "Life Worlds",
    "caps": [
-    "Living Within Planetary Limits",
-    "Listening Deeply",
-    "Staying Grounded"
-   ],
+     "Living Within Planetary Limits",
+     "Listening Deeply",
+     "Staying Grounded"
+    ],
    "desc": "A series hosted by Alexa Firmenich that dives into the philosophy of living systems, exploring how to bridge the gap between scientific understanding and the lived experience of our changing planet.",
    "types": [
     "Podcast"
@@ -873,9 +873,9 @@ window.__RESEARCH = {
   {
    "name": "Living Planet Report",
    "caps": [
-    "Learning from Impact",
-    "Living Within Planetary Limits"
-   ],
+     "Adaptive Monitoring Evaluation & Learning",
+     "Living Within Planetary Limits"
+    ],
    "desc": "Global wildlife populations have dropped about 73% since 1970, with freshwater and Latin American species hit hardest. The report warns that habitat loss, overexploitation, and other pressures could trigger environmental tipping points without urgent action on food, energy, finance, and conservation.",
    "types": [
     "Digital Publications / Reports"
@@ -885,9 +885,9 @@ window.__RESEARCH = {
   {
    "name": "Map of Life",
    "caps": [
-    "Learning from Impact",
-    "Living Within Planetary Limits"
-   ],
+     "Adaptive Monitoring Evaluation & Learning",
+     "Living Within Planetary Limits"
+    ],
    "desc": "A scientific platform that integrates global biodiversity data to map species distributions and habitat health, providing essential insights for ecological systems management.",
    "types": [
     "Data Tools"
@@ -897,9 +897,9 @@ window.__RESEARCH = {
   {
    "name": "Map the System Case Library",
    "caps": [
-    "Building Power and Agency",
-    "Thinking in Systems"
-   ],
+     "Building Power and Agency",
+     "Thinking in Systems"
+    ],
    "desc": "An investigation into the dual water crisis in Jakarta, Indonesia, mapping the complex systemic interactions between urban development, climate change, and resource depletion.",
    "types": [
     "Case Studies"
@@ -909,8 +909,8 @@ window.__RESEARCH = {
   {
    "name": "Ministry of the Future",
    "caps": [
-    "Imagining Futures"
-   ],
+     "Imagining Futures"
+    ],
    "desc": "Written by Kim Stanley Robinson, The Ministry for the Future is a climate fiction novel exploring a systemic path through the climate crisis. Centered on a fictional agency advocating for unborn generations , the book details radical interventions including carbon quantitative easing, geoengineering, and the geopolitical dynamics of eco-terrorism. By portraying the profound somatic trauma of climate catastrophes , it illustrates how finance, law, ecology, and technology must interlock to achieve planetary-scale eco-regulation and survival.",
    "types": [
     "Books"
@@ -920,9 +920,9 @@ window.__RESEARCH = {
   {
    "name": "MISO Method of Action Research",
    "caps": [
-    "Listening Deeply",
-    "Deciding Together"
-   ],
+     "Listening Deeply",
+     "Deciding Together"
+    ],
    "desc": "Developed by Cathryn Berger Kaye, the MISO Method is an action research and investigation framework designed to deepen inquiry in service-learning and systemic problem-solving. It counters shallow web searches by requiring practitioners to triangulate data across four distinct modalities: Media (analyzing digital and print literature), Interviews (consulting field experts), Surveys (polling affected populations), and Observations (gaining localized, first-hand experiential evidence). This systematic approach uncovers authentic community needs and builds robust, peer-validated baselines for subsequent social action or systemic interventions.",
    "types": [
     "Methods & Toolkits"
@@ -932,9 +932,8 @@ window.__RESEARCH = {
   {
    "name": "Mulago Foundation",
    "caps": [
-    "Mobilizing Resources",
-    "Engaging Capital"
-   ],
+     "Engaging Capital"
+    ],
    "desc": "The Mulago Foundation focuses on scaling high-impact, poverty-alleviating solutions through a rigorous, design-led approach. Unlike traditional grantmaking, they act as active partners who prioritize \"scalable impact,\" pushing organizations to refine their models for effectiveness, cost-efficiency, and long-term sustainability. They concentrate on interventions that can measurably improve the lives of the very poor, treating social impact as an engineering problem that requires clarity, feedback loops, and a relentless focus on the core mechanisms that drive outcomes.",
    "types": [
     "Fellowships"
@@ -944,10 +943,10 @@ window.__RESEARCH = {
   {
    "name": "Network Weaver",
    "caps": [
-    "Strengthening Ecosystems",
-    "Developing Leaders",
-    "Mobilizing Resources"
-   ],
+     "Strengthening Ecosystems",
+     "Developing Leaders",
+     "Engaging Capital"
+    ],
    "desc": "A resource hub for leaders who build and sustain networks, offering methods to increase network health, connectivity, and collective impact.",
    "types": [
     "Networks"
@@ -957,10 +956,9 @@ window.__RESEARCH = {
   {
    "name": "New Philanthropic Capital",
    "caps": [
-    "Mobilizing Resources",
-    "Thinking in Systems",
-    "Engaging Capital"
-   ],
+     "Engaging Capital",
+     "Thinking in Systems"
+    ],
    "desc": "NPC (New Philanthropy Capital) operates as a think tank and consultancy dedicated to enhancing social impact within the UK’s \"impact economy.\" They provide research, strategic guidance, and practical tools—such as their widely used \"Theory of Change\" framework—to help funders, charities, and policymakers transition from well-intentioned goals to measurable outcomes. By bridging capital with delivery, they help organizations navigate complex systemic challenges, ensuring that resources are directed effectively toward long-term, scalable, and evidence-based positive change.",
    "types": [
     "Think Tanks",
@@ -971,8 +969,8 @@ window.__RESEARCH = {
   {
    "name": "No One Is Self-Made",
    "caps": [
-    "Prototyping & Testing"
-   ],
+     "Prototyping & Testing"
+    ],
    "desc": "No One Is Self-Made by Dr. Key Hallmon challenges the hyper-individualistic ethos of success by highlighting the critical, often invisible role of community support and social capital. Through the lens of \"proximity-based leadership,\" the book argues that true progress depends on intentional connection, mentorship, and the collective resources of one's network. For systems change, this work underscores that building resilient, equitable infrastructures requires moving beyond individual ambition to prioritize the relational networks and shared agency that sustain transformative collective action.",
    "types": [
     "Books"
@@ -982,8 +980,8 @@ window.__RESEARCH = {
   {
    "name": "Omidayar Network’s Systems Practice Workbook",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "Omidayar Network’s \"Systems Practice\" workbook serves as a practical guide for visualizing and mapping complex dynamics. It emphasizes that systems change requires moving beyond linear cause-and-effect thinking toward understanding the \"wholes\"—the feedback loops, leverage points, and systemic structures that drive behavior. By providing tools for mapping relationships and influence, the resource allows practitioners to externalize their assumptions, revealing the hidden connections that sustain current states and identifying where interventions might generate the most meaningful, durable shifts.",
    "types": [
     "Methods & Toolkits"
@@ -993,9 +991,9 @@ window.__RESEARCH = {
   {
    "name": "On Being",
    "caps": [
-    "Acting with Integrity",
-    "Living Within Planetary Limits"
-   ],
+     "Acting with Integrity",
+     "Living Within Planetary Limits"
+    ],
    "desc": "The On Being podcast, hosted by Krista Tippett, explores the \"big questions\" of meaning, ethics, and human connection. It bridges the gap between scientific inquiry, spiritual wisdom, and social action. For systems change practitioners, the series is a profound resource for examining the interior landscape of transformation. It emphasizes that structural change is inseparable from the human capacity for empathy, presence, and moral imagination, providing the necessary emotional and philosophical depth to sustain long-term systemic work.",
    "types": [
     "Podcasts"
@@ -1005,9 +1003,9 @@ window.__RESEARCH = {
   {
    "name": "Our World in Data",
    "caps": [
-    "Learning from Impact",
-    "Reshaping Economies & States"
-   ],
+     "Adaptive Monitoring Evaluation & Learning",
+     "Reshaping Economies & States"
+    ],
    "desc": "A comprehensive online publication that presents empirical research and data on global development challenges, helping users visualize long-term trends in health, poverty, and environmental sustainability.",
    "types": [
     "Data Tools"
@@ -1017,9 +1015,9 @@ window.__RESEARCH = {
   {
    "name": "PANORAMA: Solutions for a Healthy Planet",
    "caps": [
-    "Prototyping & Testing",
-    "Designing Regenerative Systems"
-   ],
+     "Prototyping & Testing",
+     "Designing for Complexity"
+    ],
    "desc": "Real change depends on learning from what already works. PANORAMA brings together proven, on-the-ground solutions for biodiversity, climate, and sustainable development—turning experience into shared knowledge. By breaking success into practical building blocks, it empowers practitioners worldwide to adapt, replicate, and scale impact for a healthier planet.",
    "types": [
     "Methods & Toolkits"
@@ -1029,8 +1027,8 @@ window.__RESEARCH = {
   {
    "name": "Pedagogy of the Oppressed",
    "caps": [
-    "Building Power and Agency"
-   ],
+     "Building Power and Agency"
+    ],
    "desc": "Paulo Freire's seminal text introduces a liberating education framework, championing critical pedagogy and dialogic practices to empower communities to overcome systemic oppression.",
    "types": [
     "Books"
@@ -1040,8 +1038,8 @@ window.__RESEARCH = {
   {
    "name": "PESTLE Analysis",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "PESTLE analysis is essential for systems change because it prevents interventions from operating in a vacuum. By forcing a comprehensive audit of Political, Economic, Sociological, Technological, Legal, and Environmental forces, it identifies the structural constraints and hidden leverage points within a system. This diagnostic rigour reveals why past interventions may have stalled and highlights where external pressures—such as shifting regulations or emerging social norms—can be harnessed to accelerate, rather than resist, meaningful, large-scale systemic transformation.",
    "types": [
     "Methods & Toolkits"
@@ -1051,9 +1049,9 @@ window.__RESEARCH = {
   {
    "name": "Planetary Boundaries: Defining a Safe Operating Space for Humanity",
    "caps": [
-    "Living Within Planetary Limits",
-    "Thinking in Systems"
-   ],
+     "Living Within Planetary Limits",
+     "Thinking in Systems"
+    ],
    "desc": "The Planetary Boundaries concept from the Stockholm Resilience Centre outlines nine critical Earth system processes—including climate change and biodiversity loss—that define a \"safe operating space for humanity.\" Staying within these limits ensures a stable, resilient planet. However, research warns that several boundaries have already been crossed, increasing the risk of irreversible environmental disruptions.",
    "types": [
     "Methods & Toolkits"
@@ -1063,8 +1061,8 @@ window.__RESEARCH = {
   {
    "name": "Problem Framing Canvas",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "Developed by Ingrid Burkett at the Griffith Centre for Systems Innovation, the Problem Framing Canvas is a sense-making toolkit that counters cultural biases toward rapid execution by prioritizing thorough problem definition. It provides a visual scaffolding that surfaces implicit assumptions, tracks structural systemic contributors via the 5 Whys, and guides collaborative teams in translating complex problems into actionable \"How Might We\" opportunity statements.",
    "types": [
     "Methods & Toolkits"
@@ -1074,9 +1072,9 @@ window.__RESEARCH = {
   {
    "name": "Radical Collaboration",
    "caps": [
-    "Transforming Conflict",
-    "Cultivating Collaboration"
-   ],
+     "Transforming Conflict",
+     "Cultivating Collaboration"
+    ],
    "desc": "A tactical guidebook for those tackling the climate crisis. It focuses on the mechanics of building \"impact networks\"—collaborations that bridge sectors and scales—by emphasizing speed, justice, and the alignment of diverse stakeholders around shared systemic goals.",
    "types": [
     "Methods & Toolkits"
@@ -1086,8 +1084,8 @@ window.__RESEARCH = {
   {
    "name": "Reality Strikes Back - A Cartoon Guide to Complexity",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "Reality Strikes Back examines the friction between human systems—often designed with rigid, linear logic—and the complex, nonlinear reality of the natural world. It argues that organizational and economic models frequently fail because they ignore \"systemic reality,\" such as feedback loops, resource constraints, and emergence. By focusing on how to align strategic thinking with these deeper realities, the book provides tools for leaders to build organizations that are not only more resilient but also better equipped to navigate the volatility of the 21st century.",
    "types": [
     "Books"
@@ -1097,9 +1095,9 @@ window.__RESEARCH = {
   {
    "name": "Refugia",
    "caps": [
-    "Staying Grounded",
-    "Acting with Integrity"
-   ],
+     "Staying Grounded",
+     "Acting with Integrity"
+    ],
    "desc": "Refugia explores the concept of \"refugia\"—habitats that allow species or systems to persist through periods of environmental adversity—as a metaphor for social and cultural preservation in an era of climate collapse. It focuses on the intentional creation of resilient, localized zones that protect values, knowledge, and community structures when broader systems undergo profound disruption. By emphasizing adaptive strategies and deep-time thinking, it provides a framework for sustaining humanity’s \"seeds\" through the transitions ahead.",
    "types": [
     "Methods & Toolkits",
@@ -1110,10 +1108,9 @@ window.__RESEARCH = {
   {
    "name": "Regenerative Economics",
    "caps": [
-    "Mobilizing Resources",
-    "Reshaping Economies & States",
-    "Engaging Capital"
-   ],
+     "Engaging Capital",
+     "Reshaping Economies & States"
+    ],
    "desc": "This resource provides educational frameworks for understanding economic models that prioritize planetary health and social well-being over extraction. It aims to equip educators and students with the systemic understanding needed to move beyond traditional growth-based paradigms toward circular and regenerative futures.",
    "types": [
     "Digital Publications / Reports"
@@ -1123,10 +1120,10 @@ window.__RESEARCH = {
   {
    "name": "Reinventing Organizations: An Illustrated Invitation to Join the Conversation on Next-Stage Organizations",
    "caps": [
-    "Cultivating Collaboration",
-    "Developing Leaders",
-    "Mobilizing Resources"
-   ],
+     "Cultivating Collaboration",
+     "Developing Leaders",
+     "Engaging Capital"
+    ],
    "desc": "Frederic Laloux provides a beautifully illustrated, accessible overview of his research into \"Teal\" organizations—resilient, decentralized systems built on self-management, wholeness, and evolutionary purpose.",
    "types": [
     "Books"
@@ -1136,10 +1133,10 @@ window.__RESEARCH = {
   {
    "name": "Research is Ceremony: Indigenous Research Methods",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Deciding Together",
-    "Building Power and Agency"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Deciding Together",
+     "Building Power and Agency"
+    ],
    "desc": "Shawn Wilson's foundational text presents research as a relational, ceremonial practice grounded in Indigenous epistemologies, where knowledge is built through relationship and accountability to community, land, and ancestors.",
    "types": [
     "Books"
@@ -1149,9 +1146,9 @@ window.__RESEARCH = {
   {
    "name": "Resilience Thinking: Sustaining Ecosystems and People in a Changing World",
    "caps": [
-    "Living Within Planetary Limits",
-    "Thinking in Systems"
-   ],
+     "Living Within Planetary Limits",
+     "Thinking in Systems"
+    ],
    "desc": "Brian Walker and David Salt present an essential overview of social-ecological systems and resilience theory, demonstrating how communities and environments can absorb disturbance while maintaining their core functions.",
    "types": [
     "Books"
@@ -1161,9 +1158,9 @@ window.__RESEARCH = {
   {
    "name": "Sand Talk: How Indigenous Thinking Can Save the World",
    "caps": [
-    "Thinking in Systems",
-    "Honoring Many Ways of Knowing"
-   ],
+     "Thinking in Systems",
+     "Honoring Many Ways of Knowing"
+    ],
    "desc": "This book brings an indigenous perspective to critical questions about world systems and how they are breaking down. It looks at global systems from an Indigenous perspective, showing how contemporary complex problems can be re-evaluated through ancient sustainability models.",
    "types": [
     "Books"
@@ -1173,10 +1170,10 @@ window.__RESEARCH = {
   {
    "name": "School of System Change",
    "caps": [
-    "Strengthening Ecosystems",
-    "Mobilizing Resources",
-    "Thinking in Systems"
-   ],
+     "Strengthening Ecosystems",
+     "Engaging Capital",
+     "Thinking in Systems"
+    ],
    "desc": "A global learning community providing comprehensive training for change practitioners to build the capacity, frameworks, and networks needed for systemic action.",
    "types": [
     "Networks"
@@ -1186,9 +1183,9 @@ window.__RESEARCH = {
   {
    "name": "SDG Tracker",
    "caps": [
-    "Learning from Impact",
-    "Living Within Planetary Limits"
-   ],
+     "Adaptive Monitoring Evaluation & Learning",
+     "Living Within Planetary Limits"
+    ],
    "desc": "An interactive tool that monitors global progress toward the United Nations Sustainable Development Goals, providing data-driven insights into how countries are performing against specific targets.",
    "types": [
     "Data Tools"
@@ -1198,8 +1195,8 @@ window.__RESEARCH = {
   {
    "name": "Seeing Like a State",
    "caps": [
-    "Reshaping Economies & States"
-   ],
+     "Reshaping Economies & States"
+    ],
    "desc": "Written by James C. Scott, Seeing Like a State explores how certain large-scale authoritarian schemes to improve the human condition have tragically failed. The book analyzes how states utilize \"legibility\" to simplify complex, social, and ecological realities into manageable, top-down data metrics. Scott argues that these rigid, modernist designs fail because they disregard metis—the localized, practical, and experiential knowledge essential to functioning systems. It serves as a vital resource for understanding the limits of centralized control and the importance of organic, adaptive complex systems.",
    "types": [
     "Books"
@@ -1209,8 +1206,8 @@ window.__RESEARCH = {
   {
    "name": "Self-Study Guide: Regenerative Leadership",
    "caps": [
-    "Developing Leaders"
-   ],
+     "Developing Leaders"
+    ],
    "desc": "Designed for changemakers, this guide offers a developmental pathway toward regenerative leadership. It focuses on internal alignment, systems awareness, and the capacity to lead from a place of \"evolutionary purpose\" rather than top-down control.",
    "types": [
     "Methods & Toolkits"
@@ -1220,9 +1217,9 @@ window.__RESEARCH = {
   {
    "name": "Shikshantar",
    "caps": [
-    "Reshaping Economies & States",
-    "Building Power and Agency"
-   ],
+     "Reshaping Economies & States",
+     "Building Power and Agency"
+    ],
    "desc": "Shikshantar, the Institute for Hand-rearing Minds, functions as a laboratory for \"deschooling\" and building diverse, autonomous learning societies. Based in Udaipur, it critiques the industrial-schooling model as a form of colonial conditioning that suppresses natural intelligence and creativity. By fostering \"gift culture,\" community-led mentorship, and self-directed learning paths, it provides a practical framework for creating resilient, localized ecosystems that prioritize human connection, ecological regeneration, and the reclamation of our innate capacity to design our own lives.",
    "types": [
     "Capacity-Building Centers"
@@ -1232,11 +1229,10 @@ window.__RESEARCH = {
   {
    "name": "Skoll Centre",
    "caps": [
-    "Prototyping & Testing",
-    "Mobilizing Resources",
-    "Thinking in Systems",
-    "Engaging Capital"
-   ],
+     "Prototyping & Testing",
+     "Engaging Capital",
+     "Thinking in Systems"
+    ],
    "desc": "Based at the University of Oxford, this centre fosters social entrepreneurship and systems change research, providing a global hub for academics and practitioners.",
    "types": [
     "Networks"
@@ -1246,10 +1242,10 @@ window.__RESEARCH = {
   {
    "name": "Social Change Now",
    "caps": [
-    "Cultivating Collaboration",
-    "Advocating for Policy Change",
-    "Building Power and Agency"
-   ],
+     "Cultivating Collaboration",
+     "Advocating for Policy Change",
+     "Building Power and Agency"
+    ],
    "desc": "A guidebook by Deepa Iyer that offers a comprehensive set of frameworks and reflective practices for those working in social change. It helps practitioners identify their roles within an ecosystem, navigate the challenges of movement-building, and foster deep connection across diverse communities.",
    "types": [
     "Books"
@@ -1259,9 +1255,9 @@ window.__RESEARCH = {
   {
    "name": "Sociocracy 3.0",
    "caps": [
-    "Cultivating Collaboration",
-    "Developing Leaders"
-   ],
+     "Cultivating Collaboration",
+     "Developing Leaders"
+    ],
    "desc": "A comprehensive framework for evolutionary, self-organizing systems. It provides modular, practical patterns for decentralized decision-making, effective meeting facilitation, and organizational governance, helping groups increase transparency and collective agency.",
    "types": [
     "Methods & Toolkits"
@@ -1271,8 +1267,8 @@ window.__RESEARCH = {
   {
    "name": "Solarpunk Futures",
    "caps": [
-    "Imagining Futures"
-   ],
+     "Imagining Futures"
+    ],
    "desc": "Solarpunk Futures is a collaborative storytelling game designed to facilitate collective, utopian visioning. By using a deck of cards—Ancestors, Tools, Values, and Challenges—players engage in \"backcasting,\" reverse-engineering pathways to a desirable future by grounding them in current material realities. The game moves beyond dystopian trends, using play as a structured system to foster intergenerational dialogue, interdependence, and the creative planning of new, ecological social structures through the practice of radical optimism.",
    "types": [
     "Games / Scenarios"
@@ -1282,9 +1278,9 @@ window.__RESEARCH = {
   {
    "name": "Solarpunk List",
    "caps": [
-    "Designing Regenerative Systems",
-    "Prototyping & Testing"
-   ],
+     "Designing for Complexity",
+     "Prototyping & Testing"
+    ],
    "desc": "The Solarpunk List serves as a curated directory of literature, art, and projects that embody a hopeful, regenerative future. By emphasizing sustainability, community-driven technology, and harmony with the natural world, it offers a cultural counter-narrative to dystopian storytelling. This resource is useful for systems change as it provides the imaginative scaffolding necessary for \"future-making,\" helping practitioners visualize tangible alternatives to extractive systems and grounding their design work in a positive, achievable, and decentralized vision of change.",
    "types": [
     "Digital Publications / Reports"
@@ -1294,10 +1290,10 @@ window.__RESEARCH = {
   {
    "name": "Staci K Haines: The Politics of Trauma",
    "caps": [
-    "Listening Deeply",
-    "Staying Grounded",
-    "Building Power and Agency"
-   ],
+     "Listening Deeply",
+     "Staying Grounded",
+     "Building Power and Agency"
+    ],
    "desc": "Staci Haines focuses on \"somatics\"—the intersection of body, movement, and social change. Her work asserts that systemic transformation requires not just intellectual analysis, but the physical capacity to embody new ways of being. By addressing how trauma, habits, and power dynamics are physically held, her approach helps individuals and groups develop the resilience needed to disrupt oppressive systems and sustain generative, equitable action. It bridges the gap between personal internal state and external collective political movement.",
    "types": [
     "Methods & Toolkits",
@@ -1308,9 +1304,9 @@ window.__RESEARCH = {
   {
    "name": "Story-based Inquiry",
    "caps": [
-    "Shifting Narratives",
-    "Deciding Together"
-   ],
+     "Shifting Narratives",
+     "Deciding Together"
+    ],
    "desc": "A methodology and handbook (originating with UNESCO) for treating investigation as hypothesis-driven storytelling — helping researchers and journalists structure inquiry, test assumptions, and turn findings into compelling narratives.",
    "types": [
     "Methods & Toolkits"
@@ -1320,9 +1316,9 @@ window.__RESEARCH = {
   {
    "name": "Storytelling for Systems Change",
    "caps": [
-    "Shifting Narratives",
-    "Thinking in Systems"
-   ],
+     "Shifting Narratives",
+     "Thinking in Systems"
+    ],
    "desc": "A Dusseldorp Forum resource examining how narrative and lived experience can shift the mental models and public conversations that hold complex social systems in place.",
    "types": [
     "Digital Publications / Reports"
@@ -1332,9 +1328,9 @@ window.__RESEARCH = {
   {
    "name": "Successful Collaboration Starts With Eight Simple Rules",
    "caps": [
-    "Transforming Conflict",
-    "Cultivating Collaboration"
-   ],
+     "Transforming Conflict",
+     "Cultivating Collaboration"
+    ],
    "desc": "This article outlines eight foundational principles for effective collaborative work. It provides actionable strategies for fostering mutual understanding, maintaining clear communication, and creating the psychological safety necessary for teams to thrive in complex environments.",
    "types": [
     "Articles / Blogposts"
@@ -1344,9 +1340,9 @@ window.__RESEARCH = {
   {
    "name": "Swimming in the Waters of Systems Learning",
    "caps": [
-    "Thinking in Systems",
-    "Mobilizing Resources"
-   ],
+     "Thinking in Systems",
+     "Engaging Capital"
+    ],
    "desc": "This article explores the practice of systems learning in social and environmental change, reframing systems thinking from an abstract concept into an everyday operational reality. Drawing on the UNDP MEL 360 framework, it illustrates how to map strategic outcomes across six interconnected systemic conditions—ranging from mental models and relationships to policies and practices. Through a case study with a climate philanthropy portfolio, it demonstrates how heat-mapping funding allocations can help organizations reflect on where they add value, identify strategic blind spots, and embrace the non-linear pathways of systemic transformation.",
    "types": [
     "Articles / Essays"
@@ -1356,8 +1352,8 @@ window.__RESEARCH = {
   {
    "name": "System Approaches Toolkit",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "A digital repository curated to provide change practitioners with actionable toolkits, step-by-step facilitation guides, and frameworks for complex problem-solving.",
    "types": [
     "Digital Publications / Reports"
@@ -1367,9 +1363,9 @@ window.__RESEARCH = {
   {
    "name": "System Change: A Guidebook for Adopting Portfolio Approaches",
    "caps": [
-    "Thinking in Systems",
-    "Prototyping & Testing"
-   ],
+     "Thinking in Systems",
+     "Prototyping & Testing"
+    ],
    "desc": "This UNDP guidebook presents a practical methodology for adopting portfolio approaches to address complex development challenges. Grounded in applied learning from across the Asia-Pacific region, it offers practitioners a step-by-step roadmap to move away from isolated project interventions and toward coordinated portfolios of mutually reinforcing actions. It provides actionable guidance on navigating ambiguity, mapping systemic interdependencies, and managing continuous learning cycles to achieve transformative scale.",
    "types": [
     "Methods & Toolkits"
@@ -1379,9 +1375,9 @@ window.__RESEARCH = {
   {
    "name": "Systems Awareness",
    "caps": [
-    "Developing Leaders",
-    "Listening Deeply"
-   ],
+     "Developing Leaders",
+     "Listening Deeply"
+    ],
    "desc": "Systems Awareness provides a framework for cultivating the cognitive and emotional capacities required to perceive and engage with complex, living systems. It moves beyond theoretical mapping, emphasizing the shift in \"inner state\" needed to navigate deep systemic change. By integrating mindfulness, systems thinking, and social emotional learning, it trains leaders to move from reactive, fragmented mindsets toward a more holistic awareness, enabling them to recognize the deeper patterns and interconnectedness that drive systemic outcomes.",
    "types": [
     "Capacity-Building Centers"
@@ -1391,8 +1387,8 @@ window.__RESEARCH = {
   {
    "name": "Systems Change Educators Unite",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "A collaborative network for educators dedicated to integrating systems thinking and complexity literacy into school curricula globally.",
    "types": [
     "Capacity-Building Centers"
@@ -1402,9 +1398,9 @@ window.__RESEARCH = {
   {
    "name": "Systems Change Educators Unite",
    "caps": [
-    "Thinking in Systems",
-    "Cultivating Collaboration"
-   ],
+     "Thinking in Systems",
+     "Cultivating Collaboration"
+    ],
    "desc": "Systems Change Educators Unite is a global community and collaborative network dedicated to transforming education by embedding systems thinking and complexity practice into learning environments. It brings together educators, designers, and change-makers who are moving away from traditional, fragmented instructional models toward holistic, place-based, and regenerative pedagogical approaches. By sharing resources, peer methodologies, and lived experiences, the network supports practitioners in designing learning ecosystems that empower students to navigate ambiguity, challenge underlying mental models, and actively participate in systemic transformation.",
    "types": [
     "Networks"
@@ -1414,8 +1410,8 @@ window.__RESEARCH = {
   {
    "name": "Systems Innovation (Si)",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "An international network providing educational resources and collaborative platforms dedicated to accelerating the transition to new systemic paradigms.",
    "types": [
     "Capacity-Building Centers",
@@ -1426,8 +1422,8 @@ window.__RESEARCH = {
   {
    "name": "Systems Thinker's Toolbox: Tools for Managing Complexity",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "Joseph Eli Kasser provides a highly practical guide containing structured methods and tools designed to help engineers, managers, and system thinkers dissect, manage, and solve complex organizational problems.",
    "types": [
     "Methods & Toolkits"
@@ -1437,9 +1433,9 @@ window.__RESEARCH = {
   {
    "name": "Systems Thinking for Social Change",
    "caps": [
-    "Strengthening Ecosystems",
-    "Thinking in Systems"
-   ],
+     "Strengthening Ecosystems",
+     "Thinking in Systems"
+    ],
    "desc": "David Peter Stroh demonstrates how non-profits, foundations, and government agencies can utilize systems frameworks to design highly effective, long-term social change interventions.",
    "types": [
     "Books"
@@ -1449,8 +1445,8 @@ window.__RESEARCH = {
   {
    "name": "Systems Thinking Made Simple: New Hope for Solving Wicked Problems",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "Derek Cabrera and Laura Cabrera provide an accessible introduction to systems thinking by introducing the DSRP method (Distinctions, Systems, Relationships, Perspectives) as a universal framework to analyze and solve complex problems.",
    "types": [
     "Books"
@@ -1460,9 +1456,9 @@ window.__RESEARCH = {
   {
    "name": "Tamarack Institute",
    "caps": [
-    "Mobilizing Resources",
-    "Strengthening Ecosystems"
-   ],
+     "Engaging Capital",
+     "Strengthening Ecosystems"
+    ],
    "desc": "A community-focused network providing learning and resources for collective impact, poverty reduction, and collaborative governance at the local level.",
    "types": [
     "Capacity-Building Centers",
@@ -1473,8 +1469,8 @@ window.__RESEARCH = {
   {
    "name": "Teach the Future",
    "caps": [
-    "Imagining Futures"
-   ],
+     "Imagining Futures"
+    ],
    "desc": "Teach the Future works to integrate futures literacy into global education systems, arguing that students must learn to anticipate and influence change rather than passively accept it. Their resources help learners move beyond linear expectations, using tools like \"futures wheels\" to explore the potential consequences of current actions. By making foresight a core academic competency, they empower students to navigate uncertainty, challenge deterministic narratives, and actively participate in shaping more equitable, desirable long-term outcomes.",
    "types": [
     "Capacity-Building Centers"
@@ -1484,8 +1480,8 @@ window.__RESEARCH = {
   {
    "name": "Teaching Conflict and Conflict Resolution in School",
    "caps": [
-    "Transforming Conflict"
-   ],
+     "Transforming Conflict"
+    ],
    "desc": "Kathy Bickmore’s paper argues that schools must move beyond \"negative peacemaking\"—the reactive, superficial management of violence—toward \"positive liberty,\" which integrates conflict resolution into democratic education. Rather than suppressing dissent to maintain order, schools should provide systematic opportunities for students to engage with controversial issues and practice participatory decision-making. By treating conflict as an inherent, learnable component of citizenship, educators can help students develop the autonomy and social agency required to address systemic inequalities rather than perpetuating cycles of violence.",
    "types": [
     "Digital Publications / Reports"
@@ -1495,9 +1491,9 @@ window.__RESEARCH = {
   {
    "name": "The Advocacy Academy",
    "caps": [
-    "Mobilizing Resources",
-    "Advocating for Policy Change"
-   ],
+     "Engaging Capital",
+     "Advocating for Policy Change"
+    ],
    "desc": "The Advocacy Academy is a London-based movement-building organization that empowers young people from marginalized communities to become powerful social justice advocates. By providing training in grassroots organizing, narrative power, and systemic advocacy, they transform personal lived experiences of injustice into strategic political action. Their model emphasizes long-term leadership development, ensuring that youth are not just participants in current debates but are equipped to dismantle systemic barriers and reshape policy agendas for the future.",
    "types": [
     "Capacity-Building Centers"
@@ -1507,11 +1503,10 @@ window.__RESEARCH = {
   {
    "name": "The Ashoka Fellowship",
    "caps": [
-    "Developing Leaders",
-    "Mobilizing Resources",
-    "Strengthening Ecosystems",
-    "Engaging Capital"
-   ],
+     "Developing Leaders",
+     "Engaging Capital",
+     "Strengthening Ecosystems"
+    ],
    "desc": "A global fellowship that identifies leading social entrepreneurs and backs them with a living stipend, a lifelong peer network, and professional support to scale systems-changing ideas.",
    "types": [
     "Fellowships"
@@ -1521,8 +1516,8 @@ window.__RESEARCH = {
   {
    "name": "The Center for Non-Violent Communication",
    "caps": [
-    "Transforming Conflict"
-   ],
+     "Transforming Conflict"
+    ],
    "desc": "Developed by Marshall Rosenberg, Nonviolent Communication is a framework for conflict transformation that decouples objective reality from personal judgment. It structures dialogue around four pillars: neutral observations, felt emotions, universal needs, and actionable requests. By translating aggressive or defensive behavior into unmet needs, NVC de-escalates interpersonal tension, fosters deep listening, and establishes a shared psychological safety. This practice transforms conflict from a win-lose battle into a collaborative problem-solving process centered on mutual agency.",
    "types": [
     "Books"
@@ -1532,9 +1527,9 @@ window.__RESEARCH = {
   {
    "name": "The Centre for Exponential Change",
    "caps": [
-    "Imagining Futures",
-    "Thinking in Systems"
-   ],
+     "Imagining Futures",
+     "Thinking in Systems"
+    ],
    "desc": "The Centre for Exponential Change explores the intersection of rapid technological acceleration and systemic transformation. By mapping non-linear developments—such as AI and digitalization—against societal capacity, they help leaders understand how compounding change outpaces traditional, incremental policy. Their work is critical for systems change because it moves beyond static planning, emphasizing the need for flexible, resilient frameworks that can adapt to high-velocity shifts, ensuring that social structures remain equitable and human-centric amidst pervasive technological disruption.",
    "types": [
     "Think Tanks"
@@ -1544,9 +1539,9 @@ window.__RESEARCH = {
   {
    "name": "The Circle Way: A Leader in Every Chair",
    "caps": [
-    "Cultivating Collaboration",
-    "Developing Leaders"
-   ],
+     "Cultivating Collaboration",
+     "Developing Leaders"
+    ],
    "desc": "Christina Baldwin and Ann Linnea outline a foundational methodology for group facilitation, detailing how to use structured circle dynamics to foster deep listening, collaborative leadership, and shared decision-making.",
    "types": [
     "Books"
@@ -1556,9 +1551,9 @@ window.__RESEARCH = {
   {
    "name": "The Colonization of Cognition",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Acting with Integrity"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Acting with Integrity"
+    ],
    "desc": "Jinan KB critiques modern schooling for prioritizing abstract, textual information over the natural, experiential learning he terms \"existential knowledge.\" He argues that formal education colonizes cognition, disconnecting individuals from their innate ability to observe and engage with the world. Through extensive documentation of children’s play and indigenous practices, he illustrates how we must \"unlearn\" industrial educational habits. This perspective is vital for systems change, as it seeks to restore autonomous, biologically-rooted processes of understanding and creation.",
    "types": [
     "Articles / Essays"
@@ -1568,9 +1563,9 @@ window.__RESEARCH = {
   {
    "name": "The Commoner's Catalog for Changemaking",
    "caps": [
-    "Prototyping & Testing",
-    "Reshaping Economies & States"
-   ],
+     "Prototyping & Testing",
+     "Reshaping Economies & States"
+    ],
    "desc": "Explore the world of commoning, where communities steward everything from water to finance. This catalog provides a practical blueprint for self-reliance, showing how grassroots collaboration can reclaim control over our resources and culture. It’s an essential guide for building alternative, regenerative social futures",
    "types": [
     "Methods & Toolkits"
@@ -1580,9 +1575,9 @@ window.__RESEARCH = {
   {
    "name": "The Compass Education Toolkit",
    "caps": [
-    "Designing Regenerative Systems",
-    "Thinking in Systems"
-   ],
+     "Designing for Complexity",
+     "Thinking in Systems"
+    ],
    "desc": "The Compass Education toolkit offers a comprehensive framework for embedding sustainability into educational practice. Using a \"Systems Compass\"—which evaluates issues across Nature, Economy, Society, and Wellbeing—the model encourages learners to map complex problems, identify interdependencies, and envision more regenerative outcomes. By fostering holistic, long-term thinking, it provides educators and students with the necessary tools to navigate environmental challenges and design systemic solutions that prioritize ecological health and human prosperity within their local and global communities.",
    "types": [
     "Capacity-Building Centers",
@@ -1593,8 +1588,8 @@ window.__RESEARCH = {
   {
    "name": "The Converge Network Toolkit",
    "caps": [
-    "Mobilizing Resources"
-   ],
+     "Engaging Capital"
+    ],
    "desc": "The Converge Network Toolkit offers a strategic roadmap for building and sustaining high-impact networks. It shifts the focus from individual organization efforts to collective, cross-boundary collaboration, providing frameworks for governance, network structure, and shared purpose. This is essential for systems change because complex challenges—such as climate or inequality—cannot be solved by silos; the toolkit enables diverse groups to cultivate the trust and coordination necessary for systemic, adaptive, and distributed collective action.",
    "types": [
     "Methods & Toolkits"
@@ -1604,8 +1599,8 @@ window.__RESEARCH = {
   {
    "name": "The Craft of Systems Change",
    "caps": [
-    "Developing Leaders"
-   ],
+     "Developing Leaders"
+    ],
    "desc": "This book provides a suite of practical tools and strategies for navigating complex global challenges. It emphasizes the \"craft\" of systems change, focusing on how individuals and organizations can move from abstract systemic theory to concrete, adaptive action in messy real-world environments.",
    "types": [
     "Methods & Toolkits",
@@ -1616,9 +1611,9 @@ window.__RESEARCH = {
   {
    "name": "The Danger of a Single Sided Story",
    "caps": [
-    "Shifting Narratives",
-    "Listening Deeply"
-   ],
+     "Shifting Narratives",
+     "Listening Deeply"
+    ],
    "desc": "The Danger of a Single Story by Chimamanda Ngozi Adichie explains how narrow narratives create harmful cultural stereotypes and misunderstandings. Sharing personal examples, she shows how incomplete stories cause people to misjudge places like Africa. Adichie argues that seeking multiple perspectives allows us to view people and cultures with greater accuracy and respect.",
    "types": [
     "Video"
@@ -1628,9 +1623,9 @@ window.__RESEARCH = {
   {
    "name": "The Dawn of Everything: A New History of Humanity",
    "caps": [
-    "Honoring Many Ways of Knowing",
-    "Reshaping Economies & States"
-   ],
+     "Honoring Many Ways of Knowing",
+     "Reshaping Economies & States"
+    ],
    "desc": "A fundamentally transformed understanding of the human past and offers a path toward imagining new forms of freedom, new ways of organizing society. This pathbreaking book fundamentally transforms our understanding of the human past, challenging foundational myths about social evolution, hierarchy, and state origins.",
    "types": [
     "Books"
@@ -1640,8 +1635,8 @@ window.__RESEARCH = {
   {
    "name": "The Decision Lab",
    "caps": [
-    "Listening Deeply"
-   ],
+     "Listening Deeply"
+    ],
    "desc": "The Decision Lab’s bias library provides a framework for identifying the cognitive shortcuts that frequently distort systemic analysis and intervention planning. By cataloging common heuristics—such as confirmation bias, availability cascades, and framing effects—it enables practitioners to audit their own mental models. This is vital for systems change, where the ability to recognize how individual and collective biases limit our perception of systemic \"wholes\" is essential for designing effective, unbiased pathways for change.",
    "types": [
     "Capacity-Building Centers"
@@ -1651,8 +1646,8 @@ window.__RESEARCH = {
   {
    "name": "The Earth Prize",
    "caps": [
-    "Prototyping & Testing"
-   ],
+     "Prototyping & Testing"
+    ],
    "desc": "The Earth Prize is a global competition that empowers students to develop and launch environmental sustainability solutions. By providing a platform for youth-led innovation, it bridges the gap between educational theory and real-world impact. It is useful for systems change because it treats young people as active agents of transformation, fostering entrepreneurial skills and critical thinking needed to address complex ecological challenges and scale regenerative ideas within their local and global communities.",
    "types": [
     "Fellowships"
@@ -1662,9 +1657,9 @@ window.__RESEARCH = {
   {
    "name": "The Ecoversities Alliance",
    "caps": [
-    "Designing Regenerative Systems",
-    "Honoring Many Ways of Knowing"
-   ],
+     "Designing for Complexity",
+     "Honoring Many Ways of Knowing"
+    ],
    "desc": "The Ecoversities Alliance is a trans-local community of practitioners dedicated to radically re-imagining higher education to foster human and ecological flourishing. Moving beyond institutional constraints, this network supports learners in reclaiming diverse knowledge systems, decolonizing pedagogical practices, and restoring connections to local lands. Through mutual aid, intercultural dialogue, and experiential inquiry, it provides an ecology of learning spaces where participants co-create meaningful pathways that shift education from a standardized model to a tool for systemic regeneration.",
    "types": [
     "Networks"
@@ -1674,8 +1669,8 @@ window.__RESEARCH = {
   {
    "name": "The Emotional Fluency Project",
    "caps": [
-    "Staying Grounded"
-   ],
+     "Staying Grounded"
+    ],
    "desc": "The Emotional Fluency Project focuses on building the capacity for emotional intelligence as a prerequisite for social change. It posits that because our systems are human-made, they are governed by the emotional states and blind spots of their creators. By providing tools to identify, name, and regulate complex emotions, the project helps leaders and communities move from reactive, polarized responses to clear-headed, collaborative action, essential for navigating the tensions inherent in systemic transformation.",
    "types": [
     "Capacity-Building Centers"
@@ -1685,8 +1680,8 @@ window.__RESEARCH = {
   {
    "name": "The Facilitator's Toolkit",
    "caps": [
-    "Cultivating Collaboration"
-   ],
+     "Cultivating Collaboration"
+    ],
    "desc": "The NHS Facilitator's Toolkit provides a structured collection of practical methods, exercises, and tips designed to improve the effectiveness of collaborative workshops and group sessions. It covers the full lifecycle of facilitation—beginning with icebreakers and introductions, moving through group management and constraint-resolution techniques, and concluding with methods for session closure and review. Emphasizing preparation, active participation, and psychological safety, it serves as a foundational guide for practitioners leading participatory learning and change processes.",
    "types": [
     "Methods & Toolkits"
@@ -1696,10 +1691,10 @@ window.__RESEARCH = {
   {
    "name": "The Fifth Discipline: The Art & Practice of the Learning Organization",
    "caps": [
-    "Thinking in Systems",
-    "Prototyping & Testing",
-    "Developing Leaders"
-   ],
+     "Thinking in Systems",
+     "Prototyping & Testing",
+     "Developing Leaders"
+    ],
    "desc": "Peter Senge's foundational management book introduces systems thinking as the vital \"fifth discipline\" required to build highly adaptive, collaborative learning organizations.",
    "types": [
     "Books"
@@ -1709,9 +1704,9 @@ window.__RESEARCH = {
   {
    "name": "The Future is Degrowth",
    "caps": [
-    "Reshaping Economies & States",
-    "Designing Regenerative Systems"
-   ],
+     "Reshaping Economies & States",
+     "Designing for Complexity"
+    ],
    "desc": "The Future Is Degrowth provides a rigorous political-economic critique of the \"growth imperative\" that underpins modern capitalism. It argues that infinite growth on a finite planet is ecologically impossible and socially corrosive, necessitating a planned, democratic, and redistributive transition to a post-growth society. By synthesizing history, political theory, and ecological science, the authors offer a roadmap for dismantling the growth hegemony while centering human wellbeing, social justice, and reduced consumption as the foundational metrics of a resilient future.",
    "types": [
     "Books"
@@ -1721,9 +1716,9 @@ window.__RESEARCH = {
   {
    "name": "The Global Social Leaders Competition",
    "caps": [
-    "Prototyping & Testing",
-    "Mobilizing Resources"
-   ],
+     "Prototyping & Testing",
+     "Engaging Capital"
+    ],
    "desc": "The Global Social Leaders competition empowers youth to bridge the gap between global policy and local action by tasking students with designing projects linked to the UN Sustainable Development Goals. Through a structured four-phase journey—planning, action, awareness, and evaluation—participants develop leadership, teamwork, and problem-solving competencies. This framework is vital for systems change, as it treats young people as active agents, providing them with the practical experience needed to prototype and implement tangible solutions.",
    "types": [
     "Fellowships"
@@ -1733,9 +1728,9 @@ window.__RESEARCH = {
   {
    "name": "The Great Simplification",
    "caps": [
-    "Reshaping Economies & States",
-    "Designing Regenerative Systems"
-   ],
+     "Reshaping Economies & States",
+     "Designing for Complexity"
+    ],
    "desc": "Hosted by Nate Hagens, this podcast investigates the complex, interconnected global systems—energy, economy, and ecology—and the necessary transitions to a lower-entropy future.",
    "types": [
     "Podcasts"
@@ -1745,8 +1740,8 @@ window.__RESEARCH = {
   {
    "name": "The Heart of Understanding",
    "caps": [
-    "Acting with Integrity"
-   ],
+     "Acting with Integrity"
+    ],
    "desc": "In The Heart of Understanding, Thich Nhat Hanh offers a commentary on the Heart Sutra, introducing the concept of interbeing—the radical interdependence of all phenomena. He demonstrates that nothing can exist by itself; rather, everything \"inter-is\" with everything else, from sunlight to soil. This text provides a profound framework for deep observation, shifting perception from a fragmented worldview to an integrated, systemic understanding of reality, ecology, and human connection.",
    "types": [
     "Books"
@@ -1756,8 +1751,8 @@ window.__RESEARCH = {
   {
    "name": "The Long Now Podcast",
    "caps": [
-    "Imagining Futures"
-   ],
+     "Imagining Futures"
+    ],
    "desc": "The Long Now podcast, produced by the Long Now Foundation, explores long-term thinking, cultural preservation, and the future of human civilization. It features scientists, philosophers, and designers discussing projects—like the 10,000-Year Clock—that challenge the short-term biases inherent in modern decision-making. For systems change, this resource is invaluable as it encourages practitioners to expand their temporal horizon, moving beyond quarterly cycles to consider the multi-generational impact of current design interventions, systemic resilience, and the stewardship of long-term global stability.",
    "types": [
     "Podcasts"
@@ -1767,9 +1762,9 @@ window.__RESEARCH = {
   {
    "name": "The Most Creative Look to The Future",
    "caps": [
-    "Imagining Futures",
-    "Acting with Integrity"
-   ],
+     "Imagining Futures",
+     "Acting with Integrity"
+    ],
    "desc": "A project dedicated to speculative design and long-term thinking. It brings together diverse voices to envision post-extractive futures, using creative arts and systematic foresight to challenge the constraints of current systemic thinking.",
    "types": [
     "Digital Publications / Reports"
@@ -1779,9 +1774,9 @@ window.__RESEARCH = {
   {
    "name": "The Next Generation Foresight Practitioners (NGFP) Network",
    "caps": [
-    "Imagining Futures",
-    "Mobilizing Resources"
-   ],
+     "Imagining Futures",
+     "Engaging Capital"
+    ],
    "desc": "The Next Generation Foresight Practitioners (NGFP) network, an initiative by the School of International Futures, focuses on embedding futures literacy and long-term thinking into policy and practice globally. By supporting a diverse, intergenerational community of practitioners, it provides tools to navigate uncertainty and anticipate systemic shifts. For those working in systems change, NGFP is instrumental in moving from reactive problem-solving to proactive, anticipatory governance—ensuring that interventions are not only relevant today but resilient against emerging future risks and opportunities.",
    "types": [
     "Fellowships"
@@ -1791,8 +1786,8 @@ window.__RESEARCH = {
   {
    "name": "The Oxford Climate Change Challenge",
    "caps": [
-    "Prototyping & Testing"
-   ],
+     "Prototyping & Testing"
+    ],
    "desc": "The Oxford Climate Change Challenge at the Saïd Business School focuses on practical application in addressing the climate crisis through business and policy leadership. It bridges rigorous academic research with tangible systemic interventions, encouraging participants to analyze complex, interconnected environmental issues within global economic frameworks. By requiring an integration of management strategy and ecological urgency, the program equips leaders to transition away from traditional, extractive models toward the design and scaling of sustainable, climate-resilient enterprise.",
    "types": [
     "Fellowships"
@@ -1802,10 +1797,10 @@ window.__RESEARCH = {
   {
    "name": "The People’s Archive of Rural India (PARI)",
    "caps": [
-    "Shifting Narratives",
-    "Strengthening Ecosystems",
-    "Honoring Many Ways of Knowing"
-   ],
+     "Shifting Narratives",
+     "Strengthening Ecosystems",
+     "Honoring Many Ways of Knowing"
+    ],
    "desc": "The People’s Archive of Rural India (PARI) is a multimedia, collaborative project that documents the immense diversity of rural India’s livelihoods, cultures, and struggles. By prioritizing stories from marginalized voices and preserving disappearing oral histories and traditional knowledge, it challenges the erasure of rural perspectives in mainstream media and policy. PARI functions as a crucial \"living archive,\" providing granular, grounded evidence of systemic inequality and resilience that is often overlooked in top-down development discourse.",
    "types": [
     "Case Studies"
@@ -1815,9 +1810,9 @@ window.__RESEARCH = {
   {
    "name": "The Regenerative Business",
    "caps": [
-    "Mobilizing Resources",
-    "Designing Regenerative Systems"
-   ],
+     "Engaging Capital",
+     "Designing for Complexity"
+    ],
    "desc": "Carol Sanford details a strategic developmental framework designed to help business organizations transition away from extractive mechanics toward living-system, regenerative paradigms.",
    "types": [
     "Books"
@@ -1827,8 +1822,8 @@ window.__RESEARCH = {
   {
    "name": "The Right Use of Power Institute",
    "caps": [
-    "Building Power and Agency"
-   ],
+     "Building Power and Agency"
+    ],
    "desc": "The Right Use of Power Institute provides a transformative framework for ethics, leadership, and relational dynamics, shifting the paradigm of power from \"power over\" to \"power with.\" It emphasizes that power is an inherent energy, dynamic, and capacity that can be used for healing, harm, or neutral impact. By cultivating deep self-awareness, emotional fluency, and ethical mindfulness, practitioners learn to recognize their own power footprint, navigate power differentials safely, and wield influence in ways that are collaborative, compassionate, and empowering to others.",
    "types": [
     "Capacity-Building Centers",
@@ -1839,10 +1834,10 @@ window.__RESEARCH = {
   {
    "name": "The Students’ Educational and Cultural Movement of Ladakh (SECMOL)",
    "caps": [
-    "Strengthening Ecosystems",
-    "Prototyping & Testing",
-    "Honoring Many Ways of Knowing"
-   ],
+     "Strengthening Ecosystems",
+     "Prototyping & Testing",
+     "Honoring Many Ways of Knowing"
+    ],
    "desc": "SECMOL (Students' Educational and Cultural Movement of Ladakh) is a pioneering educational collective that addresses the systemic mismatch between conventional schooling and the realities of life in the high-altitude Ladakh region. Founded to empower local youth, it emphasizes experiential learning, cultural preservation, and ecological sustainability. By integrating traditional wisdom with modern knowledge, SECMOL creates a \"living school\" model where students directly manage their campus, fostering self-reliance, community governance, and a profound sense of regional identity.",
    "types": [
     "Capacity-Building Centers"
@@ -1852,9 +1847,9 @@ window.__RESEARCH = {
   {
    "name": "The Systems Thinking Playbook",
    "caps": [
-    "Cultivating Collaboration",
-    "Thinking in Systems"
-   ],
+     "Cultivating Collaboration",
+     "Thinking in Systems"
+    ],
    "desc": "Linda Booth Sweeney and Dennis Meadows compile thirty short experiential gaming exercises designed to help educators and corporate consultants introduce and build mental capacity for systems thinking.",
    "types": [
     "Books"
@@ -1864,8 +1859,8 @@ window.__RESEARCH = {
   {
    "name": "The Thinking Tools Studio - Waters Center for Systems Thinking",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "The Thinking Tools Studio is an interactive, online resource hub designed to help educators, leaders, and practitioners integrate systems thinking habits and tools into their daily work. Created by the Waters Center, the platform offers structured guidance on utilizing visual frameworks like causal loop diagrams, behavior-over-time graphs, and connection circles. These tools enable users to map complex interdependencies, identify underlying system archetypes, and surface high-leverage intervention points. It serves as a practical, capacity-building resource for shifting from linear problem-solving to a holistic, dynamic understanding of systemic problems.",
    "types": [
     "Capacity-Building Centers",
@@ -1876,9 +1871,9 @@ window.__RESEARCH = {
   {
    "name": "The Unaccountability Machine",
    "caps": [
-    "Reshaping Economies & States",
-    "Thinking in Systems"
-   ],
+     "Reshaping Economies & States",
+     "Thinking in Systems"
+    ],
    "desc": "Dan Davies’s The Unaccountability Machine provides a critical diagnosis of why large-scale systems inevitably produce catastrophic, unfixable errors. He identifies \"accountability sinks\"—bureaucratic structures that diffuse responsibility until no individual remains answerable for systemic failure. By applying Stafford Beer’s cybernetic principles, Davies argues that modern institutions have prioritized abstract efficiency over functional feedback. For those designing systems change, this work serves as an essential warning: without deliberate, human-centric accountability and transparent feedback loops, even well-intentioned structures will devolve into dysfunction.",
    "types": [
     "Books"
@@ -1888,8 +1883,8 @@ window.__RESEARCH = {
   {
    "name": "The World’s Largest Lesson",
    "caps": [
-    "Designing Regenerative Systems"
-   ],
+     "Designing for Complexity"
+    ],
    "desc": "The World’s Largest Lesson provides educators with creative, age-appropriate resources to introduce the UN Sustainable Development Goals to children and young people. By aligning curriculum with global challenges, it fosters empathy and understanding of complex interconnected systems early in development. This is crucial for systemic transformation, as it embeds futures literacy and global citizenship into the educational bedrock, cultivating a generation equipped to challenge existing norms and design regenerative alternatives to our current global status quo.",
    "types": [
     "Capacity-Building Centers"
@@ -1899,9 +1894,9 @@ window.__RESEARCH = {
   {
    "name": "The Zayed Sustainability Prize",
    "caps": [
-    "Prototyping & Testing",
-    "Engaging Capital"
-   ],
+     "Prototyping & Testing",
+     "Engaging Capital"
+    ],
    "desc": "The Zayed Sustainability Prize is a prestigious global award that honors the legacy of Sheikh Zayed bin Sultan Al Nahyan, the founding father of the UAE. It recognizes and funds innovative, impactful, and inspiring solutions across six key categories: Health, Food, Energy, Water, Climate Action, and Global High Schools. By supporting small-to-medium enterprises, nonprofits, and schools, the prize accelerates tangible progress toward a more sustainable and equitable world for communities globally.",
    "types": [
     "Fellowships"
@@ -1911,9 +1906,9 @@ window.__RESEARCH = {
   {
    "name": "Theory U: Leading from the Future as It Emerges",
    "caps": [
-    "Listening Deeply",
-    "Developing Leaders"
-   ],
+     "Listening Deeply",
+     "Developing Leaders"
+    ],
    "desc": "C. Otto Scharmer introduces a groundbreaking systems leadership framework, guiding change-makers through an internal and collective process of sensing, presencing, and co-creating sustainable futures.",
    "types": [
     "Books"
@@ -1923,8 +1918,8 @@ window.__RESEARCH = {
   {
    "name": "Thinking Collaborative",
    "caps": [
-    "Deciding Together"
-   ],
+     "Deciding Together"
+    ],
    "desc": "An organization focused on maximizing individual and group capacity through \"Adaptive Schools\" and \"Cognitive Coaching\" frameworks.",
    "types": [
     "Capacity-Building Centers"
@@ -1934,9 +1929,9 @@ window.__RESEARCH = {
   {
    "name": "Thinking in Systems: A Primer",
    "caps": [
-    "Living Within Planetary Limits",
-    "Thinking in Systems"
-   ],
+     "Living Within Planetary Limits",
+     "Thinking in Systems"
+    ],
    "desc": "Donella Meadows’ classic manual serves as an essential introduction to understanding how complex systems function, offering vital problem-solving insights that span from personal dynamics to global challenges.",
    "types": [
     "Books"
@@ -1946,9 +1941,9 @@ window.__RESEARCH = {
   {
    "name": "This Can't be Happening",
    "caps": [
-    "Living Within Planetary Limits",
-    "Reshaping Economies & States"
-   ],
+     "Living Within Planetary Limits",
+     "Reshaping Economies & States"
+    ],
    "desc": "Real climate justice requires an equitable lens. This primer shifts the focus from simple environmentalism to the systemic inequalities driving the crisis. It’s a vital resource for ensuring our collective future is built on fairness, centering the voices and needs of those most impacted by our changing world.",
    "types": [
     "Books"
@@ -1958,8 +1953,8 @@ window.__RESEARCH = {
   {
    "name": "This Living Place",
    "caps": [
-    "Designing Regenerative Systems"
-   ],
+     "Designing for Complexity"
+    ],
    "desc": "This Living Place is a collaborative initiative exploring how communities, places, and built environments can be designed around regenerative, living-systems principles. It moves away from conventional, extractive development models to focus on how spaces can actively nurture human wellbeing, ecological health, and community agency. By treating localities as interconnected ecosystems, it provides frameworks and stories that help practitioners reimagine housing, architecture, and urban planning as tools for systemic healing and long-term socio-ecological resilience.",
    "types": [
     "Case Studies",
@@ -1970,8 +1965,8 @@ window.__RESEARCH = {
   {
    "name": "Three Horizons",
    "caps": [
-    "Imagining Futures"
-   ],
+     "Imagining Futures"
+    ],
    "desc": "The Three Horizons framework maps systemic change by visualizing the concurrent interaction of the present, the transition, and the future. By categorizing established systems, short-term innovations, and long-term regenerative possibilities, it helps practitioners navigate transition without neglecting current stability. This model is invaluable for systems change because it shifts focus from reactive patching to intentional, strategic alignment, allowing stakeholders to identify, nurture, and scale nascent \"pockets of the future\" while managing the decline of legacy systems.",
    "types": [
     "Digital Publications / Reports"
@@ -1981,8 +1976,8 @@ window.__RESEARCH = {
   {
    "name": "Toolkit for Tomorrow",
    "caps": [
-    "Imagining Futures"
-   ],
+     "Imagining Futures"
+    ],
    "desc": "A foresight-driven resource designed to assist civil society organizations in navigating an unpredictable future. It provides methodologies for trend analysis, scenario planning, and adaptive strategy to ensure resilience in the face of long-term global shifts.",
    "types": [
     "Methods & Toolkits"
@@ -1992,9 +1987,9 @@ window.__RESEARCH = {
   {
    "name": "Tools for regenerative practice",
    "caps": [
-    "Living Within Planetary Limits",
-    "Designing Regenerative Systems"
-   ],
+     "Living Within Planetary Limits",
+     "Designing for Complexity"
+    ],
    "desc": "Tools for regenerative practice is a practical guide designed to help organisations, communities, initiatives and facilitators explore how human systems can better align with the regenerative dynamics of life. Bringing together 30 frameworks, exercises and methods, the toolkit supports people in deepening systems awareness, reconnecting with nature, strengthening collaboration, expanding imagination, and moving from reflection into meaningful action.",
    "types": [
     "Methods & Toolkits"
@@ -2004,9 +1999,9 @@ window.__RESEARCH = {
   {
    "name": "Transformative Pathways",
    "caps": [
-    "Deciding Together",
-    "Designing Regenerative Systems"
-   ],
+     "Deciding Together",
+     "Designing for Complexity"
+    ],
    "desc": "A report exploring the intersection of climate justice and gender equity. It offers critical analysis and case studies demonstrating how local, grassroots initiatives can provide sustainable, equitable alternatives to the industrial systems that perpetuate the climate and gender crises.",
    "types": [
     "Digital Publications / Reports"
@@ -2016,8 +2011,8 @@ window.__RESEARCH = {
   {
    "name": "Transformative Research Toolkit",
    "caps": [
-    "Deciding Together"
-   ],
+     "Deciding Together"
+    ],
    "desc": "A resource that democratizes the research process, providing tools for communities to conduct their own inquiry and data collection. It shifts the power of \"knowledge production\" from academic institutions to the people most impacted by the systems being studied.",
    "types": [
     "Methods & Toolkits"
@@ -2027,9 +2022,9 @@ window.__RESEARCH = {
   {
    "name": "TWIST (Together We Invest for Systems Transformation)",
    "caps": [
-    "Thinking in Systems",
-    "Cultivating Collaboration"
-   ],
+     "Thinking in Systems",
+     "Cultivating Collaboration"
+    ],
    "desc": "TWIST (The Worldview Intelligence and Systems Thinking) focuses on the intersection of individual perspectives and structural change. By exploring how diverse worldviews shape our understanding of problems, it provides processes to help groups move beyond polarization. This is highly useful for systems change because it emphasizes that technical solutions fail if the underlying human stories and mental models remain misaligned; it builds the necessary cohesion for groups to co-design and sustain shared, long-term systemic shifts.",
    "types": [
     "Capacity-Building Centers"
@@ -2039,8 +2034,8 @@ window.__RESEARCH = {
   {
    "name": "Understanding Interconnected Systems: Insights from Complex Systems Frameworks",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "The Complex Systems Frameworks site offers tools and methods for understanding interconnected systems like ecosystems, economies, and societies. It promotes complex systems thinking to reveal how localized shifts (like climate or policy) cause unexpected ripple effects. By analyzing patterns, feedback loops, and relationships over isolated events, it helps researchers solve complicated real-world problems.",
    "types": [
     "Methods & Toolkits"
@@ -2050,10 +2045,10 @@ window.__RESEARCH = {
   {
    "name": "Unearthodox",
    "caps": [
-    "Strengthening Ecosystems",
-    "Shifting Narratives",
-    "Building Power and Agency"
-   ],
+     "Strengthening Ecosystems",
+     "Shifting Narratives",
+     "Building Power and Agency"
+    ],
    "desc": "Unearthodox shifts biodiversity conservation from reactive, top-down interventions toward fundamental systemic stewardship. By interrogating the power dynamics, economic structures, and dominant narratives that drive ecological extraction, they challenge the traditional conservationist paradigm. Their approach prioritizes the integration of indigenous, local, and scientific knowledge to reshape how we value nature. For systems change practitioners, Unearthodox provides a vital model for building field catalysts that address the root causes of environmental degradation, fostering more equitable, resilient governance.",
    "types": [
     "Capacity-Building Centers"
@@ -2063,8 +2058,8 @@ window.__RESEARCH = {
   {
    "name": "Unstuck Systems",
    "caps": [
-    "Prototyping & Testing"
-   ],
+     "Prototyping & Testing"
+    ],
    "desc": "The \"Deep Demos\" portfolio by Unstuck Systems showcases high-leverage, practical experiments designed to prototype systemic alternatives. Rather than relying on theoretical abstractions, these demonstrations focus on \"learning-by-doing\" within real-world contexts, testing how new collaborative structures can bypass bureaucratic inertia. By documenting the successes and failures of these pilots, this resource is invaluable for systems change as it provides evidence-based blueprints for scaling regenerative interventions and managing the transition from legacy systems to more adaptive, distributed models.",
    "types": [
     "Case Studies"
@@ -2074,10 +2069,10 @@ window.__RESEARCH = {
   {
    "name": "Vipassana Meditation",
    "caps": [
-    "Listening Deeply",
-    "Acting with Integrity",
-    "Staying Grounded"
-   ],
+     "Listening Deeply",
+     "Acting with Integrity",
+     "Staying Grounded"
+    ],
    "desc": "Vipassana (insight) is the practice of cultivating non-reactive, moment-to-moment awareness of physical sensations and mental processes. By systematically scanning the body, practitioners develop acute internal observation and listening skills, recognizing how thoughts manifest as physical states. This deep interoception anchors the nervous system, dropping metabolic stress baselines and decoupling automatic emotional reactivity. It serves as a somatic foundation for self-regulation, training the mind to remain grounded and clear amidst changing internal and environmental conditions.",
    "types": [
     "Wisdom Practices"
@@ -2087,9 +2082,9 @@ window.__RESEARCH = {
   {
    "name": "Warm Data Labs",
    "caps": [
-    "Thinking in Systems",
-    "Listening Deeply"
-   ],
+     "Thinking in Systems",
+     "Listening Deeply"
+    ],
    "desc": "Developed by Nora Bateson, Warm Data Labs are a group conversational process designed to surface the \"warm data\"—the qualitative, transcontextual relationships and interdependencies connecting elements within complex systems. Unlike cold, isolated statistics, Warm Data captures living, messy interplay. By shifting participants through multiple overlapping contexts (e.g., ecology, economy, family), the practice cultivates collective perception and deep listening. It builds systemic awareness from the inside out, allowing communities to collectively sense and adapt without imposing rigid, mechanistic interventions.",
    "types": [
     "Methods & Toolkits",
@@ -2101,8 +2096,8 @@ window.__RESEARCH = {
   {
    "name": "What Is a Complex System?",
    "caps": [
-    "Thinking in Systems"
-   ],
+     "Thinking in Systems"
+    ],
    "desc": "James Ladyman and Karoline Wiesner offer a rigorous yet accessible interdisciplinary introduction to the science of complex systems, defining core characteristics such as feedback, nonlinearity, and emergence.",
    "types": [
     "Books"
@@ -2112,8 +2107,8 @@ window.__RESEARCH = {
   {
    "name": "Working Together: Collective Action, the Commons, and Multiple Methods in Practice",
    "caps": [
-    "Cultivating Collaboration"
-   ],
+     "Cultivating Collaboration"
+    ],
    "desc": "Amy R. Poteete, Marco A. Janssen, and Elinor Ostrom evaluate how combining diverse research methodologies (experiments, field observations, and models) deepens scientific understanding of collective action and institutional structures.",
    "types": [
     "Books"
@@ -2123,9 +2118,9 @@ window.__RESEARCH = {
   {
    "name": "World Systems Theory",
    "caps": [
-    "Reshaping Economies & States",
-    "Thinking in Systems"
-   ],
+     "Reshaping Economies & States",
+     "Thinking in Systems"
+    ],
    "desc": "World-systems theory offers a macro-level analytical framework for understanding the global economy as a single, integrated system rather than isolated national units. It categorizes regions into a hierarchy—core, semi-periphery, and periphery—based on their role in the international division of labor and extraction of resources. For systems change, this perspective is crucial, as it exposes the structural dependencies and historical inequalities that reinforce global disparities, demonstrating that localized solutions are often constrained by these overarching geopolitical and economic power dynamics.",
    "types": [
     "Books"
@@ -2135,8 +2130,8 @@ window.__RESEARCH = {
   {
    "name": "Youth-Led Participatory Action Research Toolkit",
    "caps": [
-    "Deciding Together"
-   ],
+     "Deciding Together"
+    ],
    "desc": "The QUEST project’s \"You-Care\" Toolkit is designed to facilitate Youth Participatory Action Research (YPAR), a framework that empowers young people to act as researchers and agents of change within their own communities. By providing structured methodologies for identifying systemic issues, collecting evidence, and implementing solutions, it shifts youth from the periphery of decision-making to the center of social inquiry. It emphasizes collaborative, intergenerational action, ensuring that youth-led interventions are grounded in both scientific rigor and community-based experiential knowledge.",
    "types": [
     "Methods & Toolkits"

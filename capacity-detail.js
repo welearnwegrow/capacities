@@ -22,7 +22,7 @@ window.__CAPDETAIL = {
   }
  },
  "Engaging Capital": {
-  "desc": "Mobilising financial, social and relational capital for systems change: understanding how funding, investment and markets shape what is possible, and aligning money with long-term, community-led work.",
+  "desc": "Mobilising financial, social and relational capital for systems change: understanding how funding, investment and markets shape what is possible, and aligning money with long-term, community-led work, including flexible budgets and blended funding that can change as the work does.",
   "levels": {
    "Personal": "Understands where money comes from in their field and how funding terms shape the work. Can describe a project's needs plainly to a funder or investor.",
    "Social": "Builds trusting relationships with funders and investors, and helps peers navigate funding terms. Brings community voice into conversations about money.",
@@ -49,7 +49,7 @@ window.__CAPDETAIL = {
   }
  },
  "Living Within Planetary Limits": {
-  "desc": "Mastering the foundational principles of earth-system science, biodiversity configurations, resource limits, and ecological feedback behaviors.",
+  "desc": "Understanding earth-system science, biodiversity, resource limits and ecological feedback, and putting that understanding into practice through regenerative and circular ways of living, producing and restoring land.",
   "levels": {
    "Personal": "Explains how natural systems work, the climate and ecological risks nearby, and the idea that the planet has real limits. Connects personal choices to their ecological footprint and begins to act on that awareness.",
    "Social": "Connects big-picture ecological trends — biodiversity loss, climate disruption, resource depletion — to what's actually happening in local communities and landscapes. Reads ecological feedback loops, not just isolated facts.",
@@ -102,13 +102,13 @@ window.__CAPDETAIL = {
    "Systemic": "Shapes long-horizon agendas at large scale, designing systems meant to hold up and stay just across generations. Helps institutions take intergenerational responsibility seriously."
   }
  },
- "Designing Regenerative Systems": {
-  "desc": "Structuring organizational models, physical infrastructure, and social interventions to deliberately mirror the self-renewing, cyclical, and non-extractive patterns of natural ecosystems.",
+ "Designing for Complexity": {
+  "desc": "Designing interventions for systems that cannot be fully predicted or controlled: trying several options at once, building in feedback, and creating the conditions for change to emerge, so that designs renew rather than deplete the people and places they touch.",
   "levels": {
-   "Personal": "Grasps the idea of circular, waste-free design and starts noticing resource use and waste streams around you. Sees the difference between extracting from a system and renewing it.",
-   "Social": "Co-designs community-scale projects — shared tools, composting, repair networks — that follow nature's cycles. Applies regenerative and circular principles to real, local efforts.",
-   "Institutional": "Redesigns supply chains, business models, or services to move from extracting toward renewing, building regeneration into how they operate. Structures work to restore rather than deplete its surroundings.",
-   "Systemic": "Designs large shared-resource systems and commons that revitalise whole ecosystems and restore relationships with land. Helps shift entire sectors from extractive habits to regenerative ones."
+   "Personal": "Recognises when a problem is complex rather than complicated, and resists designing a single fixed solution. Asks what a design might set off beyond its intended effects.",
+   "Social": "Co-designs interventions with the people in a system, using approaches like systemic design or portfolio thinking to try several options side by side. Builds in ways to notice what changes and adjust.",
+   "Institutional": "Designs programmes, services or organisations as adaptable systems, with feedback loops, room to change course, and attention to the conditions that sustain them. Moves work from extracting toward renewing.",
+   "Systemic": "Shapes the infrastructure, institutions and rules of whole sectors so they can adapt and regenerate over time. Helps fields design for emergence rather than control."
   }
  },
  "Deciding Together": {
@@ -120,8 +120,8 @@ window.__CAPDETAIL = {
    "Systemic": "Shifts the norms, funding rules and policies of a whole field so that affected communities hold lasting power over priorities, research and resources. Helps redefine who gets to decide, and whose knowledge counts."
   }
  },
- "Learning from Impact": {
-  "desc": "Utilizing empirical data tracking, quantitative and qualitative metrics, and positive deviance mapping to identify hidden localized solutions and track system-wide trends.",
+ "Adaptive Monitoring Evaluation & Learning": {
+  "desc": "Tracking what is changing through data and people’s stories, spotting positive deviance, and using what is learned to adjust plans, budgets and timelines as the system responds.",
   "levels": {
    "Personal": "Reads public data and basic statistics to build clear, evidence-based arguments for change. Asks what the numbers do — and don't — actually show.",
    "Social": "Combines numbers with people's stories to track progress and spot 'positive deviance' — the places quietly succeeding against the odds. Pairs quantitative and qualitative evidence honestly.",
@@ -156,13 +156,13 @@ window.__CAPDETAIL = {
    "Systemic": "Guides reconciliation across deeply divided regions, sectors, or interests, helping rebuild trust where it has broken down. Transforms long-standing conflict into shared, generative direction."
   }
  },
- "Mobilizing Resources": {
-  "desc": "Organizing adaptive logistics, elastic operational budgets, and highly flexible, non-linear timelines that accommodate unpredictable systemic feedback loops.",
+ "Telling the Story of Systems Change": {
+  "desc": "Telling the story of a change effort as it unfolds: making the system visible to the people in it, sharing what is being learned, and keeping communities, partners and funders connected to the work.",
   "levels": {
-   "Personal": "Manages a timeline and a simple budget, keeping clear track of what's needed and when. Balances getting things done with caring for the people doing them.",
-   "Social": "Coordinates flexible budgets and adaptive plans for community efforts, adjusting as needs and conditions change. Keeps a project focused while staying responsive to feedback.",
-   "Institutional": "Secures and manages substantial budgets, blending different kinds of funding, and steers complex initiatives over time. Balances task, relationship, and ethical dimensions of the work.",
-   "Systemic": "Designs large-scale funding and resource structures for major, long-term efforts and networks. Builds the financial and organisational backbone that lets ambitious change endure."
+   "Personal": "Describes a situation you are working on in plain language, including how its parts connect, without reducing it to a single cause or hero. Shares what you are learning, including what did not work.",
+   "Social": "Gathers and shares stories with the people involved, so a community can see its own system and progress. Uses lived experience, simple visuals and data together, with consent and care for who tells the story.",
+   "Institutional": "Builds storytelling into how an organisation reports and learns, so updates to boards, partners and funders show contribution, uncertainty and what is shifting in the system, not only outputs.",
+   "Systemic": "Helps a whole field tell a shared story of systems change, making long-term, collective progress visible and credible to the people who fund, govern and join it."
   }
  },
  "Strengthening Ecosystems": {

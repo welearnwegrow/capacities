@@ -70,6 +70,8 @@
   .ioc-march{animation:iocMarch 1s linear infinite}
   .ioc-march-rev{animation:iocMarchRev 1s linear infinite}
 </style>
+<script src="notion-config.js?v=20261006"></script>
+<script src="visitor.js?v=20261006"></script>
 </helmet>
 <div style="{{ rootStyle }}">
   <dc-import name="SiteNav" active="about" hint-size="100%,58px"></dc-import>
@@ -463,8 +465,9 @@ class Component extends DCLogic {
   _pageDims(fmt){ return fmt==='a3' ? [420,297] : [297,210]; }
   _fitImg(pdf,cap,pw,ph){ const ar=cap.w/cap.h, par=pw/ph; let w,h; if(ar>par){ w=pw; h=pw/ar; } else { h=ph; w=ph*ar; } pdf.addImage(cap.img,'PNG',(pw-w)/2,(ph-h)/2,w,h); }
   async _capture(){ const el=document.getElementById('mp-canvas'); if(!el||!window.html2canvas) return null; if(document.fonts&&document.fonts.ready){ try{ await document.fonts.ready; }catch(e){} } const c=await window.html2canvas(el,{scale:3,backgroundColor:'#f6f3e9',useCORS:true,onclone:(doc)=>{ doc.querySelectorAll('#mp-canvas textarea').forEach(ta=>{ const div=doc.createElement('div'); div.textContent=ta.value; div.setAttribute('style', ta.getAttribute('style')||''); div.style.whiteSpace='pre-wrap'; div.style.overflow='hidden'; if(ta.parentNode) ta.parentNode.replaceChild(div,ta); }); }}); return { img:c.toDataURL('image/png'), w:el.offsetWidth, h:el.offsetHeight }; }
-  async downloadOne(fmt){ fmt=fmt||'a4'; if(this.state.active==null||!window.jspdf) return; const cap=await this._capture(); if(!cap) return; const {jsPDF}=window.jspdf; const [pw,ph]=this._pageDims(fmt); const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:fmt}); this._fitImg(pdf,cap,pw,ph); pdf.save('Design-Canvas-'+this.STAGES[this.state.active].name+'-'+fmt.toUpperCase()+'.pdf'); if(window.track) window.track('download_canvas', {stage: this.STAGES[this.state.active].name, format:fmt}); }
-  async downloadAll(fmt){ fmt=fmt||'a4'; if(!window.jspdf) return; const prev=this.state.active; const {jsPDF}=window.jspdf; const [pw,ph]=this._pageDims(fmt); let pdf=null;
+  _logDl(what){ try{ const v=window.iocVisitor&&window.iocVisitor(); const base=window.NOTION_CONNECTOR_URL; if(!v||!base||base.indexOf('<')>-1) return; fetch(base.replace(/\/$/,'')+'/log-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:v.n,email:v.e,source:'design-canvas',comment:'Saved '+what}),keepalive:true}).catch(()=>{}); }catch(e){} }
+  async downloadOne(fmt){ fmt=fmt||'a4'; if(this.state.active==null||!window.jspdf) return; this._logDl((this.STAGES[this.state.active]||{}).name+' canvas'); const cap=await this._capture(); if(!cap) return; const {jsPDF}=window.jspdf; const [pw,ph]=this._pageDims(fmt); const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:fmt}); this._fitImg(pdf,cap,pw,ph); pdf.save('Design-Canvas-'+this.STAGES[this.state.active].name+'-'+fmt.toUpperCase()+'.pdf'); if(window.track) window.track('download_canvas', {stage: this.STAGES[this.state.active].name, format:fmt}); }
+  async downloadAll(fmt){ fmt=fmt||'a4'; if(!window.jspdf) return; this._logDl('all canvases'); const prev=this.state.active; const {jsPDF}=window.jspdf; const [pw,ph]=this._pageDims(fmt); let pdf=null;
     for(let i=0;i<this.STAGES.length;i++){
       this.setState({active:i,generating:true,genLabel:(i+1)+' / '+this.STAGES.length}); this._fitOverlay();
       await this._delay(520); const cap=await this._capture(); if(!cap) continue;

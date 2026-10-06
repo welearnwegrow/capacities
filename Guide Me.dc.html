@@ -76,7 +76,7 @@ class Component extends DCLogic {
     return {
       open: this.state.open,
       showFab: this.props.fab !== false && this.props.fab !== 'false',
-      frameSrc: (/\.dc\.html$/.test(location.pathname) ? 'explorer.dc.html' : 'explorer.dc.html') + '?embed=1',
+      frameSrc: (/\.dc\.html$/.test(location.pathname) ? 'explorer.dc.html' : 'explorer.html') + '?embed=1',
       onOpen: ()=>this._set(true),
       onClose: ()=>this._set(false)
     };

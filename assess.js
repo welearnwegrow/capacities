@@ -53,7 +53,7 @@
     var modal=document.getElementById('ioc-assess-modal'); if(modal) modal.scrollTop=0;
     document.getElementById('ioc-assess-overlay').scrollTop=0;
     if(window.track){ window.track('assessment_complete', {rated: rated}); }
-    document.getElementById('ioc-assess-print').addEventListener('click',function(){ var old=document.title, nm=''; try{ var w=JSON.parse(localStorage.getItem('ioc-assess-who')||'null'); if(w&&w.n) nm='-'+w.n.trim().replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,''); }catch(e){} document.title='Self-Assessment'+nm+'-'+new Date().toISOString().slice(0,10); var back=function(){ document.title=old; window.removeEventListener('afterprint',back); }; window.addEventListener('afterprint',back); window.print(); setTimeout(back,4000); });
+    document.getElementById('ioc-assess-print').addEventListener('click',function(){ if(window.iocLogAction) window.iocLogAction('download','Saved self-assessment PDF'); var old=document.title, nm=''; try{ var w=JSON.parse(localStorage.getItem('ioc-assess-who')||'null'); if(w&&w.n) nm='-'+w.n.trim().replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,''); }catch(e){} document.title='Self-Assessment'+nm+'-'+new Date().toISOString().slice(0,10); var back=function(){ document.title=old; window.removeEventListener('afterprint',back); }; window.addEventListener('afterprint',back); window.print(); setTimeout(back,4000); });
   }
   function init(t){
     var grids=document.querySelectorAll('[data-assess-grid]');

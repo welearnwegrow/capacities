@@ -100,8 +100,8 @@
     <div style="position:fixed;inset:0;z-index:2147483601;background:rgba(38,42,32,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px">
       <div style="width:100%;max-width:412px;background:linear-gradient(180deg,#fbf8f0,#f4eedf);border:1px solid rgba(70,113,111,.18);border-radius:20px;box-shadow:0 24px 60px rgba(40,50,35,.34);padding:30px 30px 26px">
         <div style="font-family:'Newsreader',serif;font-weight:500;font-size:25px;color:#233029;line-height:1.14;margin-bottom:8px">Before you begin</div>
-        <p style="font-size:13.5px;line-height:1.55;color:#6b7c72;margin:0 0 18px">Systems Change Coach is an AI-powered companion for systems-change work. Enter your email to begin. We're a small team learning who this serves. We'll only use your email to follow up and share the occasional update (you can opt-out anytime) — nothing more.</p>
-        <input id="gm-gate-email" type="email" placeholder="you@example.com" onKeyDown="{{ onGateKey }}" style="width:100%;box-sizing:border-box;border:1px solid rgba(70,113,111,.28);border-radius:12px;padding:12px 14px;font-family:'PT Sans',sans-serif;font-size:14px;background:#fff;outline:none;margin-bottom:10px" />
+        <p style="font-size:13.5px;line-height:1.55;color:#6b7c72;margin:0 0 18px">The AI Guide is a companion for systems-change work. Enter your email to begin. We're a small team learning who this serves. We'll only use your email to follow up and share the occasional update (you can opt-out anytime) — nothing more.</p>
+        <input id="gm-gate-email" type="email" placeholder="you@example.com" onKeyDown="{{ onGateKey }}" style="width:100%;box-sizing:border-box;border:1px solid rgba(70,113,111,.28);border-radius:12px;padding:12px 14px;font-family:'PT Sans',sans-serif;font-size:14px;background:#fff;outline:none;margin-bottom:10px">
         <sc-if value="{{ gateErr }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;color:#9a4a2d;margin:-2px 0 10px">{{ gateErr }}</div></sc-if>
         <button onClick="{{ onGateSubmit }}" style="width:100%;border:none;border-radius:26px;background:#b0822f;color:#fff;font-family:'PT Sans',sans-serif;font-size:14.5px;font-weight:700;padding:13px;cursor:pointer">Start Guide Me →</button>
         <p style="font-size:11px;line-height:1.5;color:#9aa89e;margin:12px 0 0;text-align:center">We'll never share your email, and you can ask us to delete it anytime.</p>
@@ -113,9 +113,9 @@
     <div style="position:fixed;inset:0;z-index:2147483600;background:rgba(38,42,32,.6);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:24px;animation:exIn .25s ease">
       <div style="width:100%;max-width:440px;background:linear-gradient(180deg,#fbf8f0,#f4eedf);border:1px solid rgba(70,113,111,.18);border-radius:20px;box-shadow:0 24px 60px rgba(40,50,35,.34);padding:26px 26px 22px;position:relative">
         <button onClick="{{ fbSkip }}" title="Close" aria-label="Close" style="position:absolute;top:14px;right:14px;width:30px;height:30px;border:none;border-radius:50%;background:rgba(70,113,111,.10);color:#6b7c72;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></button>
-        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-bottom:10px">✦ Help shape Systems Change Coach</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a8823a;margin-bottom:10px">✦ Help shape the AI Guide</div>
         <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:25px;line-height:1.12;color:#233029;margin:0 0 6px">Is this pointing you somewhere good?</h2>
-        <p style="font-size:13.5px;line-height:1.5;color:#6b7c72;margin:0 0 16px">Systems Change Coach is still learning the terrain. Tell us what landed, what missed, or what you wish it had said — every note trains it to give the next person sharper directions. A few seconds, all optional.</p>
+        <p style="font-size:13.5px;line-height:1.5;color:#6b7c72;margin:0 0 16px">The AI Guide is still learning the terrain. Tell us what landed, what missed, or what you wish it had said — every note trains it to give the next person sharper directions. A few seconds, all optional.</p>
         <div style="display:flex;gap:9px;margin-bottom:16px">
           <sc-for list="{{ fbOptions }}" as="o" hint-placeholder-count="3">
             <button onClick="{{ o.onClick }}" style="{{ o.style }}"><span style="font-size:19px;line-height:1">{{ o.icon }}</span><span>{{ o.label }}</span></button>
@@ -145,9 +145,9 @@
 
     <!-- INTRO -->
     <div class="gm-noprint" style="margin-bottom:24px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a8823a;margin-bottom:12px">✦ Guide Me · a thinking partner</div>
-      <h1 class="ex-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:44px;line-height:1.06;color:#233029;margin:0 0 12px">Talk through what you're working on</h1>
-      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:64ch">As we talk, a living map builds alongside — where you are on the <strong style="font-weight: 700; color: rgb(70, 81, 74);">route</strong>, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">learning areas</strong> that matter most, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">practical next steps</strong> to take, and a <strong style="font-weight: 700; color: rgb(70, 81, 74);">resource</strong> to begin each one.</p>
+      <div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a8823a;margin-bottom:12px">✦ AI GUIDE</div>
+      <h1 class="ex-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:44px;line-height:1.06;color:#233029;margin:0 0 12px">Get unstuck!</h1>
+      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:64ch">Describe the situation you are working on.&nbsp; As we talk, a living map builds alongside — where you are on the <strong style="font-weight: 700; color: rgb(70, 81, 74);">route</strong>, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">learning areas</strong> that matter most, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">practical next steps</strong> to take, and a <strong style="font-weight: 700; color: rgb(70, 81, 74);" data-cc-id="cc-2">resource</strong> to begin each one.</p>
     </div>
 
     <div class="gm-grid" style="display:grid;grid-template-columns:1fr;gap:20px;align-items:start">
@@ -201,19 +201,13 @@
           <div style="display:flex;align-items:flex-end;gap:7px;background:#fff;border:1px solid rgba(70,113,111,.24);border-radius:14px;padding:8px 8px 8px 10px">
             <label title="Attach a brief (PDF, Word, PowerPoint, Excel, or text/code)" style="width:34px;height:34px;flex:none;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#7a8b81" style-hover="background:rgba(70,113,111,.1)">
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
-              <input type="file" accept=".pdf,.docx,.pptx,.xlsx,.txt,.md,.markdown,.html,.htm,.js,.jsx,.ts,.tsx,.mjs,.cjs,.css,.scss,.json,.jsonc,.csv,.tsv,.xml,.yml,.yaml,.toml,.ini,.py,.rb,.go,.rs,.java,.c,.cpp,.h,.sh,.sql,.log,application/pdf" onChange="{{ onFile }}" style="display:none" />
+              <input type="file" accept=".pdf,.docx,.pptx,.xlsx,.txt,.md,.markdown,.html,.htm,.js,.jsx,.ts,.tsx,.mjs,.cjs,.css,.scss,.json,.jsonc,.csv,.tsv,.xml,.yml,.yaml,.toml,.ini,.py,.rb,.go,.rs,.java,.c,.cpp,.h,.sh,.sql,.log,application/pdf" onChange="{{ onFile }}" style="display:none">
             </label>
             <textarea id="gm-input" rows="1" placeholder="{{ composerPlaceholder }}" onKeyDown="{{ onKey }}" onInput="{{ onGrow }}" style="{{ composerStyle }}"></textarea>
             <button class="gm-send" onClick="{{ onSend }}" title="Send" style="width:38px;height:38px;flex:none;border:none;border-radius:10px;background:#b0822f;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"></path><path d="M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
             </button>
           </div>
-          <sc-if value="{{ firstTurn }}" hint-placeholder-val="{{ true }}">
-          <label style="display:flex;align-items:center;gap:7px;margin-top:10px;cursor:pointer;font-size:11.5px;color:#8a978c">
-            <input type="checkbox" id="gm-consent" defaultChecked="{{ true }}" style="width:14px;height:14px;accent-color:#46716f;cursor:pointer" />
-            Save a summary to improve this tool
-          </label>
-          </sc-if>
           <sc-if value="{{ showInlineFb }}" hint-placeholder-val="{{ false }}">
             <div style="margin-top:12px;display:flex;align-items:center;gap:8px;background:rgba(90,103,51,.07);border:1px solid rgba(90,103,51,.2);border-radius:12px;padding:9px 10px 9px 13px;animation:exIn .3s ease">
               <span style="font-size:12.5px;color:#54655c;flex:1">Is this helping?</span>
@@ -748,7 +742,6 @@ class Component extends DCLogic {
     const display = text + (brief? ((text?'\n\n':'')+'[Attached: '+brief.name+']') : '');
     const send = text + (brief? ((text?'\n\n':'')+'--- ATTACHED BRIEF ('+brief.name+') ---\n'+brief.text) : '');
     const msgs=this.state.messages.concat([{ role:'user', content:display, send:send }]);
-    { const ce=document.getElementById('gm-consent'); if(ce) this._consent=!!ce.checked; }
     this._busy=true;
     this.setState({ messages:msgs, loading:true, error:null, brief:null, briefError:null });
     const el=document.getElementById('gm-input'); if(el){ el.value=''; el.style.height='auto'; }
@@ -945,7 +938,7 @@ class Component extends DCLogic {
       if(this._demo) return;                     // demo preview never writes to Notion
       const url=window.NOTION_CONNECTOR_URL; if(!url) return;
       const userTurns=this.state.messages.filter(m=>m.role==='user'); if(!userTurns.length) return;
-      const consentEl=document.getElementById('gm-consent'); const consent=consentEl? !!consentEl.checked : (this._consent!==undefined? this._consent : true);
+      const consent=true;
       const map=this._lastMap || this.state.map || {};
       const status=this._lastStatus||'ok';
       const hasContent=(map.areas&&map.areas.length)||(map.resources&&map.resources.length)||(map.route&&map.route.length)||(map.cases&&map.cases.length)||(map.canvases&&map.canvases.length)||(map.summary&&map.summary.trim());
@@ -1201,13 +1194,13 @@ class Component extends DCLogic {
       canvasBtnLabel: st.canvasBusy ? 'Preparing your canvas\u2026' : ((map&&(map.canvases||[]).length) ? 'Download canvas (PDF)' : 'Create & download canvas (PDF)'),
       canvasBlurb: (map&&(map.canvases||[]).length) ? (this._canvasBlurb(map.canvases)+' There is space on it to write.') : 'Turn what you shared into a one-page canvas \u2014 a framework built for your situation that you can print and work through by hand.',
       canvasKindLabel: this._canvasKind(((map&&map.canvases)||[])[0]),
-      onPrintCanvases: ()=>this._printCanvases(),
+      onPrintCanvases: ()=>{ if(window.iocLogAction) window.iocLogAction('download','Saved AI Guide design canvases PDF'); this._printCanvases(); },
       routeComplete: hasMap && !!(map&&(map.route||[]).length) && picks.length>0, notRouteComplete: !(hasMap && !!(map&&(map.route||[]).length) && picks.length>0),
       turnLabel: turnCount>1 ? ('Sharpened over '+turnCount+' exchanges') : 'From what you shared',
       mapWrapStyle: { animation: (turnCount%2 ? 'exIn' : 'exInB')+' .4s ease' },
       onJumpChat: ()=>{ const el=document.getElementById('gm-chat'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); const t=document.getElementById('gm-input'); if(t) setTimeout(function(){ t.focus(); },420); } },
       onJumpMap: ()=>{ const el=document.getElementById('gm-map'); if(el){ window.scrollTo({ top: el.getBoundingClientRect().top+window.scrollY-16, behavior:'smooth' }); } },
-      onPrint: ()=>{ try{ window.print(); }catch(e){} },
+      onPrint: ()=>{ if(window.iocLogAction) window.iocLogAction('download','Saved AI Guide conversation PDF'); try{ window.print(); }catch(e){} },
       showFeedback: st.showFeedback,
       showInlineFb,
       fbThumbUp: ()=>this._inlineThumb('Really helpful'),

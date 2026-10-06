@@ -206,12 +206,12 @@ class Component extends DCLogic {
   _toggle(label){
     const picked = this.state.picked.includes(label) ? this.state.picked.filter(x=>x!==label) : [...this.state.picked, label];
     this.setState({ picked });
-    const ta = document.getElementById('ioc-eg-msg');
-    if(ta){
-      const prefix = "I'm interested in: ";
-      const lines = ta.value.split('\n').filter(l=>!l.startsWith(prefix));
-      const rest = lines.join('\n').replace(/^\n+/, '');
-      ta.value = (picked.length ? prefix + picked.join(', ') + (rest ? '\n\n' : '') : '') + rest;
+    const org = document.getElementById('ioc-eg-org');
+    if(org){
+      const prefix = 'Interested in: ';
+      const own = org.value.split(' · ').filter(p=>!p.startsWith(prefix)).join(' · ').trim();
+      const tag = picked.length ? prefix + picked.join(', ') : '';
+      org.value = [own, tag].filter(Boolean).join(' · ');
     }
   }
   renderVals(){

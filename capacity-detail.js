@@ -4,18 +4,18 @@
 //   written for people new to the field, age-agnostic (16+), grounded in the framework sources.
 window.__CAPDETAIL = {
  "Listening Deeply": {
-  "desc": "Cultivating deep, multi-sensory attention and contextual awareness to decode systemic variables, cultural subtexts, and historical field dynamics before executing action.",
+  "desc": "Learning to listen beneath the surface to people, groups and places, including what goes unsaid. It draws on practices such as presencing, strategic questioning, warm data and listening interviews, so that action starts from what a system is actually saying.",
   "levels": {
-   "Personal": "Notices your own assumptions and filters, and chooses to listen to people whose views differ from yours — including those usually overlooked — without rushing to judge. Practices active, empathic listening: summarising what you heard before responding.",
-   "Social": "Pays close attention inside a group or community, picking up the unspoken feelings, histories, and tensions that shape how people show up. Uses tools like empathy maps and listening interviews to surface what isn't being said directly.",
-   "Institutional": "Reads the deeper dynamics inside organisations — who really holds influence, what goes unsaid, and what people care about beneath their stated positions — and adapts how you engage accordingly. Distinguishes genuine empathy from projection or assumption.",
+   "Personal": "Notices own assumptions and filters, and chooses to listen to people whose views differ — including those usually overlooked — without rushing to judge. Practices active, empathic listening: summarising what was heard before responding.",
+   "Social": "Pays close attention inside a group or community, picking up the unspoken feelings, histories, and tensions that shape how people show up. Draws out what isn't being said directly, and reflects it back so the group can see it too.",
+   "Institutional": "Reads the deeper dynamics inside organisations — who really holds influence, what goes unsaid, and what people care about beneath their stated positions — and adapts how to engage accordingly. Distinguishes genuine empathy from projection or assumption.",
    "Systemic": "Senses wider shifts across regions, cultures, and ecosystems, and designs settings where groups who usually talk past each other can genuinely hear one another. Models the kind of attentive presence that helps whole fields listen better."
   }
  },
  "Staying Grounded": {
-  "desc": "The practice of monitoring and stabilizing internal nervous-system responses through deliberate, relational grounding within specific ecological and land-based settings.",
+  "desc": "Learning to stay steady in body and mind through the stress, grief and uncertainty that systems work brings, using somatic, contemplative and land-based practices, and helping groups do the same so people can keep going without burning out.",
   "levels": {
-   "Personal": "Notices how stress, grief, or overwhelm show up in your body, and learns simple ways to steady yourself, such as breathwork, body scans, or time in nature. Begins to name emotions without being swept away by them.",
+   "Personal": "Notices how stress, grief, or overwhelm show up in the body, and learns simple ways to steady oneself, through the body, breath and time outdoors. Begins to name emotions without being swept away by them.",
    "Social": "Helps a team or group stay grounded and feel safe with one another through demanding, high-pressure work. Builds shared practices of rest, care, and reflection that sustain people over a long project.",
    "Institutional": "Stays steady and clear-headed while guiding others through crises, transitions, or turbulent periods, drawing on an understanding of how the nervous system responds to stress. Treats setbacks as material for learning rather than threats.",
    "Systemic": "Holds space for collective healing and recovery across large, conflict-heavy efforts, helping whole communities avoid burnout. Builds cultures and structures where wellbeing and long-term purpose are protected, not sacrificed."
@@ -26,14 +26,14 @@ window.__CAPDETAIL = {
   "levels": {
    "Personal": "Understands where money comes from in their field and how funding terms shape the work. Can describe a project's needs plainly to a funder or investor.",
    "Social": "Builds trusting relationships with funders and investors, and helps peers navigate funding terms. Brings community voice into conversations about money.",
-   "Institutional": "Designs funding or investment models that support long-term, adaptive work, such as multi-year, flexible or pooled funds. Aligns organisational finance with systems-change goals.",
+   "Institutional": "Designs funding or investment models that support long-term, adaptive work, with money that is patient, flexible and shared. Aligns organisational finance with systems-change goals.",
    "Systemic": "Shifts how capital flows across a field by organising funders, shaping markets or influencing finance policy, so that resources reach the people and places driving change."
   }
  },
  "Acting with Integrity": {
-  "desc": "Grounding systemic choices, strategic designs, and relationship dynamics in a non-extractive ethical framework that honors interconnectedness and long-term moral integrity.",
+  "desc": "Learning to act from clear values and care, so that choices, designs and relationships do not extract from people or the living world. It draws on contemplative, ethical and decolonial traditions to work through hard trade-offs honestly.",
   "levels": {
-   "Personal": "Develops a personal sense of right relationship, grounded in care and respect rather than what's merely useful or transactional. Begins to clarify the values that guide your decisions.",
+   "Personal": "Develops a personal sense of right relationship, grounded in care and respect rather than what's merely useful or transactional. Begins to clarify the values that guide own decisions.",
    "Social": "Connects the goals of a project to a clear commitment to repair, fairness, and responsibility to future generations. Recognises that ethics is rarely a simple right-or-wrong, and works with that complexity.",
    "Institutional": "Works through hard ethical trade-offs in real decisions, weighing who is affected and how, and putting people's wellbeing ahead of convenience or short-term gain. Takes responsibility for both the intended and unintended effects of action.",
    "Systemic": "Anchors large funding and stewardship decisions in deep ethics, ensuring long-term care for people and the living world. Helps institutions hold themselves accountable to justice and repair, not just compliance."
@@ -58,19 +58,19 @@ window.__CAPDETAIL = {
   }
  },
  "Honoring Many Ways of Knowing": {
-  "desc": "Engaging with diverse cultural knowledge systems, epistemologies, and ways of knowing — honoring indigenous lifeways, land-based histories, and intergenerational oral traditions.",
+  "desc": "Learning to recognise and work with Indigenous, local, land-based, oral and spiritual knowledge alongside academic and technical expertise, with consent and respect, and to notice whose knowledge has been excluded and why.",
   "levels": {
-   "Personal": "Values local histories, oral traditions, and lineages, and respects cultural ways of knowing different from your own. Listens to ancestral and land-based knowledge with humility rather than extraction.",
+   "Personal": "Values local histories, oral traditions, and lineages, and respects cultural ways of knowing different from own. Listens to ancestral and land-based knowledge with humility rather than extraction.",
    "Social": "Brings traditional and Indigenous knowledge into the design of programs, with care, consent, and respect. Recognises whose knowledge is present and whose has been erased.",
    "Institutional": "Bridges technical methods with ancestral practices in real projects, always crediting their source and honouring their integrity. Holds the tension between different worldviews without flattening them.",
    "Systemic": "Helps many ways of knowing gain genuine standing within large institutions, protecting Indigenous and land-based sovereignty. Normalises pluriversal knowledge in spaces that have long excluded it."
   }
  },
  "Thinking in Systems": {
-  "desc": "Learning the core tools of systems thinking: tracing feedback loops, delays, stocks and flows, and mapping how a system’s structure produces its behaviour, so you can find leverage points in any field.",
+  "desc": "Learning the core tools of systems thinking: tracing feedback loops, delays, stocks and flows, and mapping how a system’s structure produces its behaviour, to find leverage points in any field.",
   "levels": {
-   "Personal": "Traces simple cause-and-effect and feedback loops in a situation close to you, seeing how one thing influences another over time. Begins to look for patterns rather than blaming single events or people.",
-   "Social": "Maps how a system works — its loops, delays, and unintended effects — to make sense of a community challenge. Builds visual representations like causal-loop diagrams to share that understanding with others.",
+   "Personal": "Traces simple cause-and-effect and feedback loops in a nearby situation, seeing how one thing influences another over time. Begins to look for patterns rather than blaming single events or people.",
+   "Social": "Maps how a system works — its loops, delays, and unintended effects — to make sense of a community challenge. Makes that picture visible and simple enough for others to question and add to.",
    "Institutional": "Models complex organisational or city systems to find leverage points where a small, well-placed shift produces outsized change. Distinguishes symptoms from the deeper structures that generate them.",
    "Systemic": "Builds and maintains large-scale system models that guide major, multi-partner efforts over time. Helps whole networks reason about feedback, delay, and consequence before they act."
   }
@@ -78,8 +78,8 @@ window.__CAPDETAIL = {
  "Building Power & Agency": {
   "desc": "Learning to see how power works, formally and informally, and to build the agency of people who have been kept from it. Changing the rules of economies and states sits with Reshaping Economies & States.",
   "levels": {
-   "Personal": "Maps who holds influence — both official and unofficial — in a space you're part of, and who benefits or loses from how things are arranged. Begins to notice the hidden and invisible forms of power, not just the obvious ones.",
-   "Social": "Sees how power intersects with race, gender, class, and history to shape what's possible in a community effort. Uses tools like stakeholder maps or Gaventa's Power Cube to analyse a real situation.",
+   "Personal": "Maps who holds influence — both official and unofficial — in a familiar space, and who benefits or loses from how things are arranged. Begins to notice the hidden and invisible forms of power, not just the obvious ones.",
+   "Social": "Sees how power intersects with race, gender, class, and history to shape what's possible in a community effort. Can show who holds which kind of power in a real situation, where it sits, and how it is used.",
    "Institutional": "Analyses how power works inside institutions, funding, and value chains, and designs realistic strategies that account for it. Identifies where power can be challenged, shared, or redistributed.",
    "Systemic": "Shifts deeply entrenched power imbalances across large funding systems and institutions toward those most affected. Helps return agency and decision-making to communities long kept on the margins."
   }
@@ -94,10 +94,10 @@ window.__CAPDETAIL = {
   }
  },
  "Imagining Futures": {
-  "desc": "Utilizing long-term horizon scanning, scenario planning, and creative imagination to project alternative socio-ecological trajectories across generational horizons.",
+  "desc": "Learning to imagine and explore possible futures, using foresight methods such as Three Horizons and scenarios as well as fiction, art and play, so people can see beyond the present and choose what to work toward.",
   "levels": {
    "Personal": "Imagines different possible futures instead of assuming things must stay as they are, distinguishing probable, plausible, possible, and preferred futures. Notices early signals and emerging trends.",
-   "Social": "Leads others through scenario and 'what if' exercises — like Three Horizons or scenario planning — that stretch collective imagination. Reflects on how cultural narratives shape what futures people can even picture.",
+   "Social": "Helps groups explore several possible futures together, stretching what they think is possible and connecting it to what is emerging now. Reflects on how cultural narratives shape what futures people can even picture.",
    "Institutional": "Builds long-term thinking and risk foresight into how organisations and cities plan and decide. Examines systems across multiple timescales rather than only the next budget cycle.",
    "Systemic": "Shapes long-horizon agendas at large scale, designing systems meant to hold up and stay just across generations. Helps institutions take intergenerational responsibility seriously."
   }
@@ -106,7 +106,7 @@ window.__CAPDETAIL = {
   "desc": "Designing interventions for systems that cannot be fully predicted or controlled: trying several options at once, building in feedback, and creating the conditions for change to emerge, so that designs renew rather than deplete the people and places they touch.",
   "levels": {
    "Personal": "Recognises when a problem is complex rather than complicated, and resists designing a single fixed solution. Asks what a design might set off beyond its intended effects.",
-   "Social": "Co-designs interventions with the people in a system, using approaches like systemic design or portfolio thinking to try several options side by side. Builds in ways to notice what changes and adjust.",
+   "Social": "Co-designs interventions with the people in a system, trying several options side by side instead of betting on one. Builds in ways to notice what changes and adjust.",
    "Institutional": "Designs programmes, services or organisations as adaptable systems, with feedback loops, room to change course, and attention to the conditions that sustain them. Moves work from extracting toward renewing.",
    "Systemic": "Shapes the infrastructure, institutions and rules of whole sectors so they can adapt and regenerate over time. Helps fields design for emergence rather than control."
   }
@@ -114,9 +114,9 @@ window.__CAPDETAIL = {
  "Deciding Together": {
   "desc": "Learning to share real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research and shared governance are ways of doing this.",
   "levels": {
-   "Personal": "Asks the people affected by a decision what matters to them before deciding, and does not assume you already know best. Notices who is usually left out when decisions are made, and starts to make room for them.",
-   "Social": "Facilitates group processes where affected people set the agenda and make decisions together, using methods such as participatory research, consent-based decision-making or community assemblies. Reflects with the group on how power shapes who speaks and who decides.",
-   "Institutional": "Builds shared governance into how organisations, programmes and public services work, for example through community boards, participatory budgets or participant-led research. Holds the organisation accountable to the people it serves, not just to its funders.",
+   "Personal": "Asks the people affected by a decision what matters to them before deciding, and does not assume to already know best. Notices who is usually left out when decisions are made, and starts to make room for them.",
+   "Social": "Facilitates group processes where affected people set the agenda and make decisions together, in ways that give everyone a real say in the outcome. Reflects with the group on how power shapes who speaks and who decides.",
+   "Institutional": "Builds shared governance into how organisations, programmes and public services work, so that the people affected have a lasting say over priorities, budgets and research. Holds the organisation accountable to the people it serves, not just to its funders.",
    "Systemic": "Shifts the norms, funding rules and policies of a whole field so that affected communities hold lasting power over priorities, research and resources. Helps redefine who gets to decide, and whose knowledge counts."
   }
  },
@@ -130,7 +130,7 @@ window.__CAPDETAIL = {
   }
  },
  "Prototyping & Testing": {
-  "desc": "Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what you learn to decide what to try next.",
+  "desc": "Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what is learned to decide what to try next.",
   "levels": {
    "Personal": "Tries small, safe-to-fail prototypes — a pop-up, a pilot, a quick test — to learn fast from real feedback rather than over-planning. Treats each attempt as a probe, not a final answer.",
    "Social": "Runs a steady series of experiments, refining each one based on how people actually respond. Builds the discipline of iterating in public and adjusting course.",
@@ -148,7 +148,7 @@ window.__CAPDETAIL = {
   }
  },
  "Transforming Conflict": {
-  "desc": "Navigating systemic, ideological, or interpersonal friction within an alliance and restructuring that energy into generative, trust-building outcomes.",
+  "desc": "Learning to work with conflict inside groups and alliances, using approaches such as nonviolent communication and deep democracy, so that tension becomes a source of understanding and trust instead of a reason to split.",
   "levels": {
    "Personal": "Handles disagreements constructively, easing tension through listening and finding common ground. Engages with conflict without avoidance, aggression, or collapse.",
    "Social": "Works through divides inside a group, recognising both the surface dispute and the deeper structural drivers beneath it. Notices early signs of tension and acts to de-escalate before things harden.",
@@ -157,9 +157,9 @@ window.__CAPDETAIL = {
   }
  },
  "Telling Stories of Systems Change": {
-  "desc": "Learning to tell the story of your own change work as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.",
+  "desc": "Learning to tell the story of a change effort as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.",
   "levels": {
-   "Personal": "Describes a situation you are working on in plain language, including how its parts connect, without reducing it to a single cause or hero. Shares what you are learning, including what did not work.",
+   "Personal": "Describes a situation being worked on in plain language, including how its parts connect, without reducing it to a single cause or hero. Shares what is being learned, including what did not work.",
    "Social": "Gathers and shares stories with the people involved, so a community can see its own system and progress. Uses lived experience, simple visuals and data together, with consent and care for who tells the story.",
    "Institutional": "Builds storytelling into how an organisation reports and learns, so updates to boards, partners and funders show contribution, uncertainty and what is shifting in the system, not only outputs.",
    "Systemic": "Helps a whole field tell a shared story of systems change, making long-term, collective progress visible and credible to the people who fund, govern and join it."
@@ -175,7 +175,7 @@ window.__CAPDETAIL = {
   }
  },
  "Advocating for Policy Change": {
-  "desc": "Actively engaging, challenging, or restructuring local legislative, policy, and civic institutional channels to secure structural and legal permanence for interventions.",
+  "desc": "Learning to influence the laws, policies and public institutions that shape a system, through campaigns, coalitions, civic participation and direct work with decision-makers, so that changes last.",
   "levels": {
    "Personal": "Takes part in civic life — petitions, local actions, voting, councils — and learns how decisions actually get made. Understands the paths through which ordinary people can shape policy.",
    "Social": "Writes clear policy proposals and runs advocacy campaigns aimed at concrete local change. Builds the case and the coalition needed to move a decision.",
@@ -184,7 +184,7 @@ window.__CAPDETAIL = {
   }
  },
  "Developing Leaders": {
-  "desc": "Exercising decentralizing, relationship-driven leadership that relinquishes top-down control to hold space for emergent, self-organizing community strategies.",
+  "desc": "Learning to lead in ways that share power: growing leadership in others, holding space for emergence, and building the self-awareness, presence and practices that systems leadership needs.",
   "levels": {
    "Personal": "Leads among peers, organising shared work fairly and celebrating the whole group's effort. Recognises the difference between complicated and complex challenges and adjusts accordingly.",
    "Social": "Practices letting go of control so a group's own strategies can emerge, helping others stay engaged in uncertainty without rushing to premature answers. Uses reflection and feedback to guide action.",

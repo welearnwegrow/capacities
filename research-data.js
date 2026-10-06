@@ -38,7 +38,7 @@ window.__RESEARCH = {
    "group": "green"
   },
   {
-   "label": "Building Power and Agency",
+   "label": "Building Power & Agency",
    "group": "teal"
   },
   {
@@ -70,7 +70,7 @@ window.__RESEARCH = {
    "group": "coral"
   },
   {
-   "label": "Telling the Story of Systems Change",
+   "label": "Telling Stories of Systems Change",
    "group": "coral"
   },
   {
@@ -125,7 +125,7 @@ window.__RESEARCH = {
   {
    "name": "All About Power",
    "caps": [
-     "Building Power and Agency",
+     "Building Power & Agency",
      "Reshaping Economies & States"
     ],
    "desc": "A seminal primer by Srilatha Batliwala that demystifies power by analyzing both formal structures and informal relations. It provides a shared lexicon for social justice advocates to map how power operates, enabling them to build more effective, evidence-based strategies for systemic change.",
@@ -209,7 +209,7 @@ window.__RESEARCH = {
    "name": "Bayo Akomolafe’s Essays",
    "caps": [
      "Acting with Integrity",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Bayo Akomolafe’s essays challenge the traditional Western paradigms of progress, individuality, and linear activism. By weaving together post-humanist philosophy, indigenous wisdom, and critical inquiry, he invites readers to embrace \"entanglement\" and the \"inappropriate\" rather than seeking simple solutions to systemic crises. His work critiques modernity’s obsession with control, urging a shift toward slowing down, grieving, and finding generative possibilities in the breakdown of dominant systems. It is a profound, poetic disruption of normative thinking.",
    "types": [
@@ -233,7 +233,7 @@ window.__RESEARCH = {
   {
    "name": "Belonging Design Principles",
    "caps": [
-     "Building Power and Agency",
+     "Building Power & Agency",
      "Designing for Complexity"
     ],
    "desc": "Created by the Othering & Belonging Institute, this guide outlines architectural and social principles for building genuine inclusion. It offers a blueprint for organizations to dismantle structural exclusion by intentionally designing spaces, policies, and narratives that foster universal belonging.",
@@ -246,7 +246,7 @@ window.__RESEARCH = {
   {
    "name": "Belonging without Othering: How We Save Ourselves and the World",
    "caps": [
-     "Building Power and Agency",
+     "Building Power & Agency",
      "Acting with Integrity"
     ],
    "desc": "john a. powell and Stephen Menendian explore the systemic dynamics of exclusion and structural racism, presenting structural \"targeted universalism\" frameworks to foster true societal belonging without marginalizing others.",
@@ -317,7 +317,7 @@ window.__RESEARCH = {
    "name": "Climate Change is Racist",
    "caps": [
      "Living Within Planetary Limits",
-     "Building Power and Agency",
+     "Building Power & Agency",
      "Reshaping Economies & States"
     ],
    "desc": "This uncomfortable, essential read exposes the structural racism embedded within the climate crisis and its solutions. It’s a call to look deeper, reminding us that true sustainability is impossible without racial justice. A  resource for ensuring our systems transformation is equitable for everyone, everywhere.",
@@ -526,7 +526,7 @@ window.__RESEARCH = {
    "caps": [
      "Honoring Many Ways of Knowing",
      "Deciding Together",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Linda Tuhiwai Smith's foundational text critiques Eurocentric scientific and academic paradigms, exploring how research can be reclaimed, decolonized, and re-centered through Indigenous knowledge and systemic practices.",
    "types": [
@@ -561,7 +561,7 @@ window.__RESEARCH = {
    "name": "Design Social Change: Take Action, Work toward Equity, and Challenge the Status Quo",
    "caps": [
      "Designing for Complexity",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "This article explores the concept of \"un-learning\" as a critical practice for fostering systemic change. It argues that traditional educational models often reinforce existing, extractive worldviews, making it difficult to envision or build genuinely regenerative futures. By applying pedagogical strategies that dismantle ingrained, colonial, and hierarchical mental models, the authors propose that practitioners can cultivate the \"epistemic agency\" required to design more equitable, community-led, and adaptive systems. It emphasizes that before new systems can take root, the old cognitive patterns that sustain them must be actively and intentionally un-learned.",
    "types": [
@@ -610,7 +610,7 @@ window.__RESEARCH = {
   {
    "name": "Dismantling the Master's Tools",
    "caps": [
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "This project offers a deep dive into the somatic and systemic practice of interrogating white supremacy in social R&D. It provides reflective tools for practitioners to recognize how their own bodies and habits are conditioned by colonial structures, offering paths toward radical transformation.",
    "types": [
@@ -648,7 +648,7 @@ window.__RESEARCH = {
    "caps": [
      "Thinking in Systems",
      "Strengthening Ecosystems",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Adam Kahane’s exploration of everyday habits highlights how systemic transformation is not solely the result of major strategic interventions but is built through the iterative, daily practices of those within the system. By focusing on cultivating skills like deep listening, reflecting on one’s own mental models, and fostering candid dialogue, practitioners can disrupt entrenched patterns from within. This approach is highly relevant for systems change as it democratizes agency, shifting the responsibility for transformation from external \"experts\" to the everyday choices of those navigating the system.",
    "types": [
@@ -805,7 +805,7 @@ window.__RESEARCH = {
    "caps": [
      "Living Within Planetary Limits",
      "Reshaping Economies & States",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Vanessa Machado de Oliveira provides a profound guide on how to face global crises, systemic harms, and climate collapse with maturity, humility, and integrity without relying on simplistic quick-fix solutions.",
    "types": [
@@ -897,7 +897,7 @@ window.__RESEARCH = {
   {
    "name": "Map the System Case Library",
    "caps": [
-     "Building Power and Agency",
+     "Building Power & Agency",
      "Thinking in Systems"
     ],
    "desc": "An investigation into the dual water crisis in Jakarta, Indonesia, mapping the complex systemic interactions between urban development, climate change, and resource depletion.",
@@ -1027,7 +1027,7 @@ window.__RESEARCH = {
   {
    "name": "Pedagogy of the Oppressed",
    "caps": [
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Paulo Freire's seminal text introduces a liberating education framework, championing critical pedagogy and dialogic practices to empower communities to overcome systemic oppression.",
    "types": [
@@ -1135,7 +1135,7 @@ window.__RESEARCH = {
    "caps": [
      "Honoring Many Ways of Knowing",
      "Deciding Together",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Shawn Wilson's foundational text presents research as a relational, ceremonial practice grounded in Indigenous epistemologies, where knowledge is built through relationship and accountability to community, land, and ancestors.",
    "types": [
@@ -1218,7 +1218,7 @@ window.__RESEARCH = {
    "name": "Shikshantar",
    "caps": [
      "Reshaping Economies & States",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Shikshantar, the Institute for Hand-rearing Minds, functions as a laboratory for \"deschooling\" and building diverse, autonomous learning societies. Based in Udaipur, it critiques the industrial-schooling model as a form of colonial conditioning that suppresses natural intelligence and creativity. By fostering \"gift culture,\" community-led mentorship, and self-directed learning paths, it provides a practical framework for creating resilient, localized ecosystems that prioritize human connection, ecological regeneration, and the reclamation of our innate capacity to design our own lives.",
    "types": [
@@ -1244,7 +1244,7 @@ window.__RESEARCH = {
    "caps": [
      "Cultivating Collaboration",
      "Advocating for Policy Change",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "A guidebook by Deepa Iyer that offers a comprehensive set of frameworks and reflective practices for those working in social change. It helps practitioners identify their roles within an ecosystem, navigate the challenges of movement-building, and foster deep connection across diverse communities.",
    "types": [
@@ -1292,7 +1292,7 @@ window.__RESEARCH = {
    "caps": [
      "Listening Deeply",
      "Staying Grounded",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Staci Haines focuses on \"somatics\"—the intersection of body, movement, and social change. Her work asserts that systemic transformation requires not just intellectual analysis, but the physical capacity to embody new ways of being. By addressing how trauma, habits, and power dynamics are physically held, her approach helps individuals and groups develop the resilience needed to disrupt oppressive systems and sustain generative, equitable action. It bridges the gap between personal internal state and external collective political movement.",
    "types": [
@@ -1822,7 +1822,7 @@ window.__RESEARCH = {
   {
    "name": "The Right Use of Power Institute",
    "caps": [
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "The Right Use of Power Institute provides a transformative framework for ethics, leadership, and relational dynamics, shifting the paradigm of power from \"power over\" to \"power with.\" It emphasizes that power is an inherent energy, dynamic, and capacity that can be used for healing, harm, or neutral impact. By cultivating deep self-awareness, emotional fluency, and ethical mindfulness, practitioners learn to recognize their own power footprint, navigate power differentials safely, and wield influence in ways that are collaborative, compassionate, and empowering to others.",
    "types": [
@@ -2047,7 +2047,7 @@ window.__RESEARCH = {
    "caps": [
      "Strengthening Ecosystems",
      "Shifting Narratives",
-     "Building Power and Agency"
+     "Building Power & Agency"
     ],
    "desc": "Unearthodox shifts biodiversity conservation from reactive, top-down interventions toward fundamental systemic stewardship. By interrogating the power dynamics, economic structures, and dominant narratives that drive ecological extraction, they challenge the traditional conservationist paradigm. Their approach prioritizes the integration of indigenous, local, and scientific knowledge to reshape how we value nature. For systems change practitioners, Unearthodox provides a vital model for building field catalysts that address the root causes of environmental degradation, fostering more equitable, resilient governance.",
    "types": [

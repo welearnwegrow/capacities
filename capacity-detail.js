@@ -22,7 +22,7 @@ window.__CAPDETAIL = {
   }
  },
  "Engaging Capital": {
-  "desc": "Mobilising financial, social and relational capital for systems change: understanding how funding, investment and markets shape what is possible, and aligning money with long-term, community-led work, including flexible budgets and blended funding that can change as the work does.",
+  "desc": "Learning how money shapes systems change: where funding and investment come from, how their terms shape the work, and how to align grants, budgets and investment with long-term, community-led change, including flexible and blended funding that can change as the work does.",
   "levels": {
    "Personal": "Understands where money comes from in their field and how funding terms shape the work. Can describe a project's needs plainly to a funder or investor.",
    "Social": "Builds trusting relationships with funders and investors, and helps peers navigate funding terms. Brings community voice into conversations about money.",
@@ -40,7 +40,7 @@ window.__CAPDETAIL = {
   }
  },
  "Reshaping Economies & States": {
-  "desc": "Changing the economic and governance rules that shape a place, including ownership, public finance, the commons, and how institutions are designed, so that wealth and decision-making serve communities instead of concentrating in few hands.",
+  "desc": "Learning to change the economic and governance rules that shape a place, including ownership, growth, public finance, the commons, and how institutions are designed, so that wealth and decision-making serve communities instead of concentrating in few hands.",
   "levels": {
    "Personal": "Understands how economies and states shape everyday life, and that their rules were made by people and can be remade. Notices who owns what, who decides, and where alternatives already exist.",
    "Social": "Works with others to try different economic arrangements locally, such as cooperatives, commons, community land trusts or participatory budgets. Connects local struggles to the wider rules that produce them, including how race, class and history are built into them.",
@@ -49,7 +49,7 @@ window.__CAPDETAIL = {
   }
  },
  "Living Within Planetary Limits": {
-  "desc": "Understanding earth-system science, biodiversity, resource limits and ecological feedback, and putting that understanding into practice through regenerative and circular ways of living, producing and restoring land.",
+  "desc": "Learning how the living world works, including earth systems, biodiversity, resource limits and ecological feedback, and putting that into practice through regenerative and circular ways of living, producing and restoring land.",
   "levels": {
    "Personal": "Explains how natural systems work, the climate and ecological risks nearby, and the idea that the planet has real limits. Connects personal choices to their ecological footprint and begins to act on that awareness.",
    "Social": "Connects big-picture ecological trends — biodiversity loss, climate disruption, resource depletion — to what's actually happening in local communities and landscapes. Reads ecological feedback loops, not just isolated facts.",
@@ -67,7 +67,7 @@ window.__CAPDETAIL = {
   }
  },
  "Thinking in Systems": {
-  "desc": "Constructing clear, visual representations of complex systems — tracing systemic feedback patterns, delays, stocks, and flows to locate structural leverage points.",
+  "desc": "Learning the core tools of systems thinking: tracing feedback loops, delays, stocks and flows, and mapping how a system’s structure produces its behaviour, so you can find leverage points in any field.",
   "levels": {
    "Personal": "Traces simple cause-and-effect and feedback loops in a situation close to you, seeing how one thing influences another over time. Begins to look for patterns rather than blaming single events or people.",
    "Social": "Maps how a system works — its loops, delays, and unintended effects — to make sense of a community challenge. Builds visual representations like causal-loop diagrams to share that understanding with others.",
@@ -75,8 +75,8 @@ window.__CAPDETAIL = {
    "Systemic": "Builds and maintains large-scale system models that guide major, multi-partner efforts over time. Helps whole networks reason about feedback, delay, and consequence before they act."
   }
  },
- "Building Power and Agency": {
-  "desc": "Explicitly mapping both formal hierarchies and informal power axes within a target landscape to trace how resources, decisions, and vulnerabilities are distributed.",
+ "Building Power & Agency": {
+  "desc": "Learning to see how power works, formally and informally, and to build the agency of people who have been kept from it. Changing the rules of economies and states sits with Reshaping Economies & States.",
   "levels": {
    "Personal": "Maps who holds influence — both official and unofficial — in a space you're part of, and who benefits or loses from how things are arranged. Begins to notice the hidden and invisible forms of power, not just the obvious ones.",
    "Social": "Sees how power intersects with race, gender, class, and history to shape what's possible in a community effort. Uses tools like stakeholder maps or Gaventa's Power Cube to analyse a real situation.",
@@ -85,7 +85,7 @@ window.__CAPDETAIL = {
   }
  },
  "Shifting Narratives": {
-  "desc": "Deconstructing how mainstream communication networks, digital spaces, and cultural story structures form collective cognitive patterns and maintain institutional inertia.",
+  "desc": "Learning to read and shift the dominant stories in a culture: how media, framing and shared myths shape what people believe is normal or possible, and how new narratives take hold.",
   "levels": {
    "Personal": "Spots bias, spin, framing, and stereotypes in news and online spaces, and asks whose voice is centred and whose is missing. Begins to see stories as something designed, not just given.",
    "Social": "Sees how widely-held cultural myths and dominant narratives quietly block social and environmental change. Crafts stories that surface shared values and invite people in.",
@@ -112,7 +112,7 @@ window.__CAPDETAIL = {
   }
  },
  "Deciding Together": {
-  "desc": "Sharing real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research is one way of doing this.",
+  "desc": "Learning to share real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research and shared governance are ways of doing this.",
   "levels": {
    "Personal": "Asks the people affected by a decision what matters to them before deciding, and does not assume you already know best. Notices who is usually left out when decisions are made, and starts to make room for them.",
    "Social": "Facilitates group processes where affected people set the agenda and make decisions together, using methods such as participatory research, consent-based decision-making or community assemblies. Reflects with the group on how power shapes who speaks and who decides.",
@@ -130,7 +130,7 @@ window.__CAPDETAIL = {
   }
  },
  "Prototyping & Testing": {
-  "desc": "Launching iterative, localized, and low-stakes operational prototypes to test a system's behavioral response and gather immediate empirical feedback.",
+  "desc": "Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what you learn to decide what to try next.",
   "levels": {
    "Personal": "Tries small, safe-to-fail prototypes — a pop-up, a pilot, a quick test — to learn fast from real feedback rather than over-planning. Treats each attempt as a probe, not a final answer.",
    "Social": "Runs a steady series of experiments, refining each one based on how people actually respond. Builds the discipline of iterating in public and adjusting course.",
@@ -139,7 +139,7 @@ window.__CAPDETAIL = {
   }
  },
  "Cultivating Collaboration": {
-  "desc": "Bringing people together and organizing them into durable structures, then stewarding the spaces where they think, decide, and act — cultivating distributed intelligence, honest dialogue, and shared direction.",
+  "desc": "Learning to host groups well: designing conversations, building trust and shared norms, and facilitating so people can think and work together. Who holds power over the group’s decisions sits with Deciding Together.",
   "levels": {
    "Personal": "Hosts balanced group conversations where quieter voices are heard and the work is genuinely shared. Co-creates norms and agreements that reflect the group's needs.",
    "Social": "Facilitates workshops that help diverse community groups reach real agreement, using participatory methods that make power and decision-making visible. Adapts the process to meet the group where it is.",
@@ -156,8 +156,8 @@ window.__CAPDETAIL = {
    "Systemic": "Guides reconciliation across deeply divided regions, sectors, or interests, helping rebuild trust where it has broken down. Transforms long-standing conflict into shared, generative direction."
   }
  },
- "Telling the Story of Systems Change": {
-  "desc": "Telling the story of a change effort as it unfolds: making the system visible to the people in it, sharing what is being learned, and keeping communities, partners and funders connected to the work.",
+ "Telling Stories of Systems Change": {
+  "desc": "Learning to tell the story of your own change work as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.",
   "levels": {
    "Personal": "Describes a situation you are working on in plain language, including how its parts connect, without reducing it to a single cause or hero. Shares what you are learning, including what did not work.",
    "Social": "Gathers and shares stories with the people involved, so a community can see its own system and progress. Uses lived experience, simple visuals and data together, with consent and care for who tells the story.",
@@ -166,7 +166,7 @@ window.__CAPDETAIL = {
   }
  },
  "Strengthening Ecosystems": {
-  "desc": "Interweaving separate grassroots initiatives, formal institutions, and civil actors into mutually supportive networks that share resources and strategic focus.",
+  "desc": "Learning to weave separate organisations, initiatives and institutions into networks that share resources, learning and strategy, so that the work holds together across a whole field rather than inside one group.",
   "levels": {
    "Personal": "Connects nearby groups to organise shared events or support each other's work. Begins to see the wider ecosystem of actors around an issue.",
    "Social": "Weaves grassroots groups and local hubs into alliances that share resources and strategy. Builds the relationships and trust that hold a network together.",

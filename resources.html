@@ -348,7 +348,7 @@ class Component extends DCLogic {
     this.state = {
       tab: (props && props.defaultTab) || 'library',
       deep: null, capFilter: null,
-      libGroups: {}, libMediums: {}, libSearch: '',
+      libGroups: {}, libMediums: {}, libGS: false, libSearch: '',
       methods: {}, conditions: {}, contextCap: null,
       submitOpen: false, submitDone: false, submitting: false, submitError: null, copied: false
     };
@@ -519,6 +519,7 @@ class Component extends DCLogic {
       if(this.state.capFilter && r.caps.indexOf(this.state.capFilter)<0) return false;
       if(anyG && !r.caps.some(c=>gActive[this._groupOf(c)])) return false;
       if(anyM && !r.types.some(t=>mActive[t])) return false;
+      if(this.state.libGS && !r.globalSouth) return false;
       if(q){ const hay=(r.name+' '+r.desc).toLowerCase(); if(hay.indexOf(q)<0) return false; }
       return true;
     });
@@ -533,6 +534,10 @@ class Component extends DCLogic {
       return { label:m+' ('+(medCounts[m]||0)+')', onToggle:()=>this.toggleObj('libMediums',m),
         style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12px', fontWeight:600, padding:'6px 11px', borderRadius:'18px', cursor:'pointer', border:'1px solid rgba(120,105,75,.35)', background:on?'#8a6a45':'#FCFBF7', color:on?'#fff':'#6b5d45' } };
     });
+    const gsOn=!!this.state.libGS, gsCount=d.resources.filter(r=>r.globalSouth).length;
+    mediumChips.push({ label:'Global South & Indigenous Voices ('+gsCount+')', onToggle:()=>this.setState(s=>({libGS:!s.libGS})),
+      style:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12px', fontWeight:600, padding:'6px 11px', borderRadius:'18px', cursor:'pointer', border:'1px solid rgba(120,105,75,.35)', background:gsOn?'#8a6a45':'#FCFBF7', color:gsOn?'#fff':'#6b5d45' } });
+    mediumChips.sort((a,b)=>a.label.localeCompare(b.label));
     const libList=filtered.slice().sort((a,b)=>{ const f=(b.featured?1:0)-(a.featured?1:0); return f!==0?f:(a.name||'').localeCompare(b.name||''); }).map(r=>this._mkRes(r));
     const capCounts={}; d.resources.forEach(r=>(r.caps||[]).forEach(c=>{ capCounts[c]=(capCounts[c]||0)+1; }));
     const capGroups=['teal','green','coral'].map(g=>({ label:(meta[g]||{}).name||g, caps:d.capacities.filter(c=>c.group===g).map(c=>{ const n=capCounts[c.label]||0; return {label:c.label, optLabel:c.label+'  ('+n+')', count:n}; }) }));
@@ -577,7 +582,7 @@ class Component extends DCLogic {
       // library
       libSearch:this.state.libSearch,
       onSearch:(e)=>this.setState({libSearch:e.target.value}),
-      clearFilters:()=>this.setState({libGroups:{},libMediums:{},libSearch:'',capFilter:null}),
+      clearFilters:()=>this.setState({libGroups:{},libMediums:{},libGS:false,libSearch:'',capFilter:null}),
       capFilterActive:!!this.state.capFilter, capFilterLabel:this.state.capFilter||'', capFilterColor:this.state.capFilter?cols[this._groupOf(this.state.capFilter)].accent:'#8a6a45', clearCapFilter:()=>this.setState({capFilter:null}),
       clearStyle:{ fontFamily:"'PT Sans',sans-serif", fontSize:'12.5px', fontWeight:700, padding:'9px 14px', borderRadius:'9px', border:'1px solid rgba(120,105,75,.32)', background:'transparent', color:'#8a6a45', cursor:'pointer' },
       groupChips, mediumChips, libList, capGroups,

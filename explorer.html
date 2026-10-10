@@ -47,7 +47,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>try{if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}catch(e){}</script>
-<script>try{if(location.search.indexOf('embed')>=0||window.top!==window.self)document.documentElement.setAttribute('data-embed','1');if(/[?&]inline=1/.test(location.search))document.documentElement.setAttribute('data-inline','1');}catch(e){}</script>
+<script>try{if(/[?&]embed=1/.test(location.search))document.documentElement.setAttribute('data-embed','1');if(/[?&]inline=1/.test(location.search))document.documentElement.setAttribute('data-inline','1');}catch(e){}</script>
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -146,9 +146,10 @@
 
     <!-- INTRO -->
     <div class="gm-noprint" style="margin-bottom:24px">
-      <div style="font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#a8823a;margin-bottom:12px">✦ AI GUIDE</div>
+      
       <h1 class="ex-h1" style="font-family:'Newsreader',serif;font-weight:500;font-size:44px;line-height:1.06;color:#233029;margin:0 0 12px">Get unstuck!</h1>
-      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:64ch">Describe the situation you are working on.&nbsp; As we talk, a living map builds alongside — where you are on the <strong style="font-weight: 700; color: rgb(70, 81, 74);">route</strong>, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">learning areas</strong> that matter most, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">practical next steps</strong> to take, and a <strong style="font-weight: 700; color: rgb(70, 81, 74);" data-cc-id="cc-2">resource</strong> to begin each one.</p>
+      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0 0 12px;max-width:64ch;text-wrap:pretty">Describe the situation you are working on. As we talk, a living map builds below: where you are on <span style="color: rgb(70, 81, 74);">the</span><strong style="font-weight: 700; color: rgb(70, 81, 74);"> route</strong>, the <strong style="font-weight: 700; color: rgb(70, 81, 74);">learning areas</strong> that matter most, some&nbsp;<strong style="font-weight: 700; color: rgb(70, 81, 74);">practical next steps</strong>&nbsp;you could take, and a <strong style="font-weight: 700; color: rgb(70, 81, 74);">resource</strong> to start deepening your capacity in that area.</p>
+      <p style="font-size:16px;line-height:1.55;color:#54655c;margin:0;max-width:64ch;text-wrap:pretty">This AI Guide is intended to help you get to the right resources. It is by no means a substitute for humans, or a group of humans, with whom you will build relationships to think through and act on problems. The biases inherent in LLMs steer only towards certain solutions. We have done our best to instruct it to reduce that bias.</p>
     </div>
 
     <div class="gm-grid" style="display:grid;grid-template-columns:1fr;gap:20px;align-items:start">
@@ -697,7 +698,7 @@ class Component extends DCLogic {
     return null;
   }
   async _aiTurn(chatMsgs){
-    const raw=await this._complete({ model:'claude-sonnet-4-5', max_tokens:4000, system:this._systemPrompt(), messages:chatMsgs });
+    const raw=await this._complete({ model:'sonnet', max_tokens:4000, system:this._systemPrompt(), messages:chatMsgs });
     let txt=(raw||'').trim();
     const a=txt.indexOf('{'), b=txt.lastIndexOf('}');
     if(a>=0&&b>a) txt=txt.slice(a,b+1);
@@ -854,7 +855,7 @@ class Component extends DCLogic {
     }
     const sys = "You are a systems-change librarian. Given someone's situation, name up to 3 REAL, well-known real-world cases (a concrete initiative, organisation, programme, movement, city or regional project, cooperative, campaign, experiment, policy, or a documented body of work that genuinely exists and that you are confident about) whose experience offers a transferable lesson. Cast a WIDE net beyond any curated library. Return exactly three: the first two bioregionally close to the person's situation (same bioregion/region/country if a place is named or implied), and the third the strongest match from anywhere in the world. Keep the three VARIED (different contexts or places). ACCURACY IS CRITICAL: only include an example if you are sure it is real and relevant; never invent one, and do NOT state specific locations, dates or figures unless you are certain. If you cannot think of a verified example, return an empty array []. Keep 'org' short. Do NOT include URLs. "+(exclude.length?("Avoid duplicating these specific resources the person already has: "+exclude.join('; ')+". "):"")+"Return STRICT JSON ONLY (no prose, no code fences): an array like [{\"title\": short case name, \"org\": organisation (short, only if certain), \"why\": one sentence on the practical lesson for this person}].";
     let raw;
-    try{ raw = await this._complete({ model:'claude-sonnet-4-5', max_tokens:700, system:sys, messages:[{ role:'user', content:context.slice(0,6000) }] }); }
+    try{ raw = await this._complete({ model:'sonnet', max_tokens:700, system:sys, messages:[{ role:'user', content:context.slice(0,6000) }] }); }
     catch(e){ return []; }
     let t=(raw||'').trim(); const a=t.indexOf('['), b=t.lastIndexOf(']'); if(a>=0&&b>a) t=t.slice(a,b+1);
     let arr; try{ arr=JSON.parse(t); }catch(e){ return []; }
@@ -1183,7 +1184,7 @@ class Component extends DCLogic {
       hasError: !!st.error, errorMsg: st.error||'',
       onSend: ()=>{ const el=document.getElementById('gm-input'); this._send(el?el.value:''); },
       needsGate: !st.gateEmail && !this._demo,
-      showClose: !this._demo,
+      showClose: false,
       onCloseGuide: ()=>this._requestClose(),
       gateErr: st.gateErr||'',
       onGateKey: (e)=>{ if(e.key==='Enter'){ e.preventDefault(); this._submitGate(); } },

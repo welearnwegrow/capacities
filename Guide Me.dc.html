@@ -64,7 +64,7 @@ class Component extends DCLogic {
   componentWillUnmount(){ document.removeEventListener('keydown', this._esc); window.removeEventListener('message', this._msg); window.removeEventListener('gm-open', this._openEv); clearTimeout(this._closeTimer); this._finishClose(); }
   _finishClose(){ clearTimeout(this._closeTimer); this._closing=false; this.setState({ open:false }); try{ document.body.style.overflow=''; }catch(e){} }
   _set(v){
-    if(v){ this.setState({ open:true }); try{ document.body.style.overflow='hidden'; }catch(e){} return; }
+    if(v){ location.href = /\.dc\.html$/.test(location.pathname) ? 'explorer.dc.html' : 'explorer.html'; return; }
     // Closing: hand off to the frame (saves the log, may show feedback). Wait for
     // its gm-dismiss; a short safety timer covers an old/cached frame that can't reply.
     try{ var f=document.getElementById('gm-frame'); if(f && f.contentWindow) f.contentWindow.postMessage({ type:'gm-close' }, '*'); }catch(e){}

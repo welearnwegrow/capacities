@@ -92,7 +92,7 @@
   }
 </style>
 <script src="./analytics.js"></script>
-<script src="visitor.js?v=20261006"></script>
+<script src="visitor.js?v=20261016"></script>
 </helmet>
 
 <div class="gm-page" style="min-height:100vh;font-family:'PT Sans',system-ui,sans-serif;color:#2c3a33;background:radial-gradient(760px 560px at 22% 8%, rgba(201,164,79,.20), transparent 66%), radial-gradient(720px 560px at 88% 92%, rgba(176,130,47,.13), transparent 68%), linear-gradient(180deg,#f8f4ea 0%,#f1ead9 100%)">
@@ -1008,7 +1008,7 @@ class Component extends DCLogic {
   // ---------- session identity + analytics helpers ----------
   _uuid(){ try{ if(window.crypto && crypto.randomUUID) return crypto.randomUUID(); }catch(e){} return 'x-'+Date.now().toString(16)+'-'+Math.random().toString(16).slice(2); }
   _sessionId(){ if(!this._sid) this._sid=this._uuid(); return this._sid; }
-  _visitorId(){ try{ let v=sessionStorage.getItem('gm_visitor'); if(!v){ v=this._uuid(); sessionStorage.setItem('gm_visitor', v); } return v; }catch(e){ return ''; } }
+  _visitorId(){ try{ if(window.iocVisitorId) return window.iocVisitorId(); let v=sessionStorage.getItem('gm_visitor'); if(!v){ v=this._uuid(); sessionStorage.setItem('gm_visitor', v); } return v; }catch(e){ return ''; } }
   _entryPoint(){
     try{ const p=new URLSearchParams(location.search).get('from'); if(p) return String(p).slice(0,120); }catch(e){}
     try{ if(document.referrer){ const h=new URL(document.referrer).host; if(h && h!==location.host) return h; } }catch(e){}

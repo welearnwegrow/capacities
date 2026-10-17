@@ -2233,12 +2233,12 @@ window.__RESEARCH = {
  ],
  "groupMeta": {
   "teal": {
-   "name": "Contextual Awareness",
+   "name": "Personal Grounding",
    "sub": "Self-awareness & worldview"
   },
   "green": {
-   "name": "Collective Design",
-   "sub": "Collective Design"
+   "name": "Collective Strategy",
+   "sub": "Collective Strategy"
   },
   "coral": {
    "name": "Systemic Action",

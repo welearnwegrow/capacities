@@ -1,5 +1,5 @@
 /* Visitor sign-in. Every browser gets a Visitor ID on arrival; all logs to Notion
-   carry it. After 2 minutes of active use the "Keep going" form asks for name +
+   carry it. After 3 minutes of active use the "Keep going" form asks for name +
    email (no way to dismiss). On submit, /identify fills the name and email into
    every earlier row with that Visitor ID. Details are reused across the site. */
 (function(){
@@ -17,7 +17,7 @@
     }catch(err){}
   }
   window.iocVisitor=get;
-  var VID='ioc-vid', ACT='ioc-active-ms', LIMIT=120000;
+  var VID='ioc-vid', ACT='ioc-active-ms', LIMIT=180000;
   function uuid(){ try{ if(window.crypto&&crypto.randomUUID) return crypto.randomUUID(); }catch(e){} return 'v-'+Date.now().toString(16)+'-'+Math.random().toString(16).slice(2); }
   function vid(){ try{ var x=localStorage.getItem(VID); if(!x){ x=uuid(); localStorage.setItem(VID,x); } return x; }catch(e){ return ''; } }
   window.iocVisitorId=vid;
@@ -57,7 +57,9 @@
   // Prefill known name/email fields wherever they appear
   var FIELDS={'ioc-sr-name':'n','ioc-sr-email':'e','ioc-eg-name':'n','ioc-eg-email':'e','gm-fb-email':'e','gm-gate-email':'e'};
   function fill(){
-    var v=get(); if(!v) return;
+    var v=get(), who=document.getElementById('ioc-eg-who');
+    if(who) who.style.display=v?'none':'flex';
+    if(!v) return;
     for(var id in FIELDS){ var el=document.getElementById(id); if(el&&!el.value&&!el.__iocFilled){ el.value=v[FIELDS[id]]||''; el.__iocFilled=true; } }
   }
 
@@ -71,7 +73,7 @@
     ov.innerHTML='<form style="width:100%;max-width:440px;background:#fbf8f1;border:1px solid rgba(176,130,47,.35);border-radius:20px;padding:30px 28px 24px;box-shadow:0 24px 60px rgba(20,30,25,.3);font-family:PT Sans,sans-serif;display:flex;flex-direction:column;gap:14px">'+
       '<div style="display:flex;align-items:center;gap:10px"><img src="favicon.png" alt="" style="width:34px;height:34px"><span style="font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8a7a4a">Systems Change Learning Guide</span></div>'+
       '<div style="font-family:Newsreader,serif;font-size:30px;line-height:1.1;color:#1f3a36">Keep going</div>'+
-      '<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a5752">You\'ve been exploring for a couple of minutes. This guide is free and open to anyone learning to change complex systems. To keep using it, please introduce yourself. This browser will remember you, and what you\'ve done here so far will be saved under your name.</p>'+
+      '<p style="margin:0;font-size:14.5px;line-height:1.6;color:#4a5752">You\'ve been exploring for a few minutes. This guide is free and open to anyone learning to change complex systems. To keep using it, please introduce yourself. This browser will remember you, and what you\'ve done here so far will be saved under your name.</p>'+
       '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#46514a">Name<input name="n" required autocomplete="name" style="'+inp+'"></label>'+
       '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#46514a">Email<input name="e" type="email" required autocomplete="email" style="'+inp+'"></label>'+
       '<label style="display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#46514a"><span>Who sent you here? <span style="font-weight:400;color:#7a8a83">(optional)</span></span><input name="r" placeholder="A person, organization or link" style="'+inp+'"></label>'+
@@ -89,8 +91,6 @@
       set(n,e); log(n,e,r,u); identify(n,e,r,u);
       if(window.track){ try{ window.track('enter_site'); }catch(err){} }
       ov.remove(); fill();
-      try{ document.querySelectorAll('iframe[src*="explorer"]').forEach(function(fr){ fr.src=fr.src; }); }catch(err){}
-      if(document.getElementById('gm-gate-email')) location.reload();
     });
   }
 

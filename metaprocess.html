@@ -61,11 +61,16 @@
   .o-needle{transform-box:view-box;transform-origin:230px 230px;transition:transform .6s cubic-bezier(.2,.7,.3,1)}
   .o-compass{transform-box:fill-box;transform-origin:center}
   .o-bearing{transition:transform .14s ease, box-shadow .14s ease}
-  .o-bearing:hover{transform:translate(-50%,-50%) scale(1.04)}
+  .o-bearing:hover{scale:1.04}
   @media (max-width:860px){
     .o-grid{grid-template-columns:1fr !important;gap:28px !important}
     .o-compass-panel{padding:30px 44px !important}
     .o-compass-wrap{max-width:280px !important}
+  }
+  @media (max-width:520px){
+    .o-compass-panel{padding:28px 12px !important}
+    .o-compass-wrap{max-width:180px !important}
+    .o-bearing{white-space:normal !important;max-width:112px !important;font-size:12px !important;padding:6px 9px !important}
   }
   .ioc-march{animation:iocMarch 1s linear infinite}
   .ioc-march-rev{animation:iocMarchRev 1s linear infinite}
@@ -79,13 +84,39 @@
   <!-- HEADER -->
   <div style="max-width:1100px;margin:0 auto;padding:clamp(30px,6vw,54px) clamp(18px,5vw,30px) 10px">
     <h1 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(34px,7vw,54px);line-height:1.03;letter-spacing:-.01em;margin:0 0 18px;color:#6b5527">Design Canvas</h1>
-    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.7;color:#4a4435;margin:0 0 14px;max-width:80ch">Designing an intervention in a complex system involves starting from what you can sense, trying things at a small scale, watching how the system responds, and adapting. No single intervention moves a system on its own. A new policy without shifts in money, relationships and the stories people tell changes little. Lasting change tends to come from a portfolio of interventions working on several levels, from mindsets and relationships to rules and resources, carried by many people at the same time. Each intervention also teaches you something about the system and where the next one should go. This page holds two tools for that work. The Orientations are the design principles that guide your choices. The Route is the process for moving through the work, with a design canvas for each stage.</p>
+    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.7;color:#4a4435;margin:0 0 14px;max-width:80ch">Designing an intervention in a complex system involves starting from what you can sense, trying things at a small scale, watching how the system responds, and adapting. No single intervention moves a system on its own. A new policy without shifts in money, relationships and the stories people tell changes little. Lasting change tends to come from a portfolio of interventions working on several levels, from mindsets and relationships to rules and resources, carried by many people at the same time. Each intervention also teaches you something about the system and where the next one should go. This page holds two tools for that work. The Route is the process for moving through the work, with a design canvas for each stage. The Orientations are the design principles that guide your choices.</p>
     
     
   </div>
 
+  <!-- ROUTE -->
+  <div id="route" style="max-width:1100px;margin:0 auto;padding:clamp(36px,6vw,60px) clamp(18px,5vw,30px) 6px">
+    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(26px,5vw,34px);line-height:1.08;margin:0 0 12px;color:#6b5527">The Route</h2>
+    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.65;color:#41514a;margin:0;max-width:none">The Route is our meta-process for intervening in complex systems: five phases (Probe, Sense, Design, Adapt, Integrate) that work as a navigation tool, not a checklist. Practitioners often move back and forth between them as the system responds and new insights reshape the problem. The Route also works at different scales of time. A team might move through all five phases in a six-month project, while a movement or institution may take five, ten or more years to do the same. Shorter cycles often sit inside longer ones. Across every scale, systems change tends to build slowly and then shift quickly, so it asks us to hold urgency and patience together, with deadlines elastic enough to absorb what we cannot predict. Tap a stage to open its design canvas, fill it in on screen and download your own copy, or download a blank canvas to print and work through by hand.</p>
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px">
+      <button onClick="{{ downloadAllA4 }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.01em;color:#fff;background:#8a6a2f;border:none;border-radius:22px;padding:11px 22px;cursor:pointer;box-shadow:0 6px 16px rgba(138,106,47,.28)">↓ Save all canvases as PDF</button>
+      <span style="font-family:'PT Sans',sans-serif;font-size:13px;color:#977c45">or open a single stage below</span>
+    </div>
+  </div>
+
+  <!-- DIAGRAM -->
+  <div style="max-width:1180px;margin:14px auto 0;padding:0 clamp(12px,4vw,26px)">
+    <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;max-width:1040px;margin:0 auto 8px">
+      <div style="{{ zoomCtrlStyle }}">
+        <button onClick="{{ zoomOut }}" aria-label="Zoom out" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#46716f;background:rgba(255,255,255,.75);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">−</button>
+        <button onClick="{{ zoomIn }}" aria-label="Zoom in" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#46716f;background:rgba(255,255,255,.75);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">+</button>
+      </div>
+    </div>
+    <div class="mp-mapframe" style="position:relative;width:100%;max-width:1040px;height:660px;margin:0 auto;touch-action:pan-x pan-y">
+      <div class="mp-stage" style="position:absolute;top:0;left:0;width:1040px;height:660px;transform-origin:top left">
+        {{ mapSvg }}
+        {{ mapWaypoints }}
+      </div>
+    </div>
+  </div>
+
   <!-- ORIENTATIONS -->
-  <div id="orientations">
+  <div id="orientations" style="margin-bottom:70px">
   <div style="max-width:1100px;margin:0 auto;padding:clamp(22px,4vw,36px) clamp(18px,5vw,30px) 8px">
     <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(26px,5vw,34px);line-height:1.08;margin:0 0 12px;color:#6b5527">Orientations</h2>
     <p style="font-size:clamp(14.5px,3.6vw,16px);line-height:1.72;color:#4a4435;margin:0;max-width:none">The Orientations are our design principles. They come from global social, cultural, and ecological movements, from people who taught us and communities we hold ourselves accountable to. Use them when you shape any intervention, whether a project, a programme, a partnership or a funding decision, to choose between options and to test what you have made.</p>
@@ -120,31 +151,6 @@
   </div>
   </div>
 
-  <!-- ROUTE -->
-  <div id="route" style="max-width:1100px;margin:0 auto;padding:clamp(36px,6vw,60px) clamp(18px,5vw,30px) 6px">
-    <h2 style="font-family:'Newsreader',serif;font-weight:500;font-size:clamp(26px,5vw,34px);line-height:1.08;margin:0 0 12px;color:#6b5527">The Route</h2>
-    <p style="font-family:'PT Sans',sans-serif;font-size:clamp(14.5px,3.6vw,16px);line-height:1.65;color:#41514a;margin:0;max-width:none">The Route is our meta-process for intervening in complex systems: five phases (Probe, Sense, Design, Adapt, Integrate) that work as a navigation tool, not a checklist. Practitioners often move back and forth between them as the system responds and new insights reshape the problem. The Route also works at different scales of time. A team might move through all five phases in a six-month project, while a movement or institution may take five, ten or more years to do the same. Shorter cycles often sit inside longer ones. Across every scale, systems change tends to build slowly and then shift quickly, so it asks us to hold urgency and patience together, with deadlines elastic enough to absorb what we cannot predict. Tap a stage to open its design canvas, fill it in on screen and download your own copy, or download a blank canvas to print and work through by hand.</p>
-    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:24px">
-      <button onClick="{{ downloadAllA4 }}" style="font-family:'PT Sans',sans-serif;font-size:13.5px;font-weight:700;letter-spacing:.01em;color:#fff;background:#8a6a2f;border:none;border-radius:22px;padding:11px 22px;cursor:pointer;box-shadow:0 6px 16px rgba(138,106,47,.28)">↓ Save all canvases as PDF</button>
-      <span style="font-family:'PT Sans',sans-serif;font-size:13px;color:#977c45">or open a single stage below</span>
-    </div>
-  </div>
-
-  <!-- DIAGRAM -->
-  <div style="max-width:1180px;margin:14px auto 70px;padding:0 clamp(12px,4vw,26px)">
-    <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px;max-width:1040px;margin:0 auto 8px">
-      <div style="{{ zoomCtrlStyle }}">
-        <button onClick="{{ zoomOut }}" aria-label="Zoom out" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#46716f;background:rgba(255,255,255,.75);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">−</button>
-        <button onClick="{{ zoomIn }}" aria-label="Zoom in" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#46716f;background:rgba(255,255,255,.75);border:1px solid rgba(70,90,85,.25);border-radius:9px;cursor:pointer">+</button>
-      </div>
-    </div>
-    <div class="mp-mapframe" style="position:relative;width:100%;max-width:1040px;height:660px;margin:0 auto;touch-action:pan-x pan-y">
-      <div class="mp-stage" style="position:absolute;top:0;left:0;width:1040px;height:660px;transform-origin:top left">
-        {{ mapSvg }}
-        {{ mapWaypoints }}
-      </div>
-    </div>
-  </div>
 
   <dc-import name="SiteFooter" hint-size="100%,300px"></dc-import>
 
@@ -350,14 +356,14 @@ class Component extends DCLogic {
   _defaultBendChord(){ return {"fb-ps":[346,189],"fb-sd":[598,219],"fb-da":[784,478],"fb-id":[475,350]}; }
 
   ORIENTS = [
-    { key:'jrf', principle:"Design for repair and renewal.", questions:["Who bears the cost of this, and who benefits?","Will it leave people and places more able to heal and renew?"], dir:'N', name:'Just & Regenerative Futures', paren:'What we value', pos:{ left:'50%', top:'9%' },
-      body:'Just and regenerative futures are the horizons toward which we orient our collective efforts. This involves the intertwined practices of repair, balance, and right relationship. While justice seeks to confront and transform the structural causes of harm and redistribute power, regeneration focuses on the capacity of social and ecological systems to heal, renew, and evolve. Drawing on Indigenous sovereignty, climate justice, and intergenerational ethics, this value serves as a compass for cultivating the conditions where both human and non-human communities can live with dignity and flourish over the long term.' },
-    { key:'plurality', principle:"Design with many ways of knowing.", questions:["Whose knowledge shaped this?","Whose is missing, and how would it change the design?"], dir:'S', name:'Plurality', paren:'How we know', pos:{ left:'50%', top:'91%' },
-      body:'Plurality is the recognition that many worlds and ways of knowing coexist, and that no single worldview can claim universality. It foregrounds Indigenous, local, land-based, and spiritual knowledge as vital alongside scientific and technical expertise. Informed by decolonial thought, participatory design, and community-led innovation, pluriversality expands whose worlds are made visible and strengthens our collective capacity to navigate complexity.' },
-    { key:'reciprocity', principle:"Give back at least as much as you take.", questions:["What does this ask of people and land?","What returns to them, and when?"], dir:'W', name:'Reciprocity', paren:'How we act', pos:{ left:'3%', top:'50%' },
-      body:'Reciprocity is the practice of mutual exchange and ethical relationship with the living world. It moves beyond extractive logic, calling us to act with care and responsibility so that our interventions restore balance rather than reproduce harm. By acknowledging that human thriving is dependent on the health of the systems we inhabit, reciprocity anchors systems change in humility and the pursuit of the right relationship. Rooted in Indigenous relational ethics, feminist standpoint theory, and reflective practice traditions, it ensures that every action contributes to the vitality of the whole.' },
-    { key:'shared', principle:"Design with, not for.", questions:["Who decides?","Can the people closest to the work change its course?"], dir:'E', name:'Shared Agency', paren:'How we make decisions', pos:{ left:'97%', top:'50%' },
-      body:'Shared agency is the practice of distributing power and decision-making responsibility across a collective to ensure that action is inclusive, adaptive, and rooted in distributed intelligence. It moves away from centralized, top-down control, favoring processes that empower those closest to the work to shape its trajectory. By anchoring decision-making in collaborative governance, consensus-building, and transparency, shared agency ensures that the group remains responsive to changing circumstances and maintains accountability to its members.' }
+    { key:'jrf', principle:"See the whole web of relationships.", questions:["What does this depend on, and what depends on it?","Where will a change here ripple out, to people or places not in the room?"], dir:'N', name:'Interdependence', paren:'How we perceive reality', pos:{ left:'50%', top:'9%' },
+      body:'Interdependence is the recognition that nothing exists on its own. People, communities, economies and ecosystems are held together by relationships, and a change in one place moves through the whole. Perceiving reality this way shifts attention from isolated problems and single causes to the patterns that connect them. Drawing on Indigenous relational worldviews, Buddhist thought, ecology and systems science, this orientation treats our own work as one thread in a larger web.' },
+    { key:'plurality', principle:"Design with many ways of knowing.", questions:["Whose knowledge shaped this?","Whose is missing, and how would it change the design?"], dir:'E', name:'Plurality', paren:'How we know', pos:{ left:'97%', top:'50%' },
+      body:'Plurality is the recognition that many worlds and ways of knowing coexist, and that no single worldview can claim universality. It foregrounds Indigenous, local, land-based, and spiritual knowledge as vital alongside scientific and technical expertise, and works to repair the harm done where some knowledges have been dismissed or erased. Informed by decolonial thought, participatory design, and community-led innovation, pluriversality expands whose worlds are made visible and strengthens our collective capacity to navigate complexity.' },
+    { key:'reciprocity', principle:"Give back at least as much as you take.", questions:["What does this take from people and land, and can it come back?","Who will live with the results of this, seven generations from now?"], dir:'W', name:'Reciprocity', paren:'How we act', pos:{ left:'3%', top:'50%' },
+      body:'Reciprocity is the practice of mutual exchange and ethical relationship with the living world. It moves beyond extractive logic, calling us to act with care and responsibility so that our interventions restore balance rather than reproduce harm. Reciprocity extends across time, compelling us to weigh decisions by their effect on people seven generations from now, and asks for patience with change that outlasts most projects, funding cycles and political terms. Rooted in Buddhist thought, Indigenous relational ethics and intergenerational justice, it keeps today\'s action accountable to those who come after.' },
+    { key:'shared', principle:"Design with, not for.", questions:["Who decides?","Who bears the cost, and can they change its course?"], dir:'S', name:'Shared Power', paren:'How we make decisions', pos:{ left:'50%', top:'91%' },
+      body:'Shared power is the practice of distributing power and decision-making responsibility across a collective, so that action is just, inclusive and adaptive. It moves away from centralized control, confronting the structural causes of injustice and repairing relationships so that those most affected can shape what happens next. By anchoring decision-making in collaborative governance, consensus-building and transparency, shared power keeps the group responsive to changing circumstances and accountable to its members.' }
   ];
   _compass(angle){
     const h = React.createElement;
@@ -386,14 +392,22 @@ class Component extends DCLogic {
     body.push(h('circle', { key:'hub', cx, cy, r:6, fill:'#FBF6EA', stroke:ink, strokeOpacity:.4, strokeWidth:.8 }));
     return h('svg', { viewBox:'0 0 460 460', style:{ position:'absolute', inset:0, width:'100%', height:'100%', overflow:'visible' } }, defs, h('g',{className:'o-compass',opacity:.95}, body));
   }
+  // Each label sits the same distance from the dial edge (dial radius = 120/460 of the wrap).
+  _bearingPos(dir){
+    const edge='calc(76.1% + 11px)';
+    if(dir==='N') return { left:'50%', bottom:edge, transform:'translateX(-50%)' };
+    if(dir==='S') return { left:'50%', top:edge, transform:'translateX(-50%)' };
+    if(dir==='W') return { right:edge, top:'50%', transform:'translateY(-50%)' };
+    return { left:edge, top:'50%', transform:'translateY(-50%)' };
+  }
   _orientVals(){
     const sel = this.ORIENTS.find(o=>o.key===this.state.sel) || this.ORIENTS[0];
-    const DEG = { jrf:0, shared:90, plurality:180, reciprocity:270 };
+    const DEG = { jrf:0, plurality:90, shared:180, reciprocity:270 };
     const angle = DEG[this.state.sel] != null ? DEG[this.state.sel] : 0;
     const orients = this.ORIENTS.map(o=>{
       const active = o.key===this.state.sel;
-      return { name:o.name, onSelect: ()=>this.setState({ sel:o.key }),
-        btnStyle: { position:'absolute', left:o.pos.left, top:o.pos.top, transform:'translate(-50%,-50%)', maxWidth:'120px', textAlign:'center', fontFamily:"'PT Serif',serif", fontWeight:700, fontSize:'13px', lineHeight:1.15, cursor:'pointer', padding:'8px 13px', borderRadius:'11px', border:'1px solid '+(active?'#8a6a2f':'rgba(176,130,47,.5)'), background:active?'#8a6a2f':'#fffdf8', color:active?'#fff':'#6B5527', boxShadow:active?'0 6px 16px rgba(120,95,40,.28)':'0 2px 7px rgba(120,95,40,.12)', zIndex:3 } };
+      return { name:o.label||o.name, onSelect: ()=>this.setState({ sel:o.key }),
+        btnStyle: Object.assign({ position:'absolute', whiteSpace:'pre' }, this._bearingPos(o.dir), { maxWidth:'140px', textAlign:'center', fontFamily:"'PT Serif',serif", fontWeight:700, fontSize:'12.5px', lineHeight:1.15, cursor:'pointer', padding:'7px 11px', borderRadius:'11px', border:'1px solid '+(active?'#8a6a2f':'rgba(176,130,47,.5)'), background:active?'#8a6a2f':'#fffdf8', color:active?'#fff':'#6B5527', boxShadow:active?'0 6px 16px rgba(120,95,40,.28)':'0 2px 7px rgba(120,95,40,.12)', zIndex:3 }) };
     });
     return { compassSvg: this._compass(angle), orients, sel: { name:sel.name, paren:sel.paren, body:sel.body, principle:sel.principle, questions:sel.questions || [] } };
   }
@@ -452,7 +466,7 @@ class Component extends DCLogic {
   // ---------- drag ----------
 
   // ---------- nav ----------
-  _open(i){ if(window.track) window.track('open_stage', {stage: this.STAGES[i] && this.STAGES[i].name}); this.setState({active:i}, ()=>this._fitOverlay()); }
+  _open(i){ const nm=this.STAGES[i]&&this.STAGES[i].name; if(window.track) window.track('open_stage', {stage: nm}); this._seen=this._seen||{}; if(nm&&!this._seen[nm]&&window.iocLogAction){ this._seen[nm]=1; window.iocLogAction('design-canvas','Opened '+nm+' canvas'); } this.setState({active:i}, ()=>this._fitOverlay()); }
   closeStage(){ this.setState({active:null}); }
   prevStage(){ this.setState(s=>({active:(s.active+this.STAGES.length-1)%this.STAGES.length}), ()=>this._fitOverlay()); }
   nextStage(){ this.setState(s=>({active:(s.active+1)%this.STAGES.length}), ()=>this._fitOverlay()); }

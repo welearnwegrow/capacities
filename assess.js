@@ -1,6 +1,6 @@
 (function(){
   var KEY='ioc-assess-v1';
-  var BANDS=[{name:'Contextual awareness',color:'#46716f'},{name:'Collective Strategy',color:'#5b6733'},{name:'Systemic Intervention',color:'#a8542d'}];
+  var BANDS=[{name:'Personal grounding',color:'#46716f'},{name:'Collective Strategy',color:'#5b6733'},{name:'Systemic Action',color:'#a8542d'}];
   var LV=['','Beginner (0-2)','Developing (2-5)','Effective (5-10)','Influential (10+)'];
   var levels={}, meta={}, assessOn=false, cellMap={};
   try{ levels=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ levels={}; }
@@ -76,7 +76,7 @@
     function logStart(name,email){
       try{
         var base=window.NOTION_CONNECTOR_URL; if(!base) return;
-        fetch(base.replace(/\/$/,'')+'/log-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:name,email:email,source:'self-assessment',comment:'Started the self-assessment'}),keepalive:true}).catch(function(){});
+        fetch(base.replace(/\/$/,'')+'/log-feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:name,email:email||'',source:'self-assessment',comment:'Started the self-assessment'}),keepalive:true}).catch(function(){});
       }catch(e){}
     }
     function openIntro(){
@@ -103,7 +103,7 @@
         logStart(n,e); document.querySelectorAll('#ioc-assess-intro').forEach(function(x){ x.remove(); }); startAssess(); });
     }
     if(btn.__iocBound) return; btn.__iocBound=true;
-    btn.addEventListener('click',function(){ var who=null; try{ who=JSON.parse(localStorage.getItem('ioc-assess-who')||'null'); }catch(e){} if(who&&who.e){ startAssess(); } else { openIntro(); } });
+    btn.addEventListener('click',function(){ var w=(window.iocVisitor&&window.iocVisitor())||{}; logStart(w.n||'Anonymous visitor',w.e||''); startAssess(); });
     document.getElementById('ioc-assess-gen').addEventListener('click',generate);
     document.getElementById('ioc-assess-close').addEventListener('click',function(){ document.getElementById('ioc-assess-overlay').style.display='none'; });
     document.getElementById('ioc-assess-reset').addEventListener('click',function(){ levels={}; save(); assessOn=false; Object.keys(cellMap).forEach(function(n){ cellMap[n].forEach(function(c){ paint(c,false); c.style.cursor='default'; }); }); document.getElementById('ioc-assess-fab').style.display='none'; document.getElementById('ioc-assess-overlay').style.display='none'; btn.style.display='inline-block'; document.getElementById('ioc-assess-results').innerHTML=''; });

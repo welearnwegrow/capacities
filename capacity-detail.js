@@ -129,7 +129,7 @@ window.__CAPDETAIL = {
    "Systemic": "Overhauls how large funders and institutions judge success, shifting from rigid targets toward measures of genuine systems change. Reshapes what a whole field treats as evidence of impact."
   }
  },
- "Prototyping & Testing": {
+ "Prototyping & Innovating": {
   "desc": "Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what is learned to decide what to try next.",
   "levels": {
    "Personal": "Tries small, safe-to-fail prototypes — a pop-up, a pilot, a quick test — to learn fast from real feedback rather than over-planning. Treats each attempt as a probe, not a final answer.",
@@ -156,7 +156,7 @@ window.__CAPDETAIL = {
    "Systemic": "Guides reconciliation across deeply divided regions, sectors, or interests, helping rebuild trust where it has broken down. Transforms long-standing conflict into shared, generative direction."
   }
  },
- "Telling Stories of Systems Change": {
+ "Telling Stories for Systems Change": {
   "desc": "Learning to tell the story of a change effort as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.",
   "levels": {
    "Personal": "Describes a situation being worked on in plain language, including how its parts connect, without reducing it to a single cause or hero. Shares what is being learned, including what did not work.",

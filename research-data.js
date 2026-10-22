@@ -58,7 +58,7 @@ window.__RESEARCH = {
    "group": "coral"
   },
   {
-   "label": "Prototyping & Testing",
+   "label": "Prototyping & Innovating",
    "group": "coral"
   },
   {
@@ -70,7 +70,7 @@ window.__RESEARCH = {
    "group": "coral"
   },
   {
-   "label": "Telling Stories of Systems Change",
+   "label": "Telling Stories for Systems Change",
    "group": "coral"
   },
   {
@@ -102,7 +102,7 @@ window.__RESEARCH = {
   {
    "name": "Acumen Academy",
    "caps": [
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "Acumen Academy offers a diverse catalog of courses designed to cultivate social entrepreneurship and leadership skills. Their curriculum focuses on the \"human side\" of systems change, teaching participants how to navigate complex power dynamics, build sustainable business models, and manage the emotional labor inherent in social transformation. This is essential for systems change because it provides the practical, pedagogical, and tactical training needed to turn abstract visions of a better future into viable, impactful, and community-centered realities.",
    "types": [
@@ -171,7 +171,7 @@ window.__RESEARCH = {
   {
    "name": "Ashoka Case Study Library",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Developing Leaders",
      "Engaging Capital"
     ],
@@ -489,7 +489,7 @@ window.__RESEARCH = {
    "name": "Data-Powered Positive Deviance",
    "caps": [
      "Adaptive Monitoring Evaluation & Learning",
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "This handbook details the Data-Powered Positive Deviance (DPPD) method, which uses big data to identify outliers who are succeeding despite systemic constraints. It provides a rigorous step-by-step process for extracting these \"uncommon practices\" and scaling them to create effective, community-led interventions.",
    "types": [
@@ -572,7 +572,7 @@ window.__RESEARCH = {
   {
    "name": "Design Thinking Toolkit",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Deciding Together",
      "Designing for Complexity"
     ],
@@ -597,7 +597,7 @@ window.__RESEARCH = {
   {
    "name": "Design. Think. Make. Break. Repeat.",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Deciding Together",
      "Designing for Complexity"
     ],
@@ -731,7 +731,7 @@ window.__RESEARCH = {
   {
    "name": "Gelephu Mindfulness City (GMC)",
    "caps": [
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "Gelephu Mindfulness City (GMC) is a planned Special Administrative Region in Bhutan, envisioned as a carbon-negative economic hub that integrates spirituality, sustainability, and modern technology. Rooted in Bhutan’s philosophy of Gross National Happiness, it aims to serve as a global sanctuary for wellness, finance, and green innovation. By leveraging bespoke, business-friendly legal frameworks and renewable infrastructure, it seeks to create a regenerative urban model that balances traditional Bhutanese values with the requirements of a 21st-century economy.",
    "types": [
@@ -743,7 +743,7 @@ window.__RESEARCH = {
   {
    "name": "Global Changemakers",
    "caps": [
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "Global Changemakers is a Swiss-based international youth organization that supports young leaders in driving community-led social impact. Their grant model is unique: rather than a generic application, funding is unlocked through participation in their specialized training programs, such as the \"Project Management for Changemakers\" course. By combining seed funding with capacity building, mentorship, and a global alumni network, they ensure that youth-led initiatives are technically sound, sustainable, and strategically aligned with systemic change goals.",
    "types": [
@@ -969,7 +969,7 @@ window.__RESEARCH = {
   {
    "name": "No One Is Self-Made",
    "caps": [
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "No One Is Self-Made by Dr. Key Hallmon challenges the hyper-individualistic ethos of success by highlighting the critical, often invisible role of community support and social capital. Through the lens of \"proximity-based leadership,\" the book argues that true progress depends on intentional connection, mentorship, and the collective resources of one's network. For systems change, this work underscores that building resilient, equitable infrastructures requires moving beyond individual ambition to prioritize the relational networks and shared agency that sustain transformative collective action.",
    "types": [
@@ -1015,7 +1015,7 @@ window.__RESEARCH = {
   {
    "name": "PANORAMA: Solutions for a Healthy Planet",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Designing for Complexity"
     ],
    "desc": "Real change depends on learning from what already works. PANORAMA brings together proven, on-the-ground solutions for biodiversity, climate, and sustainable development—turning experience into shared knowledge. By breaking success into practical building blocks, it empowers practitioners worldwide to adapt, replicate, and scale impact for a healthier planet.",
@@ -1229,7 +1229,7 @@ window.__RESEARCH = {
   {
    "name": "Skoll Centre",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Engaging Capital",
      "Thinking in Systems"
     ],
@@ -1279,7 +1279,7 @@ window.__RESEARCH = {
    "name": "Solarpunk List",
    "caps": [
      "Designing for Complexity",
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "The Solarpunk List serves as a curated directory of literature, art, and projects that embody a hopeful, regenerative future. By emphasizing sustainability, community-driven technology, and harmony with the natural world, it offers a cultural counter-narrative to dystopian storytelling. This resource is useful for systems change as it provides the imaginative scaffolding necessary for \"future-making,\" helping practitioners visualize tangible alternatives to extractive systems and grounding their design work in a positive, achievable, and decentralized vision of change.",
    "types": [
@@ -1364,7 +1364,7 @@ window.__RESEARCH = {
    "name": "System Change: A Guidebook for Adopting Portfolio Approaches",
    "caps": [
      "Thinking in Systems",
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "This UNDP guidebook presents a practical methodology for adopting portfolio approaches to address complex development challenges. Grounded in applied learning from across the Asia-Pacific region, it offers practitioners a step-by-step roadmap to move away from isolated project interventions and toward coordinated portfolios of mutually reinforcing actions. It provides actionable guidance on navigating ambiguity, mapping systemic interdependencies, and managing continuous learning cycles to achieve transformative scale.",
    "types": [
@@ -1563,7 +1563,7 @@ window.__RESEARCH = {
   {
    "name": "The Commoner's Catalog for Changemaking",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Reshaping Economies & States"
     ],
    "desc": "Explore the world of commoning, where communities steward everything from water to finance. This catalog provides a practical blueprint for self-reliance, showing how grassroots collaboration can reclaim control over our resources and culture. It’s an essential guide for building alternative, regenerative social futures",
@@ -1646,7 +1646,7 @@ window.__RESEARCH = {
   {
    "name": "The Earth Prize",
    "caps": [
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "The Earth Prize is a global competition that empowers students to develop and launch environmental sustainability solutions. By providing a platform for youth-led innovation, it bridges the gap between educational theory and real-world impact. It is useful for systems change because it treats young people as active agents of transformation, fostering entrepreneurial skills and critical thinking needed to address complex ecological challenges and scale regenerative ideas within their local and global communities.",
    "types": [
@@ -1692,7 +1692,7 @@ window.__RESEARCH = {
    "name": "The Fifth Discipline: The Art & Practice of the Learning Organization",
    "caps": [
      "Thinking in Systems",
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Developing Leaders"
     ],
    "desc": "Peter Senge's foundational management book introduces systems thinking as the vital \"fifth discipline\" required to build highly adaptive, collaborative learning organizations.",
@@ -1716,7 +1716,7 @@ window.__RESEARCH = {
   {
    "name": "The Global Social Leaders Competition",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Engaging Capital"
     ],
    "desc": "The Global Social Leaders competition empowers youth to bridge the gap between global policy and local action by tasking students with designing projects linked to the UN Sustainable Development Goals. Through a structured four-phase journey—planning, action, awareness, and evaluation—participants develop leadership, teamwork, and problem-solving competencies. This framework is vital for systems change, as it treats young people as active agents, providing them with the practical experience needed to prototype and implement tangible solutions.",
@@ -1786,7 +1786,7 @@ window.__RESEARCH = {
   {
    "name": "The Oxford Climate Change Challenge",
    "caps": [
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "The Oxford Climate Change Challenge at the Saïd Business School focuses on practical application in addressing the climate crisis through business and policy leadership. It bridges rigorous academic research with tangible systemic interventions, encouraging participants to analyze complex, interconnected environmental issues within global economic frameworks. By requiring an integration of management strategy and ecological urgency, the program equips leaders to transition away from traditional, extractive models toward the design and scaling of sustainable, climate-resilient enterprise.",
    "types": [
@@ -1835,7 +1835,7 @@ window.__RESEARCH = {
    "name": "The Students’ Educational and Cultural Movement of Ladakh (SECMOL)",
    "caps": [
      "Strengthening Ecosystems",
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Honoring Many Ways of Knowing"
     ],
    "desc": "SECMOL (Students' Educational and Cultural Movement of Ladakh) is a pioneering educational collective that addresses the systemic mismatch between conventional schooling and the realities of life in the high-altitude Ladakh region. Founded to empower local youth, it emphasizes experiential learning, cultural preservation, and ecological sustainability. By integrating traditional wisdom with modern knowledge, SECMOL creates a \"living school\" model where students directly manage their campus, fostering self-reliance, community governance, and a profound sense of regional identity.",
@@ -1894,7 +1894,7 @@ window.__RESEARCH = {
   {
    "name": "The Zayed Sustainability Prize",
    "caps": [
-     "Prototyping & Testing",
+     "Prototyping & Innovating",
      "Engaging Capital"
     ],
    "desc": "The Zayed Sustainability Prize is a prestigious global award that honors the legacy of Sheikh Zayed bin Sultan Al Nahyan, the founding father of the UAE. It recognizes and funds innovative, impactful, and inspiring solutions across six key categories: Health, Food, Energy, Water, Climate Action, and Global High Schools. By supporting small-to-medium enterprises, nonprofits, and schools, the prize accelerates tangible progress toward a more sustainable and equitable world for communities globally.",
@@ -2058,7 +2058,7 @@ window.__RESEARCH = {
   {
    "name": "Unstuck Systems",
    "caps": [
-     "Prototyping & Testing"
+     "Prototyping & Innovating"
     ],
    "desc": "The \"Deep Demos\" portfolio by Unstuck Systems showcases high-leverage, practical experiments designed to prototype systemic alternatives. Rather than relying on theoretical abstractions, these demonstrations focus on \"learning-by-doing\" within real-world contexts, testing how new collaborative structures can bypass bureaucratic inertia. By documenting the successes and failures of these pilots, this resource is invaluable for systems change as it provides evidence-based blueprints for scaling regenerative interventions and managing the transition from legacy systems to more adaptive, distributed models.",
    "types": [

@@ -469,13 +469,13 @@ class Component extends DCLogic {
       {label:'Engaging Capital',x:800,y:809,r:52,w:112,group:'green',seed:321},
       {label:'Deciding Together',x:623,y:791,r:48,w:108,group:'green',seed:342},
       {label:'Designing for Complexity',x:750,y:668,r:46,w:106,group:'green',seed:328},
-      {label:'Prototyping & Testing',x:316,y:818,r:46,w:104,group:'coral',seed:500},
+      {label:'Prototyping & Innovating',x:316,y:818,r:46,w:104,group:'coral',seed:500},
       {label:'Transforming Conflict',x:715,y:1069,r:46,w:104,group:'coral',seed:514},
       {label:'Advocating for Policy Change',x:490,y:1097,r:48,w:106,group:'coral',seed:542},
       {label:'Developing Leaders',x:584,y:980,r:46,w:104,group:'coral',seed:528},
       {label:'Adaptive Monitoring Evaluation & Learning',x:475,y:880,r:50,w:116,group:'coral',seed:349},
       {label:'Strengthening Ecosystems',x:248,y:1071,r:42,w:96,group:'coral',seed:535},
-      {label:'Telling Stories of Systems Change',x:380,y:987,r:50,w:116,group:'coral',seed:521}
+      {label:'Telling Stories for Systems Change',x:380,y:987,r:50,w:116,group:'coral',seed:521}
     ]
   };
 
@@ -800,10 +800,10 @@ class Component extends DCLogic {
       'Deciding Together': { g:'green', t:'Deciding Together', s:'Collective Strategy', b:'Learning to share real decision-making power with the communities most affected by a problem, so they help set priorities, shape the research, and decide how resources are used. Participatory research and shared governance are ways of doing this.' },
       'Adaptive Monitoring Evaluation & Learning': { g:'coral', t:'Adaptive Monitoring Evaluation & Learning', s:'Systemic Action', b:'Tracking what is changing through data and people’s stories, spotting positive deviance, and using what is learned to adjust plans, budgets and timelines as the system responds.' },
       // ===== systemic capacities (coral) =====
-      'Prototyping & Testing': { g:'coral', t:'Prototyping & Testing', s:'Systemic Action', b:"Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what is learned to decide what to try next." },
+      'Prototyping & Innovating': { g:'coral', t:'Prototyping & Innovating', s:'Systemic Action', b:"Learning to run small, safe-to-fail experiments in a real system, watch how it responds, and use what is learned to decide what to try next." },
       'Cultivating Collaboration': { g:'green', t:'Cultivating Collaboration', s:'Collective Strategy', b:'Learning to host groups well: designing conversations, building trust and shared norms, and facilitating so people can think and work together. Who holds power over the group’s decisions sits with Deciding Together.' },
       'Transforming Conflict': { g:'coral', t:'Transforming Conflict', s:'Systemic Action', b:'Learning to work with conflict inside groups and alliances, using approaches such as nonviolent communication and deep democracy, so that tension becomes a source of understanding and trust instead of a reason to split.' },
-      'Telling Stories of Systems Change': { g:'coral', t:'Telling Stories of Systems Change', s:'Systemic Action', b:'Learning to tell the story of a change effort as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.' },
+      'Telling Stories for Systems Change': { g:'coral', t:'Telling Stories for Systems Change', s:'Systemic Action', b:'Learning to tell the story of a change effort as it unfolds: making the system visible to the people in it, sharing evidence and what is being learned, and keeping communities, partners and funders connected. Shifting Narratives works on a culture’s stories; this works on the story of one effort.' },
       'Developing Leaders': { g:'coral', t:'Developing Leaders', s:'Systemic Action', b:'Learning to lead in ways that share power: growing leadership in others, holding space for emergence, and building the self-awareness, presence and practices that systems leadership needs.' },
       'Strengthening Ecosystems': { g:'coral', t:'Strengthening Ecosystems', s:'Systemic Action', b:'Learning to weave separate organisations, initiatives and institutions into networks that share resources, learning and strategy, so that the work holds together across a whole field rather than inside one group.' },
       'Advocating for Policy Change': { g:'coral', t:'Advocating for Policy Change', s:'Systemic Action', b:'Learning to influence the laws, policies and public institutions that shape a system, through campaigns, coalitions, civic participation and direct work with decision-makers, so that changes last.' }
@@ -1158,7 +1158,7 @@ class Component extends DCLogic {
     );
 
     const TIP = this._tipData();
-    const browseOrients = ['recip','shared','pluri','jrf'].map(k => { const d = TIP[k] || {}; const open = this.state.mOrient === k; return { title:d.t, sub:d.s, body:d.b, open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mOrient: s.mOrient===k ? null : k })) }; });
+    const browseOrients = ['jrf','pluri','shared','recip'].map(k => { const d = TIP[k] || {}; const open = this.state.mOrient === k; return { title:d.t, sub:d.s, body:d.b, open, chev: open?'–':'+', onToggle: () => this.setState(s => ({ mOrient: s.mOrient===k ? null : k })) }; });
     const GMETA = { teal:{name:'Personal Grounding',sub:'',head:'#46716f',border:'rgba(70,113,111,.3)',dot:'#46716f'}, green:{name:'Collective Strategy',sub:'',head:'#5f7a3a',border:'rgba(95,122,58,.3)',dot:'#5f7a3a'}, coral:{name:'Systemic Action',sub:'',head:'#a8542d',border:'rgba(168,84,45,.3)',dot:'#a8542d'} };
     const browseDomains = ['teal','green','coral'].map(g => { const m = GMETA[g]; const open = this.state.mGroup === g; const areas = (this.state.isl||[]).filter(p=>p.group===g).map(p=>({ label:p.label, onOpen: () => this.setState({ openCap: p.label, openInfo: null }, this._sync) })); return { key:g, name:m.name, sub: areas.map(a=>a.label).join(' · '), dot:m.dot, border:m.border, open, chev: open?'–':'+', headStyle:{ background:m.head, padding:'15px 16px', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer' }, areas, onToggle: () => this.setState(s => ({ mGroup: s.mGroup===g ? null : g })) }; });
 
